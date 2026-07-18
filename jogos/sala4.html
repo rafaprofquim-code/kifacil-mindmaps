@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="canonical" href="https://kifaciledu.com.br/jogos/jogos-escaperoom/torre-quimica/fases/fase4-medida-tres-gatos.html">
-<title>A Medida dos Três Gatos | Academia KiFácil</title>
-<meta name="description" content="Fase 4 do Escape Room dos Mapas da Academia KiFácil. Transforme a quantidade de mols em massa e use a densidade da água para descobrir o volume certo para cada gato.">
+<title>The Measure of Three Cats | KiFácil</title>
+<meta name="description" content="Stage 4 of the KiFácil Academy Mind Maps Escape Room. Convert the amount of moles into mass and use water's density to find the correct volume for each cat.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;1,500;1,600&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 <style>
@@ -82,7 +82,7 @@
     z-index: 0;
   }
 
-  /* ── QUADRO COM OS DADOS DA ÁGUA — sobre o quadro-negro já existente na cena ── */
+  /* ── BOARD WITH WATER DATA — over the chalkboard already in the scene ── */
   #quadro-painel {
     position: absolute;
     left: 77%; top: 26%; width: 9.5%;
@@ -101,7 +101,7 @@
     font-family: 'Lora', serif; font-size: 10px; color: rgba(232,216,176,0.55); font-style: italic;
   }
 
-  /* ── GATOS E TIGELAS ── */
+  /* ── CATS AND BOWLS ── */
   .gatos-row {
     position: relative;
     display: flex; justify-content: center; align-items: flex-end;
@@ -196,7 +196,7 @@
   }
   .shake-erro { animation: shakeErro .45s ease; }
 
-  /* ── PROFESSORA RAFAELA (esquerda) ── */
+  /* ── PROFESSOR RAFAELA (left side) ── */
   #teacher-box {
     position: absolute;
     bottom: 0; left: 20px;
@@ -253,7 +253,7 @@
   #btn-avancar.show { opacity: 1; pointer-events: all; }
   #btn-avancar:hover { filter: brightness(1.1); transform: scale(1.03); }
 
-  /* ── VITÓRIA ── */
+  /* ── VICTORY ── */
   #win-screen {
     display: none; position: fixed; inset: 0; z-index: 200;
     background: rgba(14,6,0,0.92);
@@ -273,8 +273,8 @@
   }
   .btn-next:hover { background: #f0c960; }
 
-  /* ── RESPONSIVO ── */
-  /* ── BOTÃO DE MUDO ── */
+  /* ── RESPONSIVE ── */
+  /* ── MUTE BUTTON ── */
   #controle-volume {
     position: fixed;
     bottom: 16px; right: 16px;
@@ -323,9 +323,9 @@
       border-radius: 10px;
       display: block; margin: 0 auto;
     }
-    /* No mobile o quadro fica sobreposto na própria faixa decorativa da
-       imagem (em vez de virar um bloco solto embaixo), com um fundo
-       escuro translúcido para garantir legibilidade sobre a foto. */
+    /* On mobile, the board is overlaid on the image's own decorative strip
+       (instead of becoming a loose block below it), with a translucent
+       dark background to keep it readable over the photo. */
     #quadro-painel {
       position: absolute;
       top: 28px; left: 50%; right: auto;
@@ -358,8 +358,8 @@
 
 <header class="header">
   <div>
-    <div class="eyebrow">Camadas Profundas · KiFácil</div>
-    <h1 class="page-title">A Medida dos Três Gatos</h1>
+    <div class="eyebrow">Deep Layers · KiFácil</div>
+    <h1 class="page-title">The Measure of Three Cats</h1>
   </div>
   <div class="progress-wrap">
     <div class="prog-step done" id="ps1">✓</div>
@@ -378,90 +378,90 @@
   </div>
 </header>
 
-<!-- ÁREA DO JOGO -->
+<!-- GAME AREA -->
 <div id="game-area">
 
-  <!-- PROFESSORA RAFAELA -->
+  <!-- PROFESSOR RAFAELA -->
   <aside id="teacher-box">
-    <img id="teacher-img" src="../imagens/rafa-sorrindo.jpg" alt="Professora Rafaela">
+    <img id="teacher-img" src="../imagens/rafa-sorrindo.jpg" alt="Professor Rafaela">
     <div id="teacher-bubble">
-      <div id="teacher-name">Professora Rafaela</div>
+      <div id="teacher-name">Professor Rafaela</div>
       <p id="teacher-text"></p>
-      <button id="btn-avancar" onclick="proximoPasso()">Continuar</button>
+      <button id="btn-avancar" onclick="proximoPasso()">Continue</button>
     </div>
   </aside>
 
-  <!-- CENA -->
+  <!-- SCENE -->
   <div id="scene-col">
-    <img id="scene-img" src="../imagens/patio-tres-gatos.jpg" alt="Pátio dos três gatos na Academia KiFácil">
+    <img id="scene-img" src="../imagens/patio-tres-gatos.jpg" alt="Courtyard of the three cats at KiFácil Academy">
 
-    <!-- QUADRO COM OS DADOS DA ÁGUA — escrito sobre o quadro-negro da própria cena -->
+    <!-- BOARD WITH WATER DATA — written over the scene's own chalkboard -->
     <div id="quadro-painel">
-      <div class="quadro-titulo">Água — H₂O</div>
-      <div class="quadro-dado">Massa molar: <strong>18 g/mol</strong></div>
-      <div class="quadro-dado">Densidade: <strong>1,0 g/mL</strong></div>
+      <div class="quadro-titulo">Water — H₂O</div>
+      <div class="quadro-dado">Molar mass: <strong>18 g/mol</strong></div>
+      <div class="quadro-dado">Density: <strong>1.0 g/mL</strong></div>
       <div class="quadro-relacoes"><span>m = n × M</span><span>d = m/V</span></div>
     </div>
 
-    <!-- GATOS, TIGELAS E BOTÕES -->
+    <!-- CATS, BOWLS AND BUTTONS -->
     <div class="gatos-row" id="gatosRow">
       <img id="torneira-decor" src="../imagens/torneira-antiga.png" alt="">
 
       <div class="gato-unidade">
         <div class="gato-nome">Bentinho</div>
-        <div class="gato-mol">1,5 mol de H₂O</div>
+        <div class="gato-mol">1.5 mol of H₂O</div>
         <img class="gato-img" src="../imagens/bentinho-em-pe.png" alt="Bentinho">
         <div class="tigela-container">
           <div class="agua-wrap" id="agua-bentinho"></div>
-          <img class="tigela-img" src="../imagens/tigela-vazia.png" alt="Tigela de Bentinho">
+          <img class="tigela-img" src="../imagens/tigela-vazia.png" alt="Bentinho's bowl">
         </div>
-        <div class="volume-label" id="vol-bentinho">Volume colocado: 0 mL</div>
-        <button class="btn-encher" id="btn-bentinho" data-gato="bentinho" disabled>Segure para encher</button>
+        <div class="volume-label" id="vol-bentinho">Volume added: 0 mL</div>
+        <button class="btn-encher" id="btn-bentinho" data-gato="bentinho" disabled>Hold to fill</button>
       </div>
 
       <div class="gato-unidade">
         <div class="gato-nome">Pitu</div>
-        <div class="gato-mol">2,0 mol de H₂O</div>
+        <div class="gato-mol">2.0 mol of H₂O</div>
         <img class="gato-img" src="../imagens/pitu-em-pe.png" alt="Pitu">
         <div class="tigela-container">
           <div class="agua-wrap" id="agua-pitu"></div>
-          <img class="tigela-img" src="../imagens/tigela-vazia.png" alt="Tigela de Pitu">
+          <img class="tigela-img" src="../imagens/tigela-vazia.png" alt="Pitu's bowl">
         </div>
-        <div class="volume-label" id="vol-pitu">Volume colocado: 0 mL</div>
-        <button class="btn-encher" id="btn-pitu" data-gato="pitu" disabled>Segure para encher</button>
+        <div class="volume-label" id="vol-pitu">Volume added: 0 mL</div>
+        <button class="btn-encher" id="btn-pitu" data-gato="pitu" disabled>Hold to fill</button>
       </div>
 
       <div class="gato-unidade">
         <div class="gato-nome">Chico</div>
-        <div class="gato-mol">2,5 mol de H₂O</div>
+        <div class="gato-mol">2.5 mol of H₂O</div>
         <img class="gato-img" src="../imagens/chico-em-pe.png" alt="Chico">
         <div class="tigela-container">
           <div class="agua-wrap" id="agua-chico"></div>
-          <img class="tigela-img" src="../imagens/tigela-vazia.png" alt="Tigela de Chico">
+          <img class="tigela-img" src="../imagens/tigela-vazia.png" alt="Chico's bowl">
         </div>
-        <div class="volume-label" id="vol-chico">Volume colocado: 0 mL</div>
-        <button class="btn-encher" id="btn-chico" data-gato="chico" disabled>Segure para encher</button>
+        <div class="volume-label" id="vol-chico">Volume added: 0 mL</div>
+        <button class="btn-encher" id="btn-chico" data-gato="chico" disabled>Hold to fill</button>
       </div>
     </div>
 
-    <!-- VERIFICAR -->
+    <!-- CHECK -->
     <div class="verificar-wrap">
-      <button class="btn-verificar-porcoes" id="btnVerificar" onclick="verificarPorcoes()" disabled>Verificar porções</button>
+      <button class="btn-verificar-porcoes" id="btnVerificar" onclick="verificarPorcoes()" disabled>Check portions</button>
     </div>
 
   </div><!-- #scene-col -->
 
-  <!-- TELA DE VITÓRIA -->
+  <!-- VICTORY SCREEN -->
   <div id="win-screen">
-    <div class="win-title">Porções Preparadas!</div>
-    <p class="win-sub">Você calculou a massa e o volume de água necessários para os três gatos. A próxima passagem da Torre de Química foi aberta.</p>
-    <a href="sala5.html" class="btn-next">Avançar →</a>
+    <div class="win-title">Portions Prepared!</div>
+    <p class="win-sub">You calculated the mass and volume of water needed for the three cats. The next passage of the Chemistry Tower has been opened.</p>
+    <a href="sala5.html" class="btn-next">Continue →</a>
   </div>
 
 </div><!-- #game-area -->
 
 <script>
-  /* ── DADOS DOS GATOS ── */
+  /* ── CAT DATA ── */
   const GATOS = {
     bentinho: { nome: 'Bentinho', mols: 1.5, correto: 27, atual: 0 },
     pitu:     { nome: 'Pitu',     mols: 2.0, correto: 36, atual: 0 },
@@ -471,7 +471,7 @@
   const intervalos = { bentinho: null, pitu: null, chico: null };
   let bloqueado = false;
 
-  /* ── PROFESSORA RAFAELA ── */
+  /* ── PROFESSOR RAFAELA ── */
   const IMG = {
     sorrindo:   '../imagens/rafa-sorrindo.jpg',
     explicando: '../imagens/rafa-explicando.jpg',
@@ -511,21 +511,21 @@
 
   /* ── INTRO ── */
   const introPassos = [
-    { img: 'sorrindo',   txt: 'O Professor Alceu cuida de três gatos muito especiais.' },
-    { img: 'explicando', txt: 'Você já conhece o Bentinho, mas também precisa conhecer Pitu e Chico.' },
-    { img: 'explicando', txt: 'Antes dos próximos experimentos, o professor pediu que preparássemos a água dos três.' },
-    { img: 'pensando',   txt: 'Como bom químico, ele anotou cada porção em quantidade de matéria, e não em mililitros.' },
-    { img: 'explicando', txt: 'Você deverá transformar a quantidade de mols em massa e, usando a densidade, descobrir o volume correto.' },
-    { img: 'pensando',   txt: 'Encha as três tigelas com cuidado. A água não poderá ser retirada depois que for colocada.' },
-    { img: 'animada',    txt: 'Somente depois de preparar as três porções você poderá verificar o resultado.', ultimo: true }
+    { img: 'sorrindo',   txt: 'Professor Alceu takes care of three very special cats.' },
+    { img: 'explicando', txt: 'You already know Bentinho, but you also need to meet Pitu and Chico.' },
+    { img: 'explicando', txt: 'Before the next experiments, the professor asked us to prepare water for all three.' },
+    { img: 'pensando',   txt: 'As a good chemist, he recorded each portion in amount of substance, not in milliliters.' },
+    { img: 'explicando', txt: 'You must convert the amount of moles into mass and, using the density, find the correct volume.' },
+    { img: 'pensando',   txt: 'Fill the three bowls carefully. Water cannot be removed once it has been added.' },
+    { img: 'animada',    txt: 'Only after preparing all three portions will you be able to check the result.', ultimo: true }
   ];
   let introIdx = 0;
 
-  /* Música de fundo + controle de volume (a preferência fica salva e vale
-     para todas as fases). Toca em loop a partir do primeiro clique do
-     aluno (navegadores bloqueiam áudio automático sem interação); o
-     volume do slider vale tanto para a música quanto para os efeitos
-     sonoros (clique, ding, porta etc.). */
+  /* Background music + volume control (the preference is saved and applies
+     to every stage). Loops starting from the student's first click
+     (browsers block automatic audio without interaction); the volume
+     slider applies to both the music and the sound effects (click, ding,
+     door, etc.). */
   let volumeSalvo = parseFloat(localStorage.getItem('kifacil_volume'));
   if (isNaN(volumeSalvo)) volumeSalvo = 0.35;
   let silenciado = localStorage.getItem('kifacil_silenciado') === '1';
@@ -535,12 +535,12 @@
     return silenciado ? 0 : volumeSalvo;
   }
 
-  /* A navegação entre fases sempre recarrega a página (não é uma SPA),
-     então o áudio para de tocar por um instante — isso não dá para
-     evitar. Mas guardamos o ponto exato da música em sessionStorage a
-     cada instante (evento "timeupdate") e retomamos dali na próxima
-     fase, em vez de reiniciar do zero — assim a música parece contínua
-     ao longo de toda a "Desafio das Camadas Profundas". */
+  /* Navigating between stages always reloads the page (this isn't a SPA),
+     so the audio stops for a moment — that can't be avoided. But we save
+     the exact position of the music in sessionStorage constantly (the
+     "timeupdate" event) and resume from there on the next stage instead
+     of restarting from zero — so the music feels continuous throughout
+     the whole "Deep Layers Challenge". */
   function iniciarMusicaFundo() {
     if (musicaFundo) return;
     try {
@@ -614,13 +614,13 @@
       return;
     }
     const p = introPassos[introIdx];
-    $tbtn.textContent = p.ultimo ? 'Começar' : 'Continuar';
+    $tbtn.textContent = p.ultimo ? 'Begin' : 'Continue';
     $tbtn.style.display = '';
     fala(p.img, p.txt);
   }
 
   function iniciarIntro() {
-    $tbtn.textContent = 'Continuar';
+    $tbtn.textContent = 'Continue';
     $tbtn.style.display = '';
     fala(introPassos[0].img, introPassos[0].txt);
   }
@@ -631,14 +631,14 @@
     document.querySelectorAll('.btn-encher').forEach(b => { b.disabled = false; });
   }
 
-  /* ── ENCHIMENTO DAS TIGELAS ── */
+  /* ── FILLING THE BOWLS ── */
   function atualizarNivelAgua(key) {
     const pct = (GATOS[key].atual / CAPACIDADE_MAX) * 100;
     document.getElementById('agua-' + key).style.height = pct + '%';
   }
 
   function atualizarTextoVolume(key) {
-    document.getElementById('vol-' + key).textContent = 'Volume colocado: ' + GATOS[key].atual + ' mL';
+    document.getElementById('vol-' + key).textContent = 'Volume added: ' + GATOS[key].atual + ' mL';
   }
 
   function atualizarBotaoVerificar() {
@@ -710,7 +710,7 @@
     document.querySelectorAll('.btn-encher').forEach(b => { b.disabled = true; });
   }
 
-  /* ── VERIFICAÇÃO ── */
+  /* ── VERIFICATION ── */
   function verificarPorcoes() {
     if (bloqueado) return;
     tocarClick();
@@ -727,9 +727,9 @@
     document.getElementById('ps4').className = 'prog-step done';
     document.getElementById('ps4').textContent = '✓';
 
-    falarInfo('animada', 'Excelente! Você transformou corretamente os mols em massa e usou a densidade para determinar os três volumes.', () => {
+    falarInfo('animada', 'Excellent! You correctly converted moles into mass and used density to determine the three volumes.', () => {
       setTimeout(() => {
-        falarInfo('animada', 'Agora Bentinho, Pitu e Chico receberam exatamente a quantidade de água que o Professor Alceu pediu.', () => {
+        falarInfo('animada', 'Now Bentinho, Pitu and Chico have received exactly the amount of water Professor Alceu asked for.', () => {
           setTimeout(showWin, 1800);
         });
       }, 900);
@@ -741,9 +741,9 @@
     row.classList.add('shake-erro');
     setTimeout(() => row.classList.remove('shake-erro'), 500);
 
-    falarInfo('pensando', 'Uma ou mais porções não estão corretas.', () => {
+    falarInfo('pensando', 'One or more portions are not correct.', () => {
       setTimeout(() => {
-        falarInfo('pensando', 'O Professor Alceu exige precisão absoluta. Será necessário preparar as três novamente.', () => {
+        falarInfo('pensando', 'Professor Alceu demands absolute precision. All three will need to be prepared again.', () => {
           setTimeout(reiniciarTigelas, 1500);
         });
       }, 700);
@@ -757,11 +757,11 @@
 </script>
 
 <div id="controle-volume">
-  <button id="btn-mute" onclick="alternarMudo()" aria-label="Silenciar ou ativar o som">🔊</button>
+  <button id="btn-mute" onclick="alternarMudo()" aria-label="Mute or unmute sound">🔊</button>
   <input type="range" id="slider-volume" min="0" max="100" value="35" oninput="ajustarVolume(this.value)" aria-label="Volume">
 </div>
 
-<div id="cookie-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#1a0f08;border-top:1px solid rgba(212,170,106,0.4);padding:1rem 2rem;z-index:9999;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;"><p style="margin:0;font-family:'Libre Baskerville',serif;font-size:0.82rem;color:#e8d4b0;line-height:1.5;">Este site utiliza cookies para melhorar sua experiência. Ao continuar navegando, você concorda com nossa <a href="/politica-de-privacidade.html" style="color:#e8b84b;text-decoration:underline;text-underline-offset:2px;">Política de Privacidade</a>.</p><button onclick="document.getElementById('cookie-banner').style.display='none';localStorage.setItem('kifacil_cookies','1');" style="flex-shrink:0;background:#e8b84b;border:none;padding:0.55rem 1.5rem;font-family:'Libre Baskerville',serif;font-size:0.78rem;font-weight:700;color:#1a0f08;cursor:pointer;letter-spacing:0.04em;">Entendi</button></div>
+<div id="cookie-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#1a0f08;border-top:1px solid rgba(212,170,106,0.4);padding:1rem 2rem;z-index:9999;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;"><p style="margin:0;font-family:'Libre Baskerville',serif;font-size:0.82rem;color:#e8d4b0;line-height:1.5;">This site uses cookies to improve your experience. By continuing to browse, you agree to our <a href="/politica-de-privacidade.html" style="color:#e8b84b;text-decoration:underline;text-underline-offset:2px;">Privacy Policy</a>.</p><button onclick="document.getElementById('cookie-banner').style.display='none';localStorage.setItem('kifacil_cookies','1');" style="flex-shrink:0;background:#e8b84b;border:none;padding:0.55rem 1.5rem;font-family:'Libre Baskerville',serif;font-size:0.78rem;font-weight:700;color:#1a0f08;cursor:pointer;letter-spacing:0.04em;">Got it</button></div>
 <script>if(!localStorage.getItem('kifacil_cookies'))document.getElementById('cookie-banner').style.display='flex';</script>
 
 <script type="module">
