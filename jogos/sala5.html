@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="canonical" href="https://kifaciledu.com.br/jogos/jogos-escaperoom/torre-quimica/fases/fase5-travessia-tabela-periodica.html">
-<title>A Travessia da Tabela Periódica | KiFácil</title>
-<meta name="description" content="Fase 5 do Escape Room dos Mapas da Academia KiFácil. Percorra a Tabela Periódica seguindo pistas de família e período até encontrar o elemento certo.">
+<title>The Periodic Table Crossing | KiFácil</title>
+<meta name="description" content="Stage 5 of the KiFácil Academy Mind Maps Escape Room. Cross the Periodic Table following family and period clues until you find the right element.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;1,500;1,600&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 <style>
@@ -67,13 +67,14 @@
     background: #1a0f08;
   }
 
-  /* #tabela-wrapper é dimensionado via JavaScript (função
-     ajustarWrapperTabela) para ocupar o MAIOR retângulo possível dentro
-     de #scene-col mantendo a proporção real da imagem (1436×924) — o
-     mesmo resultado visual de um object-fit:contain, mas calculado num
-     wrapper próprio, para que os hotspots e o pino (posicionados em %
-     relativas a ESTE wrapper) sempre coincidam exatamente com a tabela,
-     sem sobrar margem morta nem ficar preso ao tamanho nativo do PNG. */
+  /* #tabela-wrapper is sized via JavaScript (ajustarWrapperTabela
+     function) to occupy the LARGEST possible rectangle inside
+     #scene-col while keeping the image's real aspect ratio (1436×924)
+     — the same visual result as object-fit:contain, but calculated on
+     its own wrapper, so the hotspots and the pin (positioned in %
+     relative to THIS wrapper) always line up exactly with the table,
+     with no dead margin left over and without being locked to the
+     PNG's native size. */
   #tabela-wrapper {
     position: absolute;
     top: 50%; left: 50%;
@@ -85,15 +86,15 @@
     height: 100%;
   }
 
-  /* ── HOTSPOTS DOS ELEMENTOS ──────────────────────────────────────────────
-     Cada um dos 118 elementos recebe um hotspot invisível, gerado via
-     JavaScript a partir da grade de colunas/linhas calculada em pixels
-     reais sobre a imagem tabela-periodica-kifacil.png (ver comentários
-     no <script> mais abaixo, seção "GRADE DA TABELA"). A posição de cada
-     hotspot é sempre relativa a #tabela-wrapper (que tem exatamente o
-     tamanho da imagem renderizada — ver comentário acima), diferente
-     da convenção usada nos hotspots das demais fases do escape room,
-     que ficam relativos a #scene-col inteiro.
+  /* ── ELEMENT HOTSPOTS ─────────────────────────────────────────────────────
+     Each of the 118 elements gets an invisible hotspot, generated via
+     JavaScript from the column/row grid measured in real pixels over the
+     tabela-periodica-kifacil.png image (see comments in the <script>
+     further below, section "TABLE GRID"). Each hotspot's position is
+     always relative to #tabela-wrapper (which has exactly the size of
+     the rendered image — see comment above), unlike the convention used
+     in the hotspots of the escape room's other stages, which are
+     relative to the whole #scene-col.
      ──────────────────────────────────────────────────────────────────────── */
   .elem-hotspot {
     position: absolute;
@@ -106,13 +107,13 @@
     z-index: 10;
   }
   .elem-hotspot:hover { border-color: rgba(232,184,75,0.45); background: rgba(232,184,75,0.08); }
-  /* Elemento onde o pino está posicionado no momento: brilho dourado suave */
+  /* Element where the pin is currently positioned: soft golden glow */
   .elem-hotspot.atual {
     border-color: var(--gold);
     box-shadow: 0 0 12px 2px rgba(232,184,75,0.55);
   }
 
-  /* ── PINO DOURADO ── */
+  /* ── GOLDEN PIN ── */
   #pino {
     position: absolute;
     left: 6.51%; top: 16.18%;
@@ -124,7 +125,7 @@
     transition: left .65s cubic-bezier(.4,0,.2,1), top .65s cubic-bezier(.4,0,.2,1);
   }
 
-  /* ── PAINEL DE ETAPA — canto superior direito ── */
+  /* ── STAGE PANEL — top-right corner ── */
   #etapa-painel {
     position: absolute;
     top: 14px; right: 14px;
@@ -140,7 +141,7 @@
   .etapa-titulo { font-size: 9px; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); margin-bottom: 4px; }
   .etapa-contador { font-family: 'Lora', serif; font-size: 15px; font-weight: 600; color: var(--text); }
 
-  /* ── PROFESSORA RAFAELA (esquerda) ── */
+  /* ── PROFESSOR RAFAELA (left side) ── */
   #teacher-box {
     position: absolute;
     bottom: 0; left: 20px;
@@ -197,7 +198,7 @@
   #btn-avancar.show { opacity: 1; pointer-events: all; }
   #btn-avancar:hover { filter: brightness(1.1); transform: scale(1.03); }
 
-  /* ── VITÓRIA ── */
+  /* ── VICTORY ── */
   #win-screen {
     display: none; position: fixed; inset: 0; z-index: 200;
     background: rgba(14,6,0,0.92);
@@ -217,14 +218,14 @@
   }
   .btn-next:hover { background: #f0c960; }
 
-  /* ── RESPONSIVO ──────────────────────────────────────────────────────────
-     Os hotspots e o pino usam coordenadas em % sobre #scene-col, então
-     acompanham a imagem automaticamente tanto no modo "contain" (desktop)
-     quanto no modo "largura total" (celular) — não é necessário reescrever
-     as 118 posições para o mobile, apenas trocar o comportamento do
-     próprio #scene-img/#scene-col, como nas demais fases.
+  /* ── RESPONSIVE ──────────────────────────────────────────────────────────
+     The hotspots and the pin use % coordinates over #scene-col, so they
+     follow the image automatically both in "contain" mode (desktop) and
+     "full width" mode (mobile) — there is no need to rewrite the 118
+     positions for mobile, only to change the behavior of #scene-img/
+     #scene-col itself, as in the other stages.
      ──────────────────────────────────────────────────────────────────────── */
-  /* ── BOTÃO DE MUDO ── */
+  /* ── MUTE BUTTON ── */
   #controle-volume {
     position: fixed;
     bottom: 16px; right: 16px;
@@ -285,8 +286,8 @@
 
 <header class="header">
   <div>
-    <div class="eyebrow">Camadas Profundas · KiFácil</div>
-    <h1 class="page-title">A Travessia da Tabela Periódica</h1>
+    <div class="eyebrow">Deep Layers · KiFácil</div>
+    <h1 class="page-title">The Periodic Table Crossing</h1>
   </div>
   <div class="progress-wrap">
     <div class="prog-step done" id="ps1">✓</div>
@@ -305,70 +306,71 @@
   </div>
 </header>
 
-<!-- ÁREA DO JOGO -->
+<!-- GAME AREA -->
 <div id="game-area">
 
-  <!-- PROFESSORA RAFAELA -->
+  <!-- PROFESSOR RAFAELA -->
   <aside id="teacher-box">
-    <img id="teacher-img" src="../imagens/rafa-sorrindo.jpg" alt="Professora Rafaela">
+    <img id="teacher-img" src="../imagens/rafa-sorrindo.jpg" alt="Professor Rafaela">
     <div id="teacher-bubble">
-      <div id="teacher-name">Professora Rafaela</div>
+      <div id="teacher-name">Professor Rafaela</div>
       <p id="teacher-text"></p>
-      <button id="btn-avancar" onclick="proximoPasso()">Continuar</button>
+      <button id="btn-avancar" onclick="proximoPasso()">Continue</button>
     </div>
   </aside>
 
-  <!-- CENA: TABELA PERIÓDICA -->
+  <!-- SCENE: PERIODIC TABLE -->
   <div id="scene-col">
-    <!-- #tabela-wrapper tem exatamente o tamanho da imagem renderizada,
-         então tudo dentro dele (hotspots e pino) fica alinhado com a
-         tabela de verdade, mesmo quando sobra espaço vazio ao redor. -->
+    <!-- #tabela-wrapper has exactly the size of the rendered image,
+         so everything inside it (hotspots and pin) stays aligned with
+         the actual table, even when there is empty space around it. -->
     <div id="tabela-wrapper">
-      <img id="scene-img" src="../imagens/tabela-periodica-kifacil.png" alt="Tabela Periódica da Academia KiFácil">
+      <img id="scene-img" src="../imagens/tabela-periodica-kifacil.png" alt="Periodic Table at KiFácil Academy">
 
-      <!-- Os 118 hotspots dos elementos são inseridos aqui via JavaScript -->
+      <!-- The 118 element hotspots are inserted here via JavaScript -->
       <div id="tabelaHotspots"></div>
 
-      <!-- Pino dourado indicando a posição atual do aluno -->
-      <img id="pino" src="../imagens/pino-tabela.png" alt="Posição atual">
+      <!-- Golden pin indicating the student's current position -->
+      <img id="pino" src="../imagens/pino-tabela.png" alt="Current position">
     </div>
 
-    <!-- Painel com o número da etapa atual -->
+    <!-- Panel with the current stage number -->
     <div id="etapa-painel">
-      <div class="etapa-titulo">Travessia</div>
-      <div class="etapa-contador" id="etapaContador">Etapa 1 de 9</div>
+      <div class="etapa-titulo">Crossing</div>
+      <div class="etapa-contador" id="etapaContador">Stage 1 of 9</div>
     </div>
   </div><!-- #scene-col -->
 
-  <!-- TELA DE VITÓRIA -->
+  <!-- VICTORY SCREEN -->
   <div id="win-screen">
-    <div class="win-title">Travessia Concluída!</div>
-    <p class="win-sub">Você atravessou a Tabela Periódica seguindo pistas de família e período, sem precisar decorar uma única posição. A próxima passagem da Torre de Química foi aberta.</p>
-    <a href="sala6.html" class="btn-next">Avançar →</a>
+    <div class="win-title">Crossing Complete!</div>
+    <p class="win-sub">You crossed the Periodic Table following family and period clues, without needing to memorize a single position. The next passage of the Chemistry Tower has been opened.</p>
+    <a href="sala6.html" class="btn-next">Continue →</a>
   </div>
 
 </div><!-- #game-area -->
 
 <script>
   /* ══════════════════════════════════════════════════════════════════════
-     GRADE DA TABELA — coordenadas em % sobre a imagem tabela-periodica-
-     -kifacil.png (1436×924px), medidas diretamente nos pixels da imagem.
-     COLS[i]  = centro X (%) da coluna i+1 (1 a 18) do bloco principal.
-     FCOLS[i] = centro X (%) da coluna i+1 (1 a 15) do bloco dos
-                lantanídeos/actinídeos (linha "solta" abaixo da tabela).
-     ROWS[p]  = centro Y (%) do período p (1 a 7).
-     FROWS    = centro Y (%) das duas linhas do bloco f ("la" e "ac").
+     TABLE GRID — coordinates in % over the tabela-periodica-
+     -kifacil.png image (1436×924px), measured directly from the image's
+     pixels.
+     COLS[i]  = X center (%) of column i+1 (1 to 18) of the main block.
+     FCOLS[i] = X center (%) of column i+1 (1 to 15) of the
+                lanthanide/actinide block (the "loose" row below the table).
+     ROWS[p]  = Y center (%) of period p (1 to 7).
+     FROWS    = Y center (%) of the two rows of the f block ("la" and "ac").
      ══════════════════════════════════════════════════════════════════════ */
   const COLS = [6.51,11.18,16.13,21.24,26.32,31.45,36.60,41.69,46.76,51.81,56.90,61.87,67.13,72.46,77.75,83.13,88.58,93.92];
   const FCOLS = [15.98,20.33,24.93,29.57,34.09,38.65,43.11,47.60,52.09,56.66,61.14,65.71,70.24,74.79,79.25];
   const ROWS = { 1: 16.18, 2: 24.30, 3: 32.09, 4: 39.94, 5: 47.84, 6: 55.63, 7: 63.37 };
   const FROWS = { la: 73.11, ac: 81.06 };
 
-  /* Lista dos 118 elementos: símbolo (s), coluna (c) e período/linha (r).
-     "r" pode ser um número de 1 a 7 (bloco principal) ou 'la'/'ac'
-     (linha dos lantanídeos ou dos actinídeos). As colunas 3 dos períodos
-     6 e 7 não geram hotspot: ali ficam apenas os rótulos "57-71" e
-     "89-103" que remetem às linhas do bloco f. */
+  /* List of the 118 elements: symbol (s), column (c) and period/row (r).
+     "r" can be a number from 1 to 7 (main block) or 'la'/'ac' (the
+     lanthanide or actinide row). Column 3 of periods 6 and 7 doesn't
+     generate a hotspot: it only holds the "57-71" and "89-103" labels
+     that point to the f-block rows. */
   const ELEMENTOS = [
     { s: 'H',  c: 1,  r: 1 }, { s: 'He', c: 18, r: 1 },
 
@@ -413,9 +415,9 @@
     { s: 'Md', c: 13, r: 'ac' }, { s: 'No', c: 14, r: 'ac' }, { s: 'Lr', c: 15, r: 'ac' }
   ];
 
-  /* Converte a entrada de um elemento (coluna/linha) em % (x, y) reais,
-     escolhendo entre a grade principal (COLS/ROWS) e a grade do bloco f
-     (FCOLS/FROWS) conforme o valor de "r". */
+  /* Converts an element entry (column/row) into real (x, y) %,
+     choosing between the main grid (COLS/ROWS) and the f-block grid
+     (FCOLS/FROWS) depending on the value of "r". */
   function posicaoDoElemento(el) {
     if (el.r === 'la') return { x: FCOLS[el.c - 1], y: FROWS.la };
     if (el.r === 'ac') return { x: FCOLS[el.c - 1], y: FROWS.ac };
@@ -423,49 +425,50 @@
   }
 
   /* ══════════════════════════════════════════════════════════════════════
-     SEQUÊNCIA DE ETAPAS — cada etapa mostra uma instrução na fala da
-     professora e só avança quando o aluno clica no elemento correto.
+     STAGE SEQUENCE — each stage shows an instruction in the teacher's
+     dialogue and only advances when the student clicks the correct
+     element.
      ══════════════════════════════════════════════════════════════════════ */
-  /* Cada etapa tem:
-       instrucao  — a pista mostrada ANTES do aluno encontrar o elemento;
-       curiosidade — um fato mostrado DEPOIS de um clique correto, com uma
-                     abertura diferente em cada etapa (evitando repetir
-                     sempre a palavra "Curiosidade:");
-       resposta   — o símbolo do elemento certo daquela etapa. */
+  /* Each stage has:
+       instrucao  — the clue shown BEFORE the student finds the element;
+       curiosidade — a fact shown AFTER a correct click, with a different
+                     opening in each stage (avoiding always repeating
+                     the word "Fun fact:");
+       resposta   — the symbol of the correct element for that stage. */
   const ETAPAS = [
-    { instrucao: 'Comece no Hidrogênio. Desça dois períodos.',
-      curiosidade: 'Você sabia que o sódio metálico reage tão violentamente com a água que chega a pegar fogo?',
+    { instrucao: 'Start at Hydrogen. Go down two periods.',
+      curiosidade: 'Did you know that metallic sodium reacts so violently with water that it can catch fire?',
       resposta: 'Na' },
-    { instrucao: 'Permaneça nesse período. Encontre o ametal que possui cinco elétrons na camada de valência.',
-      curiosidade: 'Uma curiosidade: o fósforo branco brilha fracamente no escuro, e foi isso que deu origem ao nome desse elemento.',
+    { instrucao: 'Stay in this period. Find the nonmetal that has five electrons in its valence shell.',
+      curiosidade: 'A fun fact: white phosphorus glows faintly in the dark, and that\'s what gave this element its name.',
       resposta: 'P' },
-    { instrucao: 'Agora suba um período na mesma família.',
-      curiosidade: 'O interessante é que esse elemento forma quase 80% do ar que você está respirando agora.',
+    { instrucao: 'Now go up one period in the same family.',
+      curiosidade: 'What\'s interesting is that this element makes up almost 80% of the air you are breathing right now.',
       resposta: 'N' },
-    { instrucao: 'Desça pela mesma família até o quinto período.',
-      curiosidade: 'Vale lembrar que esse elemento já era usado desde a Antiguidade em cosméticos, como o kohl para contornar os olhos.',
+    { instrucao: 'Go down the same family to the fifth period.',
+      curiosidade: 'Worth remembering: this element was already used in Antiquity in cosmetics, like the kohl used to line the eyes.',
       resposta: 'Sb' },
-    { instrucao: 'Volte pelo mesmo período até os metais de transição. Encontre o metal cujo número de oxidação é +1. Ele é o único metal deste período com esse valor, e isso está indicado na própria tabela.',
-      curiosidade: 'Repare que, por sua ação antibacteriana, esse metal é usado até hoje em curativos.',
+    { instrucao: 'Go back along the same period to the transition metals. Find the metal whose oxidation number is +1. It is the only metal in this period with that value, and that is indicated right on the table itself.',
+      curiosidade: 'Notice that, thanks to its antibacterial action, this metal is still used in dressings today.',
       resposta: 'Ag' },
-    { instrucao: 'Desça um período na mesma família. Este metal é um dos mais valiosos e cobiçados que existem.',
-      curiosidade: 'Um detalhe curioso: por ser extremamente maleável, um único grama desse metal pode virar uma folha de quase 1 metro quadrado.',
+    { instrucao: 'Go down one period in the same family. This metal is one of the most valuable and coveted that exist.',
+      curiosidade: 'A curious detail: because it is extremely malleable, a single gram of this metal can become a sheet of nearly 1 square meter.',
       resposta: 'Au' },
-    { instrucao: 'Ao lado, está o único metal que permanece líquido à temperatura ambiente.',
-      curiosidade: 'Fica o registro: por ser tóxico, esse metal foi substituído em quase todos os termômetros modernos.',
+    { instrucao: 'Right next to it is the only metal that stays liquid at room temperature.',
+      curiosidade: 'For the record: because it is toxic, this metal has been replaced in almost all modern thermometers.',
       resposta: 'Hg' },
-    { instrucao: 'Agora vá até o elemento de número atômico 53.',
-      curiosidade: 'Não deixe de notar que esse elemento é essencial para o funcionamento da tireoide, por isso é adicionado ao sal de cozinha iodado.',
+    { instrucao: 'Now go to the element with atomic number 53.',
+      curiosidade: 'Be sure to note that this element is essential for thyroid function, which is why it is added to iodized table salt.',
       resposta: 'I' },
-    { instrucao: 'Suba pela mesma família. Encontre o elemento mais eletronegativo da Tabela Periódica.',
-      curiosidade: 'Para fechar: na forma de fluoreto, esse elemento é usado em pastas de dente para fortalecer e proteger o esmalte dos dentes',
+    { instrucao: 'Go up the same family. Find the most electronegative element in the Periodic Table.',
+      curiosidade: 'To close: in the form of fluoride, this element is used in toothpaste to strengthen and protect tooth enamel',
       resposta: 'F' }
   ];
   let etapaIdx = 0;
   let mecanicaAtiva = false;
   let bloqueado = false;
 
-  /* ── PROFESSORA RAFAELA (digitação + troca de imagem) ── */
+  /* ── PROFESSOR RAFAELA (typing + image swap) ── */
   const IMG = {
     sorrindo:   '../imagens/rafa-sorrindo.jpg',
     explicando: '../imagens/rafa-explicando.jpg',
@@ -498,28 +501,28 @@
     });
   }
 
-  /* Fala "informativa": esconde o botão de continuar (usada tanto para
-     as instruções de cada etapa quanto para os avisos de erro/vitória). */
+  /* "Informative" dialogue: hides the continue button (used both for
+     each stage's instructions and for error/victory notices). */
   function falarInfo(imgKey, txt, cb) {
     $tbtn.style.display = 'none';
     fala(imgKey, txt, () => { $tbtn.style.display = 'none'; if (cb) cb(); });
   }
 
-  /* ── INTRODUÇÃO ── */
+  /* ── INTRO ── */
   const introPassos = [
-    { img: 'sorrindo',   txt: 'O Professor Alceu sempre diz que a Tabela Periódica não é apenas uma lista de elementos.' },
-    { img: 'explicando', txt: 'A Tabela é um mapa.' },
-    { img: 'pensando',   txt: 'Quem aprende a caminhar por ela nunca mais precisa decorar posições.' },
-    { img: 'pensando',   txt: 'Siga exatamente cada instrução.' },
-    { img: 'animada',    txt: 'Somente quando chegar ao elemento correto poderá continuar.', ultimo: true }
+    { img: 'sorrindo',   txt: 'Professor Alceu always says the Periodic Table isn\'t just a list of elements.' },
+    { img: 'explicando', txt: 'The Table is a map.' },
+    { img: 'pensando',   txt: 'Whoever learns to walk through it never needs to memorize positions again.' },
+    { img: 'pensando',   txt: 'Follow each instruction exactly.' },
+    { img: 'animada',    txt: 'Only when you reach the correct element will you be able to continue.', ultimo: true }
   ];
   let introIdx = 0;
 
-  /* Música de fundo + controle de volume (a preferência fica salva e vale
-     para todas as fases). Toca em loop a partir do primeiro clique do
-     aluno (navegadores bloqueiam áudio automático sem interação); o
-     volume do slider vale tanto para a música quanto para os efeitos
-     sonoros (clique, ding, porta etc.). */
+  /* Background music + volume control (the preference is saved and applies
+     to every stage). Loops starting from the student's first click
+     (browsers block automatic audio without interaction); the volume
+     slider applies to both the music and the sound effects (click, ding,
+     door, etc.). */
   let volumeSalvo = parseFloat(localStorage.getItem('kifacil_volume'));
   if (isNaN(volumeSalvo)) volumeSalvo = 0.35;
   let silenciado = localStorage.getItem('kifacil_silenciado') === '1';
@@ -529,12 +532,12 @@
     return silenciado ? 0 : volumeSalvo;
   }
 
-  /* A navegação entre fases sempre recarrega a página (não é uma SPA),
-     então o áudio para de tocar por um instante — isso não dá para
-     evitar. Mas guardamos o ponto exato da música em sessionStorage a
-     cada instante (evento "timeupdate") e retomamos dali na próxima
-     fase, em vez de reiniciar do zero — assim a música parece contínua
-     ao longo de toda a "Desafio das Camadas Profundas". */
+  /* Navigating between stages always reloads the page (this isn't a SPA),
+     so the audio stops for a moment — that can't be avoided. But we save
+     the exact position of the music in sessionStorage constantly (the
+     "timeupdate" event) and resume from there on the next stage instead
+     of restarting from zero — so the music feels continuous throughout
+     the whole "Deep Layers Challenge". */
   function iniciarMusicaFundo() {
     if (musicaFundo) return;
     try {
@@ -608,20 +611,20 @@
       return;
     }
     const p = introPassos[introIdx];
-    $tbtn.textContent = p.ultimo ? 'Começar' : 'Continuar';
+    $tbtn.textContent = p.ultimo ? 'Begin' : 'Continue';
     $tbtn.style.display = '';
     fala(p.img, p.txt);
   }
 
   function iniciarIntro() {
-    $tbtn.textContent = 'Continuar';
+    $tbtn.textContent = 'Continue';
     $tbtn.style.display = '';
     fala(introPassos[0].img, introPassos[0].txt);
   }
 
   setTimeout(iniciarIntro, 400);
 
-  /* Libera os cliques na tabela e mostra a instrução da primeira etapa. */
+  /* Enables clicks on the table and shows the first stage's instruction. */
   function ativarMecanica() {
     mecanicaAtiva = true;
     atualizarContadorEtapa();
@@ -629,13 +632,13 @@
   }
 
   /* ══════════════════════════════════════════════════════════════════════
-     TAMANHO DO WRAPPER DA TABELA
-     No desktop, calcula em px o maior retângulo com a proporção real da
-     imagem (1436×924) que cabe dentro de #scene-col — equivalente a um
-     object-fit:contain, só que aplicado a #tabela-wrapper (que carrega
-     os hotspots e o pino), não à <img> sozinha. No mobile, a imagem já
-     flui em largura total (ver media query), então o wrapper só precisa
-     acompanhar 100% de largura/altura automática.
+     TABLE WRAPPER SIZE
+     On desktop, calculates in px the largest rectangle with the real
+     proportion of the image (1436×924) that fits inside #scene-col —
+     equivalent to object-fit:contain, but applied to #tabela-wrapper
+     (which carries the hotspots and the pin), not to the <img> alone.
+     On mobile, the image already flows at full width (see media query),
+     so the wrapper only needs to follow 100% automatic width/height.
      ══════════════════════════════════════════════════════════════════════ */
   const ASPECT_TABELA = 1436 / 924;
   function ajustarWrapperTabela() {
@@ -663,15 +666,15 @@
   ajustarWrapperTabela();
 
   /* ══════════════════════════════════════════════════════════════════════
-     HOTSPOTS E PINO
+     HOTSPOTS AND PIN
      ══════════════════════════════════════════════════════════════════════ */
   const $pino = document.getElementById('pino');
   const hotspotsPorSimbolo = {};
   let hotspotAtual = null;
 
-  /* Cria os 118 hotspots (invisíveis, só a borda dourada do "atual"
-     aparece) a partir da lista ELEMENTOS, posicionando cada um em % via
-     posicaoDoElemento(). */
+  /* Creates the 118 hotspots (invisible, only the "current" element's
+     golden border shows) from the ELEMENTOS list, positioning each one
+     in % via posicaoDoElemento(). */
   function montarHotspots() {
     const container = document.getElementById('tabelaHotspots');
     ELEMENTOS.forEach(el => {
@@ -688,35 +691,35 @@
   }
   montarHotspots();
 
-  /* Move o pino suavemente (a transição fica a cargo do CSS de #pino). */
+  /* Moves the pin smoothly (the transition is handled by #pino's CSS). */
   function moverPino(x, y) {
     $pino.style.left = x + '%';
     $pino.style.top = y + '%';
   }
 
-  /* Marca visualmente qual elemento é o "atual" (borda dourada), tirando
-     o destaque do anterior. */
+  /* Visually marks which element is "current" (golden border), removing
+     the highlight from the previous one. */
   function marcarAtual(simbolo) {
     if (hotspotAtual) hotspotAtual.classList.remove('atual');
     const div = hotspotsPorSimbolo[simbolo];
     if (div) { div.classList.add('atual'); hotspotAtual = div; }
   }
-  marcarAtual('H'); // posição inicial: pino sobre o Hidrogênio
+  marcarAtual('H'); // starting position: pin over Hydrogen
 
   function atualizarContadorEtapa() {
     const n = Math.min(etapaIdx + 1, ETAPAS.length);
-    document.getElementById('etapaContador').textContent = 'Etapa ' + n + ' de ' + ETAPAS.length;
+    document.getElementById('etapaContador').textContent = 'Stage ' + n + ' of ' + ETAPAS.length;
   }
 
-  /* ── CLIQUE EM UM ELEMENTO ── */
+  /* ── CLICKING AN ELEMENT ── */
   function clicarElemento(simbolo) {
     if (!mecanicaAtiva || bloqueado) return;
 
     const etapa = ETAPAS[etapaIdx];
     if (simbolo === etapa.resposta) {
-      // Acerto: som de ding, pino se move até o elemento certo, elemento
-      // novo recebe o brilho dourado. A curiosidade do elemento aparece
-      // primeiro; só depois dela a próxima instrução é mostrada.
+      // Correct: ding sound, pin moves to the right element, the new
+      // element gets the golden glow. The element's fun fact appears
+      // first; only afterward is the next instruction shown.
       tocarDing();
       const pos = posicaoDoElemento(ELEMENTOS.find(e => e.s === simbolo));
       moverPino(pos.x, pos.y);
@@ -725,22 +728,23 @@
       const curiosidade = etapa.curiosidade;
       etapaIdx++;
 
-      // Em vez de um tempo fixo na tela, mostra um botão "Continuar" —
-      // o próprio aluno decide quando já terminou de ler a curiosidade.
+      // Instead of a fixed time on screen, shows a "Continue" button —
+      // the student decides for themselves when they've finished
+      // reading the fun fact.
       mecanicaAtiva = false;
-      $tbtn.textContent = 'Continuar';
+      $tbtn.textContent = 'Continue';
       $tbtn.style.display = '';
       $tbtn.onclick = avancarAposCuriosidade;
       fala('animada', curiosidade);
     } else {
-      // Erro: nenhum progresso é perdido, o pino permanece parado.
-      falarInfo('pensando', 'Observe novamente a Tabela.');
+      // Error: no progress is lost, the pin stays where it is.
+      falarInfo('pensando', 'Look at the Table again.');
     }
   }
 
-  // Chamado quando o aluno clica em "Continuar" depois de ler a
-  // curiosidade — restaura o botão para seu uso normal (intro) e segue
-  // para a próxima instrução ou para o final da fase.
+  // Called when the student clicks "Continue" after reading the fun
+  // fact — restores the button to its normal use (intro) and moves on
+  // to the next instruction or to the end of the stage.
   function avancarAposCuriosidade() {
     tocarClick();
     $tbtn.onclick = proximoPasso;
@@ -753,17 +757,17 @@
     }
   }
 
-  /* ── FINAL DA FASE ── */
+  /* ── END OF STAGE ── */
   function finalizarFase() {
     bloqueado = true;
     document.getElementById('ps5').className = 'prog-step done';
     document.getElementById('ps5').textContent = '✓';
 
-    falarInfo('animada', 'Excelente.', () => {
+    falarInfo('animada', 'Excellent.', () => {
       setTimeout(() => {
-        falarInfo('animada', 'Você percebeu que não precisou decorar.', () => {
+        falarInfo('animada', 'You noticed that you didn\'t need to memorize anything.', () => {
           setTimeout(() => {
-            falarInfo('animada', 'Você simplesmente aprendeu a navegar pela Tabela.', () => {
+            falarInfo('animada', 'You simply learned how to navigate the Table.', () => {
               setTimeout(showWin, 1600);
             });
           }, 900);
@@ -779,11 +783,11 @@
 </script>
 
 <div id="controle-volume">
-  <button id="btn-mute" onclick="alternarMudo()" aria-label="Silenciar ou ativar o som">🔊</button>
+  <button id="btn-mute" onclick="alternarMudo()" aria-label="Mute or unmute sound">🔊</button>
   <input type="range" id="slider-volume" min="0" max="100" value="35" oninput="ajustarVolume(this.value)" aria-label="Volume">
 </div>
 
-<div id="cookie-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#1a0f08;border-top:1px solid rgba(212,170,106,0.4);padding:1rem 2rem;z-index:9999;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;"><p style="margin:0;font-family:'Libre Baskerville',serif;font-size:0.82rem;color:#e8d4b0;line-height:1.5;">Este site utiliza cookies para melhorar sua experiência. Ao continuar navegando, você concorda com nossa <a href="/politica-de-privacidade.html" style="color:#e8b84b;text-decoration:underline;text-underline-offset:2px;">Política de Privacidade</a>.</p><button onclick="document.getElementById('cookie-banner').style.display='none';localStorage.setItem('kifacil_cookies','1');" style="flex-shrink:0;background:#e8b84b;border:none;padding:0.55rem 1.5rem;font-family:'Libre Baskerville',serif;font-size:0.78rem;font-weight:700;color:#1a0f08;cursor:pointer;letter-spacing:0.04em;">Entendi</button></div>
+<div id="cookie-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#1a0f08;border-top:1px solid rgba(212,170,106,0.4);padding:1rem 2rem;z-index:9999;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;"><p style="margin:0;font-family:'Libre Baskerville',serif;font-size:0.82rem;color:#e8d4b0;line-height:1.5;">This site uses cookies to improve your experience. By continuing to browse, you agree to our <a href="/politica-de-privacidade.html" style="color:#e8b84b;text-decoration:underline;text-underline-offset:2px;">Privacy Policy</a>.</p><button onclick="document.getElementById('cookie-banner').style.display='none';localStorage.setItem('kifacil_cookies','1');" style="flex-shrink:0;background:#e8b84b;border:none;padding:0.55rem 1.5rem;font-family:'Libre Baskerville',serif;font-size:0.78rem;font-weight:700;color:#1a0f08;cursor:pointer;letter-spacing:0.04em;">Got it</button></div>
 <script>if(!localStorage.getItem('kifacil_cookies'))document.getElementById('cookie-banner').style.display='flex';</script>
 
 <script type="module">
