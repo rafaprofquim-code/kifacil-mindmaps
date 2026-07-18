@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="canonical" href="https://kifaciledu.com.br/jogos/jogos-escaperoom/torre-quimica/fases/fase7-portao-conhecimento.html">
-<title>O Portão do Conhecimento | KiFácil</title>
-<meta name="description" content="Fase 7 (Camada 1) do Escape Room dos Mapas da Academia KiFácil. A fase final do Desafio das Camadas Profundas: decifre o código que abre o Portão do Conhecimento.">
+<title>The Gate of Knowledge | KiFácil</title>
+<meta name="description" content="Stage 7 (Layer 1) of the KiFácil Academy Mind Maps Escape Room. The final stage of the Deep Layers Challenge: decipher the code that opens the Gate of Knowledge.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;1,500;1,600&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 <style>
@@ -68,12 +68,12 @@
     display: flex; align-items: center; justify-content: center;
   }
 
-  /* ── PORTÃO DO CONHECIMENTO ───────────────────────────────────────────────
-     #porta-wrapper é dimensionado via JS para o maior retângulo possível
-     mantendo a proporção real de porta-codigo.png (1024×1536), a mesma
-     técnica usada nas fases anteriores (tabela periódica / eletrosfera).
-     A porta é dividida visualmente em duas metades (mesma imagem, cada
-     uma mostrando sua parte), que deslizam para os lados no final.
+  /* ── GATE OF KNOWLEDGE ───────────────────────────────────────────────────
+     #porta-wrapper is sized via JS to the largest possible rectangle
+     while keeping porta-codigo.png's real aspect ratio (1024×1536), the
+     same technique used in the previous stages (periodic table /
+     electron shells). The door is visually split into two halves (same
+     image, each showing its own part), which slide apart at the end.
      ──────────────────────────────────────────────────────────────────────── */
   #porta-wrapper {
     position: relative;
@@ -102,8 +102,8 @@
   #porta-wrapper.aberta .porta-metade.esq { transform: translateX(-104%); }
   #porta-wrapper.aberta .porta-metade.dir { transform: translateX(104%); }
 
-  /* Os três espaços do código, sobre a porta (medidos nos pixels reais
-     da imagem: y ≈ 38.2% / 46.7% / 55.5%, sempre centralizados em x). */
+  /* The three code slots, over the door (measured from the image's real
+     pixels: y ≈ 38.2% / 46.7% / 55.5%, always centered in x). */
   .codigo-slot {
     position: absolute;
     left: 50%; width: 54%;
@@ -123,7 +123,7 @@
     100% { text-shadow: 0 0 6px rgba(0,0,0,.7); }
   }
 
-  /* Cadeados decorativos ao redor da porta — somem um a um no final. */
+  /* Decorative padlocks around the door — vanish one by one at the end. */
   .cadeado-decor {
     position: absolute;
     width: 46px;
@@ -134,7 +134,7 @@
   }
   .cadeado-decor.sumiu { opacity: 0; transform: scale(.4) rotate(25deg); }
 
-  /* ── QUADRO NEGRO (lado direito) ── */
+  /* ── CHALKBOARD (right side) ── */
   #quadro-painel {
     position: absolute;
     top: 50%; right: 90px;
@@ -206,7 +206,7 @@
   }
   .quadro-feedback.certo { color: var(--green-text); }
 
-  /* ── PROFESSORA RAFAELA (esquerda) ── */
+  /* ── PROFESSOR RAFAELA (left side) ── */
   #teacher-box {
     position: absolute;
     bottom: 0; left: 20px;
@@ -279,8 +279,8 @@
   #btn-concluir.show { opacity: 1; pointer-events: all; }
   #btn-concluir:hover { background: #f0c960; transform: scale(1.03); }
 
-  /* ── RESPONSIVO ── */
-  /* ── BOTÃO DE MUDO ── */
+  /* ── RESPONSIVE ── */
+  /* ── MUTE BUTTON ── */
   #controle-volume {
     position: fixed;
     bottom: 16px; right: 16px;
@@ -342,8 +342,8 @@
 
 <header class="header">
   <div>
-    <div class="eyebrow">Camadas Profundas · KiFácil</div>
-    <h1 class="page-title">O Portão do Conhecimento</h1>
+    <div class="eyebrow">Deep Layers · KiFácil</div>
+    <h1 class="page-title">The Gate of Knowledge</h1>
   </div>
   <div class="progress-wrap">
     <div class="prog-step done" id="ps1">✓</div>
@@ -362,34 +362,34 @@
   </div>
 </header>
 
-<!-- ÁREA DO JOGO -->
+<!-- GAME AREA -->
 <div id="game-area">
 
-  <!-- PROFESSORA RAFAELA -->
+  <!-- PROFESSOR RAFAELA -->
   <aside id="teacher-box">
-    <img id="teacher-img" src="../imagens/rafa-explicando.jpg" alt="Professora Rafaela">
+    <img id="teacher-img" src="../imagens/rafa-explicando.jpg" alt="Professor Rafaela">
     <div id="teacher-bubble">
-      <div id="teacher-name">Professora Rafaela</div>
+      <div id="teacher-name">Professor Rafaela</div>
       <p id="teacher-text"></p>
-      <button id="btn-avancar" onclick="proximoPasso()">Continuar</button>
-      <a id="btn-concluir" href="torre-quimica-concluida.html">Concluir</a>
+      <button id="btn-avancar" onclick="proximoPasso()">Continue</button>
+      <a id="btn-concluir" href="torre-quimica-concluida.html">Finish</a>
     </div>
   </aside>
 
-  <!-- CENA -->
+  <!-- SCENE -->
   <div id="scene-col">
 
-    <!-- PORTÃO DO CONHECIMENTO -->
+    <!-- GATE OF KNOWLEDGE -->
     <div id="porta-wrapper">
       <div id="luz-dourada"></div>
       <div class="porta-metade esq"><img src="../imagens/porta-codigo.png" alt=""></div>
-      <div class="porta-metade dir"><img src="../imagens/porta-codigo.png" alt="Portão do Conhecimento"></div>
+      <div class="porta-metade dir"><img src="../imagens/porta-codigo.png" alt="Gate of Knowledge"></div>
 
       <div class="codigo-slot" id="slot-1" style="top: 38.2%; font-size: 26px;">_</div>
       <div class="codigo-slot" id="slot-2" style="top: 46.7%; font-size: 26px;">_</div>
       <div class="codigo-slot" id="slot-3" style="top: 55.5%; font-size: 20px;">_</div>
 
-      <!-- Cadeados decorativos ao redor da porta -->
+      <!-- Decorative padlocks around the door -->
       <img class="cadeado-decor" src="../imagens/cadeado.png" alt="" style="left: -14%; top: 6%; transform: rotate(-8deg);">
       <img class="cadeado-decor" src="../imagens/cadeado.png" alt="" style="left: 104%; top: 4%; transform: rotate(10deg);">
       <img class="cadeado-decor" src="../imagens/cadeado.png" alt="" style="left: -18%; top: 40%; transform: rotate(6deg);">
@@ -400,14 +400,14 @@
 
   </div><!-- #scene-col -->
 
-  <!-- QUADRO NEGRO -->
+  <!-- CHALKBOARD -->
   <div id="quadro-painel">
-    <div class="quadro-eyebrow">Quadro Negro</div>
+    <div class="quadro-eyebrow">Chalkboard</div>
     <div class="equacao-fixa" id="equacaoFixa"></div>
     <div class="quadro-pergunta" id="quadroPergunta"></div>
     <div class="quadro-resposta-wrap">
-      <input type="text" id="campoResposta" inputmode="decimal" placeholder="Resposta" autocomplete="off">
-      <button class="btn-verificar-fase" onclick="verificarResposta()">Verificar</button>
+      <input type="text" id="campoResposta" inputmode="decimal" placeholder="Answer" autocomplete="off">
+      <button class="btn-verificar-fase" onclick="verificarResposta()">Check</button>
     </div>
     <div class="quadro-feedback" id="quadroFeedback"></div>
   </div>
@@ -416,8 +416,8 @@
 
 <script>
   /* ══════════════════════════════════════════════════════════════════════
-     PROFESSORA RAFAELA — esta fase usa uma única imagem
-     (rafa-explicando.jpg), então a fala só digita o texto.
+     PROFESSOR RAFAELA — this stage uses a single image
+     (rafa-explicando.jpg), so the dialogue only types the text.
      ══════════════════════════════════════════════════════════════════════ */
   const $ttxt = document.getElementById('teacher-text');
   const $tbtn = document.getElementById('btn-avancar');
@@ -442,11 +442,11 @@
     });
   }
 
-  /* Música de fundo + controle de volume (a preferência fica salva e vale
-     para todas as fases). Toca em loop a partir do primeiro clique do
-     aluno (navegadores bloqueiam áudio automático sem interação); o
-     volume do slider vale tanto para a música quanto para os efeitos
-     sonoros (clique, ding, porta etc.). */
+  /* Background music + volume control (the preference is saved and applies
+     to every stage). Loops starting from the student's first click
+     (browsers block automatic audio without interaction); the volume
+     slider applies to both the music and the sound effects (click, ding,
+     door, etc.). */
   let volumeSalvo = parseFloat(localStorage.getItem('kifacil_volume'));
   if (isNaN(volumeSalvo)) volumeSalvo = 0.35;
   let silenciado = localStorage.getItem('kifacil_silenciado') === '1';
@@ -456,12 +456,12 @@
     return silenciado ? 0 : volumeSalvo;
   }
 
-  /* A navegação entre fases sempre recarrega a página (não é uma SPA),
-     então o áudio para de tocar por um instante — isso não dá para
-     evitar. Mas guardamos o ponto exato da música em sessionStorage a
-     cada instante (evento "timeupdate") e retomamos dali na próxima
-     fase, em vez de reiniciar do zero — assim a música parece contínua
-     ao longo de toda a "Desafio das Camadas Profundas". */
+  /* Navigating between stages always reloads the page (this isn't a SPA),
+     so the audio stops for a moment — that can't be avoided. But we save
+     the exact position of the music in sessionStorage constantly (the
+     "timeupdate" event) and resume from there on the next stage instead
+     of restarting from zero — so the music feels continuous throughout
+     the whole "Deep Layers Challenge". */
   function iniciarMusicaFundo() {
     if (musicaFundo) return;
     try {
@@ -526,19 +526,19 @@
     try { const a = new Audio('../sons/porta-abrindo.mp3'); a.volume = v; a.play().catch(()=>{}); } catch(e) {}
   }
 
-  /* ── INTRODUÇÃO ── */
+  /* ── INTRO ── */
   const introPassos = [
-    'Parabéns.\nVocê chegou à última camada.',
-    'À sua frente está o Portão do Conhecimento.',
-    'Somente aqueles que dominam a linguagem da Química conseguem atravessá-lo.',
-    'Cada resposta correta revelará parte do código que rompe este selo.',
-    'Boa sorte.'
+    'Congratulations.\nYou have reached the final layer.',
+    'Before you stands the Gate of Knowledge.',
+    'Only those who master the language of Chemistry can pass through it.',
+    'Each correct answer will reveal part of the code that breaks this seal.',
+    'Good luck.'
   ];
   let introIdx = 0;
 
   function iniciarIntro() {
     $tbtn.style.display = '';
-    $tbtn.textContent = 'Continuar';
+    $tbtn.textContent = 'Continue';
     fala(introPassos[0], () => setTimeout(() => $tbtn.classList.add('show'), 300));
   }
   setTimeout(iniciarIntro, 400);
@@ -547,7 +547,7 @@
     tocarClick();
     introIdx++;
     if (introIdx >= introPassos.length) {
-      // Fechou a caixa de diálogo: some o botão e libera o quadro/porta.
+      // Closed the dialogue box: the button disappears and the board/door are enabled.
       $tbtn.classList.remove('show');
       $tbtn.style.display = 'none';
       liberarMecanica();
@@ -562,23 +562,23 @@
   }
 
   /* ══════════════════════════════════════════════════════════════════════
-     AS TRÊS ETAPAS DO PORTÃO
+     THE GATE'S THREE STAGES
      ══════════════════════════════════════════════════════════════════════ */
   const ETAPAS = [
     {
-      pergunta: 'Balanceie a equação:\n\nN₂ + H₂ → NH₃\n\nQual é a soma dos coeficientes?',
+      pergunta: 'Balance the equation:\n\nN₂ + H₂ → NH₃\n\nWhat is the sum of the coefficients?',
       resposta: 6,
       digito: '6'
     },
     {
-      pergunta: 'Utilizando 12 mol de H₂,\nquantos mol de NH₃ são produzidos?',
+      pergunta: 'Using 12 mol of H₂,\nhow many mol of NH₃ are produced?',
       resposta: 8,
       digito: '8'
     },
     {
-      pergunta: 'Os 8 mol de NH₃ ocupam qual\nvolume nas CNTP?',
+      pergunta: 'What volume do the 8 mol of NH₃\noccupy at STP?',
       resposta: 179.2,
-      digito: '179,2'
+      digito: '179.2'
     }
   ];
   let etapaIdx = 0;
@@ -590,7 +590,7 @@
     document.getElementById('quadroFeedback').className = 'quadro-feedback';
   }
 
-  // Aceita tanto vírgula quanto ponto decimal (ex.: 179,2 ou 179.2).
+  // Accepts both comma and period as the decimal separator (e.g.: 179,2 or 179.2).
   function normalizarNumero(valor) {
     return parseFloat(valor.trim().replace(',', '.'));
   }
@@ -607,12 +607,12 @@
 
     if (correto) {
       tocarDing();
-      feedback.textContent = 'Correto!';
+      feedback.textContent = 'Correct!';
       feedback.className = 'quadro-feedback certo';
       revelarDigitoPorta(etapaIdx, ETAPAS[etapaIdx].digito);
 
-      // Assim que a etapa 1 é resolvida, a equação balanceada fica fixa
-      // no quadro — as etapas 2 e 3 dependem dela para serem resolvidas.
+      // As soon as stage 1 is solved, the balanced equation stays fixed
+      // on the board — stages 2 and 3 depend on it to be solved.
       if (etapaIdx === 0) {
         const equacao = document.getElementById('equacaoFixa');
         equacao.textContent = 'N₂ + 3 H₂ → 2 NH₃';
@@ -628,14 +628,14 @@
     } else {
       tocarClick();
       campo.classList.remove('errado');
-      void campo.offsetWidth; // reinicia a animação de shake
+      void campo.offsetWidth; // restarts the shake animation
       campo.classList.add('errado');
-      feedback.textContent = 'Resposta incorreta. Tente novamente.';
+      feedback.textContent = 'Incorrect answer. Try again.';
       feedback.className = 'quadro-feedback';
     }
   }
 
-  // Envia com Enter também, sem usar prompt()/alert().
+  // Also submits with Enter, without using prompt()/alert().
   document.getElementById('campoResposta').addEventListener('keydown', e => {
     if (e.key === 'Enter') verificarResposta();
   });
@@ -649,7 +649,7 @@
   }
 
   /* ══════════════════════════════════════════════════════════════════════
-     FINAL: cadeados somem, a porta se abre, a professora encerra a fase.
+     ENDING: padlocks vanish, the door opens, the teacher wraps up the stage.
      ══════════════════════════════════════════════════════════════════════ */
   function finalizarCodigos() {
     document.getElementById('ps7').className = 'prog-step done';
@@ -671,17 +671,17 @@
   }
 
   const falaFinal = [
-    'Excelente!',
-    'Você venceu o Desafio das Camadas Profundas.',
-    'Agora as portas da Torre de Química estão abertas para você.',
-    'A partir deste momento, novos conhecimentos aguardam além deste portal.'
+    'Excellent!',
+    'You have defeated the Deep Layers Challenge.',
+    'Now the doors of the Chemistry Tower are open to you.',
+    'From this moment on, new knowledge awaits beyond this portal.'
   ];
   let falaFinalIdx = 0;
 
   function mostrarFalaFinal() {
     document.getElementById('quadro-painel').classList.remove('ativo');
     falaFinalIdx = 0;
-    $tbtn.textContent = 'Continuar';
+    $tbtn.textContent = 'Continue';
     $tbtn.style.display = '';
     fala(falaFinal[0], () => setTimeout(() => $tbtn.classList.add('show'), 300));
     $tbtn.onclick = proximoPassoFinal;
@@ -691,7 +691,7 @@
     tocarClick();
     falaFinalIdx++;
     if (falaFinalIdx >= falaFinal.length - 1) {
-      // Última fala: some o botão "Continuar" e mostra "Concluir".
+      // Last line: the "Continue" button disappears and "Finish" appears.
       $tbtn.classList.remove('show');
       $tbtn.style.display = 'none';
       fala(falaFinal[falaFinal.length - 1], () => setTimeout(() => $tconcluir.classList.add('show'), 300));
@@ -701,13 +701,13 @@
   }
 
   /* ══════════════════════════════════════════════════════════════════════
-     DIMENSIONAMENTO DO PORTÃO — maior retângulo possível respeitando a
-     proporção real de porta-codigo.png (1024×1536), a mesma técnica das
-     fases anteriores (evita sobra de espaço morto ou corte da imagem).
+     GATE SIZING — largest possible rectangle respecting porta-codigo.png's
+     real aspect ratio (1024×1536), the same technique used in the
+     previous stages (avoids dead space or the image being cropped).
      ══════════════════════════════════════════════════════════════════════ */
   const ASPECT_PORTA = 1024 / 1536;
   function ajustarTamanhoPorta() {
-    if (window.innerWidth <= 768) return; // no celular o tamanho é fixo via CSS
+    if (window.innerWidth <= 768) return; // on mobile the size is fixed via CSS
     const wrapper = document.getElementById('porta-wrapper');
     const cena = document.getElementById('scene-col');
     const alturaDisponivel = cena.clientHeight * 0.86;
@@ -726,11 +726,11 @@
 </script>
 
 <div id="controle-volume">
-  <button id="btn-mute" onclick="alternarMudo()" aria-label="Silenciar ou ativar o som">🔊</button>
+  <button id="btn-mute" onclick="alternarMudo()" aria-label="Mute or unmute sound">🔊</button>
   <input type="range" id="slider-volume" min="0" max="100" value="35" oninput="ajustarVolume(this.value)" aria-label="Volume">
 </div>
 
-<div id="cookie-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#1a0f08;border-top:1px solid rgba(212,170,106,0.4);padding:1rem 2rem;z-index:9999;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;"><p style="margin:0;font-family:'Libre Baskerville',serif;font-size:0.82rem;color:#e8d4b0;line-height:1.5;">Este site utiliza cookies para melhorar sua experiência. Ao continuar navegando, você concorda com nossa <a href="/politica-de-privacidade.html" style="color:#e8b84b;text-decoration:underline;text-underline-offset:2px;">Política de Privacidade</a>.</p><button onclick="document.getElementById('cookie-banner').style.display='none';localStorage.setItem('kifacil_cookies','1');" style="flex-shrink:0;background:#e8b84b;border:none;padding:0.55rem 1.5rem;font-family:'Libre Baskerville',serif;font-size:0.78rem;font-weight:700;color:#1a0f08;cursor:pointer;letter-spacing:0.04em;">Entendi</button></div>
+<div id="cookie-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#1a0f08;border-top:1px solid rgba(212,170,106,0.4);padding:1rem 2rem;z-index:9999;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;"><p style="margin:0;font-family:'Libre Baskerville',serif;font-size:0.82rem;color:#e8d4b0;line-height:1.5;">This site uses cookies to improve your experience. By continuing to browse, you agree to our <a href="/politica-de-privacidade.html" style="color:#e8b84b;text-decoration:underline;text-underline-offset:2px;">Privacy Policy</a>.</p><button onclick="document.getElementById('cookie-banner').style.display='none';localStorage.setItem('kifacil_cookies','1');" style="flex-shrink:0;background:#e8b84b;border:none;padding:0.55rem 1.5rem;font-family:'Libre Baskerville',serif;font-size:0.78rem;font-weight:700;color:#1a0f08;cursor:pointer;letter-spacing:0.04em;">Got it</button></div>
 <script>if(!localStorage.getItem('kifacil_cookies'))document.getElementById('cookie-banner').style.display='flex';</script>
 
 <script type="module">
