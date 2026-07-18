@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="canonical" href="https://kifaciledu.com.br/jogos/jogos-escaperoom/torre-quimica/fases/fase1-sala-entrada.html">
-<title>Sala de Entrada das Camadas Profundas | KiFácil</title>
-<meta name="description" content="Fase 1 do Escape Room dos Mapas da Academia KiFácil. Descubra os quatro modelos atômicos escondidos na sala e decifre a fechadura do cátion para abrir a primeira porta.">
+<title>Entrance Hall of the Deep Layers | KiFácil</title>
+<meta name="description" content="Stage 1 of the KiFácil Academy Mind Maps Escape Room. Discover the four hidden atomic models in the room and crack the cation lock to open the first door.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;1,500;1,600&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 <style>
@@ -61,7 +61,7 @@
     overflow: hidden;
   }
 
-  /* Cena ocupa tudo */
+  /* Scene fills the whole area */
   #scene-col {
     position: absolute;
     inset: 0;
@@ -82,8 +82,8 @@
     z-index: 10;
   }
 
-  /* ── POSIÇÕES DOS HOTSPOTS (desktop) ─────────────────────────────────────
-     Para ajustar no MOBILE, procure o bloco "HOTSPOTS MOBILE" mais abaixo.
+  /* ── HOTSPOT POSITIONS (desktop) ──────────────────────────────────────────
+     To adjust for MOBILE, look for the "MOBILE HOTSPOTS" block further down.
      ──────────────────────────────────────────────────────────────────────── */
   #hs-dalton     { left: 26%; top: 55%; width: 15%; height: 44%; }
   #hs-thomson    { left: 30%; top: 32%; width: 11%; height: 32%; }
@@ -122,7 +122,7 @@
   }
   .hotspot:hover .hotspot-label { opacity: 0; }
 
-  /* hotspots desabilitados durante intro */
+  /* hotspots disabled during the intro */
   body.intro-ativa .hotspot { pointer-events: none; filter: brightness(.45); }
 
   /* ── BENTINHO ── */
@@ -140,7 +140,7 @@
     display: block;
   }
 
-  /* Flash de travamento na porta */
+  /* Door-locking flash effect */
   #porta-lock-flash {
     display: none;
     position: absolute;
@@ -153,7 +153,7 @@
   }
   #porta-lock-flash.show { display: block; }
 
-  /* ── PROFESSORA RAFAELA (esquerda) ── */
+  /* ── PROFESSOR RAFAELA (left side) ── */
   #teacher-box {
     position: absolute;
     bottom: 0; left: 20px;
@@ -210,7 +210,7 @@
   #btn-avancar.show { opacity: 1; pointer-events: all; }
   #btn-avancar:hover { filter: brightness(1.1); transform: scale(1.03); }
 
-  /* Backdrop escurece a cena ao abrir o modal */
+  /* Backdrop dims the scene when the modal opens */
   #modal-backdrop {
     display: none;
     position: absolute; inset: 0; z-index: 90;
@@ -218,7 +218,7 @@
   }
   #modal-backdrop.show { display: block; }
 
-  /* Modal centralizado */
+  /* Centered modal */
   #stage-area {
     display: none;
     position: absolute;
@@ -231,7 +231,7 @@
   }
   #stage-area.show { display: flex; }
 
-  /* Modelos descobertos — canto superior direito */
+  /* Discovered models — top-right corner */
   #modelos-overlay {
     position: absolute;
     top: 14px; right: 14px;
@@ -286,7 +286,7 @@
   .btn-responder:hover { background: #f0c960; }
   .enigma-feedback { display: none !important; }
 
-  /* Enigma porta — fechadura do cátion */
+  /* Door puzzle — cation lock */
   .evolucao-desc {
     font-size: 13px; color: rgba(232,216,176,0.75);
     line-height: 1.7; margin-bottom: 16px;
@@ -331,7 +331,7 @@
     color: rgba(245,234,208,0.7); line-height: 1.7; font-style: italic;
   }
 
-  /* Modelos descobertos (painel pequeno) */
+  /* Discovered models (small panel) */
   .modelos-panel {
     background: var(--panel-bg);
     border: 1.5px solid var(--border);
@@ -346,7 +346,7 @@
   .modelo-dot { width: 7px; height: 7px; border-radius: 50%; border: 1px solid rgba(212,170,106,0.3); flex-shrink: 0; transition: all .3s; }
   .modelo-item.found .modelo-dot { background: var(--gold); border-color: var(--gold); }
 
-  /* ── VITÓRIA ── */
+  /* ── VICTORY ── */
   #win-screen {
     display: none; position: fixed; inset: 0; z-index: 200;
     background: rgba(14,6,0,0.92);
@@ -366,8 +366,8 @@
   }
   .btn-next:hover { background: #f0c960; }
 
-  /* ── RESPONSIVO ── */
-  /* ── BOTÃO DE MUDO ── */
+  /* ── RESPONSIVE ── */
+  /* ── MUTE BUTTON ── */
   #controle-volume {
     position: fixed;
     bottom: 16px; right: 16px;
@@ -392,10 +392,10 @@
     html, body { overflow: auto; height: auto; }
     body { min-height: 100vh; }
 
-    /* Rafaela em cima, cena embaixo */
+    /* Rafaela on top, scene below */
     #game-area { display: flex; flex-direction: column; overflow: visible; min-height: auto; }
 
-    /* Rafaela: fila horizontal no topo */
+    /* Rafaela: horizontal row at the top */
     #teacher-box {
       position: relative; bottom: auto; left: auto; width: 100%;
       flex-direction: row; align-items: flex-end; gap: 10px;
@@ -407,17 +407,17 @@
     #teacher-bubble { width: auto; flex: 1; min-height: auto; border-radius: 8px; padding: .75rem; }
     #teacher-text { font-size: 17px; }
 
-    /* Cena: altura automática — imagem renderiza no seu ratio natural,
-       garantindo que os hotspots (% do container) alinhem com o conteúdo real */
+    /* Scene: automatic height — the image renders at its natural ratio,
+       keeping the hotspots (% of the container) aligned with the real content */
     #scene-col { position: relative; width: 100%; height: auto; }
     #scene-img { width: 100%; height: auto; object-fit: unset; display: block; }
 
-    /* Modal e backdrop fixos na viewport (funciona ao scrollar) */
+    /* Modal and backdrop fixed to the viewport (works while scrolling) */
     #modal-backdrop { position: fixed; z-index: 190; }
     #stage-area { position: fixed; top: 50%; left: 50%; transform: translate(-50%,-50%);
       width: calc(100% - 24px); max-height: 90vh; overflow-y: auto; z-index: 200; }
 
-    /* Overlay modelos — abaixo da cena no mobile, não sobre a imagem */
+    /* Models overlay — below the scene on mobile, not on top of the image */
     #modelos-overlay {
       position: relative; top: auto; right: auto; min-width: unset; width: 100%;
       border-radius: 0; border-top: 1px solid var(--border);
@@ -436,13 +436,13 @@
 
     #bentinho-img { width: 100%; }
 
-    /* ── HOTSPOTS MOBILE ──────────────────────────────────────────────────────
-       Ajuste left/top/width/height de cada hotspot para o celular.
-       Os valores são % da IMAGEM (que ocupa 100% da largura da tela).
-       left  = distância da borda esquerda da imagem
-       top   = distância do topo da imagem
-       width = largura da área clicável
-       height= altura da área clicável
+    /* ── MOBILE HOTSPOTS ─────────────────────────────────────────────────────
+       Adjust left/top/width/height for each hotspot on mobile.
+       Values are % of the IMAGE (which fills 100% of the screen width).
+       left   = distance from the image's left edge
+       top    = distance from the top of the image
+       width  = width of the clickable area
+       height = height of the clickable area
        ──────────────────────────────────────────────────────────────────────── */
     #hs-dalton     { left: 4%; top: 63%; width: 35%; height: 20%; }
     #hs-thomson    { left: 8%; top: 30%; width: 16%; height: 30%; }
@@ -458,8 +458,8 @@
 
 <header class="header">
   <div>
-    <div class="eyebrow">Camadas Profundas · KiFácil</div>
-    <h1 class="page-title">Sala de Entrada das Camadas Profundas</h1>
+    <div class="eyebrow">Deep Layers · KiFácil</div>
+    <h1 class="page-title">Entrance Hall of the Deep Layers</h1>
   </div>
   <div class="progress-wrap">
     <div class="prog-step active" id="ps1">7</div>
@@ -478,91 +478,91 @@
   </div>
 </header>
 
-<!-- ÁREA DO JOGO -->
+<!-- GAME AREA -->
 <div id="game-area">
 
-  <!-- PROFESSORA RAFAELA — position:absolute no desktop / bloco acima da cena no mobile -->
+  <!-- PROFESSOR RAFAELA — position:absolute on desktop / block above the scene on mobile -->
   <aside id="teacher-box">
-    <img id="teacher-img" src="../imagens/rafa-sorrindo.jpg" alt="Professora Rafaela">
+    <img id="teacher-img" src="../imagens/rafa-sorrindo.jpg" alt="Professor Rafaela">
     <div id="teacher-bubble">
-      <div id="teacher-name">Professora Rafaela</div>
+      <div id="teacher-name">Professor Rafaela</div>
       <p id="teacher-text"></p>
-      <button id="btn-avancar" onclick="proximoPasso()">Continuar</button>
+      <button id="btn-avancar" onclick="proximoPasso()">Continue</button>
     </div>
   </aside>
 
-  <!-- CENA -->
+  <!-- SCENE -->
   <div id="scene-col">
-    <img id="scene-img" src="../imagens/sala-vitoriana (1).jpg" alt="Sala de Entrada das Camadas Profundas da Academia KiFácil">
+    <img id="scene-img" src="../imagens/sala-vitoriana (1).jpg" alt="Entrance Hall of the Deep Layers at KiFácil Academy">
 
     <!-- BENTINHO -->
     <div id="bentinho-layer">
       <img id="bentinho-img" src="../imagens/bentinho-alavanca.png" alt="Bentinho">
     </div>
 
-    <!-- Flash de travamento da porta -->
+    <!-- Door-locking flash -->
     <div id="porta-lock-flash"></div>
 
-    <!-- HOTSPOTS sobre a imagem -->
+    <!-- HOTSPOTS over the image -->
     <div class="hotspot" id="hs-dalton"
          onclick="activateEnigma('dalton')"
-         onmouseenter="showLabel(this,'Mesa de Bilhar')"
+         onmouseenter="showLabel(this,'Billiard Table')"
          onmouseleave="hideLabel(this)">
       <div class="hotspot-ring"></div>
       <div class="hotspot-check"><div class="hotspot-check-inner">✓</div></div>
-      <span class="hotspot-label">Mesa de Bilhar</span>
+      <span class="hotspot-label">Billiard Table</span>
     </div>
 
     <div class="hotspot" id="hs-thomson"
          onclick="activateEnigma('thomson')"
-         onmouseenter="showLabel(this,'Bobina de Tesla')"
+         onmouseenter="showLabel(this,'Tesla Coil')"
          onmouseleave="hideLabel(this)">
       <div class="hotspot-ring"></div>
       <div class="hotspot-check"><div class="hotspot-check-inner">✓</div></div>
-      <span class="hotspot-label">Bobina de Tesla</span>
+      <span class="hotspot-label">Tesla Coil</span>
     </div>
 
     <div class="hotspot" id="hs-rutherford"
          onclick="activateEnigma('rutherford')"
-         onmouseenter="showLabel(this,'Orrery Planetário')"
+         onmouseenter="showLabel(this,'Planetary Orrery')"
          onmouseleave="hideLabel(this)">
       <div class="hotspot-ring"></div>
       <div class="hotspot-check"><div class="hotspot-check-inner">✓</div></div>
-      <span class="hotspot-label">Orrery Planetário</span>
+      <span class="hotspot-label">Planetary Orrery</span>
     </div>
 
     <div class="hotspot" id="hs-bohr"
          onclick="activateEnigma('bohr')"
-         onmouseenter="showLabel(this,'Prisma de Luz')"
+         onmouseenter="showLabel(this,'Light Prism')"
          onmouseleave="hideLabel(this)">
       <div class="hotspot-ring"></div>
       <div class="hotspot-check"><div class="hotspot-check-inner">✓</div></div>
-      <span class="hotspot-label">Prisma de Luz</span>
+      <span class="hotspot-label">Light Prism</span>
     </div>
 
     <div class="hotspot" id="hs-porta"
          onclick="activateEnigma('porta')"
-         onmouseenter="showLabel(this,'Porta de Saída')"
+         onmouseenter="showLabel(this,'Exit Door')"
          onmouseleave="hideLabel(this)">
       <div class="hotspot-ring"></div>
       <div class="hotspot-check"><div class="hotspot-check-inner">✓</div></div>
-      <span class="hotspot-label">Porta de Saída</span>
+      <span class="hotspot-label">Exit Door</span>
     </div>
 
   </div><!-- #scene-col -->
 
-  <!-- Modelos descobertos — fora da cena, não sobrepõe hotspots nem imagem -->
+  <!-- Discovered models — outside the scene, doesn't overlap hotspots or the image -->
   <div id="modelos-overlay">
-    <div class="modelos-title">Modelos encontrados</div>
+    <div class="modelos-title">Models found</div>
     <div class="modelos-list" id="modelos-list">
-      <div id="modelos-placeholder" style="font-size:12px;color:rgba(245,234,208,0.3);font-style:italic;">Nenhum ainda...</div>
+      <div id="modelos-placeholder" style="font-size:12px;color:rgba(245,234,208,0.3);font-style:italic;">None yet...</div>
     </div>
   </div>
 
   <!-- Backdrop -->
   <div id="modal-backdrop" onclick="fecharModal()"></div>
 
-  <!-- Modal centralizado -->
+  <!-- Centered modal -->
   <div id="stage-area">
     <div class="enigma-panel" id="enigmaBox">
       <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px;">
@@ -576,11 +576,11 @@
     </div>
   </div>
 
-  <!-- TELA DE VITÓRIA -->
+  <!-- VICTORY SCREEN -->
   <div id="win-screen">
-    <div class="win-title">Sala de Entrada Concluída!</div>
-    <p class="win-sub">Você reconheceu os quatro modelos atômicos e decifrou a fechadura do cátion. A primeira porta das Camadas Profundas está aberta.</p>
-    <a href="sala2.html" class="btn-next">Avançar para o Laboratório →</a>
+    <div class="win-title">Entrance Hall Complete!</div>
+    <p class="win-sub">You identified the four atomic models and cracked the cation lock. The first door of the Deep Layers is open.</p>
+    <a href="sala2.html" class="btn-next">Continue to the Laboratory →</a>
   </div>
 
 </div><!-- #game-area -->
@@ -591,59 +591,59 @@
 
   const enigmas = {
     dalton: {
-      eyebrow: 'Mesa de Bilhar — Modelo Atômico',
-      title: 'O átomo como uma bola de bilhar',
+      eyebrow: 'Billiard Table — Atomic Model',
+      title: 'The atom as a billiard ball',
       desc: '',
-      dica: 'Átomo como esfera maciça e indivisível — como uma bola de bilhar. Qual é esse modelo?',
-      placeholder: 'Digite o nome do modelo ou cientista...',
+      dica: 'The atom as a solid, indivisible sphere — like a billiard ball. Which model is this?',
+      placeholder: 'Type the model or scientist\'s name...',
       keyword: 'dalton',
       feedbackOk: '',
       feedbackErr: '',
-      rafaOk: 'Correto! Dalton, o pioneiro. Continue explorando!'
+      rafaOk: 'Correct! Dalton, the pioneer. Keep exploring!'
     },
     thomson: {
-      eyebrow: 'Bobina de Tesla — Modelo Atômico',
-      title: 'Eletricidade e cargas negativas',
+      eyebrow: 'Tesla Coil — Atomic Model',
+      title: 'Electricity and negative charges',
       desc: '',
-      dica: 'Átomo como pudim de passas: elétrons negativos espalhados numa massa positiva. Quem propôs isso?',
-      placeholder: 'Digite o nome do modelo ou cientista...',
+      dica: 'The atom as a plum pudding: negative electrons scattered through a positive mass. Who proposed this?',
+      placeholder: 'Type the model or scientist\'s name...',
       keyword: 'thomson',
       keywords: ['thomson', 'thompson'],
       feedbackOk: '',
       feedbackErr: '',
-      rafaOk: 'Isso! Thomson descobriu o elétron. Siga em frente!'
+      rafaOk: 'That\'s it! Thomson discovered the electron. Onward!'
     },
     rutherford: {
-      eyebrow: 'Orrery Planetário — Modelo Atômico',
-      title: 'O núcleo e os elétrons em órbita',
+      eyebrow: 'Planetary Orrery — Atomic Model',
+      title: 'The nucleus and orbiting electrons',
       desc: '',
-      dica: 'Elétrons orbitando um núcleo central — igual aos planetas ao redor do Sol. Qual é esse modelo?',
-      placeholder: 'Digite o nome do modelo ou cientista...',
+      dica: 'Electrons orbiting a central nucleus — just like planets around the Sun. Which model is this?',
+      placeholder: 'Type the model or scientist\'s name...',
       keyword: 'rutherford',
       feedbackOk: '',
       feedbackErr: '',
-      rafaOk: 'Perfeito! Rutherford e o núcleo central. Continue!'
+      rafaOk: 'Perfect! Rutherford and the central nucleus. Keep going!'
     },
     bohr: {
-      eyebrow: 'Prisma de Luz — Modelo Atômico',
-      title: 'Espectros de luz e níveis de energia',
+      eyebrow: 'Light Prism — Atomic Model',
+      title: 'Light spectra and energy levels',
       desc: '',
-      dica: 'Elétrons em níveis de energia que emitem luz colorida ao saltar. Qual modelo é esse?',
-      placeholder: 'Digite o nome do modelo ou cientista...',
+      dica: 'Electrons in energy levels that emit colored light when they jump. Which model is this?',
+      placeholder: 'Type the model or scientist\'s name...',
       keyword: 'bohr',
       feedbackOk: '',
       feedbackErr: '',
-      rafaOk: 'Isso! Bohr e os níveis de energia.'
+      rafaOk: 'That\'s it! Bohr and the energy levels.'
     },
     porta: {
-      eyebrow: 'Porta de Saída — Enigma Final',
-      title: 'A fechadura do cátion',
+      eyebrow: 'Exit Door — Final Puzzle',
+      title: 'The cation lock',
       keyword: null,
-      rafaOk: 'Perfeito! Você calculou nêutrons e elétrons corretamente. A fechadura reconheceu sua resposta.'
+      rafaOk: 'Perfect! You calculated the neutrons and electrons correctly. The lock recognized your answer.'
     }
   };
 
-  /* ── PROFESSORA RAFAELA ── */
+  /* ── PROFESSOR RAFAELA ── */
   const IMG = {
     sorrindo:   '../imagens/rafa-sorrindo.jpg',
     explicando: '../imagens/rafa-explicando.jpg',
@@ -683,22 +683,22 @@
 
   /* ── INTRO ── */
   const introPassos = [
-    { img: 'sorrindo',   txt: 'Bem-vindo às Camadas Profundas da Academia KiFácil. Esta é uma das construções mais antigas da nossa escola.' },
-    { img: 'explicando', txt: 'Cada objeto desta sala guarda uma parte importante da história da Química. Observe tudo com atenção.' },
-    { img: 'pensando',   txt: 'Alguns objetos escondem pistas sobre os principais modelos atômicos...' },
+    { img: 'sorrindo',   txt: 'Welcome to the Deep Layers of KiFácil Academy. This is one of the oldest buildings in our school.' },
+    { img: 'explicando', txt: 'Every object in this room holds an important part of Chemistry\'s history. Look closely at everything.' },
+    { img: 'pensando',   txt: 'Some objects hide clues about the main atomic models...' },
     { bentinho: true },
     { img: 'pensando',   txt: 'Bentinho...' },
-    { img: 'sorrindo',   txt: 'Parece que ele resolveu testar você. Não se preocupe, isso acontece com frequência por aqui.' },
-    { img: 'explicando', txt: 'Nesta sala existem quatro objetos. Cada um deles representa um importante modelo atômico.' },
-    { img: 'animada',    txt: 'Quando identificar os quatro modelos, a fechadura reconhecerá que você reuniu as pistas necessárias. Só então será possível resolver o enigma final da porta.', ultimo: true },
+    { img: 'sorrindo',   txt: 'Looks like he decided to test you. Don\'t worry, that happens a lot around here.' },
+    { img: 'explicando', txt: 'This room has four objects. Each one represents an important atomic model.' },
+    { img: 'animada',    txt: 'Once you identify all four models, the lock will recognize that you\'ve gathered the necessary clues. Only then will you be able to solve the door\'s final puzzle.', ultimo: true },
   ];
   let introIdx = 0;
 
-  /* Música de fundo + controle de volume (a preferência fica salva e vale
-     para todas as fases). Toca em loop a partir do primeiro clique do
-     aluno (navegadores bloqueiam áudio automático sem interação); o
-     volume do slider vale tanto para a música quanto para os efeitos
-     sonoros (clique, ding, porta etc.). */
+  /* Background music + volume control (the preference is saved and applies
+     to every stage). Loops starting from the student's first click
+     (browsers block automatic audio without interaction); the volume
+     slider applies to both the music and the sound effects (click, ding,
+     door, etc.). */
   let volumeSalvo = parseFloat(localStorage.getItem('kifacil_volume'));
   if (isNaN(volumeSalvo)) volumeSalvo = 0.35;
   let silenciado = localStorage.getItem('kifacil_silenciado') === '1';
@@ -708,12 +708,12 @@
     return silenciado ? 0 : volumeSalvo;
   }
 
-  /* A navegação entre fases sempre recarrega a página (não é uma SPA),
-     então o áudio para de tocar por um instante — isso não dá para
-     evitar. Mas guardamos o ponto exato da música em sessionStorage a
-     cada instante (evento "timeupdate") e retomamos dali na próxima
-     fase, em vez de reiniciar do zero — assim a música parece contínua
-     ao longo de toda a "Desafio das Camadas Profundas". */
+  /* Navigating between stages always reloads the page (this isn't a SPA),
+     so the audio stops for a moment — that can't be avoided. But we save
+     the exact position of the music in sessionStorage constantly (the
+     "timeupdate" event) and resume from there on the next stage instead
+     of restarting from zero — so the music feels continuous throughout
+     the whole "Deep Layers Challenge". */
   function iniciarMusicaFundo() {
     if (musicaFundo) return;
     try {
@@ -782,58 +782,58 @@
       cenaBentinho(() => {
         introIdx++;
         const next = introPassos[introIdx];
-        $tbtn.textContent = 'Continuar';
+        $tbtn.textContent = 'Continue';
         $tbtn.style.display = '';
         fala(next.img, next.txt);
       });
       return;
     }
-    $tbtn.textContent = p.ultimo ? 'Estou pronto!' : 'Continuar';
+    $tbtn.textContent = p.ultimo ? 'I\'m ready!' : 'Continue';
     $tbtn.style.display = '';
     fala(p.img, p.txt);
   }
 
   function iniciarIntro() {
     document.body.classList.add('intro-ativa');
-    $tbtn.textContent = 'Continuar';
+    $tbtn.textContent = 'Continue';
     $tbtn.style.display = '';
     fala(introPassos[0].img, introPassos[0].txt);
   }
 
   setTimeout(iniciarIntro, 400);
 
-  /* ── CENA DO BENTINHO ── */
+  /* ── BENTINHO SCENE ── */
   function cenaBentinho(callback) {
     const layer = document.getElementById('bentinho-layer');
     const img   = document.getElementById('bentinho-img');
     const flash = document.getElementById('porta-lock-flash');
 
-    /* entra correndo da esquerda + miado */
+    /* runs in from the left + meow */
     layer.style.transition = 'none';
     layer.style.left       = '-120px';
     layer.style.display    = 'block';
     img.src = '../imagens/bentinho-correndo.png';
     try { new Audio('../sons/bentinho-miado.MP3').play().catch(()=>{}); } catch(e) {}
 
-    /* força reflow para que a transição dispare */
+    /* force reflow so the transition fires */
     layer.offsetWidth;
 
-    /* corre até a porta */
+    /* runs to the door */
     layer.style.transition = 'left 1.4s ease-in';
     layer.style.left       = '60%';
 
     setTimeout(() => {
-      /* chega na porta com a alavanca */
+      /* reaches the door with the lever */
       layer.style.transition = 'none';
       img.src = '../imagens/bentinho-alavanca (1).png';
 
-      /* flash vermelho + som de trancamento após 800ms */
+      /* red flash + locking sound after 800ms */
       setTimeout(() => {
         try { new Audio('../sons/trancando.mp3').play().catch(()=>{}); } catch(e) {}
         flash.classList.add('show');
         setTimeout(() => flash.classList.remove('show'), 500);
 
-        /* sai correndo após 2s */
+        /* runs off after 2s */
         setTimeout(() => {
           img.src = '../imagens/beninho-saindo.png';
           layer.style.transition = 'left 1s ease-in';
@@ -848,7 +848,7 @@
     }, 1450);
   }
 
-  /* ── ENIGMAS ── */
+  /* ── PUZZLES ── */
   function showLabel(el, txt) {}
   function hideLabel(el) {}
 
@@ -857,9 +857,9 @@
       rafaFala('sorrindo', enigmas[id].rafaOk); return;
     }
     if (id === 'porta' && (!solved.dalton || !solved.thomson || !solved.rutherford || !solved.bohr)) {
-      showEnigmaPanel('Porta de Saída', 'Acesso bloqueado', '',
-        `<div class="locked-msg">A fechadura não responde. Encontre os quatro modelos atômicos antes de tentar abrir a porta.</div>`);
-      rafaFala('pensando', 'A fechadura não abre ainda. Encontre os quatro modelos atômicos escondidos na sala primeiro!');
+      showEnigmaPanel('Exit Door', 'Access locked', '',
+        `<div class="locked-msg">The lock isn't responding. Find the four atomic models before trying to open the door.</div>`);
+      rafaFala('pensando', 'The lock won\'t open yet. Find the four atomic models hidden in the room first!');
       return;
     }
 
@@ -869,33 +869,33 @@
 
     if (id === 'porta') {
       document.getElementById('eBody').innerHTML = `
-        <p class="evolucao-desc">A fechadura mostra um átomo transformado em cátion. Use o número atômico e o número de massa para descobrir os dois números que faltam.</p>
+        <p class="evolucao-desc">The lock shows an atom that has become a cation. Use the atomic number and the mass number to figure out the two missing numbers.</p>
         <div class="cation-card">
           <div class="cation-simbolo">Al&sup3;&#8314;</div>
           <div class="cation-dados">
-            Número atômico (Z) = 13<br>
-            Número de massa (A) = 27
+            Atomic number (Z) = 13<br>
+            Mass number (A) = 27
           </div>
         </div>
         <div class="evolucao-grid">
           <div class="evolucao-field">
             <div class="evolucao-num">N</div>
-            <input class="evolucao-input" id="ev-neutrons" type="text" placeholder="Número de nêutrons..." onkeydown="if(event.key==='Enter')checkPortaEvolucao()">
+            <input class="evolucao-input" id="ev-neutrons" type="text" placeholder="Number of neutrons..." onkeydown="if(event.key==='Enter')checkPortaEvolucao()">
           </div>
           <div class="evolucao-field">
             <div class="evolucao-num">E</div>
-            <input class="evolucao-input" id="ev-eletrons" type="text" placeholder="Número de elétrons do cátion..." onkeydown="if(event.key==='Enter')checkPortaEvolucao()">
+            <input class="evolucao-input" id="ev-eletrons" type="text" placeholder="Number of electrons in the cation..." onkeydown="if(event.key==='Enter')checkPortaEvolucao()">
           </div>
         </div>
-        <button class="btn-responder" onclick="checkPortaEvolucao()" style="width:100%;">Confirmar senha</button>`;
-      rafaFala('pensando', 'A fechadura pede a estrutura do cátion. Calcule nêutrons e elétrons com cuidado — o Al³⁺ perdeu elétrons, não prótons!');
+        <button class="btn-responder" onclick="checkPortaEvolucao()" style="width:100%;">Confirm code</button>`;
+      rafaFala('pensando', 'The lock is asking for the cation\'s structure. Calculate neutrons and electrons carefully — Al³⁺ lost electrons, not protons!');
       setTimeout(() => document.getElementById('ev-neutrons').focus(), 100);
     } else {
       if (solved[id]) return;
       document.getElementById('eBody').innerHTML = `
         <div class="enigma-input-wrap">
           <input class="enigma-input" id="enigmaInput" type="text" placeholder="${e.placeholder}" onkeydown="if(event.key==='Enter')checkEnigma()">
-          <button class="btn-responder" onclick="checkEnigma()">Responder</button>
+          <button class="btn-responder" onclick="checkEnigma()">Answer</button>
         </div>`;
       rafaFala('explicando', e.dica);
       setTimeout(() => document.getElementById('enigmaInput')?.focus(), 100);
@@ -931,21 +931,21 @@
       markSolved(id);
       const count = ['dalton','thomson','rutherford','bohr'].filter(k => solved[k]).length;
       if (count === 4) {
-        rafaFala('animada', 'Todos os modelos encontrados! Agora resolva o enigma da porta.');
+        rafaFala('animada', 'All models found! Now solve the door\'s puzzle.');
       } else {
         rafaFala('sorrindo', enigmas[id].rafaOk);
       }
       setTimeout(fecharModal, 900);
     } else {
       fb.className = 'enigma-feedback show err';
-      fb.innerHTML = `<strong>Não é esse.</strong> ${e.feedbackErr}`;
-      rafaFala('pensando', 'Não foi dessa vez. Releia a pista com atenção — você consegue!');
+      fb.innerHTML = `<strong>Not quite.</strong> ${e.feedbackErr}`;
+      rafaFala('pensando', 'Not this time. Re-read the clue carefully — you\'ve got this!');
     }
   }
 
-  /* Enigma da porta: cátion Al³⁺ — Z = 13, A = 27
-     nêutrons = A - Z = 27 - 13 = 14
-     elétrons = Z - carga = 13 - 3 = 10 */
+  /* Door puzzle: Al³⁺ cation — Z = 13, A = 27
+     neutrons = A - Z = 27 - 13 = 14
+     electrons = Z - charge = 13 - 3 = 10 */
   function checkPortaEvolucao() {
     const soDigitos = s => s.trim().replace(/\D/g, '');
     const neutrons = soDigitos(document.getElementById('ev-neutrons').value);
@@ -960,15 +960,15 @@
       rafaFala('animada', enigmas.porta.rafaOk);
       setTimeout(showWin, 5000);
     } else {
-      rafaFala('pensando', 'Quase. Lembre-se: nêutrons = número de massa − número atômico. E o cátion Al³⁺ perdeu 3 elétrons, então elétrons = número atômico − 3.');
+      rafaFala('pensando', 'Almost. Remember: neutrons = mass number − atomic number. And the Al³⁺ cation lost 3 electrons, so electrons = atomic number − 3.');
     }
   }
 
   const modeloNomes = {
-    dalton: 'Modelo de Dalton',
-    thomson: 'Modelo de Thomson',
-    rutherford: 'Modelo de Rutherford',
-    bohr: 'Modelo de Bohr'
+    dalton: 'Dalton Model',
+    thomson: 'Thomson Model',
+    rutherford: 'Rutherford Model',
+    bohr: 'Bohr Model'
   };
 
   function markSolved(id) {
@@ -1010,11 +1010,11 @@
 </script>
 
 <div id="controle-volume">
-  <button id="btn-mute" onclick="alternarMudo()" aria-label="Silenciar ou ativar o som">🔊</button>
+  <button id="btn-mute" onclick="alternarMudo()" aria-label="Mute or unmute sound">🔊</button>
   <input type="range" id="slider-volume" min="0" max="100" value="35" oninput="ajustarVolume(this.value)" aria-label="Volume">
 </div>
 
-<div id="cookie-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#1a0f08;border-top:1px solid rgba(212,170,106,0.4);padding:1rem 2rem;z-index:9999;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;"><p style="margin:0;font-family:'Libre Baskerville',serif;font-size:0.82rem;color:#e8d4b0;line-height:1.5;">Este site utiliza cookies para melhorar sua experiência. Ao continuar navegando, você concorda com nossa <a href="/politica-de-privacidade.html" style="color:#e8b84b;text-decoration:underline;text-underline-offset:2px;">Política de Privacidade</a>.</p><button onclick="document.getElementById('cookie-banner').style.display='none';localStorage.setItem('kifacil_cookies','1');" style="flex-shrink:0;background:#e8b84b;border:none;padding:0.55rem 1.5rem;font-family:'Libre Baskerville',serif;font-size:0.78rem;font-weight:700;color:#1a0f08;cursor:pointer;letter-spacing:0.04em;">Entendi</button></div>
+<div id="cookie-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#1a0f08;border-top:1px solid rgba(212,170,106,0.4);padding:1rem 2rem;z-index:9999;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;"><p style="margin:0;font-family:'Libre Baskerville',serif;font-size:0.82rem;color:#e8d4b0;line-height:1.5;">This site uses cookies to improve your experience. By continuing to browse, you agree to our <a href="/politica-de-privacidade.html" style="color:#e8b84b;text-decoration:underline;text-underline-offset:2px;">Privacy Policy</a>.</p><button onclick="document.getElementById('cookie-banner').style.display='none';localStorage.setItem('kifacil_cookies','1');" style="flex-shrink:0;background:#e8b84b;border:none;padding:0.55rem 1.5rem;font-family:'Libre Baskerville',serif;font-size:0.78rem;font-weight:700;color:#1a0f08;cursor:pointer;letter-spacing:0.04em;">Got it</button></div>
 <script>if(!localStorage.getItem('kifacil_cookies'))document.getElementById('cookie-banner').style.display='flex';</script>
 
 <script type="module">
