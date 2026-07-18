@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="canonical" href="https://kifaciledu.com.br/jogos/jogos-escaperoom/torre-quimica/fases/escape-room-laboratorio.html">
-<title>Laboratório de Identificação de Reagentes | KiFácil</title>
-<meta name="description" content="Fase 2 do Escape Room dos Mapas da Academia KiFácil. Analise as fichas de cada frasco e descubra a identidade dos quatro reagentes.">
+<title>Reagent Identification Laboratory | KiFácil</title>
+<meta name="description" content="Stage 2 of the KiFácil Academy Mind Maps Escape Room. Analyze each flask's data sheet and discover the identity of the four reagents.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;1,500;1,600&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 <style>
@@ -81,9 +81,9 @@
     z-index: 10;
   }
 
-  /* ── POSIÇÕES DOS HOTSPOTS (desktop) ─────────────────────────────────────
-     Ajustar left/top/width/height contra a imagem real de fundo.
-     Para o MOBILE, ver o bloco "HOTSPOTS MOBILE" mais abaixo.
+  /* ── HOTSPOT POSITIONS (desktop) ──────────────────────────────────────────
+     Adjust left/top/width/height against the real background image.
+     For MOBILE, see the "MOBILE HOTSPOTS" block further down.
      ──────────────────────────────────────────────────────────────────────── */
   #hs-A { left: 37.6%; top: 46%; width: 5%; height: 18%; }
   #hs-B { left: 44.2%; top: 46%; width: 5%; height: 18%; }
@@ -134,7 +134,7 @@
   .hotspot.solved .hotspot-assign { display: block; }
   .hotspot-assign.atribuida { color: #ff5c3c; border-color: #ff5c3c; background: rgba(14,6,0,0.95); }
 
-  /* ── PROFESSORA RAFAELA (esquerda) ── */
+  /* ── PROFESSOR RAFAELA (left side) ── */
   #teacher-box {
     position: absolute;
     bottom: 0; left: 20px;
@@ -191,7 +191,7 @@
   #btn-avancar.show { opacity: 1; pointer-events: all; }
   #btn-avancar:hover { filter: brightness(1.1); transform: scale(1.03); }
 
-  /* ── BANCADA DE IDENTIFICAÇÃO — canto superior direito ── */
+  /* ── IDENTIFICATION BENCH — top-right corner ── */
   #modelos-overlay {
     display: none;
     position: absolute;
@@ -268,7 +268,7 @@
   }
   .shake-erro { animation: shakeErro .4s ease; }
 
-  /* Backdrop escurece a cena ao abrir o modal */
+  /* Backdrop dims the scene when the modal opens */
   #modal-backdrop {
     display: none;
     position: absolute; inset: 0; z-index: 90;
@@ -276,7 +276,7 @@
   }
   #modal-backdrop.show { display: block; }
 
-  /* Modal centralizado */
+  /* Centered modal */
   #stage-area {
     display: none;
     position: absolute;
@@ -314,7 +314,7 @@
   }
   .enigma-desc { display: none; }
 
-  /* Ficha de análise */
+  /* Analysis sheet */
   .ficha-teste {
     display: flex; gap: 12px; align-items: flex-start;
     padding-bottom: 12px; margin-bottom: 12px;
@@ -345,7 +345,7 @@
     75% { transform: translateX(4px); }
   }
 
-  /* ── VITÓRIA ── */
+  /* ── VICTORY ── */
   #win-screen {
     display: none; position: fixed; inset: 0; z-index: 200;
     background: rgba(14,6,0,0.92);
@@ -365,8 +365,8 @@
   }
   .btn-next:hover { background: #f0c960; }
 
-  /* ── RESPONSIVO ── */
-  /* ── BOTÃO DE MUDO ── */
+  /* ── RESPONSIVE ── */
+  /* ── MUTE BUTTON ── */
   #controle-volume {
     position: fixed;
     bottom: 16px; right: 16px;
@@ -429,8 +429,8 @@
 
     .hotspot-assign { bottom: -30px; font-size: 14px; padding: 4px 9px; }
 
-    /* ── HOTSPOTS MOBILE ──────────────────────────────────────────────────────
-       Ajustar contra a imagem real renderizada em largura total.
+    /* ── MOBILE HOTSPOTS ─────────────────────────────────────────────────────
+       Adjust against the actual full-width rendered image.
        ──────────────────────────────────────────────────────────────────────── */
     #hs-A { left: 34%;  top: 42%; width: 7%; height: 24%; }
     #hs-B { left: 43%; top: 42%; width: 7%; height: 24%; }
@@ -443,8 +443,8 @@
 
 <header class="header">
   <div>
-    <div class="eyebrow">Camadas Profundas · KiFácil</div>
-    <h1 class="page-title">Laboratório de Identificação de Reagentes</h1>
+    <div class="eyebrow">Deep Layers · KiFácil</div>
+    <h1 class="page-title">Reagent Identification Laboratory</h1>
   </div>
   <div class="progress-wrap">
     <div class="prog-step done" id="ps1">✓</div>
@@ -463,77 +463,77 @@
   </div>
 </header>
 
-<!-- ÁREA DO JOGO -->
+<!-- GAME AREA -->
 <div id="game-area">
 
-  <!-- PROFESSORA RAFAELA -->
+  <!-- PROFESSOR RAFAELA -->
   <aside id="teacher-box">
-    <img id="teacher-img" src="../imagens/rafa-sorrindo.jpg" alt="Professora Rafaela">
+    <img id="teacher-img" src="../imagens/rafa-sorrindo.jpg" alt="Professor Rafaela">
     <div id="teacher-bubble">
-      <div id="teacher-name">Professora Rafaela</div>
+      <div id="teacher-name">Professor Rafaela</div>
       <p id="teacher-text"></p>
-      <button id="btn-avancar" onclick="proximoPasso()">Continuar</button>
+      <button id="btn-avancar" onclick="proximoPasso()">Continue</button>
     </div>
   </aside>
 
-  <!-- CENA -->
+  <!-- SCENE -->
   <div id="scene-col">
-    <img id="scene-img" src="../imagens/laboratorio-identificacao-reagentes2.jpg" alt="Laboratório de Identificação de Reagentes da Academia KiFácil">
+    <img id="scene-img" src="../imagens/laboratorio-identificacao-reagentes2.jpg" alt="Reagent Identification Laboratory at KiFácil Academy">
 
-    <!-- HOTSPOTS sobre os quatro frascos -->
+    <!-- HOTSPOTS over the four flasks -->
     <div class="hotspot" id="hs-A" onclick="onHotspotClick('A')">
       <div class="hotspot-ring"></div>
       <div class="hotspot-check"><div class="hotspot-check-inner">✓</div></div>
-      <span class="hotspot-label">Frasco A</span>
+      <span class="hotspot-label">Flask A</span>
       <span class="hotspot-assign" id="assign-A">?</span>
     </div>
     <div class="hotspot" id="hs-B" onclick="onHotspotClick('B')">
       <div class="hotspot-ring"></div>
       <div class="hotspot-check"><div class="hotspot-check-inner">✓</div></div>
-      <span class="hotspot-label">Frasco B</span>
+      <span class="hotspot-label">Flask B</span>
       <span class="hotspot-assign" id="assign-B">?</span>
     </div>
     <div class="hotspot" id="hs-C" onclick="onHotspotClick('C')">
       <div class="hotspot-ring"></div>
       <div class="hotspot-check"><div class="hotspot-check-inner">✓</div></div>
-      <span class="hotspot-label">Frasco C</span>
+      <span class="hotspot-label">Flask C</span>
       <span class="hotspot-assign" id="assign-C">?</span>
     </div>
     <div class="hotspot" id="hs-D" onclick="onHotspotClick('D')">
       <div class="hotspot-ring"></div>
       <div class="hotspot-check"><div class="hotspot-check-inner">✓</div></div>
-      <span class="hotspot-label">Frasco D</span>
+      <span class="hotspot-label">Flask D</span>
       <span class="hotspot-assign" id="assign-D">?</span>
     </div>
 
   </div><!-- #scene-col -->
 
-  <!-- Anote resultado dos experimentos — fora da cena -->
+  <!-- Record the experiment results — outside the scene -->
   <div id="modelos-overlay">
     <div class="painel-secao">
-      <div class="painel-secao-title">Tabela de densidades</div>
+      <div class="painel-secao-title">Density Table</div>
       <div class="densidade-tabela">
-        <div class="dens-linha"><span>Etanol</span><span>0,79 g/mL</span></div>
-        <div class="dens-linha"><span>Óleo</span><span>0,92 g/mL</span></div>
-        <div class="dens-linha"><span>Água</span><span>1,00 g/mL</span></div>
-        <div class="dens-linha"><span>Solução de ácido acético</span><span>≈ 1,01 g/mL</span></div>
-        <div class="dens-linha"><span>Solução de NaOH</span><span>≈ 1,05 g/mL</span></div>
+        <div class="dens-linha"><span>Ethanol</span><span>0.79 g/mL</span></div>
+        <div class="dens-linha"><span>Oil</span><span>0.92 g/mL</span></div>
+        <div class="dens-linha"><span>Water</span><span>1.00 g/mL</span></div>
+        <div class="dens-linha"><span>Acetic acid solution</span><span>≈ 1.01 g/mL</span></div>
+        <div class="dens-linha"><span>NaOH solution</span><span>≈ 1.05 g/mL</span></div>
       </div>
-      <div class="densidade-nota">Líquidos menos densos permanecem sobre líquidos mais densos.</div>
+      <div class="densidade-nota">Less dense liquids stay on top of denser liquids.</div>
     </div>
 
     <div class="painel-secao">
-      <div class="painel-secao-title">Anote resultado dos experimentos</div>
-      <div class="bancada-cabecalho"><span>Fr.</span><span>Fenol.</span><span>Água</span><span>Ind.</span><span>Densid.</span></div>
+      <div class="painel-secao-title">Record the experiment results</div>
+      <div class="bancada-cabecalho"><span>Fl.</span><span>Phen.</span><span>Water</span><span>Ind.</span><span>Dens.</span></div>
       <div class="bancada-tabela" id="bancadaBody">
-        <div class="bancada-vazio" id="bancadaPlaceholder">Analise os frascos para registrar os resultados...</div>
+        <div class="bancada-vazio" id="bancadaPlaceholder">Analyze the flasks to record the results...</div>
       </div>
     </div>
 
     <div class="painel-secao" id="identificacaoBox">
-      <div class="painel-secao-title">Identifique os frascos</div>
+      <div class="painel-secao-title">Identify the flasks</div>
       <div class="placas-tray" id="placasTray"></div>
-      <button class="btn-verificar" id="btnVerificar" onclick="verificarIdentificacao()" disabled>Verificar identificação</button>
+      <button class="btn-verificar" id="btnVerificar" onclick="verificarIdentificacao()" disabled>Check identification</button>
       <div class="identificacao-msg" id="identificacaoMsg"></div>
     </div>
   </div>
@@ -541,7 +541,7 @@
   <!-- Backdrop -->
   <div id="modal-backdrop" onclick="fecharModal()"></div>
 
-  <!-- Modal centralizado -->
+  <!-- Centered modal -->
   <div id="stage-area">
     <div class="enigma-panel" id="enigmaBox">
       <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px;">
@@ -554,68 +554,68 @@
     </div>
   </div>
 
-  <!-- TELA DE VITÓRIA -->
+  <!-- VICTORY SCREEN -->
   <div id="win-screen">
-    <div class="win-title">Reagentes Identificados!</div>
-    <p class="win-sub">Você analisou as fichas de cada frasco e descobriu a identidade dos quatro reagentes. A porta para o próximo laboratório está aberta.</p>
-    <a href="sala3.html" class="btn-next">Avançar →</a>
+    <div class="win-title">Reagents Identified!</div>
+    <p class="win-sub">You analyzed each flask's data sheet and discovered the identity of all four reagents. The door to the next laboratory is open.</p>
+    <a href="sala3.html" class="btn-next">Continue →</a>
   </div>
 
 </div><!-- #game-area -->
 
 <script>
-  /* ── REAGENTES DESCONHECIDOS ── */
+  /* ── UNKNOWN REAGENTS ── */
   const LIQUIDOS = {
-    naoh:   { nome: 'Solução de NaOH',          curto: 'NaOH' },
-    acido:  { nome: 'Solução de Ácido Acético', curto: 'Ác. acético' },
-    etanol: { nome: 'Etanol',                   curto: 'Etanol' },
-    oleo:   { nome: 'Óleo',                      curto: 'Óleo' }
+    naoh:   { nome: 'NaOH Solution',       curto: 'NaOH' },
+    acido:  { nome: 'Acetic Acid Solution', curto: 'Acetic acid' },
+    etanol: { nome: 'Ethanol',              curto: 'Ethanol' },
+    oleo:   { nome: 'Oil',                  curto: 'Oil' }
   };
 
   const analisado  = { A: false, B: false, C: false, D: false };
   const atribuicao = { A: null,  B: null,  C: null,  D: null  };
   let placaSelecionada = null;
 
-  /* ── FICHAS DE ANÁLISE ── */
+  /* ── ANALYSIS SHEETS ── */
   const fichas = {
     A: {
       resposta: 'naoh',
       testes: [
-        { desc: 'Foi adicionada fenolftaleína.', resultado: 'A solução ficou <strong>rosa intenso</strong>.' },
-        { desc: 'Foi misturado com água.', resultado: 'Foi observada apenas uma fase.' }
+        { desc: 'Phenolphthalein was added.', resultado: 'The solution turned <strong>intense pink</strong>.' },
+        { desc: 'It was mixed with water.', resultado: 'Only one phase was observed.' }
       ],
-      reg: { fenol: 'Rosa intenso', agua: 'Uma fase', indicador: '—', densidade: '—' }
+      reg: { fenol: 'Intense pink', agua: 'One phase', indicador: '—', densidade: '—' }
     },
     B: {
       resposta: 'acido',
       testes: [
-        { desc: 'Foi adicionada fenolftaleína.', resultado: 'A solução permaneceu incolor.' },
-        { desc: 'Foi misturado com água.', resultado: 'Foi observada apenas uma fase.' },
-        { desc: 'Foi testado com papel indicador universal.', resultado: 'O papel indicou que a solução <strong>apresenta caráter ácido</strong>.' }
+        { desc: 'Phenolphthalein was added.', resultado: 'The solution remained colorless.' },
+        { desc: 'It was mixed with water.', resultado: 'Only one phase was observed.' },
+        { desc: 'It was tested with universal indicator paper.', resultado: 'The paper indicated that the solution <strong>is acidic</strong>.' }
       ],
-      reg: { fenol: 'Incolor', agua: 'Uma fase', indicador: 'Ácido', densidade: '—' }
+      reg: { fenol: 'Colorless', agua: 'One phase', indicador: 'Acidic', densidade: '—' }
     },
     C: {
       resposta: 'etanol',
       testes: [
-        { desc: 'Foi adicionada fenolftaleína.', resultado: 'A solução permaneceu incolor.' },
-        { desc: 'Foi misturado com água.', resultado: 'Foi observada apenas uma fase.' },
-        { desc: 'Foi medida a densidade da amostra.', resultado: 'Densidade aproximada: <strong>0,79 g/mL</strong>.' }
+        { desc: 'Phenolphthalein was added.', resultado: 'The solution remained colorless.' },
+        { desc: 'It was mixed with water.', resultado: 'Only one phase was observed.' },
+        { desc: 'The sample\'s density was measured.', resultado: 'Approximate density: <strong>0.79 g/mL</strong>.' }
       ],
-      reg: { fenol: 'Incolor', agua: 'Uma fase', indicador: '—', densidade: '0,79 g/mL' }
+      reg: { fenol: 'Colorless', agua: 'One phase', indicador: '—', densidade: '0.79 g/mL' }
     },
     D: {
       resposta: 'oleo',
       testes: [
-        { desc: 'Foi adicionada fenolftaleína.', resultado: 'A solução permaneceu incolor.' },
-        { desc: 'Foi misturado com água.', resultado: 'Foram observadas duas fases.<br>O líquido desconhecido permaneceu na fase <strong>superior</strong>.' },
-        { desc: 'Foi medida a densidade da amostra.', resultado: 'Densidade aproximada: <strong>0,92 g/mL</strong>.' }
+        { desc: 'Phenolphthalein was added.', resultado: 'The solution remained colorless.' },
+        { desc: 'It was mixed with water.', resultado: 'Two phases were observed.<br>The unknown liquid stayed in the <strong>top</strong> phase.' },
+        { desc: 'The sample\'s density was measured.', resultado: 'Approximate density: <strong>0.92 g/mL</strong>.' }
       ],
-      reg: { fenol: 'Incolor', agua: 'Duas fases (superior)', indicador: '—', densidade: '0,92 g/mL' }
+      reg: { fenol: 'Colorless', agua: 'Two phases (top)', indicador: '—', densidade: '0.92 g/mL' }
     }
   };
 
-  /* ── PROFESSORA RAFAELA ── */
+  /* ── PROFESSOR RAFAELA ── */
   const IMG = {
     sorrindo:   '../imagens/rafa-sorrindo.jpg',
     explicando: '../imagens/rafa-explicando.jpg',
@@ -655,19 +655,19 @@
 
   /* ── INTRO ── */
   const introPassos = [
-    { img: 'sorrindo',   txt: 'Preciso da sua ajuda.' },
-    { img: 'explicando', txt: 'Eu havia separado alguns reagentes para entregar ao Professor Alceu...' },
-    { img: 'pensando',   txt: 'Mas o Bentinho lambeu os rótulos e agora não sei qual é qual.' },
-    { img: 'explicando', txt: 'Precisamos identificar qual frasco corresponde a cada substância.' },
-    { img: 'animada',    txt: 'Analise a ficha de cada frasco e registre os resultados. Depois, use a bancada e a tabela de densidades para descobrir quem é quem.', ultimo: true },
+    { img: 'sorrindo',   txt: 'I need your help.' },
+    { img: 'explicando', txt: 'I had set aside some reagents to deliver to Professor Alceu...' },
+    { img: 'pensando',   txt: 'But Bentinho licked off the labels, and now I don\'t know which is which.' },
+    { img: 'explicando', txt: 'We need to identify which flask corresponds to each substance.' },
+    { img: 'animada',    txt: 'Analyze each flask\'s data sheet and record the results. Then use the bench and the density table to figure out which is which.', ultimo: true },
   ];
   let introIdx = 0;
 
-  /* Música de fundo + controle de volume (a preferência fica salva e vale
-     para todas as fases). Toca em loop a partir do primeiro clique do
-     aluno (navegadores bloqueiam áudio automático sem interação); o
-     volume do slider vale tanto para a música quanto para os efeitos
-     sonoros (clique, ding, porta etc.). */
+  /* Background music + volume control (the preference is saved and applies
+     to every stage). Loops starting from the student's first click
+     (browsers block automatic audio without interaction); the volume
+     slider applies to both the music and the sound effects (click, ding,
+     door, etc.). */
   let volumeSalvo = parseFloat(localStorage.getItem('kifacil_volume'));
   if (isNaN(volumeSalvo)) volumeSalvo = 0.35;
   let silenciado = localStorage.getItem('kifacil_silenciado') === '1';
@@ -677,12 +677,12 @@
     return silenciado ? 0 : volumeSalvo;
   }
 
-  /* A navegação entre fases sempre recarrega a página (não é uma SPA),
-     então o áudio para de tocar por um instante — isso não dá para
-     evitar. Mas guardamos o ponto exato da música em sessionStorage a
-     cada instante (evento "timeupdate") e retomamos dali na próxima
-     fase, em vez de reiniciar do zero — assim a música parece contínua
-     ao longo de toda a "Desafio das Camadas Profundas". */
+  /* Navigating between stages always reloads the page (this isn't a SPA),
+     so the audio stops for a moment — that can't be avoided. But we save
+     the exact position of the music in sessionStorage constantly (the
+     "timeupdate" event) and resume from there on the next stage instead
+     of restarting from zero — so the music feels continuous throughout
+     the whole "Deep Layers Challenge". */
   function iniciarMusicaFundo() {
     if (musicaFundo) return;
     try {
@@ -744,20 +744,20 @@
       return;
     }
     const p = introPassos[introIdx];
-    $tbtn.textContent = p.ultimo ? 'Estou pronto!' : 'Continuar';
+    $tbtn.textContent = p.ultimo ? 'I\'m ready!' : 'Continue';
     $tbtn.style.display = '';
     fala(p.img, p.txt);
   }
 
   function iniciarIntro() {
-    $tbtn.textContent = 'Continuar';
+    $tbtn.textContent = 'Continue';
     $tbtn.style.display = '';
     fala(introPassos[0].img, introPassos[0].txt);
   }
 
   setTimeout(iniciarIntro, 400);
 
-  /* ── FICHA DE ANÁLISE ── */
+  /* ── ANALYSIS SHEET ── */
   function onHotspotClick(id) {
     if (!analisado[id]) { activateFicha(id); return; }
     if (placaSelecionada) { atribuirFrasco(id); return; }
@@ -781,15 +781,15 @@
       </div>`).join('');
 
     const botaoHtml = jaRegistrado
-      ? `<button class="btn-opcao" style="border-color:var(--gold);background:rgba(232,184,75,.1);" onclick="fecharModal()">Fechar</button>`
-      : `<button class="btn-opcao" style="border-color:var(--gold);background:rgba(232,184,75,.1);" onclick="confirmarRegistro('${id}')">Registrar resultado</button>`;
+      ? `<button class="btn-opcao" style="border-color:var(--gold);background:rgba(232,184,75,.1);" onclick="fecharModal()">Close</button>`
+      : `<button class="btn-opcao" style="border-color:var(--gold);background:rgba(232,184,75,.1);" onclick="confirmarRegistro('${id}')">Record Result</button>`;
 
-    showEnigmaPanel('Frasco ' + id + ' — Ficha de Análise', 'Resultados dos testes', '', `
+    showEnigmaPanel('Flask ' + id + ' — Analysis Sheet', 'Test Results', '', `
       ${testesHtml}
       <div class="ficha-opcoes" style="grid-template-columns:1fr;">${botaoHtml}</div>`);
 
     if (!jaRegistrado) {
-      rafaFala('explicando', 'Leia os resultados e clique em "Registrar resultado" para anotar esses dados na tabela ao lado.');
+      rafaFala('explicando', 'Read the results and click "Record Result" to add this data to the table on the side.');
     }
   }
 
@@ -798,7 +798,7 @@
     registrarNaBancada(id);
     fecharModal();
     if (!['A', 'B', 'C', 'D'].every(k => analisado[k])) {
-      rafaFala('explicando', 'Resultado registrado. Compare com os demais frascos e com a tabela de densidades antes de identificar.');
+      rafaFala('explicando', 'Result recorded. Compare it with the other flasks and the density table before identifying.');
     }
   }
 
@@ -822,10 +822,10 @@
 
   function revelarIdentificacao() {
     document.getElementById('identificacaoBox').style.display = 'block';
-    rafaFala('pensando', 'Agora compare a cor com fenolftaleína, a miscibilidade em água e a densidade — e identifique cada frasco.');
+    rafaFala('pensando', 'Now compare the color with phenolphthalein, the miscibility in water, and the density — then identify each flask.');
   }
 
-  /* ── IDENTIFICAÇÃO POR PLACAS ── */
+  /* ── IDENTIFICATION BY TILES ── */
   function renderPlacas() {
     const tray = document.getElementById('placasTray');
     tray.innerHTML = Object.keys(LIQUIDOS).map(k =>
@@ -852,8 +852,8 @@
       }
       return;
     }
-    // se a placa selecionada já estava em outro frasco, e este frasco de
-    // destino já tinha uma placa, elas trocam de lugar (nunca some nenhuma)
+    // if the selected tile was already on another flask, and this target
+    // flask already had a tile, they swap places (nothing ever disappears)
     const origem = Object.keys(atribuicao).find(k => atribuicao[k] === placaSelecionada);
     const ocupanteAnterior = atribuicao[id];
     atribuicao[id] = placaSelecionada;
@@ -899,20 +899,20 @@
       document.getElementById('ps2').className = 'prog-step done';
       document.getElementById('ps2').textContent = '✓';
       const box = document.getElementById('identificacaoBox');
-      msg.textContent = 'Identificação correta!';
+      msg.textContent = 'Correct identification!';
       msg.classList.add('show', 'certo');
       box.style.opacity = '0.5';
       box.style.pointerEvents = 'none';
-      rafaFala('animada', 'Excelente! Você identificou corretamente os quatro reagentes. Agora podemos levar os reagentes ao Professor Alceu.');
+      rafaFala('animada', 'Excellent! You correctly identified all four reagents. Now we can take them to Professor Alceu.');
       setTimeout(showWin, 3500);
     } else {
       const trocouEtanolAcido = atribuicao.B === 'etanol' && atribuicao.C === 'acido';
       if (trocouEtanolAcido) {
-        rafaFala('pensando', 'Os dois ficam incolores com fenolftaleína e formam uma só fase com água. Um deles tem caráter ácido — o outro tem densidade menor que a da água.');
+        rafaFala('pensando', 'Both stay colorless with phenolphthalein and form a single phase with water. One of them is acidic — the other has a density lower than water.');
       } else {
-        rafaFala('pensando', 'Não analise cada resultado isoladamente. Compare a cor com fenolftaleína, a miscibilidade em água e a densidade antes de identificar os frascos.');
+        rafaFala('pensando', 'Don\'t analyze each result on its own. Compare the color with phenolphthalein, the miscibility in water, and the density before identifying the flasks.');
       }
-      msg.textContent = 'Ainda não está certo. Ajuste as placas e clique em Verificar identificação novamente.';
+      msg.textContent = 'Not quite right yet. Adjust the tiles and click Check Identification again.';
       msg.classList.remove('certo');
       msg.classList.add('show');
       const box = document.getElementById('identificacaoBox');
@@ -954,11 +954,11 @@
 </script>
 
 <div id="controle-volume">
-  <button id="btn-mute" onclick="alternarMudo()" aria-label="Silenciar ou ativar o som">🔊</button>
+  <button id="btn-mute" onclick="alternarMudo()" aria-label="Mute or unmute sound">🔊</button>
   <input type="range" id="slider-volume" min="0" max="100" value="35" oninput="ajustarVolume(this.value)" aria-label="Volume">
 </div>
 
-<div id="cookie-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#1a0f08;border-top:1px solid rgba(212,170,106,0.4);padding:1rem 2rem;z-index:9999;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;"><p style="margin:0;font-family:'Libre Baskerville',serif;font-size:0.82rem;color:#e8d4b0;line-height:1.5;">Este site utiliza cookies para melhorar sua experiência. Ao continuar navegando, você concorda com nossa <a href="/politica-de-privacidade.html" style="color:#e8b84b;text-decoration:underline;text-underline-offset:2px;">Política de Privacidade</a>.</p><button onclick="document.getElementById('cookie-banner').style.display='none';localStorage.setItem('kifacil_cookies','1');" style="flex-shrink:0;background:#e8b84b;border:none;padding:0.55rem 1.5rem;font-family:'Libre Baskerville',serif;font-size:0.78rem;font-weight:700;color:#1a0f08;cursor:pointer;letter-spacing:0.04em;">Entendi</button></div>
+<div id="cookie-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#1a0f08;border-top:1px solid rgba(212,170,106,0.4);padding:1rem 2rem;z-index:9999;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;"><p style="margin:0;font-family:'Libre Baskerville',serif;font-size:0.82rem;color:#e8d4b0;line-height:1.5;">This site uses cookies to improve your experience. By continuing to browse, you agree to our <a href="/politica-de-privacidade.html" style="color:#e8b84b;text-decoration:underline;text-underline-offset:2px;">Privacy Policy</a>.</p><button onclick="document.getElementById('cookie-banner').style.display='none';localStorage.setItem('kifacil_cookies','1');" style="flex-shrink:0;background:#e8b84b;border:none;padding:0.55rem 1.5rem;font-family:'Libre Baskerville',serif;font-size:0.78rem;font-weight:700;color:#1a0f08;cursor:pointer;letter-spacing:0.04em;">Got it</button></div>
 <script>if(!localStorage.getItem('kifacil_cookies'))document.getElementById('cookie-banner').style.display='flex';</script>
 
 <script type="module">
