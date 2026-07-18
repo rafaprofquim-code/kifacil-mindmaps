@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="canonical" href="https://kifaciledu.com.br/jogos/jogos-escaperoom/torre-quimica/fases/fase3-camara-registros.html">
-<title>Câmara de Registros Atômicos | KiFácil</title>
-<meta name="description" content="Fase 3 do Escape Room dos Mapas da Academia KiFácil. Use pistas de isotonia e isobaria para descobrir a identidade de cada elemento e digite as respostas nos pergaminhos.">
+<title>Chamber of Atomic Records | KiFácil</title>
+<meta name="description" content="Stage 3 of the KiFácil Academy Mind Maps Escape Room. Use isotone and isobar clues to discover the identity of each element and type the answers on the scrolls.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;1,500;1,600&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 <style>
@@ -74,9 +74,9 @@
     display: block;
   }
 
-  /* ── HOTSPOTS (pergaminhos) ────────────────────────────────────────────────
-     Ajustar left/top/width contra a imagem real de fundo.
-     Para o MOBILE, ver o bloco "HOTSPOTS MOBILE" mais abaixo.
+  /* ── HOTSPOTS (scrolls) ───────────────────────────────────────────────────
+     Adjust left/top/width against the real background image.
+     For MOBILE, see the "MOBILE HOTSPOTS" block further down.
      ──────────────────────────────────────────────────────────────────────── */
   .hotspot {
     position: absolute;
@@ -119,7 +119,7 @@
   .hotspot:hover .hotspot-label { opacity: 1; }
   .hotspot.solved:hover .hotspot-label { opacity: 0; }
 
-  /* ── PROFESSORA RAFAELA (esquerda) ── */
+  /* ── PROFESSOR RAFAELA (left side) ── */
   #teacher-box {
     position: absolute;
     bottom: 0; left: 20px;
@@ -175,7 +175,7 @@
   #btn-avancar.show { opacity: 1; pointer-events: all; }
   #btn-avancar:hover { filter: brightness(1.1); transform: scale(1.03); }
 
-  /* ── PERGAMINHOS IDENTIFICADOS — canto superior direito ── */
+  /* ── IDENTIFIED SCROLLS — top-right corner ── */
   #modelos-overlay {
     position: absolute;
     top: 14px; right: 14px;
@@ -195,7 +195,7 @@
   .modelo-dot { width: 7px; height: 7px; border-radius: 50%; border: 1px solid rgba(212,170,106,0.3); flex-shrink: 0; transition: all .3s; }
   .modelo-item.found .modelo-dot { background: var(--gold); border-color: var(--gold); }
 
-  /* Backdrop escurece a cena ao abrir o modal */
+  /* Backdrop dims the scene when the modal opens */
   #modal-backdrop {
     display: none;
     position: absolute; inset: 0; z-index: 90;
@@ -203,7 +203,7 @@
   }
   #modal-backdrop.show { display: block; }
 
-  /* Modal centralizado */
+  /* Centered modal */
   #stage-area {
     display: none;
     position: absolute;
@@ -241,7 +241,7 @@
   }
   .enigma-desc { display: none; }
 
-  /* Pistas do pergaminho */
+  /* Scroll clues */
   .pistas-lista { list-style: none; margin: 0 0 16px; padding: 0; text-align: left; }
   .pistas-lista li {
     font-size: 14px; color: var(--text-soft); line-height: 1.6;
@@ -284,7 +284,7 @@
     75% { transform: translateX(4px); }
   }
 
-  /* ── VITÓRIA ── */
+  /* ── VICTORY ── */
   #win-screen {
     display: none; position: fixed; inset: 0; z-index: 200;
     background: rgba(14,6,0,0.92);
@@ -304,8 +304,8 @@
   }
   .btn-next:hover { background: #f0c960; }
 
-  /* ── RESPONSIVO ── */
-  /* ── BOTÃO DE MUDO ── */
+  /* ── RESPONSIVE ── */
+  /* ── MUTE BUTTON ── */
   #controle-volume {
     position: fixed;
     bottom: 16px; right: 16px;
@@ -366,8 +366,8 @@
 
     .resposta-input-wrap { flex-direction: column; }
 
-    /* ── HOTSPOTS MOBILE ──────────────────────────────────────────────────────
-       Ajustar contra a imagem real renderizada em largura total.
+    /* ── MOBILE HOTSPOTS ─────────────────────────────────────────────────────
+       Adjust against the actual full-width rendered image.
        ──────────────────────────────────────────────────────────────────────── */
     #hs-p1 { left: 8%;  top: 34%; width: 24%; }
     #hs-p2 { left: 38%; top: 30%; width: 24%; }
@@ -379,8 +379,8 @@
 
 <header class="header">
   <div>
-    <div class="eyebrow">Camadas Profundas · KiFácil</div>
-    <h1 class="page-title">Câmara de Registros Atômicos</h1>
+    <div class="eyebrow">Deep Layers · KiFácil</div>
+    <h1 class="page-title">Chamber of Atomic Records</h1>
   </div>
   <div class="progress-wrap">
     <div class="prog-step done" id="ps1">✓</div>
@@ -399,54 +399,54 @@
   </div>
 </header>
 
-<!-- ÁREA DO JOGO -->
+<!-- GAME AREA -->
 <div id="game-area">
 
-  <!-- PROFESSORA RAFAELA -->
+  <!-- PROFESSOR RAFAELA -->
   <aside id="teacher-box">
-    <img id="teacher-img" src="../imagens/rafa-explicando.jpg" alt="Professora Rafaela">
+    <img id="teacher-img" src="../imagens/rafa-explicando.jpg" alt="Professor Rafaela">
     <div id="teacher-bubble">
-      <div id="teacher-name">Professora Rafaela</div>
+      <div id="teacher-name">Professor Rafaela</div>
       <p id="teacher-text"></p>
-      <button id="btn-avancar" onclick="proximoPasso()">Continuar</button>
+      <button id="btn-avancar" onclick="proximoPasso()">Continue</button>
     </div>
   </aside>
 
-  <!-- CENA -->
+  <!-- SCENE -->
   <div id="scene-col">
-    <img id="scene-img" src="../imagens/camara-registros-atomicos.jpg" alt="Câmara de Registros Atômicos da Academia KiFácil">
+    <img id="scene-img" src="../imagens/camara-registros-atomicos.jpg" alt="Chamber of Atomic Records at KiFácil Academy">
 
-    <!-- PERGAMINHOS -->
+    <!-- SCROLLS -->
     <div class="hotspot" id="hs-p1" onclick="activateFicha('p1')">
-      <img class="pergaminho-img" src="../imagens/pergaminho-atomico.png" alt="Pergaminho 1">
+      <img class="pergaminho-img" src="../imagens/pergaminho-atomico.png" alt="Scroll 1">
       <div class="hotspot-check"><div class="hotspot-check-inner">✓</div></div>
-      <span class="hotspot-label">Pergaminho 1</span>
+      <span class="hotspot-label">Scroll 1</span>
     </div>
     <div class="hotspot" id="hs-p2" onclick="activateFicha('p2')">
-      <img class="pergaminho-img" src="../imagens/pergaminho-atomico.png" alt="Pergaminho 2">
+      <img class="pergaminho-img" src="../imagens/pergaminho-atomico.png" alt="Scroll 2">
       <div class="hotspot-check"><div class="hotspot-check-inner">✓</div></div>
-      <span class="hotspot-label">Pergaminho 2</span>
+      <span class="hotspot-label">Scroll 2</span>
     </div>
     <div class="hotspot" id="hs-p3" onclick="activateFicha('p3')">
-      <img class="pergaminho-img" src="../imagens/pergaminho-atomico.png" alt="Pergaminho 3">
+      <img class="pergaminho-img" src="../imagens/pergaminho-atomico.png" alt="Scroll 3">
       <div class="hotspot-check"><div class="hotspot-check-inner">✓</div></div>
-      <span class="hotspot-label">Pergaminho 3</span>
+      <span class="hotspot-label">Scroll 3</span>
     </div>
 
   </div><!-- #scene-col -->
 
-  <!-- Pergaminhos identificados — fora da cena -->
+  <!-- Identified scrolls — outside the scene -->
   <div id="modelos-overlay">
-    <div class="modelos-title">Registros decifrados</div>
+    <div class="modelos-title">Records deciphered</div>
     <div class="modelos-list" id="modelos-list">
-      <div id="modelos-placeholder" style="font-size:12px;color:rgba(245,234,208,0.3);font-style:italic;">Nenhum ainda...</div>
+      <div id="modelos-placeholder" style="font-size:12px;color:rgba(245,234,208,0.3);font-style:italic;">None yet...</div>
     </div>
   </div>
 
   <!-- Backdrop -->
   <div id="modal-backdrop" onclick="fecharModal()"></div>
 
-  <!-- Modal centralizado -->
+  <!-- Centered modal -->
   <div id="stage-area">
     <div class="enigma-panel" id="enigmaBox">
       <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px;">
@@ -459,11 +459,11 @@
     </div>
   </div>
 
-  <!-- TELA DE VITÓRIA -->
+  <!-- VICTORY SCREEN -->
   <div id="win-screen">
-    <div class="win-title">Registros Decifrados!</div>
-    <p class="win-sub">Você decifrou os três registros e descobriu a identidade de cada elemento. A porta da Câmara de Registros está destrancada.</p>
-    <a href="sala4.html" class="btn-next">Avançar →</a>
+    <div class="win-title">Records Deciphered!</div>
+    <p class="win-sub">You deciphered all three records and discovered the identity of each element. The door to the Chamber of Records is unlocked.</p>
+    <a href="sala4.html" class="btn-next">Continue →</a>
   </div>
 
 </div><!-- #game-area -->
@@ -471,38 +471,38 @@
 <script>
   const solved = { p1: false, p2: false, p3: false };
 
-  /* Notação nuclídica: número de massa em cima, número atômico embaixo,
-     ambos à esquerda do símbolo — ex.: nuclideo(37, 17, 'Cl') → ³⁷₁₇Cl */
+  /* Nuclide notation: mass number on top, atomic number on the bottom,
+     both to the left of the symbol — e.g. nuclideo(37, 17, 'Cl') → ³⁷₁₇Cl */
   function nuclideo(massa, atomico, simbolo) {
     return '<span class="nuclideo-inline"><span class="nucl-numeros"><span>' + massa + '</span><span>' + atomico + '</span></span><span class="nucl-simbolo">' + simbolo + '</span></span>';
   }
 
-  /* ── PERGAMINHOS: cada um esconde um elemento, revelado por pistas de
-     isotonia/isobaria com elementos de referência já conhecidos ── */
+  /* ── SCROLLS: each one hides an element, revealed through isotone/isobar
+     clues tied to already-known reference elements ── */
   const pergaminhos = {
     p1: {
-      nomeExibicao: 'Cálcio (Ca)',
+      nomeExibicao: 'Calcium (Ca)',
       pistas: [
-        'É isótono do cloro (' + nuclideo(37, 17, 'Cl') + ').',
-        'É isóbaro do potássio (' + nuclideo(40, 19, 'K') + ').'
+        'It is an isotone of chlorine (' + nuclideo(37, 17, 'Cl') + ').',
+        'It is an isobar of potassium (' + nuclideo(40, 19, 'K') + ').'
       ],
-      respostas: ['calcio', 'ca']
+      respostas: ['calcium', 'ca']
     },
     p2: {
-      nomeExibicao: 'Carbono (C)',
+      nomeExibicao: 'Carbon (C)',
       pistas: [
-        'É isótono do boro (' + nuclideo(11, 5, 'B') + ').',
-        'Está no 2º período da Tabela Periódica.'
+        'It is an isotone of boron (' + nuclideo(11, 5, 'B') + ').',
+        'It is in period 2 of the Periodic Table.'
       ],
-      respostas: ['carbono', 'c']
+      respostas: ['carbon', 'c']
     },
     p3: {
-      nomeExibicao: 'Flúor (F)',
+      nomeExibicao: 'Fluorine (F)',
       pistas: [
-        'É isótono do neônio (' + nuclideo(20, 10, 'Ne') + ').',
-        'É um halogênio do 2º período da Tabela Periódica.'
+        'It is an isotone of neon (' + nuclideo(20, 10, 'Ne') + ').',
+        'It is a halogen in period 2 of the Periodic Table.'
       ],
-      respostas: ['fluor', 'f']
+      respostas: ['fluorine', 'f']
     }
   };
 
@@ -510,7 +510,7 @@
     return str.trim().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
   }
 
-  /* ── PROFESSORA RAFAELA ── */
+  /* ── PROFESSOR RAFAELA ── */
   const $timg = document.getElementById('teacher-img');
   const $ttxt = document.getElementById('teacher-text');
   const $tbtn = document.getElementById('btn-avancar');
@@ -542,19 +542,19 @@
 
   /* ── INTRO ── */
   const introPassos = [
-    { txt: 'Preciso da sua ajuda.' },
-    { txt: 'Cada um destes pergaminhos guarda vários segredos sobre um elemento químico, registradas para uma pesquisa do Professor Alceu.' },
-    { txt: 'Mas os rótulos com os nomes dos elementos sumiram e eu não faço ideia de quem poderia fazer algo assim! Agora não sei mais de qual elemento cada pergaminho está falando.', som: 'bentinho' },
-    { txt: 'Por sorte, quem escreveu os registros deixou pistas em cada um — número de prótons, de nêutrons, relações com outros elementos conhecidos...' },
-    { txt: 'Abra cada pergaminho, leia as pistas com atenção e digite o nome ou o símbolo do elemento correto para vencer esta fase.', ultimo: true },
+    { txt: 'I need your help.' },
+    { txt: 'Each of these scrolls holds several secrets about a chemical element, recorded for one of Professor Alceu\'s research projects.' },
+    { txt: 'But the labels with the element names are gone, and I have no idea who could have done such a thing! Now I don\'t know which element each scroll is about anymore.', som: 'bentinho' },
+    { txt: 'Luckily, whoever wrote these records left clues in each one — number of protons, number of neutrons, relationships with other known elements...' },
+    { txt: 'Open each scroll, read the clues carefully, and type the correct element\'s name or symbol to complete this stage.', ultimo: true },
   ];
   let introIdx = 0;
 
-  /* Música de fundo + controle de volume (a preferência fica salva e vale
-     para todas as fases). Toca em loop a partir do primeiro clique do
-     aluno (navegadores bloqueiam áudio automático sem interação); o
-     volume do slider vale tanto para a música quanto para os efeitos
-     sonoros (clique, ding, porta etc.). */
+  /* Background music + volume control (the preference is saved and applies
+     to every stage). Loops starting from the student's first click
+     (browsers block automatic audio without interaction); the volume
+     slider applies to both the music and the sound effects (click, ding,
+     door, etc.). */
   let volumeSalvo = parseFloat(localStorage.getItem('kifacil_volume'));
   if (isNaN(volumeSalvo)) volumeSalvo = 0.35;
   let silenciado = localStorage.getItem('kifacil_silenciado') === '1';
@@ -564,12 +564,12 @@
     return silenciado ? 0 : volumeSalvo;
   }
 
-  /* A navegação entre fases sempre recarrega a página (não é uma SPA),
-     então o áudio para de tocar por um instante — isso não dá para
-     evitar. Mas guardamos o ponto exato da música em sessionStorage a
-     cada instante (evento "timeupdate") e retomamos dali na próxima
-     fase, em vez de reiniciar do zero — assim a música parece contínua
-     ao longo de toda a "Desafio das Camadas Profundas". */
+  /* Navigating between stages always reloads the page (this isn't a SPA),
+     so the audio stops for a moment — that can't be avoided. But we save
+     the exact position of the music in sessionStorage constantly (the
+     "timeupdate" event) and resume from there on the next stage instead
+     of restarting from zero — so the music feels continuous throughout
+     the whole "Deep Layers Challenge". */
   function iniciarMusicaFundo() {
     if (musicaFundo) return;
     try {
@@ -636,38 +636,38 @@
       return;
     }
     const p = introPassos[introIdx];
-    $tbtn.textContent = p.ultimo ? 'Estou pronto!' : 'Continuar';
+    $tbtn.textContent = p.ultimo ? 'I\'m ready!' : 'Continue';
     $tbtn.style.display = '';
     fala(p.txt);
     if (p.som === 'bentinho') tocarBentinho();
   }
 
   function iniciarIntro() {
-    $tbtn.textContent = 'Continuar';
+    $tbtn.textContent = 'Continue';
     $tbtn.style.display = '';
     fala(introPassos[0].txt);
   }
 
   setTimeout(iniciarIntro, 400);
 
-  /* ── FICHA DO PERGAMINHO ── */
+  /* ── SCROLL SHEET ── */
   function activateFicha(id) {
     if (solved[id]) {
-      rafaFala('Este pergaminho já foi decifrado.');
+      rafaFala('This scroll has already been deciphered.');
       return;
     }
     const p = pergaminhos[id];
     const pistasHtml = p.pistas.map(txt => `<li>${txt}</li>`).join('');
 
-    showEnigmaPanel('Registro Atômico', 'Qual é o elemento?', '', `
+    showEnigmaPanel('Atomic Record', 'Which element is this?', '', `
       <ul class="pistas-lista">${pistasHtml}</ul>
       <div class="resposta-input-wrap">
-        <input type="text" class="resposta-input" id="inputResposta" placeholder="Nome ou símbolo do elemento..." autocomplete="off" spellcheck="false">
-        <button class="btn-confirmar-resposta" onclick="responderFicha('${id}')">Confirmar</button>
+        <input type="text" class="resposta-input" id="inputResposta" placeholder="Element name or symbol..." autocomplete="off" spellcheck="false">
+        <button class="btn-confirmar-resposta" onclick="responderFicha('${id}')">Confirm</button>
       </div>
       <div class="resposta-feedback" id="feedbackResposta"></div>`);
 
-    rafaFala('Cada pergaminho guarda as propriedades de um elemento, mas os rótulos sumiram. Use as pistas para descobrir qual é.');
+    rafaFala('Each scroll holds the properties of an element, but the labels are gone. Use the clues to figure out which one it is.');
 
     const input = document.getElementById('inputResposta');
     setTimeout(() => input.focus(), 60);
@@ -689,21 +689,21 @@
       if (count === 3) {
         document.getElementById('ps3').className = 'prog-step done';
         document.getElementById('ps3').textContent = '✓';
-        rafaFala('Excelente! Você decifrou os três registros. Agora podemos devolvê-los ao arquivo do Professor Alceu.');
+        rafaFala('Excellent! You deciphered all three records. Now we can return them to Professor Alceu\'s archive.');
         setTimeout(showWin, 3500);
       } else {
-        rafaFala('Correto! Continue com os próximos pergaminhos.');
+        rafaFala('Correct! Move on to the next scrolls.');
       }
     } else {
       input.classList.add('errada');
       setTimeout(() => input.classList.remove('errada'), 300);
-      feedback.textContent = 'Ainda não é esse elemento. Revise as pistas com atenção.';
+      feedback.textContent = 'That\'s not the element yet. Review the clues carefully.';
       input.value = '';
       input.focus();
     }
   }
 
-  const modeloNomes = { p1: 'Pergaminho 1', p2: 'Pergaminho 2', p3: 'Pergaminho 3' };
+  const modeloNomes = { p1: 'Scroll 1', p2: 'Scroll 2', p3: 'Scroll 3' };
 
   function markSolved(id) {
     solved[id] = true;
@@ -752,11 +752,11 @@
 </script>
 
 <div id="controle-volume">
-  <button id="btn-mute" onclick="alternarMudo()" aria-label="Silenciar ou ativar o som">🔊</button>
+  <button id="btn-mute" onclick="alternarMudo()" aria-label="Mute or unmute sound">🔊</button>
   <input type="range" id="slider-volume" min="0" max="100" value="35" oninput="ajustarVolume(this.value)" aria-label="Volume">
 </div>
 
-<div id="cookie-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#1a0f08;border-top:1px solid rgba(212,170,106,0.4);padding:1rem 2rem;z-index:9999;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;"><p style="margin:0;font-family:'Libre Baskerville',serif;font-size:0.82rem;color:#e8d4b0;line-height:1.5;">Este site utiliza cookies para melhorar sua experiência. Ao continuar navegando, você concorda com nossa <a href="/politica-de-privacidade.html" style="color:#e8b84b;text-decoration:underline;text-underline-offset:2px;">Política de Privacidade</a>.</p><button onclick="document.getElementById('cookie-banner').style.display='none';localStorage.setItem('kifacil_cookies','1');" style="flex-shrink:0;background:#e8b84b;border:none;padding:0.55rem 1.5rem;font-family:'Libre Baskerville',serif;font-size:0.78rem;font-weight:700;color:#1a0f08;cursor:pointer;letter-spacing:0.04em;">Entendi</button></div>
+<div id="cookie-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#1a0f08;border-top:1px solid rgba(212,170,106,0.4);padding:1rem 2rem;z-index:9999;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;"><p style="margin:0;font-family:'Libre Baskerville',serif;font-size:0.82rem;color:#e8d4b0;line-height:1.5;">This site uses cookies to improve your experience. By continuing to browse, you agree to our <a href="/politica-de-privacidade.html" style="color:#e8b84b;text-decoration:underline;text-underline-offset:2px;">Privacy Policy</a>.</p><button onclick="document.getElementById('cookie-banner').style.display='none';localStorage.setItem('kifacil_cookies','1');" style="flex-shrink:0;background:#e8b84b;border:none;padding:0.55rem 1.5rem;font-family:'Libre Baskerville',serif;font-size:0.78rem;font-weight:700;color:#1a0f08;cursor:pointer;letter-spacing:0.04em;">Got it</button></div>
 <script>if(!localStorage.getItem('kifacil_cookies'))document.getElementById('cookie-banner').style.display='flex';</script>
 
 <script type="module">
