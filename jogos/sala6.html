@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="canonical" href="https://kifaciledu.com.br/jogos/jogos-escaperoom/torre-quimica/fases/fase6-cartao-titanio.html">
-<title>O Cartão do Titânio | KiFácil</title>
-<meta name="description" content="Fase 6 do Escape Room dos Mapas da Academia KiFácil. Descubra a distribuição eletrônica do Titânio e organize os elétrons nas camadas da eletrosfera.">
+<title>The Titanium Card | KiFácil</title>
+<meta name="description" content="Stage 6 of the KiFácil Academy Mind Maps Escape Room. Discover Titanium's electron configuration and organize the electrons into the electron shells.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;1,500;1,600&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 <style>
@@ -67,11 +67,11 @@
     background: #1a0f08 url('../imagens/fundo-distribuicao-eletronica.jpg') center / cover no-repeat;
   }
 
-  /* ── CARTÃO DO TITÂNIO ────────────────────────────────────────────────────
-     Duas fases via classes: aparece grande e centralizado (.visivel),
-     depois encolhe e vai para o canto superior esquerdo (.fixo). A troca
-     de tamanho/posição é sempre uma transição suave (fade + transform),
-     nunca um salto brusco. ──────────────────────────────────────────────── */
+  /* ── TITANIUM CARD ────────────────────────────────────────────────────────
+     Two phases via classes: appears large and centered (.visivel), then
+     shrinks and moves to the top-left corner (.fixo). The size/position
+     change is always a smooth transition (fade + transform), never an
+     abrupt jump. ──────────────────────────────────────────────────────── */
   #cartao-titanio-wrap {
     position: absolute;
     top: 50%; left: 50%;
@@ -90,13 +90,13 @@
   }
   #cartao-titanio-wrap img { width: 100%; display: block; filter: drop-shadow(0 8px 22px rgba(0,0,0,.65)); }
 
-  /* ── ETAPA 1 — ESQUEMA DE PAULING (lado direito) ──────────────────────────
-     Grade fixa de 4 colunas (s / p / d / f). Cada subnível é posicionado
-     por coluna+linha via grid-column/grid-row (definidos inline no HTML),
-     e não centralizado dentro da própria linha — por isso a coluna s
-     fica sempre mais à esquerda, a p à direita dela, e assim por diante.
-     O campo numérico fica sobreposto no canto superior direito da
-     notação (simulando um expoente), não abaixo dela.
+  /* ── STAGE 1 — PAULING DIAGRAM (right side) ────────────────────────────────
+     Fixed 4-column grid (s / p / d / f). Each subshell is positioned by
+     column+row via grid-column/grid-row (set inline in the HTML), and is
+     not centered within its own row — which is why the s column is always
+     further left, p to its right, and so on. The numeric field is
+     overlaid on the upper-right corner of the notation (simulating an
+     exponent), not below it.
      ──────────────────────────────────────────────────────────────────────── */
   #etapa1-painel {
     position: absolute;
@@ -116,9 +116,9 @@
     transition: opacity .5s ease, top .6s ease, transform .6s ease;
   }
   #etapa1-painel.ativo { opacity: 1; pointer-events: all; }
-  /* Etapa 2: o esquema preenchido some do centro das atenções, mas
-     continua visível (encolhido, no canto superior direito) como
-     consulta — nunca sai da tela. */
+  /* Stage 2: the filled-in diagram leaves the center of attention, but
+     stays visible (shrunk, in the top-right corner) as a reference — it
+     never leaves the screen. */
   #etapa1-painel.consulta {
     top: 14px;
     right: 14px;
@@ -139,10 +139,10 @@
     margin: 0 auto 8px 4px;
   }
 
-  /* Setas diagonais do diagrama de Pauling: linhas finas e douradas,
-     desenhadas via JS (função desenharSetasPauling) conectando o centro
-     de um subnível ao próximo, na ordem real de preenchimento. Ficam
-     atrás dos subníveis (z-index menor). */
+  /* Diagonal arrows of the Pauling diagram: thin, golden lines, drawn
+     via JS (desenharSetasPauling function) connecting the center of one
+     subshell to the next, in the actual filling order. They sit behind
+     the subshells (lower z-index). */
   .pauling-seta {
     position: absolute;
     height: 1.5px;
@@ -164,7 +164,7 @@
     font-weight: 600;
     color: var(--text-soft);
   }
-  /* O input fica no canto superior direito da notação, como um expoente. */
+  /* The input sits in the upper-right corner of the notation, like an exponent. */
   .expoente {
     position: absolute;
     top: -10px; right: -18px;
@@ -194,7 +194,7 @@
   }
   .btn-verificar-fase:hover { filter: brightness(1.1); }
 
-  /* ── ETAPA 2 — ELETROSFERA (centro) ── */
+  /* ── STAGE 2 — ELECTRON SHELLS (center) ── */
   #etapa2-painel {
     position: absolute;
     inset: 0;
@@ -207,7 +207,7 @@
   }
   #etapa2-painel.ativo { opacity: 1; pointer-events: all; }
 
-  /* Texto da distribuição eletrônica, logo abaixo do cartão (canto superior esquerdo) */
+  /* Electron configuration text, right below the card (top-left corner) */
   #distribuicao-texto {
     position: absolute;
     top: 178px; left: 18px;
@@ -223,9 +223,9 @@
     text-align: center;
   }
 
-  /* Eletrosfera construída inteiramente em HTML/CSS (sem imagem): quatro
-     círculos concêntricos + núcleo, todos compartilhando o mesmo centro
-     matemático (left:50%; top:50%; transform:translate(-50%,-50%)). */
+  /* Electron shells built entirely in HTML/CSS (no image): four
+     concentric circles + nucleus, all sharing the same mathematical
+     center (left:50%; top:50%; transform:translate(-50%,-50%)). */
   #eletrosfera-wrapper {
     position: relative;
     aspect-ratio: 1 / 1;
@@ -271,9 +271,9 @@
     z-index: 7;
   }
 
-  /* Elétrons: mesma imagem, arrastáveis; enquanto na bandeja ficam em
-     fluxo normal (flex), quando soltos sobre a eletrosfera passam a
-     ser posicionados de forma absoluta (ver reorganizarCamada no JS). */
+  /* Electrons: same image, draggable; while in the tray they flow
+     normally (flex), when dropped onto the electron shells they become
+     absolutely positioned (see reorganizarCamada in the JS). */
   .eletron-item {
     width: 24px; height: 24px;
     cursor: grab;
@@ -301,7 +301,7 @@
   }
   .btn-verificar-fase.etapa2 { width: auto; padding: 13px 34px; }
 
-  /* ── VITÓRIA ── */
+  /* ── VICTORY ── */
   #win-screen {
     display: none; position: fixed; inset: 0; z-index: 200;
     background: rgba(14,6,0,0.92);
@@ -321,7 +321,7 @@
   }
   .btn-next:hover { background: #f0c960; }
 
-  /* ── PROFESSORA RAFAELA (esquerda) ── */
+  /* ── PROFESSOR RAFAELA (left side) ── */
   #teacher-box {
     position: absolute;
     bottom: 0; left: 20px;
@@ -378,8 +378,8 @@
   #btn-avancar.show { opacity: 1; pointer-events: all; }
   #btn-avancar:hover { filter: brightness(1.1); transform: scale(1.03); }
 
-  /* ── RESPONSIVO ── */
-  /* ── BOTÃO DE MUDO ── */
+  /* ── RESPONSIVE ── */
+  /* ── MUTE BUTTON ── */
   #controle-volume {
     position: fixed;
     bottom: 16px; right: 16px;
@@ -433,9 +433,10 @@
       position: relative; top: auto; right: auto; transform: none;
       width: 100%; max-height: none;
     }
-    /* No celular o esquema já flui em largura total dentro da página, então
-       a versão "consulta" da etapa 2 só precisa continuar em fluxo normal
-       (o aluno rola a tela até ele), sem encolher via transform. */
+    /* On mobile the diagram already flows at full width within the page,
+       so the "reference" version of stage 2 only needs to stay in
+       normal flow (the student scrolls the screen to it), without
+       shrinking via transform. */
     #etapa1-painel.consulta {
       position: relative; top: auto; right: auto; transform: none;
       width: 100%; max-height: none; margin-bottom: 16px;
@@ -466,8 +467,8 @@
 
 <header class="header">
   <div>
-    <div class="eyebrow">Camadas Profundas · KiFácil</div>
-    <h1 class="page-title">O Cartão do Titânio</h1>
+    <div class="eyebrow">Deep Layers · KiFácil</div>
+    <h1 class="page-title">The Titanium Card</h1>
   </div>
   <div class="progress-wrap">
     <div class="prog-step done" id="ps1">✓</div>
@@ -486,39 +487,39 @@
   </div>
 </header>
 
-<!-- ÁREA DO JOGO -->
+<!-- GAME AREA -->
 <div id="game-area">
 
-  <!-- PROFESSORA RAFAELA -->
+  <!-- PROFESSOR RAFAELA -->
   <aside id="teacher-box">
-    <img id="teacher-img" src="../imagens/rafa-sorrindo.jpg" alt="Professora Rafaela">
+    <img id="teacher-img" src="../imagens/rafa-sorrindo.jpg" alt="Professor Rafaela">
     <div id="teacher-bubble">
-      <div id="teacher-name">Professora Rafaela</div>
+      <div id="teacher-name">Professor Rafaela</div>
       <p id="teacher-text"></p>
-      <button id="btn-avancar" onclick="proximoPasso()">Continuar</button>
+      <button id="btn-avancar" onclick="proximoPasso()">Continue</button>
     </div>
   </aside>
 
-  <!-- CENA -->
+  <!-- SCENE -->
   <div id="scene-col">
 
-    <!-- CARTÃO DO TITÂNIO: aparece grande e centralizado, depois encolhe
-         para o canto superior esquerdo e permanece lá o resto da fase. -->
+    <!-- TITANIUM CARD: appears large and centered, then shrinks to the
+         top-left corner and stays there for the rest of the stage. -->
     <div id="cartao-titanio-wrap">
-      <img src="../imagens/cartao-titanio.png" alt="Cartão do Titânio">
+      <img src="../imagens/cartao-titanio.png" alt="Titanium Card">
     </div>
 
-    <!-- ETAPA 1: ESQUEMA SIMPLIFICADO DE PAULING -->
+    <!-- STAGE 1: SIMPLIFIED PAULING DIAGRAM -->
     <div id="etapa1-painel">
-      <div class="etapa1-titulo">Distribuição eletrônica</div>
-      <div class="etapa1-sub">Preencha apenas os subníveis ocupados pelo Titânio (Z = 22).</div>
+      <div class="etapa1-titulo">Electron configuration</div>
+      <div class="etapa1-sub">Fill in only the subshells occupied by Titanium (Z = 22).</div>
 
-      <!-- Grade fixa de 4 colunas (s / p / d / f). Cada subnível é
-           posicionado por coluna+linha, não centralizado na linha —
-           por isso a coluna s fica sempre mais à esquerda, a p à
-           direita dela, a d à direita da p, e a f à direita da d.
-           As setas diagonais são desenhadas por cima via JavaScript
-           (função desenharSetasPauling). -->
+      <!-- Fixed 4-column grid (s / p / d / f). Each subshell is
+           positioned by column+row, not centered within the row —
+           which is why the s column is always further left, p to its
+           right, d to the right of p, and f to the right of d.
+           The diagonal arrows are drawn on top via JavaScript
+           (desenharSetasPauling function). -->
       <div id="paulingGrade">
         <div class="subnivel" data-orb="1s" style="grid-column:1; grid-row:1;">
           <span class="notacao">1s</span><input class="expoente" id="orb-1s" type="text" inputmode="numeric" maxlength="2">
@@ -576,10 +577,10 @@
         </div>
       </div>
 
-      <button class="btn-verificar-fase" onclick="verificarPauling()">Verificar</button>
+      <button class="btn-verificar-fase" onclick="verificarPauling()">Check</button>
     </div>
 
-    <!-- ETAPA 2: DISTRIBUIÇÃO NAS CAMADAS DA ELETROSFERA -->
+    <!-- STAGE 2: DISTRIBUTION INTO THE ELECTRON SHELLS -->
     <div id="etapa2-painel">
 
       <div id="distribuicao-texto">
@@ -601,26 +602,26 @@
       <div id="eletrons-tray"></div>
 
       <div id="etapa2-controles">
-        <button class="btn-verificar-fase etapa2" onclick="verificarCamadas()">Verificar</button>
+        <button class="btn-verificar-fase etapa2" onclick="verificarCamadas()">Check</button>
       </div>
     </div>
 
   </div><!-- #scene-col -->
 
-  <!-- TELA DE VITÓRIA -->
+  <!-- VICTORY SCREEN -->
   <div id="win-screen">
-    <div class="win-title">Parabéns!</div>
-    <p class="win-sub">Você dominou a distribuição eletrônica do Titânio e organizou corretamente todos os elétrons nas camadas da eletrosfera.</p>
-    <a href="sala7.html" class="btn-next">Próxima Fase →</a>
+    <div class="win-title">Congratulations!</div>
+    <p class="win-sub">You mastered Titanium's electron configuration and correctly organized every electron into the electron shells.</p>
+    <a href="sala7.html" class="btn-next">Next Stage →</a>
   </div>
 
 </div><!-- #game-area -->
 
 <script>
   /* ══════════════════════════════════════════════════════════════════════
-     PROFESSORA RAFAELA — mesmo padrão das fases anteriores: quatro
-     expressões (sorrindo/explicando/pensando/animada) trocadas conforme
-     o tom de cada fala.
+     PROFESSOR RAFAELA — same pattern as the previous stages: four
+     expressions (sorrindo/explicando/pensando/animada) swapped according
+     to the tone of each line.
      ══════════════════════════════════════════════════════════════════════ */
   const IMG = {
     sorrindo:   '../imagens/rafa-sorrindo.jpg',
@@ -654,18 +655,18 @@
     });
   }
 
-  /* Fala "informativa": esconde o botão de continuar (usada para as
-     mensagens de acerto/erro das duas etapas). */
+  /* "Informative" dialogue: hides the continue button (used for the
+     correct/incorrect messages of both stages). */
   function falarInfo(imgKey, txt, cb) {
     $tbtn.style.display = 'none';
     fala(imgKey, txt, () => { $tbtn.style.display = 'none'; if (cb) cb(); });
   }
 
-  /* Música de fundo + controle de volume (a preferência fica salva e vale
-     para todas as fases). Toca em loop a partir do primeiro clique do
-     aluno (navegadores bloqueiam áudio automático sem interação); o
-     volume do slider vale tanto para a música quanto para os efeitos
-     sonoros (clique, ding, porta etc.). */
+  /* Background music + volume control (the preference is saved and applies
+     to every stage). Loops starting from the student's first click
+     (browsers block automatic audio without interaction); the volume
+     slider applies to both the music and the sound effects (click, ding,
+     door, etc.). */
   let volumeSalvo = parseFloat(localStorage.getItem('kifacil_volume'));
   if (isNaN(volumeSalvo)) volumeSalvo = 0.35;
   let silenciado = localStorage.getItem('kifacil_silenciado') === '1';
@@ -675,12 +676,12 @@
     return silenciado ? 0 : volumeSalvo;
   }
 
-  /* A navegação entre fases sempre recarrega a página (não é uma SPA),
-     então o áudio para de tocar por um instante — isso não dá para
-     evitar. Mas guardamos o ponto exato da música em sessionStorage a
-     cada instante (evento "timeupdate") e retomamos dali na próxima
-     fase, em vez de reiniciar do zero — assim a música parece contínua
-     ao longo de toda a "Desafio das Camadas Profundas". */
+  /* Navigating between stages always reloads the page (this isn't a SPA),
+     so the audio stops for a moment — that can't be avoided. But we save
+     the exact position of the music in sessionStorage constantly (the
+     "timeupdate" event) and resume from there on the next stage instead
+     of restarting from zero — so the music feels continuous throughout
+     the whole "Deep Layers Challenge". */
   function iniciarMusicaFundo() {
     if (musicaFundo) return;
     try {
@@ -750,12 +751,12 @@
     try { const a = new Audio('../sons/magica.mp3'); a.volume = v; a.play().catch(()=>{}); } catch(e) {}
   }
 
-  /* ── INTRODUÇÃO ── */
+  /* ── INTRO ── */
   const introPassos = [
-    { img: 'sorrindo',   txt: 'Vejo que você chegou muito longe no Desafio das Camadas Profundas.' },
-    { img: 'explicando', txt: 'Pouquíssimos alunos conseguem chegar até esta sala.' },
-    { img: 'explicando', txt: 'Hoje vou apresentar o elemento mais importante da Academia KiFácil.' },
-    { img: 'animada',    txt: 'O Titânio. Faça a distribuição eletrônica desse elemento.' }
+    { img: 'sorrindo',   txt: 'I see you\'ve come very far in the Deep Layers Challenge.' },
+    { img: 'explicando', txt: 'Very few students manage to reach this room.' },
+    { img: 'explicando', txt: 'Today I will introduce you to the most important element at KiFácil Academy.' },
+    { img: 'animada',    txt: 'Titanium. Work out this element\'s electron configuration.' }
   ];
   let introIdx = 0;
 
@@ -771,15 +772,15 @@
     const ultimaFala = introIdx === introPassos.length - 1;
     $tbtn.style.display = ultimaFala ? 'none' : '';
     fala(introPassos[introIdx].img, introPassos[introIdx].txt, () => {
-      // Depois da última fala, o cartão do Titânio aparece sozinho —
-      // esta fase não tem botão "Começar".
+      // After the last line, the Titanium card appears on its own —
+      // this stage has no "Begin" button.
       if (ultimaFala) setTimeout(mostrarCartaoTitanio, 700);
     });
   }
 
   /* ══════════════════════════════════════════════════════════════════════
-     CARTÃO DO TITÂNIO — aparece centralizado, espera ~3s e encolhe para
-     o canto superior esquerdo, onde permanece pelo resto da fase.
+     TITANIUM CARD — appears centered, waits ~3s and shrinks to the
+     top-left corner, where it stays for the rest of the stage.
      ══════════════════════════════════════════════════════════════════════ */
   function mostrarCartaoTitanio() {
     tocarMagica();
@@ -789,19 +790,19 @@
 
   function encolherCartaoTitanio() {
     document.getElementById('cartao-titanio-wrap').classList.add('fixo');
-    setTimeout(iniciarEtapa1, 850); // aguarda a transição suave terminar
+    setTimeout(iniciarEtapa1, 850); // waits for the smooth transition to finish
   }
 
   /* ══════════════════════════════════════════════════════════════════════
-     ETAPA 1 — ESQUEMA DE PAULING
+     STAGE 1 — PAULING DIAGRAM
      ══════════════════════════════════════════════════════════════════════ */
-  // Todos os subníveis do esquema, na ordem em que aparecem na tela.
+  // All the subshells in the diagram, in the order they appear on screen.
   const TODOS_ORBITAIS = ['1s','2s','2p','3s','3p','3d','4s','4p','4d','4f','5s','5p','5d','6s','6p','7s'];
-  // Distribuição eletrônica correta do Titânio (Z = 22); os subníveis que
-  // não aparecem aqui devem permanecer vazios.
+  // Titanium's correct electron configuration (Z = 22); subshells not
+  // listed here must remain empty.
   const RESPOSTA_PAULING = { '1s': 2, '2s': 2, '2p': 6, '3s': 2, '3p': 6, '4s': 2, '3d': 2 };
-  // Ordem real de preenchimento do diagrama de Pauling — usada só para
-  // desenhar as setas diagonais entre um subnível e o próximo.
+  // The actual filling order of the Pauling diagram — used only to draw
+  // the diagonal arrows between one subshell and the next.
   const ORDEM_PREENCHIMENTO = ['1s','2s','2p','3s','3p','4s','3d','4p','5s','4d','5p','6s','4f','5d','6p','7s'];
 
   function iniciarEtapa1() {
@@ -811,9 +812,9 @@
     window.addEventListener('resize', desenharSetasPauling);
   }
 
-  // Desenha uma linha fina e dourada entre o centro de cada subnível e o
-  // centro do próximo, seguindo ORDEM_PREENCHIMENTO — sem SVG e sem
-  // canvas: cada seta é uma <div> fina, rotacionada via CSS transform.
+  // Draws a thin, golden line between the center of each subshell and
+  // the center of the next one, following ORDEM_PREENCHIMENTO — no SVG
+  // and no canvas: each arrow is a thin <div>, rotated via CSS transform.
   function desenharSetasPauling() {
     const grade = document.getElementById('paulingGrade');
     grade.querySelectorAll('.pauling-seta').forEach(seta => seta.remove());
@@ -845,7 +846,7 @@
     }
   }
 
-  // Garante que cada campo só aceite dígitos inteiros (sem sinais, sem vírgula/ponto).
+  // Ensures each field only accepts whole digits (no signs, no comma/period).
   function configurarCamposNumericos() {
     TODOS_ORBITAIS.forEach(orb => {
       const input = document.getElementById('orb-' + orb);
@@ -868,45 +869,46 @@
 
     if (tudoCorreto) {
       tocarDing();
-      falarInfo('animada', 'Excelente.', () => {
+      falarInfo('animada', 'Excellent.', () => {
         setTimeout(() => {
-          falarInfo('explicando', 'Agora distribua esses elétrons nas camadas da eletrosfera.', () => {
+          falarInfo('explicando', 'Now distribute these electrons into the electron shells.', () => {
             setTimeout(avancarParaEtapa2, 1000);
           });
         }, 900);
       });
     } else {
-      // Não revela a resposta nem altera os campos — o aluno tenta de novo.
-      falarInfo('pensando', 'Existe um erro na distribuição eletrônica.');
+      // Doesn't reveal the answer or change the fields — the student tries again.
+      falarInfo('pensando', 'There is an error in the electron configuration.');
     }
   }
 
   function avancarParaEtapa2() {
-    // O esquema preenchido continua na tela (encolhido num canto) para o
-    // aluno poder consultar enquanto organiza os elétrons — só trava os
-    // campos e tira o botão "Verificar" dele, que já não serve mais.
+    // The filled-in diagram stays on screen (shrunk into a corner) so
+    // the student can reference it while organizing the electrons — it
+    // just locks the fields and removes the "Check" button, which is no
+    // longer needed.
     const painel = document.getElementById('etapa1-painel');
     painel.querySelectorAll('.expoente').forEach(input => { input.readOnly = true; });
     painel.querySelector('.btn-verificar-fase').style.display = 'none';
-    painel.querySelector('.etapa1-sub').textContent = 'Consulte aqui enquanto organiza os elétrons.';
+    painel.querySelector('.etapa1-sub').textContent = 'Check here while you organize the electrons.';
     painel.classList.add('consulta');
-    setTimeout(desenharSetasPauling, 650); // redesenha as setas no novo tamanho/posição
+    setTimeout(desenharSetasPauling, 650); // redraws the arrows at the new size/position
     iniciarEtapa2();
   }
 
   /* ══════════════════════════════════════════════════════════════════════
-     ETAPA 2 — DISTRIBUIÇÃO NAS CAMADAS DA ELETROSFERA
+     STAGE 2 — DISTRIBUTION INTO THE ELECTRON SHELLS
      ══════════════════════════════════════════════════════════════════════ */
   const TOTAL_ELETRONS = 22;
-  // Raio de cada camada, em fração do MENOR lado do wrapper (não da
-  // metade dele) — os mesmos valores controlam o raio visual dos
-  // rótulos e o posicionamento final dos elétrons. Derivados diretamente
-  // dos diâmetros em CSS: K=34% → raio 17%, L=52% → 26%, M=70% → 35%,
-  // N=88% → 44%. Nunca medidos a partir de imagem.
+  // Radius of each shell, as a fraction of the wrapper's SMALLER side
+  // (not half of it) — the same values control the labels' visual
+  // radius and the electrons' final placement. Derived directly from
+  // the CSS diameters: K=34% → radius 17%, L=52% → 26%, M=70% → 35%,
+  // N=88% → 44%. Never measured from an image.
   const RAIOS_CAMADAS = { K: 0.17, L: 0.26, M: 0.35, N: 0.44 };
-  // Faixas de soltura (distância normalizada = distância em px / menor
-  // lado do wrapper): mais largas que o raio exato de cada camada, para
-  // o aluno não precisar acertar a linha fina do círculo.
+  // Drop zones (normalized distance = distance in px / wrapper's
+  // smaller side): wider than each shell's exact radius, so the student
+  // doesn't need to hit the circle's thin line exactly.
   const FAIXAS_SOLTURA = {
     K: [0.10, 0.23],
     L: [0.23, 0.35],
@@ -929,15 +931,15 @@
     });
   }
 
-  // Posiciona os rótulos K, L, M, N discretamente ao lado de cada órbita,
-  // usando exatamente os mesmos raios (RAIOS_CAMADAS) usados para
-  // encaixar os elétrons — nunca valores separados.
+  // Positions the K, L, M, N labels discreetly next to each orbit,
+  // using exactly the same radii (RAIOS_CAMADAS) used to place the
+  // electrons — never separate values.
   function posicionarRotulosCamadas() {
     const wrapper = document.getElementById('eletrosfera-wrapper');
     const tamanho = Math.min(wrapper.clientWidth, wrapper.clientHeight);
     const centroX = wrapper.clientWidth / 2;
     const centroY = wrapper.clientHeight / 2;
-    const anguloRotulo = -Math.PI / 4; // canto superior direito de cada órbita
+    const anguloRotulo = -Math.PI / 4; // top-right corner of each orbit
 
     Object.keys(RAIOS_CAMADAS).forEach(nome => {
       const raioPx = tamanho * RAIOS_CAMADAS[nome];
@@ -947,20 +949,20 @@
     });
   }
 
-  // Cria os 22 elétrons na bandeja, cada um com seus próprios eventos de arraste.
+  // Creates the 22 electrons in the tray, each with its own drag events.
   function criarEletrons() {
     const tray = document.getElementById('eletrons-tray');
     for (let i = 0; i < TOTAL_ELETRONS; i++) {
       const el = document.createElement('img');
       el.src = '../imagens/eletron1.png';
       el.className = 'eletron-item';
-      el.alt = 'Elétron';
+      el.alt = 'Electron';
       tornarArrastavel(el);
       tray.appendChild(el);
     }
   }
 
-  /* ── ARRASTAR E SOLTAR (mouse e toque) ── */
+  /* ── DRAG AND DROP (mouse and touch) ── */
   let eletronArrastado = null;
   let arrasteOffsetX = 0;
   let arrasteOffsetY = 0;
@@ -1033,14 +1035,14 @@
     const camada = classificarPorFaixa(distanciaNormalizada);
 
     if (camada) {
-      // Soltou dentro de uma das faixas: associa a essa camada. A posição
-      // exata de soltura não importa — reorganizarTodasCamadas encaixa o
-      // elétron sobre a circunferência certa logo em seguida.
+      // Dropped inside one of the zones: associates it with that shell.
+      // The exact drop position doesn't matter — reorganizarTodasCamadas
+      // snaps the electron onto the right circle right afterward.
       el.dataset.camada = camada;
       el.style.position = 'absolute';
       wrapper.appendChild(el);
     } else {
-      // Fora de todas as faixas: volta para a bandeja, sem camada nenhuma.
+      // Outside all the zones: goes back to the tray, with no shell at all.
       delete el.dataset.camada;
       el.style.position = '';
       el.style.left = '';
@@ -1053,12 +1055,12 @@
     reorganizarTodasCamadas();
   }
 
-  // Classifica a distância normalizada (0 a ~0.5) numa das quatro faixas
-  // de soltura (mais largas que o raio exato de cada camada). Fora de
-  // todas elas, retorna null (o elétron volta para a bandeja).
+  // Classifies the normalized distance (0 to ~0.5) into one of the four
+  // drop zones (wider than each shell's exact radius). Outside all of
+  // them, returns null (the electron goes back to the tray).
   function classificarPorFaixa(distanciaNormalizada) {
-    // K inclui o próprio limite inferior (0.10); as demais faixas começam
-    // logo acima do limite da faixa anterior, para não haver sobreposição.
+    // K includes its own lower bound (0.10); the other zones start
+    // right above the previous zone's bound, so there is no overlap.
     if (distanciaNormalizada >= FAIXAS_SOLTURA.K[0] && distanciaNormalizada <= FAIXAS_SOLTURA.K[1]) return 'K';
     let camadaEncontrada = null;
     ['L', 'M', 'N'].forEach(nome => {
@@ -1068,10 +1070,10 @@
     return camadaEncontrada;
   }
 
-  /* Reorganiza os elétrons de UMA camada, distribuindo-os uniformemente
-     ao redor da circunferência correspondente (sem sobreposição). Usa
-     exatamente RAIOS_CAMADAS — o mesmo raio que desenha o círculo em CSS
-     e posiciona o rótulo. */
+  /* Rearranges the electrons of ONE shell, distributing them evenly
+     around the corresponding circle (no overlap). Uses exactly
+     RAIOS_CAMADAS — the same radius that draws the circle in CSS and
+     positions the label. */
   function reorganizarCamada(nomeCamada) {
     const wrapper = document.getElementById('eletrosfera-wrapper');
     const eletrons = wrapper.querySelectorAll('.eletron-item[data-camada="' + nomeCamada + '"]');
@@ -1084,7 +1086,7 @@
     const centroY = wrapper.clientHeight / 2;
 
     eletrons.forEach((el, i) => {
-      const angulo = (2 * Math.PI * i) / total - Math.PI / 2; // começa no topo
+      const angulo = (2 * Math.PI * i) / total - Math.PI / 2; // starts at the top
       el.style.left = (centroX + raioPx * Math.cos(angulo)) + 'px';
       el.style.top = (centroY + raioPx * Math.sin(angulo)) + 'px';
       el.style.transform = 'translate(-50%, -50%)';
@@ -1096,7 +1098,7 @@
     Object.keys(RAIOS_CAMADAS).forEach(reorganizarCamada);
   }
 
-  /* ── VERIFICAÇÃO DA ETAPA 2 ── */
+  /* ── STAGE 2 VERIFICATION ── */
   function verificarCamadas() {
     tocarClick();
 
@@ -1112,16 +1114,16 @@
       tocarDing();
       document.getElementById('ps6').className = 'prog-step done';
       document.getElementById('ps6').textContent = '✓';
-      falarInfo('animada', 'Parabéns!', () => {
+      falarInfo('animada', 'Congratulations!', () => {
         setTimeout(() => {
-          falarInfo('animada', 'Você dominou a distribuição eletrônica do Titânio.', () => {
+          falarInfo('animada', 'You mastered Titanium\'s electron configuration.', () => {
             setTimeout(showWin, 1200);
           });
         }, 900);
       });
     } else {
-      // Nenhum elétron é alterado — o aluno pode continuar reorganizando.
-      falarInfo('pensando', 'Existe erro na distribuição das camadas.');
+      // No electron is changed — the student can keep rearranging them.
+      falarInfo('pensando', 'There is an error in how the shells are distributed.');
     }
   }
 
@@ -1132,11 +1134,11 @@
 </script>
 
 <div id="controle-volume">
-  <button id="btn-mute" onclick="alternarMudo()" aria-label="Silenciar ou ativar o som">🔊</button>
+  <button id="btn-mute" onclick="alternarMudo()" aria-label="Mute or unmute sound">🔊</button>
   <input type="range" id="slider-volume" min="0" max="100" value="35" oninput="ajustarVolume(this.value)" aria-label="Volume">
 </div>
 
-<div id="cookie-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#1a0f08;border-top:1px solid rgba(212,170,106,0.4);padding:1rem 2rem;z-index:9999;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;"><p style="margin:0;font-family:'Libre Baskerville',serif;font-size:0.82rem;color:#e8d4b0;line-height:1.5;">Este site utiliza cookies para melhorar sua experiência. Ao continuar navegando, você concorda com nossa <a href="/politica-de-privacidade.html" style="color:#e8b84b;text-decoration:underline;text-underline-offset:2px;">Política de Privacidade</a>.</p><button onclick="document.getElementById('cookie-banner').style.display='none';localStorage.setItem('kifacil_cookies','1');" style="flex-shrink:0;background:#e8b84b;border:none;padding:0.55rem 1.5rem;font-family:'Libre Baskerville',serif;font-size:0.78rem;font-weight:700;color:#1a0f08;cursor:pointer;letter-spacing:0.04em;">Entendi</button></div>
+<div id="cookie-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#1a0f08;border-top:1px solid rgba(212,170,106,0.4);padding:1rem 2rem;z-index:9999;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;"><p style="margin:0;font-family:'Libre Baskerville',serif;font-size:0.82rem;color:#e8d4b0;line-height:1.5;">This site uses cookies to improve your experience. By continuing to browse, you agree to our <a href="/politica-de-privacidade.html" style="color:#e8b84b;text-decoration:underline;text-underline-offset:2px;">Privacy Policy</a>.</p><button onclick="document.getElementById('cookie-banner').style.display='none';localStorage.setItem('kifacil_cookies','1');" style="flex-shrink:0;background:#e8b84b;border:none;padding:0.55rem 1.5rem;font-family:'Libre Baskerville',serif;font-size:0.78rem;font-weight:700;color:#1a0f08;cursor:pointer;letter-spacing:0.04em;">Got it</button></div>
 <script>if(!localStorage.getItem('kifacil_cookies'))document.getElementById('cookie-banner').style.display='flex';</script>
 
 <script type="module">
