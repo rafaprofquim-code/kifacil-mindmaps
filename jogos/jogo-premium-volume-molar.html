@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow">
+  <title>Volume Molar dos Gases — Jogo Premium | KiFácil</title>
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --fundo: #fdf8f0;
+      --fundo-card: #fffdf9;
+      --escuro: #2e2016;
+      --texto: #1a1208;
+      --texto-suave: #3d2e1a;
+      --dourado: #8a5e10;
+      --dourado-claro: #c8920a;
+      --borda: rgba(100,70,20,0.3);
+      --borda-forte: rgba(100,70,20,0.5);
+      --verde-escuro: #1e5238;
+      --vermelho-escuro: #7a1515;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Libre Baskerville', Georgia, serif;
+      background: var(--fundo);
+      color: var(--texto);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    .top-nav {
+      background: #1e1008;
+      border-bottom: 2px solid var(--dourado-claro);
+      padding: 0 2.5rem;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+    .brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.7rem;
+      font-weight: 600;
+      color: #fff8ee;
+      letter-spacing: 0.03em;
+      margin-right: auto;
+    }
+
+    /* MAIN */
+    main {
+      flex: 1;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 2.5rem;
+      width: 100%;
+    }
+    .titulo-jogo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+      line-height: 1.1;
+    }
+    .subtitulo {
+      font-size: 1.1rem;
+      color: var(--texto);
+      margin-bottom: 2.5rem;
+      max-width: 680px;
+    }
+
+    .narrador {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 1.4rem;
+      padding: 1rem 1.1rem;
+      border: 1.5px solid var(--borda-forte);
+      border-radius: 10px;
+      background: rgba(30,16,8,0.05);
+    }
+    .narrador img {
+      width: 78px;
+      height: 96px;
+      object-fit: cover;
+      object-position: top center;
+      border-radius: 10px;
+      border: 1px solid rgba(200,146,10,.35);
+      flex-shrink: 0;
+    }
+    .narrador-nome {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.8rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--dourado-claro);
+      margin-bottom: 0.4rem;
+    }
+    .narrador-texto {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: var(--texto-suave);
+    }
+
+    /* IMAGEM */
+    .imagem-wrapper {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: fit-content;
+      max-width: min(100%, 900px);
+      max-height: 70vh;
+      margin: 0 auto;
+      cursor: zoom-in;
+      border: 1.5px solid var(--borda-forte);
+      border-radius: 6px;
+      overflow: hidden;
+      background: #f7efe2;
+    }
+    .imagem-wrapper img {
+      display: block;
+      width: auto;
+      max-width: 100%;
+      height: auto;
+      max-height: 70vh;
+      object-fit: contain;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    /* Recipientes sobre a bancada da imagem */
+    .overlay-recipientes {
+      position: absolute;
+      left: 50%; bottom: 8%; transform: translateX(-50%);
+      display: flex; gap: 1.6rem; justify-content: center; align-items: flex-end; flex-wrap: nowrap;
+      pointer-events: none;
+    }
+
+    .link-aula {
+      position: absolute; top: 10px; right: 10px; z-index: 10;
+      display: flex; flex-direction: column; align-items: center; gap: 2px;
+      text-decoration: none; color: #fff8ee;
+      background: rgba(30,16,8,0.72); border: 1.5px solid var(--dourado-claro, #c8920a);
+      border-radius: 8px; padding: 0.4rem 0.65rem;
+      font-family: 'Cormorant Garamond', serif; font-size: 0.68rem; font-weight: 600;
+      letter-spacing: 0.02em; text-align: center; line-height: 1.2;
+      cursor: pointer; transition: background 0.2s, transform 0.15s;
+    }
+    .link-aula:hover { background: rgba(30,16,8,0.92); transform: translateY(-1px); }
+    .link-aula svg { width: 22px; height: 22px; }
+
+    /* MODAL ZOOM */
+    .modal-zoom {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(18,10,4,0.93);
+      z-index: 200;
+      align-items: center;
+      justify-content: center;
+      cursor: zoom-out;
+    }
+    .modal-zoom.ativo { display: flex; }
+    .modal-zoom img {
+      max-width: 95vw;
+      max-height: 90vh;
+      object-fit: contain;
+      border: 1px solid var(--borda-forte);
+      border-radius: 4px;
+      pointer-events: none;
+    }
+
+    .modal-btn-confirmar {
+      background: #1e1008;
+      color: var(--dourado-claro);
+      border: 1.5px solid var(--dourado-claro);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.6rem 1.8rem;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+    .modal-btn-confirmar:hover { background: var(--dourado-claro); color: #1e1008; }
+    .modal-btn-confirmar:disabled { opacity: 0.4; cursor: default; }
+    .modal-btn-confirmar:disabled:hover { background: #1e1008; color: var(--dourado-claro); }
+
+    /* CONCLUSÃO */
+    .conclusao {
+      display: none;
+      margin-top: 3rem;
+      background: var(--fundo-card);
+      border: 1.5px solid var(--borda-forte);
+      border-radius: 12px;
+      padding: 3rem 2rem;
+      text-align: center;
+    }
+    .conclusao.visivel { display: block; }
+    .conclusao-titulo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.8rem, 5vw, 2.8rem);
+      font-weight: 600;
+      margin-bottom: 0.8rem;
+    }
+    .conclusao-placar {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      color: var(--dourado-claro);
+      margin-bottom: 1rem;
+    }
+    .conclusao-mensagem {
+      font-size: 0.93rem;
+      color: var(--texto-suave);
+      max-width: 460px;
+      margin: 0 auto 2rem;
+      line-height: 1.8;
+    }
+    .btn-reiniciar {
+      background: #1e1008;
+      color: var(--dourado-claro);
+      border: 1.5px solid var(--dourado-claro);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.7rem 2rem;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+    .btn-reiniciar:hover { background: var(--dourado-claro); color: #1e1008; }
+
+    /* FOOTER */
+    footer {
+      background: var(--escuro);
+      border-top: 2px solid var(--dourado-claro);
+      padding: 1.2rem 2rem;
+      text-align: center;
+      font-size: 0.82rem;
+      color: rgba(255,248,238,0.5);
+    }
+
+    @media (min-width: 641px) {
+      .narrador {
+        max-width: 900px;
+        margin: 0 auto 1.2rem;
+      }
+      .narrador-texto {
+        font-size: 1.08rem;
+      }
+    }
+
+    /* ==========================================================
+       MECÂNICA ESPECÍFICA — VOLUME MOLAR DOS GASES
+       Todo o palco interativo fica em fluxo normal ABAIXO da
+       imagem (nunca sobreposto/clipado pelo imagem-wrapper), para
+       nunca ficar cortado nem tampar a caixa de diálogo no mobile.
+       ========================================================== */
+    .palco-jogo {
+      width: min(100%, 900px);
+      margin: 1.4rem auto 0;
+      min-height: 40px;
+    }
+
+    /* Recipientes graduados */
+    .recipientes-linha {
+      display: flex;
+      gap: 1.8rem;
+      justify-content: center;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      padding: .5rem 0;
+    }
+    .recipiente {
+      position: relative;
+      width: 108px;
+      flex-shrink: 0;
+    }
+    .recipiente-visual {
+      position: relative;
+    }
+    .recipiente-img {
+      width: 100%;
+      display: block;
+      pointer-events: none;
+      user-select: none;
+    }
+    .recipiente-svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+    .recipiente-fill {
+      transition: y 1s ease, height 1s ease, opacity .4s ease;
+    }
+    .particula-gas {
+      fill: #fffdf6;
+      opacity: 0;
+      transition: opacity .6s ease;
+    }
+    .recipiente-rotulo {
+      text-align: center;
+      margin-top: .5rem;
+      background: rgba(255,253,246,0.88);
+      border-radius: 6px;
+      padding: 3px 6px;
+    }
+    .recipiente-formula {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 700;
+      font-size: 1.25rem;
+      color: var(--dourado);
+    }
+    .recipiente-mol {
+      font-size: .72rem;
+      color: var(--texto-suave);
+    }
+    .recipiente-volume {
+      font-size: .82rem;
+      font-weight: 700;
+      color: var(--verde-escuro);
+      min-height: 1.2em;
+    }
+    .recipiente.brilho .recipiente-img {
+      filter: drop-shadow(0 0 12px rgba(232,184,75,0.85)) brightness(1.06);
+    }
+
+    /* Botão central de ação do palco */
+    .palco-acoes { text-align: center; margin: 1.1rem 0 .3rem; }
+
+    /* Indicadores CNTP — sobre o topo da imagem */
+    .overlay-indicadores {
+      position: absolute;
+      left: 50%; top: 5%; transform: translateX(-50%); z-index: 4;
+      pointer-events: none;
+    }
+    .indicadores-cntp {
+      display: flex;
+      gap: 1.6rem;
+      justify-content: center;
+      flex-wrap: nowrap;
+    }
+    .indicador {
+      text-align: center;
+      background: rgba(255,253,246,0.9);
+      border-radius: 8px;
+      padding: 6px 14px;
+    }
+    .indicador img { width: 38px; height: auto; margin-bottom: .35rem; }
+    .indicador-valor {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 700;
+      color: var(--dourado);
+      font-size: 1.15rem;
+    }
+    .indicador-label {
+      font-size: .68rem;
+      color: var(--texto-suave);
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+
+    /* Slider genérico (etapas 3 e 4) */
+    .slider-bloco { max-width: 420px; margin: 1rem auto; text-align: center; }
+    .slider-leitura {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--dourado);
+      margin-bottom: .6rem;
+    }
+    input[type="range"] {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 6px;
+      border-radius: 3px;
+      background: linear-gradient(90deg, var(--dourado-claro), rgba(200,146,10,.25));
+      outline: none;
+      cursor: pointer;
+    }
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 20px; height: 20px;
+      border-radius: 50%;
+      background: #1e1008;
+      border: 2px solid var(--dourado-claro);
+      cursor: pointer;
+    }
+    input[type="range"]::-moz-range-thumb {
+      width: 18px; height: 18px;
+      border-radius: 50%;
+      background: #1e1008;
+      border: 2px solid var(--dourado-claro);
+      cursor: pointer;
+    }
+    .slider-marcas {
+      display: flex;
+      justify-content: space-between;
+      font-size: .72rem;
+      color: var(--texto-suave);
+      margin-top: .3rem;
+    }
+
+    /* Opções fixas de mol (etapa 3) */
+    .mol-opcoes { display: flex; gap: .6rem; justify-content: center; flex-wrap: wrap; margin: .3rem 0 1rem; }
+    .btn-mol {
+      background: var(--fundo); border: 1.5px solid var(--borda-forte); border-radius: 6px;
+      padding: .5rem 1.1rem; font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: .95rem;
+      color: var(--texto); cursor: pointer; transition: border-color .2s, background .2s;
+    }
+    .btn-mol:hover { border-color: var(--dourado-claro); }
+    .btn-mol.selecionado { border-color: var(--dourado-claro); background: rgba(200,146,10,.14); color: var(--dourado); }
+
+    /* Painel de dados sobre a imagem (cálculos, régua, tabela de desafios, resumo) */
+    .overlay-painel {
+      position: absolute; inset: 0; z-index: 6;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: .8rem;
+      padding: 4%;
+      overflow-y: auto;
+    }
+    .painel-dados {
+      background: rgba(30,16,8,0.94);
+      border: 1.5px solid var(--dourado-claro);
+      border-radius: 10px;
+      padding: 1.2rem 1.3rem;
+      color: #f5ead0;
+      max-width: 480px;
+      width: 100%;
+      max-height: 100%;
+      overflow-y: auto;
+      flex-shrink: 0;
+    }
+    .painel-titulo {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--dourado-claro);
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      margin-bottom: .8rem;
+      text-align: center;
+    }
+
+    /* Passo a passo do cálculo (etapa 4) */
+    .passo-calculo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: .7rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.05rem;
+      padding: .35rem 0;
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity .5s ease, transform .5s ease;
+    }
+    .passo-calculo.visivel { opacity: 1; transform: translateY(0); }
+    .passo-seta { color: var(--dourado-claro); font-size: 1.2rem; }
+    .passo-destaque { color: var(--dourado-claro); font-weight: 700; }
+
+    /* Tabela de desafios (etapa 5) */
+    .tabela-desafios { width: 100%; border-collapse: collapse; }
+    .td-linha {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr 1fr;
+      gap: .5rem;
+      align-items: center;
+      padding: .5rem 0;
+      border-bottom: 1px solid rgba(232,184,75,0.18);
+    }
+    .td-linha.cabecalho {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 700;
+      color: var(--dourado-claro);
+      font-size: .66rem;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+    }
+    .td-gas { font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: .92rem; }
+    .td-gas small { display: block; font-family: 'Libre Baskerville', serif; font-weight: 400; color: rgba(245,234,208,0.65); font-size: .68rem; }
+    .td-input {
+      font-family: 'Libre Baskerville', Georgia, serif;
+      font-size: .8rem;
+      background: rgba(255,255,255,0.07);
+      color: #f5ead0;
+      border: 1px solid rgba(232,184,75,0.4);
+      border-radius: 5px;
+      padding: .32rem .35rem;
+      width: 100%;
+    }
+    .td-input.correta { border-color: var(--verde-escuro); box-shadow: 0 0 0 1px var(--verde-escuro) inset; }
+    .td-input.errada  { border-color: var(--vermelho-escuro); box-shadow: 0 0 0 1px var(--vermelho-escuro) inset; }
+    .td-feedback { font-size: .78rem; color: #f5ead0; margin-top: .7rem; min-height: 1.2em; text-align: center; }
+    .td-botoes { text-align: center; margin-top: .8rem; }
+
+    /* Quadro-resumo final */
+    .resumo-fluxo {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: .15rem;
+    }
+    .resumo-item {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--dourado-claro);
+    }
+    .resumo-seta { color: rgba(245,234,208,0.55); font-size: 1rem; }
+
+    @media (max-width: 640px) {
+      .top-nav { padding: 0 1.2rem; gap: 1.2rem; }
+      main { padding: 2rem 1rem 4rem; }
+      .recipiente { width: 84px; }
+      .recipientes-linha { gap: 1rem; }
+      .overlay-recipientes { bottom: 5%; gap: 1rem; }
+      .recipiente-formula { font-size: 1rem; }
+      .recipiente-mol { font-size: .62rem; }
+      .recipiente-volume { font-size: .7rem; }
+      .indicadores-cntp { gap: .8rem; }
+      .indicador { padding: 4px 8px; }
+      .indicador img { width: 26px; }
+      .indicador-valor { font-size: .92rem; }
+      .indicador-label { font-size: .58rem; }
+      .overlay-painel { padding: 3% 2%; gap: .5rem; }
+      .painel-dados { max-width: 100%; padding: .8rem .9rem; font-size: .85rem; }
+      .painel-titulo { font-size: .82rem; }
+      .td-linha { grid-template-columns: 1fr 0.9fr 0.9fr; font-size: .78rem; }
+      .link-aula { top: 6px; right: 6px; padding: 0.3rem 0.5rem; font-size: 0.6rem; }
+      .link-aula svg { width: 18px; height: 18px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <div class="brand">KiFácil</div>
+</nav>
+
+<main>
+  <h1 class="titulo-jogo">Volume Molar dos Gases</h1>
+  <p class="subtitulo">Descubra, observando experimentos, por que qualquer gás ocupa o mesmo volume nas CNTP quando possui um mol.</p>
+
+  <div class="narrador">
+    <img src="../imagens/rafa-sorrindo.jpg" alt="Professora Rafaela" id="imgProfessora" />
+    <div>
+      <div class="narrador-nome">Professora Rafaela</div>
+      <div class="narrador-texto" id="narradorTexto">Será que gases diferentes ocupam volumes diferentes?</div>
+      <button class="modal-btn-confirmar" id="btnContinuarFala">Continuar</button>
+    </div>
+  </div>
+
+  <div class="imagem-wrapper" id="imagemWrapper">
+    <img src="../imagens/sala-volume-gases.jpg" alt="Sala de experimentos com gases" id="imagemJogo" />
+    <div class="overlay-indicadores" id="overlayIndicadores"></div>
+    <div class="overlay-recipientes" id="overlayRecipientes"></div>
+    <div class="overlay-painel" id="overlayPainel"></div>
+    <!-- COLOQUE O LINK AQUI -->
+    <a class="link-aula" href="https://www.youtube.com/watch?v=3wnKPFLmIM4" target="_blank" rel="noopener" title="Assista à aula">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.6"/>
+        <path d="M10 8.5L16 12L10 15.5V8.5Z" fill="currentColor"/>
+      </svg>
+      <span>Assista à aula</span>
+    </a>
+  </div>
+
+  <div class="palco-jogo" id="palcoJogo"></div>
+
+  <div class="conclusao" id="conclusao">
+    <div class="conclusao-titulo">Fase concluída</div>
+    <div class="conclusao-placar" id="conclusaoPlacar"></div>
+    <p class="conclusao-mensagem" id="conclusaoMensagem"></p>
+    <button class="btn-reiniciar" onclick="reiniciar()">Jogar novamente</button>
+  </div>
+</main>
+
+<footer>© 2026 KiFácil</footer>
+
+<!-- MODAL ZOOM -->
+<div class="modal-zoom" id="modalZoom">
+  <img src="../imagens/sala-volume-gases.jpg" alt="Sala ampliada" />
+</div>
+
+<script>
+/* ==========================================================
+   DADOS
+   ========================================================== */
+const V_MOLAR = 22.4; // litros por mol nas CNTP
+
+const GASES = {
+  h2:  { formula: 'H₂',  nome: 'hidrogênio',         massaMolar: 2,  cor: '#8ecbe6' },
+  o2:  { formula: 'O₂',  nome: 'oxigênio',            massaMolar: 32, cor: '#e3ac54' },
+  co2: { formula: 'CO₂', nome: 'dióxido de carbono',  massaMolar: 44, cor: '#cf9550' },
+  n2:  { formula: 'N₂',  nome: 'nitrogênio',          massaMolar: 28, cor: '#84b6dc' },
+  ch4: { formula: 'CH₄', nome: 'metano',              massaMolar: 16, cor: '#93d18d' },
+  nh3: { formula: 'NH₃', nome: 'amônia',              massaMolar: 17, cor: '#cf9adf' }
+};
+
+/* Desafios da etapa 5: massa dada (g) -> mol e volume (L) esperados */
+const DESAFIOS_ETAPA5 = [
+  { gas: 'o2',  massa: 16 },
+  { gas: 'n2',  massa: 56 },
+  { gas: 'ch4', massa: 4  },
+  { gas: 'co2', massa: 11 },
+  { gas: 'nh3', massa: 34 }
+];
+
+/* ==========================================================
+   PROFESSORA — diálogo
+   ========================================================== */
+const $prof = document.getElementById('imgProfessora');
+const $fala = document.getElementById('narradorTexto');
+const $btnContinuar = document.getElementById('btnContinuarFala');
+const IMG_PROF = {
+  sorrindo:  '../imagens/rafa-sorrindo.jpg',
+  explicando:'../imagens/rafa-explicando.jpg',
+  pensando:  '../imagens/rafa-pensando.jpg',
+  animada:   '../imagens/rafa-animada.jpg'
+};
+let _aoContinuar = null;
+
+function falar(mood, texto, aoContinuar) {
+  _aoContinuar = aoContinuar || null;
+  $prof.style.opacity = '0';
+  setTimeout(() => { $prof.src = IMG_PROF[mood] || IMG_PROF.explicando; $prof.style.opacity = '1'; }, 180);
+  $fala.textContent = texto;
+  $btnContinuar.style.display = _aoContinuar ? 'inline-block' : 'none';
+}
+$btnContinuar.addEventListener('click', () => {
+  const cb = _aoContinuar;
+  _aoContinuar = null;
+  $btnContinuar.style.display = 'none';
+  if (cb) cb();
+});
+
+function professoraPergunta(texto) {
+  $prof.style.opacity = '0';
+  setTimeout(() => { $prof.src = IMG_PROF.pensando; $prof.style.opacity = '1'; }, 180);
+  $fala.textContent = texto;
+}
+
+const _ding = new Audio('../sons/ding.mp3');
+_ding.preload = 'auto';
+function tocarDing() { try { _ding.currentTime = 0; _ding.play().catch(() => {}); } catch (e) {} }
+
+/* ==========================================================
+   FORMATAÇÃO NUMÉRICA (padrão brasileiro)
+   ========================================================== */
+function fmt(numero, casas) {
+  const n = Number(numero.toFixed(casas == null ? 2 : casas));
+  let s = n.toString().replace('.', ',');
+  return s;
+}
+function paraNumero(str) {
+  if (typeof str !== 'string') return NaN;
+  return parseFloat(str.trim().replace(',', '.'));
+}
+function aproxIgual(a, b, tolerancia) {
+  return Math.abs(a - b) <= tolerancia;
+}
+
+/* ==========================================================
+   COMPONENTE: RECIPIENTE GRADUADO (desenhado em SVG)
+   ========================================================== */
+function criarRecipiente(id, formula, corGas) {
+  const div = document.createElement('div');
+  div.className = 'recipiente';
+  div.dataset.id = id;
+  div.innerHTML = `
+    <div class="recipiente-visual">
+      <img src="../imagens/recipiente-gas.png" alt="" class="recipiente-img" />
+      <svg class="recipiente-svg" viewBox="0 0 100 100" preserveAspectRatio="none">
+        <defs><clipPath id="clip_${id}"><rect x="21" y="15" width="58" height="70" rx="2"/></clipPath></defs>
+        <g clip-path="url(#clip_${id})">
+          <rect class="recipiente-fill" data-id="${id}" x="21" y="85" width="58" height="0" fill="${corGas}" opacity="0.55"></rect>
+          <g class="recipiente-particulas" data-id="${id}"></g>
+        </g>
+      </svg>
+    </div>
+    <div class="recipiente-rotulo">
+      <div class="recipiente-formula">${formula}</div>
+      <div class="recipiente-mol" data-mol="${id}"></div>
+      <div class="recipiente-volume" data-id="${id}">—</div>
+    </div>
+  `;
+  return div;
+}
+
+function definirNivelRecipiente(id, litros, litrosMax) {
+  const rect = document.querySelector(`.recipiente-fill[data-id="${id}"]`);
+  const rotulo = document.querySelector(`.recipiente-volume[data-id="${id}"]`);
+  if (!rect || !rotulo) return;
+  const frac = Math.max(0, Math.min(1, litros / litrosMax));
+  const alturaMax = 70;
+  const altura = frac * alturaMax;
+  rect.setAttribute('y', 85 - altura);
+  rect.setAttribute('height', altura);
+  rotulo.textContent = litros > 0 ? fmt(litros, 2) + ' L' : '—';
+  atualizarParticulas(id, frac);
+}
+
+function atualizarParticulas(id, frac) {
+  const g = document.querySelector(`.recipiente-particulas[data-id="${id}"]`);
+  if (!g) return;
+  const alvo = Math.round(frac * 14);
+  const atuais = g.children.length;
+  if (alvo > atuais) {
+    for (let i = atuais; i < alvo; i++) {
+      const cx = 27 + Math.random() * 46;
+      const cy = 80 - Math.random() * Math.max(2, frac * 62);
+      const c = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      c.setAttribute('cx', cx.toFixed(1));
+      c.setAttribute('cy', cy.toFixed(1));
+      c.setAttribute('r', 1.5);
+      c.setAttribute('class', 'particula-gas');
+      g.appendChild(c);
+      requestAnimationFrame(() => { c.style.opacity = '1'; });
+    }
+  } else if (alvo < atuais) {
+    for (let i = atuais - 1; i >= alvo; i--) g.children[i].remove();
+  }
+}
+
+/* ==========================================================
+   PALCO — área de fluxo normal abaixo da imagem
+   ========================================================== */
+const $palco = document.getElementById('palcoJogo');
+const $overlayRecipientes = document.getElementById('overlayRecipientes');
+const $overlayIndicadores = document.getElementById('overlayIndicadores');
+const $overlayPainel = document.getElementById('overlayPainel');
+function limparPalco() { $palco.innerHTML = ''; $overlayRecipientes.innerHTML = ''; $overlayIndicadores.innerHTML = ''; $overlayPainel.innerHTML = ''; }
+
+/* ==========================================================
+   INTRODUÇÃO
+   ========================================================== */
+function iniciarIntro() {
+  falar('sorrindo', 'Será que gases diferentes ocupam volumes diferentes?', () => {
+    falar('pensando', 'Vamos descobrir.', () => {
+      etapa1();
+    });
+  });
+}
+
+/* ==========================================================
+   ETAPA 1 — três recipientes, 1 mol cada, mesmo volume final
+   ========================================================== */
+function etapa1() {
+  limparPalco();
+  const linha = document.createElement('div');
+  linha.className = 'recipientes-linha';
+  linha.id = 'linhaEtapa1';
+  ['h2', 'o2', 'co2'].forEach(id => {
+    const g = GASES[id];
+    const rec = criarRecipiente(id, g.formula, g.cor);
+    linha.appendChild(rec);
+  });
+  const acoes = document.createElement('div');
+  acoes.className = 'palco-acoes';
+  acoes.innerHTML = '<button class="modal-btn-confirmar" id="btnEncher">Coloque 1 mol de gás</button>';
+  $overlayRecipientes.appendChild(linha);
+  $palco.appendChild(acoes);
+
+  ['h2', 'o2', 'co2'].forEach(id => {
+    document.querySelector(`.recipiente-mol[data-mol="${id}"]`).textContent = '1 mol';
+    definirNivelRecipiente(id, 0, V_MOLAR);
+  });
+
+  falar('explicando', 'Aqui estão três recipientes transparentes. Aperte "Coloque 1 mol de gás" para colocar um mol de hidrogênio, oxigênio e dióxido de carbono em cada um e observar.', null);
+
+  document.getElementById('btnEncher').addEventListener('click', () => {
+    document.getElementById('btnEncher').disabled = true;
+    tocarDing();
+    ['h2', 'o2', 'co2'].forEach(id => definirNivelRecipiente(id, V_MOLAR, V_MOLAR));
+    setTimeout(() => {
+      falar('animada', 'Observe: os três chegaram exatamente à mesma altura — 22,4 litros. O que você percebeu?', () => {
+        etapa2();
+      });
+    }, 1300);
+  });
+}
+
+/* ==========================================================
+   ETAPA 2 — condições CNTP
+   ========================================================== */
+function etapa2() {
+  const indicadores = document.createElement('div');
+  indicadores.className = 'indicadores-cntp';
+  indicadores.innerHTML = `
+    <div class="indicador">
+      <img src="../imagens/termometro-cntp.png" alt="Termômetro" />
+      <div class="indicador-valor">0°C</div>
+      <div class="indicador-label">Temperatura</div>
+    </div>
+    <div class="indicador">
+      <img src="../imagens/manometro-cntp.png" alt="Manômetro" />
+      <div class="indicador-valor">1 atm</div>
+      <div class="indicador-label">Pressão</div>
+    </div>
+  `;
+  $overlayIndicadores.appendChild(indicadores);
+
+  falar('explicando', 'Sob essas condições — chamadas de CNTP, Condições Normais de Temperatura e Pressão — todos os gases apresentam o mesmo volume quando possuem um mol.', () => {
+    document.querySelectorAll('#linhaEtapa1 .recipiente').forEach(r => r.classList.add('brilho'));
+    setTimeout(etapa3, 700);
+  });
+}
+
+/* ==========================================================
+   ETAPA 3 — slider de mols: o volume é proporcional
+   ========================================================== */
+function etapa3() {
+  limparPalco();
+  const linha = document.createElement('div');
+  linha.className = 'recipientes-linha';
+  const rec = criarRecipiente('livre', 'O₂', GASES.o2.cor);
+  linha.appendChild(rec);
+  $overlayRecipientes.appendChild(linha);
+
+  const bloco = document.createElement('div');
+  bloco.className = 'slider-bloco';
+  bloco.innerHTML = `
+    <div class="slider-leitura" id="leituraMol">1 mol → 22,4 L</div>
+    <div class="mol-opcoes" id="molOpcoes">
+      <button class="btn-mol" data-mol="0.5" type="button">0,5 mol</button>
+      <button class="btn-mol selecionado" data-mol="1" type="button">1 mol</button>
+      <button class="btn-mol" data-mol="1.5" type="button">1,5 mol</button>
+      <button class="btn-mol" data-mol="2" type="button">2 mol</button>
+    </div>
+  `;
+  $palco.appendChild(bloco);
+
+  document.querySelector('.recipiente-mol[data-mol="livre"]').textContent = '1 mol';
+  definirNivelRecipiente('livre', V_MOLAR, 2 * V_MOLAR);
+
+  const leitura = document.getElementById('leituraMol');
+  const botoesMol = document.querySelectorAll('#molOpcoes .btn-mol');
+  botoesMol.forEach(btn => {
+    btn.addEventListener('click', () => {
+      botoesMol.forEach(b => b.classList.remove('selecionado'));
+      btn.classList.add('selecionado');
+      const mol = parseFloat(btn.dataset.mol);
+      const litros = mol * V_MOLAR;
+      leitura.textContent = fmt(mol, 1) + ' mol → ' + fmt(litros, 2) + ' L';
+      document.querySelector('.recipiente-mol[data-mol="livre"]').textContent = fmt(mol, 1) + ' mol';
+      definirNivelRecipiente('livre', litros, 2 * V_MOLAR);
+    });
+  });
+
+  falar('explicando', 'Agora escolha diferentes quantidades de mols e observe o que acontece com o nível do gás.', () => {
+    falar('animada', 'Perceba que o volume é proporcional ao número de mols: dobrando os mols, dobra o volume.', () => {
+      etapa4();
+    });
+  });
+}
+
+/* ==========================================================
+   ETAPA 4 — problema guiado: CO2, 6,6 g
+   ========================================================== */
+function etapa4() {
+  limparPalco();
+  falar('explicando', 'Agora um problema: temos 6,6 gramas de CO₂. Primeiro, vamos descobrir quantos mols existem nessa massa.', () => {
+    montarPainelCalculo();
+  });
+}
+
+function montarPainelCalculo() {
+  const painel = document.createElement('div');
+  painel.className = 'painel-dados';
+  painel.innerHTML = `
+    <div class="painel-titulo">CO₂ — 6,6 g</div>
+    <div id="passosCalculo"></div>
+  `;
+  $overlayPainel.appendChild(painel);
+  const cont = document.getElementById('passosCalculo');
+
+  const passos = [
+    '<span class="passo-destaque">44 g</span><span class="passo-seta">↓</span><span>1 mol</span>',
+    '<span class="passo-destaque">6,6 g</span><span class="passo-seta">↓</span><span class="passo-destaque">0,15 mol</span>'
+  ];
+  let i = 0;
+  function proximoPasso() {
+    if (i >= passos.length) {
+      setTimeout(montarRegua, 500);
+      return;
+    }
+    const p = document.createElement('div');
+    p.className = 'passo-calculo';
+    p.innerHTML = passos[i];
+    cont.appendChild(p);
+    requestAnimationFrame(() => p.classList.add('visivel'));
+    i++;
+    setTimeout(proximoPasso, 900);
+  }
+  proximoPasso();
+}
+
+function montarRegua() {
+  const painel = document.createElement('div');
+  painel.className = 'painel-dados';
+  painel.id = 'painelRegua';
+  painel.innerHTML = `
+    <div class="painel-titulo">0,15 mol → Volume?</div>
+    <div class="slider-bloco" style="margin-top:0;">
+      <div class="slider-leitura" id="leituraRegua">0 mol → 0 L</div>
+      <input type="range" id="reguaProporcional" min="0" max="1" step="0.01" value="0" />
+      <div class="slider-marcas"><span>0 mol</span><span>0,5 mol</span><span>1 mol</span></div>
+    </div>
+    <div class="palco-acoes"><button class="modal-btn-confirmar" id="btnConfirmarRegua">Confirmar</button></div>
+    <div class="td-feedback" id="feedbackRegua"></div>
+  `;
+  $overlayPainel.appendChild(painel);
+
+  falar('explicando', 'Use a régua proporcional abaixo: arraste até encontrar a posição de 0,15 mol e veja o volume correspondente.', null);
+
+  const slider = document.getElementById('reguaProporcional');
+  const leitura = document.getElementById('leituraRegua');
+  slider.addEventListener('input', () => {
+    const mol = parseFloat(slider.value);
+    const litros = mol * V_MOLAR;
+    leitura.textContent = fmt(mol, 2) + ' mol → ' + fmt(litros, 2) + ' L';
+  });
+
+  document.getElementById('btnConfirmarRegua').addEventListener('click', () => {
+    const mol = parseFloat(slider.value);
+    const feedback = document.getElementById('feedbackRegua');
+    if (aproxIgual(mol, 0.15, 0.02)) {
+      tocarDing();
+      slider.disabled = true;
+      document.getElementById('btnConfirmarRegua').disabled = true;
+      feedback.style.color = '#8fd18a';
+      feedback.textContent = 'Exatamente: 0,15 mol → 3,36 L.';
+      const passo = document.createElement('div');
+      passo.className = 'passo-calculo';
+      passo.innerHTML = '<span class="passo-destaque">0,15 mol</span><span class="passo-seta">↓</span><span class="passo-destaque">3,36 L</span>';
+      document.getElementById('painelRegua').insertBefore(passo, document.getElementById('painelRegua').querySelector('.palco-acoes'));
+      requestAnimationFrame(() => passo.classList.add('visivel'));
+      setTimeout(() => {
+        falar('animada', 'Muito bem! Bastou multiplicar 0,15 mol por 22,4 litros para chegar a 3,36 litros.', () => {
+          etapa5();
+        });
+      }, 1400);
+    } else {
+      professoraPergunta('Tente novamente: 1 mol equivale a 22,4 litros — encontre a fração correspondente a 0,15 mol.');
+    }
+  });
+}
+
+/* ==========================================================
+   ETAPA 5 — vários desafios: mol e volume de cada gás
+   ========================================================== */
+function etapa5() {
+  limparPalco();
+  falar('explicando', 'Agora é sua vez. Para cada gás, calcule o número de mols e o volume nas CNTP.', () => {
+    montarTabelaDesafios();
+  });
+}
+
+function montarTabelaDesafios() {
+  const painel = document.createElement('div');
+  painel.className = 'painel-dados';
+  painel.style.maxWidth = '560px';
+  painel.innerHTML = `
+    <div class="painel-titulo">Desafios — CNTP</div>
+    <div class="tabela-desafios" id="tabelaDesafios">
+      <div class="td-linha cabecalho"><span>Gás</span><span>Mol</span><span>Volume (L)</span></div>
+      ${DESAFIOS_ETAPA5.map(d => {
+        const g = GASES[d.gas];
+        return `
+        <div class="td-linha" data-gas="${d.gas}">
+          <span class="td-gas">${g.formula}<small>${fmt(d.massa, d.massa % 1 === 0 ? 0 : 2)} g</small></span>
+          <input class="td-input" data-campo="mol" type="text" inputmode="decimal" placeholder="mol" />
+          <input class="td-input" data-campo="litros" type="text" inputmode="decimal" placeholder="L" />
+        </div>`;
+      }).join('')}
+    </div>
+    <div class="td-feedback" id="feedbackDesafios"></div>
+    <div class="td-botoes"><button class="modal-btn-confirmar" id="btnVerificarDesafios">Verificar</button></div>
+  `;
+  $overlayPainel.appendChild(painel);
+
+  document.getElementById('btnVerificarDesafios').addEventListener('click', verificarDesafios);
+}
+
+function verificarDesafios() {
+  let tudoCerto = true;
+  DESAFIOS_ETAPA5.forEach(d => {
+    const g = GASES[d.gas];
+    const molEsperado = d.massa / g.massaMolar;
+    const litrosEsperado = molEsperado * V_MOLAR;
+    const linha = document.querySelector(`.td-linha[data-gas="${d.gas}"]`);
+    const inputMol = linha.querySelector('[data-campo="mol"]');
+    const inputLitros = linha.querySelector('[data-campo="litros"]');
+    const molOk = aproxIgual(paraNumero(inputMol.value), molEsperado, 0.02);
+    const litrosOk = aproxIgual(paraNumero(inputLitros.value), litrosEsperado, 0.15);
+    inputMol.classList.remove('correta', 'errada');
+    inputLitros.classList.remove('correta', 'errada');
+    inputMol.classList.add(molOk ? 'correta' : 'errada');
+    inputLitros.classList.add(litrosOk ? 'correta' : 'errada');
+    if (!molOk || !litrosOk) tudoCerto = false;
+  });
+
+  const feedback = document.getElementById('feedbackDesafios');
+  if (tudoCerto) {
+    tocarDing();
+    feedback.style.color = '#8fd18a';
+    feedback.textContent = 'Todos os cálculos corretos!';
+    document.getElementById('btnVerificarDesafios').disabled = true;
+    document.querySelectorAll('#tabelaDesafios .td-input').forEach(i => i.disabled = true);
+    setTimeout(finalizarJogo, 1300);
+  } else {
+    feedback.style.color = '#f5ead0';
+    feedback.textContent = 'Alguns valores ainda não conferem. Lembre-se: mol = massa ÷ massa molar; volume = mol × 22,4 L.';
+    professoraPergunta('Revise os campos destacados em vermelho: mol = massa ÷ massa molar, e volume = mol × 22,4 L.');
+  }
+}
+
+/* ==========================================================
+   FINAL
+   ========================================================== */
+function finalizarJogo() {
+  limparPalco();
+  const painel = document.createElement('div');
+  painel.className = 'painel-dados';
+  painel.innerHTML = `
+    <div class="painel-titulo">CNTP</div>
+    <div class="resumo-fluxo">
+      <div class="resumo-item">0°C</div>
+      <div class="resumo-seta">↓</div>
+      <div class="resumo-item">1 atm</div>
+      <div class="resumo-seta">↓</div>
+      <div class="resumo-item">1 mol</div>
+      <div class="resumo-seta">↓</div>
+      <div class="resumo-item">22,4 litros</div>
+    </div>
+  `;
+  $overlayPainel.appendChild(painel);
+
+  falar('animada', 'Excelente. Agora você entende por que qualquer gás ocupa o mesmo volume nas CNTP.', () => {
+    document.getElementById('conclusaoPlacar').textContent = 'O volume molar dos gases, compreendido';
+    document.getElementById('conclusaoMensagem').textContent =
+      'Você descobriu, observando os experimentos, que nas CNTP qualquer gás ocupa 22,4 litros por mol — independentemente da sua massa molar.';
+    const conclusao = document.getElementById('conclusao');
+    conclusao.classList.add('visivel');
+    conclusao.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+}
+
+function reiniciar() {
+  document.getElementById('conclusao').classList.remove('visivel');
+  limparPalco();
+  iniciarIntro();
+}
+
+/* ==========================================================
+   ZOOM DA IMAGEM PRINCIPAL
+   ========================================================== */
+const imagemWrapper = document.getElementById('imagemWrapper');
+const modalZoom = document.getElementById('modalZoom');
+imagemWrapper.addEventListener('click', (e) => {
+  if (e.target.closest('button, input, a, .overlay-painel')) return;
+  modalZoom.classList.add('ativo');
+});
+modalZoom.addEventListener('click', () => modalZoom.classList.remove('ativo'));
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') modalZoom.classList.remove('ativo');
+});
+
+/* ==========================================================
+   INIT
+   ========================================================== */
+iniciarIntro();
+</script>
+
+<script>
+(function () {
+  var _clickSom = new Audio('../sons/click.mp3');
+  _clickSom.preload = 'auto';
+  document.addEventListener('click', function (e) {
+    var alvo = e.target.closest('button');
+    if (alvo) { try { _clickSom.currentTime = 0; _clickSom.play().catch(function () {}); } catch (err) {} }
+  }, true);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,1217 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex, nofollow">
+<title>Construindo o Diagrama de Linus Pauling | KiFácil</title>
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --fundo: #fdf8f0;
+    --fundo-card: #fffdf9;
+    --escuro: #2e2016;
+    --texto: #1a1208;
+    --texto-suave: #3d2e1a;
+    --dourado: #8a5e10;
+    --dourado-claro: #c8920a;
+    --borda: rgba(100,70,20,0.3);
+    --borda-forte: rgba(100,70,20,0.5);
+    --verde-escuro: #1e5238;
+    --vermelho-escuro: #7a1515;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { overflow-x: hidden; }
+  body {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    background: var(--fundo);
+    color: var(--texto);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  .top-nav {
+    background: #1e1008;
+    border-bottom: 2px solid var(--dourado-claro);
+    padding: 0 2.5rem;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+  .brand {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.7rem;
+    font-weight: 600;
+    color: #fff8ee;
+  }
+
+  /* MAIN */
+  main {
+    flex: 1;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2.2rem 1.5rem 4rem;
+    width: 100%;
+  }
+  .titulo-jogo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.8rem, 4.5vw, 2.6rem);
+    font-weight: 600;
+    margin-bottom: 1.2rem;
+    line-height: 1.1;
+  }
+
+  /* NARRADOR */
+  .narrador {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: var(--fundo-card);
+    border: 1.5px solid var(--borda);
+    border-radius: 10px;
+    padding: 0.9rem 1.2rem;
+    margin-bottom: 1.6rem;
+  }
+  .narrador img {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--dourado-claro);
+    flex-shrink: 0;
+  }
+  .narrador-conteudo { flex: 1; }
+  .narrador-nome {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--dourado-claro);
+    margin-bottom: 0.15rem;
+  }
+  .narrador-texto {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--texto);
+  }
+  #continuarBalao { margin-top: 0.6rem; }
+
+  /* CENA / ATIVIDADE */
+  .cena-atividade {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.6rem;
+    align-items: flex-start;
+  }
+
+  .imagem-wrapper {
+    position: relative;
+    flex: 1 1 56%;
+    min-width: 300px;
+    min-height: 420px;
+    aspect-ratio: 4 / 3;
+    border: 1.5px solid var(--borda-forte);
+    border-radius: 6px;
+    overflow: hidden;
+    background: var(--fundo-card);
+  }
+  .imagem-cenario {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    user-select: none;
+    pointer-events: none;
+  }
+
+  .link-aula {
+    position: absolute; top: 90px; right: 10px; z-index: 10;
+    display: flex; flex-direction: column; align-items: center; gap: 2px;
+    text-decoration: none; color: #fff8ee;
+    background: rgba(30,16,8,0.72); border: 1.5px solid var(--dourado-claro, #c8920a);
+    border-radius: 8px; padding: 0.4rem 0.65rem;
+    font-family: 'Cormorant Garamond', serif; font-size: 0.68rem; font-weight: 600;
+    letter-spacing: 0.02em; text-align: center; line-height: 1.2;
+    cursor: pointer; transition: background 0.2s, transform 0.15s;
+  }
+  .link-aula:hover { background: rgba(30,16,8,0.92); transform: translateY(-1px); }
+  .link-aula svg { width: 22px; height: 22px; }
+
+  /* HUD */
+  .hud {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: none;
+    flex-direction: column;
+    gap: 4px;
+    background: rgba(30,16,8,0.82);
+    border: 1px solid var(--dourado-claro);
+    border-radius: 6px;
+    padding: 8px 12px;
+    z-index: 5;
+  }
+  .hud.visivel { display: flex; }
+  .hud-item { display: flex; justify-content: space-between; gap: 10px; }
+  .hud-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: rgba(255,248,238,0.65);
+  }
+  .hud-valor {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: var(--dourado-claro);
+  }
+
+  /* PAINEL DE CAPACIDADE (sempre visível) */
+  .capacidade-painel {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    display: none;
+    gap: 10px;
+    background: rgba(30,16,8,0.82);
+    border: 1px solid var(--dourado-claro);
+    border-radius: 6px;
+    padding: 6px 10px;
+    z-index: 5;
+  }
+  .capacidade-painel.visivel { display: flex; }
+  .capacidade-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Cormorant Garamond', serif;
+    color: #fff8ee;
+  }
+  .capacidade-item span:first-child {
+    font-size: 0.72rem;
+    color: var(--dourado-claro);
+    font-weight: 700;
+  }
+  .capacidade-item span:last-child { font-size: 0.68rem; }
+
+  /* DIAGRAMA */
+  .diagrama-wrap {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-rows: repeat(7, minmax(0, 1fr));
+    gap: 4% 4px;
+    padding: 12% 6%;
+  }
+  .cel-diagrama {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+    gap: 1px;
+    border: 1.5px solid var(--borda-forte);
+    border-radius: 5px;
+    background: rgba(253,248,240,0.88);
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 700;
+    font-size: clamp(0.75rem, 2.2vw, 1.05rem);
+    color: var(--texto);
+    transition: background 0.3s, border-color 0.3s, box-shadow 0.3s;
+  }
+  .cel-diagrama.acesa {
+    border-color: var(--dourado-claro);
+    box-shadow: 0 0 8px rgba(200,146,10,0.5);
+  }
+  .cel-diagrama.dourada {
+    background: rgba(200,146,10,0.22);
+    border-color: var(--dourado-claro);
+  }
+  .cel-numero, .cel-letra { line-height: 1; }
+  .cel-eletrons {
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 34px;
+    font-size: 0.72rem;
+    text-align: center;
+    padding: 1px 2px;
+    border: 1px solid var(--borda-forte);
+    border-radius: 4px;
+    background: var(--fundo-card);
+    font-family: 'Libre Baskerville', serif;
+    font-weight: 400;
+    display: none;
+  }
+  .cel-eletrons.visivel { display: block; }
+  .cel-eletrons:disabled { opacity: 0.65; }
+
+  svg.setas-diagrama {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 2;
+  }
+  .seta-linha {
+    stroke: var(--dourado-claro);
+    stroke-width: 2.4;
+    fill: none;
+    stroke-linecap: round;
+  }
+  .seta-cabeca { fill: var(--dourado-claro); }
+  .seta-voo { will-change: transform, opacity; }
+
+  /* ATIVIDADE */
+  .atividade-card {
+    flex: 1 1 40%;
+    min-width: 280px;
+    background: var(--fundo-card);
+    border: 1.5px solid var(--borda);
+    border-radius: 10px;
+    padding: 1.5rem;
+  }
+  .atividade-cabecalho { margin-bottom: 1rem; }
+  .atividade-eyebrow {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--dourado-claro);
+    margin-bottom: 0.3rem;
+  }
+  .atividade-titulo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+  .atividade-corpo {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .questao-titulo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin-bottom: 0.2rem;
+  }
+
+  .input-linha {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .campo-resposta {
+    width: 70px;
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: 1rem;
+    padding: 0.5rem 0.6rem;
+    background: var(--fundo);
+    border: 1.5px solid var(--borda-forte);
+    border-radius: 6px;
+    color: var(--texto);
+    outline: none;
+    text-align: center;
+  }
+  .campo-resposta:focus { border-color: var(--dourado-claro); }
+  .campo-resposta:disabled { opacity: 0.5; }
+
+  .opcao-btn, .resposta-opcao {
+    display: block;
+    width: 100%;
+    background: rgba(0,0,0,0.02);
+    border: 1px solid var(--borda);
+    border-radius: 6px;
+    padding: 10px 14px;
+    text-align: left;
+    margin-bottom: 8px;
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: 0.95rem;
+    color: var(--texto);
+    cursor: pointer;
+    transition: background .15s, border-color .15s;
+  }
+  .opcao-btn:hover, .resposta-opcao:hover { background: rgba(200,146,10,0.06); }
+  .opcao-btn.correta, .resposta-opcao.correta { border-color: var(--verde-escuro); background: rgba(30,82,56,0.07); }
+  .opcao-btn.errada, .resposta-opcao.errada { border-color: var(--vermelho-escuro); background: rgba(122,21,21,0.05); }
+  .opcao-btn:disabled, .resposta-opcao:disabled { cursor: default; }
+
+  .feedback-box {
+    display: none;
+    padding: 10px 12px;
+    border-radius: 6px;
+    font-size: 0.92rem;
+    line-height: 1.6;
+    border-left: 3px solid var(--borda-forte);
+  }
+  .feedback-box.visivel { display: block; }
+  .feedback-box.ok   { border-color: var(--verde-escuro); background: rgba(30,82,56,0.06); color: var(--texto); }
+  .feedback-box.err  { border-color: var(--vermelho-escuro); background: rgba(122,21,21,0.05); color: var(--texto); }
+  .feedback-box.info { border-color: var(--borda-forte); background: rgba(100,70,20,0.05); color: var(--texto); }
+
+  .desafio-box {
+    border: 1px dashed var(--borda-forte);
+    border-radius: 8px;
+    padding: 0.9rem 1rem;
+    background: rgba(200,146,10,0.05);
+  }
+  .desafio-titulo {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--dourado-claro);
+    margin-bottom: 0.3rem;
+  }
+  .desafio-texto { font-size: 0.9rem; line-height: 1.6; }
+
+  .btn-avancar {
+    align-self: flex-start;
+    background: #1e1008;
+    color: var(--dourado-claro);
+    border: 1.5px solid var(--dourado-claro);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.55rem 1.4rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+  }
+  .btn-avancar:hover { background: var(--dourado-claro); color: #1e1008; }
+  .btn-avancar:disabled { opacity: 0.4; cursor: default; }
+
+  .config-final {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--dourado-claro);
+    letter-spacing: 0.02em;
+  }
+
+  footer {
+    background: var(--escuro);
+    border-top: 2px solid var(--dourado-claro);
+    padding: 1.2rem 2rem;
+    text-align: center;
+    font-size: 0.82rem;
+    color: rgba(255,248,238,0.5);
+  }
+
+  @media (max-width: 860px) {
+    /* Em coluna, o eixo transversal do flex vira a LARGURA. Sem
+       align-items:stretch, os filhos não esticam para 100% —
+       a largura do .imagem-wrapper passa a ser derivada do
+       aspect-ratio a partir do min-height (bug real do overflow). */
+    .cena-atividade { flex-direction: column; align-items: stretch; }
+    .imagem-wrapper, .atividade-card { flex: 1 1 auto; width: 100%; max-width: 100%; }
+  }
+  @media (max-width: 640px) {
+    .top-nav { padding: 0 1.2rem; }
+    main { padding: 1.6rem 1rem 3rem; }
+    .narrador img { width: 50px; height: 50px; }
+    .diagrama-wrap {
+      padding: 5% 2%; gap: 1.6% 2px;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      grid-template-rows: repeat(7, minmax(0, 1fr));
+    }
+    .cel-eletrons { width: 28px; font-size: 0.62rem; bottom: -16px; }
+    .imagem-wrapper { min-height: 340px; min-width: 0; width: 100%; max-width: 100%; box-sizing: border-box; }
+    .atividade-card { min-width: 0; width: 100%; box-sizing: border-box; }
+    .capacidade-painel {
+      top: auto; left: auto; bottom: 6px; right: 6px;
+      max-width: 46%; padding: 5px 6px; gap: 5px; flex-wrap: wrap;
+    }
+    .capacidade-item span:first-child { font-size: 0.62rem; }
+    .capacidade-item span:last-child { font-size: 0.6rem; }
+    .hud {
+      top: 6px; right: 6px; max-width: 50%;
+      padding: 5px 7px; gap: 2px; box-sizing: border-box;
+    }
+    .hud-item { gap: 6px; flex-wrap: wrap; }
+    .hud-label { font-size: 0.56rem; }
+    .hud-valor { font-size: 0.7rem; }
+    .link-aula { top: 68px; right: 6px; padding: 0.3rem 0.5rem; font-size: 0.6rem; }
+    .link-aula svg { width: 18px; height: 18px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <div class="brand">KiFácil</div>
+</nav>
+
+<main>
+  <h1 class="titulo-jogo" id="tituloJogo">Construindo o Diagrama de Linus Pauling</h1>
+
+  <div class="narrador" id="teacherBox">
+    <img src="../imagens/rafa-sorrindo.jpg" alt="Professora Rafaela" id="teacherImg">
+    <div class="narrador-conteudo">
+      <div class="narrador-nome">Professora Rafaela</div>
+      <div class="narrador-texto" id="teacherText">Hoje você vai aprender o  diagrama de Linus Pauling SIMPLIFICADO e que é utilizado na maior parte dos elementos químicos mais comuns.</div>
+      <div id="continuarBalao"></div>
+    </div>
+  </div>
+
+  <div class="cena-atividade">
+    <div class="imagem-wrapper" id="imagemWrapper">
+      <img src="../imagens/linus-pauling-vazio.jpg" alt="Pergaminho vazio sobre a mesa" class="imagem-cenario">
+
+      <div class="hud" id="hud">
+        <div class="hud-item"><span class="hud-label">Elemento</span><span class="hud-valor" id="hudElemento">—</span></div>
+        <div class="hud-item"><span class="hud-label">Elétrons</span><span class="hud-valor" id="hudEletrons">—</span></div>
+        <div class="hud-item"><span class="hud-label">Distribuídos</span><span class="hud-valor" id="hudDistribuidos">—</span></div>
+      </div>
+
+      <div class="capacidade-painel" id="capacidadePainel">
+        <div class="capacidade-item"><span>s</span><span>2</span></div>
+        <div class="capacidade-item"><span>p</span><span>6</span></div>
+        <div class="capacidade-item"><span>d</span><span>10</span></div>
+        <div class="capacidade-item"><span>f</span><span>14</span></div>
+      </div>
+
+      <div class="diagrama-wrap" id="diagramaWrap"></div>
+      <svg class="setas-diagrama" id="setasSvg"></svg>
+      <!-- COLOQUE O LINK AQUI -->
+      <a class="link-aula" href="https://www.youtube.com/watch?v=jy5OEtQNDRY&t=4s" target="_blank" rel="noopener" title="Assista à aula">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.6"/>
+          <path d="M10 8.5L16 12L10 15.5V8.5Z" fill="currentColor"/>
+        </svg>
+        <span>Assista à aula</span>
+      </a>
+    </div>
+
+    <section class="atividade-card">
+      <div class="atividade-cabecalho">
+        <div class="atividade-eyebrow">Torre de Química — Diagrama de Linus Pauling</div>
+        <h2 class="atividade-titulo" id="painelTitulo">Introdução</h2>
+      </div>
+      <div class="atividade-corpo" id="painelCorpo"></div>
+    </section>
+  </div>
+</main>
+
+<footer>© 2026 KiFácil</footer>
+
+<script>
+const _ding = new Audio('../sons/ding.mp3');
+_ding.preload = 'auto';
+function tocarDing() { try { _ding.currentTime = 0; _ding.play().catch(function () {}); } catch (e) {} }
+
+// ══════════════════════════════════════════════════
+//  DADOS — DIAGRAMA SIMPLIFICADO (Ensino Médio)
+//  Cobre até o Rádio (Z=88) e os lantanídeos.
+//  Não inclui actinídeos, transição pesada nem
+//  elementos sintéticos.
+// ══════════════════════════════════════════════════
+const DIAGRAMA = [
+  { n: 1, subniveis: ['s'] },
+  { n: 2, subniveis: ['s', 'p'] },
+  { n: 3, subniveis: ['s', 'p', 'd'] },
+  { n: 4, subniveis: ['s', 'p', 'd', 'f'] },
+  { n: 5, subniveis: ['s', 'p', 'd'] },
+  { n: 6, subniveis: ['s', 'p'] },
+  { n: 7, subniveis: ['s'] }
+];
+
+// Ordem real de preenchimento (regra de Madelung), apenas
+// os 16 subníveis que existem no diagrama simplificado.
+const ORDEM_PREENCHIMENTO = [
+  '1s','2s','2p','3s','3p','4s','3d','4p',
+  '5s','4d','5p','6s','4f','5d','6p','7s'
+];
+
+const CAPACIDADE = { s: 2, p: 6, d: 10, f: 14 };
+
+// Objeto central de elementos — para adicionar um novo elemento
+// (Oxigênio, Cloro etc.) basta acrescentar uma entrada aqui e incluir
+// a chave em SEQUENCIA_ELEMENTOS.
+const ELEMENTOS = {
+  na: { simbolo: 'Na', nome: 'Sódio', z: 11, massa: '22,99', eletrons: 11 },
+  ca: { simbolo: 'Ca', nome: 'Cálcio', z: 20, massa: '40,08', eletrons: 20 },
+  fe: { simbolo: 'Fe', nome: 'Ferro', z: 26, massa: '55,85', eletrons: 26 }
+};
+
+// Ordem em que os elementos são praticados na Etapa 5/6
+const SEQUENCIA_ELEMENTOS = ['na', 'ca', 'fe'];
+
+function elementoAtual() {
+  return ELEMENTOS[SEQUENCIA_ELEMENTOS[estado._idxElemento]];
+}
+
+// ══════════════════════════════════════════════════
+//  ESTADO GLOBAL
+// ══════════════════════════════════════════════════
+const estado = {
+  etapa: 0,
+  distribuicao: {},    // ex.: { '1s': 2, '2s': 2, ... }
+  _idxElemento: 0       // índice em SEQUENCIA_ELEMENTOS
+};
+
+// ══════════════════════════════════════════════════
+//  PROFESSORA — contrato fixo, não improvisar
+// ══════════════════════════════════════════════════
+const professorImagens = {
+  sorrindo: '../imagens/rafa-sorrindo.jpg',
+  explicando: '../imagens/rafa-explicando.jpg',
+  pensando: '../imagens/rafa-pensando.jpg',
+  animada: '../imagens/rafa-animada.jpg'
+};
+
+function mostrarProfessor(texto, imagem = 'explicando') {
+  const img = document.getElementById('teacherImg');
+  const txt = document.getElementById('teacherText');
+  if (img) img.src = professorImagens[imagem] || professorImagens.sorrindo;
+  if (txt) txt.innerHTML = texto;
+}
+function professora(texto, imagem = 'explicando') {
+  mostrarProfessor(texto, imagem);
+  return '';
+}
+
+// ══════════════════════════════════════════════════
+//  TÍTULO
+// ══════════════════════════════════════════════════
+function setTitulo(txt) {
+  const tituloJogo = document.getElementById('tituloJogo');
+  const painelTitulo = document.getElementById('painelTitulo');
+  if (tituloJogo) tituloJogo.textContent = txt;
+  if (painelTitulo) painelTitulo.textContent = txt;
+}
+
+// ══════════════════════════════════════════════════
+//  ÁREA DE ATIVIDADE
+// ══════════════════════════════════════════════════
+function renderCorpo(html) {
+  const corpo = document.getElementById('painelCorpo');
+  if (corpo) corpo.innerHTML = html;
+  const bal = document.getElementById('continuarBalao');
+  if (bal) bal.innerHTML = '';
+}
+function appendCorpo(html) {
+  const corpo = document.getElementById('painelCorpo');
+  if (corpo) corpo.insertAdjacentHTML('beforeend', html);
+}
+function btnAvancar(label, fn, id = 'btnAvancar') {
+  return `<button class="btn-avancar" id="${id}" onclick="${fn}">${label}</button>`;
+}
+function mostrarBotaoBalao(label, fn, id) {
+  const bal = document.getElementById('continuarBalao');
+  if (!bal) return;
+  bal.innerHTML = btnAvancar(label, fn, id);
+}
+
+// ══════════════════════════════════════════════════
+//  GRADE DO DIAGRAMA (CSS Grid, uma célula por elemento)
+// ══════════════════════════════════════════════════
+function renderGradeDiagrama() {
+  const wrap = document.getElementById('diagramaWrap');
+  wrap.innerHTML = '';
+  DIAGRAMA.forEach(linha => {
+    linha.subniveis.forEach((sub, colIdx) => {
+      const cel = document.createElement('div');
+      cel.className = 'cel-diagrama';
+      cel.id = `cel-${linha.n}${sub}`;
+      cel.style.gridRow = linha.n;
+      cel.style.gridColumn = colIdx + 1;
+      cel.innerHTML = `
+        <span class="cel-numero" id="num-${linha.n}${sub}"></span><span class="cel-letra" id="let-${linha.n}${sub}"></span>
+        <input class="cel-eletrons" id="ele-${linha.n}${sub}" type="text" maxlength="2" disabled>
+      `;
+      wrap.appendChild(cel);
+    });
+  });
+}
+
+function celula(n, sub) {
+  const el = document.getElementById(`cel-${n}${sub}`);
+  if (!el) console.error(`Célula ${n}${sub} não existe no diagrama simplificado.`);
+  return el;
+}
+
+// ══════════════════════════════════════════════════
+//  ETAPA 1 — coluna do s (números 1 a 7)
+// ══════════════════════════════════════════════════
+function etapa1() {
+  estado.etapa = 1;
+  setTitulo('Etapa 1 — A primeira coluna');
+  professora('Hoje você vai aprender o  diagrama de Linus Pauling SIMPLIFICADO e que é utilizado na maior parte dos elementos químicos mais comuns.', 'sorrindo');
+
+  renderCorpo(`
+    <div class="questao-titulo">Comece preenchendo a primeira coluna.</div>
+    <div class="feedback-box visivel info">Escreva os números de 1 até 7, em ordem, um de cada vez.</div>
+    <div class="input-linha">
+      <input class="campo-resposta" id="campoEtapa1" type="text" inputmode="numeric" maxlength="1" autocomplete="off">
+      <button class="btn-avancar" id="btnConfirmar1" onclick="confirmarEtapa1()">Confirmar</button>
+    </div>
+    <div class="feedback-box" id="feedbackEtapa1"></div>
+  `);
+
+  estado._proximoS = 1;
+  setTimeout(() => document.getElementById('campoEtapa1')?.focus(), 60);
+  const campo = document.getElementById('campoEtapa1');
+  campo.addEventListener('keydown', e => { if (e.key === 'Enter') confirmarEtapa1(); });
+}
+
+function confirmarEtapa1() {
+  const campo = document.getElementById('campoEtapa1');
+  const feedback = document.getElementById('feedbackEtapa1');
+  const valor = campo.value.trim();
+  const esperado = estado._proximoS;
+
+  if (valor === String(esperado)) {
+    tocarDing();
+    celula(esperado, 's').querySelector('.cel-numero').textContent = esperado;
+    celula(esperado, 's').classList.add('acesa');
+    feedback.className = 'feedback-box visivel ok';
+    feedback.textContent = `${esperado} — certo!`;
+    campo.value = '';
+
+    if (esperado === 7) {
+      professora('Muito bem.', 'animada');
+      setTimeout(() => etapa2(), 500);
+    } else {
+      estado._proximoS++;
+      campo.focus();
+    }
+  } else {
+    feedback.className = 'feedback-box visivel err';
+    feedback.textContent = 'Observe a sequência.';
+    campo.value = '';
+    campo.focus();
+  }
+}
+
+// ══════════════════════════════════════════════════
+//  ETAPA 2 — colunas p, d, f (intervalos reais)
+// ══════════════════════════════════════════════════
+const COLUNAS_ETAPA2 = [
+  { sub: 'p', inicio: 2, fim: 6, explicacao: 'A coluna do <strong>p</strong> começa na camada 2 e vai até a 6 — não existe 1p nem 7p neste diagrama simplificado.' },
+  { sub: 'd', inicio: 3, fim: 5, explicacao: 'A coluna do <strong>d</strong> começa na camada 3 e vai até a 5 — repare que não existe 6d no nosso diagrama.' },
+  { sub: 'f', inicio: 4, fim: 4, explicacao: 'A coluna do <strong>f</strong> aparece só na camada 4 neste diagrama simplificado — não existe 5f, 6f nem 7f aqui.' }
+];
+
+function etapa2(colIdx = 0) {
+  estado.etapa = 2;
+  const coluna = COLUNAS_ETAPA2[colIdx];
+
+  if (!coluna) {
+    professora('Repare que a coluna parou de crescer aqui — isso porque, no diagrama simplificado que usamos no Ensino Médio, não chegamos a usar orbitais além desse ponto. Eles existem, mas só aparecem em elementos muito pesados, que você não vai encontrar em prova.', 'explicando');
+    setTitulo('Etapa 2 — Concluída');
+    renderCorpo(`
+      <div class="feedback-box visivel ok">As colunas s, p, d e f estão completas com seus números.</div>
+    `);
+    mostrarBotaoBalao('Continuar →', 'etapa3()');
+    return;
+  }
+
+  setTitulo(`Etapa 2 — Coluna do ${coluna.sub}`);
+  professora(coluna.explicacao, colIdx === 0 ? 'explicando' : 'pensando');
+
+  renderCorpo(`
+    <div class="questao-titulo">${colIdx === 0 ? 'Preencha a coluna, retirando o que não existe nas pontas.' : 'Percebeu o padrão? Complete sozinho.'}</div>
+    <div class="feedback-box visivel info">Digite os números de ${coluna.inicio} até ${coluna.fim}.</div>
+    <div class="input-linha">
+      <input class="campo-resposta" id="campoEtapa2" type="text" inputmode="numeric" maxlength="1" autocomplete="off">
+      <button class="btn-avancar" id="btnConfirmar2" onclick="confirmarEtapa2(${colIdx})">Confirmar</button>
+    </div>
+    <div class="feedback-box" id="feedbackEtapa2"></div>
+  `);
+
+  estado._colIdx2 = colIdx;
+  estado._proximoN2 = coluna.inicio;
+  setTimeout(() => document.getElementById('campoEtapa2')?.focus(), 60);
+  const campo = document.getElementById('campoEtapa2');
+  campo.addEventListener('keydown', e => { if (e.key === 'Enter') confirmarEtapa2(colIdx); });
+}
+
+function confirmarEtapa2(colIdx) {
+  const coluna = COLUNAS_ETAPA2[colIdx];
+  const campo = document.getElementById('campoEtapa2');
+  const feedback = document.getElementById('feedbackEtapa2');
+  const valor = campo.value.trim();
+  const esperado = estado._proximoN2;
+
+  if (valor === String(esperado)) {
+    tocarDing();
+    celula(esperado, coluna.sub).querySelector('.cel-numero').textContent = esperado;
+    celula(esperado, coluna.sub).classList.add('acesa');
+    feedback.className = 'feedback-box visivel ok';
+    feedback.textContent = `${esperado}${coluna.sub} — certo!`;
+    campo.value = '';
+
+    if (esperado === coluna.fim) {
+      setTimeout(() => etapa2(colIdx + 1), 500);
+    } else {
+      estado._proximoN2++;
+      campo.focus();
+    }
+  } else {
+    feedback.className = 'feedback-box visivel err';
+    feedback.textContent = 'Observe a sequência.';
+    campo.value = '';
+    campo.focus();
+  }
+}
+
+// ══════════════════════════════════════════════════
+//  ETAPA 3 — letras (s, p, d, f)
+// ══════════════════════════════════════════════════
+const COLUNAS_ETAPA3 = ['s', 'p', 'd', 'f'];
+
+function etapa3(colIdx = 0) {
+  estado.etapa = 3;
+
+  if (colIdx >= COLUNAS_ETAPA3.length) {
+    setTitulo('Etapa 3 — Concluída');
+    professora('Perfeito. Agora cada célula do nosso diagrama já tem camada e subnível.', 'animada');
+    renderCorpo(`
+      <div class="feedback-box visivel ok">O diagrama está completo: 1s · 2s 2p · 3s 3p 3d · 4s 4p 4d 4f · 5s 5p 5d · 6s 6p · 7s.</div>
+    `);
+    mostrarBotaoBalao('Continuar →', 'etapa4()');
+    return;
+  }
+
+  setTitulo('Etapa 3 — Letras do diagrama');
+  professora('Cada coluna representa um tipo de subnível.', 'explicando');
+
+  renderCorpo(`
+    <div class="questao-titulo">Qual letra representa esta coluna? (coluna ${colIdx + 1})</div>
+    <div class="input-linha">
+      <input class="campo-resposta" id="campoEtapa3" type="text" maxlength="1" autocomplete="off">
+      <button class="btn-avancar" id="btnConfirmar3" onclick="confirmarEtapa3(${colIdx})">Confirmar</button>
+    </div>
+    <div class="feedback-box" id="feedbackEtapa3"></div>
+  `);
+
+  setTimeout(() => document.getElementById('campoEtapa3')?.focus(), 60);
+  const campo = document.getElementById('campoEtapa3');
+  campo.addEventListener('keydown', e => { if (e.key === 'Enter') confirmarEtapa3(colIdx); });
+}
+
+function confirmarEtapa3(colIdx) {
+  const esperado = COLUNAS_ETAPA3[colIdx];
+  const campo = document.getElementById('campoEtapa3');
+  const feedback = document.getElementById('feedbackEtapa3');
+  const valor = campo.value.trim().toLowerCase();
+
+  if (valor === esperado) {
+    tocarDing();
+    DIAGRAMA.forEach(linha => {
+      if (linha.subniveis.includes(esperado)) {
+        document.getElementById(`let-${linha.n}${esperado}`).textContent = esperado;
+      }
+    });
+    setTimeout(() => etapa3(colIdx + 1), 400);
+  } else {
+    feedback.className = 'feedback-box visivel err';
+    feedback.textContent = 'Observe: primeira = s, segunda = p, terceira = d, quarta = f.';
+    campo.value = '';
+    campo.focus();
+  }
+}
+
+// ══════════════════════════════════════════════════
+//  ETAPA 4 — setas de preenchimento (animação)
+// ══════════════════════════════════════════════════
+function etapa4() {
+  estado.etapa = 4;
+  setTitulo('Etapa 4 — A ordem de leitura');
+  professora('Agora observe como lemos esse diagrama. Este é o diagrama simplificado que usamos no Ensino Médio — cobre até o Rádio e os lantanídeos, o suficiente para qualquer prova.', 'explicando');
+
+  renderCorpo(`
+    <div class="feedback-box visivel info">Acompanhe as setas douradas — elas mostram a ordem real de preenchimento dos subníveis.</div>
+  `);
+  mostrarBotaoBalao('Concluir →', 'finalizarEtapa4()', 'btnFinalizarEtapa4');
+  document.getElementById('btnFinalizarEtapa4').disabled = true;
+
+  DIAGRAMA.forEach(l => l.subniveis.forEach(s => celula(l.n, s).classList.remove('acesa')));
+
+  const svg = document.getElementById('setasSvg');
+  svg.innerHTML = `
+    <defs>
+      <marker id="pontaSeta" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+        <path d="M0,0 L10,5 L0,10 Z" class="seta-cabeca"></path>
+      </marker>
+    </defs>
+  `;
+  desenharDiagonal(0, construirGruposDiagonais(), svg);
+}
+
+function centroCelula(n, sub, svg) {
+  const cel = celula(n, sub);
+  const celRect = cel.getBoundingClientRect();
+  const svgRect = svg.getBoundingClientRect();
+  return {
+    x: celRect.left - svgRect.left + celRect.width / 2,
+    y: celRect.top - svgRect.top + celRect.height / 2
+  };
+}
+
+// Agrupa os subníveis por n+l (regra de Madelung). Cada grupo é uma
+// diagonal só: 1s | 2s | 2p,3s | 3p,4s | 3d,4p,5s | 4d,5p,6s | 4f,5d,6p,7s
+const LETRA_L = { s: 0, p: 1, d: 2, f: 3 };
+function construirGruposDiagonais() {
+  const mapa = new Map();
+  DIAGRAMA.forEach(linha => {
+    linha.subniveis.forEach(sub => {
+      const soma = linha.n + LETRA_L[sub];
+      if (!mapa.has(soma)) mapa.set(soma, []);
+      mapa.get(soma).push({ n: linha.n, sub });
+    });
+  });
+  return [...mapa.keys()].sort((a, b) => a - b)
+    .map(soma => mapa.get(soma).sort((a, b) => a.n - b.n));
+}
+
+// Vetor de um "passo" na diagonal (n+1, l-1), medido na própria grade —
+// assim a seta encaixa exatamente entre as células, seja qual for o tamanho de tela.
+function passoDiagonal(svg) {
+  const s1 = centroCelula(1, 's', svg);
+  const s2 = centroCelula(2, 's', svg);
+  const p2 = centroCelula(2, 'p', svg);
+  return { dx: -(p2.x - s2.x), dy: s2.y - s1.y };
+}
+
+function desenharDiagonal(idx, grupos, svg) {
+  if (idx >= grupos.length) {
+    setTimeout(() => {
+      professora('Cada seta diagonal une os subníveis de mesmo n+l — essa é a ordem real de preenchimento, e ela vale para todos os elementos que você vai estudar no Ensino Médio.', 'animada');
+      document.getElementById('btnFinalizarEtapa4').disabled = false;
+    }, 400);
+    return;
+  }
+
+  const grupo = grupos[idx];
+  const passo = passoDiagonal(svg);
+  const magnitude = Math.hypot(passo.dx, passo.dy) || 1;
+  const ux = passo.dx / magnitude, uy = passo.dy / magnitude;
+  const prolongamento = magnitude * 0.42;
+
+  const primeiro = centroCelula(grupo[0].n, grupo[0].sub, svg);
+  const ultimo = centroCelula(grupo[grupo.length - 1].n, grupo[grupo.length - 1].sub, svg);
+
+  const p1 = { x: primeiro.x - ux * prolongamento, y: primeiro.y - uy * prolongamento };
+  const p2 = { x: ultimo.x + ux * prolongamento, y: ultimo.y + uy * prolongamento };
+
+  voarSeta(svg, p1, p2, () => {
+    grupo.forEach(c => celula(c.n, c.sub).classList.add('acesa'));
+    setTimeout(() => desenharDiagonal(idx + 1, grupos, svg), 380);
+  });
+}
+
+function voarSeta(svg, p1, p2, aoTerminar) {
+  const dx = p2.x - p1.x;
+  const dy = p2.y - p1.y;
+  const dist = Math.hypot(dx, dy) || 1;
+  const ux = dx / dist, uy = dy / dist;
+
+  // encolhe a ponta final para a cabeça da flecha não invadir a célula
+  const encolhe = 9;
+  const fx = p2.x - ux * encolhe;
+  const fy = p2.y - uy * encolhe;
+
+  const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+  g.setAttribute('class', 'seta-voo');
+
+  const linha = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+  linha.setAttribute('x1', p1.x);
+  linha.setAttribute('y1', p1.y);
+  linha.setAttribute('x2', fx);
+  linha.setAttribute('y2', fy);
+  linha.setAttribute('class', 'seta-linha');
+  linha.setAttribute('marker-end', 'url(#pontaSeta)');
+  g.appendChild(linha);
+  svg.appendChild(g);
+
+  // ponto de partida do voo: bem atrás, na direção oposta ao destino, com leve desvio lateral
+  const distanciaVoo = 120;
+  const desvio = 22 * (Math.random() < 0.5 ? -1 : 1);
+  const partidaX = -ux * distanciaVoo - uy * desvio;
+  const partidaY = -uy * distanciaVoo + ux * desvio;
+
+  const duracao = 300;
+  const inicio = performance.now();
+  g.style.opacity = '0';
+  function anima(t) {
+    const p = Math.min(1, (t - inicio) / duracao);
+    const ease = 1 - Math.pow(1 - p, 3);
+    // pequeno "estica e finca" perto do fim, como se a flecha bicasse o alvo
+    const fincada = p > 0.82 ? Math.sin((p - 0.82) / 0.18 * Math.PI) * 5 : 0;
+    const tx = partidaX * (1 - ease) + ux * fincada;
+    const ty = partidaY * (1 - ease) + uy * fincada;
+    g.style.transform = `translate(${tx}px, ${ty}px)`;
+    g.style.opacity = String(Math.min(1, p / 0.35));
+    if (p < 1) {
+      requestAnimationFrame(anima);
+    } else {
+      g.style.transform = 'translate(0px, 0px)';
+      g.style.opacity = '1';
+      if (aoTerminar) aoTerminar();
+    }
+  }
+  requestAnimationFrame(anima);
+}
+
+function finalizarEtapa4() { etapa5(); }
+
+// ══════════════════════════════════════════════════
+//  ETAPA 5 — carta do elemento (número atômico x massa)
+// ══════════════════════════════════════════════════
+function etapa5() {
+  estado.etapa = 5;
+  const el = elementoAtual();
+  setTitulo('Etapa 5 — A carta do elemento');
+  professora(estado._idxElemento === 0
+    ? 'Agora vamos utilizar esse diagrama.'
+    : `Vamos praticar de novo com outro elemento: ${el.nome}.`, 'sorrindo');
+
+  renderCorpo(`
+    <div class="questao-titulo">${el.nome} · ${el.simbolo}</div>
+    <div class="feedback-box visivel info">Na carta aparecem dois números: ${el.z} e ${el.massa}.</div>
+    <div class="questao-titulo" id="perguntaCarta">Qual número representa a quantidade de prótons?</div>
+    <div id="opcoesCarta"></div>
+    <div class="feedback-box" id="feedbackCarta"></div>
+  `);
+
+  estado._etapaCarta = 'protons';
+  renderOpcoesCarta(el);
+}
+
+function renderOpcoesCarta(el) {
+  const container = document.getElementById('opcoesCarta');
+  container.innerHTML = `
+    <button class="opcao-btn" onclick="responderCarta(this, '${el.z}')">${el.z}</button>
+    <button class="opcao-btn" onclick="responderCarta(this, '${el.massa}')">${el.massa}</button>
+  `;
+}
+
+function responderCarta(btn, valor) {
+  const el = elementoAtual();
+  const feedback = document.getElementById('feedbackCarta');
+  const etapaCarta = estado._etapaCarta;
+  const correta = etapaCarta === 'protons' ? String(el.z) : el.massa;
+
+  document.querySelectorAll('#opcoesCarta .opcao-btn').forEach(b => b.disabled = true);
+
+  if (valor === correta) {
+    tocarDing();
+    btn.classList.add('correta');
+    feedback.className = 'feedback-box visivel ok';
+    feedback.textContent = etapaCarta === 'protons'
+      ? 'Correto! O menor número representa o número atômico.'
+      : 'Correto! O maior número representa aproximadamente a massa.';
+  } else {
+    btn.classList.add('errada');
+    feedback.className = 'feedback-box visivel err';
+    feedback.textContent = etapaCarta === 'protons'
+      ? 'O menor número representa o número atômico.'
+      : 'O maior representa aproximadamente a massa.';
+  }
+
+  setTimeout(() => {
+    if (etapaCarta === 'protons') {
+      estado._etapaCarta = 'massa';
+      document.getElementById('perguntaCarta').textContent = 'Qual número representa aproximadamente a massa atômica?';
+      feedback.className = 'feedback-box';
+      renderOpcoesCarta(el);
+    } else {
+      etapaDistribuicao();
+    }
+  }, 1400);
+}
+
+// ══════════════════════════════════════════════════
+//  DISTRIBUIÇÃO ELETRÔNICA
+// ══════════════════════════════════════════════════
+function etapaDistribuicao() {
+  estado.etapa = 6;
+  estado.distribuicao = {};
+  estado._idxDistribuicao = 0;
+
+  const el = elementoAtual();
+  setTitulo('Distribuição Eletrônica');
+  professora('Agora vamos utilizar o diagrama para distribuir os elétrons, seguindo a mesma ordem das setas.', 'explicando');
+
+  document.getElementById('hud').classList.add('visivel');
+  document.getElementById('capacidadePainel').classList.add('visivel');
+  document.getElementById('hudElemento').textContent = el.nome;
+  document.getElementById('hudEletrons').textContent = el.eletrons;
+  atualizarDistribuidos();
+
+  DIAGRAMA.forEach(l => l.subniveis.forEach(s => {
+    celula(l.n, s).classList.remove('acesa', 'dourada');
+    document.getElementById(`ele-${l.n}${s}`).value = '';
+  }));
+
+  renderCorpo(`
+    <div class="questao-titulo">Distribua os ${el.eletrons} elétrons do ${el.nome}.</div>
+    <div class="feedback-box visivel info">Siga a ordem das setas. Comece pelo 1s.</div>
+    <div class="input-linha">
+      <span id="labelSubnivelAtual" style="font-family:'Cormorant Garamond',serif;font-weight:700;font-size:1.1rem;">1s</span>
+      <input class="campo-resposta" id="campoDistribuicao" type="text" inputmode="numeric" maxlength="2" autocomplete="off">
+      <button class="btn-avancar" id="btnConfirmarDist" onclick="confirmarDistribuicao()">Confirmar</button>
+    </div>
+    <div class="feedback-box" id="feedbackDistribuicao"></div>
+  `);
+
+  setTimeout(() => document.getElementById('campoDistribuicao')?.focus(), 60);
+  const campo = document.getElementById('campoDistribuicao');
+  campo.addEventListener('keydown', e => { if (e.key === 'Enter') confirmarDistribuicao(); });
+
+  destacarSubnivelAtual();
+}
+
+function destacarSubnivelAtual() {
+  const codigo = ORDEM_PREENCHIMENTO[estado._idxDistribuicao];
+  celula(codigo[0], codigo[1]).classList.add('acesa');
+}
+
+function totalDistribuido() {
+  return Object.values(estado.distribuicao).reduce((a, b) => a + b, 0);
+}
+
+function atualizarDistribuidos() {
+  const el = elementoAtual();
+  document.getElementById('hudDistribuidos').textContent = `${totalDistribuido()} / ${el.eletrons}`;
+}
+
+function confirmarDistribuicao() {
+  const el = elementoAtual();
+  const codigo = ORDEM_PREENCHIMENTO[estado._idxDistribuicao];
+  const n = codigo[0];
+  const sub = codigo[1];
+  const capacidadeMax = CAPACIDADE[sub];
+  const restantes = el.eletrons - totalDistribuido();
+  const maxPermitido = Math.min(capacidadeMax, restantes);
+
+  const campo = document.getElementById('campoDistribuicao');
+  const feedback = document.getElementById('feedbackDistribuicao');
+  const valor = parseInt(campo.value.trim(), 10);
+
+  if (isNaN(valor)) return;
+
+  if (valor > capacidadeMax) {
+    feedback.className = 'feedback-box visivel err';
+    feedback.textContent = `Observe o quadro ao lado. O subnível ${sub} comporta no máximo ${capacidadeMax} elétrons.`;
+    campo.value = '';
+    campo.focus();
+    return;
+  }
+
+  if (valor !== maxPermitido) {
+    feedback.className = 'feedback-box visivel err';
+    feedback.textContent = maxPermitido === capacidadeMax
+      ? `Tente novamente — quantos elétrons cabem no subnível ${sub}?`
+      : `Restam apenas ${restantes} elétrons para distribuir.`;
+    campo.value = '';
+    campo.focus();
+    return;
+  }
+
+  tocarDing();
+  estado.distribuicao[codigo] = valor;
+  document.getElementById(`ele-${codigo}`).value = valor;
+  celula(n, sub).classList.remove('acesa');
+  celula(n, sub).classList.add('dourada');
+  feedback.className = 'feedback-box visivel ok';
+  feedback.textContent = `${codigo} = ${valor} elétrons — certo!`;
+  campo.value = '';
+  atualizarDistribuidos();
+
+  if (totalDistribuido() === el.eletrons) {
+    concluirDistribuicao();
+  } else {
+    estado._idxDistribuicao++;
+    document.getElementById('labelSubnivelAtual').textContent = ORDEM_PREENCHIMENTO[estado._idxDistribuicao];
+    destacarSubnivelAtual();
+    campo.focus();
+  }
+}
+
+function concluirDistribuicao() {
+  const el = elementoAtual();
+  const config = Object.entries(estado.distribuicao)
+    .sort((a, b) => ORDEM_PREENCHIMENTO.indexOf(a[0]) - ORDEM_PREENCHIMENTO.indexOf(b[0]))
+    .map(([codigo, qtd]) => `${codigo}<sup>${sobrescrito(qtd)}</sup>`)
+    .join(' ');
+
+  const temProximo = estado._idxElemento < SEQUENCIA_ELEMENTOS.length - 1;
+
+  setTitulo('Distribuição Concluída');
+  professora(temProximo
+    ? `Muito bem! Essa é a configuração do ${el.nome}. Vamos repetir o processo com outro elemento.`
+    : 'Excelente! Você concluiu a distribuição eletrônica dos três elementos.', 'animada');
+
+  renderCorpo(`
+    <div class="feedback-box visivel ok">Configuração eletrônica do ${el.nome}:</div>
+    <div class="config-final">${config}</div>
+  `);
+  if (temProximo) {
+    mostrarBotaoBalao('Próximo elemento →', 'avancarElemento()', 'btnProximoElemento');
+  } else {
+    mostrarBotaoBalao('Ver resumo →', 'mostrarResumoFinal()', 'btnResumoFinal');
+  }
+}
+
+function avancarElemento() {
+  estado._idxElemento++;
+  etapa5();
+}
+
+function mostrarResumoFinal() {
+  setTitulo('Fase Concluída');
+  professora('Você já sabe usar o diagrama de Linus Pauling para descobrir a distribuição eletrônica de qualquer elemento do Ensino Médio — é só seguir a ordem das diagonais.', 'sorrindo');
+
+  renderCorpo(`
+    <div class="feedback-box visivel ok">Você praticou com ${SEQUENCIA_ELEMENTOS.length} elementos: ${SEQUENCIA_ELEMENTOS.map(k => ELEMENTOS[k].nome).join(', ')}.</div>
+    <div class="questao-titulo" style="margin-top:1rem;">O que você aprendeu</div>
+    <div class="feedback-box visivel info">O diagrama organiza os subníveis em diagonais de mesmo n+l. Seguindo essas diagonais na ordem certa, você descobre a distribuição eletrônica de qualquer elemento até o Rádio.</div>
+  `);
+  mostrarBotaoBalao('Recomeçar a fase', 'location.reload()', 'btnRecomecarFase');
+
+  try { localStorage.setItem('kifacil_linus-pauling_ok', 'true'); } catch (e) {}
+}
+
+function sobrescrito(n) {
+  const mapa = { '0':'⁰','1':'¹','2':'²','3':'³','4':'⁴','5':'⁵','6':'⁶','7':'⁷','8':'⁸','9':'⁹' };
+  return String(n).split('').map(c => mapa[c] || c).join('');
+}
+
+// ══════════════════════════════════════════════════
+//  INIT
+// ══════════════════════════════════════════════════
+renderGradeDiagrama();
+etapa1();
+</script>
+
+<script>
+(function () {
+  var _clickSom = new Audio('../sons/click.mp3');
+  _clickSom.preload = 'auto';
+  document.addEventListener('click', function (e) {
+    var alvo = e.target.closest('button');
+    if (alvo) { try { _clickSom.currentTime = 0; _clickSom.play().catch(function () {}); } catch (err) {} }
+  }, true);
+})();
+</script>
+</body>
+</html>

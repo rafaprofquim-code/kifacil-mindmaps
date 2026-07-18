@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow">
+  <title>Classifique a Substância — Jogo | KiFácil</title>
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;1,500&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --fundo: #fdf8f0;
+      --card: #fffdf9;
+      --escuro: #1a0f06;
+      --texto: #1a1208;
+      --suave: #3d2e1a;
+      --ouro: #8a5e10;
+      --ouro-claro: #c8920a;
+      --borda: rgba(100,70,20,0.25);
+      --borda-forte: rgba(100,70,20,0.45);
+      --verde: #1e5238;
+      --verde-bg: #eef7f1;
+      --vermelho: #7a1515;
+      --vermelho-bg: #fdf0f0;
+      --azul: #163c6e;
+      --azul-bg: #eef3fb;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Libre Baskerville', Georgia, serif;
+      background: var(--fundo);
+      color: var(--texto);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .nav {
+      background: var(--escuro);
+      border-bottom: 2px solid var(--ouro-claro);
+      padding: 0 2.5rem;
+      height: 54px;
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+    .brand {
+      font-family: 'Lora', serif;
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: #fff8ee;
+    }
+
+    /* MAIN */
+    main {
+      position: relative;
+      flex: 1;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 5rem;
+      width: 100%;
+    }
+
+    .link-aula {
+      position: absolute; top: 10px; right: 10px; z-index: 10;
+      display: flex; flex-direction: column; align-items: center; gap: 2px;
+      text-decoration: none; color: #fff8ee;
+      background: rgba(30,16,8,0.72); border: 1.5px solid var(--dourado-claro, #c8920a);
+      border-radius: 8px; padding: 0.4rem 0.65rem;
+      font-family: 'Cormorant Garamond', serif; font-size: 0.68rem; font-weight: 600;
+      letter-spacing: 0.02em; text-align: center; line-height: 1.2;
+      cursor: pointer; transition: background 0.2s, transform 0.15s;
+    }
+    .link-aula:hover { background: rgba(30,16,8,0.92); transform: translateY(-1px); }
+    .link-aula svg { width: 22px; height: 22px; }
+
+    /* CABEÇALHO */
+    .jogo-titulo {
+      font-family: 'Lora', serif;
+      font-size: clamp(1.7rem, 4vw, 2.4rem);
+      font-weight: 600;
+      line-height: 1.1;
+      margin-bottom: 0.4rem;
+    }
+    .jogo-desc {
+      font-size: 0.95rem;
+      color: var(--suave);
+      margin-bottom: 2rem;
+      line-height: 1.7;
+    }
+
+    .narrador {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 1.6rem;
+      padding: 1rem 1.1rem;
+      border: 1.5px solid var(--borda-forte);
+      border-radius: 10px;
+      background: rgba(30,16,8,0.04);
+    }
+    .narrador img {
+      width: 78px;
+      height: 96px;
+      object-fit: cover;
+      object-position: top center;
+      border-radius: 10px;
+      border: 1px solid rgba(200,146,10,.35);
+      flex-shrink: 0;
+    }
+    .narrador-nome {
+      font-family: 'Lora', serif;
+      font-size: 0.8rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--ouro-claro);
+      margin-bottom: 0.4rem;
+    }
+    .narrador-texto {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: var(--suave);
+    }
+
+    /* CARTAS */
+    #rodada1, #rodada2, #rodada3 {
+      margin-top: 1rem;
+    }
+
+    .cartas-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+      gap: 0.8rem;
+      margin-bottom: 2rem;
+    }
+    .carta {
+      background: var(--card);
+      border: 1.5px solid var(--borda-forte);
+      border-radius: 10px;
+      padding: 1rem 0.8rem;
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.15s, box-shadow 0.15s, border-color 0.2s, background 0.2s;
+      user-select: none;
+      position: relative;
+    }
+    .carta:hover:not(.selecionada):not(.bloqueada) {
+      transform: translateY(-3px);
+      box-shadow: 0 4px 16px rgba(100,70,20,0.13);
+    }
+    .carta.bloqueada { cursor: default; opacity: 0.55; }
+
+    .carta-formula {
+      font-family: 'Lora', serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      line-height: 1.1;
+      margin-bottom: 0.4rem;
+      color: var(--ouro);
+    }
+    .carta-nome {
+      font-size: 0.72rem;
+      color: var(--suave);
+      line-height: 1.4;
+    }
+
+    /* Estados de seleção */
+    .carta.sel-simples  { background: #eef3fb; border-color: #163c6e; }
+    .carta.sel-composta { background: #fff4e6; border-color: #8a4f00; }
+    .carta.sel-mistura  { background: var(--verde-bg); border-color: var(--verde); }
+    .carta.sel-homogenea  { background: #eef3fb; border-color: var(--azul); }
+    .carta.sel-heterogenea { background: var(--vermelho-bg); border-color: var(--vermelho); }
+
+    .carta.correta  { border-color: var(--verde) !important; }
+    .carta.errada   { border-color: var(--vermelho) !important; animation: shake 0.35s ease; }
+    @keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-4px)} 75%{transform:translateX(4px)} }
+
+    /* Badge na carta */
+    .carta-badge {
+      position: absolute;
+      top: -8px; right: -8px;
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+      border: 2px solid var(--fundo);
+    }
+    .badge-ok  { background: var(--verde); color: #fff; }
+    .badge-err { background: var(--vermelho); color: #fff; }
+
+    /* OPÇÕES DE CLASSIFICAÇÃO */
+    .opcoes-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-bottom: 1.6rem;
+    }
+    .opcao-btn {
+      padding: 0.55rem 1.3rem;
+      border-radius: 6px;
+      border: 1.5px solid var(--borda-forte);
+      background: var(--card);
+      font-family: 'Libre Baskerville', serif;
+      font-size: 0.88rem;
+      cursor: pointer;
+      transition: all 0.15s;
+      color: var(--texto);
+    }
+    .opcao-btn:hover { background: var(--fundo); border-color: var(--ouro-claro); }
+    .opcao-btn.ativa-simples  { background: var(--azul-bg); border-color: var(--azul); color: var(--azul); font-weight: 700; }
+    .opcao-btn.ativa-composta { background: #fff4e6; border-color: #8a4f00; color: #8a4f00; font-weight: 700; }
+    .opcao-btn.ativa-mistura  { background: var(--verde-bg); border-color: var(--verde); color: var(--verde); font-weight: 700; }
+    .opcao-btn.ativa-homogenea   { background: var(--azul-bg); border-color: var(--azul); color: var(--azul); font-weight: 700; }
+    .opcao-btn.ativa-heterogenea { background: var(--vermelho-bg); border-color: var(--vermelho); color: var(--vermelho); font-weight: 700; }
+
+    /* INSTRUÇÃO FLUTUANTE */
+    .instrucao {
+      font-size: 0.85rem;
+      color: var(--suave);
+      background: var(--card);
+      border: 1px solid var(--borda);
+      border-radius: 6px;
+      padding: 0.7rem 1rem;
+      margin-bottom: 1.4rem;
+      line-height: 1.6;
+    }
+    .instrucao strong { color: var(--ouro); }
+
+    /* FEEDBACK */
+    .feedback-box {
+      border-radius: 8px;
+      padding: 1rem 1.2rem;
+      margin-bottom: 1.2rem;
+      font-size: 0.88rem;
+      line-height: 1.7;
+      display: none;
+    }
+    .feedback-box.visivel { display: block; }
+    .feedback-box.ok  { background: var(--verde-bg); border: 1.5px solid #5a9e5a; color: var(--verde); }
+    .feedback-box.err { background: var(--vermelho-bg); border: 1.5px solid #c47a7a; color: var(--vermelho); }
+    .feedback-box.info { background: var(--azul-bg); border: 1.5px solid #7a9ecb; color: var(--azul); }
+    .feedback-box strong { display: block; margin-bottom: 0.3rem; font-size: 0.92rem; }
+    .feedback-box .explicacao { color: var(--suave); margin-top: 0.4rem; font-size: 0.83rem; }
+
+    /* BOTÃO PRINCIPAL */
+    .btn-primario {
+      background: var(--escuro);
+      color: var(--ouro-claro);
+      border: 1.5px solid var(--ouro-claro);
+      font-family: 'Lora', serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.65rem 1.8rem;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+    .btn-primario:hover { background: var(--ouro-claro); color: var(--escuro); }
+    .btn-primario:disabled { opacity: 0.35; cursor: default; }
+    .btn-primario:disabled:hover { background: var(--escuro); color: var(--ouro-claro); }
+
+    /* RODADA 3 — CURVAS */
+    .curva-wrap {
+      background: var(--card);
+      border: 1.5px solid var(--borda-forte);
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin-bottom: 1.6rem;
+    }
+    .curva-titulo {
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ouro);
+      margin-bottom: 1rem;
+    }
+    .curvas-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .curva-item {
+      background: var(--fundo);
+      border: 1.5px solid var(--borda);
+      border-radius: 8px;
+      padding: 1rem;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .curva-item:hover { border-color: var(--ouro-claro); }
+    .curva-item.selecionada-pura { background: var(--verde-bg); border-color: var(--verde); }
+    .curva-item.selecionada-mistura { background: var(--azul-bg); border-color: var(--azul); }
+    .curva-item.correta-curva { border-color: var(--verde); background: var(--verde-bg); }
+    .curva-item.errada-curva { border-color: var(--vermelho); background: var(--vermelho-bg); animation: shake 0.35s ease; }
+    .curva-label {
+      font-size: 0.78rem;
+      color: var(--suave);
+      text-align: center;
+      margin-bottom: 0.5rem;
+    }
+
+    /* SVGs das curvas */
+    .curva-svg { width: 100%; height: auto; display: block; }
+
+    /* TEXTO LIVRE */
+    .textarea-resposta {
+      width: 100%;
+      font-family: 'Libre Baskerville', serif;
+      font-size: 0.9rem;
+      color: var(--texto);
+      background: var(--fundo);
+      border: 1.5px solid var(--borda-forte);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      resize: vertical;
+      min-height: 80px;
+      outline: none;
+      transition: border-color 0.2s;
+      margin-bottom: 1rem;
+    }
+    .textarea-resposta:focus { border-color: var(--ouro-claro); }
+    .textarea-resposta::placeholder { color: rgba(26,18,8,0.35); }
+
+    /* CONCLUSÃO */
+    .conclusao {
+      display: none;
+      margin-top: 2.5rem;
+      background: var(--card);
+      border: 1.5px solid var(--borda-forte);
+      border-radius: 12px;
+      padding: 2.5rem 2rem;
+      text-align: center;
+    }
+    .conclusao.visivel { display: block; }
+    .conclusao-titulo {
+      font-family: 'Lora', serif;
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      font-weight: 600;
+      margin-bottom: 0.6rem;
+    }
+    .conclusao-placar {
+      font-family: 'Lora', serif;
+      font-size: 1.3rem;
+      color: var(--ouro-claro);
+      margin-bottom: 0.8rem;
+    }
+    .conclusao-msg {
+      font-size: 0.9rem;
+      color: var(--suave);
+      line-height: 1.8;
+      max-width: 480px;
+      margin: 0 auto 2rem;
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--escuro);
+      border-top: 2px solid var(--ouro-claro);
+      padding: 1.2rem 2rem;
+      text-align: center;
+      font-size: 0.8rem;
+      color: rgba(255,248,238,0.45);
+    }
+
+    @media (max-width: 600px) {
+      .nav { padding: 0 1.2rem; gap: 1rem; }
+      main { padding: 1.8rem 1rem 4rem; }
+      .cartas-grid { grid-template-columns: repeat(3, 1fr); }
+      .curvas-grid { grid-template-columns: 1fr; }
+      .opcoes-wrap { gap: 0.5rem; }
+      .link-aula { top: 6px; right: 6px; padding: 0.3rem 0.5rem; font-size: 0.6rem; }
+      .link-aula svg { width: 18px; height: 18px; }
+    }
+  </style>
+  <style>
+    @media (min-width:701px){
+      body{background:#f7efe2;color:#1a1208;}
+      .cartas-grid, .scene-wrap, .game-shell, .imagem-wrapper { max-height:68vh; display:flex; align-items:center; justify-content:center; }
+      .cena-card img, .imagem-wrapper img { object-fit:contain; background-position:center; filter:brightness(0.95); }
+      .narrador, .narr-box { position:relative; top:18px; left:22px; }
+      .narrador img { width:132px; height:158px; }
+      .narrador-text { font-size:16px; color:#2e1a08; }
+      footer{ text-align:center; padding:16px 12px; background:#2e2016; color:#fff8ee; font-size:0.95rem; }
+    }
+  </style>
+  <style>
+    @media (min-width:701px){
+      body { background: #fdf8f0 !important; color: #1a1208 !important; }
+      .narrador, .narr-box, .teacher-box, #teacher-box { display:flex; align-items:flex-start; gap:1rem; margin:0 auto 1.2rem; padding:1rem 1.1rem; border:1.5px solid rgba(100,70,20,0.5); border-radius:10px; background:rgba(30,16,8,0.05); max-width:900px; position:relative; top:18px; left:22px; }
+      .narrador img, .teacher-img, #teacher-img { width:78px; height:96px; object-fit:cover; object-position:top center; border-radius:10px; border:1px solid rgba(200,146,10,.35); }
+      .narrador-texto, .narr, .teacher-text, .narrador-text { font-size:1.05rem; line-height:1.8; color:#3d2e1a; }
+      .imagem-wrapper, .scene-wrap, .cena, .cena-wrap, .scene-inner, .game-shell, .cena-card { display:flex; justify-content:center; align-items:center; width:min(100%,900px); max-height:70vh; margin:0 auto; cursor:zoom-in; border:1.5px solid rgba(100,70,20,0.5); border-radius:6px; overflow:hidden; background:#f7efe2; }
+      .imagem-wrapper img, .scene-img, .game-bg, .cena-wrap img { display:block; max-width:100%; height:auto; max-height:70vh; object-fit:contain; pointer-events:none; }
+      footer { background:#1e1008 !important; border-top:2px solid #c8920a !important; padding:1.2rem 2rem !important; text-align:center; color:rgba(255,248,238,0.5) !important; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="brand">KiFácil</div>
+</nav>
+
+<main>
+  <h1 class="jogo-titulo">Classifique a Substância</h1>
+  <p class="jogo-desc">Três rodadas de classificação progressiva — do geral para o específico.</p>
+
+  <div class="narrador">
+    <img src="../imagens/rafa-sorrindo.jpg" alt="Professora Rafaela" />
+    <div>
+      <div class="narrador-nome">Professora Rafaela</div>
+      <div class="narrador-texto" id="narradorTexto">Rodada 1: escolha uma categoria (Substância Simples, Composta ou Mistura) e clique em cada carta para classificar. Você pode trocar a categoria antes de confirmar cada carta e, ao final, clique em Verificar.</div>
+      <div id="narradorContinuar"></div>
+    </div>
+  </div>
+
+  <!-- RODADA 1 -->
+  <div id="rodada1">
+    <div class="opcoes-wrap" id="opcoes1">
+      <button class="opcao-btn" id="btn-simples"  onclick="selecionarOpcao('simples')">Substância Simples</button>
+      <button class="opcao-btn" id="btn-composta" onclick="selecionarOpcao('composta')">Substância Composta</button>
+      <button class="opcao-btn" id="btn-mistura"  onclick="selecionarOpcao('mistura')">Mistura</button>
+    </div>
+
+    <div class="cartas-grid" id="cartasR1"></div>
+    <div class="feedback-box" id="feedbackR1"></div>
+    <button class="btn-primario" id="btnVerificarR1" onclick="verificarRodada1()">Verificar →</button>
+  </div>
+
+  <!-- RODADA 2 -->
+  <div id="rodada2" style="display:none">
+    <div class="opcoes-wrap" id="opcoes2">
+      <button class="opcao-btn" id="btn-homogenea"   onclick="selecionarOpcao2('homogenea')">Homogênea</button>
+      <button class="opcao-btn" id="btn-heterogenea" onclick="selecionarOpcao2('heterogenea')">Heterogênea</button>
+    </div>
+
+    <div class="cartas-grid" id="cartasR2"></div>
+    <div class="feedback-box" id="feedbackR2"></div>
+    <button class="btn-primario" id="btnVerificarR2" onclick="verificarRodada2()">Verificar →</button>
+  </div>
+
+  <!-- RODADA 3 -->
+  <div id="rodada3" style="display:none">
+    <div class="curva-wrap">
+      <div class="curva-titulo">Qual é cada curva?</div>
+      <div class="curvas-grid" id="curvasGrid">
+
+        <!-- CURVA A: substância pura — patamares HORIZONTAIS reais (S+L e L+G) -->
+        <div class="curva-item" id="curvaA" onclick="selecionarCurva('A')">
+          <div class="curva-label">Curva A</div>
+          <svg class="curva-svg" viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg">
+            <line x1="22" y1="135" x2="22" y2="8"  stroke="#3d2e1a" stroke-width="1.5"/>
+            <line x1="22" y1="135" x2="192" y2="135" stroke="#3d2e1a" stroke-width="1.5"/>
+            <text x="4"   y="12"  font-size="9" fill="#3d2e1a" font-family="serif">T(°C)</text>
+            <text x="178" y="144" font-size="9" fill="#3d2e1a" font-family="serif">t(s)</text>
+            <!-- S: subindo -->
+            <line x1="22" y1="120" x2="55"  y2="90"  stroke="#c8920a" stroke-width="2.5"/>
+            <!-- S+L: patamar horizontal -->
+            <line x1="55" y1="90"  x2="90"  y2="90"  stroke="#c8920a" stroke-width="2.5"/>
+            <!-- L: subindo -->
+            <line x1="90" y1="90"  x2="125" y2="55"  stroke="#c8920a" stroke-width="2.5"/>
+            <!-- L+G: patamar horizontal -->
+            <line x1="125" y1="55" x2="160" y2="55"  stroke="#c8920a" stroke-width="2.5"/>
+            <!-- G: subindo -->
+            <line x1="160" y1="55" x2="185" y2="30"  stroke="#c8920a" stroke-width="2.5"/>
+            <!-- rótulos -->
+            <text x="28"  y="110" font-size="8" fill="#8a5e10" font-family="serif">S</text>
+            <text x="62"  y="86"  font-size="8" fill="#8a5e10" font-family="serif">S+L</text>
+            <text x="96"  y="78"  font-size="8" fill="#8a5e10" font-family="serif">L</text>
+            <text x="128" y="51"  font-size="8" fill="#8a5e10" font-family="serif">L+G</text>
+            <text x="166" y="45"  font-size="8" fill="#8a5e10" font-family="serif">G</text>
+          </svg>
+        </div>
+
+        <!-- CURVA B: mistura — sem patamar horizontal, ΔT menor nas transições -->
+        <div class="curva-item" id="curvaB" onclick="selecionarCurva('B')">
+          <div class="curva-label">Curva B</div>
+          <svg class="curva-svg" viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg">
+            <line x1="22" y1="135" x2="22" y2="8"  stroke="#3d2e1a" stroke-width="1.5"/>
+            <line x1="22" y1="135" x2="192" y2="135" stroke="#3d2e1a" stroke-width="1.5"/>
+            <text x="4"   y="12"  font-size="9" fill="#3d2e1a" font-family="serif">T(°C)</text>
+            <text x="178" y="144" font-size="9" fill="#3d2e1a" font-family="serif">t(s)</text>
+            <!-- S: subindo -->
+            <line x1="22" y1="120" x2="55"  y2="95"  stroke="#163c6e" stroke-width="2.5"/>
+            <!-- S+L: inclinação menor (não horizontal) -->
+            <line x1="55" y1="95"  x2="90"  y2="85"  stroke="#163c6e" stroke-width="2.5"/>
+            <!-- L: subindo -->
+            <line x1="90" y1="85"  x2="125" y2="55"  stroke="#163c6e" stroke-width="2.5"/>
+            <!-- L+G: inclinação menor (não horizontal) -->
+            <line x1="125" y1="55" x2="158" y2="45"  stroke="#163c6e" stroke-width="2.5"/>
+            <!-- G: subindo -->
+            <line x1="158" y1="45" x2="185" y2="20"  stroke="#163c6e" stroke-width="2.5"/>
+            <!-- rótulos -->
+            <text x="28"  y="112" font-size="8" fill="#163c6e" font-family="serif">S</text>
+            <text x="60"  y="82"  font-size="8" fill="#163c6e" font-family="serif">S+L</text>
+            <text x="96"  y="74"  font-size="8" fill="#163c6e" font-family="serif">L</text>
+            <text x="128" y="42"  font-size="8" fill="#163c6e" font-family="serif">L+G</text>
+            <text x="164" y="35"  font-size="8" fill="#163c6e" font-family="serif">G</text>
+            <!-- indicador ΔT nas transições -->
+            <text x="55" y="110" font-size="7" fill="#888" font-family="serif">ΔT</text>
+            <text x="125" y="65" font-size="7" fill="#888" font-family="serif">ΔT</text>
+          </svg>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Pergunta de texto livre -->
+    <div style="margin-bottom:1.2rem">
+      <div style="font-size:0.88rem; color:var(--suave); margin-bottom:0.6rem; line-height:1.6;">
+        Por que a curva de uma <strong style="color:var(--ouro)">substância pura</strong> apresenta um patamar durante a mudança de estado, enquanto a de uma mistura não?
+      </div>
+      <textarea class="textarea-resposta" id="respostaR3" placeholder="Escreva com suas palavras..."></textarea>
+    </div>
+
+    <div class="feedback-box" id="feedbackR3"></div>
+    <button class="btn-primario" id="btnVerificarR3" onclick="verificarRodada3()">Finalizar →</button>
+  </div>
+
+  <!-- CONCLUSÃO -->
+  <div class="conclusao" id="conclusao">
+    <div class="conclusao-titulo">Estudo concluído!</div>
+    <div class="conclusao-placar" id="placar"></div>
+    <p class="conclusao-msg" id="mensagemFinal"></p>
+    <button class="btn-primario" onclick="reiniciar()">Jogar novamente</button>
+  </div>
+
+  <!-- COLOQUE O LINK AQUI -->
+  <a class="link-aula" href="https://www.youtube.com/watch?v=jthAHASDD3I&t=2s" target="_blank" rel="noopener" title="Assista à aula">
+    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.6"/>
+      <path d="M10 8.5L16 12L10 15.5V8.5Z" fill="currentColor"/>
+    </svg>
+    <span>Assista à aula</span>
+  </a>
+</main>
+
+<footer>© 2026 KiFácil</footer>
+
+<script>
+// ─── DADOS ───────────────────────────────────────────────────────────
+const SUBSTANCIAS_R1 = [
+  { formula:'O₂',  nome:'Oxigênio',      tipo:'simples',
+    dica:'Formada por átomos de apenas UM elemento químico — o oxigênio.',
+    explicacao:'O₂ é uma substância simples: formada por átomos de apenas um único elemento químico (O).' },
+  { formula:'H₂O', nome:'Água',           tipo:'composta',
+    dica:'Possui H e O — dois elementos diferentes formando uma única substância.',
+    explicacao:'H₂O é uma substância composta: formada por átomos de dois elementos (H e O), com composição química definida.' },
+  { formula:'Fe',  nome:'Ferro',          tipo:'simples',
+    dica:'Metal formado por apenas um tipo de átomo.',
+    explicacao:'Fe é uma substância simples: formada por átomos de apenas um único elemento (ferro).' },
+  { formula:'CO₂', nome:'Gás carbônico',  tipo:'composta',
+    dica:'Possui C e O — dois elementos formando uma substância pura.',
+    explicacao:'CO₂ é uma substância composta: formada por C e O com composição definida (ponto de fusão/ebulição constante).' },
+  { formula:'O₃',  nome:'Ozônio',         tipo:'simples',
+    dica:'Três átomos do MESMO elemento formando uma molécula diferente do O₂.',
+    explicacao:'O₃ é uma substância simples: diferente do O₂, mas ainda formada por apenas um elemento — o oxigênio.' },
+  { formula:'ar',  nome:'Ar atmosférico', tipo:'mistura',
+    dica:'Contém N₂, O₂, CO₂ e outros — mais de uma substância.',
+    explicacao:'O ar atmosférico é uma mistura homogênea de N₂, O₂, CO₂ e outros gases. Sua composição varia, e não tem ponto de ebulição fixo.' },
+  { formula:'Leite',nome:'Leite',         tipo:'mistura',
+    dica:'Água, gorduras, proteínas, açúcares — diversas substâncias juntas.',
+    explicacao:'O leite é uma mistura (coloidal/heterogênea): contém água, gorduras, proteínas e açúcares, sem composição fixa.' },
+  { formula:'Água\ndo mar', nome:'Água do mar', tipo:'mistura',
+    dica:'Água + sais dissolvidos — mais de uma substância.',
+    explicacao:'A água do mar é uma mistura homogênea: água com sais (NaCl, MgCl₂ etc.) dissolvidos, sem composição fixa.' },
+];
+
+const MISTURAS_R2 = [
+  { formula:'ar',       nome:'Ar atmosférico', tipo:'homogenea',
+    dica:'Uma única fase visível a olho nu — você não vê componentes separados.',
+    explicacao:'O ar atmosférico é homogêneo: apresenta uma única fase — impossível distinguir os componentes a olho nu ou com microscópio comum.' },
+  { formula:'Leite',    nome:'Leite',           tipo:'heterogenea',
+    dica:'Com microscópio é possível identificar partículas dispersas.',
+    explicacao:'O leite é uma mistura heterogênea (coloide): com microscópio comum é possível ver as partículas de gordura dispersas.' },
+  { formula:'Água\ndo mar', nome:'Água do mar', tipo:'homogenea',
+    dica:'Os sais estão completamente dissolvidos — apenas uma fase visível.',
+    explicacao:'A água do mar é homogênea: o sal está completamente dissolvido, formando uma única fase.' },
+  { formula:'Areia\n+ água', nome:'Areia + água', tipo:'heterogenea',
+    dica:'Dá para ver os dois componentes separados a olho nu.',
+    explicacao:'Areia + água é heterogênea: as fases são visíveis a olho nu — a areia não se dissolve na água.' },
+];
+
+// ─── ESTADO ──────────────────────────────────────────────────────────
+let opcaoSelecionada1 = null;
+let opcaoSelecionada2 = null;
+let curvaSelecionada = null;
+let classificacoesR1 = {};
+let classificacoesR2 = {};
+let acertosR1 = 0;
+let acertosR2 = 0;
+let r3Acertou = false;
+
+// ─── UTILITÁRIOS ─────────────────────────────────────────────────────
+function feedback(id, tipo, titulo, explicacao) {
+  const el = document.getElementById(id);
+  el.className = `feedback-box visivel ${tipo}`;
+  el.innerHTML = `<strong>${titulo}</strong><span class="explicacao">${explicacao}</span>`;
+}
+
+function atualizarProgresso(rodada) {
+  const pct = { 1: 0, 2: 34, 3: 67, 4: 100 };
+  const progressoFill = document.getElementById('progressoFill');
+  const progressoTexto = document.getElementById('progressoTexto');
+
+  if (progressoFill) {
+    progressoFill.style.width = pct[rodada] + '%';
+  }
+  if (progressoTexto) {
+    progressoTexto.textContent = rodada < 4 ? `Rodada ${rodada} de 3` : 'Concluído!';
+  }
+}
+
+function atualizarNarrador(rodada) {
+  const textos = {
+    1: 'Rodada 1: escolha uma categoria (Substância Simples, Composta ou Mistura) e clique em cada carta para classificar. Você pode trocar a categoria antes de confirmar cada carta e, ao final, clique em Verificar.',
+    2: 'Rodada 2: agora classifique as misturas como homogêneas ou heterogêneas. Escolha a categoria e clique em cada carta; depois clique em Verificar para conferir.',
+    3: 'Rodada 3: observe as curvas e selecione qual representa a substância pura. Em seguida, escreva sua explicação no campo de texto e clique em Finalizar.'
+  };
+  document.getElementById('narradorTexto').textContent = textos[rodada];
+}
+
+// ─── RODADA 1 ─────────────────────────────────────────────────────────
+function selecionarOpcao(tipo) {
+  opcaoSelecionada1 = tipo;
+  ['simples','composta','mistura'].forEach(t => {
+    const btn = document.getElementById(`btn-${t}`);
+    btn.className = `opcao-btn${tipo === t ? ` ativa-${t}` : ''}`;
+  });
+}
+
+function renderCartasR1() {
+  const grid = document.getElementById('cartasR1');
+  grid.innerHTML = '';
+  SUBSTANCIAS_R1.forEach((s, i) => {
+    const el = document.createElement('div');
+    el.className = 'carta';
+    el.id = `carta-r1-${i}`;
+    el.innerHTML = `<div class="carta-formula">${s.formula}</div><div class="carta-nome">${s.nome}</div>`;
+    el.addEventListener('click', () => classificarR1(i));
+    grid.appendChild(el);
+  });
+}
+
+function classificarR1(idx) {
+  if (!opcaoSelecionada1) {
+    feedback('feedbackR1','info','Escolha uma categoria primeiro','Selecione Substância Simples, Composta ou Mistura antes de clicar na carta.');
+    return;
+  }
+  classificacoesR1[idx] = opcaoSelecionada1;
+  const carta = document.getElementById(`carta-r1-${idx}`);
+  carta.className = `carta sel-${opcaoSelecionada1}`;
+  carta.querySelector('.carta-formula').style.color = '';
+  document.getElementById('feedbackR1').className = 'feedback-box';
+}
+
+function verificarRodada1() {
+  if (Object.keys(classificacoesR1).length < SUBSTANCIAS_R1.length) {
+    feedback('feedbackR1','info','Classifique todas as substâncias',
+      `Você classificou ${Object.keys(classificacoesR1).length} de ${SUBSTANCIAS_R1.length}. Clique nas que faltam.`);
+    return;
+  }
+
+  acertosR1 = 0;
+  let erros = [];
+  SUBSTANCIAS_R1.forEach((s, i) => {
+    const carta = document.getElementById(`carta-r1-${i}`);
+    const badge = document.createElement('div');
+    badge.className = 'carta-badge';
+    carta.querySelectorAll('.carta-badge').forEach(b => b.remove());
+    if (classificacoesR1[i] === s.tipo) {
+      acertosR1++;
+      tocarDing();
+      carta.classList.add('correta');
+      badge.classList.add('badge-ok');
+      badge.textContent = '✓';
+    } else {
+      carta.classList.add('errada');
+      badge.classList.add('badge-err');
+      badge.textContent = '✕';
+      erros.push(`<strong>${s.formula}</strong>: ${s.dica}`);
+    }
+    carta.classList.add('bloqueada');
+    carta.appendChild(badge);
+  });
+
+  if (erros.length === 0) {
+    feedback('feedbackR1','ok','Perfeito! Todas corretas.',
+      'Você domina a diferença entre substâncias simples, compostas e misturas.');
+  } else {
+    feedback('feedbackR1','err',`${acertosR1} de ${SUBSTANCIAS_R1.length} corretas. Observe as dicas:`,
+      '<ul style="margin-top:0.4rem;padding-left:1.2rem">' + erros.map(e => `<li style="margin-bottom:0.3rem">${e}</li>`).join('') + '</ul>');
+  }
+
+  document.getElementById('btnVerificarR1').disabled = true;
+
+  // Mostrar botão para o aluno avançar quando estiver pronto
+  const btnAvancar1 = document.createElement('button');
+  btnAvancar1.className = 'btn-primario';
+  btnAvancar1.style.marginTop = '1rem';
+  btnAvancar1.textContent = 'Próxima rodada →';
+  btnAvancar1.onclick = avancarParaR2;
+  const narradorContinuar1 = document.getElementById('narradorContinuar');
+  narradorContinuar1.innerHTML = '';
+  narradorContinuar1.appendChild(btnAvancar1);
+}
+
+// ─── RODADA 2 ─────────────────────────────────────────────────────────
+function avancarParaR2() {
+  document.getElementById('rodada1').style.display = 'none';
+  document.getElementById('rodada2').style.display = 'block';
+  document.getElementById('narradorContinuar').innerHTML = '';
+  atualizarProgresso(2);
+  atualizarNarrador(2);
+  renderCartasR2();
+}
+
+function selecionarOpcao2(tipo) {
+  opcaoSelecionada2 = tipo;
+  ['homogenea','heterogenea'].forEach(t => {
+    const btn = document.getElementById(`btn-${t}`);
+    btn.className = `opcao-btn${tipo === t ? ` ativa-${t}` : ''}`;
+  });
+}
+
+function renderCartasR2() {
+  const grid = document.getElementById('cartasR2');
+  grid.innerHTML = '';
+  MISTURAS_R2.forEach((s, i) => {
+    const el = document.createElement('div');
+    el.className = 'carta';
+    el.id = `carta-r2-${i}`;
+    el.innerHTML = `<div class="carta-formula">${s.formula}</div><div class="carta-nome">${s.nome}</div>`;
+    el.addEventListener('click', () => classificarR2(i));
+    grid.appendChild(el);
+  });
+}
+
+function classificarR2(idx) {
+  if (!opcaoSelecionada2) {
+    feedback('feedbackR2','info','Escolha uma categoria primeiro','Selecione Homogênea ou Heterogênea antes de clicar na carta.');
+    return;
+  }
+  classificacoesR2[idx] = opcaoSelecionada2;
+  const carta = document.getElementById(`carta-r2-${idx}`);
+  carta.className = `carta sel-${opcaoSelecionada2}`;
+  document.getElementById('feedbackR2').className = 'feedback-box';
+}
+
+function verificarRodada2() {
+  if (Object.keys(classificacoesR2).length < MISTURAS_R2.length) {
+    feedback('feedbackR2','info','Classifique todas as misturas',
+      `Você classificou ${Object.keys(classificacoesR2).length} de ${MISTURAS_R2.length}.`);
+    return;
+  }
+
+  acertosR2 = 0;
+  let erros = [];
+  MISTURAS_R2.forEach((s, i) => {
+    const carta = document.getElementById(`carta-r2-${i}`);
+    const badge = document.createElement('div');
+    badge.className = 'carta-badge';
+    carta.querySelectorAll('.carta-badge').forEach(b => b.remove());
+    if (classificacoesR2[i] === s.tipo) {
+      acertosR2++;
+      tocarDing();
+      carta.classList.add('correta');
+      badge.classList.add('badge-ok');
+      badge.textContent = '✓';
+    } else {
+      carta.classList.add('errada');
+      badge.classList.add('badge-err');
+      badge.textContent = '✕';
+      erros.push(`<strong>${s.formula}</strong>: ${s.dica}`);
+    }
+    carta.classList.add('bloqueada');
+    carta.appendChild(badge);
+  });
+
+  if (erros.length === 0) {
+    feedback('feedbackR2','ok','Perfeito!',
+      'Você sabe distinguir misturas homogêneas de heterogêneas.');
+  } else {
+    feedback('feedbackR2','err',`${acertosR2} de ${MISTURAS_R2.length} corretas:`,
+      '<ul style="margin-top:0.4rem;padding-left:1.2rem">' + erros.map(e => `<li style="margin-bottom:0.3rem">${e}</li>`).join('') + '</ul>');
+  }
+
+  document.getElementById('btnVerificarR2').disabled = true;
+
+  const btnAvancar2 = document.createElement('button');
+  btnAvancar2.className = 'btn-primario';
+  btnAvancar2.style.marginTop = '1rem';
+  btnAvancar2.textContent = 'Próxima rodada →';
+  btnAvancar2.onclick = avancarParaR3;
+  const narradorContinuar2 = document.getElementById('narradorContinuar');
+  narradorContinuar2.innerHTML = '';
+  narradorContinuar2.appendChild(btnAvancar2);
+}
+
+// ─── RODADA 3 ─────────────────────────────────────────────────────────
+function avancarParaR3() {
+  document.getElementById('rodada2').style.display = 'none';
+  document.getElementById('rodada3').style.display = 'block';
+  document.getElementById('narradorContinuar').innerHTML = '';
+  atualizarProgresso(3);
+  atualizarNarrador(3);
+}
+
+function selecionarCurva(letra) {
+  curvaSelecionada = letra;
+  ['A','B'].forEach(l => {
+    const el = document.getElementById(`curva${l}`);
+    el.className = 'curva-item';
+    if (l === letra) {
+      // A = pura (tem patamar), B = mistura
+      el.classList.add(l === 'A' ? 'selecionada-pura' : 'selecionada-mistura');
+    }
+  });
+  document.getElementById('feedbackR3').className = 'feedback-box';
+}
+
+function verificarRodada3() {
+  const resposta = document.getElementById('respostaR3').value.trim();
+  if (!curvaSelecionada) {
+    feedback('feedbackR3','info','Selecione uma curva','Clique na Curva A ou na Curva B para indicar qual é a substância pura.');
+    return;
+  }
+
+  // Curva A tem patamar = substância pura. Pergunta implícita: qual é a substância pura?
+  r3Acertou = curvaSelecionada === 'A';
+  const curvaA = document.getElementById('curvaA');
+  const curvaB = document.getElementById('curvaB');
+  curvaA.className = 'curva-item correta-curva'; // A é sempre a pura
+  curvaB.className = `curva-item ${curvaSelecionada === 'B' ? 'errada-curva' : ''}`;
+  curvaA.style.pointerEvents = 'none';
+  curvaB.style.pointerEvents = 'none';
+
+  if (r3Acertou) {
+    tocarDing();
+    feedback('feedbackR3','ok',
+      'A Curva A é a substância pura.',
+      'O patamar horizontal indica que a temperatura permanece constante durante a mudança de estado — toda a energia absorvida vai para a mudança de fase, não para elevar a temperatura. Em uma mistura, não existe temperatura fixa de mudança de estado, então a curva sobe continuamente.' +
+      (resposta ? `<br><br><em>Sua resposta:</em> "${resposta}" — boa reflexão!` : ''));
+  } else {
+    feedback('feedbackR3','err',
+      'Não é bem isso. A Curva A é a substância pura.',
+      'A <strong>Curva A</strong> tem um patamar (segmento horizontal): durante a mudança de estado de uma substância pura, a temperatura não varia — toda a energia vai para romper as ligações. A <strong>Curva B</strong> sobe continuamente porque misturas não têm temperatura fixa de ebulição ou fusão.');
+  }
+
+  document.getElementById('btnVerificarR3').disabled = true;
+
+  const btnAvancar3 = document.createElement('button');
+  btnAvancar3.className = 'btn-primario';
+  btnAvancar3.style.marginTop = '1rem';
+  btnAvancar3.textContent = 'Ver resultado final →';
+  btnAvancar3.onclick = mostrarConclusao;
+  const narradorContinuar3 = document.getElementById('narradorContinuar');
+  narradorContinuar3.innerHTML = '';
+  narradorContinuar3.appendChild(btnAvancar3);
+}
+
+// ─── CONCLUSÃO ────────────────────────────────────────────────────────
+function mostrarConclusao() {
+  document.getElementById('rodada3').style.display = 'none';
+  document.getElementById('conclusao').classList.add('visivel');
+  document.getElementById('narradorContinuar').innerHTML = '';
+  atualizarProgresso(4);
+
+  const total = SUBSTANCIAS_R1.length + MISTURAS_R2.length + 1;
+  const acertos = acertosR1 + acertosR2 + (r3Acertou ? 1 : 0);
+  const pct = Math.round((acertos / total) * 100);
+
+  document.getElementById('placar').textContent = `${acertos} de ${total} — ${pct}% de acerto`;
+
+  let msg;
+  if (pct === 100) msg = 'Excelente! Você classificou corretamente todas as substâncias e interpretou as curvas de aquecimento. Domínio completo do conteúdo.';
+  else if (pct >= 75) msg = 'Muito bem! Apenas alguns pontos merecem revisão. Releia o mapa e jogue novamente para fixar.';
+  else if (pct >= 50) msg = 'Bom início. Revise as diferenças entre substância simples, composta e mistura, e preste atenção nas curvas de aquecimento.';
+  else msg = 'Continue estudando! Revise o mapa mental de Substâncias e tente novamente. Cada rodada é uma chance de aprender.';
+
+  document.getElementById('mensagemFinal').textContent = msg;
+  document.getElementById('conclusao').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function reiniciar() {
+  opcaoSelecionada1 = null;
+  opcaoSelecionada2 = null;
+  curvaSelecionada = null;
+  classificacoesR1 = {};
+  classificacoesR2 = {};
+  acertosR1 = 0; acertosR2 = 0; r3Acertou = false;
+
+  document.getElementById('conclusao').classList.remove('visivel');
+  document.getElementById('rodada1').style.display = 'block';
+  document.getElementById('rodada2').style.display = 'none';
+  document.getElementById('rodada3').style.display = 'none';
+
+  ['simples','composta','mistura'].forEach(t => document.getElementById(`btn-${t}`).className = 'opcao-btn');
+  ['homogenea','heterogenea'].forEach(t => document.getElementById(`btn-${t}`).className = 'opcao-btn');
+  document.getElementById('feedbackR1').className = 'feedback-box';
+  document.getElementById('feedbackR2').className = 'feedback-box';
+  document.getElementById('feedbackR3').className = 'feedback-box';
+  document.getElementById('btnVerificarR1').disabled = false;
+  document.getElementById('btnVerificarR2').disabled = false;
+  document.getElementById('btnVerificarR3').disabled = false;
+  document.getElementById('respostaR3').value = '';
+  ['curvaA','curvaB'].forEach(id => {
+    document.getElementById(id).className = 'curva-item';
+    document.getElementById(id).style.pointerEvents = '';
+  });
+
+  atualizarProgresso(1);
+  atualizarNarrador(1);
+  renderCartasR1();
+  renderCartasR2();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ─── SOM ─────────────────────────────────────────────────────────────
+const _ding = new Audio('../sons/ding.mp3');
+_ding.preload = 'auto';
+function tocarDing() { try{ _ding.currentTime = 0; _ding.play().catch(()=>{}); }catch(e){} }
+
+// ─── INIT ────────────────────────────────────────────────────────────
+renderCartasR1();
+renderCartasR2();
+atualizarProgresso(1);
+</script>
+
+<script>
+(function () {
+  var _clickSom = new Audio('../sons/click.mp3');
+  _clickSom.preload = 'auto';
+  document.addEventListener('click', function (e) {
+    var alvo = e.target.closest('button');
+    if (alvo) { try { _clickSom.currentTime = 0; _clickSom.play().catch(function () {}); } catch (err) {} }
+  }, true);
+})();
+</script>
+</body>
+</html>

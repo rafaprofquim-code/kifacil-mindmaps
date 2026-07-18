@@ -1,0 +1,788 @@
+﻿﻿
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="canonical" href="https://kifaciledu.com.br/jogos/jogos-escaperoom/torre-quimica/fases/laboratorio-rutherford.html">
+<title>Laboratório de Rutherford — Cápsula do Tempo | KiFácil</title>
+<meta name="description" content="Viaje ao laboratório de Ernest Rutherford em 1911 e reviva a descoberta do núcleo atômico. Escape Room da Cápsula do Tempo — KiFácil.">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Y1JGD5VVBD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-Y1JGD5VVBD');
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;1,500;1,600&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #4a3728; --bg-dark: #2e2016; --text: #f5ead0; --text-soft: #e8d4b0;
+    --gold: #e8b84b; --border: rgba(212,170,106,0.35); --border-faint: rgba(212,170,106,0.2);
+    --green: rgba(80,200,120,0.15); --green-border: rgba(80,200,120,0.5); --green-text: #8fe0a0;
+    --paper: #f5ead0; --paper-text: #2e1a08; --paper-text-soft: #3d2010; --paper-gold: #8b5e1a;
+  }
+  html, body { height: 100%; }
+  body { background: var(--bg); font-family: 'Libre Baskerville', serif; color: var(--text); min-height: 100vh; display: flex; flex-direction: column; }
+
+  .nav { background: var(--bg-dark); padding: 12px 32px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid var(--border); font-size: 11px; color: var(--text-soft); letter-spacing: .04em; flex-shrink: 0; }
+  .nav a { color: var(--gold); text-decoration: none; }
+  .nav a:hover { text-decoration: underline; }
+  .nav-sep { color: rgba(232,216,176,0.4); }
+
+  .header { background: var(--bg-dark); padding: 20px 32px 16px; border-bottom: 1px solid var(--border-faint); display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; }
+  .eyebrow { font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--gold); margin-bottom: 4px; }
+  .page-title { font-family: 'Lora', serif; font-size: 30px; font-weight: 600; color: var(--text); }
+
+  .main { display: flex; flex: 1; align-items: flex-start; }
+
+  /* CENA */
+  .scene-wrap { background: var(--bg-dark); padding: 28px; display: flex; justify-content: center; align-items: flex-start; flex: 0 0 56%; }
+  .scene-inner { position: relative; width: 100%; max-width: 620px; user-select: none; }
+  .scene-img { width: 100%; display: block; border-radius: 8px; border: 1px solid rgba(212,170,106,0.4); }
+  .scene-overlay { position: absolute; top: 0; left: 0; right: 0; background: linear-gradient(180deg, rgba(46,32,22,0.85) 0%, rgba(46,32,22,0) 100%); padding: 16px 20px 28px; border-radius: 8px 8px 0 0; pointer-events: none; }
+  .scene-overlay-title { font-family: 'Lora', serif; font-size: 20px; font-weight: 600; color: var(--text); margin-bottom: 2px; }
+  .scene-overlay-sub { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--gold); }
+
+  .link-aula {
+    position: absolute; top: 10px; right: 10px; z-index: 10;
+    display: flex; flex-direction: column; align-items: center; gap: 2px;
+    text-decoration: none; color: #fff8ee;
+    background: rgba(30,16,8,0.72); border: 1.5px solid var(--dourado-claro, #c8920a);
+    border-radius: 8px; padding: 0.4rem 0.65rem;
+    font-family: 'Cormorant Garamond', Georgia, serif; font-size: 0.68rem; font-weight: 600;
+    letter-spacing: 0.02em; text-align: center; line-height: 1.2;
+    cursor: pointer; transition: background 0.2s, transform 0.15s;
+  }
+  .link-aula:hover { background: rgba(30,16,8,0.92); transform: translateY(-1px); }
+  .link-aula svg { width: 22px; height: 22px; }
+
+  .hotspot { position: absolute; cursor: pointer; display: none; border-radius: 8px; transition: box-shadow .4s; }
+  .hotspot.active { display: block; z-index: 5; box-shadow: 0 0 0 2px rgba(232,184,75,0.6), 0 0 18px rgba(232,184,75,0.25); animation: pulseHS 2.2s ease-in-out infinite; }
+  .hotspot.locked { display: block; z-index: 1; cursor: default; box-shadow: 0 0 0 1px rgba(232,184,75,0.15); }
+  .hotspot.done { display: block; z-index: 2; cursor: default; pointer-events: none; background: rgba(232,184,75,0.1); box-shadow: 0 0 0 2px rgba(232,184,75,0.45); }
+  @keyframes pulseHS { 0%, 100% { box-shadow: 0 0 0 2px rgba(232,184,75,0.45), 0 0 12px rgba(232,184,75,0.15); } 50% { box-shadow: 0 0 0 2.5px rgba(232,184,75,0.9), 0 0 24px rgba(232,184,75,0.4); } }
+  .btn-iniciar-exp { display: none; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); background: var(--gold); border: none; border-radius: 8px; padding: 16px 32px; font-family: 'Libre Baskerville', serif; font-size: 14px; font-weight: 700; color: var(--bg-dark); cursor: pointer; letter-spacing: .06em; text-transform: uppercase; z-index: 10; box-shadow: 0 4px 28px rgba(0,0,0,0.55), 0 0 0 1px rgba(232,184,75,0.3); transition: background .15s; white-space: nowrap; animation: fadeInBtn .4s ease; }
+  .btn-iniciar-exp:hover { background: #f0c960; }
+  @keyframes fadeInBtn { from { opacity: 0; transform: translate(-50%, -46%) scale(.95); } to { opacity: 1; transform: translate(-50%, -50%) scale(1); } }
+
+  /* PAINEL DIREITO */
+  .panels-row { flex: 1; display: flex; flex-direction: column; gap: 18px; padding: 28px; border-left: 1px solid var(--border-faint); align-self: stretch; }
+
+  .narr-box { background: var(--paper); border: 1px solid rgba(139,94,26,0.25); border-radius: 8px; padding: 20px 22px; }
+  .narr-eyebrow { font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--paper-gold); margin-bottom: 8px; }
+  .narr { font-family: 'Lora', serif; font-size: 21px; line-height: 1.7; color: var(--paper-text); font-weight: 600; }
+  .narr strong { color: #6b3f0e; font-style: normal; }
+  .narr em { color: #3d2010; }
+
+  .progresso-wrap { background: var(--paper); border: 1px solid rgba(139,94,26,0.18); border-radius: 8px; padding: 16px 20px; }
+  .progresso-title { font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--paper-gold); margin-bottom: 14px; }
+  .ato-item { display: flex; align-items: flex-start; gap: 12px; padding: 8px 0; border-bottom: 1px solid rgba(139,94,26,0.1); }
+  .ato-item:last-child { border-bottom: none; }
+  .ato-dot { width: 10px; height: 10px; border-radius: 50%; border: 1.5px solid rgba(139,94,26,0.3); flex-shrink: 0; margin-top: 4px; transition: all .4s; }
+  .ato-item.done .ato-dot { background: var(--paper-gold); border-color: var(--paper-gold); }
+  .ato-nome { font-family: 'Lora', serif; font-size: 17px; color: rgba(46,26,8,0.35); transition: color .4s; line-height: 1.5; }
+  .ato-item.done .ato-nome { color: var(--paper-text); }
+  .ato-tag { font-size: 11px; color: rgba(46,26,8,0.3); display: block; margin-top: 2px; }
+
+  /* OVERLAY CARD */
+  .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.82); display: none; align-items: center; justify-content: center; z-index: 200; padding: 20px; }
+  .overlay.show { display: flex; }
+  .card { background: var(--paper); border: 1px solid rgba(139,94,26,0.35); border-radius: 10px; padding: 0; max-width: 560px; width: 100%; position: relative; max-height: 92vh; display: flex; flex-direction: column; animation: cardIn .3s ease; overflow: hidden; }
+
+  .card-close { position: absolute; top: 12px; right: 14px; width: 34px; height: 34px; border: none; background: transparent; color: var(--paper-gold); font-family: Arial, sans-serif; font-size: 30px; line-height: 1; cursor: pointer; z-index: 5; }
+  .card-close:hover { color: #4a2c10; }
+  @keyframes cardIn { from { opacity: 0; transform: scale(.96) translateY(8px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+
+  /* CABEÇALHO FIXO: eyebrow, título e diagrama nunca rolam */
+  .card-fixed-top { padding: 32px 32px 18px; flex-shrink: 0; border-bottom: 1px solid rgba(139,94,26,0.18); background: var(--paper); }
+  .card-eyebrow { font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--paper-gold); margin-bottom: 8px; }
+  .card-title { font-family: 'Lora', serif; font-size: 24px; font-weight: 600; color: var(--paper-text); margin-bottom: 14px; line-height: 1.3; }
+
+  /* CORPO ROLÁVEL: fala inicial, perguntas, respostas e conclusões */
+  .card-scroll-body { padding: 18px 32px 32px; overflow-y: auto; flex: 1; }
+
+  .card-fala { font-family: 'Lora', serif; font-size: 19px; line-height: 1.75; color: var(--paper-text); font-weight: 600; margin-bottom: 18px; }
+  .card-fala strong { color: #6b3f0e; font-style: normal; }
+
+  .diagrama-wrap { background: #fff8ee; border: 1px solid rgba(139,94,26,0.2); border-radius: 8px; padding: 14px; margin: 0; text-align: center; }
+  .diagrama-svg-wrap { position: relative; width: 100%; aspect-ratio: 380 / 210; }
+  .diagrama-svg-wrap svg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: block; }
+  .exp-marker { position: absolute; width: 30px; height: 30px; border-radius: 50%; background: #e8b84b; color: #2e1a08; font-family: 'Libre Baskerville', serif; font-size: 14px; font-weight: 700; align-items: center; justify-content: center; transform: translate(-50%, -50%); cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.5); z-index: 5; user-select: none; transition: background .2s; }
+  .exp-marker:hover { filter: brightness(1.1); }
+
+  .btn-acao { display: block; width: 100%; background: var(--paper-text); border: none; border-radius: 6px; padding: 13px; font-family: 'Libre Baskerville', serif; font-size: 13px; font-weight: 700; color: var(--paper); cursor: pointer; letter-spacing: .04em; text-transform: uppercase; transition: background .15s; margin-bottom: 8px; }
+  .btn-acao:hover:not(:disabled) { background: #4a2c10; }
+  .btn-acao:disabled { opacity: 0.4; cursor: default; }
+  .btn-acao.feita { background: rgba(80,200,120,0.15); color: #2d5a2d; border: 1px solid rgba(80,200,120,0.4); }
+
+  .pergunta-box { display: none; }
+  .pergunta-box.show { display: block; animation: cardIn .3s ease; }
+  .pergunta-texto { font-family: 'Lora', serif; font-size: 19px; line-height: 1.7; color: var(--paper-text); font-weight: 600; margin-bottom: 14px; }
+  .pergunta-texto strong { color: #6b3f0e; font-style: normal; }
+  .resposta-input { width: 100%; background: #fff8ee; border: 1.5px solid rgba(139,94,26,0.4); border-radius: 6px; padding: 12px 14px; font-family: 'Libre Baskerville', serif; font-size: 15px; color: var(--paper-text); outline: none; caret-color: var(--paper-gold); transition: border-color .15s; margin-bottom: 10px; resize: vertical; min-height: 70px; }
+  .resposta-input:focus { border-color: var(--paper-gold); }
+  .resposta-input::placeholder { color: rgba(46,26,8,0.3); }
+
+  .btn-opcao { display: block; width: 100%; background: rgba(232,184,75,0.07); border: 1px solid rgba(139,94,26,0.3); border-radius: 8px; padding: 14px 16px; font-family: 'Lora', serif; font-size: 16px; font-weight: 600; color: var(--paper-text); cursor: pointer; line-height: 1.6; text-align: left; transition: background .15s, border-color .15s; }
+  .btn-opcao:hover:not(:disabled) { background: rgba(232,184,75,0.15); border-color: rgba(232,184,75,0.6); }
+  .btn-opcao:disabled { cursor: default; opacity: 0.65; }
+  .quiz-feedback { display: none; border-radius: 8px; padding: 16px 18px; margin-top: 14px; margin-bottom: 14px; }
+  .quiz-feedback.show { display: block; animation: cardIn .3s ease; }
+  .quiz-feedback.ok { background: rgba(80,200,120,0.08); border: 1px solid rgba(80,200,120,0.4); }
+  .quiz-feedback.err { background: rgba(139,94,26,0.07); border: 1px solid rgba(139,94,26,0.3); }
+  .quiz-feedback.ok .conclusao-eyebrow { color: #2d5a2d; }
+  .quiz-feedback.ok .conclusao-texto { color: #1f3d1f; }
+  .quiz-feedback.err .conclusao-eyebrow { color: #7a4a1a; }
+  .quiz-feedback.err .conclusao-texto { color: #4a2e08; }
+
+  .conclusao-box { display: none; background: rgba(80,200,120,0.08); border: 1px solid rgba(80,200,120,0.4); border-radius: 8px; padding: 16px 18px; margin-top: 14px; margin-bottom: 14px; }
+  .conclusao-box.show { display: block; animation: cardIn .3s ease; }
+  .conclusao-eyebrow { font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: #2d5a2d; margin-bottom: 8px; }
+  .conclusao-texto { font-family: 'Lora', serif; font-size: 18px; line-height: 1.75; color: #1f3d1f; font-weight: 600; }
+  .conclusao-texto strong { color: #2d5a2d; font-style: normal; }
+
+  .btn-continuar { display: none; width: 100%; background: var(--paper-gold); border: none; border-radius: 6px; padding: 13px; font-family: 'Libre Baskerville', serif; font-size: 13px; font-weight: 700; color: var(--paper); cursor: pointer; letter-spacing: .06em; text-transform: uppercase; transition: background .15s; margin-top: 14px; }
+  .btn-continuar.show { display: block; }
+  .btn-continuar:hover { background: #6b3f0e; }
+
+  /* TELA FINAL */
+  .win-screen { display: none; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 60px 32px; flex: 1; }
+  .win-screen.show { display: flex; }
+  .win-title { font-family: 'Lora', serif; font-size: 44px; font-weight: 600; color: var(--gold); margin-bottom: 12px; }
+  .win-sub { font-size: 15px; color: var(--text-soft); font-style: italic; margin-bottom: 32px; line-height: 1.8; max-width: 560px; }
+  .win-badges { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-bottom: 32px; }
+  .badge { background: var(--bg-dark); border: 1px solid var(--border); border-radius: 8px; padding: 18px 22px; text-align: center; min-width: 120px; }
+  .badge-icon { font-size: 26px; margin-bottom: 6px; }
+  .badge-label { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--gold); }
+  .win-btns { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+  .btn-restart { background: none; border: 1px solid rgba(232,184,75,0.3); border-radius: 6px; padding: 10px 24px; font-family: 'Libre Baskerville', serif; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: rgba(232,184,75,0.6); cursor: pointer; transition: all .15s; }
+  .btn-restart:hover { border-color: rgba(232,184,75,0.6); color: var(--gold); }
+
+  /* CINTILAÇÕES — 3 intensidades, mesma tela, nunca se move */
+  .cint { opacity: 0; transition: opacity .4s ease; }
+  .cint.on { opacity: 1; }
+  .cint-central.on { animation: blinkForte 1.2s ease-in-out infinite; }
+  @keyframes blinkForte { 0%, 100% { opacity: 0.75; } 50% { opacity: 1; } }
+  .cint-media.on { animation: blinkMedia 1.5s ease-in-out infinite; }
+  @keyframes blinkMedia { 0%, 100% { opacity: 0.4; } 50% { opacity: 0.75; } }
+  .cint-rara.on { animation: blinkFraca 1.8s ease-in-out infinite; }
+  @keyframes blinkFraca { 0%, 100% { opacity: 0.2; } 50% { opacity: 0.5; } }
+
+  @media (max-width: 768px) {
+    .main { flex-direction: column; }
+    .scene-wrap { flex: none; width: 100%; padding: 16px; }
+    .panels-row { border-left: none; border-top: 1px solid var(--border-faint); padding: 20px 16px; }
+    .page-title { font-size: 22px; }
+    .narr { font-size: 18px; }
+    .card-fixed-top { padding: 20px 20px 14px; }
+    .card-scroll-body { padding: 14px 20px 20px; }
+    .card-title { font-size: 20px; }
+    .card-fala, .pergunta-texto { font-size: 16px; }
+    .win-title { font-size: 32px; }
+    .link-aula { top: 6px; right: 6px; padding: 0.3rem 0.5rem; font-size: 0.6rem; }
+    .link-aula svg { width: 18px; height: 18px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="../../../torre-central/mapa-kifacil.html">Academia KiFácil</a>
+  <span class="nav-sep">›</span>
+  <a href="../../torre-ciencia.html">Torre de Ciências</a>
+  <span class="nav-sep">›</span>
+  Torre de Química · Fase 4 · Rutherford
+</nav>
+
+<header class="header">
+  <div>
+    <div class="eyebrow">Escape Room · Cápsula do Tempo</div>
+    <h1 class="page-title">Laboratório de Rutherford</h1>
+  </div>
+</header>
+
+<div class="main" id="mainScreen">
+
+  <div class="scene-wrap">
+    <div class="scene-inner">
+      <img src="../imagens/laboratorio-rut.jpg" alt="Laboratório de Ernest Rutherford no início do século XX" class="scene-img">
+      <div class="scene-overlay">
+        <div class="scene-overlay-title">Laboratório de Ernest Rutherford</div>
+        <div class="scene-overlay-sub">1911 · Cápsula do Tempo</div>
+      </div>
+
+      <!-- INTRO: 3 hotspots sequenciais — ajuste left/top/width/height conforme a imagem -->
+      <!-- hs-fonte: caixa de chumbo com polônio (esquerda) -->
+      <div class="hotspot active" id="hs-fonte"    style="left:2%;top:52%;width:28%;height:38%;"  onclick="clicarFonte()"></div>
+      <!-- hs-anteparo: aparato de ZnS (centro/direita, área maior) -->
+      <div class="hotspot locked" id="hs-anteparo" style="left:58%;top:46%;width:45%;height:15%;" onclick="clicarAnteparo()"></div>
+      <!-- hs-folha: lâmina de ouro (dentro do aparato, área menor — z-index:5 quando active garante prioridade de clique) -->
+      <div class="hotspot locked" id="hs-folha"    style="left:64%;top:46%;width:15%;height:14%;" onclick="clicarFolha()"></div>
+      <button class="btn-iniciar-exp" id="btnIniciarExp" onclick="iniciarExperimento()">⚡ Iniciar experimento</button>
+
+      <!-- COLOQUE O LINK AQUI -->
+      <a class="link-aula" href="https://www.youtube.com/watch?v=Mab6V0QYYUs&t=1s" target="_blank" rel="noopener" title="Assista à aula">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.6"/>
+          <path d="M10 8.5L16 12L10 15.5V8.5Z" fill="currentColor"/>
+        </svg>
+        <span>Assista à aula</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="panels-row">
+
+    <div class="narr-box">
+      <div class="narr-eyebrow">Cápsula do Tempo — 1911</div>
+      <div class="narr" id="narr">
+        <strong>Rutherford:</strong> <em>"Antes de começarmos, vamos relembrar a ideia de Thomson. Segundo ele, o átomo seria uma esfera de carga positiva espalhada por todo o seu volume, contendo elétrons distribuídos em seu interior, como passas em um pudim.
+
+Durante algum tempo, esse modelo pareceu explicar bem o que os cientistas observavam. Mas, como todo bom cientista, não devemos aceitar uma ideia apenas porque ela parece correta.
+
+Vamos colocá-la à prova.
+
+Traga-me a fonte de polônio, dentro da caixa de chumbo."</em>
+      </div>
+    </div>
+
+    <div class="progresso-wrap">
+      <div class="progresso-title">Observações do experimento</div>
+      <div class="ato-item" id="ai-1">
+        <div class="ato-dot"></div>
+        <div>
+          <div class="ato-nome">A maioria atravessa</div>
+          <span class="ato-tag">confirma o modelo de Thomson</span>
+        </div>
+      </div>
+      <div class="ato-item" id="ai-2">
+        <div class="ato-dot"></div>
+        <div>
+          <div class="ato-nome">Algumas desviam</div>
+          <span class="ato-tag">existe carga concentrada</span>
+        </div>
+      </div>
+      <div class="ato-item" id="ai-3">
+        <div class="ato-dot"></div>
+        <div>
+          <div class="ato-nome">Raríssimas retornam quase por completo</div>
+          <span class="ato-tag">núcleo pequeno, denso e positivo</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- TELA FINAL -->
+<div class="win-screen" id="winScreen">
+  <div class="win-title">O núcleo atômico foi descoberto!</div>
+  <p class="win-sub">Você ajudou Rutherford a provar que o átomo de Thomson estava incompleto. A carga positiva não está espalhada por todo o volume — ela está concentrada num núcleo pequeno, denso, com quase toda a massa do átomo. Ao redor dele, um imenso espaço vazio onde os elétrons se movem. Esse é o modelo planetário: núcleo no centro, eletrosfera ao redor, como planetas girando em torno do Sol.</p>
+  <div class="win-badges">
+    <div class="badge"><div class="badge-icon">🕳️</div><div class="badge-label">Espaço vazio</div></div>
+    <div class="badge"><div class="badge-icon">⚡</div><div class="badge-label">Carga concentrada</div></div>
+    <div class="badge"><div class="badge-icon">☀️</div><div class="badge-label">Núcleo denso</div></div>
+  </div>
+  <div class="win-btns">
+    <button class="btn-restart" onclick="resetGame()">Reviver o experimento</button>
+  </div>
+</div>
+
+<!-- OVERLAY CARD -->
+<div class="overlay" id="overlay">
+  <div class="card" id="card"></div>
+</div>
+
+<script>
+function setNarr(html) { document.getElementById('narr').innerHTML = html; }
+function openOverlay() { document.getElementById('overlay').classList.add('show'); }
+function closeOverlay() { document.getElementById('overlay').classList.remove('show'); }
+
+document.getElementById('overlay').addEventListener('click', function(e) {
+  if (e.target === this) closeOverlay();
+});
+
+function tocarDing() {
+  const a = new Audio('../sons/ding.mp3');
+  a.play().catch(() => {});
+}
+
+// ── ESTADO DA INTRO ──────────────────────────────────────────────────────────
+// 0 = aguardando fonte | 1 = aguardando folha | 2 = aguardando anteparo | 3 = pronto
+let introStep = 0;
+
+function marcarFeito(id) {
+  const el = document.getElementById(id);
+  el.classList.remove('active');
+  el.classList.add('done');
+}
+function ativarHotspot(id) {
+  const el = document.getElementById(id);
+  el.classList.remove('locked');
+  el.classList.add('active');
+}
+
+// ── HELPER: avança entre falas do card de intro ──────────────────────────────
+function nextFala(idx) {
+  let i = 0;
+  while (true) {
+    const el = document.getElementById('fala-' + i);
+    if (!el) break;
+    el.style.display = i === idx ? 'block' : 'none';
+    i++;
+  }
+  const body = document.querySelector('.card-scroll-body');
+  if (body) body.scrollTop = 0;
+}
+
+function responderIntroFonte() {
+  const val = document.getElementById('respIntroFonte').value.trim();
+  if (!val) { document.getElementById('respIntroFonte').focus(); return; }
+  tocarDing();
+  document.getElementById('respIntroFonte').disabled = true;
+  document.getElementById('btnResponderIntroFonte').disabled = true;
+  document.getElementById('conclusaoIntroFonte').classList.add('show');
+  document.getElementById('btnConcluirFonte').style.display = 'block';
+}
+
+// ── CLIQUE 1: FONTE DE POLÔNIO ───────────────────────────────────────────────
+function clicarFonte() {
+  if (introStep !== 0) return;
+  document.getElementById('card').innerHTML = `
+    <button class="card-close" onclick="closeOverlay()" aria-label="Fechar">×</button>
+    <div class="card-fixed-top">
+      <div class="card-eyebrow">Aparato · 1 de 3</div>
+      <div class="card-title">Fonte de Polônio-210</div>
+    </div>
+    <div class="card-scroll-body">
+      <div id="fala-0">
+        <div class="card-fala"><strong>Rutherford:</strong> "Esta é uma fonte de polônio. Ela emite continuamente partículas alfa através de uma pequena abertura no bloco de chumbo que a envolve, formando um feixe estreito e direcionado."</div>
+        <button class="btn-acao" onclick="nextFala(1)">Próximo →</button>
+      </div>
+      <div id="fala-1" style="display:none">
+        <div class="card-fala"><strong>Rutherford:</strong> "Já sabemos algumas coisas sobre essas partículas. Elas possuem carga elétrica positiva, são muito mais massivas que os elétrons e viajam a velocidades extremamente elevadas."</div>
+        <button class="btn-acao" onclick="nextFala(2)">Próximo →</button>
+      </div>
+      <div id="fala-2" style="display:none">
+        <div class="card-fala"><strong>Rutherford:</strong> "Em outras palavras, vamos lançar partículas positivas, pesadas e muito rápidas contra a matéria. Será que atravessarão o átomo facilmente? Ou encontrarão algum obstáculo em seu caminho? Vamos descobrir."</div>
+        <div class="pergunta-box show" style="margin-bottom:14px;">
+          <div class="pergunta-texto">O que você imagina que aconteça quando partículas tão pesadas atingirem um obstáculo sólido?</div>
+          <textarea class="resposta-input" id="respIntroFonte" placeholder="Escreva sua hipótese..."></textarea>
+          <button class="btn-acao" id="btnResponderIntroFonte" onclick="responderIntroFonte()" style="margin-top:8px;">Responder a Rutherford</button>
+        </div>
+        <div class="conclusao-box" id="conclusaoIntroFonte">
+          <div class="conclusao-eyebrow">Rutherford responde</div>
+          <div class="conclusao-texto">"A maioria dos cientistas esperava que as partículas atravessassem praticamente sem desvio — afinal, no modelo de Thomson a carga positiva está espalhada por todo o volume do átomo, sem nada concentrado capaz de repelir fortemente uma partícula tão rápida. Essa era minha expectativa também. Vamos ver se é isso que acontece."</div>
+        </div>
+        <button class="btn-acao" id="btnConcluirFonte" onclick="concluirFonte()" style="display:none;margin-top:14px;">Entendido — examinar a lâmina de ouro →</button>
+      </div>
+    </div>`;
+  openOverlay();
+}
+
+function concluirFonte() {
+  closeOverlay();
+  introStep = 1;
+  marcarFeito('hs-fonte');
+  ativarHotspot('hs-folha');
+  setNarr('<strong>Rutherford:</strong> <em>"Agora examine a lâmina de ouro — é ela que o feixe vai atravessar."</em>');
+}
+
+// ── CLIQUE 2: LÂMINA DE OURO ─────────────────────────────────────────────────
+function clicarFolha() {
+  if (introStep < 1) {
+    setNarr('<strong>Rutherford:</strong> <em>"Primeiro, examine a fonte de polônio — ela está ali, à esquerda."</em>');
+    return;
+  }
+  if (introStep !== 1) return;
+  document.getElementById('card').innerHTML = `
+    <button class="card-close" onclick="closeOverlay()" aria-label="Fechar">×</button>
+    <div class="card-fixed-top">
+      <div class="card-eyebrow">Aparato · 2 de 3</div>
+      <div class="card-title">Lâmina de Ouro</div>
+    </div>
+    <div class="card-scroll-body">
+      <div id="fala-0">
+        <div class="card-fala"><strong>Rutherford:</strong> "Esta é a lâmina de ouro. Eu precisava de um material que pudesse ser martelado até ficar extremamente fino, e o ouro é um dos metais mais maleáveis que existem. Conseguimos produzir lâminas com apenas algumas centenas de átomos de espessura."</div>
+        <button class="btn-acao" onclick="nextFala(1)">Próximo →</button>
+      </div>
+      <div id="fala-1" style="display:none">
+        <div class="card-fala"><strong>Rutherford:</strong> "Se a lâmina fosse grossa, cada partícula alfa atravessaria muitas camadas de átomos e sofreria inúmeras interações, tornando os resultados difíceis de interpretar. Com uma lâmina extremamente fina, os desvios observados podem ser associados a um número muito menor de interações."</div>
+        <button class="btn-acao" onclick="concluirFolha()">Entendido — examinar o anteparo →</button>
+      </div>
+    </div>`;
+  openOverlay();
+}
+
+function concluirFolha() {
+  closeOverlay();
+  introStep = 2;
+  marcarFeito('hs-folha');
+  ativarHotspot('hs-anteparo');
+  setNarr('<strong>Rutherford:</strong> <em>"E ali está o anteparo de sulfeto de zinco — nosso detector. Examine-o de perto."</em>');
+}
+
+// ── CLIQUE 3: ANTEPARO DE SULFETO DE ZINCO ───────────────────────────────────
+function clicarAnteparo() {
+  if (introStep < 2) {
+    const msg = introStep === 0
+      ? 'Primeiro, examine a fonte de polônio — ela está ali, à esquerda.'
+      : 'Agora examine a lâmina de ouro ao centro.';
+    setNarr(`<strong>Rutherford:</strong> <em>"${msg}"</em>`);
+    return;
+  }
+  if (introStep !== 2) return;
+  document.getElementById('card').innerHTML = `
+    <button class="card-close" onclick="closeOverlay()" aria-label="Fechar">×</button>
+    <div class="card-fixed-top">
+      <div class="card-eyebrow">Aparato · 3 de 3</div>
+      <div class="card-title">Anteparo de Sulfeto de Zinco</div>
+    </div>
+    <div class="card-scroll-body">
+      <div id="fala-0">
+        <div class="card-fala"><strong>Rutherford:</strong> "Este é o anteparo de sulfeto de zinco. Quando uma partícula alfa o atinge, surge um pequeno flash de luz exatamente no ponto do impacto. Chamamos esse flash de cintilação."</div>
+        <button class="btn-acao" onclick="nextFala(1)">Próximo →</button>
+      </div>
+      <div id="fala-1" style="display:none">
+        <div class="card-fala"><strong>Rutherford:</strong> "As partículas alfa são invisíveis, então não posso observar sua trajetória diretamente. Por isso, coloquei o anteparo ao redor da lâmina de ouro — assim, consigo detectar partículas que seguem em frente, partículas que desviam para os lados e até partículas que retornam na direção da fonte. Cada cintilação nos mostrará para onde uma partícula alfa foi após atravessar a lâmina."</div>
+        <button class="btn-acao" onclick="concluirAnteparo()">Entendido — pronto para começar →</button>
+      </div>
+    </div>`;
+  openOverlay();
+}
+
+function concluirAnteparo() {
+  closeOverlay();
+  introStep = 3;
+  marcarFeito('hs-anteparo');
+  setNarr('<strong>Rutherford:</strong> <em>"Agora que você entende cada peça do aparato, vamos ligar a fonte e observar."</em>');
+  document.getElementById('btnIniciarExp').style.display = 'block';
+}
+
+function iniciarExperimento() {
+  document.getElementById('btnIniciarExp').style.display = 'none';
+  abrirExperimento();
+}
+
+// ── ESTADO DO EXPERIMENTO ────────────────────────────────────────────────────
+const expVisto = { central: false, media: false, rara: false };
+function todosVistos() { return expVisto.central && expVisto.media && expVisto.rara; }
+let quizQ2tentativas = 0;
+
+// ── CONTEÚDO DAS REGIÕES ──────────────────────────────────────────────────────
+const expConteudo = {
+  central: {
+    titulo: '① Cintilação no centro da tela',
+    pergunta: '<strong>Rutherford:</strong> "Observe a tela: surge uma cintilação forte, bem no centro, exatamente na direção em que o feixe foi disparado — a grande maioria das partículas chegou ali. Pensando no modelo de Thomson que revisamos, isso era esperado ou surpreendente?"',
+    conclusao: '"Exatamente o que o modelo de Thomson previa: como a carga positiva estaria espalhada e diluída por todo o volume do átomo, nada deveria desviar fortemente as partículas alfa — e foi isso que vimos, a grande maioria atravessou quase sem desviar. Até aqui, o experimento <strong>confirma</strong> a expectativa."',
+    idResp: 'respCentral'
+  },
+  media: {
+    titulo: '② Cintilações laterais — desvio moderado',
+    pergunta: '<strong>Rutherford:</strong> "Veja — aparecem cintilações mais fracas, fora do centro, em ângulos consideráveis. Essas partículas alfa são pesadas e extremamente velozes. Que tipo de coisa, dentro do átomo, seria capaz de desviar uma partícula tão energética desse jeito?"',
+    conclusao: '"Pense bem: se a carga positiva estivesse mesmo espalhada e diluída por todo o volume do átomo, como Thomson propôs, nenhum ponto teria força suficiente para desviar uma partícula alfa de forma tão acentuada. Para causar esses desvios, deve haver, em algum lugar do átomo, uma <strong>concentração de carga</strong> — pontual, e não espalhada. E como as partículas alfa são positivas, e foram repelidas, essa concentração também deve ser <strong>positiva</strong>."',
+    idResp: 'respMedia'
+  },
+  rara: {
+    titulo: '③ Cintilações extremas — retorno quase completo',
+    pergunta: '<strong>Rutherford:</strong> "Surgiram raríssimas cintilações, fracas, nas extremidades da tela — quase do mesmo lado de onde o feixe partiu! Uma partícula alfa, pesada e veloz, só pode ter chegado tão próximo dali se tivesse retornado quase por completo, como se tivesse colidido com algo muito mais pesado do que ela. O que precisaria existir, dentro do átomo de ouro, para fazer isso acontecer?"',
+    conclusao: '"Foi quase tão inacreditável como atirar uma granada de 38 centímetros contra uma folha de papel e vê-la voltar, atingindo-nos. Para uma partícula tão pesada e veloz retornar quase por completo, ela precisa colidir com algo extremamente denso e maciço, concentrado numa região muito pequena do átomo. Chamo essa região de núcleo. E aqui está o ponto central: se praticamente toda a carga positiva e toda a massa do átomo estão concentradas nesse núcleo minúsculo, então não resta mais nada preenchendo o resto do volume: o restante do átomo é, necessariamente, espaço vazio. As três observações não são três evidências separadas — são o mesmo fenômeno, visto a distâncias diferentes do núcleo. Obrigado, caro estudante — você acabou de reviver a descoberta do núcleo atômico."',
+    idResp: 'respRara'
+  }
+};
+
+// ── DIAGRAMA DO EXPERIMENTO ───────────────────────────────────────────────────
+function diagramaExperimento() {
+  return `
+  <div class="diagrama-svg-wrap">
+    <svg viewBox="0 0 380 210" xmlns="http://www.w3.org/2000/svg">
+      <rect x="15" y="80" width="48" height="40" fill="#2e1a08"/>
+      <text x="6" y="135" font-family="Libre Baskerville, serif" font-size="9" fill="#8b5e1a">polônio</text>
+      <text x="0" y="146" font-family="Libre Baskerville, serif" font-size="9" fill="#8b5e1a">(caixa de chumbo)</text>
+
+      <rect x="88" y="70" width="9" height="22" fill="#3d2010"/>
+      <rect x="88" y="108" width="9" height="22" fill="#3d2010"/>
+      <rect x="116" y="70" width="9" height="22" fill="#3d2010"/>
+      <rect x="116" y="108" width="9" height="22" fill="#3d2010"/>
+      <text x="78" y="160" font-family="Libre Baskerville, serif" font-size="9" fill="#8b5e1a">placas de</text>
+      <text x="78" y="171" font-family="Libre Baskerville, serif" font-size="9" fill="#8b5e1a">chumbo</text>
+
+      <rect x="205" y="55" width="6" height="90" fill="#c9a227"/>
+      <text x="180" y="180" font-family="Libre Baskerville, serif" font-size="9" fill="#8b5e1a">lâmina de ouro</text>
+
+      <path d="M 260 12 A 110 110 0 0 1 260 188" fill="none" stroke="#cbb98a" stroke-width="10" opacity="0.5"/>
+      <text x="252" y="6" font-family="Libre Baskerville, serif" font-size="10" fill="#8b5e1a">tela de ZnS</text>
+
+      <!-- Cintilações — todas aparecem ao mesmo tempo ao ligar -->
+      <circle id="cintCentralGlow" class="cint" cx="304" cy="100" r="15" fill="#f0c960" opacity="0.3"/>
+      <circle id="cintCentral" class="cint cint-central" cx="304" cy="100" r="7" fill="#f0c960"/>
+      <circle id="cintMedia1" class="cint cint-media" cx="297" cy="62" r="4" fill="#e8b84b"/>
+      <circle id="cintMedia2" class="cint cint-media" cx="297" cy="138" r="4" fill="#e8b84b"/>
+      <circle id="cintRara1" class="cint cint-rara" cx="265" cy="16" r="3" fill="#c0392b"/>
+      <circle id="cintRara2" class="cint cint-rara" cx="265" cy="184" r="3" fill="#c0392b"/>
+
+    </svg>
+    <div id="marker-central" class="exp-marker" onclick="investigarRegiao('central')" style="left:89.5%;top:47.6%;display:none">1</div>
+    <div id="marker-media"   class="exp-marker" onclick="investigarRegiao('media')"   style="left:84.2%;top:29.5%;display:none">2</div>
+    <div id="marker-rara"    class="exp-marker" onclick="investigarRegiao('rara')"    style="left:73.2%;top:83.3%;display:none">3</div>
+  </div>`;
+}
+
+function abrirExperimento() {
+  expVisto.central = false; expVisto.media = false; expVisto.rara = false;
+  document.getElementById('card').innerHTML = `
+    <button class="card-close" onclick="closeOverlay()" aria-label="Fechar">×</button>
+    <div class="card-fixed-top">
+      <div class="card-eyebrow">O Experimento da Folha de Ouro</div>
+      <div class="card-title">O que acontece quando as partículas atingem a folha?</div>
+      <div class="diagrama-wrap" id="diagramaExp">${diagramaExperimento()}</div>
+    </div>
+    <div class="card-scroll-body" id="expScrollBody">
+      <div class="card-fala">
+        <strong>Rutherford:</strong> "Aqui está a fonte: um fragmento de polônio dentro de uma caixa de chumbo, emitindo partículas alfa — já sabemos que são pesadas e carregadas positivamente. As placas de chumbo, com pequenos orifícios, direcionam o feixe até a lâmina de ouro. Ao redor, a tela revestida de sulfeto de zinco vai brilhar onde as partículas chegarem. Ligue o aparato."
+      </div>
+      <button class="btn-acao" id="btnAcaoExp" onclick="ligarExperimento()">⚡ Ligar o aparato</button>
+    </div>`;
+  openOverlay();
+}
+
+function ligarExperimento() {
+  ['cintCentralGlow','cintCentral','cintMedia1','cintMedia2','cintRara1','cintRara2']
+    .forEach(id => document.getElementById(id)?.classList.add('on'));
+  ['marker-central','marker-media','marker-rara']
+    .forEach(id => { const el = document.getElementById(id); if (el) el.style.display = 'flex'; });
+  const btn = document.getElementById('btnAcaoExp');
+  btn.textContent = '✓ Aparato ligado'; btn.classList.add('feita'); btn.disabled = true;
+  setTimeout(renderMapaExp, 700);
+}
+
+function renderMapaExp() {
+  const status = (tipo) => expVisto[tipo]
+    ? `<span style="color:#2d5a2d;font-weight:700;margin-left:6px;">✓</span>`
+    : '';
+  document.getElementById('expScrollBody').innerHTML = `
+    <p style="font-family:'Libre Baskerville',serif;font-size:12px;color:rgba(46,26,8,0.55);line-height:1.7;margin-bottom:16px;text-align:center;">
+      Observe a tela: as três cintilações aparecem <strong style="color:#6b3f0e">ao mesmo tempo</strong>.<br>
+      Clique em cada marcador numerado — ou nos botões abaixo — para investigar. Sem ordem obrigatória.
+    </p>
+    <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:20px;">
+      <button class="btn-acao${expVisto.central?' feita':''}" onclick="investigarRegiao('central')" ${expVisto.central?'disabled':''}>
+        ① Cintilação central${status('central')}
+      </button>
+      <button class="btn-acao${expVisto.media?' feita':''}" onclick="investigarRegiao('media')" ${expVisto.media?'disabled':''}>
+        ② Cintilações laterais${status('media')}
+      </button>
+      <button class="btn-acao${expVisto.rara?' feita':''}" onclick="investigarRegiao('rara')" ${expVisto.rara?'disabled':''}>
+        ③ Cintilações extremas (raras)${status('rara')}
+      </button>
+    </div>
+    ${todosVistos() ? '<button class="btn-continuar show" onclick="finalizarExperimento()">Finalizar →</button>' : ''}`;
+}
+
+function investigarRegiao(tipo) {
+  const c = expConteudo[tipo];
+  document.getElementById('expScrollBody').innerHTML = `
+    <div class="card-fala" style="margin-bottom:16px;">${c.pergunta}</div>
+    <div class="pergunta-box show" id="pergInv">
+      <textarea class="resposta-input" id="${c.idResp}" placeholder="Escreva sua hipótese..."></textarea>
+      <button class="btn-acao" style="margin-top:8px;" onclick="responderExp('${tipo}')">Responder a Rutherford</button>
+    </div>
+    <div class="conclusao-box" id="conclusaoInv">
+      <div class="conclusao-eyebrow">Rutherford responde</div>
+      <div class="conclusao-texto">${c.conclusao}</div>
+      <button class="btn-continuar" id="btnVoltarMapa" onclick="concluirInvestigacao('${tipo}')">← Voltar às observações</button>
+    </div>`;
+}
+
+function responderExp(tipo) {
+  const c = expConteudo[tipo];
+  const val = document.getElementById(c.idResp)?.value.trim();
+  if (!val) { document.getElementById(c.idResp)?.focus(); return; }
+  tocarDing();
+  const inp = document.querySelector('#pergInv .resposta-input');
+  const btn = document.querySelector('#pergInv .btn-acao');
+  if (inp) inp.disabled = true;
+  if (btn) btn.disabled = true;
+  document.getElementById('conclusaoInv')?.classList.add('show');
+  document.getElementById('btnVoltarMapa')?.classList.add('show');
+}
+
+function concluirInvestigacao(tipo) {
+  expVisto[tipo] = true;
+  const marker = document.getElementById('marker-' + tipo);
+  if (marker) {
+    marker.style.cursor = 'default';
+    marker.removeAttribute('onclick');
+    marker.style.background = 'rgba(80,200,120,0.85)';
+    marker.style.color = '#1a3d1a';
+    marker.style.boxShadow = '0 2px 6px rgba(0,0,0,0.3)';
+  }
+  renderMapaExp();
+}
+
+function finalizarExperimento() {
+  quizQ2tentativas = 0;
+  mostrarQ1();
+}
+
+function mostrarQ1() {
+  document.getElementById('expScrollBody').innerHTML = `
+    <div class="card-fala" style="margin-bottom:20px;">
+      <strong>Rutherford:</strong> <em>"Antes de fecharmos o laboratório, quero ter certeza de que você entendeu o que acabamos de observar. Uma última análise dos resultados."</em>
+    </div>
+    <p style="font-family:'Lora',serif;font-size:17px;line-height:1.75;color:var(--paper-text);font-weight:600;margin-bottom:20px;">
+      Rutherford observou que a grande maioria das partículas alfa atravessou a lâmina de ouro sem sofrer nenhum desvio em sua trajetória. Considerando o conjunto completo dos resultados do experimento, ele concluiu que isso aconteceu porque:
+    </p>
+    <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:16px;">
+      <button class="btn-opcao" id="q1-opcA" onclick="responderQ1('A')">
+        <strong style="font-size:12px;letter-spacing:.08em;opacity:0.6;display:block;margin-bottom:4px;">OPÇÃO A</strong>
+        O modelo de Thomson estava correto: a carga positiva, distribuída por todo o volume do átomo, não seria capaz de desviar significativamente as partículas alfa.
+      </button>
+      <button class="btn-opcao" id="q1-opcB" onclick="responderQ1('B')">
+        <strong style="font-size:12px;letter-spacing:.08em;opacity:0.6;display:block;margin-bottom:4px;">OPÇÃO B</strong>
+        A maior parte do volume do átomo é espaço vazio, o que permitiu que a maioria das partículas passasse direto, sem encontrar nenhum obstáculo em sua trajetória.
+      </button>
+    </div>
+    <div class="quiz-feedback" id="fbQ1"></div>`;
+}
+
+function responderQ1(opc) {
+  ['q1-opcA','q1-opcB'].forEach(id => { const b = document.getElementById(id); if (b) b.disabled = true; });
+  const fb = document.getElementById('fbQ1');
+  if (opc === 'B') {
+    tocarDing();
+    fb.className = 'quiz-feedback show ok';
+    fb.innerHTML = `
+      <div class="conclusao-eyebrow">Rutherford responde</div>
+      <div class="conclusao-texto">"Exatamente. É a ausência de obstáculo na maioria das trajetórias que prova que o átomo é, em sua maior parte, espaço vazio. Essa conclusão só faz sentido em conjunto com os outros dois resultados — os desvios e a raríssima partícula que voltou — que revelaram o núcleo: pequeno, denso, concentrado."</div>
+      <button class="btn-continuar show" style="margin-top:16px;" onclick="mostrarQ2()">Continuar →</button>`;
+  } else {
+    fb.className = 'quiz-feedback show err';
+    fb.innerHTML = `
+      <div class="conclusao-eyebrow">Rutherford comenta</div>
+      <div class="conclusao-texto">"Esse resultado isolado até poderia parecer compatível com Thomson — mas e as partículas que sofreram grandes desvios? E a que voltou quase em sentido contrário? Um modelo de carga espalhada e fraca não consegue explicar esses outros dois resultados. Leve o experimento inteiro em consideração e tente novamente."</div>
+      <button class="btn-acao" style="margin-top:12px;" onclick="mostrarQ1()">Tentar novamente →</button>`;
+  }
+  fb.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function mostrarQ2() {
+  quizQ2tentativas = 0;
+  document.getElementById('expScrollBody').innerHTML = `
+    <div class="card-fala" style="margin-bottom:20px;">
+      <strong>Rutherford:</strong> <em>"Muito bem. Uma última questão antes de fecharmos o laboratório."</em>
+    </div>
+    <p style="font-family:'Lora',serif;font-size:17px;line-height:1.75;color:var(--paper-text);font-weight:600;margin-bottom:16px;">
+      Vimos que os prótons estão concentrados no núcleo do átomo. Mas e os elétrons? No modelo de Rutherford, eles estariam espalhados pelo restante do volume do átomo — a região ao redor do núcleo que, atualmente, damos o nome de:
+    </p>
+    <div class="pergunta-box show">
+      <input type="text" class="resposta-input" id="respQ2" placeholder="Nome da região..." autocomplete="off" style="min-height:auto;resize:none;height:48px;" onkeydown="if(event.key==='Enter')responderQ2()">
+      <button class="btn-acao" style="margin-top:8px;" onclick="responderQ2()">Confirmar →</button>
+    </div>
+    <div class="quiz-feedback" id="fbQ2"></div>`;
+  setTimeout(() => document.getElementById('respQ2')?.focus(), 100);
+}
+
+function responderQ2() {
+  const raw = document.getElementById('respQ2')?.value || '';
+  const val = raw.trim().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+  const fb = document.getElementById('fbQ2');
+  if (val === 'eletrosfera') {
+    tocarDing();
+    const inp = document.getElementById('respQ2');
+    if (inp) inp.disabled = true;
+    const btn = document.querySelector('.pergunta-box .btn-acao');
+    if (btn) btn.disabled = true;
+    fb.className = 'quiz-feedback show ok';
+    fb.innerHTML = `
+      <div class="conclusao-eyebrow">Rutherford responde</div>
+      <div class="conclusao-texto">"Eletrosfera — correto. Núcleo e eletrosfera: dois territórios dentro do mesmo átomo. No núcleo, os prótons — concentrados, densos, com quase toda a massa. Na eletrosfera, os elétrons — dispersos pelo enorme espaço vazio ao redor. Esse é o modelo que construímos juntos hoje."</div>
+      <button class="btn-continuar show" style="margin-top:16px;" onclick="concluirSala()">Sair do laboratório →</button>`;
+  } else {
+    quizQ2tentativas++;
+    if (quizQ2tentativas === 1) {
+      fb.className = 'quiz-feedback show err';
+      fb.innerHTML = `
+        <div class="conclusao-eyebrow">Rutherford comenta</div>
+        <div class="conclusao-texto">"Pense na palavra que se opõe a 'núcleo' — qual é a região que <em>envolve</em> o núcleo do átomo, onde estão os elétrons? Tente novamente."</div>`;
+    } else {
+      fb.className = 'quiz-feedback show err';
+      fb.innerHTML = `
+        <div class="conclusao-eyebrow">Rutherford revela</div>
+        <div class="conclusao-texto">"A região é a <strong>eletrosfera</strong> — o espaço ao redor do núcleo onde os elétrons se movem. Agora que você sabe, podemos avançar."</div>
+        <button class="btn-continuar show" style="margin-top:16px;" onclick="concluirSala()">Sair do laboratório →</button>`;
+    }
+  }
+  fb.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function concluirSala() {
+  closeOverlay();
+  localStorage.setItem('kifacil_rutherford_ok', '1');
+  ['ai-1', 'ai-2', 'ai-3'].forEach(id => document.getElementById(id).classList.add('done'));
+  setTimeout(() => {
+    document.getElementById('mainScreen').style.display = 'none';
+    document.getElementById('winScreen').classList.add('show');
+  }, 300);
+}
+
+function resetGame() {
+  introStep = 0;
+  expVisto.central = false; expVisto.media = false; expVisto.rara = false;
+  quizQ2tentativas = 0;
+  ['ai-1', 'ai-2', 'ai-3'].forEach(id => document.getElementById(id).classList.remove('done'));
+
+  const hf = document.getElementById('hs-fonte');
+  hf.classList.remove('done'); hf.classList.add('active');
+
+  const hfo = document.getElementById('hs-folha');
+  hfo.classList.remove('active'); hfo.classList.add('locked');
+
+  const ha = document.getElementById('hs-anteparo');
+  ha.classList.remove('active'); ha.classList.add('locked');
+
+  document.getElementById('btnIniciarExp').style.display = 'none';
+  document.getElementById('mainScreen').style.display = '';
+  document.getElementById('winScreen').classList.remove('show');
+
+  setNarr(`<strong>Rutherford:</strong> <em>"Antes de começarmos, vamos relembrar a ideia de Thomson. Segundo ele, o átomo seria uma esfera de carga positiva espalhada por todo o seu volume, contendo elétrons distribuídos em seu interior, como passas em um pudim.<br><br>Durante algum tempo, esse modelo pareceu explicar bem o que os cientistas observavam. Mas, como todo bom cientista, não devemos aceitar uma ideia apenas porque ela parece correta.<br><br>Vamos colocá-la à prova.<br><br>Traga-me a fonte de polônio, dentro da caixa de chumbo."</em>`);
+}
+</script>
+
+<div id="cookie-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#1a0f08;border-top:1px solid rgba(212,170,106,0.4);padding:1rem 2rem;z-index:9999;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;"><p style="margin:0;font-family:'Libre Baskerville',serif;font-size:0.82rem;color:#e8d4b0;line-height:1.5;">Este site utiliza cookies para melhorar sua experi&ecirc;ncia. Ao continuar navegando, voc&ecirc; concorda com nossa <a href="/politica-de-privacidade.html" style="color:#e8b84b;text-decoration:underline;text-underline-offset:2px;">Pol&iacute;tica de Privacidade</a>.</p><button onclick="document.getElementById('cookie-banner').style.display='none';localStorage.setItem('kifacil_cookies','1');" style="flex-shrink:0;background:#e8b84b;border:none;padding:0.55rem 1.5rem;font-family:'Libre Baskerville',serif;font-size:0.78rem;font-weight:700;color:#1a0f08;cursor:pointer;letter-spacing:0.04em;">Entendi</button></div>
+<script>if(!localStorage.getItem('kifacil_cookies'))document.getElementById('cookie-banner').style.display='flex';</script>
+<script type="module">
+  import { requireAuth }          from '../../../js/guards.js';
+  import { session }              from '../../../js/session.js';
+  import { registrarEntradaFase } from '../../../js/progresso.js';
+  import { iniciarNavTorre }      from '../../../js/nav-torre.js';
+
+  await requireAuth('../../../login.html').catch(() => {});
+
+  iniciarNavTorre('quimica');
+
+  const emRevisao = new URLSearchParams(location.search).has('revisao');
+  const uid = session.usuario?.uid;
+  if (uid && !localStorage.getItem('kf_xp_laboratorio-rutherford') && !emRevisao) {
+    await registrarEntradaFase(uid, 10)
+      .then(() => localStorage.setItem('kf_xp_laboratorio-rutherford', '1'))
+      .catch(e => console.warn('[XP] laboratorio-rutherford:', e));
+  }
+
+</script>
+<script>
+(function () {
+  var _clickSom = new Audio('../sons/click.mp3');
+  _clickSom.preload = 'auto';
+  document.addEventListener('click', function (e) {
+    var alvo = e.target.closest('button');
+    if (alvo) { try { _clickSom.currentTime = 0; _clickSom.play().catch(function () {}); } catch (err) {} }
+  }, true);
+})();
+</script>
+</body>
+</html>

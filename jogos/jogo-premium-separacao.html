@@ -1,0 +1,897 @@
+﻿
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="canonical" href="https://kifaciledu.com.br/jogos/jogos-escaperoom/torre-quimica/fases/fase4-cozinha.html">
+<title>Escape Room de Química — Cozinha Vitoriana | KiFácil</title>
+<meta name="description" content="Fase 4 do escape room de química: cozinha vitoriana. Resolva o enigma da separação de misturas para escapar. KiFácil Academia.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;1,500;1,600&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7277947032296495" crossorigin="anonymous"></script>
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #4a3728;
+    --bg-dark: #2e2016;
+    --text: #f5ead0;
+    --text-soft: #e8d4b0;
+    --gold: #e8b84b;
+    --border: rgba(212,170,106,0.35);
+    --border-faint: rgba(212,170,106,0.2);
+    --green-text: #8fe0a0;
+    --red-text: #e8956a;
+  }
+
+  html, body { height: 100%; }
+
+  body {
+    background: var(--bg);
+    font-family: 'Libre Baskerville', serif;
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .nav {
+    background: var(--bg-dark);
+    padding: 12px 32px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 1px solid var(--border);
+    font-size: 11px;
+    color: var(--text-soft);
+    letter-spacing: .04em;
+    flex-shrink: 0;
+  }
+
+  .nav a { color: var(--gold); text-decoration: none; }
+  .nav-sep { color: rgba(232,216,176,0.4); }
+
+  .header {
+    background: var(--bg-dark);
+    padding: 20px 32px 16px;
+    border-bottom: 1px solid var(--border-faint);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+  }
+
+  .eyebrow {
+    font-size: 10px;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 4px;
+  }
+
+  .page-title {
+    font-family: 'Lora', serif;
+    font-size: 30px;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .main { display: flex; flex: 1; align-items: flex-start; }
+
+  .scene-wrap {
+    background: var(--bg-dark);
+    padding: 28px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex: 0 0 54%;
+  }
+
+  .scene-inner {
+    position: relative;
+    width: 100%;
+    max-width: 720px;
+    user-select: none;
+  }
+
+  .scene-img {
+    width: 100%;
+    display: block;
+    border-radius: 8px;
+    border: 1px solid rgba(212,170,106,0.4);
+  }
+
+  .link-aula {
+    position: absolute; top: 10px; right: 10px; z-index: 10;
+    display: flex; flex-direction: column; align-items: center; gap: 2px;
+    text-decoration: none; color: #fff8ee;
+    background: rgba(30,16,8,0.72); border: 1.5px solid var(--dourado-claro, #c8920a);
+    border-radius: 8px; padding: 0.4rem 0.65rem;
+    font-family: 'Cormorant Garamond', Georgia, serif; font-size: 0.68rem; font-weight: 600;
+    letter-spacing: 0.02em; text-align: center; line-height: 1.2;
+    cursor: pointer; transition: background 0.2s, transform 0.15s;
+  }
+  .link-aula:hover { background: rgba(30,16,8,0.92); transform: translateY(-1px); }
+  .link-aula svg { width: 22px; height: 22px; }
+
+  .mistura-display {
+    position: absolute;
+    bottom: 18%;
+    left: 2%;
+    width: 22%;
+    background: rgba(46,32,22,0.92);
+    border: 1px solid rgba(212,170,106,0.5);
+    border-radius: 6px;
+    padding: 8px 10px;
+    font-size: 10px;
+    color: var(--text-soft);
+    line-height: 1.6;
+    pointer-events: none;
+    transition: all .4s;
+  }
+
+  .mistura-display-title {
+    font-size: 9px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 4px;
+  }
+
+  .comp { display: flex; align-items: center; gap: 5px; }
+  .comp-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+  .comp.removed { opacity: 0.32; text-decoration: line-through; }
+
+  .hotspot {
+    position: absolute;
+    border: 2px solid transparent;
+    background: rgba(232,184,75,0);
+    cursor: pointer;
+    border-radius: 10px;
+    transition: all .18s ease;
+  }
+
+  .hotspot:hover {
+    border-color: rgba(232,184,75,0.75);
+    background: rgba(232,184,75,0.12);
+    box-shadow: 0 0 18px rgba(232,184,75,0.25);
+  }
+
+  .hotspot.usado {
+    pointer-events: none;
+    opacity: 0;
+  }
+
+  /* Ajuste estes números se o quadrado de clique não cair exatamente sobre o objeto. */
+  .hotspot-filtracao { left: 4%; top: 24%; width: 26%; height: 28%; }
+  .hotspot-destilacao { left: 67%; top: 25%; width: 28%; height: 24%; }
+  .hotspot-evaporacao { left: 50%; top: 55%; width: 30%; height: 20%; }
+
+  .panels-row {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    padding: 28px;
+    border-left: 1px solid var(--border-faint);
+    align-self: stretch;
+    overflow-y: auto;
+  }
+
+  .narr-box, .metodos-wrap, .resultado-box {
+    background: #f5ead0;
+    border: 1px solid rgba(139,94,26,0.2);
+    border-radius: 8px;
+  }
+
+  .narr-box { padding: 18px 20px; }
+
+  .narr-eyebrow, .metodos-title, .resultado-eyebrow {
+    font-size: 10px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: #8b5e1a;
+    margin-bottom: 8px;
+  }
+
+  .narr {
+    font-family: 'Lora', serif;
+    font-size: 21px;
+    font-weight: 600;
+    line-height: 1.75;
+    color: #2e1a08;
+  }
+
+  .narr strong { color: #6b3f0e; font-style: normal; }
+
+  .metodos-wrap {
+    padding: 16px 18px;
+  }
+
+  .metodo-placeholder {
+    border: 1px dashed rgba(212,170,106,0.28);
+    border-radius: 8px;
+    padding: 16px;
+    font-size: 12px;
+    color: rgba(46,26,8,0.4);
+    line-height: 1.7;
+  }
+
+  .etapa-card {
+    display: none;
+    border: 1px solid rgba(212,170,106,0.32);
+    border-radius: 8px;
+    padding: 13px 16px;
+    margin-bottom: 10px;
+    background: rgba(255,255,255,0.03);
+    animation: fadeUp .35s ease;
+  }
+
+  .etapa-card.show { display: flex; gap: 12px; align-items: flex-start; }
+  .etapa-icon { font-size: 18px; line-height: 1.2; }
+
+  .etapa-nome {
+    font-size: 13px;
+    color: #2e1a08;
+    margin-bottom: 4px;
+    font-weight: 700;
+  }
+
+  .etapa-desc {
+    font-size: 11px;
+    color: #3d2010;
+    line-height: 1.6;
+  }
+
+  .resultado-box {
+    padding: 14px 18px;
+    display: none;
+    animation: fadeUp .4s ease;
+  }
+
+  .resultado-box.show { display: block; }
+
+  .resultado-texto {
+    font-family: 'Lora', serif;
+    font-size: 18px;
+    color: #2e1a08;
+    font-style: normal;
+    line-height: 1.7;
+  }
+
+  .resultado-texto.ok { color: var(--green-text); }
+  .resultado-texto.err { color: var(--red-text); }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .popup {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(20, 12, 7, 0.78);
+    z-index: 999;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  .popup.show { display: flex; }
+
+  .popup-card {
+    background: var(--bg-dark);
+    border: 1px solid var(--border);
+    box-shadow: 0 18px 50px rgba(0,0,0,0.35);
+    border-radius: 12px;
+    padding: 24px;
+    width: min(460px, 94vw);
+    color: var(--text);
+  }
+
+  .popup-card h2 {
+    font-family: 'Lora', serif;
+    color: var(--gold);
+    font-size: 30px;
+    margin-bottom: 8px;
+  }
+
+  .popup-card p {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--text-soft);
+  }
+
+  .popup-card input {
+    width: 100%;
+    margin-top: 16px;
+    padding: 12px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    background: #1f140d;
+    color: var(--text);
+    font-family: 'Libre Baskerville', serif;
+    outline: none;
+  }
+
+  .popup-card input:focus {
+    border-color: rgba(232,184,75,0.75);
+  }
+
+  .popup-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 16px;
+  }
+
+  .popup-actions button {
+    padding: 10px 16px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--gold);
+    cursor: pointer;
+    font-family: 'Libre Baskerville', serif;
+  }
+
+  .popup-actions button:last-child {
+    background: var(--gold);
+    color: var(--bg-dark);
+    font-weight: 700;
+  }
+
+  #popupErro {
+    margin-top: 12px;
+    color: var(--red-text);
+    min-height: 20px;
+  }
+
+  .win-screen {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 60px 32px;
+    flex: 1;
+  }
+
+  .win-screen.show { display: flex; }
+
+  .win-title {
+    font-family: 'Lora', serif;
+    font-size: 48px;
+    font-weight: 600;
+    color: var(--gold);
+    margin-bottom: 12px;
+    animation: fadeUp .6s ease;
+  }
+
+  .win-sub {
+    font-size: 15px;
+    color: var(--text-soft);
+    font-style: italic;
+    margin-bottom: 36px;
+    line-height: 1.8;
+    max-width: 620px;
+    animation: fadeUp .7s ease;
+  }
+
+  .win-badges {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 32px;
+    animation: fadeUp .8s ease;
+  }
+
+  .badge {
+    background: var(--bg-dark);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 18px 22px;
+    text-align: center;
+    min-width: 100px;
+  }
+
+  .badge-icon { font-size: 26px; margin-bottom: 6px; }
+
+  .badge-label {
+    font-size: 10px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  .win-btns {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+    animation: fadeUp .9s ease;
+  }
+
+  .btn-next {
+    background: var(--gold);
+    border: none;
+    border-radius: 6px;
+    padding: 14px 36px;
+    font-family: 'Libre Baskerville', serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--bg-dark);
+    cursor: pointer;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    transition: background .15s;
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  .btn-next:hover { background: #f0c960; }
+
+  .btn-restart {
+    background: none;
+    border: 1px solid rgba(232,184,75,0.3);
+    border-radius: 6px;
+    padding: 10px 24px;
+    font-family: 'Libre Baskerville', serif;
+    font-size: 11px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: rgba(232,184,75,0.6);
+    cursor: pointer;
+    transition: all .15s;
+  }
+
+  .btn-restart:hover { border-color: rgba(232,184,75,0.6); color: var(--gold); }
+
+  /* TELA FINAL */
+  .win-screen {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 28px 16px;
+    flex: 1;
+    background: var(--bg-dark);
+  }
+
+  .win-screen.show { display: flex; }
+
+  .win-msg {
+    max-width: 760px;
+    margin: 0 auto;
+    font-family: 'Lora', serif;
+    font-size: clamp(22px, 3.4vw, 36px);
+    line-height: 1.5;
+    color: var(--gold);
+    text-align: center;
+    animation: fadeUp .7s ease;
+  }
+
+  .win-screen .btn-restart {
+    margin-top: 18px;
+    color: rgba(232,184,75,0.78);
+    border-color: rgba(232,184,75,0.35);
+    background: rgba(46,32,22,0.65);
+  }
+
+  .win-screen .btn-restart:hover {
+    color: var(--gold);
+    border-color: rgba(232,184,75,0.75);
+    background: rgba(232,184,75,0.08);
+  }
+
+  @media (max-width: 768px) {
+    html, body { height: auto; min-height: 100vh; }
+    .nav { padding: 10px 16px; font-size: 10px; flex-wrap: wrap; gap: 6px; }
+    .header { padding: 12px 16px; flex-wrap: wrap; row-gap: 8px; }
+    .page-title { font-size: 22px; }
+    .eyebrow { font-size: 9px; }
+    .main { flex-direction: column; flex: none; }
+    .scene-wrap { flex: none; width: 100%; padding: 16px; }
+    .panels-row { flex: none; overflow-y: visible; border-left: none; border-top: 1px solid var(--border-faint); padding: 20px 16px; }
+    .narr { font-size: 16px; }
+    .win-title { font-size: 34px; }
+
+    .win-msg { font-size: clamp(20px, 6.2vw, 28px); }
+    .link-aula { top: 6px; right: 6px; padding: 0.3rem 0.5rem; font-size: 0.6rem; }
+    .link-aula svg { width: 18px; height: 18px; }
+  }
+
+  /* Paisagem em celular */
+  @media (orientation: landscape) and (max-height: 500px) {
+    .win-screen {
+      padding: 6px 12px;
+      justify-content: center;
+    }
+
+    .win-msg { font-size: 20px; }
+
+    .win-screen .btn-restart {
+      flex-shrink: 0;
+      margin-top: 6px;
+      padding: 5px 20px;
+      font-size: 10px;
+    }
+  }
+</style>
+</head>
+
+<body>
+
+<nav class="nav">
+  <a href="../../../torre-central/mapa-kifacil.html">Academia KiFácil</a>
+  <span class="nav-sep">›</span>
+  <a href="../../torre-ciencia.html">Torre de Ciências</a>
+  <span class="nav-sep">›</span>
+  Torre de Química · Fase 8 · Cozinha
+</nav>
+
+<header class="header">
+  <div>
+    <div class="eyebrow">Escape Room · Academia KiFácil</div>
+    <h1 class="page-title">Cozinha Vitoriana</h1>
+  </div>
+
+</header>
+
+<div class="main" id="mainScreen">
+
+  <div class="scene-wrap">
+    <div class="scene-inner">
+      <img src="../imagens/cozinha-vitoriana.jpg" alt="Cozinha vitoriana com panela no fogão e equipamentos de separação" class="scene-img">
+
+      <button class="hotspot hotspot-filtracao" id="hotspot-filtracao" onclick="clicarObjeto('filtracao')" aria-label="Filtração"></button>
+      <button class="hotspot hotspot-destilacao" id="hotspot-destilacao" onclick="clicarObjeto('destilacao')" aria-label="Destilação simples"></button>
+      <button class="hotspot hotspot-evaporacao" id="hotspot-evaporacao" onclick="clicarObjeto('evaporacao')" aria-label="Evaporação"></button>
+
+
+      <!-- COLOQUE O LINK AQUI -->
+      <a class="link-aula" href="https://www.youtube.com/watch?v=ACMxNgBCsEs&t=1s" target="_blank" rel="noopener" title="Assista à aula">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.6"/>
+          <path d="M10 8.5L16 12L10 15.5V8.5Z" fill="currentColor"/>
+        </svg>
+        <span>Assista à aula</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="panels-row">
+
+    <div class="narr-box">
+      <div class="narr-eyebrow">Academia KiFácil — Fase 4</div>
+      <div class="narr" id="narr">
+        Você encontrou uma panela contendo uma mistura de <strong>água, areia, álcool e sal</strong>.
+        Para escapar desta sala, será necessário obter <strong>sal puro</strong>.
+        Observe os equipamentos disponíveis na cozinha e <strong>clique nos objetos na sequência correta</strong>,
+        aplicando os métodos de separação de misturas adequados.
+        <br><br>
+        Um bilhete diz: <em>"Preciso do sal puro."</em>
+      </div>
+    </div>
+
+    <div class="metodos-wrap" id="metodosWrap">
+      <div class="metodos-title">Registro das etapas</div>
+
+      <div class="metodo-placeholder" id="placeholderEtapas">
+        As etapas aparecerão aqui à medida que você clicar nos objetos corretos e responder às perguntas.
+      </div>
+
+      <div class="etapa-card" id="card-filtracao">
+        <div class="etapa-icon">🔽</div>
+        <div>
+          <div class="etapa-nome">Filtração</div>
+          <div class="etapa-desc">O papel de filtro reteve a areia, que é um sólido insolúvel. Passaram pelo funil: água, álcool e sal dissolvido.</div>
+        </div>
+      </div>
+
+      <div class="etapa-card" id="card-destilacao">
+        <div class="etapa-icon">⚗️</div>
+        <div>
+          <div class="etapa-nome">Destilação simples</div>
+          <div class="etapa-desc">O álcool foi separado porque possui menor ponto de ebulição que a água. Restaram água e sal na panela.</div>
+        </div>
+      </div>
+
+      <div class="etapa-card" id="card-evaporacao">
+        <div class="etapa-icon">🔥</div>
+        <div>
+          <div class="etapa-nome">Evaporação</div>
+          <div class="etapa-desc">A água evaporou e o sal permaneceu como sólido cristalino. Agora o NaCl foi obtido puro.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="resultado-box" id="resultadoBox">
+      <div class="resultado-eyebrow">Resultado</div>
+      <div class="resultado-texto" id="resultadoTexto"></div>
+    </div>
+
+  </div>
+</div>
+
+<div class="win-screen" id="winScreen">
+  <div class="win-msg">Parabéns: Vosê usou filtração, destilação e evaporação para obter sal puro!</div>
+
+  <button class="btn-restart" onclick="resetGame()">Jogar novamente</button>
+</div>
+
+<div class="popup" id="popupPergunta">
+  <div class="popup-card">
+    <h2 id="popupTitulo">Pergunta</h2>
+    <p id="popupTexto"></p>
+    <input id="popupResposta" type="text" placeholder="Digite sua resposta" autocomplete="off">
+    <div class="popup-actions">
+      <button type="button" onclick="fecharPergunta()">Cancelar</button>
+      <button type="button" onclick="verificarResposta()">Responder</button>
+    </div>
+    <p id="popupErro"></p>
+  </div>
+</div>
+
+<script>
+const estado = {
+  areia: true,
+  alcool: true,
+  agua: true,
+  sal: true
+};
+
+let metodoAtual = null;
+let etapaAtual = 0;
+
+const ordemCorreta = ['filtracao', 'destilacao', 'evaporacao'];
+
+const perguntas = {
+  filtracao: {
+    titulo: 'Filtração',
+    pergunta: 'A filtração deve ser usada primeiro. Qual componente da mistura fica retido no papel de filtro?',
+    respostas: ['areia'],
+    dica: 'Pense no componente sólido que não se dissolve na mistura.',
+    remove: 'comp-areia',
+    card: 'card-filtracao',
+    hotspot: 'hotspot-filtracao',
+    resultado: 'Correto! A areia é um sólido insolúvel e fica retida no papel de filtro.',
+    narr: 'Muito bem! A <strong>areia</strong> foi separada pela filtração. Agora ainda restam <strong>água, álcool e sal dissolvido</strong> na panela.'
+  },
+
+  destilacao: {
+    titulo: 'Destilação simples',
+    pergunta: 'Após remover a areia, qual componente da mistura possui o menor ponto de ebulição e pode ser separado por destilação?',
+    respostas: ['alcool', 'álcool', 'etanol', 'alcool etilico', 'álcool etílico'],
+    dica: 'É o líquido que evapora antes da água.',
+    remove: 'comp-alcool',
+    card: 'card-destilacao',
+    hotspot: 'hotspot-destilacao',
+    resultado: 'Correto! O álcool evapora primeiro, pois possui menor ponto de ebulição que a água.',
+    narr: 'Excelente! O <strong>álcool</strong> foi separado pela destilação simples. Agora restam <strong>água e sal</strong> na panela.'
+  },
+
+  evaporacao: {
+    titulo: 'Evaporação',
+    pergunta: 'Na última etapa, a evaporação remove qual componente para que sobre apenas o sal?',
+    respostas: ['água', 'agua'],
+    dica: 'É o solvente que evapora, deixando o sal sólido para trás.',
+    remove: 'comp-agua',
+    card: 'card-evaporacao',
+    hotspot: 'hotspot-evaporacao',
+    resultado: 'Correto! A água evapora e o sal permanece como sólido.',
+    narr: 'Perfeito! A <strong>água</strong> evaporou. Restaram os cristais de <strong>sal puro</strong>.'
+  }
+};
+
+function normalizar(txt) {
+  return txt
+    .trim()
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '');
+}
+
+function clicarObjeto(id) {
+
+
+  const esperado = ordemCorreta[etapaAtual];
+
+  if (id !== esperado) {
+    if (id === 'destilacao' && estado.areia) {
+      mostrarErro('Ainda não. Se você tentar destilar antes, a areia continua na mistura. Primeiro remova o sólido insolúvel.');
+      return;
+    }
+
+    if (id === 'evaporacao' && (estado.areia || estado.alcool)) {
+      mostrarErro('Ainda não. Evaporar agora não daria sal puro, porque ainda há outros componentes contaminando a mistura.');
+      return;
+    }
+
+    mostrarErro('Esse não é o próximo equipamento da sequência correta.');
+    return;
+  }
+
+  abrirPergunta(id);
+}
+
+function abrirPergunta(metodo) {
+  metodoAtual = metodo;
+  const p = perguntas[metodo];
+
+  document.getElementById('popupTitulo').textContent = p.titulo;
+  document.getElementById('popupTexto').textContent = p.pergunta;
+  document.getElementById('popupResposta').value = '';
+  document.getElementById('popupErro').textContent = '';
+  document.getElementById('popupPergunta').classList.add('show');
+
+  setTimeout(() => document.getElementById('popupResposta').focus(), 80);
+}
+
+function fecharPergunta() {
+  document.getElementById('popupPergunta').classList.remove('show');
+}
+
+function verificarResposta() {
+  const p = perguntas[metodoAtual];
+  const respostaAluno = normalizar(document.getElementById('popupResposta').value);
+  const respostasAceitas = p.respostas.map(normalizar);
+
+  if (!respostasAceitas.includes(respostaAluno)) {
+    document.getElementById('popupErro').textContent = 'Ainda não. Dica: ' + p.dica;
+    return;
+  }
+
+  fecharPergunta();
+  aplicarEtapaCorreta(metodoAtual);
+}
+
+function aplicarEtapaCorreta(id) {
+  tocarDing();
+  const p = perguntas[id];
+
+  if (id === 'filtracao') estado.areia = false;
+  if (id === 'destilacao') estado.alcool = false;
+  if (id === 'evaporacao') estado.agua = false;
+
+  document.getElementById(p.remove)?.classList.add('removed');
+  document.getElementById(p.card)?.classList.add('show');
+  document.getElementById(p.hotspot)?.classList.add('usado');
+  document.getElementById('placeholderEtapas').style.display = 'none';
+
+  setNarr(p.narr);
+
+  const box = document.getElementById('resultadoBox');
+  const texto = document.getElementById('resultadoTexto');
+
+  box.className = 'resultado-box show';
+  texto.className = 'resultado-texto ok';
+  texto.textContent = p.resultado;
+
+  etapaAtual++;
+
+  if (id === 'evaporacao') {
+    tocarPorta();
+    setTimeout(() => {
+      document.getElementById('mainScreen').style.display = 'none';
+      document.getElementById('winScreen').classList.add('show');
+    }, 1800);
+  }
+}
+
+function tocarDing() {
+  const a = new Audio('../sons/ding.mp3');
+  a.play().catch(() => {});
+}
+
+function tocarPorta() {
+  const a = new Audio('../sons/porta-abrindo.mp3');
+  a.play().catch(() => {});
+}
+
+function mostrarErro(msg) {
+  const box = document.getElementById('resultadoBox');
+  const texto = document.getElementById('resultadoTexto');
+
+  box.className = 'resultado-box show';
+  texto.className = 'resultado-texto err';
+  texto.textContent = msg;
+}
+
+function setNarr(html) {
+  document.getElementById('narr').innerHTML = html;
+}
+
+function resetGame() {
+  estado.areia = true;
+  estado.alcool = true;
+  estado.agua = true;
+  estado.sal = true;
+  etapaAtual = 0;
+  metodoAtual = null;
+
+  ['areia', 'alcool', 'agua', 'sal'].forEach(c => {
+    document.getElementById('comp-' + c)?.classList.remove('removed');
+  });
+
+  ['filtracao', 'destilacao', 'evaporacao'].forEach(id => {
+    document.getElementById('card-' + id)?.classList.remove('show');
+    document.getElementById('hotspot-' + id)?.classList.remove('usado');
+  });
+
+  document.getElementById('resultadoBox').className = 'resultado-box';
+  document.getElementById('placeholderEtapas').style.display = 'block';
+  document.getElementById('mainScreen').style.display = '';
+  document.getElementById('winScreen').classList.remove('show');
+
+  setNarr('Você encontrou uma panela contendo uma mistura de <strong>água, areia, álcool e sal</strong>. Para escapar desta sala, será necessário obter <strong>sal puro</strong>. Observe os equipamentos disponíveis na cozinha e <strong>clique nos objetos na sequência correta</strong>, aplicando os métodos de separação de misturas adequados.<br><br>Um bilhete diz: <em>"Preciso do sal puro."</em>');
+}
+
+document.getElementById('popupResposta').addEventListener('keydown', function(event) {
+  if (event.key === 'Enter') verificarResposta();
+});
+</script>
+
+<div id="cookie-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#1a0f08;border-top:1px solid rgba(212,170,106,0.4);padding:1rem 2rem;z-index:9999;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;">
+  <p style="margin:0;font-family:'Libre Baskerville',serif;font-size:0.82rem;color:#e8d4b0;line-height:1.5;">
+    Este site utiliza cookies para melhorar sua experi&ecirc;ncia. Ao continuar navegando, voc&ecirc; concorda com nossa
+    <a href="/politica-de-privacidade.html" style="color:#e8b84b;text-decoration:underline;text-underline-offset:2px;">Pol&iacute;tica de Privacidade</a>.
+  </p>
+  <button onclick="document.getElementById('cookie-banner').style.display='none';localStorage.setItem('kifacil_cookies','1');" style="flex-shrink:0;background:#e8b84b;border:none;padding:0.55rem 1.5rem;font-family:'Libre Baskerville',serif;font-size:0.78rem;font-weight:700;color:#1a0f08;cursor:pointer;letter-spacing:0.04em;">Entendi</button>
+</div>
+
+<script>
+if(!localStorage.getItem('kifacil_cookies')) {
+  document.getElementById('cookie-banner').style.display='flex';
+}
+</script>
+
+<script type="module">
+  import { requireAuth }          from '../../../js/guards.js';
+  import { session }              from '../../../js/session.js';
+  import { registrarEntradaFase } from '../../../js/progresso.js';
+  import { iniciarNavTorre }      from '../../../js/nav-torre.js';
+  import { salvarPerfil }         from '../../../js/database.js';
+
+  await requireAuth('../../../login.html').catch(() => {});
+
+  iniciarNavTorre('quimica');
+
+  const emRevisao = new URLSearchParams(location.search).has('revisao');
+  const uid = session.usuario?.uid;
+  if (uid && !localStorage.getItem('kf_xp_fase4-cozinha') && !emRevisao) {
+    await registrarEntradaFase(uid, 10)
+      .then(() => localStorage.setItem('kf_xp_fase4-cozinha', '1'))
+      .catch(e => console.warn('[XP] fase4-cozinha:', e));
+  }
+
+  const _lk = document.querySelector('a.botao-carla-hotspot');
+  if (_lk && uid) {
+    _lk.addEventListener('click', async e => {
+      e.preventDefault();
+      if (!emRevisao) {
+        await salvarPerfil(uid, { faseAtual: 'fase5-sala-professora-carla' }).catch(e => console.error('[Progresso] Falha ao salvar faseAtual:', e));
+      }
+      window.location.href = _lk.href;
+    });
+  }
+</script>
+<script>
+(function () {
+  var _clickSom = new Audio('../sons/click.mp3');
+  _clickSom.preload = 'auto';
+  document.addEventListener('click', function (e) {
+    var alvo = e.target.closest('button');
+    if (alvo) { try { _clickSom.currentTime = 0; _clickSom.play().catch(function () {}); } catch (err) {} }
+  }, true);
+})();
+</script>
+</body>
+</html>

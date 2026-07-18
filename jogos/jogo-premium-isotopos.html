@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="canonical" href="https://kifaciledu.com.br/jogos/jogos-escaperoom/torre-quimica/fases/laboratorio-isotopos.html">
+<title>Laboratório de Isótopos — Cápsula do Tempo | KiFácil</title>
+<meta name="description" content="Explore o laboratório de isótopos e descubra isótopos, isótonos e isóbaros. Escape Room da Cápsula do Tempo — KiFácil.">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Y1JGD5VVBD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-Y1JGD5VVBD');
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;1,500;1,600&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #4a3728; --bg-dark: #2e2016; --text: #f5ead0; --text-soft: #e8d4b0;
+    --gold: #e8b84b; --border: rgba(212,170,106,0.35); --border-faint: rgba(212,170,106,0.2);
+    --green: rgba(80,200,120,0.15); --green-border: rgba(80,200,120,0.5); --green-text: #8fe0a0;
+    --paper: #f5ead0; --paper-text: #2e1a08; --paper-text-soft: #3d2010; --paper-gold: #8b5e1a;
+  }
+  html, body { height: 100%; }
+  body { background: var(--bg); font-family: 'Libre Baskerville', serif; color: var(--text); min-height: 100vh; display: flex; flex-direction: column; }
+
+  .nav { background: var(--bg-dark); padding: 12px 32px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid var(--border); font-size: 11px; color: var(--text-soft); letter-spacing: .04em; flex-shrink: 0; }
+  .nav a { color: var(--gold); text-decoration: none; }
+  .nav a:hover { text-decoration: underline; }
+  .nav-sep { color: rgba(232,216,176,0.4); }
+
+  .header { background: var(--bg-dark); padding: 20px 32px 16px; border-bottom: 1px solid var(--border-faint); display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; flex-wrap: wrap; gap: 12px; }
+  .eyebrow { font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--gold); margin-bottom: 4px; }
+  .page-title { font-family: 'Lora', serif; font-size: 30px; font-weight: 600; color: var(--text); }
+
+  .narrador { display: flex; align-items: flex-start; gap: 12px; padding: 16px 18px; margin: 0 28px 18px; background: rgba(46,32,22,0.92); border: 1px solid rgba(232,184,75,0.5); border-radius: 10px; }
+  .narrador img { width: 80px; height: 96px; object-fit: cover; object-position: top center; border-radius: 10px; border: 1px solid rgba(232,184,75,0.45); flex-shrink: 0; }
+  .narrador-name { font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
+  .narrador-text { font-family: 'Lora', serif; font-size: 16px; line-height: 1.7; color: var(--text); }
+
+  .main { display: flex; flex: 1; align-items: flex-start; }
+
+  /* CENA */
+  .scene-wrap { background: var(--bg-dark); padding: 28px; display: flex; justify-content: center; align-items: flex-start; flex: 0 0 56%; }
+  .scene-inner { position: relative; width: 100%; max-width: 620px; user-select: none; }
+  .scene-img { width: 100%; display: block; border-radius: 8px; border: 1px solid rgba(212,170,106,0.4); }
+  .scene-overlay { position: absolute; top: 0; left: 0; right: 0; background: linear-gradient(180deg, rgba(46,32,22,0.85) 0%, rgba(46,32,22,0) 100%); padding: 16px 20px 28px; border-radius: 8px 8px 0 0; pointer-events: none; }
+  .scene-overlay-title { font-family: 'Lora', serif; font-size: 20px; font-weight: 600; color: var(--text); margin-bottom: 2px; }
+  .scene-overlay-sub { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--gold); }
+
+  .btn-iniciar-exp { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); background: var(--gold); border: none; border-radius: 8px; padding: 16px 32px; font-family: 'Libre Baskerville', serif; font-size: 14px; font-weight: 700; color: var(--bg-dark); cursor: pointer; letter-spacing: .06em; text-transform: uppercase; z-index: 10; box-shadow: 0 4px 28px rgba(0,0,0,0.55), 0 0 0 1px rgba(232,184,75,0.3); transition: background .15s; white-space: nowrap; }
+  .btn-iniciar-exp:hover { background: #f0c960; }
+  .btn-iniciar-exp.oculto { display: none; }
+
+  /* PAINEL DIREITO */
+  .panels-row { flex: 1; display: flex; flex-direction: column; gap: 18px; padding: 28px; border-left: 1px solid var(--border-faint); align-self: stretch; }
+
+  .narr-box { background: var(--paper); border: 1px solid rgba(139,94,26,0.25); border-radius: 8px; padding: 20px 22px; }
+  .narr-eyebrow { font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--paper-gold); margin-bottom: 8px; }
+  .narr { font-family: 'Lora', serif; font-size: 20px; line-height: 1.7; color: var(--paper-text); font-weight: 600; }
+  .narr strong { color: #6b3f0e; font-style: normal; }
+  .narr em { color: #3d2010; }
+
+  /* OVERLAY CARD */
+  .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.82); display: none; align-items: center; justify-content: center; z-index: 200; padding: 20px; }
+  .overlay.show { display: flex; }
+  .card { background: var(--paper); border: 1px solid rgba(139,94,26,0.35); border-radius: 10px; padding: 0; max-width: 600px; width: 100%; position: relative; max-height: 92vh; display: flex; flex-direction: column; animation: cardIn .3s ease; overflow: hidden; }
+  .card-close { position: absolute; top: 12px; right: 14px; width: 34px; height: 34px; border: none; background: transparent; color: var(--paper-gold); font-family: Arial, sans-serif; font-size: 30px; line-height: 1; cursor: pointer; z-index: 5; }
+  .card-close:hover { color: #4a2c10; }
+  @keyframes cardIn { from { opacity: 0; transform: scale(.96) translateY(8px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+
+  .card-fixed-top { padding: 30px 30px 16px; flex-shrink: 0; border-bottom: 1px solid rgba(139,94,26,0.18); background: var(--paper); }
+  .card-eyebrow { font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--paper-gold); margin-bottom: 8px; }
+  .card-title { font-family: 'Lora', serif; font-size: 22px; font-weight: 600; color: var(--paper-text); line-height: 1.3; }
+
+  .card-scroll-body { padding: 18px 30px 30px; overflow-y: auto; flex: 1; }
+  .card-fala { font-family: 'Lora', serif; font-size: 18px; line-height: 1.75; color: var(--paper-text); font-weight: 600; margin-bottom: 18px; }
+  .card-fala strong { color: #6b3f0e; font-style: normal; }
+
+  .btn-acao { display: block; width: 100%; background: var(--paper-text); border: none; border-radius: 6px; padding: 13px; font-family: 'Libre Baskerville', serif; font-size: 13px; font-weight: 700; color: var(--paper); cursor: pointer; letter-spacing: .04em; text-transform: uppercase; transition: background .15s; margin-bottom: 8px; }
+  .btn-acao:hover:not(:disabled) { background: #4a2c10; }
+  .btn-acao:disabled { opacity: 0.4; cursor: default; }
+  .btn-acao.feita { background: rgba(80,200,120,0.15); color: #2d5a2d; border: 1px solid rgba(80,200,120,0.4); }
+  .btn-acao.secundario { background: transparent; color: var(--paper-text); border: 1.5px solid rgba(139,94,26,0.4); }
+  .btn-acao.secundario:hover:not(:disabled) { background: rgba(139,94,26,0.08); }
+
+  .pergunta-box { display: none; }
+  .pergunta-box.show { display: block; animation: cardIn .3s ease; }
+  .pergunta-texto { font-family: 'Lora', serif; font-size: 18px; line-height: 1.7; color: var(--paper-text); font-weight: 600; margin-bottom: 14px; }
+  .pergunta-texto strong { color: #6b3f0e; font-style: normal; }
+
+  .btn-opcao { display: block; width: 100%; background: rgba(232,184,75,0.07); border: 1px solid rgba(139,94,26,0.3); border-radius: 8px; padding: 13px 16px; font-family: 'Lora', serif; font-size: 15.5px; font-weight: 600; color: var(--paper-text); cursor: pointer; line-height: 1.6; text-align: left; transition: background .15s, border-color .15s; margin-bottom: 8px; }
+  .btn-opcao:hover:not(:disabled) { background: rgba(232,184,75,0.15); border-color: rgba(232,184,75,0.6); }
+  .btn-opcao:disabled { cursor: default; opacity: 0.6; }
+  .btn-opcao.opcao-certa { background: rgba(80,200,120,0.18); border-color: rgba(80,200,120,0.6); }
+  .btn-opcao.opcao-errada { background: rgba(180,60,50,0.1); border-color: rgba(180,60,50,0.4); }
+
+  .quiz-feedback { display: none; border-radius: 8px; padding: 15px 17px; margin-top: 10px; margin-bottom: 14px; }
+  .quiz-feedback.show { display: block; animation: cardIn .3s ease; }
+  .quiz-feedback.ok { background: rgba(80,200,120,0.08); border: 1px solid rgba(80,200,120,0.4); }
+  .quiz-feedback.err { background: rgba(139,94,26,0.07); border: 1px solid rgba(139,94,26,0.3); }
+  .quiz-feedback.ok .conclusao-eyebrow { color: #2d5a2d; }
+  .quiz-feedback.ok .conclusao-texto { color: #1f3d1f; }
+  .quiz-feedback.err .conclusao-eyebrow { color: #7a4a1a; }
+  .quiz-feedback.err .conclusao-texto { color: #4a2e08; }
+
+  .conclusao-box { display: none; background: rgba(80,200,120,0.08); border: 1px solid rgba(80,200,120,0.4); border-radius: 8px; padding: 16px 18px; margin-top: 14px; margin-bottom: 14px; }
+  .conclusao-box.show { display: block; animation: cardIn .3s ease; }
+  .conclusao-eyebrow { font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: #2d5a2d; margin-bottom: 8px; }
+  .conclusao-texto { font-family: 'Lora', serif; font-size: 17px; line-height: 1.75; color: #1f3d1f; font-weight: 600; }
+  .conclusao-texto strong { color: #2d5a2d; font-style: normal; }
+
+  .btn-continuar { display: none; width: 100%; background: var(--paper-gold); border: none; border-radius: 6px; padding: 13px; font-family: 'Libre Baskerville', serif; font-size: 13px; font-weight: 700; color: var(--paper); cursor: pointer; letter-spacing: .06em; text-transform: uppercase; transition: background .15s; margin-top: 14px; }
+  .btn-continuar.show { display: block; }
+  .btn-continuar:hover { background: #6b3f0e; }
+
+  /* PERGAMINHO DE REVELAÇÃO */
+  .pergaminho-box { display: none; background-image: url('../imagens/pergaminho-info.png'); background-size: 100% 100%; background-repeat: no-repeat; padding: 30px 40px 40px; text-align: center; margin: 6px -18px 16px; width: calc(100% + 36px); min-height: 222px; }
+  .pergaminho-box.show { display: block; animation: cardIn .4s ease; }
+  .pergaminho-eyebrow { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: #6b3f0e; margin-bottom: 10px; }
+  .pergaminho-texto { font-family: 'Lora', serif; font-size: 14.5px; line-height: 1.6; color: #2e1a08; font-weight: 600; margin: 0 auto 12px; max-width: 430px; }
+  .pergaminho-texto.resumo-final { padding-top: 26px; }
+  .pergaminho-texto.resumo-final p { margin: 0 0 6px; }
+  .pergaminho-nome { font-family: 'Lora', serif; font-size: 28px; font-weight: 700; color: #6b3f0e; letter-spacing: .05em; }
+
+  /* ÁTOMOS DINÂMICOS */
+  .atomos-linha { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin: 4px 0 18px; }
+  .atomo-caixa { text-align: center; width: 140px; }
+  .atomo-clicavel { position: relative; width: 120px; height: 120px; margin: 0 auto 8px; cursor: pointer; border-radius: 50%; background: rgba(255,244,216,0.65); border: 1.5px solid rgba(139,94,26,0.35); overflow: hidden; transition: border-color .2s, background .2s; }
+  .atomo-clicavel:hover { border-color: rgba(232,184,75,0.7); background: rgba(248,231,183,0.9); }
+  .atomo-clicavel.revelado { border-color: rgba(80,200,120,0.6); background: rgba(80,200,120,0.08); cursor: default; }
+  .particula {
+    position: absolute;
+    pointer-events: none;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Lora', serif;
+    font-weight: 700;
+    line-height: 1;
+  }
+  .particula.proton {
+    background: rgba(180, 36, 36, 0.2);
+    border: 1px solid rgba(140, 20, 20, 0.45);
+    color: #7a1515;
+  }
+  .particula.neutron {
+    background: rgba(76, 98, 128, 0.16);
+    border: 1px solid rgba(64, 84, 112, 0.38);
+    color: #2f3e52;
+  }
+  .legenda-particulas {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    margin: -4px 0 16px;
+    flex-wrap: wrap;
+  }
+  .legenda-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 12.5px;
+    color: rgba(46,26,8,0.7);
+  }
+  .legenda-simbolo {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Lora', serif;
+    font-size: 14px;
+    font-weight: 700;
+  }
+  .legenda-simbolo.proton {
+    background: rgba(180, 36, 36, 0.2);
+    border: 1px solid rgba(140, 20, 20, 0.45);
+    color: #7a1515;
+  }
+  .legenda-simbolo.neutron {
+    background: rgba(76, 98, 128, 0.16);
+    border: 1px solid rgba(64, 84, 112, 0.38);
+    color: #2f3e52;
+  }
+  .atomo-legenda { font-family: 'Lora', serif; font-size: 13.5px; font-weight: 600; color: var(--paper-text); }
+  .atomo-info { font-size: 11px; color: rgba(46,26,8,0.55); margin-top: 2px; display: none; }
+  .atomo-info.show { display: block; }
+  .atomo-clique-dica { font-size: 10px; color: rgba(46,26,8,0.4); margin-top: 2px; }
+
+  /* ETAPA 2 — MONTAR */
+  .monte-box { display: flex; flex-direction: column; align-items: center; gap: 14px; margin: 6px 0 16px; }
+  .monte-atomo { position: relative; width: 160px; height: 160px; border-radius: 50%; background: rgba(255,244,216,0.65); border: 1.5px solid rgba(139,94,26,0.35); overflow: hidden; }
+  .monte-contagem { font-family: 'Lora', serif; font-size: 14px; color: var(--paper-text); text-align: center; }
+  .monte-botoes { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+  .btn-particula { background: rgba(232,184,75,0.12); border: 1.5px solid rgba(139,94,26,0.35); border-radius: 6px; padding: 10px 16px; font-family: 'Libre Baskerville', serif; font-size: 12.5px; font-weight: 700; color: var(--paper-text); cursor: pointer; letter-spacing: .03em; transition: background .15s; }
+  .btn-particula:hover:not(:disabled) { background: rgba(232,184,75,0.25); }
+  .btn-particula:disabled { opacity: 0.4; cursor: default; }
+  .aviso-elemento { display: none; background: rgba(180,60,50,0.08); border: 1px solid rgba(180,60,50,0.35); border-radius: 8px; padding: 13px 16px; margin-top: 4px; }
+  .aviso-elemento.show { display: block; animation: cardIn .3s ease; }
+  .aviso-titulo { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: #7a2515; margin-bottom: 6px; }
+  .aviso-texto { font-family: 'Lora', serif; font-size: 15px; color: #4a2e08; font-weight: 600; line-height: 1.6; }
+
+  /* ETAPA 5 — CLASSIFICAR */
+  .banco-cartoes { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 16px; padding: 12px; background: rgba(139,94,26,0.05); border-radius: 8px; border: 1px dashed rgba(139,94,26,0.3); }
+  .cartao-nuclideo { background: var(--paper-text); color: var(--paper); font-family: 'Lora', serif; font-weight: 700; font-size: 14px; padding: 8px 14px; border-radius: 6px; cursor: pointer; transition: background .15s, transform .15s; user-select: none; }
+  .cartao-nuclideo:hover { background: #4a2c10; }
+  .cartao-nuclideo.selecionado { background: var(--paper-gold); box-shadow: 0 0 0 2px rgba(232,184,75,0.5); }
+  .caixas-categoria { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+  .caixa-categoria { border: 1.5px dashed rgba(139,94,26,0.35); border-radius: 8px; padding: 12px 8px; min-height: 90px; text-align: center; cursor: pointer; transition: border-color .15s, background .15s; }
+  .caixa-categoria:hover { border-color: rgba(232,184,75,0.7); background: rgba(232,184,75,0.06); }
+  .caixa-titulo { font-family: 'Lora', serif; font-size: 13px; font-weight: 700; color: var(--paper-gold); text-transform: uppercase; letter-spacing: .04em; margin-bottom: 8px; }
+  .caixa-conteudo { display: flex; flex-wrap: wrap; gap: 5px; justify-content: center; }
+  .cartao-fixado { background: rgba(80,200,120,0.18); border: 1px solid rgba(80,200,120,0.5); color: #1f3d1f; font-family: 'Lora', serif; font-weight: 700; font-size: 12.5px; padding: 5px 9px; border-radius: 5px; }
+  .cartao-fixado.errado { background: rgba(180,60,50,0.15); border-color: rgba(180,60,50,0.4); color: #6b1f10; }
+
+  /* TELA FINAL */
+  .win-screen { display: none; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 60px 32px; flex: 1; }
+  .win-screen.show { display: flex; }
+  .win-title { font-family: 'Lora', serif; font-size: 40px; font-weight: 600; color: var(--gold); margin-bottom: 12px; }
+  .win-sub { font-size: 15px; color: var(--text-soft); font-style: italic; margin-bottom: 32px; line-height: 1.8; max-width: 560px; }
+  .win-badges { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-bottom: 32px; }
+  .badge { background: var(--bg-dark); border: 1px solid var(--border); border-radius: 8px; padding: 18px 22px; text-align: center; min-width: 120px; }
+  .badge-icon { font-size: 26px; margin-bottom: 6px; }
+  .badge-label { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--gold); }
+  .win-btns { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+  .btn-next { background: var(--gold); border: none; border-radius: 6px; padding: 14px 36px; font-family: 'Libre Baskerville', serif; font-size: 14px; font-weight: 700; color: var(--bg-dark); cursor: pointer; letter-spacing: .06em; text-transform: uppercase; transition: background .15s; text-decoration: none; display: inline-block; }
+  .btn-next:hover { background: #f0c960; }
+  .btn-restart { background: none; border: 1px solid rgba(232,184,75,0.3); border-radius: 6px; padding: 10px 24px; font-family: 'Libre Baskerville', serif; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: rgba(232,184,75,0.6); cursor: pointer; transition: all .15s; }
+  .btn-restart:hover { border-color: rgba(232,184,75,0.6); color: var(--gold); }
+
+  /* ANIMAÇÃO FINAL — próton vs nêutron */
+  .anim-final-wrap { display: flex; flex-direction: column; align-items: center; gap: 10px; margin: 14px 0 18px; }
+  .anim-final-atomo { position: relative; width: 130px; height: 130px; }
+  .anim-final-legenda { font-family: 'Lora', serif; font-size: 13.5px; color: var(--paper-text); font-weight: 600; text-align: center; min-height: 20px; }
+
+  @media (max-width: 768px) {
+    .main { flex-direction: column; }
+    .scene-wrap { flex: none; width: 100%; padding: 16px; }
+    .panels-row { border-left: none; border-top: 1px solid var(--border-faint); padding: 20px 16px; }
+    .page-title { font-size: 22px; }
+    .prog-step .step-label { display: none; }
+    .narr { font-size: 17px; }
+    .card-fixed-top { padding: 20px 20px 14px; }
+    .card-scroll-body { padding: 14px 20px 20px; }
+    .card-title { font-size: 19px; }
+    .card-fala, .pergunta-texto { font-size: 15.5px; }
+    .win-title { font-size: 30px; }
+    .atomo-clicavel { width: 92px; height: 92px; }
+    .atomo-caixa { width: 105px; }
+    .caixas-categoria { grid-template-columns: 1fr; }
+    .pergaminho-box { padding: 26px 31px 35px; margin: 6px -13px 16px; width: calc(100% + 26px); min-height: 227px; }
+    .pergaminho-texto { font-size: 10.8px; line-height: 1.45; }
+    .pergaminho-texto:not(.resumo-final) { max-width: 240px; margin: 0 auto 22px; }
+    .pergaminho-nome { font-size: 20px; }
+    .pergaminho-box.resumo-final-box { padding-left: 16px; padding-right: 16px; }
+    .pergaminho-texto.resumo-final { font-size: 11.5px; max-width: none; margin-left: 0; }
+  }
+  </style>
+  <style>
+    @media (min-width:701px){
+      body{background:#f7efe2;color:#2e1a08;}
+      .scene-wrap, .scene-inner { max-height:68vh; display:flex; align-items:center; justify-content:center; }
+      .scene-img { object-fit:contain; background-position:center; filter:brightness(0.9); }
+      .narrador { position:relative; top:18px; left:22px; }
+      .narrador img { width:132px; height:158px; }
+      .narr { font-size:16px; color:#2e1a08; line-height:1.6; }
+      footer{ text-align:center; padding:16px 12px; background:#2e2016; color:#f5ead0; font-size:0.95rem; }
+    }
+  </style>
+  <style>
+    :root {
+      --fundo: #fdf8f0;
+      --fundo-card: #fffdf9;
+      --escuro: #2e2016;
+      --texto: #1a1208;
+      --texto-suave: #3d2e1a;
+      --dourado: #8a5e10;
+      --dourado-claro: #c8920a;
+      --borda: rgba(100,70,20,0.3);
+      --borda-forte: rgba(100,70,20,0.5);
+      --verde-escuro: #1e5238;
+      --vermelho-escuro: #7a1515;
+    }
+
+    body {
+      font-family: 'Libre Baskerville', Georgia, serif;
+      background: var(--fundo);
+      color: var(--texto);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    main {
+      flex: 1;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 2.5rem;
+      width: 100%;
+    }
+
+    .top-nav {
+      background: #1e1008;
+      border-bottom: 2px solid var(--dourado-claro);
+      padding: 0 2.5rem;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.7rem;
+      font-weight: 600;
+      color: #fff8ee;
+      letter-spacing: 0.03em;
+      margin-right: auto;
+    }
+
+    .titulo-jogo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+      line-height: 1.1;
+    }
+
+    .subtitulo {
+      font-size: 1.1rem;
+      color: var(--texto);
+      margin-bottom: 2.5rem;
+      max-width: 680px;
+    }
+
+    .narrador {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 1.4rem;
+      padding: 1rem 1.1rem;
+      border: 1.5px solid var(--borda-forte);
+      border-radius: 10px;
+      background: rgba(30,16,8,0.05);
+    }
+
+    .narrador img {
+      width: 78px;
+      height: 96px;
+      object-fit: cover;
+      object-position: top center;
+      border-radius: 10px;
+      border: 1px solid rgba(200,146,10,.35);
+      flex-shrink: 0;
+    }
+
+    .narrador-nome {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.8rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--dourado-claro);
+      margin-bottom: 0.4rem;
+    }
+
+    .narrador-texto {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: var(--texto-suave);
+    }
+
+    .imagem-wrapper {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: fit-content;
+      max-width: min(100%, 900px);
+      max-height: 70vh;
+      margin: 0 auto;
+      cursor: zoom-in;
+      border: 1.5px solid var(--borda-forte);
+      border-radius: 6px;
+      overflow: hidden;
+      background: #f7efe2;
+    }
+
+    .imagem-wrapper img {
+      display: block;
+      width: auto;
+      max-width: 100%;
+      height: auto;
+      max-height: 70vh;
+      object-fit: contain;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .link-aula {
+      position: absolute; top: 10px; right: 10px; z-index: 10;
+      display: flex; flex-direction: column; align-items: center; gap: 2px;
+      text-decoration: none; color: #fff8ee;
+      background: rgba(30,16,8,0.72); border: 1.5px solid var(--dourado-claro, #c8920a);
+      border-radius: 8px; padding: 0.4rem 0.65rem;
+      font-family: 'Cormorant Garamond', serif; font-size: 0.68rem; font-weight: 600;
+      letter-spacing: 0.02em; text-align: center; line-height: 1.2;
+      cursor: pointer; transition: background 0.2s, transform 0.15s;
+    }
+    .link-aula:hover { background: rgba(30,16,8,0.92); transform: translateY(-1px); }
+    .link-aula svg { width: 22px; height: 22px; }
+
+    .progresso-wrap {
+      background: var(--fundo-card);
+      border: 1.5px solid var(--borda-forte);
+      border-radius: 10px;
+      padding: 1.2rem 1.3rem;
+      margin-bottom: 1.6rem;
+      display: grid;
+      gap: 0.9rem;
+    }
+
+    .progresso-title {
+      font-size: 0.82rem;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--dourado-claro);
+      margin-bottom: 0.9rem;
+    }
+
+    .ato-item {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+      padding: 0.85rem 0;
+      border-top: 1px solid rgba(100,70,20,0.12);
+    }
+
+    .ato-item:first-child {
+      border-top: none;
+    }
+
+    .ato-nome {
+      font-family: 'Lora', serif;
+      font-size: 0.98rem;
+      color: var(--texto-suave);
+      line-height: 1.4;
+      font-weight: 600;
+    }
+
+    .ato-item.active .ato-nome {
+      color: var(--texto);
+    }
+
+    .prog-step {
+      width: 34px;
+      min-width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: rgba(200,146,10,0.12);
+      color: var(--texto);
+      border: 1.5px solid rgba(100,70,20,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      transition: all 0.25s;
+    }
+
+    .prog-step.done {
+      background: var(--dourado-claro);
+      border-color: var(--dourado-claro);
+      color: #1e1008;
+    }
+
+    .prog-step.active {
+      box-shadow: 0 0 0 6px rgba(200,146,10,0.15);
+    }
+
+    footer {
+      background: var(--escuro);
+      border-top: 2px solid var(--dourado-claro);
+      padding: 1.2rem 2rem;
+      text-align: center;
+      font-size: 0.82rem;
+      color: rgba(255,248,238,0.5);
+    }
+
+    @media (max-width: 640px) {
+      .top-nav { padding: 0 1.2rem; gap: 1.2rem; }
+      main { padding: 2rem 1rem 4rem; }
+      .modal-pergunta { padding: 2rem 1.2rem 1.5rem; }
+      .overlay { padding: 0.4rem; }
+      .modal-input { font-size: 1rem; }
+      .hotspot { width: 22px; height: 22px; font-size: 0.65rem; border-width: 1.5px; }
+      .link-aula { top: 6px; right: 6px; padding: 0.3rem 0.5rem; font-size: 0.6rem; }
+      .link-aula svg { width: 18px; height: 18px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <div class="brand">KiFácil</div>
+</nav>
+
+<main id="mainScreen">
+  <h1 class="titulo-jogo">Investigação Nuclear</h1>
+  <p class="subtitulo">Descubra isótopos, isótonos e isóbaros.</p>
+
+  <div class="narrador">
+    <img src="../imagens/rafa-sorrindo.jpg" alt="Professora Rafaela">
+    <div>
+      <div class="narrador-nome">Professora Rafaela</div>
+      <div id="narr" class="narrador-texto">Venha à bancada. Observe os átomos e identifique os padrões que definem isótopos, isótonos e isóbaros.</div>
+    </div>
+  </div>
+
+  <div class="imagem-wrapper">
+    <img src="../imagens/laboratorio-isotopos.jpg" alt="Laboratório de isótopos no início do século XX" id="imagemJogo">
+    <button class="btn-iniciar-exp" id="btnIniciar" onclick="abrirEtapa1()">⚗ Entrar no laboratório</button>
+    <!-- COLOQUE O LINK AQUI -->
+    <a class="link-aula" href="https://www.youtube.com/watch?v=G9GUwdQqrkA" target="_blank" rel="noopener" title="Assista à aula">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.6"/>
+        <path d="M10 8.5L16 12L10 15.5V8.5Z" fill="currentColor"/>
+      </svg>
+      <span>Assista à aula</span>
+    </a>
+  </div>
+</main>
+
+<!-- TELA FINAL -->
+<div class="win-screen" id="winScreen">
+  <div class="win-title">Isótopos, isótonos e isóbaros descobertos!</div>
+  <p class="win-sub">Você investigou por que existiam átomos com propriedades químicas idênticas e massas diferentes. O número de prótons define o elemento — o número de nêutrons pode variar. Assim surgem os conceitos de isótopo, isótono e isóbaro.</p>
+  <div class="win-badges">
+    <div class="badge"><div class="badge-icon">⚛️</div><div class="badge-label">Isótopos</div></div>
+    <div class="badge"><div class="badge-icon">🧲</div><div class="badge-label">Isótonos</div></div>
+    <div class="badge"><div class="badge-icon">⚖️</div><div class="badge-label">Isóbaros</div></div>
+  </div>
+  <div class="win-btns">
+    <button class="btn-restart" onclick="resetGame()">Reviver o experimento</button>
+  </div>
+</div>
+
+<!-- OVERLAY CARD -->
+<div class="overlay" id="overlay">
+  <div class="card" id="card"></div>
+</div>
+
+<script>
+/* ============================================================
+   ÁREA DE CONFIGURAÇÃO — confirme os caminhos das imagens
+   conforme a pasta real desta fase no seu projeto.
+   Convenção usada aqui: ../imagens/ (mesma das fases de Thomson/Rutherford)
+   ============================================================ */
+const IMG = {
+  proton: '../imagens/proton.png',
+  neutron: '../imagens/neutron.png'
+};
+
+function setNarr(html) { document.getElementById('narr').innerHTML = html; }
+function openOverlay() { document.getElementById('overlay').classList.add('show'); }
+function closeOverlay() { document.getElementById('overlay').classList.remove('show'); }
+document.getElementById('overlay').addEventListener('click', function (e) { if (e.target === this) closeOverlay(); });
+
+function tocarDing() {
+  const a = new Audio('../sons/ding.mp3');
+  a.play().catch(() => {});
+}
+
+/* ============================================================
+   RENDERIZAÇÃO DINÂMICA DE PARTÍCULAS (nunca via <img> fixa no HTML)
+   ============================================================ */
+function limparContainer(el) { el.innerHTML = ''; }
+
+// posiciona partículas em espiral compacta (ângulo áureo) — evita overlap feio
+function posicionarParticula(el, index, total, raioMax, tamanho) {
+  const golden = 137.5;
+  const angulo = index * golden * (Math.PI / 180);
+  const r = total <= 1 ? 0 : raioMax * Math.sqrt((index + 0.5) / total);
+  const x = r * Math.cos(angulo);
+  const y = r * Math.sin(angulo);
+  el.style.position = 'absolute';
+  el.style.width = tamanho + 'px';
+  el.style.height = tamanho + 'px';
+  el.style.left = `calc(50% + ${x}px - ${tamanho / 2}px)`;
+  el.style.top = `calc(50% + ${y}px - ${tamanho / 2}px)`;
+}
+
+function criarAtomoBase(container) {
+  limparContainer(container);
+}
+
+function obterLegendaParticulasHTML() {
+  return `
+    <div class="legenda-particulas" aria-label="Legenda de partículas do núcleo">
+      <span class="legenda-item"><span class="legenda-simbolo proton">⊕</span> Próton</span>
+      <span class="legenda-item"><span class="legenda-simbolo neutron">0</span> Nêutron</span>
+    </div>`;
+}
+
+// renderiza núcleo (prótons + nêutrons) dinamicamente dentro do container
+function renderNucleo(container, protons, neutrons, tamanhoContainer) {
+  limparContainer(container);
+  const total = protons + neutrons;
+  const raio = Math.min(tamanhoContainer * 0.34, Math.max(tamanhoContainer * 0.2, total * 4.1));
+  const tamanhoParticula = total > 10 ? Math.max(13, 18 - total / 3) : 24;
+
+  for (let i = 0; i < protons; i++) {
+    const p = document.createElement('div');
+    p.className = 'particula proton';
+    p.textContent = '⊕';
+    p.style.fontSize = Math.max(10, Math.round(tamanhoParticula * 0.58)) + 'px';
+    posicionarParticula(p, i, total, raio, tamanhoParticula);
+    container.appendChild(p);
+  }
+  for (let j = 0; j < neutrons; j++) {
+    const n = document.createElement('div');
+    n.className = 'particula neutron';
+    n.textContent = '0';
+    n.style.fontSize = Math.max(10, Math.round(tamanhoParticula * 0.58)) + 'px';
+    posicionarParticula(n, protons + j, total, raio, tamanhoParticula);
+    container.appendChild(n);
+  }
+}
+
+/* ============================================================
+   ETAPA 1 — DESCOBRINDO OS ISÓTOPOS
+   ============================================================ */
+const ATOMOS_H = [
+  { id: 'h1', nome: 'Hidrogênio-1', protons: 1, neutrons: 0 },
+  { id: 'h2', nome: 'Hidrogênio-2', protons: 1, neutrons: 1 },
+  { id: 'h3', nome: 'Hidrogênio-3', protons: 1, neutrons: 2 }
+];
+const revelado1 = { h1: false, h2: false, h3: false };
+
+function abrirEtapa1() {
+  document.getElementById('btnIniciar').classList.add('oculto');
+  document.getElementById('card').innerHTML = `
+    <button class="card-close" onclick="closeOverlay()" aria-label="Fechar">×</button>
+    <div class="card-fixed-top">
+      <div class="card-eyebrow">Descoberta 1 — Três Átomos de Hidrogênio</div>
+      <div class="card-title">Clique em cada átomo para abrir o núcleo</div>
+    </div>
+    <div class="card-scroll-body">
+      <div class="card-fala"><strong>Professora Rafaela:</strong> "Aqui estão três amostras de hidrogênio, retiradas de fontes diferentes. Abra o <strong>núcleo</strong> de cada uma e observe com atenção o que encontra lá dentro."</div>
+      <div class="atomos-linha" id="linhaAtomos1"></div>
+      ${obterLegendaParticulasHTML()}
+      <div class="pergunta-box" id="pergunta1">
+        <div class="pergunta-texto"><strong>Professora Rafaela:</strong> "Muito bem — você abriu os três núcleos. Agora me diga: o que permaneceu <strong>igual</strong> nos três átomos?"</div>
+        <button class="btn-opcao" onclick="responderEtapa1(this,'protons')">Número de prótons</button>
+        <button class="btn-opcao" onclick="responderEtapa1(this,'neutrons')">Número de nêutrons</button>
+        <button class="btn-opcao" onclick="responderEtapa1(this,'massa')">Número de massa</button>
+      </div>
+      <div class="quiz-feedback" id="fb1"></div>
+      <div class="pergaminho-box" id="pergaminho1">
+        <div class="pergaminho-eyebrow">Explicação</div>
+        <div class="pergaminho-texto">Os três átomos têm exatamente 1 próton — por isso são todos hidrogênio. Apenas o número de nêutrons mudou. Átomos de um mesmo elemento, com números de massa diferentes, recebem um nome:</div>
+        <div class="pergaminho-nome">ISÓTOPOS</div>
+      </div>
+      <button class="btn-continuar" id="btnContinuar1" onclick="fecharEtapa1()">Continuar →</button>
+    </div>`;
+  openOverlay();
+  renderLinhaAtomos1();
+}
+
+function renderLinhaAtomos1() {
+  const linha = document.getElementById('linhaAtomos1');
+  linha.innerHTML = '';
+  ATOMOS_H.forEach(atomo => {
+    const caixa = document.createElement('div');
+    caixa.className = 'atomo-caixa';
+    caixa.innerHTML = `
+      <div class="atomo-clicavel" id="clique-${atomo.id}"></div>
+      <div class="atomo-legenda">${atomo.nome}</div>
+      <div class="atomo-info" id="info-${atomo.id}"></div>
+      <div class="atomo-clique-dica" id="dica-${atomo.id}">clique para abrir</div>`;
+    linha.appendChild(caixa);
+    const clique = caixa.querySelector('.atomo-clicavel');
+    clique.addEventListener('click', () => abrirNucleo1(atomo, clique));
+  });
+}
+
+function abrirNucleo1(atomo, container) {
+  if (revelado1[atomo.id]) return;
+  revelado1[atomo.id] = true;
+  container.classList.add('revelado');
+  renderNucleo(container, atomo.protons, atomo.neutrons, 120);
+  document.getElementById('info-' + atomo.id).classList.add('show');
+  document.getElementById('info-' + atomo.id).textContent = `${atomo.protons} próton · ${atomo.neutrons} nêutron${atomo.neutrons === 1 ? '' : 's'}`;
+  document.getElementById('dica-' + atomo.id).style.display = 'none';
+  tocarDing();
+  if (Object.values(revelado1).every(v => v)) {
+    document.getElementById('pergunta1').classList.add('show');
+  }
+}
+
+function responderEtapa1(btn, escolha) {
+  document.querySelectorAll('#pergunta1 .btn-opcao').forEach(b => b.disabled = true);
+  const fb = document.getElementById('fb1');
+  if (escolha === 'protons') {
+    tocarDing();
+    btn.classList.add('opcao-certa');
+    fb.className = 'quiz-feedback show ok';
+    fb.innerHTML = `<div class="conclusao-eyebrow">Correto</div><div class="conclusao-texto">Os prótons permaneceram os mesmos nos três átomos — todos têm 1. Isso é o que define o elemento químico.</div>`;
+    document.getElementById('pergaminho1').classList.add('show');
+    document.getElementById('btnContinuar1').classList.add('show');
+  } else {
+    btn.classList.add('opcao-errada');
+    fb.className = 'quiz-feedback show err';
+    fb.innerHTML = `<div class="conclusao-eyebrow">Comentário</div><div class="conclusao-texto">Olhe de novo os números que você encontrou em cada núcleo — nêutrons e massa mudaram entre os três átomos. Só uma coisa não mudou. Tente outra vez.</div>`;
+    setTimeout(() => {
+      document.querySelectorAll('#pergunta1 .btn-opcao').forEach(b => { b.disabled = false; b.classList.remove('opcao-errada'); });
+      fb.classList.remove('show');
+    }, 1800);
+  }
+}
+
+function fecharEtapa1() {
+  setNarr('<strong>Professora Rafaela:</strong> <em>"Isótopos — mesmo número de prótons, número de massa diferente. Agora venha até a bancada de montagem: quero ver você representar um isótopo com as próprias mãos."</em>');
+  abrirEtapa2();
+}
+
+/* ============================================================
+   ETAPA 2 — MONTE OUTRO ISÓTOPO
+   ============================================================ */
+const NOMES_ELEMENTOS = { 1: 'Hidrogênio', 2: 'Hélio', 3: 'Lítio', 4: 'Berílio', 5: 'Boro' };
+let monteProtons = 1;
+let monteNeutrons = 0;
+
+function abrirEtapa2() {
+  monteProtons = 1;
+  monteNeutrons = 0;
+  document.getElementById('card').innerHTML = `
+    <button class="card-close" onclick="closeOverlay()" aria-label="Fechar">×</button>
+    <div class="card-fixed-top">
+      <div class="card-eyebrow">Descoberta 2 — Represente outro Isótopo</div>
+      <div class="card-title">Use o painel para representar outro isótopo do hidrogênio</div>
+    </div>
+    <div class="card-scroll-body">
+      <div class="card-fala"><strong>Professora Rafaela:</strong> "Este é um átomo de hidrogênio comum: 1 próton, nenhum nêutron. Use os botões abaixo para representar outro isótopo do hidrogênio."</div>
+      <div class="monte-box">
+        <div class="monte-atomo" id="monteAtomo"></div>
+        <div class="monte-contagem" id="monteContagem"></div>
+        <div class="monte-botoes">
+          <button class="btn-particula" onclick="montarParticula('proton')">+ Próton</button>
+          <button class="btn-particula" id="btnAddNeutron" onclick="montarParticula('neutron')">+ Nêutron</button>
+        </div>
+      </div>
+      <div class="aviso-elemento" id="avisoElemento">
+        <div class="aviso-titulo">Atenção</div>
+        <div class="aviso-texto" id="avisoTexto"></div>
+      </div>
+      <div class="conclusao-box" id="conclusaoEtapa2">
+        <div class="conclusao-eyebrow">Isótopo representado</div>
+        <div class="conclusao-texto">Você manteve o mesmo número de prótons e alterou apenas a quantidade de nêutrons. Assim, este núcleo representa outro isótopo do hidrogênio, que é chamado de deutério.</div>
+      </div>
+      <button class="btn-continuar" id="btnContinuar2" onclick="fecharEtapa2()">Continuar →</button>
+    </div>`;
+  openOverlay();
+  atualizarMonte();
+}
+
+function atualizarMonte() {
+  const container = document.getElementById('monteAtomo');
+  renderNucleo(container, monteProtons, monteNeutrons, 160);
+  document.getElementById('monteContagem').textContent = `${monteProtons} próton${monteProtons === 1 ? '' : 's'} · ${monteNeutrons} nêutron${monteNeutrons === 1 ? '' : 's'}`;
+}
+
+function montarParticula(tipo) {
+  if (tipo === 'neutron') {
+    monteNeutrons++;
+    tocarDing();
+    atualizarMonte();
+    document.getElementById('avisoElemento').classList.remove('show');
+    if (monteNeutrons >= 1) {
+      document.getElementById('conclusaoEtapa2').classList.add('show');
+      document.getElementById('btnContinuar2').classList.add('show');
+      document.getElementById('btnAddNeutron').disabled = true;
+    }
+  } else {
+    monteProtons++;
+    atualizarMonte();
+    const nomeNovo = NOMES_ELEMENTOS[monteProtons] || 'um novo elemento';
+    document.getElementById('avisoTexto').textContent = `Se você adiciona um próton, o átomo deixa de ser hidrogênio e passa a ser ${nomeNovo}! Isótopos mantêm sempre o mesmo número de prótons — vamos voltar a 1 próton e continuar explorando os nêutrons.`;
+    document.getElementById('avisoElemento').classList.add('show');
+    setTimeout(() => { monteProtons = 1; atualizarMonte(); }, 2200);
+  }
+}
+
+function fecharEtapa2() {
+  setNarr('<strong>Professora Rafaela:</strong> <em>"Perfeito — só os nêutrons mudam. Agora venha ver algo diferente: dois elementos diferentes que guardam uma semelhança inesperada."</em>');
+  abrirEtapa3();
+}
+
+/* ============================================================
+   ETAPA 3 — DESCOBRINDO OS ISÓTONOS
+   ============================================================ */
+const ATOMOS_ISOTONOS = [
+  { id: 'c14', nome: 'Carbono-14', simbolo: 'C', z: 6, n: 8 },
+  { id: 'n15', nome: 'Nitrogênio-15', simbolo: 'N', z: 7, n: 8 }
+];
+const revelado3 = { c14: false, n15: false };
+
+function abrirEtapa3() {
+  document.getElementById('card').innerHTML = `
+    <button class="card-close" onclick="closeOverlay()" aria-label="Fechar">×</button>
+    <div class="card-fixed-top">
+      <div class="card-eyebrow">Descoberta 3 — Carbono-14 e Nitrogênio-15</div>
+      <div class="card-title">Abra os dois núcleos e compare</div>
+    </div>
+    <div class="card-scroll-body">
+      <div class="card-fala"><strong>Professora Rafaela:</strong> "Estes dois átomos pertencem a elementos diferentes. Abra os núcleos e anote o que encontrar."</div>
+      <div class="atomos-linha" id="linhaAtomos3"></div>
+      ${obterLegendaParticulasHTML()}
+      <div class="pergunta-box" id="pergunta3">
+        <div class="pergunta-texto"><strong>Professora Rafaela:</strong> "Repare bem nos números que você viu. O que permaneceu <strong>igual</strong> entre o carbono e o nitrogênio?"</div>
+        <button class="btn-opcao" onclick="responderEtapa3(this,'protons')">Número de prótons</button>
+        <button class="btn-opcao" onclick="responderEtapa3(this,'neutrons')">Número de nêutrons</button>
+        <button class="btn-opcao" onclick="responderEtapa3(this,'massa')">Número de massa</button>
+      </div>
+      <div class="quiz-feedback" id="fb3"></div>
+      <div class="pergaminho-box" id="pergaminho3">
+        <div class="pergaminho-eyebrow">Explicação</div>
+        <div class="pergaminho-texto">Carbono e nitrogênio são elementos diferentes — prótons diferentes — mas ambos têm 8 nêutrons. Átomos de elementos diferentes com o mesmo número de nêutrons recebem um nome:</div>
+        <div class="pergaminho-nome">ISÓTONOS</div>
+      </div>
+      <button class="btn-continuar" id="btnContinuar3" onclick="fecharEtapa3()">Continuar →</button>
+    </div>`;
+  openOverlay();
+  renderLinhaAtomos3();
+}
+
+function renderLinhaAtomos3() {
+  const linha = document.getElementById('linhaAtomos3');
+  linha.innerHTML = '';
+  ATOMOS_ISOTONOS.forEach(atomo => {
+    const caixa = document.createElement('div');
+    caixa.className = 'atomo-caixa';
+    caixa.innerHTML = `
+      <div class="atomo-clicavel" id="clique-${atomo.id}"></div>
+      <div class="atomo-legenda">${atomo.nome}</div>
+      <div class="atomo-info" id="info-${atomo.id}"></div>
+      <div class="atomo-clique-dica" id="dica-${atomo.id}">clique para abrir</div>`;
+    linha.appendChild(caixa);
+    const clique = caixa.querySelector('.atomo-clicavel');
+    clique.addEventListener('click', () => abrirNucleo3(atomo, clique));
+  });
+}
+
+function abrirNucleo3(atomo, container) {
+  if (revelado3[atomo.id]) return;
+  revelado3[atomo.id] = true;
+  container.classList.add('revelado');
+  renderNucleo(container, atomo.z, atomo.n, 120);
+  document.getElementById('info-' + atomo.id).classList.add('show');
+  document.getElementById('info-' + atomo.id).textContent = `${atomo.simbolo} · Z=${atomo.z} · N=${atomo.n}`;
+  document.getElementById('dica-' + atomo.id).style.display = 'none';
+  tocarDing();
+  if (Object.values(revelado3).every(v => v)) {
+    document.getElementById('pergunta3').classList.add('show');
+  }
+}
+
+function responderEtapa3(btn, escolha) {
+  document.querySelectorAll('#pergunta3 .btn-opcao').forEach(b => b.disabled = true);
+  const fb = document.getElementById('fb3');
+  if (escolha === 'neutrons') {
+    tocarDing();
+    btn.classList.add('opcao-certa');
+    fb.className = 'quiz-feedback show ok';
+    fb.innerHTML = `<div class="conclusao-eyebrow">Correto</div><div class="conclusao-texto">Os nêutrons permaneceram os mesmos: 8 em cada átomo, mesmo sendo elementos diferentes.</div>`;
+    document.getElementById('pergaminho3').classList.add('show');
+    document.getElementById('btnContinuar3').classList.add('show');
+  } else {
+    btn.classList.add('opcao-errada');
+    fb.className = 'quiz-feedback show err';
+    fb.innerHTML = `<div class="conclusao-eyebrow">Comentário</div><div class="conclusao-texto">Compare Z=6/N=8 com Z=7/N=8 outra vez. Um desses três números não mudou entre os dois átomos. Tente novamente.</div>`;
+    setTimeout(() => {
+      document.querySelectorAll('#pergunta3 .btn-opcao').forEach(b => { b.disabled = false; b.classList.remove('opcao-errada'); });
+      fb.classList.remove('show');
+    }, 1800);
+  }
+}
+
+function fecharEtapa3() {
+  setNarr('<strong>Professora Rafaela:</strong> <em>"Isótonos — mesmo número de nêutrons. Agora um último par, ainda mais surpreendente."</em>');
+  abrirEtapa4();
+}
+
+/* ============================================================
+   ETAPA 4 — DESCOBRINDO OS ISÓBAROS
+   ============================================================ */
+const ATOMOS_ISOBAROS = [
+  { id: 'ar40', nome: 'Argônio-40', simbolo: 'Ar', z: 18, n: 22 },
+  { id: 'ca40', nome: 'Cálcio-40', simbolo: 'Ca', z: 20, n: 20 }
+];
+const revelado4 = { ar40: false, ca40: false };
+
+function abrirEtapa4() {
+  document.getElementById('card').innerHTML = `
+    <button class="card-close" onclick="closeOverlay()" aria-label="Fechar">×</button>
+    <div class="card-fixed-top">
+      <div class="card-eyebrow">Descoberta 4 — Argônio-40 e Cálcio-40</div>
+      <div class="card-title">Abra os dois núcleos e compare</div>
+    </div>
+    <div class="card-scroll-body">
+      <div class="card-fala"><strong>Professora Rafaela:</strong> "Estes dois núcleos são ainda mais distantes um do outro em número de prótons. Abra-os e observe."</div>
+      <div class="atomos-linha" id="linhaAtomos4"></div>
+      ${obterLegendaParticulasHTML()}
+      <div class="pergunta-box" id="pergunta4">
+        <div class="pergunta-texto"><strong>Professora Rafaela:</strong> "Prótons diferentes, nêutrons diferentes... o que ainda assim permaneceu <strong>igual</strong>?"</div>
+        <button class="btn-opcao" onclick="responderEtapa4(this,'protons')">Número de prótons</button>
+        <button class="btn-opcao" onclick="responderEtapa4(this,'neutrons')">Número de nêutrons</button>
+        <button class="btn-opcao" onclick="responderEtapa4(this,'massa')">Número de massa</button>
+      </div>
+      <div class="quiz-feedback" id="fb4"></div>
+      <div class="pergaminho-box" id="pergaminho4">
+        <div class="pergaminho-eyebrow">Explicação</div>
+        <div class="pergaminho-texto">Argônio (18+22) e cálcio (20+20) têm prótons e nêutrons diferentes, mas a soma — o número de massa — é 40 nos dois. Átomos de elementos diferentes com o mesmo número de massa recebem um nome:</div>
+        <div class="pergaminho-nome">ISÓBAROS</div>
+      </div>
+      <button class="btn-continuar" id="btnContinuar4" onclick="fecharEtapa4()">Continuar →</button>
+    </div>`;
+  openOverlay();
+  renderLinhaAtomos4();
+}
+
+function renderLinhaAtomos4() {
+  const linha = document.getElementById('linhaAtomos4');
+  linha.innerHTML = '';
+  ATOMOS_ISOBAROS.forEach(atomo => {
+    const caixa = document.createElement('div');
+    caixa.className = 'atomo-caixa';
+    caixa.innerHTML = `
+      <div class="atomo-clicavel" id="clique-${atomo.id}"></div>
+      <div class="atomo-legenda">${atomo.nome}</div>
+      <div class="atomo-info" id="info-${atomo.id}"></div>
+      <div class="atomo-clique-dica" id="dica-${atomo.id}">clique para abrir</div>`;
+    linha.appendChild(caixa);
+    const clique = caixa.querySelector('.atomo-clicavel');
+    clique.addEventListener('click', () => abrirNucleo4(atomo, clique));
+  });
+}
+
+function abrirNucleo4(atomo, container) {
+  if (revelado4[atomo.id]) return;
+  revelado4[atomo.id] = true;
+  container.classList.add('revelado');
+  renderNucleo(container, atomo.z, atomo.n, 120);
+  document.getElementById('info-' + atomo.id).classList.add('show');
+  document.getElementById('info-' + atomo.id).textContent = `${atomo.simbolo} · Z=${atomo.z} · N=${atomo.n} · A=${atomo.z + atomo.n}`;
+  document.getElementById('dica-' + atomo.id).style.display = 'none';
+  tocarDing();
+  if (Object.values(revelado4).every(v => v)) {
+    document.getElementById('pergunta4').classList.add('show');
+  }
+}
+
+function responderEtapa4(btn, escolha) {
+  document.querySelectorAll('#pergunta4 .btn-opcao').forEach(b => b.disabled = true);
+  const fb = document.getElementById('fb4');
+  if (escolha === 'massa') {
+    tocarDing();
+    btn.classList.add('opcao-certa');
+    fb.className = 'quiz-feedback show ok';
+    fb.innerHTML = `<div class="conclusao-eyebrow">Correto</div><div class="conclusao-texto">18+22=40 e 20+20=40 — o número de massa é igual nos dois átomos.</div>`;
+    document.getElementById('pergaminho4').classList.add('show');
+    document.getElementById('btnContinuar4').classList.add('show');
+  } else {
+    btn.classList.add('opcao-errada');
+    fb.className = 'quiz-feedback show err';
+    fb.innerHTML = `<div class="conclusao-eyebrow">Comentário</div><div class="conclusao-texto">Some prótons + nêutrons de cada um e compare os resultados. Tente novamente.</div>`;
+    setTimeout(() => {
+      document.querySelectorAll('#pergunta4 .btn-opcao').forEach(b => { b.disabled = false; b.classList.remove('opcao-errada'); });
+      fb.classList.remove('show');
+    }, 1800);
+  }
+}
+
+function fecharEtapa4() {
+  setNarr('<strong>Professora Rafaela:</strong> <em>"Isóbaros — mesmo número de massa. Agora vamos ao laboratório de desafios — quero testar o que você aprendeu com pares novos, nunca vistos antes."</em>');
+  abrirEtapa6();
+}
+
+/* ============================================================
+   ETAPA 6 — LABORATÓRIO (desafios aleatórios)
+   ============================================================ */
+const DESAFIOS_LAB = [
+  { a: { z: 8, n: 10 }, b: { z: 8, n: 8 }, resposta: 'isotopos' },
+  { a: { z: 6, n: 6 }, b: { z: 6, n: 8 }, resposta: 'isotopos' },
+  { a: { z: 6, n: 8 }, b: { z: 8, n: 6 }, resposta: 'isobaros' },
+  { a: { z: 19, n: 20 }, b: { z: 20, n: 19 }, resposta: 'isobaros' },
+  { a: { z: 5, n: 6 }, b: { z: 7, n: 6 }, resposta: 'isotonos' },
+  { a: { z: 11, n: 12 }, b: { z: 11, n: 14 }, resposta: 'isotopos' },
+  { a: { z: 16, n: 16 }, b: { z: 15, n: 16 }, resposta: 'isotonos' },
+  { a: { z: 26, n: 30 }, b: { z: 27, n: 29 }, resposta: 'isobaros' }
+];
+const NOMES_CATEGORIA = { isotopos: 'Isótopos', isotonos: 'Isótonos', isobaros: 'Isóbaros' };
+let filaDesafios = [];
+let indiceDesafio = 0;
+let acertosLab = 0;
+
+function embaralhar(array) {
+  const copia = [...array];
+  for (let i = copia.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copia[i], copia[j]] = [copia[j], copia[i]];
+  }
+  return copia;
+}
+
+function abrirEtapa6() {
+  filaDesafios = embaralhar(DESAFIOS_LAB);
+  indiceDesafio = 0;
+  acertosLab = 0;
+  document.getElementById('card').innerHTML = `
+    <button class="card-close" onclick="closeOverlay()" aria-label="Fechar">×</button>
+    <div class="card-fixed-top">
+      <div class="card-eyebrow">Descoberta 6 — Laboratório de Desafios</div>
+      <div class="card-title" id="tituloLab">Desafio 1 de ${filaDesafios.length}</div>
+    </div>
+    <div class="card-scroll-body" id="corpoLab"></div>`;
+  openOverlay();
+  renderDesafioAtual();
+}
+
+function renderDesafioAtual() {
+  if (indiceDesafio >= filaDesafios.length) { finalizarLab(); return; }
+  const d = filaDesafios[indiceDesafio];
+  document.getElementById('tituloLab').textContent = `Desafio ${indiceDesafio + 1} de ${filaDesafios.length}`;
+  document.getElementById('corpoLab').innerHTML = `
+    <div class="pergunta-texto">
+      <strong>Átomo A</strong> — Z=${d.a.z}, N=${d.a.n}<br>
+      <strong>Átomo B</strong> — Z=${d.b.z}, N=${d.b.n}
+    </div>
+    <p style="font-family:'Lora',serif;font-size:15.5px;color:var(--paper-text);font-weight:600;margin-bottom:14px;">São:</p>
+    <button class="btn-opcao" onclick="responderLab(this,'isotopos')">Isótopos</button>
+    <button class="btn-opcao" onclick="responderLab(this,'isotonos')">Isótonos</button>
+    <button class="btn-opcao" onclick="responderLab(this,'isobaros')">Isóbaros</button>
+    <div class="quiz-feedback" id="fbLab"></div>`;
+}
+
+function responderLab(btn, escolha) {
+  const d = filaDesafios[indiceDesafio];
+  document.querySelectorAll('#corpoLab .btn-opcao').forEach(b => b.disabled = true);
+  const fb = document.getElementById('fbLab');
+  if (escolha === d.resposta) {
+    tocarDing();
+    acertosLab++;
+    btn.classList.add('opcao-certa');
+    fb.className = 'quiz-feedback show ok';
+    fb.innerHTML = `<div class="conclusao-eyebrow">Correto</div><div class="conclusao-texto">São ${NOMES_CATEGORIA[d.resposta]}.</div>
+      <button class="btn-continuar show" style="margin-top:10px;" onclick="proximoDesafio()">Próximo →</button>`;
+  } else {
+    btn.classList.add('opcao-errada');
+    fb.className = 'quiz-feedback show err';
+    fb.innerHTML = `<div class="conclusao-eyebrow">Não foi dessa vez</div><div class="conclusao-texto">A resposta correta é: ${NOMES_CATEGORIA[d.resposta]}.</div>
+      <button class="btn-continuar show" style="margin-top:10px;" onclick="proximoDesafio()">Próximo →</button>`;
+  }
+}
+
+function proximoDesafio() {
+  indiceDesafio++;
+  renderDesafioAtual();
+}
+
+function finalizarLab() {
+  document.getElementById('corpoLab').innerHTML = `
+    <div class="conclusao-box show">
+      <div class="conclusao-eyebrow">Laboratório concluído</div>
+      <div class="conclusao-texto">Você acertou ${acertosLab} de ${filaDesafios.length} desafios.</div>
+    </div>
+    <button class="btn-continuar show" onclick="fecharEtapa6()">Continuar →</button>`;
+}
+
+function fecharEtapa6() {
+  setNarr('<strong>Professora Rafaela:</strong> <em>"Muito bem — venha ver o resumo de tudo o que descobrimos hoje."</em>');
+  abrirEtapaFinal();
+}
+
+/* ============================================================
+   ETAPA FINAL — RESUMO + ANIMAÇÃO
+   ============================================================ */
+function abrirEtapaFinal() {
+  document.getElementById('card').innerHTML = `
+    <button class="card-close" onclick="closeOverlay()" aria-label="Fechar">×</button>
+    <div class="card-fixed-top">
+      <div class="card-eyebrow">Resumo Final</div>
+      <div class="card-title">O que você descobriu hoje</div>
+    </div>
+    <div class="card-scroll-body">
+      <div class="pergaminho-box resumo-final-box show" style="min-height:220px;">
+        <div class="pergaminho-texto resumo-final" style="text-align:left;">
+          <p><strong>Isótopos</strong> → mesmo número de prótons.</p>
+          <p><strong>Isótonos</strong> → mesmo número de nêutrons.</p>
+          <p><strong>Isóbaros</strong> → mesmo número de massa.</p>
+        </div>
+      </div>
+      <button class="btn-continuar show" onclick="fecharEtapaFinal()">Concluir laboratório →</button>
+    </div>`;
+  openOverlay();
+}
+
+function fecharEtapaFinal() {
+  closeOverlay();
+  localStorage.setItem('kifacil_isotopos_ok', '1');
+  setTimeout(() => {
+    document.getElementById('mainScreen').style.display = 'none';
+    document.getElementById('winScreen').classList.add('show');
+  }, 300);
+}
+
+/* ============================================================
+   RESET
+   ============================================================ */
+function resetGame() {
+  Object.keys(revelado1).forEach(k => revelado1[k] = false);
+  Object.keys(revelado3).forEach(k => revelado3[k] = false);
+  Object.keys(revelado4).forEach(k => revelado4[k] = false);
+  monteProtons = 1; monteNeutrons = 0;
+  indiceDesafio = 0; acertosLab = 0;
+
+  document.getElementById('btnIniciar').classList.remove('oculto');
+  document.getElementById('mainScreen').style.display = '';
+  document.getElementById('winScreen').classList.remove('show');
+  setNarr('<strong>Professora Rafaela:</strong> <em>"Venha à bancada. Encontrei algo curioso estudando os produtos da desintegração radioativa: substâncias com propriedades químicas idênticas, mas com massas atômicas diferentes. Isso não deveria ser possível, segundo o que se ensinava até agora. Vamos investigar juntos."</em>');
+}
+</script>
+
+<div id="cookie-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#1a0f08;border-top:1px solid rgba(212,170,106,0.4);padding:1rem 2rem;z-index:9999;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;"><p style="margin:0;font-family:'Libre Baskerville',serif;font-size:0.82rem;color:#e8d4b0;line-height:1.5;">Este site utiliza cookies para melhorar sua experi&ecirc;ncia. Ao continuar navegando, voc&ecirc; concorda com nossa <a href="/politica-de-privacidade.html" style="color:#e8b84b;text-decoration:underline;text-underline-offset:2px;">Pol&iacute;tica de Privacidade</a>.</p><button onclick="document.getElementById('cookie-banner').style.display='none';localStorage.setItem('kifacil_cookies','1');" style="flex-shrink:0;background:#e8b84b;border:none;padding:0.55rem 1.5rem;font-family:'Libre Baskerville',serif;font-size:0.78rem;font-weight:700;color:#1a0f08;cursor:pointer;letter-spacing:0.04em;">Entendi</button></div>
+<script>if(!localStorage.getItem('kifacil_cookies'))document.getElementById('cookie-banner').style.display='flex';</script>
+<script>
+(function () {
+  var _clickSom = new Audio('../sons/click.mp3');
+  _clickSom.preload = 'auto';
+  document.addEventListener('click', function (e) {
+    var alvo = e.target.closest('button');
+    if (alvo) { try { _clickSom.currentTime = 0; _clickSom.play().catch(function () {}); } catch (err) {} }
+  }, true);
+})();
+</script>
+</body>
+</html>

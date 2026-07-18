@@ -1,0 +1,1167 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow">
+  <title>Polaridade das Moléculas — Jogo Premium | KiFácil</title>
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --fundo: #fdf8f0;
+      --fundo-card: #fffdf9;
+      --escuro: #2e2016;
+      --texto: #1a1208;
+      --texto-suave: #3d2e1a;
+      --dourado: #8a5e10;
+      --dourado-claro: #c8920a;
+      --borda: rgba(100,70,20,0.3);
+      --borda-forte: rgba(100,70,20,0.5);
+      --verde-escuro: #1e5238;
+      --vermelho-escuro: #7a1515;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Libre Baskerville', Georgia, serif;
+      background: var(--fundo);
+      color: var(--texto);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    .top-nav {
+      background: #1e1008;
+      border-bottom: 2px solid var(--dourado-claro);
+      padding: 0 2.5rem;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+    .brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.7rem;
+      font-weight: 600;
+      color: #fff8ee;
+      letter-spacing: 0.03em;
+      margin-right: auto;
+    }
+
+    /* MAIN */
+    main {
+      flex: 1;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 1rem 1.5rem 1rem;
+      width: 100%;
+    }
+    .titulo-jogo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.5rem, 3.4vw, 2.2rem);
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+      line-height: 1.1;
+    }
+    .subtitulo {
+      font-size: .92rem;
+      color: var(--texto);
+      margin-bottom: .8rem;
+      max-width: 680px;
+    }
+
+    .narrador {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: .7rem;
+      padding: .6rem .9rem;
+      border: 1.5px solid var(--borda-forte);
+      border-radius: 10px;
+      background: rgba(30,16,8,0.05);
+    }
+    .narrador img {
+      width: 58px;
+      height: 72px;
+      object-fit: cover;
+      object-position: top center;
+      border-radius: 10px;
+      border: 1px solid rgba(200,146,10,.35);
+      flex-shrink: 0;
+    }
+    .narrador-nome {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.72rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--dourado-claro);
+      margin-bottom: 0.25rem;
+    }
+    .narrador-texto {
+      font-size: .88rem;
+      line-height: 1.55;
+      color: var(--texto-suave);
+      /* altura mínima reservada para ~4 linhas: falas curtas e longas
+         não mudam a altura da caixa, então a imagem abaixo dela não
+         "pula" para cima e para baixo a cada troca de fala. */
+      min-height: 6.2em;
+    }
+
+    /* IMAGEM */
+    .imagem-wrapper {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: fit-content;
+      max-width: min(100%, 900px);
+      max-height: 46vh;
+      margin: 0 auto;
+      cursor: zoom-in;
+      border: 1.5px solid var(--borda-forte);
+      border-radius: 6px;
+      overflow: hidden;
+      background: #f7efe2;
+    }
+    .imagem-wrapper img {
+      display: block;
+      width: auto;
+      max-width: 100%;
+      height: auto;
+      max-height: 46vh;
+      object-fit: contain;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    /* top ajustado para não sobrepor o .painel-interacao, que ocupa
+       o canto superior direito do palco (right:1.5%; top:2%) quando
+       uma pergunta está sendo exibida. */
+    .link-aula {
+      position: absolute; top: 175px; right: 10px; z-index: 10;
+      display: flex; flex-direction: column; align-items: center; gap: 2px;
+      text-decoration: none; color: #fff8ee;
+      background: rgba(30,16,8,0.72); border: 1.5px solid var(--dourado-claro, #c8920a);
+      border-radius: 8px; padding: 0.4rem 0.65rem;
+      font-family: 'Cormorant Garamond', serif; font-size: 0.68rem; font-weight: 600;
+      letter-spacing: 0.02em; text-align: center; line-height: 1.2;
+      cursor: pointer; transition: background 0.2s, transform 0.15s;
+    }
+    .link-aula:hover { background: rgba(30,16,8,0.92); transform: translateY(-1px); }
+    .link-aula svg { width: 22px; height: 22px; }
+
+    /* HOTSPOTS */
+    .hotspot {
+      position: absolute;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #1e1008;
+      border: 2px solid var(--dourado-claro);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transform: translate(-50%, -50%);
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--dourado-claro);
+      transition: box-shadow 0.2s;
+      z-index: 10;
+      user-select: none;
+    }
+    .hotspot:hover {
+      animation: pulsar 0.6s ease-in-out infinite alternate;
+    }
+    @keyframes pulsar {
+      from { transform: translate(-50%, -50%) scale(1);    box-shadow: 0 0 0 0   rgba(200,146,10,0.4); }
+      to   { transform: translate(-50%, -50%) scale(1.13); box-shadow: 0 0 0 7px rgba(200,146,10,0);   }
+    }
+    .hotspot.concluido { border-color: var(--dourado-claro); color: var(--dourado-claro); }
+    .hotspot.revelado  { border-color: var(--vermelho-escuro); color: var(--vermelho-escuro); }
+
+    /* OVERLAY */
+    .overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(30,16,8,0.65);
+      z-index: 100;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+    .overlay.ativo { display: flex; }
+
+    /* MODAL PERGUNTA */
+    .modal-pergunta {
+      background: var(--fundo-card);
+      border: 1.5px solid var(--borda-forte);
+      border-radius: 12px;
+      max-width: 520px;
+      width: 100%;
+      padding: 2.5rem 2rem 2rem;
+      position: relative;
+    }
+    .modal-fechar {
+      position: absolute;
+      top: 1rem;
+      right: 1.2rem;
+      background: none;
+      border: none;
+      font-size: 1.4rem;
+      color: var(--texto-suave);
+      cursor: pointer;
+      line-height: 1;
+      padding: 0;
+    }
+    .modal-fechar:hover { color: var(--texto); }
+    .modal-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--dourado-claro);
+      border: 1px solid var(--dourado-claro);
+      display: inline-block;
+      padding: 0.15em 0.7em;
+      border-radius: 2px;
+      margin-bottom: 0.8rem;
+    }
+    .modal-pergunta-texto {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem;
+      font-weight: 600;
+      line-height: 1.3;
+      margin-bottom: 1.4rem;
+    }
+    .tracados {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.3rem;
+      margin-bottom: 1.2rem;
+    }
+    .tracado-letra {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--dourado);
+      border-bottom: 2px solid var(--dourado);
+      width: 20px;
+      text-align: center;
+      line-height: 1.3;
+    }
+    .modal-input {
+      width: 100%;
+      font-family: 'Libre Baskerville', Georgia, serif;
+      font-size: 1.1rem;
+      padding: 0.65rem 1rem;
+      background: var(--fundo);
+      border: 1.5px solid var(--borda-forte);
+      border-radius: 6px;
+      color: var(--texto);
+      outline: none;
+      transition: border-color 0.2s;
+      margin-bottom: 1rem;
+    }
+    .modal-input:focus { border-color: var(--dourado-claro); }
+    .modal-input:disabled { opacity: 0.5; cursor: default; }
+    .modal-btn-confirmar {
+      background: #1e1008;
+      color: var(--dourado-claro);
+      border: 1.5px solid var(--dourado-claro);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.6rem 1.8rem;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+    .modal-btn-confirmar:hover { background: var(--dourado-claro); color: #1e1008; }
+    .modal-btn-confirmar:disabled { opacity: 0.4; cursor: default; }
+    .modal-btn-confirmar:disabled:hover { background: #1e1008; color: var(--dourado-claro); }
+    .modal-feedback {
+      margin-top: 1.2rem;
+      font-size: 0.88rem;
+      line-height: 1.7;
+      border-left: 3px solid var(--borda-forte);
+      padding-left: 1rem;
+      display: none;
+    }
+    .modal-feedback.visivel { display: block; }
+    .feedback-certo   { color: var(--verde-escuro); font-weight: 700; }
+    .feedback-errado  { color: var(--vermelho-escuro); font-weight: 700; }
+    .feedback-resposta{ color: var(--verde-escuro); font-weight: 700; }
+    .feedback-dica    { color: var(--texto-suave); }
+    .feedback-explicacao { color: var(--texto); margin-top: 0.5rem; }
+
+    /* MODAL ZOOM */
+    .modal-zoom {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(18,10,4,0.93);
+      z-index: 200;
+      align-items: center;
+      justify-content: center;
+      cursor: zoom-out;
+    }
+    .modal-zoom.ativo { display: flex; }
+    .modal-zoom img {
+      max-width: 95vw;
+      max-height: 90vh;
+      object-fit: contain;
+      border: 1px solid var(--borda-forte);
+      border-radius: 4px;
+      pointer-events: none;
+    }
+
+    /* CONCLUSÃO */
+    .conclusao {
+      display: none;
+      margin-top: 3rem;
+      background: var(--fundo-card);
+      border: 1.5px solid var(--borda-forte);
+      border-radius: 12px;
+      padding: 3rem 2rem;
+      text-align: center;
+    }
+    .conclusao.visivel { display: block; }
+    .conclusao-titulo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.8rem, 5vw, 2.8rem);
+      font-weight: 600;
+      margin-bottom: 0.8rem;
+    }
+    .conclusao-placar {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      color: var(--dourado-claro);
+      margin-bottom: 1rem;
+    }
+    .conclusao-mensagem {
+      font-size: 0.93rem;
+      color: var(--texto-suave);
+      max-width: 460px;
+      margin: 0 auto 2rem;
+      line-height: 1.8;
+    }
+    .btn-reiniciar {
+      background: #1e1008;
+      color: var(--dourado-claro);
+      border: 1.5px solid var(--dourado-claro);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.7rem 2rem;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+    .btn-reiniciar:hover { background: var(--dourado-claro); color: #1e1008; }
+
+    /* FOOTER */
+    footer {
+      background: var(--escuro);
+      border-top: 2px solid var(--dourado-claro);
+      padding: .6rem 2rem;
+      text-align: center;
+      font-size: 0.78rem;
+      color: rgba(255,248,238,0.5);
+    }
+
+    @media (min-width: 641px) {
+      .narrador {
+        max-width: 900px;
+        margin: 0 auto .7rem;
+      }
+      .narrador-texto {
+        font-size: .92rem;
+      }
+    }
+
+    /* RESPONSIVO */
+    @media (max-width: 640px) {
+      .top-nav { padding: 0 1.2rem; gap: 1.2rem; }
+      main { padding: .8rem 1rem 1rem; }
+      .modal-pergunta { padding: 2rem 1.2rem 1.5rem; }
+      .overlay { padding: 0.4rem; }
+      .modal-input { font-size: 1rem; }
+      .hotspot { width: 22px; height: 22px; font-size: 0.65rem; border-width: 1.5px; }
+      .link-aula { top: 6px; right: 6px; padding: 0.3rem 0.5rem; font-size: 0.6rem; }
+      .link-aula svg { width: 18px; height: 18px; }
+    }
+
+    /* ==========================================================
+       MECÂNICA ESPECÍFICA — POLARIDADE DAS MOLÉCULAS
+       Nada acima deste bloco foi alterado (nav, narrador,
+       imagem-wrapper, conclusão, footer, modal-zoom permanecem
+       idênticos à fase-modelo). Tudo daqui pra baixo é novo.
+       ========================================================== */
+    .narrador img { transition: opacity .25s ease; }
+    /* visibility (não display) reserva sempre o espaço do botão —
+       assim a caixa da professora nunca muda de altura, e a imagem
+       abaixo dela não "pula" para cima e para baixo a cada troca
+       de fala. */
+    #btnContinuarFala { margin-top: .9rem; visibility: hidden; }
+
+    .palco-plataforma {
+      position: absolute;
+      left: 50%; top: 66%;
+      transform: translate(-50%, -50%);
+      width: 68%;
+      pointer-events: none;
+      display: none;
+      filter: drop-shadow(0 10px 24px rgba(0,0,0,.5));
+    }
+    .palco-svg-wrap {
+      position: absolute;
+      left: 50%; top: 60%;
+      transform: translate(-50%, -50%);
+      width: 50%;
+      aspect-ratio: 1 / 1;
+      display: none;
+    }
+    /* Guia de tetraedro — usado no NH3 e no CH4, para deixar claro que
+       são moléculas 3D (piramidal / tetraédrica), não planas. Fica
+       exatamente na mesma caixa do palco-svg-wrap (mesmo
+       left/top/width/transform), para que as coordenadas 0-400 do
+       SVG mapeiem 1:1 para dentro da imagem do tetraedro. */
+    .imagem-wrapper img.palco-tetraedro {
+      position: absolute;
+      left: 50%; top: 60%;
+      transform: translate(-50%, -50%);
+      width: 50%;
+      pointer-events: none;
+      display: none;
+      opacity: .9;
+      filter: drop-shadow(0 8px 16px rgba(0,0,0,.4));
+    }
+    .imagem-wrapper img.palco-tetraedro.wrap-tetraedro,
+    .palco-svg-wrap.wrap-tetraedro { top: 68%; }
+    #palcoSvg { width: 100%; height: 100%; overflow: visible; }
+
+    .formula-molecula {
+      font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 24px;
+      fill: #2a1608; text-anchor: middle;
+    }
+    .formula-fundo {
+      fill: rgba(253,248,240,0.95);
+      stroke: var(--dourado-claro);
+      stroke-width: 1.5;
+    }
+    .atomo circle { fill: #2e1608; stroke: var(--dourado-claro); stroke-width: 2.5; }
+    .atomo.substituinte circle { fill: #3d2410; }
+    .atomo text {
+      font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 19px;
+      fill: #fff8ee; text-anchor: middle; dominant-baseline: central; pointer-events: none;
+    }
+    .ligacao { stroke: rgba(232,184,75,0.55); stroke-width: 2.5; }
+    .vetor-dipolo { stroke: #5b9bd5; stroke-width: 3; opacity: 0; transition: opacity .4s ease; }
+    .vetor-dipolo.mostrar { opacity: 1; }
+    .ponta-vetor { fill: #5b9bd5; }
+    .vetor-resultante { stroke: #e2b93b; stroke-width: 3.5; opacity: 0; transition: opacity .5s ease; }
+    .vetor-resultante.mostrar { opacity: 1; }
+    .ponta-resultante { fill: #e2b93b; }
+    .mu-label, .delta-label {
+      font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 22px;
+      fill: #2a1608; text-anchor: middle; opacity: 0; transition: opacity .5s ease;
+      paint-order: stroke;
+      stroke: rgba(255,250,238,0.92);
+      stroke-width: 5px;
+      stroke-linejoin: round;
+    }
+    .mu-label.mostrar, .delta-label.mostrar { opacity: 1; }
+
+    /* Par eletrônico da ligação — duas bolinhas vermelhas empilhadas */
+    .par-eletronico circle {
+      fill: #b5342a; stroke: #5a1712; stroke-width: 1;
+      transition: cx .9s ease, cy .9s ease;
+    }
+
+    /* Painel de interação — perguntas e escolhas, sobreposto ao lado
+       da cena (dentro do imagem-wrapper, nunca em fluxo abaixo dela,
+       para a página jamais precisar rolar). */
+    .painel-interacao {
+      display: none;
+      position: absolute;
+      right: 1.5%; top: 2%;
+      transform: none;
+      width: 30%;
+      max-width: 230px;
+      background: rgba(30,16,8,0.92);
+      border: 1.5px solid var(--dourado-claro);
+      border-radius: 10px;
+      padding: 1.4rem 1.5rem;
+      text-align: center;
+      z-index: 8;
+      box-shadow: 0 6px 18px rgba(0,0,0,.4);
+    }
+    .painel-interacao.visivel { display: block; }
+    .interacao-texto {
+      font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 1.12rem;
+      margin-bottom: 1rem; color: #f5ead0;
+    }
+    .interacao-botoes { display: flex; gap: .6rem; justify-content: center; flex-wrap: wrap; }
+    .interacao-botoes .modal-btn-confirmar { padding: .7rem 1.6rem; font-size: 1.05rem; }
+    /* símbolos químicos (Cl, Br...) não podem virar maiúsculas */
+    .btn-simbolo { text-transform: none; }
+
+    /* Resumo final (etapa de conclusão) */
+    .resumo-cadeia {
+      display: flex; flex-direction: column; align-items: center; gap: .5rem;
+      margin: 1.4rem 0 1.8rem;
+    }
+    .resumo-passo {
+      background: var(--fundo); border: 1px solid var(--borda-forte); border-radius: 8px;
+      padding: .55rem 1.4rem; font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: .98rem;
+    }
+    .resumo-seta { color: var(--dourado-claro); font-size: 1.15rem; line-height: 1; }
+
+    @media (max-width: 640px) {
+      /* no mobile o texto quebra em mais linhas (coluna mais
+         estreita); reserva mais espaço para as falas mais longas
+         não empurrarem a imagem para baixo. */
+      .narrador-texto { min-height: 8.6em; }
+      .palco-plataforma { width: 84%; top: 46%; }
+      .palco-svg-wrap { width: 68%; top: 32%; }
+      .palco-tetraedro { width: 68%; top: 32%; }
+      .palco-svg-wrap.wrap-tetraedro,
+      .palco-tetraedro.wrap-tetraedro { top: 46%; }
+      .painel-interacao {
+        right: auto; left: 50%; top: 3%; bottom: auto;
+        transform: translateX(-50%);
+        width: 94%; max-width: none;
+        padding: .9rem 1rem;
+      }
+      .interacao-texto { font-size: 1rem; margin-bottom: .7rem; }
+      .interacao-botoes { gap: .5rem; }
+      .interacao-botoes .modal-btn-confirmar { padding: .55rem 1.2rem; font-size: .92rem; }
+      /* no mobile o .painel-interacao vira uma barra central no topo
+         (left:50%; top:3%; width:94%) — o crachá precisa descer mais
+         para não ficar por cima dele. */
+      .link-aula { top: 120px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <div class="brand">KiFácil</div>
+</nav>
+
+<main>
+  <h1 class="titulo-jogo">Polaridade das Moléculas</h1>
+  <p class="subtitulo">Observe os vetores de eletronegatividade e descubra sozinho quando eles se anulam e quando sobra um lado mais negativo.</p>
+
+  <div class="narrador">
+    <img src="../imagens/rafa-sorrindo.jpg" alt="Professora Rafaela" id="imgProfessora" />
+    <div>
+      <div class="narrador-nome">Professora Rafaela</div>
+      <div class="narrador-texto" id="narradorTexto">Hoje vamos descobrir por que algumas moléculas possuem um lado mais negativo e outras não.</div>
+      <button class="modal-btn-confirmar" id="btnContinuarFala">Continuar</button>
+    </div>
+  </div>
+
+  <div class="imagem-wrapper" id="imagemWrapper">
+    <img src="../imagens/observatorio-molecular.jpg" alt="Observatório molecular" id="imagemJogo" />
+    <img src="../imagens/plataforma-molecula.png" alt="" class="palco-plataforma" id="palcoPlataforma" />
+    <img src="../imagens/tetraedro-wireframe.png" alt="" class="palco-tetraedro" id="palcoTetraedro" />
+    <div class="palco-svg-wrap" id="palcoWrap">
+      <svg id="palcoSvg" viewBox="0 0 400 400"></svg>
+    </div>
+    <div class="painel-interacao" id="painelInteracao">
+      <div class="interacao-texto" id="interacaoTexto"></div>
+      <div class="interacao-botoes" id="interacaoBotoes"></div>
+    </div>
+
+    <!-- COLOQUE O LINK AQUI -->
+    <a class="link-aula" href="https://www.youtube.com/watch?v=LuK5V7_qN9Q" target="_blank" rel="noopener" title="Assista à aula">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.6"/>
+        <path d="M10 8.5L16 12L10 15.5V8.5Z" fill="currentColor"/>
+      </svg>
+      <span>Assista à aula</span>
+    </a>
+  </div>
+
+  <div class="conclusao" id="conclusao">
+    <div class="conclusao-titulo">Fase concluída</div>
+    <div class="resumo-cadeia">
+      <div class="resumo-passo">Ligação polar</div>
+      <div class="resumo-seta">↓</div>
+      <div class="resumo-passo">Diferença de eletronegatividade</div>
+      <div class="resumo-seta">↓</div>
+      <div class="resumo-passo">Vetores</div>
+      <div class="resumo-seta">↓</div>
+      <div class="resumo-passo">Geometria</div>
+      <div class="resumo-seta">↓</div>
+      <div class="resumo-passo">Momento dipolar resultante</div>
+      <div class="resumo-seta">↓</div>
+      <div class="resumo-passo">Polar ou Apolar</div>
+    </div>
+    <p class="conclusao-mensagem" id="conclusaoMensagem">Excelente. Agora você consegue visualizar por que algumas moléculas possuem polaridade e outras não.</p>
+    <button class="btn-reiniciar" onclick="reiniciar()">Jogar novamente</button>
+  </div>
+</main>
+
+<footer>© 2026 KiFácil</footer>
+
+<!-- MODAL ZOOM -->
+<div class="modal-zoom" id="modalZoom">
+  <img src="../imagens/observatorio-molecular.jpg" alt="Observatório ampliado" />
+</div>
+
+<script>
+/* ==========================================================
+   DADOS — ELETRONEGATIVIDADE (escala relativa, só a ordem importa)
+   ========================================================== */
+const ELETRONEGATIVIDADE = { H: 2.1, B: 2.0, C: 2.5, N: 3.0, O: 3.5, F: 4.0, Cl: 3.0, Br: 2.8, I: 2.5 };
+
+/* Diatômicas homonucleares — etapa 1 (sempre apolares) */
+const DIATOMICAS_APOLARES = [
+  { formula: 'H₂', simbolo: 'H' },
+  { formula: 'Cl₂', simbolo: 'Cl' },
+  { formula: 'O₂', simbolo: 'O', ligacaoDupla: true }
+];
+
+/* Diatômicas heteronucleares — etapa 2 (sempre polares) */
+const DIATOMICAS_POLARES = [
+  { formula: 'HCl', a: 'H', b: 'Cl' },
+  { formula: 'HF', a: 'H', b: 'F' },
+  { formula: 'HBr', a: 'H', b: 'Br' },
+  { formula: 'HI', a: 'H', b: 'I' }
+];
+
+/* Moléculas poliatômicas — objeto central, reutilizado nas etapas 3, 4 e 5.
+   "angulos" são graus (convenção SVG: 0°=direita, 90°=baixo).
+   Para adicionar uma nova molécula, basta uma entrada aqui. */
+const MOLECULAS = {
+  co2: { formula: 'CO₂', central: 'C', substituintes: ['O', 'O'], angulos: [0, 180], ligacaoDupla: true },
+  h2o: { formula: 'H₂O', central: 'O', substituintes: ['H', 'H'], angulos: [250, 290] },
+  nh3: { formula: 'NH₃', central: 'N', substituintes: ['H', 'H', 'H'], angulos: [150, 30, 90] },
+  ch4: { formula: 'CH₄', central: 'C', substituintes: ['H', 'H', 'H', 'H'], angulos: [45, 135, 225, 315] }
+};
+
+const DICAS_SOCRATICAS = [
+  'Compare a eletronegatividade dos dois lados da ligação.',
+  'Observe para onde os vetores apontam — eles se equilibram?'
+];
+function dicaAleatoria() { return DICAS_SOCRATICAS[Math.floor(Math.random() * DICAS_SOCRATICAS.length)]; }
+
+/* ==========================================================
+   PROFESSORA RAFAELA — mesmo padrão das demais fases
+   ========================================================== */
+const IMG_PROF = {
+  sorrindo: '../imagens/rafa-sorrindo.jpg',
+  explicando: '../imagens/rafa-explicando.jpg',
+  pensando: '../imagens/rafa-pensando.jpg',
+  animada: '../imagens/rafa-animada.jpg'
+};
+const $prof = document.getElementById('imgProfessora');
+const $fala = document.getElementById('narradorTexto');
+const $btnContinuar = document.getElementById('btnContinuarFala');
+let _aoContinuar = null;
+
+function falar(mood, texto, aoContinuar) {
+  _aoContinuar = aoContinuar || null;
+  $prof.style.opacity = '0';
+  setTimeout(() => { $prof.src = IMG_PROF[mood] || IMG_PROF.explicando; $prof.style.opacity = '1'; }, 180);
+  $fala.textContent = texto;
+  $btnContinuar.style.visibility = _aoContinuar ? 'visible' : 'hidden';
+}
+$btnContinuar.addEventListener('click', () => {
+  const cb = _aoContinuar;
+  _aoContinuar = null;
+  $btnContinuar.style.visibility = 'hidden';
+  if (cb) cb();
+});
+function professoraPergunta(texto, mood) {
+  $prof.style.opacity = '0';
+  setTimeout(() => { $prof.src = IMG_PROF[mood || 'pensando']; $prof.style.opacity = '1'; }, 180);
+  $fala.textContent = texto;
+}
+
+const _ding = new Audio('../sons/ding.mp3');
+_ding.preload = 'auto';
+function tocarDing() { try { _ding.currentTime = 0; _ding.play().catch(() => {}); } catch (e) {} }
+
+/* ==========================================================
+   PAINEL DE INTERAÇÃO — perguntas e escolhas do aluno
+   ========================================================== */
+function mostrarPainelInteracao(texto, botoes) {
+  document.getElementById('interacaoTexto').textContent = texto;
+  const cont = document.getElementById('interacaoBotoes');
+  cont.innerHTML = '';
+  botoes.forEach(b => {
+    const btn = document.createElement('button');
+    btn.className = 'modal-btn-confirmar';
+    // símbolos químicos (Cl, Br...) não podem virar maiúsculas —
+    // o botão padrão é uppercase por CSS, então essa classe desliga
+    // a transformação quando o texto é um símbolo de elemento.
+    if (b.simbolo) btn.classList.add('btn-simbolo');
+    btn.textContent = b.texto;
+    btn.addEventListener('click', b.aoClicar);
+    cont.appendChild(btn);
+  });
+  document.getElementById('painelInteracao').classList.add('visivel');
+}
+function esconderPainelInteracao() {
+  document.getElementById('painelInteracao').classList.remove('visivel');
+}
+function perguntarEscolha(pergunta, opcoes) {
+  // opcoes: [{ texto, certa, aoAcertar, simbolo }]
+  mostrarPainelInteracao(pergunta, opcoes.map(op => ({
+    texto: op.texto,
+    simbolo: op.simbolo,
+    aoClicar: () => {
+      if (op.certa) {
+        tocarDing();
+        document.querySelectorAll('#interacaoBotoes button').forEach(b => b.disabled = true);
+        setTimeout(() => { esconderPainelInteracao(); op.aoAcertar(); }, 250);
+      } else {
+        professoraPergunta(dicaAleatoria());
+      }
+    }
+  })));
+}
+function perguntarSimNao(pergunta, respostaSim, aoAcertar) {
+  perguntarEscolha(pergunta, [
+    { texto: 'Sim', certa: respostaSim, aoAcertar },
+    { texto: 'Não', certa: !respostaSim, aoAcertar }
+  ]);
+}
+function perguntarDiferencaEletronegatividade(existeDiferenca, aoAcertar) {
+  perguntarSimNao('Existe diferença de eletronegatividade entre os átomos?', existeDiferenca, aoAcertar);
+}
+function perguntarMaisEletronegativo(simboloA, simboloB, aoAcertar) {
+  const aMaisEletronegativo = ELETRONEGATIVIDADE[simboloA] > ELETRONEGATIVIDADE[simboloB];
+  perguntarEscolha('Qual é o átomo mais eletronegativo?', [
+    { texto: simboloA, certa: aMaisEletronegativo, aoAcertar, simbolo: true },
+    { texto: simboloB, certa: !aMaisEletronegativo, aoAcertar, simbolo: true }
+  ]);
+}
+
+/* ==========================================================
+   PALCO — desenho de átomos, ligações e vetores (SVG)
+   ========================================================== */
+const NS = 'http://www.w3.org/2000/svg';
+const svg = document.getElementById('palcoSvg');
+const CX = 200, CY = 200;
+const RAIO_SUBSTITUINTE = 108;
+const RAIO_DIATOMICA = 62;
+/* Diatômicas ficam mais baixas no palco, sobre a parte clara da plataforma
+   (as moléculas poliatômicas continuam centradas em CY, inalteradas). */
+const CY_DIATOMICA = 250;
+
+function criarSvgEl(tag, attrs) {
+  const el = document.createElementNS(NS, tag);
+  for (const k in attrs) el.setAttribute(k, attrs[k]);
+  return el;
+}
+function anguloParaXY(anguloGraus, raio, cx = CX, cy = CY) {
+  const rad = anguloGraus * Math.PI / 180;
+  return { x: cx + raio * Math.cos(rad), y: cy + raio * Math.sin(rad) };
+}
+
+function limparPalco() {
+  svg.innerHTML = `
+    <defs>
+      <marker id="pontaVetor" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M0,0 L10,5 L0,10 Z" class="ponta-vetor"></path>
+      </marker>
+      <marker id="pontaResultante" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+        <path d="M0,0 L10,5 L0,10 Z" class="ponta-resultante"></path>
+      </marker>
+    </defs>
+  `;
+}
+function mostrarPalco(usarTetraedro) {
+  document.getElementById('palcoPlataforma').style.display = usarTetraedro ? 'none' : 'block';
+  document.getElementById('palcoTetraedro').style.display = usarTetraedro ? 'block' : 'none';
+  document.getElementById('palcoWrap').style.display = 'block';
+}
+function esconderPalco() {
+  document.getElementById('palcoPlataforma').style.display = 'none';
+  document.getElementById('palcoTetraedro').style.display = 'none';
+  document.getElementById('palcoWrap').style.display = 'none';
+}
+
+function desenharFormula(texto, y = 44) {
+  const t = criarSvgEl('text', { class: 'formula-molecula', x: CX, y });
+  t.textContent = texto;
+  svg.appendChild(t);
+  // quadro de fundo, para a fórmula ficar legível sobre qualquer parte da imagem
+  const bbox = t.getBBox();
+  const padX = 10, padY = 6;
+  const fundo = criarSvgEl('rect', {
+    class: 'formula-fundo',
+    x: bbox.x - padX, y: bbox.y - padY,
+    width: bbox.width + padX * 2, height: bbox.height + padY * 2,
+    rx: 6
+  });
+  svg.insertBefore(fundo, t);
+}
+
+/* Par eletrônico da ligação: duas bolinhas vermelhas empilhadas
+   verticalmente, na posição correspondente à fração "frac" do
+   caminho entre pA e pB (0.5 = centralizado). */
+function desenharParEletronico(pA, pB, frac) {
+  const x = pA.x + (pB.x - pA.x) * frac;
+  const y = pA.y + (pB.y - pA.y) * frac;
+  const g = criarSvgEl('g', { class: 'par-eletronico' });
+  g.appendChild(criarSvgEl('circle', { cx: x, cy: y - 6, r: 4 }));
+  g.appendChild(criarSvgEl('circle', { cx: x, cy: y + 6, r: 4 }));
+  svg.appendChild(g);
+  return g;
+}
+function moverParEletronico(g, pA, pB, frac) {
+  const x = pA.x + (pB.x - pA.x) * frac;
+  const y = pA.y + (pB.y - pA.y) * frac;
+  const circles = g.querySelectorAll('circle');
+  circles[0].setAttribute('cx', x); circles[0].setAttribute('cy', y - 6);
+  circles[1].setAttribute('cx', x); circles[1].setAttribute('cy', y + 6);
+}
+
+/* δ+ / δ− : cargas parciais exibidas em cima de cada átomo da
+   ligação, quando existe diferença de eletronegatividade (distinto
+   de μ, usado para o momento dipolar resultante da molécula). */
+function mostrarDelta(ponto, sinal) {
+  const t = criarSvgEl('text', { class: 'delta-label', x: ponto.x, y: ponto.y - 38 });
+  t.textContent = sinal === '+' ? 'δ+' : 'δ−';
+  svg.appendChild(t);
+  requestAnimationFrame(() => t.classList.add('mostrar'));
+  return t;
+}
+
+function desenharAtomo(cx, cy, simbolo, ehCentral) {
+  const g = criarSvgEl('g', { class: 'atomo' + (ehCentral ? '' : ' substituinte') });
+  g.appendChild(criarSvgEl('circle', { cx, cy, r: ehCentral ? 30 : 24 }));
+  const t = criarSvgEl('text', { x: cx, y: cy });
+  t.textContent = simbolo;
+  g.appendChild(t);
+  svg.appendChild(g);
+  return g;
+}
+function desenharLigacao(p1, p2) {
+  const linha = criarSvgEl('line', { class: 'ligacao', x1: p1.x, y1: p1.y, x2: p2.x, y2: p2.y });
+  svg.insertBefore(linha, svg.firstChild.nextSibling);
+  return linha;
+}
+/* Ligação dupla: duas linhas paralelas, deslocadas perpendicularmente
+   ao eixo da ligação (ex.: O=C=O do CO2, O=O do O2). */
+function desenharLigacaoDupla(p1, p2) {
+  const dx = p2.x - p1.x, dy = p2.y - p1.y;
+  const comp = Math.hypot(dx, dy) || 1;
+  const nx = -dy / comp, ny = dx / comp;
+  const offset = 4;
+  desenharLigacao({ x: p1.x + nx * offset, y: p1.y + ny * offset }, { x: p2.x + nx * offset, y: p2.y + ny * offset });
+  desenharLigacao({ x: p1.x - nx * offset, y: p1.y - ny * offset }, { x: p2.x - nx * offset, y: p2.y - ny * offset });
+}
+
+/* Diatômica: dois átomos lado a lado, ligados. Retorna os centros.
+   Fica mais para baixo no palco (CY_DIATOMICA) para sentar sobre a
+   parte clara da plataforma. */
+function desenharDiatomica(simboloA, simboloB, formula, ligacaoDupla) {
+  const pA = { x: CX - RAIO_DIATOMICA, y: CY_DIATOMICA };
+  const pB = { x: CX + RAIO_DIATOMICA, y: CY_DIATOMICA };
+  if (formula) desenharFormula(formula, CY_DIATOMICA - 60);
+  if (ligacaoDupla) desenharLigacaoDupla(pA, pB); else desenharLigacao(pA, pB);
+  desenharAtomo(pA.x, pA.y, simboloA, false);
+  desenharAtomo(pB.x, pB.y, simboloB, false);
+  return { pA, pB };
+}
+
+/* Molécula com átomo central + substituintes nos ângulos definidos. */
+function desenharMoleculaCentral(mol) {
+  desenharFormula(mol.formula);
+  const pontos = mol.angulos.map(ang => anguloParaXY(ang, RAIO_SUBSTITUINTE));
+  pontos.forEach(p => { if (mol.ligacaoDupla) desenharLigacaoDupla({ x: CX, y: CY }, p); else desenharLigacao({ x: CX, y: CY }, p); });
+  desenharAtomo(CX, CY, mol.central, true);
+  pontos.forEach((p, i) => desenharAtomo(p.x, p.y, mol.substituintes[i], false));
+  return pontos;
+}
+
+/* Vértices do guia de tetraedro (tetraedro-wireframe.png), medidos
+   sobre a própria imagem e convertidos para o viewBox 0-400 (a
+   imagem ocupa exatamente a mesma caixa do palco-svg-wrap).
+   NH3 usa o ápice + 2 vértices da base (o 3º vértice da base vira
+   o par isolado, sem átomo). CH4 usa os 4 vértices, com o C no
+   centroide — os 4 H ficam nos 4 cantos do guia. */
+const TETRAEDRO_VERTICES = {
+  apice: { x: 198, y: 64 },
+  baseEsq: { x: 60, y: 288 },
+  baseDir: { x: 344, y: 268 },
+  baseFrente: { x: 252, y: 320 }
+};
+const NH3_VERTICES = {
+  apice: TETRAEDRO_VERTICES.apice,
+  h1: TETRAEDRO_VERTICES.baseEsq,
+  h2: TETRAEDRO_VERTICES.baseDir,
+  h3: TETRAEDRO_VERTICES.baseFrente,
+  n: { x: 205, y: 205 }
+};
+const CH4_VERTICES = {
+  h1: TETRAEDRO_VERTICES.apice,
+  h2: TETRAEDRO_VERTICES.baseEsq,
+  h3: TETRAEDRO_VERTICES.baseDir,
+  h4: TETRAEDRO_VERTICES.baseFrente,
+  c: { x: 213, y: 235 }
+};
+function desenharNH3() {
+  desenharFormula('NH₃', 40);
+  const pontos = [NH3_VERTICES.h1, NH3_VERTICES.h2, NH3_VERTICES.h3];
+  pontos.forEach(p => desenharLigacao(NH3_VERTICES.n, p));
+  desenharAtomo(NH3_VERTICES.n.x, NH3_VERTICES.n.y, 'N', true);
+  pontos.forEach(p => desenharAtomo(p.x, p.y, 'H', false));
+  return pontos;
+}
+function desenharCH4() {
+  desenharFormula('CH₄', 40);
+  const pontos = [CH4_VERTICES.h1, CH4_VERTICES.h2, CH4_VERTICES.h3, CH4_VERTICES.h4];
+  pontos.forEach(p => desenharLigacao(CH4_VERTICES.c, p));
+  desenharAtomo(CH4_VERTICES.c.x, CH4_VERTICES.c.y, 'C', true);
+  pontos.forEach(p => desenharAtomo(p.x, p.y, 'H', false));
+  return pontos;
+}
+
+/* Direção (em graus) que o vetor do dipolo daquela ligação deve apontar:
+   sempre do átomo menos eletronegativo para o mais eletronegativo. */
+function direcaoDipolo(elCentral, elSubstituinte, anguloSubstituinte) {
+  const enCentral = ELETRONEGATIVIDADE[elCentral];
+  const enSub = ELETRONEGATIVIDADE[elSubstituinte];
+  return enSub > enCentral ? anguloSubstituinte : (anguloSubstituinte + 180) % 360;
+}
+
+/* Soma vetorial simples — usada para o vetor resultante. */
+function calcularResultante(vetores) {
+  let sx = 0, sy = 0;
+  vetores.forEach(v => {
+    const r = v.anguloGraus * Math.PI / 180;
+    sx += v.magnitude * Math.cos(r);
+    sy += v.magnitude * Math.sin(r);
+  });
+  return { x: sx, y: sy, magnitude: Math.hypot(sx, sy), anguloGraus: Math.atan2(sy, sx) * 180 / Math.PI };
+}
+
+function mostrarMu(valor) {
+  const t = criarSvgEl('text', { class: 'mu-label', x: CX, y: 372 });
+  t.textContent = 'μ = ' + valor;
+  svg.appendChild(t);
+  requestAnimationFrame(() => t.classList.add('mostrar'));
+  return t;
+}
+
+/* ==========================================================
+   ETAPA 1 — diatômicas homonucleares (ν = 0)
+   O par eletrônico da ligação nasce centralizado entre os átomos
+   e permanece ali: não há diferença de eletronegatividade.
+   ========================================================== */
+function etapa1(idx) {
+  if (idx >= DIATOMICAS_APOLARES.length) { etapa2(0); return; }
+  const mol = DIATOMICAS_APOLARES[idx];
+  limparPalco(); mostrarPalco();
+  const { pA, pB } = desenharDiatomica(mol.simbolo, mol.simbolo, mol.formula, mol.ligacaoDupla);
+  desenharParEletronico(pA, pB, 0.5);
+  falar('explicando', `Observe a molécula de ${mol.formula}.`, null);
+  perguntarDiferencaEletronegatividade(false, () => {
+    falar('animada', `Não existe um lado mais negativo — os elétrons ficam igualmente distribuídos entre os dois átomos. Portanto, o ${mol.formula} é uma molécula apolar.`, () => {
+      etapa1(idx + 1);
+    });
+  });
+}
+
+/* ==========================================================
+   ETAPA 2 — diatômicas heteronucleares (o par eletrônico se
+   aproxima do átomo mais eletronegativo e nasce o vetor)
+   ========================================================== */
+function etapa2(idx) {
+  if (idx >= DIATOMICAS_POLARES.length) { etapaMolecula(0); return; }
+  const mol = DIATOMICAS_POLARES[idx];
+  limparPalco(); mostrarPalco();
+  const { pA, pB } = desenharDiatomica(mol.a, mol.b, mol.formula);
+  const par = desenharParEletronico(pA, pB, 0.5);
+  falar('explicando', `Observe a molécula de ${mol.formula}.`, null);
+  perguntarDiferencaEletronegatividade(true, () => {
+    perguntarMaisEletronegativo(mol.a, mol.b, () => {
+      const bEhMaisEletronegativo = ELETRONEGATIVIDADE[mol.b] > ELETRONEGATIVIDADE[mol.a];
+      const maisEletronegativo = bEhMaisEletronegativo ? pB : pA;
+      const menos = bEhMaisEletronegativo ? pA : pB;
+      const origem = { x: menos.x + (maisEletronegativo.x - menos.x) * 0.18, y: menos.y };
+      const destino = { x: menos.x + (maisEletronegativo.x - menos.x) * 0.82, y: menos.y };
+      const vetor = criarSvgEl('line', {
+        class: 'vetor-dipolo', x1: origem.x, y1: origem.y, x2: destino.x, y2: destino.y,
+        'marker-end': 'url(#pontaVetor)'
+      });
+      svg.appendChild(vetor);
+      requestAnimationFrame(() => vetor.classList.add('mostrar'));
+      moverParEletronico(par, pA, pB, bEhMaisEletronegativo ? 0.74 : 0.26);
+      mostrarDelta(maisEletronegativo, '-');
+      mostrarDelta(menos, '+');
+      const simboloMais = bEhMaisEletronegativo ? mol.b : mol.a;
+      // o aluno decide quando prosseguir — sem avanço automático,
+      // ele precisa de tempo para observar a seta e os elétrons.
+      falar('animada', `Os elétrons ficam mais próximos do ${simboloMais}, o átomo mais eletronegativo — nasce um momento dipolar. Portanto, o ${mol.formula} é uma molécula polar.`, () => {
+        etapa2(idx + 1);
+      });
+    });
+  });
+}
+
+function criarSetaCurta(origem, anguloGraus) {
+  const comprimento = 34;
+  const rad = anguloGraus * Math.PI / 180;
+  const destino = { x: origem.x + comprimento * Math.cos(rad), y: origem.y + comprimento * Math.sin(rad) };
+  const g = criarSvgEl('g', {});
+  const linha = criarSvgEl('line', {
+    class: 'vetor-dipolo mostrar', x1: origem.x, y1: origem.y, x2: destino.x, y2: destino.y,
+    'marker-end': 'url(#pontaVetor)'
+  });
+  g.appendChild(linha);
+  svg.appendChild(g);
+  return g;
+}
+
+/* ==========================================================
+   ETAPA 3 — moléculas poliatômicas (CO2, H2O, NH3, CH4): mesmo
+   raciocínio da etapa 2 (existe diferença de eletronegatividade?),
+   agora somado à geometria da molécula para decidir se os vetores
+   se anulam ou não. O aluno sempre controla quando prosseguir.
+   ========================================================== */
+const ORDEM_ETAPA_GEOMETRIA = ['co2', 'h2o', 'nh3', 'ch4'];
+const EXPLICACAO_GEOMETRIA = {
+  co2: { ehPolar: false, geometria: 'linear',
+    texto: 'Há diferença de eletronegatividade entre C e O, mas como o CO₂ é linear, os vetores se anulam. Portanto, o CO₂ é uma molécula apolar.' },
+  h2o: { ehPolar: true, geometria: 'angular',
+    texto: 'Há diferença de eletronegatividade entre O e H, e como a água é angular, os vetores não se anulam. Portanto, a água é uma molécula polar.' },
+  nh3: { ehPolar: true, geometria: 'piramidal',
+    texto: 'Há diferença de eletronegatividade entre N e H, e como o NH₃ é piramidal, os vetores não se anulam. Portanto, o NH₃ é uma molécula polar.' },
+  ch4: { ehPolar: false, geometria: 'tetraédrica',
+    texto: 'Há uma pequena diferença de eletronegatividade entre C e H, mas a simetria tetraédrica do CH₄ anula os vetores. Portanto, o CH₄ é uma molécula apolar.' }
+};
+
+function etapaMolecula(idx) {
+  if (idx >= ORDEM_ETAPA_GEOMETRIA.length) { finalizarJogo(); return; }
+  const chave = ORDEM_ETAPA_GEOMETRIA[idx];
+  const usaTetraedro = chave === 'nh3' || chave === 'ch4';
+  const mol = MOLECULAS[chave];
+  const info = EXPLICACAO_GEOMETRIA[chave];
+  limparPalco(); mostrarPalco(usaTetraedro);
+  document.getElementById('palcoWrap').classList.toggle('wrap-tetraedro', usaTetraedro);
+  document.getElementById('palcoTetraedro').classList.toggle('wrap-tetraedro', usaTetraedro);
+
+  let pontos, direcoes, centro, resultanteFixo = null;
+  if (chave === 'nh3') {
+    pontos = desenharNH3();
+    centro = NH3_VERTICES.n;
+    direcoes = pontos.map(p => direcaoDipolo('N', 'H', Math.atan2(p.y - centro.y, p.x - centro.x) * 180 / Math.PI));
+    resultanteFixo = NH3_VERTICES.apice;
+  } else if (chave === 'ch4') {
+    pontos = desenharCH4();
+    centro = CH4_VERTICES.c;
+    direcoes = pontos.map(p => direcaoDipolo('C', 'H', Math.atan2(p.y - centro.y, p.x - centro.x) * 180 / Math.PI));
+  } else {
+    pontos = desenharMoleculaCentral(mol);
+    centro = { x: CX, y: CY };
+    direcoes = mol.angulos.map((ang, i) => direcaoDipolo(mol.central, mol.substituintes[i], ang));
+  }
+
+  falar('explicando', `Observe a molécula de ${mol.formula}.`, null);
+  perguntarDiferencaEletronegatividade(true, () => {
+    pontos.forEach((p, i) => criarSetaCurta(p, direcoes[i]));
+
+    if (info.ehPolar) {
+      let destino;
+      if (resultanteFixo) {
+        destino = resultanteFixo;
+      } else {
+        const resultante = calcularResultante(direcoes.map(d => ({ anguloGraus: d, magnitude: 1 })));
+        const escala = 46;
+        destino = { x: centro.x + resultante.x / resultante.magnitude * escala, y: centro.y + resultante.y / resultante.magnitude * escala };
+      }
+      const vetorResultante = criarSvgEl('line', {
+        class: 'vetor-resultante', x1: centro.x, y1: centro.y, x2: destino.x, y2: destino.y,
+        'marker-end': 'url(#pontaResultante)'
+      });
+      svg.appendChild(vetorResultante);
+      requestAnimationFrame(() => vetorResultante.classList.add('mostrar'));
+    } else {
+      mostrarMu(0);
+    }
+
+    // o aluno decide quando prosseguir, com tempo para analisar
+    // os vetores antes de ir para a próxima molécula.
+    falar('animada', info.texto, () => {
+      etapaMolecula(idx + 1);
+    });
+  });
+}
+
+/* ==========================================================
+   FINAL
+   ========================================================== */
+function finalizarJogo() {
+  esconderPalco();
+  falar('animada', 'Excelente. Agora você consegue visualizar por que algumas moléculas possuem polaridade e outras não.', () => {
+    const conclusao = document.getElementById('conclusao');
+    conclusao.classList.add('visivel');
+    conclusao.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+}
+
+function reiniciar() {
+  document.getElementById('conclusao').classList.remove('visivel');
+  esconderPalco();
+  esconderPainelInteracao();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  iniciarIntro();
+}
+
+/* ==========================================================
+   INTRODUÇÃO / INÍCIO
+   ========================================================== */
+function iniciarIntro() {
+  falar('sorrindo', 'Hoje vamos descobrir por que algumas moléculas possuem um lado mais negativo e outras não. Você não vai decorar regras — vai enxergar a polaridade acontecendo.', () => {
+    etapa1(0);
+  });
+}
+
+/* ── Zoom (clique fora dos elementos interativos amplia a cena) ── */
+const imagemWrapper = document.getElementById('imagemWrapper');
+const modalZoom = document.getElementById('modalZoom');
+imagemWrapper.addEventListener('click', e => {
+  if (e.target.closest('.palco-svg-wrap, .painel-interacao')) return;
+  modalZoom.classList.add('ativo');
+});
+modalZoom.addEventListener('click', () => modalZoom.classList.remove('ativo'));
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') modalZoom.classList.remove('ativo');
+});
+
+/* ── INIT ── */
+iniciarIntro();
+</script>
+
+<script>
+(function () {
+  var _clickSom = new Audio('../sons/click.mp3');
+  _clickSom.preload = 'auto';
+  document.addEventListener('click', function (e) {
+    var alvo = e.target.closest('button');
+    if (alvo) { try { _clickSom.currentTime = 0; _clickSom.play().catch(function () {}); } catch (err) {} }
+  }, true);
+})();
+</script>
+</body>
+</html>

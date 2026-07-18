@@ -1,0 +1,750 @@
+﻿﻿
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="canonical" href="https://kifaciledu.com.br/jogos/jogos-escaperoom/torre-quimica/fases/gabinete-mendeleev.html">
+<title>Gabinete de Mendeleev — Cápsula do Tempo | KiFácil</title>
+<meta name="description" content="Viaje ao gabinete de Dmitri Mendeleev em 1869 e acompanhe a descoberta dos padrões da tabela periódica. Escape Room da Cápsula do Tempo — KiFácil.">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Y1JGD5VVBD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-Y1JGD5VVBD');
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;1,500;1,600&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #4a3728; --bg-dark: #2e2016; --text: #f5ead0; --text-soft: #e8d4b0;
+    --gold: #e8b84b; --border: rgba(212,170,106,0.35); --border-faint: rgba(212,170,106,0.2);
+    --paper: #f5ead0; --paper-text: #2e1a08; --paper-text-soft: #3d2010; --paper-gold: #8b5e1a; --cream: #fff8ee;
+    --ok: #2d6b34; --err: #8b1e12;
+  }
+  html, body { min-height: 100%; }
+  body { background: var(--bg); font-family: 'Libre Baskerville', serif; color: var(--text); min-height: 100vh; display: flex; flex-direction: column; }
+  .nav { background: var(--bg-dark); padding: 12px 32px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid var(--border); font-size: 11px; color: var(--text-soft); letter-spacing: .04em; flex-shrink: 0; }
+  .nav a { color: var(--gold); text-decoration: none; }
+  .nav a:hover { text-decoration: underline; }
+  .nav-sep { color: rgba(232,216,176,0.4); }
+  .header { background: var(--bg-dark); padding: 20px 32px 16px; border-bottom: 1px solid var(--border-faint); display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; }
+  .eyebrow { font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--gold); margin-bottom: 4px; }
+  .page-title { font-family: 'Lora', serif; font-size: 30px; font-weight: 600; color: var(--text); }
+  .main { display: flex; flex: 1; align-items: flex-start; }
+  .scene-wrap { background: var(--bg-dark); padding: 28px; display: flex; justify-content: center; align-items: flex-start; flex: 0 0 58%; }
+  .scene-inner { position: relative; width: 100%; max-width: 820px; user-select: none; }
+  .scene-img { width: 100%; display: block; border-radius: 8px; border: 1px solid rgba(212,170,106,0.4); }
+  .scene-overlay { position: absolute; top: 0; left: 0; right: 0; background: linear-gradient(180deg, rgba(46,32,22,0.78) 0%, rgba(46,32,22,0) 100%); padding: 16px 20px 32px; border-radius: 8px 8px 0 0; pointer-events: none; }
+  .scene-overlay-title { font-family: 'Lora', serif; font-size: 21px; font-weight: 600; color: var(--text); margin-bottom: 2px; }
+  .scene-overlay-sub { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--gold); }
+
+  .link-aula {
+    position: absolute; top: 10px; right: 10px; z-index: 10;
+    display: flex; flex-direction: column; align-items: center; gap: 2px;
+    text-decoration: none; color: #fff8ee;
+    background: rgba(30,16,8,0.72); border: 1.5px solid var(--dourado-claro, #c8920a);
+    border-radius: 8px; padding: 0.4rem 0.65rem;
+    font-family: 'Cormorant Garamond', Georgia, serif; font-size: 0.68rem; font-weight: 600;
+    letter-spacing: 0.02em; text-align: center; line-height: 1.2;
+    cursor: pointer; transition: background 0.2s, transform 0.15s;
+  }
+  .link-aula:hover { background: rgba(30,16,8,0.92); transform: translateY(-1px); }
+  .link-aula svg { width: 22px; height: 22px; }
+
+  .hotspot { position: absolute; cursor: pointer; display: none; border-radius: 10px; }
+  .hotspot.active { display: block; }
+  .hotspot.done { display: none; }
+  .hotspot::after { content: ''; position: absolute; inset: 0; border: 2px solid rgba(232,184,75,0); border-radius: 10px; transition: all .2s; }
+  .hotspot:hover::after { border-color: rgba(232,184,75,.7); box-shadow: 0 0 18px rgba(232,184,75,.18); background: rgba(232,184,75,.06); }
+
+  .quadro-overlay {
+    position: absolute; left: 50%; top: 52%; width: min(96%, 780px); max-height: 88%; transform: translate(-50%, -50%);
+    display: none; flex-direction: column; padding: 12px; background: #f5ecd8; border: 2px solid rgba(139,94,26,.48);
+    border-radius: 10px; box-shadow: 0 12px 34px rgba(0,0,0,0.48); overflow-y: auto; z-index: 30;
+  }
+  .quadro-overlay.show { display: flex; animation: fadeIn .35s ease; }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  .quadro-instrucao { font-family: 'Lora', serif; color: #2e1a08; font-size: clamp(10px, 1vw, 13px); line-height: 1.35; margin-bottom: 8px; }
+  .quadro-instrucao strong { color: #6b3f0e; }
+
+  .game-area { display: grid; grid-template-columns: 1.25fr .85fr; gap: 10px; align-items: stretch; }
+  .board-box, .bank-box { background: rgba(255,248,238,.72); border: 1.5px solid rgba(139,94,26,.28); border-radius: 9px; padding: 9px; }
+  .box-title { font-family: 'Lora', serif; font-size: clamp(12px, 1.2vw, 16px); font-weight: 700; color: #6b3f0e; text-align: center; margin-bottom: 8px; }
+  .hint-small { font-size: 9px; color: rgba(46,26,8,.68); text-align: center; margin-top: -4px; margin-bottom: 7px; line-height: 1.35; }
+
+  .mass-row { display: grid; grid-template-columns: repeat(6, minmax(0,1fr)); gap: 6px; align-items: stretch; }
+  .periodic-table-mini { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 7px; }
+  .family-head { background: rgba(139,94,26,.12); color: #6b3f0e; border: 1px solid rgba(139,94,26,.22); border-radius: 7px; padding: 6px 4px; text-align: center; font-size: 10px; font-weight: 700; line-height: 1.25; min-height: 40px; display: flex; align-items: center; justify-content: center; }
+  .drop-slot { min-height: 88px; border: 2px dashed rgba(139,94,26,.35); border-radius: 8px; background: rgba(255,255,255,.35); display: flex; align-items: center; justify-content: center; padding: 4px; transition: .15s; color: rgba(46,26,8,.4); font-size: 10px; text-align: center; }
+  .drop-slot.drag-over { background: rgba(232,184,75,.18); border-color: var(--paper-gold); transform: scale(1.02); }
+  .drop-slot.fixed { border-style: solid; background: rgba(232,184,75,.14); }
+  .drop-slot.errado { animation: shake .35s ease; border-color: var(--err); }
+  .drop-slot.correto { border-color: var(--ok); background: rgba(80,200,120,.10); }
+  @keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-4px)} 75%{transform:translateX(4px)} }
+  .quadro-fechar { display: none; position: sticky; top: 0; align-self: flex-end; background: rgba(255,248,238,0.95); border: 1px solid rgba(139,94,26,.3); border-radius: 6px; padding: 4px 12px; font-family: 'Libre Baskerville', serif; font-size: 13px; font-weight: 700; color: #6b3f0e; cursor: pointer; z-index: 5; margin-bottom: 6px; }
+
+  .cards-bank { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 7px; }
+  .element-card { background: #f5ecd8; border: 1.5px solid rgba(139,94,26,.38); border-radius: 8px; padding: 7px 5px; color: var(--paper-text); box-shadow: 0 2px 6px rgba(0,0,0,.16); cursor: grab; touch-action: none; text-align: center; min-height: 82px; display: flex; flex-direction: column; justify-content: center; transition: transform .12s, box-shadow .12s, opacity .12s; }
+  .element-card:active { cursor: grabbing; transform: scale(.98); }
+  .element-card.selected { outline: 3px solid var(--paper-gold); box-shadow: 0 0 0 4px rgba(232,184,75,.20), 0 2px 8px rgba(0,0,0,.22); }
+  .element-card.fixed-card { cursor: default; box-shadow: inset 0 0 0 2px rgba(139,94,26,.35), 0 2px 6px rgba(0,0,0,.12); }
+  .element-card.simple-card { min-height: 68px; }
+  .element-card.simple-card .sym { font-size: clamp(26px, 3vw, 38px); }
+  .element-card .sym { font-family: 'Lora', serif; font-size: clamp(22px, 2.6vw, 34px); font-weight: 700; line-height: 1; }
+  .element-card .name { color: var(--paper-gold); font-size: clamp(7px, .8vw, 10px); letter-spacing: .06em; text-transform: uppercase; margin: 2px 0 3px; }
+  .element-card .mass { color: #6b3f0e; font-size: clamp(8px, .8vw, 10px); font-weight: 700; margin-bottom: 2px; }
+  .elem-prop-ato2 { font-size: 11px; color: var(--paper-text-soft); margin-top: 2px; line-height: 1.4; }
+  .bank-empty { font-size: 11px; color: rgba(46,26,8,.55); text-align: center; padding: 18px 6px; line-height: 1.5; }
+
+  .quadro-feedback { margin-top: 7px; padding: 4px 8px; font-family: 'Lora', serif; font-size: 12px; line-height: 1.35; min-height: 29px; text-align: center; overflow-wrap: anywhere; }
+  .quadro-feedback.err { color: var(--err); }
+  .quadro-feedback.ok { color: var(--ok); font-weight: 700; }
+  .btn-verificar { margin-top: 5px; align-self: center; background: var(--paper-gold); border: none; border-radius: 6px; padding: 8px 22px; font-family: 'Libre Baskerville', serif; font-size: clamp(10px, 1.1vw, 13px); font-weight: 700; color: #fff8ee; cursor: pointer; letter-spacing: .06em; text-transform: uppercase; transition: background .15s; }
+  .btn-verificar:hover { background: #6b3f0e; }
+  .btn-verificar:disabled { opacity: .4; cursor: default; }
+
+  .panels-row { flex: 1; display: flex; flex-direction: column; gap: 18px; padding: 28px; border-left: 1px solid var(--border-faint); align-self: stretch; }
+  .narr-box, .progresso-wrap { background: var(--paper); border: 1px solid rgba(139,94,26,0.25); border-radius: 8px; }
+  .narr-box { padding: 20px 22px; }
+  .narr-eyebrow, .progresso-title { font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--paper-gold); margin-bottom: 8px; }
+  .narr { font-family: 'Lora', serif; font-size: 21px; line-height: 1.7; color: var(--paper-text); font-weight: 600; }
+  .narr strong { color: #6b3f0e; font-style: normal; }
+  .narr em { color: var(--paper-text-soft); font-style: italic; }
+  .progresso-wrap { padding: 16px 20px; }
+  .progresso-title { margin-bottom: 14px; }
+  .ato-item { display: flex; align-items: flex-start; gap: 12px; padding: 8px 0; border-bottom: 1px solid rgba(139,94,26,0.1); }
+  .ato-item:last-child { border-bottom: none; }
+  .ato-dot { width: 10px; height: 10px; border-radius: 50%; border: 1.5px solid rgba(139,94,26,0.3); flex-shrink: 0; margin-top: 4px; transition: all .4s; }
+  .ato-item.done .ato-dot { background: var(--paper-gold); border-color: var(--paper-gold); }
+  .ato-nome { font-family: 'Lora', serif; font-size: 17px; color: rgba(46,26,8,0.35); transition: color .4s; line-height: 1.5; }
+  .ato-item.done .ato-nome { color: var(--paper-text); }
+  .ato-tag { font-size: 11px; color: rgba(46,26,8,0.3); display: block; margin-top: 2px; }
+
+  .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.82); display: none; align-items: center; justify-content: center; z-index: 200; padding: 20px; }
+  .overlay.show { display: flex; }
+  .card { background: var(--paper); border: 1px solid rgba(139,94,26,0.35); border-radius: 10px; padding: 36px; max-width: 820px; width: 100%; position: relative; max-height: 92vh; overflow-y: auto; animation: cardIn .3s ease; }
+  .card-close { position: absolute; top: 14px; right: 16px; background: none; border: none; color: rgba(46,26,8,0.4); font-family: Arial, sans-serif; font-size: 20px; line-height: 1; cursor: pointer; z-index: 5; transition: color .15s; }
+  .card-close:hover { color: #2e1a08; }
+  @keyframes cardIn { from { opacity: 0; transform: scale(.96) translateY(8px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+  .card-eyebrow { font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--paper-gold); margin-bottom: 8px; }
+  .card-title { font-family: 'Lora', serif; font-size: 26px; font-weight: 600; color: var(--paper-text); margin-bottom: 14px; line-height: 1.3; }
+  .card-fala { font-family: 'Lora', serif; font-size: 21px; line-height: 1.7; color: var(--paper-text); font-weight: 600; margin-bottom: 16px; }
+  .card-fala strong { color: #6b3f0e; font-style: normal; }
+  .diagrama-wrap { background: var(--cream); border: 1px solid rgba(139,94,26,0.2); border-radius: 8px; padding: 18px; margin-bottom: 18px; text-align: center; overflow-x: auto; }
+  .btn-acao { display: block; width: 100%; background: var(--paper-text); border: none; border-radius: 6px; padding: 13px; font-family: 'Libre Baskerville', serif; font-size: 13px; font-weight: 700; color: var(--paper); cursor: pointer; letter-spacing: .04em; text-transform: uppercase; transition: background .15s; margin-bottom: 8px; }
+  .btn-acao:hover:not(:disabled) { background: #4a2c10; }
+  .btn-acao:disabled { opacity: 0.4; cursor: default; }
+  .btn-acao.feita { background: rgba(80,200,120,0.15); color: #2d5a2d; border: 1px solid rgba(80,200,120,0.4); }
+  .pergunta-box { display: none; }
+  .pergunta-box.show { display: block; animation: cardIn .3s ease; }
+  .pergunta-texto { font-family: 'Lora', serif; font-size: 21px; line-height: 1.7; color: var(--paper-text); font-weight: 600; margin-bottom: 14px; }
+  .pergunta-texto strong { color: #6b3f0e; font-style: normal; }
+  .resposta-input { width: 100%; background: var(--cream); border: 1.5px solid rgba(139,94,26,0.4); border-radius: 6px; padding: 12px 14px; font-family: 'Libre Baskerville', serif; font-size: 15px; color: var(--paper-text); outline: none; caret-color: var(--paper-gold); transition: border-color .15s; margin-bottom: 10px; resize: vertical; min-height: 70px; }
+  .resposta-input:focus { border-color: var(--paper-gold); }
+  .resposta-input::placeholder { color: rgba(46,26,8,0.3); }
+  .conclusao-box { display: none; background: rgba(80,200,120,0.08); border: 1px solid rgba(80,200,120,0.4); border-radius: 8px; padding: 16px 18px; margin-top: 14px; }
+  .conclusao-box.show { display: block; animation: cardIn .3s ease; }
+  .conclusao-eyebrow { font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: #2d5a2d; margin-bottom: 8px; }
+  .conclusao-texto { font-family: 'Lora', serif; font-size: 20px; line-height: 1.7; color: #1f3d1f; font-weight: 600; }
+  .conclusao-texto strong { color: #2d5a2d; font-style: normal; }
+  .btn-continuar { display: none; width: 100%; background: var(--paper-gold); border: none; border-radius: 6px; padding: 13px; font-family: 'Libre Baskerville', serif; font-size: 13px; font-weight: 700; color: var(--paper); cursor: pointer; letter-spacing: .06em; text-transform: uppercase; transition: background .15s; margin-top: 14px; }
+  .btn-continuar.show { display: block; }
+  .btn-continuar:hover { background: #6b3f0e; }
+
+  .win-screen { display: none; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 60px 32px; flex: 1; }
+  .win-screen.show { display: flex; }
+  .win-title { font-family: 'Lora', serif; font-size: 44px; font-weight: 600; color: var(--gold); margin-bottom: 12px; }
+  .win-sub { font-size: 15px; color: var(--text-soft); font-style: italic; margin-bottom: 32px; line-height: 1.8; max-width: 720px; }
+  .win-badges { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-bottom: 32px; }
+  .badge { background: var(--bg-dark); border: 1px solid var(--border); border-radius: 8px; padding: 18px 22px; text-align: center; min-width: 135px; }
+  .badge-icon { font-size: 26px; margin-bottom: 6px; }
+  .badge-label { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--gold); }
+  .win-btns { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+  .btn-restart { background: none; border: 1px solid rgba(232,184,75,0.3); border-radius: 6px; padding: 10px 24px; font-family: 'Libre Baskerville', serif; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: rgba(232,184,75,0.6); cursor: pointer; transition: all .15s; }
+  .btn-restart:hover { border-color: rgba(232,184,75,0.6); color: var(--gold); }
+
+  @media (max-width: 900px) {
+    .main { flex-direction: column; }
+    .scene-wrap { flex: none; width: 100%; padding: 16px; }
+    .panels-row { border-left: none; border-top: 1px solid var(--border-faint); padding: 20px 16px; }
+    .header { padding: 18px 16px 16px; }
+    .nav { padding: 10px 16px; flex-wrap: wrap; }
+    .page-title { font-size: 22px; }
+    .narr { font-size: 18px; }
+    .card { padding: 22px; }
+    .card-title { font-size: 22px; }
+    .card-fala, .pergunta-texto { font-size: 18px; }
+    .win-title { font-size: 32px; }
+    .quadro-overlay { position: static; width: 100%; height: auto; max-height: none; margin-top: 12px; padding: 4%; overflow-y: visible; transform: none; border-radius: 8px; }
+    #hs-carta { left: 45% !important; top: 65% !important; width: 45% !important; height: 30% !important; }
+    .quadro-fechar { display: block; }
+    .game-area { grid-template-columns: 1fr; gap: 8px; }
+    .mass-row { grid-template-columns: repeat(3, minmax(0,1fr)); }
+    .drop-slot { min-height: 80px; }
+    .cards-bank { grid-template-columns: repeat(4, minmax(0,1fr)); gap: 5px; }
+    .element-card { min-height: 76px; padding: 4px 3px; }
+    .element-card.simple-card { min-height: 58px; }
+    .family-head { min-height: 32px; font-size: 9px; }
+    .link-aula { top: 6px; right: 6px; padding: 0.3rem 0.5rem; font-size: 0.6rem; }
+    .link-aula svg { width: 18px; height: 18px; }
+  }
+  @media (max-width: 520px) {
+    .cards-bank { grid-template-columns: repeat(3, minmax(0,1fr)); }
+    .mass-row { grid-template-columns: repeat(3, minmax(0,1fr)); }
+    .periodic-table-mini { gap: 5px; }
+    .drop-slot { min-height: 74px; }
+    .element-card { min-height: 70px; padding: 3px 2px; }
+    .element-card .sym { font-size: 18px; }
+    .element-card .mass { font-size: 8px; }
+    .elem-prop-ato2 { font-size: 10px; }
+    .element-card.simple-card { min-height: 50px; }
+    .element-card.simple-card .sym { font-size: 18px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="../../../torre-central/mapa-kifacil.html">Academia KiFácil</a>
+  <span class="nav-sep">›</span>
+  <a href="../../torre-ciencia.html">Torre de Ciências</a>
+  <span class="nav-sep">›</span>
+  Torre de Química · Fase 6 · Mendeleev
+</nav>
+
+<header class="header">
+  <div>
+    <div class="eyebrow">Escape Room · Cápsula do Tempo</div>
+    <h1 class="page-title">Gabinete de Mendeleev</h1>
+  </div>
+</header>
+
+<div class="main" id="mainScreen">
+  <div class="scene-wrap">
+    <div class="scene-inner">
+      <img src="../imagens/mendeleev.jpg" alt="Gabinete de Dmitri Mendeleev em 1869" class="scene-img">
+      <div class="hotspot active" id="hs-quadro" style="left:31%;top:5%;width:45%;height:67%;" onclick="abrirQuadro1()"></div>
+      <div class="hotspot" id="hs-carta" style="left:55%;top:72%;width:24%;height:20%;" onclick="abrirAto3()"></div>
+
+      <div class="quadro-overlay" id="quadroOverlay">
+        <button class="quadro-fechar" onclick="fecharQuadro()" aria-label="Fechar">✕ Fechar</button>
+        <div class="quadro-instrucao" id="quadroInstrucao"></div>
+        <div id="cartoesGrid"></div>
+        <div class="quadro-feedback" id="quadroFeedback"></div>
+        <button class="btn-verificar" id="btnVerificar" onclick="verificarMassas()">Verificar massas</button>
+      </div>
+
+      <!-- COLOQUE O LINK AQUI -->
+      <a class="link-aula" href="https://www.youtube.com/watch?v=8edFd1nDsko" target="_blank" rel="noopener" title="Assista à aula">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.6"/>
+          <path d="M10 8.5L16 12L10 15.5V8.5Z" fill="currentColor"/>
+        </svg>
+        <span>Assista à aula</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="panels-row">
+    <div class="narr-box">
+      <div class="narr-eyebrow">Cápsula do Tempo — 1869</div>
+      <div class="narr" id="narr">
+        Você chega ao gabinete de Mendeleev. Sobre a mesa há cartões com elementos e anotações de massa.<br><br>
+        <strong>Mendeleev:</strong> <em>"Não quero que você decore. Quero que investigue comigo. Clique no quadro para organizar os cartões que reuni."</em>
+      </div>
+    </div>
+
+    <div class="progresso-wrap">
+      <div class="progresso-title">Observações realizadas</div>
+      <div class="ato-item" id="ai-1">
+        <div class="ato-dot"></div>
+        <div><div class="ato-nome">Massas crescentes</div><span class="ato-tag">primeira pista</span></div>
+      </div>
+      <div class="ato-item" id="ai-2">
+        <div class="ato-dot"></div>
+        <div><div class="ato-nome">Colunas semelhantes</div><span class="ato-tag">propriedades se repetem</span></div>
+      </div>
+      <div class="ato-item" id="ai-3">
+        <div class="ato-dot"></div>
+        <div><div class="ato-nome">Tabela moderna</div><span class="ato-tag">número atômico</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="win-screen" id="winScreen">
+  <div class="win-title">O padrão apareceu!</div>
+  <p class="win-sub">Você acompanhou o raciocínio de Mendeleev: primeiro as massas foram colocadas em ordem crescente; depois, as propriedades semelhantes revelaram colunas. Essa repetição organizada é a periodicidade. Hoje a tabela moderna é organizada pelo número atômico: para cada número, há um elemento correspondente — 1 hidrogênio, 2 hélio, 3 lítio e assim por diante.</p>
+  <div class="win-badges">
+    <div class="badge"><div class="badge-icon">↔️</div><div class="badge-label">Períodos</div></div>
+    <div class="badge"><div class="badge-icon">↕️</div><div class="badge-label">Famílias</div></div>
+    <div class="badge"><div class="badge-icon">⚛️</div><div class="badge-label">Prótons</div></div>
+  </div>
+  <div class="win-btns">
+    <button class="btn-restart" onclick="resetGame()">Revisitar o gabinete</button>
+  </div>
+</div>
+
+<div class="overlay" id="overlay"><div class="card" id="card"></div></div>
+
+<script>
+function setNarr(html) { document.getElementById('narr').innerHTML = html; }
+function openOverlay() { document.getElementById('overlay').classList.add('show'); }
+function closeOverlay() { document.getElementById('overlay').classList.remove('show'); }
+document.getElementById('overlay').addEventListener('click', function(e) { if (e.target === this) closeOverlay(); });
+function tocarDing() { const a = new Audio('../sons/ding.mp3'); a.play().catch(() => {}); }
+
+const elementos = {
+  Li: { simb: 'Li', nome: 'Lítio', massa: 7, massaTxt: '7', grupo: 'A', props: 'metal; reage com água' },
+  Na: { simb: 'Na', nome: 'Sódio', massa: 23, massaTxt: '23', grupo: 'A', props: 'metal; reage com água' },
+  K:  { simb: 'K',  nome: 'Potássio', massa: 39, massaTxt: '39', grupo: 'A', props: 'metal; reage com água' },
+  F:  { simb: 'F',  nome: 'Flúor', massa: 19, massaTxt: '19', grupo: 'B', props: 'não metal; forma sais' },
+  Cl: { simb: 'Cl', nome: 'Cloro', massa: 35.5, massaTxt: '35,5', grupo: 'B', props: 'não metal; forma sais' },
+  Br: { simb: 'Br', nome: 'Bromo', massa: 80, massaTxt: '80', grupo: 'B', props: 'não metal; forma sais' }
+};
+
+const ordemCorretaMassas = ['Li', 'F', 'Na', 'Cl', 'K', 'Br'];
+const gabaritoColunas = {
+  'a1': 'Li', 'b1': 'F',
+  'a2': 'Na', 'b2': 'Cl',
+  'a3': 'K',  'b3': 'Br'
+};
+
+let etapa = 'massas';
+let selectedCard = null;
+let slotsMassas = {};
+let bankMassas = [];
+let slotsColunas = { a1: 'Li', b1: 'F', a2: null, b2: null, a3: null, b3: null };
+let bankColunas = [];
+
+function embaralhar(lista) {
+  const copia = [...lista];
+  for (let i = copia.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copia[i], copia[j]] = [copia[j], copia[i]];
+  }
+  return copia;
+}
+
+function cardHTML(simb, fixed = false, simples = false, emSlot = false) {
+  const el = elementos[simb];
+  const conteudo = simples
+    ? `
+      <div class="sym">${el.simb}</div>
+      <div class="mass">massa ${el.massaTxt}</div>
+    `
+    : `
+      <div class="sym">${el.simb}</div>
+      <div class="name">${el.nome}</div>
+      <div class="mass">massa ${el.massaTxt}</div>
+      <div class="elem-prop-ato2">${el.props}</div>
+    `;
+  let attrs = '';
+  if (!fixed) {
+    if (emSlot) {
+      attrs = `draggable="true" ondragstart="dragStart(event, '${simb}')" onclick="devolverDoSlot('${simb}', event)"`;
+    } else {
+      attrs = `draggable="true" onclick="selecionarCard('${simb}')" ondragstart="dragStart(event, '${simb}')"`;
+    }
+  }
+  return `
+    <div class="element-card ${fixed ? 'fixed-card' : ''} ${simples ? 'simple-card' : ''}" ${attrs} data-simb="${simb}">
+      ${conteudo}
+    </div>
+  `;
+}
+
+function abrirQuadro1() {
+  document.getElementById('hs-quadro').classList.remove('active');
+  etapa = 'massas';
+  selectedCard = null;
+  slotsMassas = { m1:null, m2:null, m3:null, m4:null, m5:null, m6:null };
+  bankMassas = embaralhar(['Li', 'Na', 'K', 'F', 'Cl', 'Br']);
+  document.getElementById('quadroOverlay').classList.add('show');
+  renderMassas();
+}
+
+function renderMassas() {
+  document.getElementById('quadroInstrucao').innerHTML = `
+    <strong>Mendeleev:</strong> "Tenho cartões com símbolos e massas. Observe os números e tente encontrar uma sequência lógica."
+  `;
+  document.getElementById('btnVerificar').textContent = 'Verificar sequência';
+  document.getElementById('btnVerificar').disabled = false;
+  document.getElementById('btnVerificar').setAttribute('onclick', 'verificarMassas()');
+
+  const slots = ['m1','m2','m3','m4','m5','m6'].map((id, i) => `
+    <div class="drop-slot" data-slot="${id}" ondragover="allowDrop(event)" ondragleave="dragLeave(event)" ondrop="dropOnSlot(event, '${id}')" onclick="clickSlot('${id}')">
+      ${slotsMassas[id] ? cardHTML(slotsMassas[id], false, true, true) : `${i + 1}º lugar`}
+    </div>
+  `).join('');
+
+  document.getElementById('cartoesGrid').innerHTML = `
+    <div class="game-area">
+      <div class="board-box">
+        <div class="box-title">Linha de investigação</div>
+        <div class="hint-small">observe apenas símbolo e massa</div>
+        <div class="mass-row">${slots}</div>
+      </div>
+      <div class="bank-box">
+        <div class="box-title">Cartões fora da tabela</div>
+        <div class="hint-small">arraste ou toque no cartão e depois no espaço</div>
+        <div class="cards-bank" id="bankCards">
+          ${bankMassas.length ? bankMassas.map(s => cardHTML(s, false, true)).join('') : '<div class="bank-empty">Todos os cartões foram usados.</div>'}
+        </div>
+      </div>
+    </div>
+  `;
+  atualizarSelecaoVisual();
+}
+
+function verificarMassas() {
+  const fb = document.getElementById('quadroFeedback');
+  const resposta = ['m1','m2','m3','m4','m5','m6'].map(id => slotsMassas[id]);
+  if (resposta.some(v => !v)) {
+    fb.textContent = 'Ainda faltam cartões na linha.';
+    fb.className = 'quadro-feedback err';
+    return;
+  }
+  const ok = resposta.every((s, i) => s === ordemCorretaMassas[i]);
+  if (!ok) {
+    fb.textContent = 'Quase! Compare os números dos cartões e procure uma sequência mais regular.';
+    fb.className = 'quadro-feedback err';
+    marcarErrosMassas();
+    return;
+  }
+  fb.innerHTML = '<strong>Mendeleev:</strong> Excelente! Foi exatamente o que pensei: colocar os elementos em ordem crescente de massa. Mas havia algo ainda mais curioso...';
+  fb.className = 'quadro-feedback ok';
+  tocarDing();
+  concluirProgresso(1);
+  const btn = document.getElementById('btnVerificar');
+  btn.disabled = false;
+  btn.textContent = 'Ir para a próxima pista';
+  btn.setAttribute('onclick', 'abrirColunas()');
+}
+
+function marcarErrosMassas() {
+  ['m1','m2','m3','m4','m5','m6'].forEach((id, i) => {
+    const slot = document.querySelector(`[data-slot="${id}"]`);
+    if (!slot) return;
+    slot.classList.toggle('errado', slotsMassas[id] !== ordemCorretaMassas[i]);
+    setTimeout(() => slot.classList.remove('errado'), 500);
+  });
+}
+
+function abrirColunas() {
+  etapa = 'colunas';
+  selectedCard = null;
+  slotsColunas = { a1: 'Li', b1: 'F', a2: null, b2: null, a3: null, b3: null };
+  bankColunas = embaralhar(['Na', 'K', 'Cl', 'Br']);
+  document.getElementById('quadroFeedback').textContent = '';
+  document.getElementById('quadroFeedback').className = 'quadro-feedback';
+  renderColunas();
+}
+
+function renderColunas() {
+  document.getElementById('quadroInstrucao').innerHTML = `
+    <strong>Mendeleev:</strong> "Mas eu acredito que podemos refinar a nossa organização. Alguns elementos se comportavam de maneira semelhante. Complete as <strong>colunas</strong> usando as propriedades."
+  `;
+  document.getElementById('btnVerificar').textContent = 'Verificar colunas';
+  document.getElementById('btnVerificar').disabled = false;
+  document.getElementById('btnVerificar').setAttribute('onclick', 'verificarColunas()');
+
+  const slot = (id, fixed = false) => `
+    <div class="drop-slot ${fixed ? 'fixed' : ''}" data-slot="${id}" ${fixed ? '' : `ondragover="allowDrop(event)" ondragleave="dragLeave(event)" ondrop="dropOnSlot(event, '${id}')" onclick="clickSlot('${id}')"`}>
+      ${slotsColunas[id] ? cardHTML(slotsColunas[id], fixed, false, !fixed) : 'solte aqui'}
+    </div>
+  `;
+
+  document.getElementById('cartoesGrid').innerHTML = `
+    <div class="game-area">
+      <div class="board-box">
+        <div class="box-title">Tabela em construção</div>
+        <div class="hint-small">os dois primeiros já estão fixos como pista</div>
+        <div class="periodic-table-mini">
+          <div class="family-head">Coluna 1<br>reagem com água</div>
+          <div class="family-head">Coluna 2<br>formam sais</div>
+          ${slot('a1', true)}
+          ${slot('b1', true)}
+          ${slot('a2')}
+          ${slot('b2')}
+          ${slot('a3')}
+          ${slot('b3')}
+        </div>
+      </div>
+      <div class="bank-box">
+        <div class="box-title">Cartões de Mendeleev</div>
+        <div class="hint-small">arraste para os espaços vazios</div>
+        <div class="cards-bank" id="bankCards">
+          ${bankColunas.length ? bankColunas.map(s => cardHTML(s)).join('') : '<div class="bank-empty">Todos os cartões foram usados.</div>'}
+        </div>
+      </div>
+    </div>
+  `;
+  atualizarSelecaoVisual();
+}
+
+function verificarColunas() {
+  const fb = document.getElementById('quadroFeedback');
+  const ids = ['a2','b2','a3','b3'];
+  if (ids.some(id => !slotsColunas[id])) {
+    fb.textContent = 'Ainda faltam cartões na tabela.';
+    fb.className = 'quadro-feedback err';
+    return;
+  }
+  const ok = Object.keys(gabaritoColunas).every(id => slotsColunas[id] === gabaritoColunas[id]);
+  if (!ok) {
+    fb.textContent = 'Quase! As colunas estão certas, mas a ordem de cima para baixo importa: organize cada coluna pela massa atômica, do menor para o maior valor.';
+    fb.className = 'quadro-feedback err';
+    marcarErrosColunas();
+    return;
+  }
+  fb.textContent = 'Perfeito! As massas crescem nas linhas, e as propriedades semelhantes aparecem nas colunas.';
+  fb.className = 'quadro-feedback ok';
+  tocarDing();
+  concluirProgresso(2);
+
+  const btn = document.getElementById('btnVerificar');
+  btn.disabled = false;
+  btn.textContent = 'Ler conclusão de Mendeleev';
+  btn.setAttribute('onclick', 'abrirAto1Pergunta()');
+}
+
+function marcarErrosColunas() {
+  ['a2','b2','a3','b3'].forEach(id => {
+    const slot = document.querySelector(`[data-slot="${id}"]`);
+    if (!slot) return;
+    slot.classList.toggle('errado', slotsColunas[id] !== gabaritoColunas[id]);
+    setTimeout(() => slot.classList.remove('errado'), 500);
+  });
+}
+
+function dragStart(e, simb) {
+  e.dataTransfer.setData('text/plain', simb);
+  selectedCard = simb;
+}
+function allowDrop(e) { e.preventDefault(); e.currentTarget.classList.add('drag-over'); }
+function dragLeave(e) { e.currentTarget.classList.remove('drag-over'); }
+function dropOnSlot(e, slotId) {
+  e.preventDefault();
+  e.currentTarget.classList.remove('drag-over');
+  const simb = e.dataTransfer.getData('text/plain') || selectedCard;
+  moverParaSlot(simb, slotId);
+}
+function selecionarCard(simb) {
+  selectedCard = selectedCard === simb ? null : simb;
+  atualizarSelecaoVisual();
+}
+function devolverDoSlot(simb, event) {
+  event.stopPropagation();
+  selectedCard = null;
+  if (etapa === 'massas') {
+    removerDeMassas(simb);
+    bankMassas.push(simb);
+    renderMassas();
+  } else if (etapa === 'colunas') {
+    removerDeColunas(simb);
+    bankColunas.push(simb);
+    renderColunas();
+  }
+}
+function fecharQuadro() {
+  document.getElementById('quadroOverlay').classList.remove('show');
+  const hs = document.getElementById('hs-quadro');
+  if (!hs.classList.contains('done')) hs.classList.add('active');
+}
+function clickSlot(slotId) {
+  if (!selectedCard) return;
+  moverParaSlot(selectedCard, slotId);
+}
+function atualizarSelecaoVisual() {
+  document.querySelectorAll('.element-card').forEach(card => {
+    card.classList.toggle('selected', card.dataset.simb === selectedCard);
+  });
+}
+function moverParaSlot(simb, slotId) {
+  if (!simb) return;
+  if (etapa === 'massas') moverMassas(simb, slotId);
+  if (etapa === 'colunas') moverColunas(simb, slotId);
+  selectedCard = null;
+}
+function moverMassas(simb, slotId) {
+  if (!slotsMassas.hasOwnProperty(slotId)) return;
+  removerDeMassas(simb);
+  const anterior = slotsMassas[slotId];
+  if (anterior) bankMassas.push(anterior);
+  slotsMassas[slotId] = simb;
+  bankMassas = bankMassas.filter(s => s !== simb);
+  document.getElementById('quadroFeedback').textContent = '';
+  document.getElementById('quadroFeedback').className = 'quadro-feedback';
+  renderMassas();
+}
+function removerDeMassas(simb) {
+  Object.keys(slotsMassas).forEach(id => {
+    if (slotsMassas[id] === simb) slotsMassas[id] = null;
+  });
+  bankMassas = bankMassas.filter(s => s !== simb);
+}
+function moverColunas(simb, slotId) {
+  if (!slotsColunas.hasOwnProperty(slotId)) return;
+  if (slotId === 'a1' || slotId === 'b1') return;
+  removerDeColunas(simb);
+  const anterior = slotsColunas[slotId];
+  if (anterior) bankColunas.push(anterior);
+  slotsColunas[slotId] = simb;
+  bankColunas = bankColunas.filter(s => s !== simb);
+  document.getElementById('quadroFeedback').textContent = '';
+  document.getElementById('quadroFeedback').className = 'quadro-feedback';
+  renderColunas();
+}
+function removerDeColunas(simb) {
+  ['a2','b2','a3','b3'].forEach(id => {
+    if (slotsColunas[id] === simb) slotsColunas[id] = null;
+  });
+  bankColunas = bankColunas.filter(s => s !== simb);
+}
+
+function concluirProgresso(n) {
+  document.getElementById('ai-' + n).classList.add('done');
+}
+
+function abrirAto1Pergunta() {
+  document.getElementById('card').innerHTML = `
+    <button class="card-close" onclick="closeOverlay()" aria-label="Fechar">×</button>
+    <div class="card-eyebrow">Observações 1 e 2 — Periodicidade</div>
+    <div class="card-title">A massa cresce, e as propriedades se repetem</div>
+    <div class="card-fala"><strong>Mendeleev:</strong> "Excelente. Primeiro você organizou os elementos em ordem crescente de massa. Depois percebeu que certos comportamentos reapareciam nas colunas."</div>
+    <div class="pergunta-box show" id="pergunta1">
+      <div class="pergunta-texto"><strong>Mendeleev:</strong> "O que esse padrão sugere sobre a organização dos elementos?"</div>
+      <textarea class="resposta-input" id="resp1" placeholder="Escreva sua observação..."></textarea>
+      <button class="btn-acao" onclick="responderAto1()">Mostrar a Mendeleev</button>
+    </div>
+    <div class="conclusao-box" id="conclusao1">
+      <div class="conclusao-eyebrow">Mendeleev responde</div>
+      <div class="conclusao-texto">"Exatamente! As <strong>linhas</strong> ajudavam a seguir a ordem crescente de massa, e as <strong>colunas</strong> reuniam elementos com propriedades semelhantes. Essa repetição é a <strong>periodicidade</strong>."</div>
+    </div>
+    <button class="btn-continuar" id="btnContinuar1" onclick="concluirAto1()">Continuar →</button>`;
+  openOverlay();
+}
+function responderAto1() {
+  if (!document.getElementById('resp1').value.trim()) { document.getElementById('resp1').focus(); return; }
+  tocarDing();
+  document.getElementById('conclusao1').classList.add('show');
+  document.getElementById('btnContinuar1').classList.add('show');
+  document.querySelector('#pergunta1 .resposta-input').disabled = true;
+  document.querySelector('#pergunta1 .btn-acao').disabled = true;
+}
+function concluirAto1() {
+  closeOverlay();
+  document.getElementById('quadroOverlay').classList.remove('show');
+  document.getElementById('hs-quadro').classList.add('done');
+  document.getElementById('hs-carta').classList.add('active');
+  setNarr('<strong>Mendeleev:</strong> <em>"Você encontrou o padrão que eu procurava. Agora clique na carta sobre a mesa: ela mostra como a tabela é organizada hoje."</em>');
+}
+
+function abrirAto3() {
+  document.getElementById('card').innerHTML = `
+    <button class="card-close" onclick="closeOverlay()" aria-label="Fechar">×</button>
+    <div class="card-eyebrow">Observação 3 — A tabela de hoje</div>
+    <div class="card-title">Hoje a ordem vem do número atômico</div>
+    <div class="card-fala"><strong>Mendeleev:</strong> "Na minha época, a massa atômica foi a melhor pista. Mas a Cápsula do Tempo trouxe uma correção do futuro."</div>
+    <div class="diagrama-wrap">
+      <div class="card-fala" style="text-align:left;margin-bottom:0;">
+        <strong>Antes:</strong> Mendeleev observou massas atômicas e propriedades semelhantes.<br><br>
+        <strong>Hoje:</strong> a tabela periódica é organizada pelo <strong>número atômico</strong>, isto é, pela quantidade de <strong>prótons</strong> no núcleo.<br><br>
+        Para cada número, há um elemento correspondente: <strong>1 = hidrogênio</strong>, <strong>2 = hélio</strong>, <strong>3 = lítio</strong>... e assim por diante. <strong>Moseley</strong> percebeu um padrão entre o número de prótons e a periodicidade das propriedades.
+      </div>
+    </div>
+    <button class="btn-acao" id="btnAcao3" onclick="mostrarPergunta3()">Ler a anotação do futuro</button>
+    <div class="pergunta-box" id="pergunta3">
+      <div class="pergunta-texto"><strong>Mendeleev:</strong> "Se você fosse explicar para um colega pelo que a tabela é organizada hoje, o que diria?"</div>
+      <textarea class="resposta-input" id="resp3" placeholder="Exemplo: hoje a tabela segue o número atômico, que corresponde ao número de prótons..."></textarea>
+      <button class="btn-acao" onclick="responderAto3()">Mostrar a Mendeleev</button>
+    </div>
+    <div class="conclusao-box" id="conclusao3">
+      <div class="conclusao-eyebrow">Mendeleev conclui</div>
+      <div class="conclusao-texto">"Exatamente. Eu encontrei o padrão observando massas e propriedades. Depois, Moseley mostrou que a ordem mais correta é o <strong>número atômico</strong>."</div>
+    </div>
+    <button class="btn-continuar" id="btnContinuar3" onclick="concluirAto3()">Finalizar →</button>`;
+  openOverlay();
+}
+function mostrarPergunta3() {
+  const btn = document.getElementById('btnAcao3');
+  btn.textContent = '✓ Anotação lida';
+  btn.classList.add('feita');
+  btn.disabled = true;
+  document.getElementById('pergunta3').classList.add('show');
+}
+function responderAto3() {
+  if (!document.getElementById('resp3').value.trim()) { document.getElementById('resp3').focus(); return; }
+  tocarDing();
+  document.getElementById('conclusao3').classList.add('show');
+  document.getElementById('btnContinuar3').classList.add('show');
+  document.querySelector('#pergunta3 .resposta-input').disabled = true;
+  document.querySelector('#pergunta3 .btn-acao').disabled = true;
+}
+function concluirAto3() {
+  localStorage.setItem('kifacil_mendeleev_ok', '1');
+  closeOverlay();
+  concluirProgresso(3);
+  document.getElementById('hs-carta').classList.remove('active');
+  document.getElementById('hs-carta').classList.add('done');
+  setTimeout(() => {
+    document.getElementById('mainScreen').style.display = 'none';
+    document.getElementById('winScreen').classList.add('show');
+  }, 300);
+}
+
+function resetGame() {
+  [1,2,3].forEach(n => {
+    document.getElementById('ai-' + n).classList.remove('done');
+  });
+  document.getElementById('hs-quadro').classList.add('active');
+  document.getElementById('hs-quadro').classList.remove('done');
+  document.getElementById('hs-carta').classList.remove('active','done');
+  document.getElementById('quadroOverlay').classList.remove('show');
+  document.getElementById('mainScreen').style.display = '';
+  document.getElementById('winScreen').classList.remove('show');
+  document.getElementById('quadroFeedback').textContent = '';
+  document.getElementById('quadroFeedback').className = 'quadro-feedback';
+  setNarr(`Você chega ao gabinete de Mendeleev. Sobre a mesa há cartões com elementos e anotações de massa.<br><br><strong>Mendeleev:</strong> <em>"Não quero que você decore. Quero que investigue comigo. Clique no quadro para organizar os cartões que reuni."</em>`);
+}
+</script>
+
+<script type="module">
+  import { requireAuth }          from '../../../js/guards.js';
+  import { session }              from '../../../js/session.js';
+  import { registrarEntradaFase } from '../../../js/progresso.js';
+  import { iniciarNavTorre }      from '../../../js/nav-torre.js';
+
+  await requireAuth('../../../login.html').catch(() => {});
+
+  iniciarNavTorre('quimica');
+
+  const emRevisao = new URLSearchParams(location.search).has('revisao');
+  const uid = session.usuario?.uid;
+  if (uid && !localStorage.getItem('kf_xp_mendeleev') && !emRevisao) {
+    await registrarEntradaFase(uid, 10)
+      .then(() => localStorage.setItem('kf_xp_mendeleev', '1'))
+      .catch(e => console.warn('[XP] mendeleev:', e));
+  }
+
+</script>
+
+<div id="cookie-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#1a0f08;border-top:1px solid rgba(212,170,106,0.4);padding:1rem 2rem;z-index:9999;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;"><p style="margin:0;font-family:'Libre Baskerville',serif;font-size:0.82rem;color:#e8d4b0;line-height:1.5;">Este site utiliza cookies para melhorar sua experi&ecirc;ncia. Ao continuar navegando, voc&ecirc; concorda com nossa <a href="/politica-de-privacidade.html" style="color:#e8b84b;text-decoration:underline;text-underline-offset:2px;">Pol&iacute;tica de Privacidade</a>.</p><button onclick="document.getElementById('cookie-banner').style.display='none';localStorage.setItem('kifacil_cookies','1');" style="flex-shrink:0;background:#e8b84b;border:none;padding:0.55rem 1.5rem;font-family:'Libre Baskerville',serif;font-size:0.78rem;font-weight:700;color:#1a0f08;cursor:pointer;letter-spacing:0.04em;">Entendi</button></div>
+<script>if(!localStorage.getItem('kifacil_cookies'))document.getElementById('cookie-banner').style.display='flex';</script>
+<script>
+(function () {
+  var _clickSom = new Audio('../sons/click.mp3');
+  _clickSom.preload = 'auto';
+  document.addEventListener('click', function (e) {
+    var alvo = e.target.closest('button');
+    if (alvo) { try { _clickSom.currentTime = 0; _clickSom.play().catch(function () {}); } catch (err) {} }
+  }, true);
+})();
+</script>
+</body>
+</html>

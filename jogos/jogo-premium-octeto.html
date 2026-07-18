@@ -1,0 +1,1293 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow">
+  <title>A Regra do Octeto — Jogo Premium | KiFácil</title>
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --fundo: #fdf8f0;
+      --fundo-card: #fffdf9;
+      --escuro: #2e2016;
+      --texto: #1a1208;
+      --texto-suave: #3d2e1a;
+      --dourado: #8a5e10;
+      --dourado-claro: #c8920a;
+      --borda: rgba(100,70,20,0.3);
+      --borda-forte: rgba(100,70,20,0.5);
+      --verde-escuro: #1e5238;
+      --vermelho-escuro: #7a1515;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Libre Baskerville', Georgia, serif;
+      background: var(--fundo);
+      color: var(--texto);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    .top-nav {
+      background: #1e1008;
+      border-bottom: 2px solid var(--dourado-claro);
+      padding: 0 2.5rem;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+    .brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.7rem;
+      font-weight: 600;
+      color: #fff8ee;
+      letter-spacing: 0.03em;
+      margin-right: auto;
+    }
+
+    /* MAIN */
+    main {
+      flex: 1;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 2.5rem;
+      width: 100%;
+    }
+    .titulo-jogo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+      line-height: 1.1;
+    }
+    .subtitulo {
+      font-size: 1.1rem;
+      color: var(--texto);
+      margin-bottom: 2.5rem;
+      max-width: 680px;
+    }
+
+    .narrador {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 1.4rem;
+      padding: 1rem 1.1rem;
+      border: 1.5px solid var(--borda-forte);
+      border-radius: 10px;
+      background: rgba(30,16,8,0.05);
+    }
+    .narrador img {
+      width: 78px;
+      height: 96px;
+      object-fit: cover;
+      object-position: top center;
+      border-radius: 10px;
+      border: 1px solid rgba(200,146,10,.35);
+      flex-shrink: 0;
+    }
+    .narrador-nome {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.8rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--dourado-claro);
+      margin-bottom: 0.4rem;
+    }
+    .narrador-texto {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: var(--texto-suave);
+    }
+
+    /* IMAGEM */
+    .imagem-wrapper {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: fit-content;
+      max-width: min(100%, 900px);
+      max-height: 70vh;
+      margin: 0 auto;
+      cursor: zoom-in;
+      border: 1.5px solid var(--borda-forte);
+      border-radius: 6px;
+      overflow: hidden;
+      background: #f7efe2;
+    }
+    .imagem-wrapper img {
+      display: block;
+      width: auto;
+      max-width: 100%;
+      height: auto;
+      max-height: 70vh;
+      object-fit: contain;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .link-aula {
+      position: absolute; top: 10px; right: 10px; z-index: 10;
+      display: flex; flex-direction: column; align-items: center; gap: 2px;
+      text-decoration: none; color: #fff8ee;
+      background: rgba(30,16,8,0.72); border: 1.5px solid var(--dourado-claro, #c8920a);
+      border-radius: 8px; padding: 0.4rem 0.65rem;
+      font-family: 'Cormorant Garamond', serif; font-size: 0.68rem; font-weight: 600;
+      letter-spacing: 0.02em; text-align: center; line-height: 1.2;
+      cursor: pointer; transition: background 0.2s, transform 0.15s;
+    }
+    .link-aula:hover { background: rgba(30,16,8,0.92); transform: translateY(-1px); }
+    .link-aula svg { width: 22px; height: 22px; }
+
+    /* HOTSPOTS */
+    .hotspot {
+      position: absolute;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #1e1008;
+      border: 2px solid var(--dourado-claro);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transform: translate(-50%, -50%);
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--dourado-claro);
+      transition: box-shadow 0.2s;
+      z-index: 10;
+      user-select: none;
+    }
+    .hotspot:hover {
+      animation: pulsar 0.6s ease-in-out infinite alternate;
+    }
+    @keyframes pulsar {
+      from { transform: translate(-50%, -50%) scale(1);    box-shadow: 0 0 0 0   rgba(200,146,10,0.4); }
+      to   { transform: translate(-50%, -50%) scale(1.13); box-shadow: 0 0 0 7px rgba(200,146,10,0);   }
+    }
+    .hotspot.concluido { border-color: var(--dourado-claro); color: var(--dourado-claro); }
+    .hotspot.revelado  { border-color: var(--vermelho-escuro); color: var(--vermelho-escuro); }
+
+    /* OVERLAY */
+    .overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(30,16,8,0.65);
+      z-index: 100;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+    .overlay.ativo { display: flex; }
+
+    /* MODAL PERGUNTA */
+    .modal-pergunta {
+      background: var(--fundo-card);
+      border: 1.5px solid var(--borda-forte);
+      border-radius: 12px;
+      max-width: 520px;
+      width: 100%;
+      padding: 2.5rem 2rem 2rem;
+      position: relative;
+    }
+    .modal-fechar {
+      position: absolute;
+      top: 1rem;
+      right: 1.2rem;
+      background: none;
+      border: none;
+      font-size: 1.4rem;
+      color: var(--texto-suave);
+      cursor: pointer;
+      line-height: 1;
+      padding: 0;
+    }
+    .modal-fechar:hover { color: var(--texto); }
+    .modal-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--dourado-claro);
+      border: 1px solid var(--dourado-claro);
+      display: inline-block;
+      padding: 0.15em 0.7em;
+      border-radius: 2px;
+      margin-bottom: 0.8rem;
+    }
+    .modal-pergunta-texto {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem;
+      font-weight: 600;
+      line-height: 1.3;
+      margin-bottom: 1.4rem;
+    }
+    .tracados {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.3rem;
+      margin-bottom: 1.2rem;
+    }
+    .tracado-letra {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--dourado);
+      border-bottom: 2px solid var(--dourado);
+      width: 20px;
+      text-align: center;
+      line-height: 1.3;
+    }
+    .modal-input {
+      width: 100%;
+      font-family: 'Libre Baskerville', Georgia, serif;
+      font-size: 1.1rem;
+      padding: 0.65rem 1rem;
+      background: var(--fundo);
+      border: 1.5px solid var(--borda-forte);
+      border-radius: 6px;
+      color: var(--texto);
+      outline: none;
+      transition: border-color 0.2s;
+      margin-bottom: 1rem;
+    }
+    .modal-input:focus { border-color: var(--dourado-claro); }
+    .modal-input:disabled { opacity: 0.5; cursor: default; }
+    .modal-btn-confirmar {
+      background: #1e1008;
+      color: var(--dourado-claro);
+      border: 1.5px solid var(--dourado-claro);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.6rem 1.8rem;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+    .modal-btn-confirmar:hover { background: var(--dourado-claro); color: #1e1008; }
+    .modal-btn-confirmar:disabled { opacity: 0.4; cursor: default; }
+    .modal-btn-confirmar:disabled:hover { background: #1e1008; color: var(--dourado-claro); }
+    .modal-feedback {
+      margin-top: 1.2rem;
+      font-size: 0.88rem;
+      line-height: 1.7;
+      border-left: 3px solid var(--borda-forte);
+      padding-left: 1rem;
+      display: none;
+    }
+    .modal-feedback.visivel { display: block; }
+    .feedback-certo   { color: var(--verde-escuro); font-weight: 700; }
+    .feedback-errado  { color: var(--vermelho-escuro); font-weight: 700; }
+    .feedback-resposta{ color: var(--verde-escuro); font-weight: 700; }
+    .feedback-dica    { color: var(--texto-suave); }
+    .feedback-explicacao { color: var(--texto); margin-top: 0.5rem; }
+
+    /* MODAL ZOOM */
+    .modal-zoom {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(18,10,4,0.93);
+      z-index: 200;
+      align-items: center;
+      justify-content: center;
+      cursor: zoom-out;
+    }
+    .modal-zoom.ativo { display: flex; }
+    .modal-zoom img {
+      max-width: 95vw;
+      max-height: 90vh;
+      object-fit: contain;
+      border: 1px solid var(--borda-forte);
+      border-radius: 4px;
+      pointer-events: none;
+    }
+
+    /* CONCLUSÃO */
+    .conclusao {
+      display: none;
+      margin-top: 3rem;
+      background: var(--fundo-card);
+      border: 1.5px solid var(--borda-forte);
+      border-radius: 12px;
+      padding: 3rem 2rem;
+      text-align: center;
+    }
+    .conclusao.visivel { display: block; }
+    .conclusao-titulo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.8rem, 5vw, 2.8rem);
+      font-weight: 600;
+      margin-bottom: 0.8rem;
+    }
+    .conclusao-placar {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      color: var(--dourado-claro);
+      margin-bottom: 1rem;
+    }
+    .conclusao-mensagem {
+      font-size: 0.93rem;
+      color: var(--texto-suave);
+      max-width: 460px;
+      margin: 0 auto 2rem;
+      line-height: 1.8;
+    }
+    .btn-reiniciar {
+      background: #1e1008;
+      color: var(--dourado-claro);
+      border: 1.5px solid var(--dourado-claro);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.7rem 2rem;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+    .btn-reiniciar:hover { background: var(--dourado-claro); color: #1e1008; }
+
+    /* FOOTER */
+    footer {
+      background: var(--escuro);
+      border-top: 2px solid var(--dourado-claro);
+      padding: 1.2rem 2rem;
+      text-align: center;
+      font-size: 0.82rem;
+      color: rgba(255,248,238,0.5);
+    }
+
+    @media (min-width: 641px) {
+      .narrador {
+        max-width: 900px;
+        margin: 0 auto 1.2rem;
+      }
+      .narrador-texto {
+        font-size: 1.08rem;
+      }
+    }
+
+    /* RESPONSIVO */
+    @media (max-width: 640px) {
+      .top-nav { padding: 0 1.2rem; gap: 1.2rem; }
+      main { padding: 2rem 1rem 4rem; }
+      .modal-pergunta { padding: 2rem 1.2rem 1.5rem; }
+      .overlay { padding: 0.4rem; }
+      .modal-input { font-size: 1rem; }
+      .hotspot { width: 22px; height: 22px; font-size: 0.65rem; border-width: 1.5px; }
+      .link-aula { top: 6px; right: 6px; padding: 0.3rem 0.5rem; font-size: 0.6rem; }
+      .link-aula svg { width: 18px; height: 18px; }
+    }
+
+    /* ==========================================================
+       MECÂNICA ESPECÍFICA — A REGRA DO OCTETO
+       Nada acima deste bloco foi alterado (nav, narrador,
+       imagem-wrapper, conclusão, footer, modal-zoom permanecem
+       idênticos à fase-modelo). Tudo daqui pra baixo é novo.
+       ========================================================== */
+    .narrador img { transition: opacity .25s ease; }
+    #btnContinuarFala { margin-top: .9rem; display: none; }
+
+    /* Tabela periódica */
+    .palco-tabela {
+      position: absolute;
+      left: 50%; top: 50%;
+      transform: translate(-50%, -50%);
+      width: 84%;
+      display: none;
+    }
+    .palco-tabela.visivel { display: block; }
+    .palco-tabela img { display: block; width: 100%; height: auto; user-select: none; pointer-events: none; }
+    .colunas-tabela { position: absolute; inset: 0; }
+    .coluna-familia {
+      position: absolute;
+      top: 18%;
+      height: 40%;
+      border-radius: 8px;
+      opacity: 0;
+      transition: opacity 0.6s ease, box-shadow 0.6s ease;
+      pointer-events: none;
+    }
+    .coluna-familia.iluminada {
+      opacity: 1;
+      background: rgba(255, 244, 214, 0.3);
+      backdrop-filter: brightness(1.55) saturate(1.35);
+      -webkit-backdrop-filter: brightness(1.55) saturate(1.35);
+      box-shadow: 0 0 16px 3px rgba(255,215,106,0.55), inset 0 0 0 1px rgba(255,241,199,0.5);
+    }
+    .coluna-familia.dourada {
+      background: rgba(255, 250, 232, 0.42);
+      backdrop-filter: brightness(1.95) saturate(1.5);
+      -webkit-backdrop-filter: brightness(1.95) saturate(1.5);
+      box-shadow: 0 0 26px 8px rgba(255,215,106,0.9), inset 0 0 0 1px rgba(255,250,230,0.8);
+    }
+    /* Enquanto está aguardando o clique do aluno, a coluna pulsa
+       para convidar a interação — some assim que ele clica. */
+    .coluna-familia.clicavel {
+      pointer-events: auto;
+      cursor: pointer;
+    }
+    .coluna-familia.clicavel.dourada {
+      animation: pulsarColuna 0.9s ease-in-out infinite alternate;
+    }
+    @keyframes pulsarColuna {
+      from { box-shadow: 0 0 26px 8px rgba(255,215,106,0.9), inset 0 0 0 1px rgba(255,250,230,0.8); }
+      to   { box-shadow: 0 0 40px 15px rgba(255,215,106,1), inset 0 0 0 1px rgba(255,250,230,0.95); }
+    }
+
+    /* Contagem de elétrons na última camada — família 18 (investigação) */
+    .numero-eletrons {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      width: 20px; height: 20px;
+      border-radius: 50%;
+      background: rgba(255,215,106,0.92);
+      border: 1px solid #7a5205;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 700; font-size: .72rem;
+      color: #1e1008;
+      opacity: 0;
+      transition: opacity .5s ease;
+      pointer-events: none;
+    }
+    .numero-eletrons.mostrar { opacity: 1; }
+
+    /* Símbolo flutuante — animação de saída da tabela */
+    .simbolo-flutuante {
+      position: absolute;
+      left: 50%; top: 38%;
+      transform: translate(-50%, -50%);
+      width: 46px; height: 46px;
+      border-radius: 50%;
+      background: rgba(255,215,106,0.92);
+      border: 2px solid var(--dourado-claro);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 700;
+      font-size: 1.3rem;
+      color: #1e1008;
+      z-index: 9;
+      pointer-events: none;
+      transition: left 1s cubic-bezier(.22,.61,.36,1), top 1s cubic-bezier(.22,.61,.36,1), transform 1s cubic-bezier(.22,.61,.36,1), opacity .4s ease;
+    }
+
+    /* Cartão do elemento */
+    .cartao-elemento {
+      position: absolute;
+      left: 50%; top: 4%;
+      width: 82%;
+      max-width: 380px;
+      min-height: 420px;
+      background-image: url('../imagens/carta-elemento.png');
+      background-size: 100% 100%;
+      background-repeat: no-repeat;
+      border-radius: 6px;
+      opacity: 0;
+      display: none;
+      transform: translateX(-50%) scale(0.75);
+      transition: opacity .5s ease, transform .5s ease;
+      z-index: 12;
+    }
+    .cartao-elemento.visivel { display: block; }
+    .cartao-elemento.mostrar { opacity: 1; transform: translateX(-50%) scale(1); }
+    .imagem-wrapper.cartao-ativo { overflow: visible; }
+    .cartao-conteudo {
+      position: absolute; inset: 19% 10% 6% 10%;
+      display: flex; flex-direction: column; align-items: center;
+      text-align: center; gap: .3rem;
+      color: var(--texto);
+    }
+    .cartao-simbolo {
+      font-family: 'Cormorant Garamond', serif; font-weight: 700;
+      font-size: clamp(1.5rem, 5vw, 2rem); color: var(--dourado);
+      line-height: 1;
+    }
+    .cartao-info { font-size: .74rem; color: var(--texto-suave); line-height: 1.35; }
+    .camada-valencia {
+      display: flex; gap: .3rem; justify-content: center; align-items: center;
+      min-height: 30px; margin: .05rem 0; flex-wrap: wrap; max-width: 100%;
+    }
+    .camada-valencia img.eletron-icone {
+      width: 22px; height: 22px; max-width: 22px; max-height: 22px;
+      object-fit: contain; transition: transform .8s ease, opacity .8s ease;
+    }
+    .eletron-icone.saindo,
+    .eletron-icone.entrando-de { transform: translate(70px, -70px) scale(.3); opacity: 0; }
+    .cartao-pergunta { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: .85rem; }
+    .cartao-opcoes { display: flex; flex-direction: column; gap: .32rem; align-items: center; width: 100%; }
+    .cartao-opcoes .modal-btn-confirmar { padding: .32rem 1rem; font-size: .78rem; }
+    .escolha-grupo { display: flex; gap: .35rem; flex-wrap: wrap; justify-content: center; }
+    .escolha-btn {
+      background: rgba(0,0,0,.03); border: 1px solid var(--borda); border-radius: 6px;
+      padding: .26rem .62rem; font-family: 'Libre Baskerville', Georgia, serif; font-size: .74rem;
+      cursor: pointer; color: var(--texto); transition: background .15s, border-color .15s;
+    }
+    .escolha-btn.selecionado { border-color: var(--dourado-claro); background: rgba(200,146,10,0.12); }
+    .escolha-btn:disabled { cursor: default; opacity: .5; }
+    .cartao-mensagem { font-size: .76rem; color: var(--verde-escuro); font-weight: 700; min-height: 1.1em; }
+
+    /* Etapa 5 — tabela de famílias */
+    .tabela-familias {
+      position: absolute; left: 50%; top: 50%;
+      transform: translate(-50%, -50%);
+      width: 88%; max-width: 460px; max-height: 82%;
+      overflow-y: auto;
+      background: rgba(30,16,8,0.94);
+      border: 1.5px solid var(--dourado-claro);
+      border-radius: 10px;
+      padding: 1rem 1.1rem;
+      display: none;
+      z-index: 12;
+    }
+    .tabela-familias.visivel { display: block; }
+    .tf-linha {
+      display: grid; grid-template-columns: 1.2fr 1.3fr 0.9fr;
+      gap: .4rem; align-items: center;
+      padding: .45rem 0; border-bottom: 1px solid rgba(232,184,75,0.18);
+    }
+    .tf-linha.cabecalho {
+      font-family: 'Cormorant Garamond', serif; font-weight: 700; color: var(--dourado-claro);
+      font-size: .68rem; text-transform: uppercase; letter-spacing: .06em;
+    }
+    .tf-familia { font-family: 'Cormorant Garamond', serif; font-weight: 700; color: #f5ead0; font-size: .9rem; }
+    .tf-select {
+      font-family: 'Libre Baskerville', Georgia, serif; font-size: .78rem;
+      background: rgba(255,255,255,0.07); color: #f5ead0;
+      border: 1px solid rgba(232,184,75,0.4); border-radius: 5px; padding: .28rem .3rem;
+    }
+    .tf-select.correta { border-color: var(--verde-escuro); box-shadow: 0 0 0 1px var(--verde-escuro) inset; }
+    .tf-select.errada  { border-color: var(--vermelho-escuro); box-shadow: 0 0 0 1px var(--vermelho-escuro) inset; }
+    .tf-feedback { font-size: .78rem; color: #f5ead0; margin-top: .6rem; min-height: 1.2em; text-align: center; }
+    .tf-botoes { text-align: center; margin-top: .7rem; }
+
+    @media (max-width: 640px) {
+      .cartao-elemento { width: 92%; min-height: 400px; }
+      .cartao-info { font-size: .7rem; }
+      .tabela-familias { width: 94%; padding: .8rem .7rem; }
+      .tf-linha { grid-template-columns: 1fr 1.1fr 0.8fr; font-size: .74rem; }
+      .tf-familia { font-size: .8rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <div class="brand">KiFácil</div>
+</nav>
+
+<main>
+  <h1 class="titulo-jogo">A Regra do Octeto</h1>
+  <p class="subtitulo">Descubra por que alguns átomos preferem ganhar elétrons e outros preferem perdê-los, observando o comportamento das famílias da tabela periódica.</p>
+
+  <div class="narrador">
+    <img src="../imagens/rafa-sorrindo.jpg" alt="Professora Rafaela" id="imgProfessora" />
+    <div>
+      <div class="narrador-nome">Professora Rafaela</div>
+      <div class="narrador-texto" id="narradorTexto">Hoje vamos descobrir por que alguns átomos ganham elétrons enquanto outros preferem perdê-los.</div>
+      <button class="modal-btn-confirmar" id="btnContinuarFala">Continuar</button>
+    </div>
+  </div>
+
+  <div class="imagem-wrapper" id="imagemWrapper">
+    <img src="../imagens/laboratorio-octeto.jpg" alt="Laboratório da regra do octeto" id="imagemJogo" />
+
+    <div class="palco-tabela" id="palcoTabela">
+      <img src="../imagens/tabela-periodica-vazia.png" alt="Tabela periódica" />
+      <div class="colunas-tabela" id="colunasTabela"></div>
+    </div>
+
+    <div class="cartao-elemento" id="cartaoElemento">
+      <div class="cartao-conteudo">
+        <div class="cartao-simbolo" id="cartaoSimbolo"></div>
+        <div class="cartao-info" id="cartaoInfo"></div>
+        <div class="camada-valencia" id="camadaValencia"></div>
+        <div class="cartao-pergunta" id="cartaoPergunta"></div>
+        <div class="cartao-opcoes" id="cartaoOpcoes"></div>
+        <div class="cartao-mensagem" id="cartaoMensagem"></div>
+      </div>
+    </div>
+
+    <div class="tabela-familias" id="tabelaFamilias"></div>
+
+    <!-- COLOQUE O LINK AQUI -->
+    <a class="link-aula" href="https://www.youtube.com/watch?v=Sj8KCVdujBI" target="_blank" rel="noopener" title="Assista à aula">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.6"/>
+        <path d="M10 8.5L16 12L10 15.5V8.5Z" fill="currentColor"/>
+      </svg>
+      <span>Assista à aula</span>
+    </a>
+  </div>
+
+  <div class="conclusao" id="conclusao">
+    <div class="conclusao-titulo">Fase concluída</div>
+    <div class="conclusao-placar" id="conclusaoPlacar"></div>
+    <p class="conclusao-mensagem" id="conclusaoMensagem"></p>
+    <button class="btn-reiniciar" onclick="reiniciar()">Jogar novamente</button>
+  </div>
+</main>
+
+<footer>© 2026 KiFácil</footer>
+
+<!-- MODAL ZOOM -->
+<div class="modal-zoom" id="modalZoom">
+  <img src="../imagens/laboratorio-octeto.jpg" alt="Laboratório ampliado" />
+</div>
+
+<script>
+/* ==========================================================
+   DADOS — ELEMENTOS
+   Objeto central: para adicionar um novo elemento à etapa 4,
+   basta acrescentar uma entrada aqui e incluir a chave em
+   ORDEM_ETAPA4.
+   ========================================================== */
+const ELEMENTOS = {
+  na: { simbolo: 'Na', nome: 'sódio',  numeroAtomico: 11, distribuicao: [2, 8, 1], familia: 1,  processo: 'perde', quantidade: 1 },
+  cl: { simbolo: 'Cl', nome: 'cloro',  numeroAtomico: 17, distribuicao: [2, 8, 7], familia: 17, processo: 'ganha', quantidade: 1 },
+  li: { simbolo: 'Li', nome: 'lítio',  numeroAtomico: 3,  distribuicao: [2, 1],    familia: 1,  processo: 'perde', quantidade: 1 },
+  be: { simbolo: 'Be', nome: 'berílio', numeroAtomico: 4, distribuicao: [2, 2],    familia: 2,  processo: 'perde', quantidade: 2 },
+  al: { simbolo: 'Al', nome: 'alumínio', numeroAtomico: 13, distribuicao: [2, 8, 3], familia: 13, processo: 'perde', quantidade: 3 },
+  o:  { simbolo: 'O',  nome: 'oxigênio', numeroAtomico: 8, distribuicao: [2, 6],    familia: 16, processo: 'ganha', quantidade: 2 },
+  f:  { simbolo: 'F',  nome: 'flúor',   numeroAtomico: 9,  distribuicao: [2, 7],    familia: 17, processo: 'ganha', quantidade: 1 }
+};
+const ORDEM_ETAPA4 = ['li', 'be', 'al', 'o', 'f'];
+
+/* Famílias representativas (colunas iluminadas na etapa 1) */
+const FAMILIAS_REPRESENTATIVAS = [1, 2, 13, 14, 15, 16, 17, 18];
+
+/* Padrão da etapa 5 — o que o aluno precisa descobrir sozinho */
+const FAMILIAS_OCTETO = {
+  1:  { processo: 'Perde 1', nox: '+1' },
+  2:  { processo: 'Perde 2', nox: '+2' },
+  13: { processo: 'Perde 3', nox: '+3' },
+  15: { processo: 'Ganha 3', nox: '−3' },
+  16: { processo: 'Ganha 2', nox: '−2' },
+  17: { processo: 'Ganha 1', nox: '−1' },
+  18: { processo: 'Estável', nox: '0' }
+};
+const ORDEM_FAMILIAS_TABELA = [1, 2, 13, 15, 16, 17, 18];
+const OPCOES_PROCESSO = ['Perde 1', 'Perde 2', 'Perde 3', 'Ganha 1', 'Ganha 2', 'Ganha 3', 'Estável'];
+const OPCOES_NOX = ['+1', '+2', '+3', '−1', '−2', '−3', '0'];
+
+/* Dicas socráticas — nunca "errado", sempre uma pergunta */
+const DICAS_SOCRATICAS = [
+  'Observe quantos elétrons existem na última camada.',
+  'Será mais fácil ganhar muitos elétrons ou perder poucos?'
+];
+function dicaAleatoria() {
+  return DICAS_SOCRATICAS[Math.floor(Math.random() * DICAS_SOCRATICAS.length)];
+}
+
+/* ==========================================================
+   PROFESSORA RAFAELA — mesmo padrão usado nas demais fases
+   ========================================================== */
+const IMG_PROF = {
+  sorrindo:   '../imagens/rafa-sorrindo.jpg',
+  explicando: '../imagens/rafa-explicando.jpg',
+  pensando:   '../imagens/rafa-pensando.jpg',
+  animada:    '../imagens/rafa-animada.jpg'
+};
+const $prof = document.getElementById('imgProfessora');
+const $fala = document.getElementById('narradorTexto');
+const $btnContinuar = document.getElementById('btnContinuarFala');
+let _aoContinuar = null;
+
+function falar(mood, texto, aoContinuar) {
+  _aoContinuar = aoContinuar || null;
+  $prof.style.opacity = '0';
+  setTimeout(() => { $prof.src = IMG_PROF[mood] || IMG_PROF.explicando; $prof.style.opacity = '1'; }, 180);
+  $fala.textContent = texto;
+  $btnContinuar.style.display = _aoContinuar ? 'inline-block' : 'none';
+}
+$btnContinuar.addEventListener('click', () => {
+  const cb = _aoContinuar;
+  _aoContinuar = null;
+  $btnContinuar.style.display = 'none';
+  if (cb) cb();
+});
+
+// Pergunta socrática: muda a expressão/fala da professora SEM
+// exigir clique em "Continuar" — o aluno continua interagindo
+// com o cartão/tabela que já está na tela.
+function professoraPergunta(texto) {
+  $prof.style.opacity = '0';
+  setTimeout(() => { $prof.src = IMG_PROF.pensando; $prof.style.opacity = '1'; }, 180);
+  $fala.textContent = texto;
+}
+
+const _ding = new Audio('../sons/ding.mp3');
+_ding.preload = 'auto';
+function tocarDing() { try { _ding.currentTime = 0; _ding.play().catch(() => {}); } catch (e) {} }
+
+/* ==========================================================
+   TABELA PERIÓDICA — destaque de famílias
+   Colunas medidas sobre tabela-periodica-vazia.png (1536×1024):
+   coluna 1 começa a ~9,6% da largura, cada coluna tem ~4,24%
+   de passo e ~4% de largura própria.
+   ========================================================== */
+const COLUNA_ESQUERDA_BASE = 9.4;
+const COLUNA_LARGURA = 4.9;
+const COLUNA_PASSO = 4.245;
+
+function posicaoColuna(familia) {
+  let left = COLUNA_ESQUERDA_BASE + (familia - 1) * COLUNA_PASSO;
+
+  // Desloca apenas as famílias 13 a 18
+  if (familia >= 13) {
+    left += 3.2;   // aumente ou diminua este valor
+  }
+
+  return {
+    left,
+    width: COLUNA_LARGURA
+  };
+}
+
+function criarColunasTabela() {
+  const cont = document.getElementById('colunasTabela');
+  cont.innerHTML = '';
+  FAMILIAS_REPRESENTATIVAS.forEach(f => {
+    const div = document.createElement('div');
+    div.className = 'coluna-familia';
+    div.dataset.familia = f;
+    const pos = posicaoColuna(f);
+
+div.style.left = pos.left + '%';
+div.style.width = pos.width + '%';
+
+const alturas = {
+    1:  { top: 15.5, height: 44 },
+    18: { top: 15.5, height: 44 }
+};
+
+const config = alturas[f] || { top:22, height: 37.0 };
+
+div.style.top = config.top + '%';
+div.style.height = config.height + '%';
+    cont.appendChild(div);
+  });
+}
+function iluminarFamiliasRepresentativas() {
+  document.querySelectorAll('.coluna-familia').forEach(c => c.classList.add('iluminada'));
+}
+function destacarFamiliaDourada(familia) {
+  const el = document.querySelector(`.coluna-familia[data-familia="${familia}"]`);
+  if (el) el.classList.add('dourada');
+}
+
+// Revela, período a período, quantos elétrons a família 18 tem na
+// última camada — 2 para o hélio, 8 para os demais. Usa a mesma
+// faixa vertical (top/height) ajustada para a família 18 em
+// criarColunasTabela, para os números caírem sobre a coluna certa.
+function mostrarEletronsFamilia18() {
+  const pos = posicaoColuna(18);
+  const leftCentro = pos.left + pos.width / 2;
+  const top = 15.5, height = 44;
+  const alturaLinha = height / 7;
+  const cont = document.getElementById('colunasTabela');
+  for (let periodo = 1; periodo <= 7; periodo++) {
+    const div = document.createElement('div');
+    div.className = 'numero-eletrons';
+    div.style.left = leftCentro + '%';
+    div.style.top = (top + alturaLinha * (periodo - 0.5)) + '%';
+    div.textContent = periodo === 1 ? '2' : '8';
+    cont.appendChild(div);
+    requestAnimationFrame(() => div.classList.add('mostrar'));
+  }
+}
+function mostrarTabela() { document.getElementById('palcoTabela').classList.add('visivel'); }
+function esconderTabela() { document.getElementById('palcoTabela').classList.remove('visivel'); }
+
+// Pequeno emblema que "sai" da coluna da família até o centro do
+// palco, onde vira o cartão do elemento.
+function animarSaidaDaTabela(simbolo, familia, aoTerminar) {
+  const badge = document.createElement('div');
+  badge.className = 'simbolo-flutuante';
+  badge.textContent = simbolo;
+  const pos = posicaoColuna(familia);
+  badge.style.left = (pos.left + pos.width / 2) + '%';
+  document.getElementById('palcoTabela').appendChild(badge);
+  requestAnimationFrame(() => {
+    badge.style.left = '50%';
+    badge.style.top = '50%';
+    badge.style.transform = 'translate(-50%, -50%) scale(1.35)';
+  });
+  setTimeout(() => {
+    badge.style.opacity = '0';
+    setTimeout(() => badge.remove(), 400);
+    if (aoTerminar) aoTerminar();
+  }, 950);
+}
+
+/* ==========================================================
+   CAMADA DE VALÊNCIA — elétrons como ícones (eletron.png)
+   ========================================================== */
+function textoDistribuicao(dist) { return dist.join(' • '); }
+
+function renderCamadaValencia(qtd) {
+  const cont = document.getElementById('camadaValencia');
+  cont.innerHTML = '';
+  for (let i = 0; i < qtd; i++) {
+    const img = document.createElement('img');
+    img.src = '../imagens/eletron.png';
+    img.alt = '';
+    img.className = 'eletron-icone';
+    cont.appendChild(img);
+  }
+}
+
+function animarPerdeEletron(qtdAntes, qtdDepois, aoTerminar) {
+  const icones = document.querySelectorAll('#camadaValencia .eletron-icone');
+  const remover = qtdAntes - qtdDepois;
+  for (let i = 0; i < remover; i++) {
+    const icone = icones[icones.length - 1 - i];
+    if (icone) icone.classList.add('saindo');
+  }
+  setTimeout(() => { renderCamadaValencia(qtdDepois); if (aoTerminar) aoTerminar(); }, 850);
+}
+
+function animarGanhaEletron(qtdAntes, qtdDepois, aoTerminar) {
+  renderCamadaValencia(qtdAntes);
+  const cont = document.getElementById('camadaValencia');
+  const adicionar = qtdDepois - qtdAntes;
+  const novos = [];
+  for (let i = 0; i < adicionar; i++) {
+    const img = document.createElement('img');
+    img.src = '../imagens/eletron.png';
+    img.alt = '';
+    img.className = 'eletron-icone entrando-de';
+    cont.appendChild(img);
+    novos.push(img);
+  }
+  requestAnimationFrame(() => {
+    setTimeout(() => novos.forEach(n => n.classList.remove('entrando-de')), 30);
+  });
+  setTimeout(() => { if (aoTerminar) aoTerminar(); }, 850);
+}
+
+/* ==========================================================
+   CARTÃO DO ELEMENTO
+   ========================================================== */
+function mostrarCartao(elemento, aoAparecer) {
+  const simboloEl = document.getElementById('cartaoSimbolo');
+  simboloEl.textContent = elemento.simbolo;
+  // símbolos curtos (Na, Cl...) usam a fonte grande padrão; rótulos
+  // genéricos mais longos ("Átomo") precisam de uma fonte menor
+  // para não vazar para fora do cartão.
+  simboloEl.style.fontSize = elemento.simbolo.length > 3 ? '1.3rem' : '';
+  const linhaNumero = elemento.numeroAtomico != null ? `Número atômico: ${elemento.numeroAtomico}<br>` : '';
+  document.getElementById('cartaoInfo').innerHTML =
+    `${linhaNumero}Distribuição: ${textoDistribuicao(elemento.distribuicao)}`;
+  renderCamadaValencia(elemento.distribuicao[elemento.distribuicao.length - 1]);
+  document.getElementById('cartaoPergunta').textContent = '';
+  document.getElementById('cartaoOpcoes').innerHTML = '';
+  document.getElementById('cartaoMensagem').textContent = '';
+
+  const cartao = document.getElementById('cartaoElemento');
+  cartao.classList.add('visivel');
+  document.getElementById('imagemWrapper').classList.add('cartao-ativo');
+  requestAnimationFrame(() => cartao.classList.add('mostrar'));
+  setTimeout(() => { if (aoAparecer) aoAparecer(); }, 550);
+}
+function esconderCartao() {
+  const cartao = document.getElementById('cartaoElemento');
+  cartao.classList.remove('mostrar');
+  setTimeout(() => {
+    cartao.classList.remove('visivel');
+    document.getElementById('imagemWrapper').classList.remove('cartao-ativo');
+  }, 500);
+}
+function mostrarMensagemCartao(texto) {
+  document.getElementById('cartaoMensagem').textContent = texto;
+}
+
+/* Pergunta de escolha simples (etapas 2 e 3): duas opções, uma certa. */
+function perguntarEscolhaBinaria(pergunta, opcoes, aoAcertar) {
+  document.getElementById('cartaoPergunta').textContent = pergunta;
+  const cont = document.getElementById('cartaoOpcoes');
+  cont.innerHTML = '<div class="escolha-grupo" id="grupoBinario"></div>';
+  const grupo = document.getElementById('grupoBinario');
+
+  opcoes.forEach(op => {
+    const btn = document.createElement('button');
+    btn.className = 'modal-btn-confirmar';
+    btn.textContent = op.texto;
+    btn.addEventListener('click', () => {
+      if (op.certa) {
+        tocarDing();
+        grupo.querySelectorAll('button').forEach(b => b.disabled = true);
+        setTimeout(aoAcertar, 250);
+      } else {
+        professoraPergunta(dicaAleatoria());
+      }
+    });
+    grupo.appendChild(btn);
+  });
+}
+
+/* Pergunta de direção + quantidade (etapa 4). */
+function perguntarDirecaoQuantidade(elemento, aoAcertar) {
+  document.getElementById('cartaoPergunta').textContent = 'Esse elemento perde ou ganha elétrons? Quantos?';
+  const cont = document.getElementById('cartaoOpcoes');
+  let direcao = null, quantidade = null;
+
+  cont.innerHTML = `
+    <div class="escolha-grupo" id="grupoDirecao">
+      <button class="escolha-btn" data-dir="perde">Perde</button>
+      <button class="escolha-btn" data-dir="ganha">Ganha</button>
+    </div>
+    <div class="escolha-grupo" id="grupoQuantidade">
+      ${[1, 2, 3, 4, 5, 6, 7].map(n => `<button class="escolha-btn" data-qtd="${n}">${n}</button>`).join('')}
+    </div>
+    <button class="modal-btn-confirmar" id="btnConfirmarEtapa4">Confirmar</button>
+  `;
+
+  cont.querySelectorAll('[data-dir]').forEach(b => b.addEventListener('click', () => {
+    direcao = b.dataset.dir;
+    cont.querySelectorAll('[data-dir]').forEach(x => x.classList.remove('selecionado'));
+    b.classList.add('selecionado');
+  }));
+  cont.querySelectorAll('[data-qtd]').forEach(b => b.addEventListener('click', () => {
+    quantidade = parseInt(b.dataset.qtd, 10);
+    cont.querySelectorAll('[data-qtd]').forEach(x => x.classList.remove('selecionado'));
+    b.classList.add('selecionado');
+  }));
+
+  document.getElementById('btnConfirmarEtapa4').addEventListener('click', () => {
+    if (!direcao || !quantidade) return;
+
+    if (direcao === elemento.processo && quantidade === elemento.quantidade) {
+      tocarDing();
+      cont.querySelectorAll('button').forEach(b => b.disabled = true);
+      const valenciaAntes = elemento.distribuicao[elemento.distribuicao.length - 1];
+      const valenciaDepois = direcao === 'perde'
+        ? (elemento.distribuicao.length > 1 ? elemento.distribuicao[elemento.distribuicao.length - 2] : 0)
+        : valenciaAntes + quantidade;
+      const acao = direcao === 'perde' ? animarPerdeEletron : animarGanhaEletron;
+      acao(valenciaAntes, valenciaDepois, () => {
+        const verbo = direcao === 'perde' ? 'perdeu' : 'ganhou';
+        mostrarMensagemCartao(`${elemento.simbolo} ${verbo} ${quantidade} elétron${quantidade > 1 ? 's' : ''} e atingiu a estabilidade.`);
+        setTimeout(aoAcertar, 300);
+      });
+    } else {
+      professoraPergunta(dicaAleatoria());
+    }
+  });
+}
+
+/* ==========================================================
+   ETAPA 1 — a tabela periódica e as famílias representativas
+   ========================================================== */
+function etapa1() {
+  criarColunasTabela(); // recria do zero: garante nenhum clique/listener herdado de uma partida anterior
+  mostrarTabela();
+  iluminarFamiliasRepresentativas();
+  falar(
+    'explicando',
+    'Observe alguns elementos da tabela periódica. Os gases nobres existem de forma estável na natureza, sem fazer nenhuma ligação química. Sabe-se que esse comportamento tem relação com a configuração eletrônica deles.',
+    () => {
+      destacarFamiliaDourada(18);
+      falar('pensando', 'Vamos investigar os gases nobres?', null);
+      habilitarCliqueFamilia18();
+    }
+  );
+}
+
+// Em vez de um botão "Continuar", quem avança a fala é o próprio
+// clique na coluna 18 (já iluminada) — ela pulsa convidando o
+// aluno a clicar; ao clicar, revela os elétrons da última camada.
+function habilitarCliqueFamilia18() {
+  const el = document.querySelector('.coluna-familia[data-familia="18"]');
+  if (!el) return;
+  el.classList.add('clicavel');
+  const aoClicar = () => {
+    el.classList.remove('clicavel');
+    el.removeEventListener('click', aoClicar);
+    mostrarEletronsFamilia18();
+    falar('animada', 'Se observarmos de perto, veremos que todos possuem 8 elétrons na última camada — com exceção do hélio, que tem 2.', () => {
+      setTimeout(etapaConceito, 900);
+    });
+  };
+  el.addEventListener('click', aoClicar);
+}
+
+/* ==========================================================
+   ETAPA CONCEITUAL — antes de nomear qualquer elemento, ensina
+   o raciocínio geral com dois átomos genéricos (sem símbolo real):
+   a última camada pode se completar ganhando OU perdendo elétrons.
+   ========================================================== */
+function etapaConceito() {
+  esconderTabela();
+  falar('explicando', 'Para que um átomo fique mais estável, ele procura ficar com a última camada completamente preenchida. Isso pode acontecer de duas maneiras.', () => {
+    conceitoSituacaoGanhar();
+  });
+}
+
+function conceitoSituacaoGanhar() {
+  const atomo = { simbolo: 'Átomo', distribuicao: [2, 8, 6] };
+  mostrarCartao(atomo, () => {
+    falar('explicando', 'Se faltam poucos elétrons para completar a última camada, normalmente é mais vantajoso ganhar esses elétrons.', () => {
+      animarGanhaEletron(6, 8, () => {
+        mostrarMensagemCartao('A última camada ficou completa.');
+        setTimeout(() => {
+          esconderCartao();
+          setTimeout(conceitoSituacaoPerder, 700);
+        }, 1700);
+      });
+    });
+  });
+}
+
+function conceitoSituacaoPerder() {
+  const atomo = { simbolo: 'Átomo', distribuicao: [2, 8, 2] };
+  mostrarCartao(atomo, () => {
+    falar('explicando', 'Mas existe outra possibilidade. Quando a última camada possui poucos elétrons, às vezes é mais simples perdê-los. Assim, a camada anterior, que já estava completa, passa a ser a camada mais externa.', () => {
+      animarPerdeEletron(2, 0, () => {
+        renderCamadaValencia(8);
+        document.getElementById('cartaoInfo').innerHTML = 'Nova última camada: já completa.';
+        mostrarMensagemCartao('Esta camada já estava completa.');
+        setTimeout(() => {
+          falar('animada', 'Perceba que um átomo pode ficar estável tanto ganhando quanto perdendo elétrons. O importante não é sempre ganhar ou sempre perder, mas terminar com uma camada mais externa completa.', () => {
+            esconderCartao();
+            setTimeout(etapa2, 700);
+          });
+        }, 1600);
+      });
+    });
+  });
+}
+
+/* ==========================================================
+   ETAPA 2 — sódio: perder é mais fácil que ganhar
+   ========================================================== */
+function etapa2() {
+  falar('explicando', 'Observe o sódio.', () => {
+    animarSaidaDaTabela('Na', ELEMENTOS.na.familia, () => {
+      mostrarCartao(ELEMENTOS.na, () => {
+        falar('explicando', 'Observe que o sódio tem 1 elétron na última camada. Ele pode ganhar mais sete, ou perder um único elétron.', () => {
+          perguntarEscolhaBinaria(
+            'O que parece mais fácil?',
+            [
+              { texto: 'Perder 1 elétron', certa: true },
+              { texto: 'Ganhar 7 elétrons', certa: false }
+            ],
+            () => {
+              animarPerdeEletron(1, 0, () => {
+                renderCamadaValencia(8);
+                document.getElementById('cartaoInfo').innerHTML = 'Número atômico: 11<br>Distribuição: 2 • 8';
+                mostrarMensagemCartao('Agora o sódio possui a mesma configuração do Neônio.');
+                setTimeout(() => { esconderCartao(); setTimeout(etapa3, 600); }, 2000);
+              });
+            }
+          );
+        });
+      });
+    });
+  });
+}
+
+/* ==========================================================
+   ETAPA 3 — cloro: ganhar é mais fácil que perder
+   ========================================================== */
+function etapa3() {
+  falar('explicando', 'Agora observe o cloro.', () => {
+    animarSaidaDaTabela('Cl', ELEMENTOS.cl.familia, () => {
+      mostrarCartao(ELEMENTOS.cl, () => {
+        perguntarEscolhaBinaria(
+          'O que parece mais fácil?',
+          [
+            { texto: 'Ganhar 1 elétron', certa: true },
+            { texto: 'Perder 7 elétrons', certa: false }
+          ],
+          () => {
+            animarGanhaEletron(7, 8, () => {
+              document.getElementById('cartaoInfo').innerHTML = 'Número atômico: 17<br>Distribuição: 2 • 8 • 8';
+              mostrarMensagemCartao('O cloro tornou-se estável.');
+              setTimeout(() => { esconderCartao(); setTimeout(etapa4, 600); }, 2000);
+            });
+          }
+        );
+      });
+    });
+  });
+}
+
+/* ==========================================================
+   ETAPA 4 — vários elementos: perde ou ganha? quantos?
+   ========================================================== */
+function etapa4() {
+  falar('explicando', 'Agora vamos observar outros elementos. Você decide: perde ou ganha, e quantos elétrons?', () => {
+    etapa4Elemento(0);
+  });
+}
+function etapa4Elemento(idx) {
+  if (idx >= ORDEM_ETAPA4.length) { etapa5(); return; }
+  const el = ELEMENTOS[ORDEM_ETAPA4[idx]];
+  animarSaidaDaTabela(el.simbolo, el.familia, () => {
+    mostrarCartao(el, () => {
+      perguntarDirecaoQuantidade(el, () => {
+        setTimeout(() => {
+          esconderCartao();
+          setTimeout(() => etapa4Elemento(idx + 1), 600);
+        }, 1700);
+      });
+    });
+  });
+}
+
+/* ==========================================================
+   ETAPA 5 — quadro-resumo (Família / Processo / NOX)
+   ========================================================== */
+function etapa5() {
+  esconderTabela();
+  falar('explicando', 'Agora complete o quadro com o padrão que você observou em cada família.', () => {
+    montarTabelaFamilias();
+    document.getElementById('tabelaFamilias').classList.add('visivel');
+  });
+}
+
+function montarTabelaFamilias() {
+  const cont = document.getElementById('tabelaFamilias');
+  cont.innerHTML = `
+    <div class="tf-linha cabecalho"><span>Família</span><span>Processo</span><span>NOX</span></div>
+    ${ORDEM_FAMILIAS_TABELA.map(f => `
+      <div class="tf-linha" data-familia="${f}">
+        <span class="tf-familia">Família ${f}</span>
+        <select class="tf-select" data-campo="processo">
+          <option value="">—</option>
+          ${OPCOES_PROCESSO.map(p => `<option value="${p}">${p}</option>`).join('')}
+        </select>
+        <select class="tf-select" data-campo="nox">
+          <option value="">—</option>
+          ${OPCOES_NOX.map(n => `<option value="${n}">${n}</option>`).join('')}
+        </select>
+      </div>
+    `).join('')}
+    <div class="tf-feedback" id="tfFeedback"></div>
+    <div class="tf-botoes"><button class="modal-btn-confirmar" id="btnVerificarFamilias">Verificar</button></div>
+  `;
+  document.getElementById('btnVerificarFamilias').addEventListener('click', verificarTabelaFamilias);
+}
+
+function verificarTabelaFamilias() {
+  let tudoCerto = true;
+  let familiaErradaGanha = false;
+  let houveErro = false;
+
+  document.querySelectorAll('#tabelaFamilias .tf-linha[data-familia]').forEach(linha => {
+    const familia = parseInt(linha.dataset.familia, 10);
+    const esperado = FAMILIAS_OCTETO[familia];
+    const selProcesso = linha.querySelector('[data-campo="processo"]');
+    const selNox = linha.querySelector('[data-campo="nox"]');
+    const certo = selProcesso.value === esperado.processo && selNox.value === esperado.nox;
+
+    selProcesso.classList.remove('correta', 'errada');
+    selNox.classList.remove('correta', 'errada');
+    selProcesso.classList.add(certo ? 'correta' : 'errada');
+    selNox.classList.add(certo ? 'correta' : 'errada');
+
+    if (!certo) {
+      tudoCerto = false;
+      if (!houveErro) { houveErro = true; familiaErradaGanha = [15, 16, 17].includes(familia); }
+    }
+  });
+
+  const feedback = document.getElementById('tfFeedback');
+  if (tudoCerto) {
+    tocarDing();
+    feedback.textContent = 'Excelente! O padrão está completo.';
+    setTimeout(finalizarJogo, 1300);
+  } else {
+    const dica = familiaErradaGanha
+      ? 'Será mais fácil ganhar muitos elétrons ou perder poucos?'
+      : 'Observe quantos elétrons existem na última camada.';
+    feedback.textContent = dica;
+    professoraPergunta(dica);
+  }
+}
+
+/* ==========================================================
+   FINAL
+   ========================================================== */
+function finalizarJogo() {
+  document.getElementById('tabelaFamilias').classList.remove('visivel');
+  mostrarTabela();
+  iluminarFamiliasRepresentativas();
+  FAMILIAS_REPRESENTATIVAS.forEach(destacarFamiliaDourada);
+
+  falar('animada', 'Excelente. Agora você consegue prever quantos elétrons um átomo tende a ganhar ou perder apenas observando sua família.', () => {
+    document.getElementById('conclusaoPlacar').textContent = 'A regra do octeto, compreendida';
+    document.getElementById('conclusaoMensagem').textContent =
+      'Você descobriu sozinho por que cada família tende a ganhar ou perder um número específico de elétrons, sempre buscando a estabilidade dos gases nobres.';
+    const conclusao = document.getElementById('conclusao');
+    conclusao.classList.add('visivel');
+    conclusao.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+}
+
+function reiniciar() {
+  document.getElementById('conclusao').classList.remove('visivel');
+  esconderTabela();
+  esconderCartao();
+  document.getElementById('tabelaFamilias').classList.remove('visivel');
+  document.querySelectorAll('.coluna-familia').forEach(c => c.classList.remove('iluminada', 'dourada', 'clicavel'));
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  iniciarIntro();
+}
+
+/* ==========================================================
+   INTRODUÇÃO / INÍCIO
+   ========================================================== */
+function iniciarIntro() {
+  falar('sorrindo', 'Hoje vamos descobrir por que alguns átomos ganham elétrons enquanto outros preferem perdê-los.', () => {
+    etapa1();
+  });
+}
+
+/* ── Zoom (clique fora dos elementos interativos amplia a cena) ── */
+const imagemWrapper = document.getElementById('imagemWrapper');
+const modalZoom = document.getElementById('modalZoom');
+imagemWrapper.addEventListener('click', e => {
+  if (e.target.closest('.cartao-elemento, .tabela-familias, .palco-tabela')) return;
+  modalZoom.classList.add('ativo');
+});
+modalZoom.addEventListener('click', () => modalZoom.classList.remove('ativo'));
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') modalZoom.classList.remove('ativo');
+});
+
+/* ── INIT ── */
+criarColunasTabela();
+iniciarIntro();
+</script>
+
+<script>
+(function () {
+  var _clickSom = new Audio('../sons/click.mp3');
+  _clickSom.preload = 'auto';
+  document.addEventListener('click', function (e) {
+    var alvo = e.target.closest('button');
+    if (alvo) { try { _clickSom.currentTime = 0; _clickSom.play().catch(function () {}); } catch (err) {} }
+  }, true);
+})();
+</script>
+</body>
+</html>

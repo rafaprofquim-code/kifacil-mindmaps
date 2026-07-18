@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow">
+  <title>O Gabinete de John Dalton — Jogo KiFácil</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;1,500;1,600&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --fundo: #2e2016;
+      --fundo2: #4a3728;
+      --pergaminho: #f5ead0;
+      --card: #fff8ee;
+      --texto: #241407;
+      --suave: #5b3d20;
+      --ouro: #c8920a;
+      --ouro2: #e8b84b;
+      --borda: rgba(200,146,10,.45);
+      --verde: #1e5238;
+      --vermelho: #7a1515;
+      --azul: #163c6e;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      min-height: 100vh;
+      background: var(--fundo);
+      color: var(--pergaminho);
+      font-family: 'Libre Baskerville', Georgia, serif;
+    }
+
+    .topo {
+      background: #1e1008;
+      border-bottom: 2px solid var(--ouro);
+      padding: 12px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 18px;
+    }
+
+    .marca {
+      font-family: 'Lora', serif;
+      color: #fff8ee;
+      font-size: 1.45rem;
+      font-weight: 600;
+    }
+
+    main {
+      width: min(1280px, 100%);
+      margin: 0 auto;
+      padding: 24px 18px 48px;
+    }
+
+    .intro {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 18px;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      font-family: 'Lora', serif;
+      font-size: clamp(1.9rem, 4vw, 3rem);
+      font-weight: 600;
+      color: var(--ouro2);
+      line-height: 1.05;
+    }
+
+    .narrador {
+      display: flex;
+      align-items: flex-end;
+      gap: 12px;
+      margin-bottom: 18px;
+      padding: 14px 16px;
+      background: rgba(30,16,8,.9);
+      border: 1px solid rgba(232,184,75,.35);
+      border-radius: 12px;
+      box-shadow: 0 10px 24px rgba(0,0,0,.25);
+    }
+    .narrador img {
+      width: 84px;
+      height: 100px;
+      object-fit: cover;
+      object-position: top center;
+      border-radius: 10px;
+      border: 1px solid rgba(232,184,75,.4);
+      flex-shrink: 0;
+    }
+    .narrador-texto {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: var(--pergaminho);
+    }
+    .narrador-nome {
+      font-family: 'Lora', serif;
+      font-size: 0.76rem;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--ouro2);
+      margin-bottom: 6px;
+    }
+
+    .jogo-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 330px;
+      gap: 18px;
+      align-items: start;
+    }
+
+    .cena-card {
+      background: #1e1008;
+      border: 1px solid rgba(232,184,75,.32);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 18px 45px rgba(0,0,0,.25);
+    }
+
+    .cena-wrap {
+      position: relative;
+      width: 100%;
+      user-select: none;
+    }
+
+    .cena-wrap img {
+      display: block;
+      width: 100%;
+      height: auto;
+      pointer-events: none;
+    }
+
+    .link-aula {
+      position: absolute; top: 10px; right: 10px; z-index: 10;
+      display: flex; flex-direction: column; align-items: center; gap: 2px;
+      text-decoration: none; color: #fff8ee;
+      background: rgba(30,16,8,0.72); border: 1.5px solid var(--dourado-claro, #c8920a);
+      border-radius: 8px; padding: 0.4rem 0.65rem;
+      font-family: 'Cormorant Garamond', serif; font-size: 0.68rem; font-weight: 600;
+      letter-spacing: 0.02em; text-align: center; line-height: 1.2;
+      cursor: pointer; transition: background 0.2s, transform 0.15s;
+    }
+    .link-aula:hover { background: rgba(30,16,8,0.92); transform: translateY(-1px); }
+    .link-aula svg { width: 22px; height: 22px; }
+
+  .hotspot {
+  position: absolute;
+
+  background: transparent !important;
+  background-color: transparent !important;
+
+  border: 2px solid rgba(232,184,75,.05);
+  border-radius: 10px;
+
+  cursor: pointer;
+
+  padding: 0;
+  margin: 0;
+
+  appearance: none;
+  -webkit-appearance: none;
+
+  transition: background .18s, border-color .18s, box-shadow .18s;
+}
+
+    .hotspot:hover,
+    .hotspot.foco {
+      background: rgba(232,184,75,.08);
+      border-color: rgba(232,184,75,.7);
+      box-shadow: 0 0 0 4px rgba(232,184,75,.1);
+    }
+
+    .hotspot.concluido::after {
+      content: '✓';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(30,82,56,.92);
+      color: #fff;
+      border: 2px solid #c7e6c7;
+      font-weight: 700;
+      font-size: 1.25rem;
+    }
+
+    .tooltip {
+      position: absolute;
+      background: rgba(30,16,8,.95);
+      color: var(--ouro2);
+      border: 1px solid var(--borda);
+      border-radius: 6px;
+      padding: 7px 10px;
+      font-size: .68rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      pointer-events: none;
+      z-index: 20;
+      opacity: 0;
+      transform: translate(-50%, -115%);
+      white-space: nowrap;
+      transition: opacity .15s;
+    }
+
+    .tooltip.visivel { opacity: 1; }
+
+    .painel {
+      background: var(--pergaminho);
+      color: var(--texto);
+      border: 1px solid var(--borda);
+      border-radius: 10px;
+      padding: 18px;
+      position: sticky;
+      top: 14px;
+    }
+
+    .painel-label {
+      font-size: .68rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--ouro);
+      margin-bottom: 8px;
+    }
+
+    .painel h2 {
+      font-family: 'Lora', serif;
+      font-size: 1.45rem;
+      line-height: 1.18;
+      margin-bottom: 10px;
+    }
+
+    .painel p {
+      font-size: .86rem;
+      line-height: 1.75;
+      color: var(--suave);
+      margin-bottom: 16px;
+    }
+
+    .lista-etapas {
+      display: grid;
+      gap: 8px;
+    }
+
+    .etapa-item {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      padding: 8px 0;
+      border-top: 1px solid rgba(100,70,20,.14);
+      color: rgba(36,20,7,.52);
+      font-size: .78rem;
+      line-height: 1.35;
+    }
+
+    .etapa-bolinha {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(100,70,20,.28);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: 0 0 auto;
+      font-size: .7rem;
+      font-weight: 700;
+    }
+
+    .etapa-item.ativa { color: var(--texto); font-weight: 700; }
+    .etapa-item.feita { color: var(--verde); }
+    .etapa-item.feita .etapa-bolinha { background: var(--verde); color: #fff; border-color: var(--verde); }
+    .etapa-item.ativa .etapa-bolinha { border-color: var(--ouro); color: var(--ouro); }
+
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(14,8,3,.78);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      z-index: 100;
+    }
+
+    .overlay.ativo { display: flex; }
+
+    .modal {
+      width: min(610px, 100%);
+      max-height: 92vh;
+      overflow: auto;
+      background: var(--pergaminho);
+      color: var(--texto);
+      border: 1.5px solid var(--borda);
+      border-radius: 14px;
+      padding: 28px;
+      position: relative;
+      box-shadow: 0 25px 80px rgba(0,0,0,.45);
+      animation: entrar .22s ease;
+    }
+
+    @keyframes entrar { from { opacity: 0; transform: translateY(12px) scale(.97); } to { opacity: 1; transform: none; } }
+
+    .fechar {
+      position: absolute;
+      top: 12px;
+      right: 16px;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: rgba(36,20,7,.45);
+      cursor: pointer;
+    }
+
+    .modal-kicker {
+      color: var(--ouro);
+      font-size: .72rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .modal h3 {
+      font-family: 'Lora', serif;
+      font-size: 1.7rem;
+      line-height: 1.22;
+      margin-bottom: 12px;
+    }
+
+    .modal-texto {
+      font-size: .94rem;
+      line-height: 1.85;
+      color: var(--suave);
+      margin-bottom: 18px;
+    }
+
+    .opcoes { display: grid; gap: 9px; }
+
+    .opcao {
+      width: 100%;
+      text-align: left;
+      background: #fffdf9;
+      border: 1.5px solid rgba(100,70,20,.28);
+      border-radius: 8px;
+      padding: 12px 14px;
+      font-family: 'Libre Baskerville', Georgia, serif;
+      font-size: .88rem;
+      line-height: 1.45;
+      color: var(--texto);
+      cursor: pointer;
+      transition: background .15s, border-color .15s, transform .15s;
+    }
+
+    .opcao:hover:not(:disabled) {
+      transform: translateY(-1px);
+      background: #fff6df;
+      border-color: var(--ouro);
+    }
+
+    .opcao.certa { background: #eef7f1; border-color: #599a62; color: var(--verde); font-weight: 700; }
+    .opcao.errada { background: #fdf0f0; border-color: #c47a7a; color: var(--vermelho); }
+    .opcao:disabled { cursor: default; }
+
+    .feedback {
+      display: none;
+      margin-top: 14px;
+      padding: 13px 15px;
+      border-radius: 8px;
+      font-size: .86rem;
+      line-height: 1.75;
+    }
+
+    .feedback.visivel { display: block; }
+    .feedback.ok { background: #eef7f1; border: 1.5px solid #599a62; color: var(--verde); }
+    .feedback.erro { background: #fdf0f0; border: 1.5px solid #c47a7a; color: var(--vermelho); }
+
+    .btn {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 6px;
+      background: #1e1008;
+      color: var(--ouro2);
+      border: 1.5px solid var(--ouro);
+      border-radius: 6px;
+      padding: 11px 18px;
+      font-family: 'Lora', serif;
+      font-size: .9rem;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      margin-top: 14px;
+      transition: background .2s, color .2s;
+    }
+
+    .btn:hover { background: var(--ouro); color: #1e1008; }
+    .btn:disabled { opacity: .4; cursor: default; }
+
+    .drag-area { display: grid; gap: 14px; }
+
+    .zonas {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: 10px;
+    }
+
+    .zona {
+      min-height: 118px;
+      background: #fffdf9;
+      border: 1.5px dashed rgba(100,70,20,.35);
+      border-radius: 10px;
+      padding: 10px;
+    }
+
+    .zona-titulo {
+      font-size: .75rem;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--ouro);
+      margin-bottom: 8px;
+      text-align: center;
+    }
+
+    .cartoes { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+
+    .cartao {
+      background: #fffdf9;
+      border: 1.5px solid rgba(100,70,20,.3);
+      border-radius: 999px;
+      padding: 8px 11px;
+      font-size: .76rem;
+      cursor: pointer;
+      user-select: none;
+      transition: transform .15s, border-color .15s;
+    }
+
+    .cartao:hover { transform: translateY(-1px); border-color: var(--ouro); }
+    .cartao.selecionado { background: #fff1bf; border-color: var(--ouro); }
+    .cartao.usado { display: none; }
+
+    .moleculas {
+      display: grid;
+      gap: 12px;
+    }
+
+    .mol-card {
+      background: #fffdf9;
+      border: 1.5px solid rgba(100,70,20,.28);
+      border-radius: 10px;
+      padding: 12px;
+    }
+
+    .mol-titulo {
+      color: var(--ouro);
+      font-size: .78rem;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      margin-bottom: 10px;
+    }
+
+    .bolinhas { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 10px; }
+
+    .atom-btn {
+      width: 43px;
+      height: 43px;
+      border-radius: 50%;
+      border: 2px solid rgba(100,70,20,.35);
+      background: #f4e6ce;
+      font-family: 'Lora', serif;
+      font-weight: 700;
+      color: var(--texto);
+      cursor: pointer;
+      transition: transform .15s, border-color .15s;
+    }
+
+    .atom-btn:hover { transform: translateY(-2px); border-color: var(--ouro); }
+    .atom-btn.H { background: #f8f0df; }
+    .atom-btn.O { background: #b85034; color: #fff; }
+    .atom-btn.C { background: #1f1b18; color: #fff; }
+    .atom-btn.usado { opacity: .35; pointer-events: none; }
+
+    .montagem {
+      min-height: 52px;
+      border: 1.5px dashed rgba(100,70,20,.3);
+      border-radius: 8px;
+      padding: 8px;
+      display: flex;
+      gap: 7px;
+      align-items: center;
+      flex-wrap: wrap;
+      color: rgba(36,20,7,.42);
+      font-size: .82rem;
+    }
+
+    .mini-atomo {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      border: 1.5px solid rgba(0,0,0,.2);
+      font-family: 'Lora', serif;
+      font-weight: 700;
+      font-size: .78rem;
+    }
+
+    .mini-atomo.H { background: #f8f0df; color: var(--texto); }
+    .mini-atomo.O { background: #b85034; color: #fff; }
+    .mini-atomo.C { background: #1f1b18; color: #fff; }
+
+    .final {
+      display: none;
+      position: absolute;
+      inset: 0;
+      background: rgba(245,234,208,.96);
+      color: var(--texto);
+      border-radius: 10px;
+      padding: 32px;
+      text-align: center;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+    }
+
+    .final.visivel { display: flex; }
+    .final h2 { font-family: 'Lora', serif; color: var(--ouro); font-size: 2.2rem; margin-bottom: 10px; }
+    .final p { max-width: 660px; margin: 0 auto 18px; color: var(--suave); line-height: 1.8; }
+
+    @media (max-width: 980px) {
+      .jogo-grid { grid-template-columns: 1fr; }
+      .painel { position: static; }
+      .intro { display: block; }
+    }
+
+    @media (max-width: 620px) {
+      .topo { padding: 10px 14px; }
+      main { padding: 18px 10px 38px; }
+      .modal { padding: 24px 16px; }
+      .zonas { grid-template-columns: 1fr; }
+      .hotspot.concluido::after { width: 30px; height: 30px; font-size: 1rem; }
+      .narrador { flex-direction: column; align-items: flex-start; }
+      .link-aula { top: 6px; right: 6px; padding: 0.3rem 0.5rem; font-size: 0.6rem; }
+      .link-aula svg { width: 18px; height: 18px; }
+      .narrador img { width: 70px; height: 86px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topo">
+    <div class="marca">KiFácil</div>
+  </header>
+
+  <main>
+    <section class="intro">
+      <div>
+        <h1>O Gabinete de John Dalton</h1>
+      </div>
+    </section>
+
+    <section class="narrador">
+      <img src="../imagens/rafa-sorrindo.jpg" alt="Professora Rafaela" />
+      <div>
+        <div class="narrador-nome">Professora Rafaela</div>
+        <div class="narrador-texto">Observe os objetos e escolha os que ajudam a reconstruir a teoria de Dalton.</div>
+      </div>
+    </section>
+
+    <section class="jogo-grid">
+      <div class="cena-card">
+        <section class="final" id="final">
+          <h2>Teoria de Dalton concluída</h2>
+          <p>Você reuniu as evidências que ajudaram Dalton a defender que a matéria é formada por átomos: partículas maciças, indivisíveis para aquele modelo, que se combinam em proporções fixas.</p>
+          <button class="btn" onclick="reiniciar()">Jogar novamente</button>
+        </section>
+        <div class="cena-wrap" id="cenaWrap">
+          <img class="game-bg" src="../imagens/dalton-gabinete.jpg" alt="Gabinete de John Dalton com objetos científicos" />
+
+          <button class="hotspot" data-id="gregos" aria-label="Ideias dos gregos" style="left:20%;top:8%;width:12.5%;height:27%;"></button>
+          <button class="hotspot" data-id="lavoisier" aria-label="Lei de Lavoisier" style="left:6.4%;top:48%;width:28%;height:28%;"></button>
+          <button class="hotspot" data-id="proust" aria-label="Lei de Proust" style="left:38.3%;top:65%;width:31%;height:31%;"></button>
+          <button class="hotspot" data-id="atomos" aria-label="Monte os átomos" style="left:61%;top:55%;width:25%;height:18%;"></button>
+          <button class="hotspot" data-id="postulados" aria-label="Postulados de Dalton" style="left:59.8%;top:8.5%;width:23%;height:39%;"></button>
+          <button class="hotspot" data-id="futuro" aria-label="Viagem no tempo" style="left:82%;top:80%;width:16%;height:14%;"></button>
+
+          <div class="tooltip" id="tooltip"></div>
+
+          <!-- COLOQUE O LINK AQUI -->
+          <a class="link-aula" href="https://www.youtube.com/watch?v=1QYINY-xoIM&t=1s" target="_blank" rel="noopener" title="Assista à aula">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.6"/>
+              <path d="M10 8.5L16 12L10 15.5V8.5Z" fill="currentColor"/>
+            </svg>
+            <span>Assista à aula</span>
+          </a>
+        </div>
+      </div>
+
+      <aside class="painel">
+        <div class="painel-label">Missão</div>
+        <h2>Construa a teoria atômica</h2>
+        <div class="lista-etapas" id="listaEtapas"></div>
+      </aside>
+    </section>
+
+  </main>
+
+  <div class="overlay" id="overlay">
+    <div class="modal" id="modal">
+      <button class="fechar" onclick="fecharModal()" aria-label="Fechar">&times;</button>
+      <div class="modal-kicker" id="modalKicker"></div>
+      <h3 id="modalTitulo"></h3>
+      <div class="modal-texto" id="modalTexto"></div>
+      <div id="modalConteudo"></div>
+      <div class="feedback" id="feedback"></div>
+      <button class="btn" id="btnContinuar" onclick="concluirAtual()" style="display:none">Registrar descoberta</button>
+    </div>
+  </div>
+
+<script>
+const ETAPAS = [
+  { id:'gregos', nome:'Ideias dos gregos', dica:'Ideias dos gregos' },
+  { id:'lavoisier', nome:'Lei da Conservação das Massas', dica:'Balança de Lavoisier' },
+  { id:'proust', nome:'Lei das Proporções Definidas', dica:'Receitas e proporções' },
+  { id:'atomos', nome:'Monte os átomos', dica:'Caixa de esferas' },
+  { id:'postulados', nome:'Postulados de Dalton - Quadro Negro', dica:'Quadro negro' },
+  { id:'futuro', nome:'O que Dalton não sabia', dica:'Carta do futuro' }
+];
+
+const estado = {
+  concluidas: new Set(),
+  atual: null,
+  atomosMontados: { agua: [], co2: [] },
+  selecionadoPostulado: null,
+  selecionadoFuturo: null
+};
+
+const dados = {
+  gregos: {
+    kicker:'Descoberta 1', titulo:'Antes de Dalton: a ideia do átomo',
+    texto:'Demócrito já havia proposto que a matéria poderia ser formada por partículas indivisíveis. Mas, na época, essa era uma ideia filosófica, sem base experimental suficiente.',
+    tipo:'opcoes', correta:'evidencias',
+    pergunta:'Por que Dalton foi tão importante nessa história?',
+    opcoes:[
+      ['nome','Porque ele apenas criou o nome átomo.'],
+      ['evidencias','Porque relacionou a ideia de átomo a evidências experimentais.'],
+      ['eletron','Porque descobriu o elétron.']
+    ],
+    ok:'Isso mesmo. Dalton transformou a ideia filosófica em uma teoria científica apoiada nas leis ponderais.'
+  },
+  lavoisier: {
+    kicker:'Descoberta 2', titulo:'A balança e a conservação da massa',
+    texto:'Nos papéis da mesa, as massas dos reagentes e dos produtos permanecem iguais. Isso conversa com a Lei de Lavoisier.',
+    tipo:'opcoes', correta:'nao',
+    pergunta:'Em uma reação química comum, considerando o sistema fechado, a massa total muda?',
+    opcoes:[
+      ['sim','Sim, porque os reagentes desaparecem.'],
+      ['nao','Não. A massa total se conserva.'],
+      ['sempre','Sempre aumenta, porque surgem produtos.']
+    ],
+    ok:'Perfeito. Para Dalton, isso fazia sentido porque os átomos não seriam criados nem destruídos, apenas reorganizados.'
+  },
+  proust: {
+    kicker:'Descoberta 3', titulo:'As proporções constantes',
+    texto:'Ao comparar diferentes amostras de água, Dalton percebeu que elas sempre apresentavam a mesma composição. Essa regularidade foi posteriormente formalizada pela Lei de Proust, conhecida como Lei das Proporções Constantes.',
+    tipo:'opcoes', correta:'combinacao',
+    pergunta:'Se a água sempre apresenta a mesma composição, o que Dalton poderia concluir?',
+    opcoes:[
+      ['variar','Que a quantidade de átomos pode variar de uma amostra para outra.'],
+      ['combinacao','Que a água é formada pela mesma combinação de átomos em qualquer amostra.'],
+      ['desaparecer','Que os elementos podem desaparecer durante uma reação.']
+    ],
+    ok:'Muito bom. Esse raciocínio ajudou Dalton a explicar a formação de compostos.'
+  },
+  atomos: {
+    kicker:'Descoberta 4', titulo:'Monte as substâncias com esferas',
+    texto:'No modelo de Dalton, os átomos eram representados como esferas maciças. Monte as duas substâncias usando as quantidades indicadas.',
+    tipo:'atomos'
+  },
+  postulados: {
+    kicker:'Descoberta 5', titulo:'Separe os postulados',
+    texto:'Clique em uma ideia e depois na área correspondente: o que Dalton defendia e o que não pertence ao modelo dele?',
+    tipo:'postulados'
+  },
+  futuro: {
+    kicker:'Descoberta 6', titulo:'Uma carta do futuro',
+    texto:'Agora compare o modelo de Dalton com descobertas posteriores. Dalton não conhecia várias ideias que estudamos hoje.',
+    tipo:'futuro'
+  }
+};
+
+function renderEtapas() {
+  const lista = document.getElementById('listaEtapas');
+  lista.innerHTML = '';
+  ETAPAS.forEach((e, i) => {
+    const div = document.createElement('div');
+    const feita = estado.concluidas.has(e.id);
+    const primeiraNaoFeita = ETAPAS.find(x => !estado.concluidas.has(x.id))?.id === e.id;
+    div.className = 'etapa-item ' + (feita ? 'feita' : primeiraNaoFeita ? 'ativa' : '');
+    div.innerHTML = `<span class="etapa-bolinha">${feita ? '✓' : i+1}</span><span>${e.nome}</span>`;
+    lista.appendChild(div);
+  });
+  document.querySelectorAll('.hotspot').forEach(h => h.classList.toggle('concluido', estado.concluidas.has(h.dataset.id)));
+  const total = estado.concluidas.size;
+  document.getElementById('final').classList.toggle('visivel', total === 6);
+}
+
+function playSuccess() {
+  const a = new Audio('../sons/ding.mp3');
+  a.play().catch(() => {});
+}
+
+function abrir(id) {
+  estado.atual = id;
+  const d = dados[id];
+  document.getElementById('modalKicker').textContent = d.kicker;
+  document.getElementById('modalTitulo').textContent = d.titulo;
+  document.getElementById('modalTexto').innerHTML = d.texto;
+  document.getElementById('feedback').className = 'feedback';
+  document.getElementById('feedback').innerHTML = '';
+  document.getElementById('btnContinuar').style.display = estado.concluidas.has(id) ? 'inline-flex' : 'none';
+
+  if (d.tipo === 'opcoes') renderOpcoes(d);
+  if (d.tipo === 'atomos') renderAtomos();
+  if (d.tipo === 'postulados') renderPostulados();
+  if (d.tipo === 'futuro') renderFuturo();
+
+  document.getElementById('overlay').classList.add('ativo');
+}
+
+function renderOpcoes(d) {
+  const box = document.getElementById('modalConteudo');
+  box.innerHTML = `<p class="modal-texto"><strong>${d.pergunta}</strong></p><div class="opcoes" id="opcoesBox"></div>`;
+  const opcoesBox = document.getElementById('opcoesBox');
+  d.opcoes.forEach(([valor, texto]) => {
+    const b = document.createElement('button');
+    b.className = 'opcao';
+    b.textContent = texto;
+    b.onclick = () => responderOpcao(valor, b);
+    opcoesBox.appendChild(b);
+  });
+}
+
+function responderOpcao(valor, botao) {
+  const d = dados[estado.atual];
+  document.querySelectorAll('.opcao').forEach(b => b.disabled = true);
+  const fb = document.getElementById('feedback');
+  if (valor === d.correta) {
+    botao.classList.add('certa');
+    fb.className = 'feedback ok visivel';
+    fb.innerHTML = d.ok;
+    document.getElementById('btnContinuar').style.display = 'inline-flex';
+    playSuccess();
+  } else {
+    botao.classList.add('errada');
+    fb.className = 'feedback erro visivel';
+    fb.innerHTML = 'Ainda não. Observe a pista histórica e tente pensar no que Dalton conseguiria concluir com os experimentos.';
+    setTimeout(() => {
+      document.querySelectorAll('.opcao').forEach(b => { b.disabled = false; b.classList.remove('errada'); });
+      fb.className = 'feedback';
+    }, 1200);
+  }
+}
+
+function renderAtomos() {
+  estado.atomosMontados = { agua: [], co2: [] };
+  document.getElementById('modalConteudo').innerHTML = `
+    <div class="moleculas">
+      <div class="mol-card">
+        <div class="mol-titulo">Molécula 1 — Água: 2 H + 1 O</div>
+        <div class="bolinhas" id="atomosAguaBtns"></div>
+        <div class="montagem" id="montagemAgua">Clique nos átomos para montar a água.</div>
+      </div>
+      <div class="mol-card">
+        <div class="mol-titulo">Molécula 2 — Dióxido de carbono: 1 C + 2 O</div>
+        <div class="bolinhas" id="atomosCo2Btns"></div>
+        <div class="montagem" id="montagemCo2">Clique nos átomos para montar o CO₂.</div>
+      </div>
+    </div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <button class="btn" onclick="verificarAtomos()">Verificar montagem</button>
+      <button class="btn" onclick="renderAtomos()" style="background:transparent;border-color:rgba(100,70,20,.45);color:var(--suave)">Limpar</button>
+    </div>
+  `;
+  criarBotoesAtomos('Agua', ['H','H','H','O','O','C']);
+  criarBotoesAtomos('Co2', ['C','C','O','O','O','H']);
+}
+
+function criarBotoesAtomos(sufixo, lista) {
+  const box = document.getElementById('atomos' + sufixo + 'Btns');
+  lista.forEach((simbolo, idx) => {
+    const b = document.createElement('button');
+    b.className = 'atom-btn ' + simbolo;
+    b.textContent = simbolo;
+    b.onclick = () => {
+      const chave = sufixo === 'Agua' ? 'agua' : 'co2';
+      estado.atomosMontados[chave].push(simbolo);
+      b.classList.add('usado');
+      renderMontagem(chave);
+    };
+    box.appendChild(b);
+  });
+}
+
+function renderMontagem(chave) {
+  const el = document.getElementById(chave === 'agua' ? 'montagemAgua' : 'montagemCo2');
+  el.innerHTML = estado.atomosMontados[chave].map(a => `<span class="mini-atomo ${a}">${a}</span>`).join('') || 'Clique nos átomos para montar.';
+}
+
+function contar(arr, simb) { return arr.filter(x => x === simb).length; }
+
+function verificarAtomos() {
+  const agua = estado.atomosMontados.agua;
+  const co2 = estado.atomosMontados.co2;
+  const okAgua = agua.length === 3 && contar(agua,'H') === 2 && contar(agua,'O') === 1;
+  const okCo2 = co2.length === 3 && contar(co2,'C') === 1 && contar(co2,'O') === 2;
+  const fb = document.getElementById('feedback');
+  if (okAgua && okCo2) {
+    fb.className = 'feedback ok visivel';
+    fb.innerHTML = 'Excelente. Você montou compostos com proporções fixas, exatamente o tipo de raciocínio que ajudava a sustentar o modelo de Dalton.';
+    document.getElementById('btnContinuar').style.display = 'inline-flex';
+    playSuccess();
+  } else {
+    fb.className = 'feedback erro visivel';
+    fb.innerHTML = 'Quase. Água precisa de 2 H e 1 O. CO₂ precisa de 1 C e 2 O. Clique em <strong>Limpar</strong> para tentar de novo.';
+  }
+}
+
+function renderPostulados() {
+  const cartoes = [
+    {t:'A matéria é formada por átomos.', grupo:'sim'},
+    {t:'Átomos seriam maciços e indivisíveis.', grupo:'sim'},
+    {t:'Átomos do mesmo elemento seriam iguais.', grupo:'sim'},
+    {t:'Átomos se reorganizam nas reações.', grupo:'sim'},
+    {t:'O átomo possui núcleo e eletrosfera.', grupo:'nao'},
+    {t:'Existem elétrons, prótons e nêutrons.', grupo:'nao'}
+  ];
+  document.getElementById('modalConteudo').innerHTML = `
+    <div class="drag-area">
+      <div class="cartoes" id="cartoesPostulados"></div>
+      <div class="zonas">
+        <div class="zona" onclick="colocarPostulado('sim')"><div class="zona-titulo">Dalton defendia</div><div id="zonaSim"></div></div>
+        <div class="zona" onclick="colocarPostulado('nao')"><div class="zona-titulo">Não pertence ao modelo</div><div id="zonaNao"></div></div>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <button class="btn" onclick="verificarPostulados()">Verificar postulados</button>
+        <button class="btn" onclick="renderPostulados()" style="background:transparent;border-color:rgba(100,70,20,.45);color:var(--suave)">Limpar</button>
+      </div>
+    </div>`;
+  window.postulados = cartoes.map((c,i) => ({...c, id:i, colocado:null}));
+  atualizarPostulados();
+}
+
+function atualizarPostulados() {
+  const box = document.getElementById('cartoesPostulados');
+  box.innerHTML = '';
+  window.postulados.filter(c => !c.colocado).forEach(c => {
+    const b = document.createElement('button');
+    b.className = 'cartao' + (estado.selecionadoPostulado === c.id ? ' selecionado' : '');
+    b.textContent = c.t;
+    b.onclick = () => { estado.selecionadoPostulado = c.id; atualizarPostulados(); };
+    box.appendChild(b);
+  });
+  document.getElementById('zonaSim').innerHTML = window.postulados.filter(c => c.colocado==='sim').map(c => `<div class="cartao">${c.t}</div>`).join('');
+  document.getElementById('zonaNao').innerHTML = window.postulados.filter(c => c.colocado==='nao').map(c => `<div class="cartao">${c.t}</div>`).join('');
+}
+
+function colocarPostulado(grupo) {
+  if (estado.selecionadoPostulado === null) return;
+  const c = window.postulados.find(x => x.id === estado.selecionadoPostulado);
+  c.colocado = grupo;
+  estado.selecionadoPostulado = null;
+  atualizarPostulados();
+}
+
+function verificarPostulados() {
+  const fb = document.getElementById('feedback');
+  const todos = window.postulados.every(c => c.colocado);
+  const ok = todos && window.postulados.every(c => c.colocado === c.grupo);
+  if (ok) {
+    fb.className = 'feedback ok visivel';
+    fb.innerHTML = 'Perfeito. Você separou o modelo de Dalton das descobertas que vieram depois.';
+    document.getElementById('btnContinuar').style.display = 'inline-flex';
+    playSuccess();
+  } else {
+    fb.className = 'feedback erro visivel';
+    fb.innerHTML = todos ? 'Algum cartão está no lado errado. Lembre-se: núcleo, elétrons, prótons e nêutrons não faziam parte do modelo de Dalton.' : 'Coloque todos os cartões nas duas áreas antes de verificar.';
+  }
+}
+
+function renderFuturo() {
+  const cartoes = [
+    {t:'Existem elétrons.', grupo:'nao'},
+    {t:'Existem prótons e nêutrons.', grupo:'nao'},
+    {t:'Existem isótopos.', grupo:'nao'},
+    {t:'Átomos podem se combinar formando compostos.', grupo:'sim'},
+    {t:'Átomos de elementos diferentes possuem massas diferentes.', grupo:'sim'},
+    {t:'Prótons e nêutrons são formados por quarks.', grupo:'nao'}
+  ];
+  document.getElementById('modalConteudo').innerHTML = `
+    <div class="drag-area">
+      <div class="cartoes" id="cartoesFuturo"></div>
+      <div class="zonas">
+        <div class="zona" onclick="colocarFuturo('sim')"><div class="zona-titulo">Dalton acreditava</div><div id="zonaFuturoSim"></div></div>
+        <div class="zona" onclick="colocarFuturo('nao')"><div class="zona-titulo">Dalton não sabia</div><div id="zonaFuturoNao"></div></div>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <button class="btn" onclick="verificarFuturo()">Verificar carta</button>
+        <button class="btn" onclick="renderFuturo()" style="background:transparent;border-color:rgba(100,70,20,.45);color:var(--suave)">Limpar</button>
+      </div>
+    </div>`;
+  window.futuro = cartoes.map((c,i) => ({...c, id:i, colocado:null}));
+  atualizarFuturo();
+}
+
+function atualizarFuturo() {
+  const box = document.getElementById('cartoesFuturo');
+  box.innerHTML = '';
+  window.futuro.filter(c => !c.colocado).forEach(c => {
+    const b = document.createElement('button');
+    b.className = 'cartao' + (estado.selecionadoFuturo === c.id ? ' selecionado' : '');
+    b.textContent = c.t;
+    b.onclick = () => { estado.selecionadoFuturo = c.id; atualizarFuturo(); };
+    box.appendChild(b);
+  });
+  document.getElementById('zonaFuturoSim').innerHTML = window.futuro.filter(c => c.colocado==='sim').map(c => `<div class="cartao">${c.t}</div>`).join('');
+  document.getElementById('zonaFuturoNao').innerHTML = window.futuro.filter(c => c.colocado==='nao').map(c => `<div class="cartao">${c.t}</div>`).join('');
+}
+
+function colocarFuturo(grupo) {
+  if (estado.selecionadoFuturo === null) return;
+  const c = window.futuro.find(x => x.id === estado.selecionadoFuturo);
+  c.colocado = grupo;
+  estado.selecionadoFuturo = null;
+  atualizarFuturo();
+}
+
+function verificarFuturo() {
+  const fb = document.getElementById('feedback');
+  const todos = window.futuro.every(c => c.colocado);
+  const ok = todos && window.futuro.every(c => c.colocado === c.grupo);
+  if (ok) {
+    fb.className = 'feedback ok visivel';
+    fb.innerHTML = 'Maravilha. Você entendeu a força e também os limites do modelo de Dalton.';
+    document.getElementById('btnContinuar').style.display = 'inline-flex';
+    playSuccess();
+  } else {
+    fb.className = 'feedback erro visivel';
+    fb.innerHTML = todos ? 'Revise a carta: elétrons, prótons, nêutrons, isótopos e quarks são conhecimentos posteriores a Dalton.' : 'Coloque todos os cartões antes de verificar.';
+  }
+}
+
+function concluirAtual() {
+  if (!estado.atual) return;
+  estado.concluidas.add(estado.atual);
+  fecharModal();
+  renderEtapas();
+}
+
+function fecharModal() { document.getElementById('overlay').classList.remove('ativo'); }
+function reiniciar() { estado.concluidas = new Set(); renderEtapas(); window.scrollTo({top:0, behavior:'smooth'}); }
+
+const tooltip = document.getElementById('tooltip');
+document.querySelectorAll('.hotspot').forEach(h => {
+  h.addEventListener('click', () => abrir(h.dataset.id));
+  h.addEventListener('mouseenter', () => {
+    const e = ETAPAS.find(x => x.id === h.dataset.id);
+    tooltip.textContent = e.dica;
+    tooltip.style.left = (h.offsetLeft + h.offsetWidth/2) + 'px';
+    tooltip.style.top = h.offsetTop + 'px';
+    tooltip.classList.add('visivel');
+  });
+  h.addEventListener('mouseleave', () => tooltip.classList.remove('visivel'));
+});
+
+document.getElementById('overlay').addEventListener('click', (e) => {
+  if (e.target.id === 'overlay') fecharModal();
+});
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') fecharModal();
+});
+
+renderEtapas();
+</script>
+<script>
+(function () {
+  var _clickSom = new Audio('../sons/click.mp3');
+  _clickSom.preload = 'auto';
+  document.addEventListener('click', function (e) {
+    var alvo = e.target.closest('button');
+    if (alvo) { try { _clickSom.currentTime = 0; _clickSom.play().catch(function () {}); } catch (err) {} }
+  }, true);
+})();
+</script>
+</body>
+</html>

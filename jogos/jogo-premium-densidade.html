@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Desafio da Densidade — KiFácil</title>
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --ouro:#c8920a;
+      --ouro-escuro:#8a5e10;
+      --marrom:#1e1008;
+      --pergaminho:#fff4df;
+      --texto:#1a1208;
+      --verde:#2e7d32;
+      --vermelho:#8f1d1d;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;background:#120904;color:var(--texto);font-family:'Libre Baskerville',Georgia,serif;overflow-x:hidden;overscroll-behavior-x:none;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+    body{display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:0}
+
+    .conclusao{
+      display:none;width:min(100vw,1536px);
+      background:#fff4df;border:1.5px solid rgba(200,146,10,.45);border-radius:12px;
+      padding:3rem 2rem;text-align:center;margin-top:0;
+    }
+    .conclusao.visivel{display:block}
+    .conclusao-titulo{
+      font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,5vw,2.8rem);
+      font-weight:600;color:#1a1208;margin-bottom:.8rem;
+    }
+    .conclusao-placar{
+      font-family:'Cormorant Garamond',serif;font-size:1.4rem;
+      color:#c8920a;margin-bottom:1rem;
+    }
+    .conclusao-mensagem{
+      font-size:.93rem;color:#5b3d20;max-width:460px;
+      margin:0 auto 2rem;line-height:1.8;
+    }
+    .btn-reiniciar{
+      background:#1e1008;color:#c8920a;border:1.5px solid #c8920a;
+      font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:600;
+      letter-spacing:.1em;text-transform:uppercase;padding:.7rem 2rem;
+      border-radius:4px;cursor:pointer;transition:background .2s,color .2s;
+    }
+    .btn-reiniciar:hover{background:#c8920a;color:#1e1008}
+
+    .game-shell{
+      width:min(100%,1382px);
+      margin:0 auto;
+      position:relative;
+      line-height:1;
+      overflow:hidden;
+      background:#120904;
+      user-select:none;
+    }
+    .game-bg{display:block;width:100%;height:auto;pointer-events:none}
+
+    .ui-layer{position:absolute;inset:0}
+    .clickable{pointer-events:auto}
+
+    /* Badge fica abaixo de #scoreValue (canto superior direito já ocupado pelo placar) */
+    .link-aula {
+      position: absolute; top: 100px; right: 10px; z-index: 10;
+      display: flex; flex-direction: column; align-items: center; gap: 2px;
+      text-decoration: none; color: #fff8ee;
+      background: rgba(30,16,8,0.72); border: 1.5px solid var(--dourado-claro, #c8920a);
+      border-radius: 8px; padding: 0.4rem 0.65rem;
+      font-family: 'Cormorant Garamond', serif; font-size: 0.68rem; font-weight: 600;
+      letter-spacing: 0.02em; text-align: center; line-height: 1.2;
+      cursor: pointer; transition: background 0.2s, transform 0.15s;
+    }
+    .link-aula:hover { background: rgba(30,16,8,0.92); transform: translateY(-1px); }
+    .link-aula svg { width: 22px; height: 22px; }
+
+    /* Campos posicionados sobre a arte */
+    .density-input{
+      position:absolute;
+      left:16.6%; top:56.45%; width:19.0%; height:4.15%;
+      border:1px solid rgba(92,57,21,.45);
+      background:rgba(255,250,240,.96);
+      border-radius:.55vw;
+      padding:0 4.2% 0 1.2%;
+      font-family:'Libre Baskerville',serif;
+      font-size:clamp(12px,1.1vw,17px);
+      color:#28160a;
+      outline:none;
+      box-shadow:inset 0 1px 3px rgba(0,0,0,.08);
+    }
+    .density-unit{
+      position:absolute; left:31.95%; top:57.85%;
+      font-size:clamp(11px,1vw,16px); color:#241307;
+      pointer-events:none;
+    }
+    .calc-btn{
+      position:absolute;
+      left:23.70%; top:77.72%; width:11.65%; height:4.85%;
+      border:0;
+      border-radius:.45vw;
+      background:rgba(30,16,8,.02);
+      cursor:pointer;
+      font-size:0;
+    }
+    .calc-btn:hover{box-shadow:0 0 0 .22vw rgba(200,146,10,.65),0 0 1.2vw rgba(200,146,10,.35)}
+    .calc-btn:disabled{cursor:default;box-shadow:none}
+
+    .dynamic-box{
+      position:absolute;
+      background:rgba(255,250,240,.93);
+      color:#241307;
+      text-align:center;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-family:'Cormorant Garamond',serif;
+      font-weight:700;
+      font-size:clamp(16px,1.55vw,24px);
+      border-radius:.42vw;
+      pointer-events:none;
+    }
+    #massBox{left:23.95%; top:63.45%; width:11.1%; height:3.95%}
+    #volumeBox{left:23.95%; top:71.05%; width:11.1%; height:3.95%}
+    #objectCounter{left:9.25%; top:79.25%; width:11.9%; height:3.85%; background:transparent;color:#ffd07a;text-shadow:0 2px 3px #000;font-size:clamp(13px,1.35vw,20px)}
+
+    .material-select{
+      position:absolute;
+      left:56.3%; top:64.25%; width:10.15%; height:4.0%;
+      border:1px solid rgba(92,57,21,.45);
+      background:rgba(255,250,240,.96);
+      border-radius:.45vw;
+      padding:0 .7vw;
+      font-family:'Libre Baskerville',serif;
+      font-size:clamp(11px,1.0vw,16px);
+      color:#28160a;
+      outline:none;
+      cursor:pointer;
+    }
+    .material-select:disabled{opacity:.55;cursor:default}
+
+    .choice-btn{
+      position:absolute;
+      border:0;
+      border-radius:.55vw;
+      background:rgba(255,255,255,.02);
+      cursor:pointer;
+      font-size:0;
+    }
+    .choice-btn:hover:not(:disabled){box-shadow:0 0 0 .22vw rgba(200,146,10,.75),0 0 1.2vw rgba(200,146,10,.35)}
+    .choice-btn:disabled{cursor:default}
+    #btnFloat{left:70.22%; top:77.73%; width:12.65%; height:7.8%}
+    #btnSink{left:83.68%; top:77.73%; width:12.65%; height:7.8%}
+
+    /* Pontos sobre o canto superior direito */
+    #scoreValue{
+      position:absolute; left:93.1%; top:7.0%; width:3.7%; height:3%;
+      display:flex;align-items:center;justify-content:center;
+      color:#ffe6a8;font-family:'Cormorant Garamond',serif;font-weight:700;
+      font-size:clamp(22px,2.6vw,40px);text-shadow:0 2px 4px #000;
+      pointer-events:none;
+    }
+
+    .progress-dot{
+      position:absolute;width:3.65%;aspect-ratio:1/1;border-radius:50%;
+      display:none;pointer-events:none;
+    }
+    #dot1{left:14.2%;top:89.8%} #dot2{left:22.0%;top:89.8%} #dot3{left:29.9%;top:89.8%}
+
+    .message{
+      position:absolute;left:40.65%;top:88.25%;width:48.6%;height:8.5%;
+      display:flex;align-items:center;justify-content:center;text-align:center;
+      padding:0 4%;
+      font-size:clamp(15px,1.6vw,25px);line-height:1.35;color:#2b180c;
+      pointer-events:none;
+    }
+    .message.ok{color:#1f5e35;font-weight:700}.message.err{color:#7a1515;font-weight:700}
+
+    .feedback-pop{
+      position:absolute;left:38.5%;top:28%;width:28%;min-height:12%;
+      background:rgba(255,248,232,.98);border:2px solid rgba(138,94,16,.85);border-radius:14px;
+      box-shadow:0 12px 40px rgba(0,0,0,.45);padding:1rem 1.2rem;display:none;z-index:20;
+      font-size:clamp(12px,1.1vw,16px);line-height:1.55;color:#2a180b;
+    }
+    .feedback-pop.show{display:block;animation:pop .18s ease-out}
+    .feedback-pop strong{font-family:'Cormorant Garamond',serif;font-size:1.35em;display:block;margin-bottom:.25em;color:#8a5e10}
+    @keyframes pop{from{transform:scale(.96);opacity:0}to{transform:scale(1);opacity:1}}
+
+
+    .correct-flash{animation:correctFlash .5s ease}
+    @keyframes correctFlash{0%{filter:brightness(1)}50%{filter:brightness(1.22)}100%{filter:brightness(1)}}
+    .shake{animation:shake .35s ease}
+    @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+
+    #objectCounter{ display:none }
+
+    .step-modal{
+      position:fixed;inset:0;background:rgba(18,9,4,.68);
+      display:none;align-items:center;justify-content:center;padding:1rem;z-index:1000;
+    }
+    .step-modal.show{display:flex;animation:pop .18s ease-out}
+    .step-card{
+      width:min(500px,90vw);background:#fff4df;border:2px solid #c8920a;border-radius:16px;
+      box-shadow:0 20px 60px rgba(0,0,0,.55);padding:2rem 2.2rem;text-align:center;position:relative;
+    }
+    .step-titulo{
+      font-family:'Cormorant Garamond',serif;font-size:clamp(1.4rem,3vw,2rem);
+      color:#1f5e35;font-weight:700;margin:0 0 .6rem;
+    }
+    .step-texto{
+      font-size:clamp(.9rem,1.8vw,1.05rem);line-height:1.75;color:#3d2e1a;margin:0 0 1.5rem;
+    }
+    .step-fechar{
+      position:absolute;top:.6rem;right:.9rem;background:none;border:none;
+      font-size:1.4rem;color:rgba(36,20,7,.4);cursor:pointer;line-height:1;
+    }
+    .step-fechar:hover{color:rgba(36,20,7,.8)}
+    .btn-continuar{
+      background:#1e1008;color:#c8920a;border:1.5px solid #c8920a;border-radius:7px;
+      padding:.75rem 2rem;font-family:'Cormorant Garamond',serif;font-size:1rem;
+      font-weight:700;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;
+    }
+    .btn-continuar:hover{background:#c8920a;color:#1e1008}
+
+    #gameWrap{ width:100%; display:flex; justify-content:center; background:#120904; overflow-x:hidden; }
+    @media (max-width:768px){
+      #gameWrap{ width:100%; background:#120904; overflow-x:hidden; }
+      .game-shell{
+        width:100%;
+        max-width:100%;
+        min-width:0;
+      }
+      .game-bg{ width:100%; height:auto; }
+      .ui-layer{ touch-action:pan-y; }
+      .clickable{ touch-action:manipulation; }
+      .link-aula { top: 60px; right: 6px; padding: 0.3rem 0.5rem; font-size: 0.6rem; }
+      .link-aula svg { width: 18px; height: 18px; }
+
+      .density-input{
+        font-size:8px;
+        line-height:1;
+        padding:0 4.8% 0 .9%;
+      }
+      .density-input::placeholder{ font-size:8px; }
+      .density-unit{
+        left:30.9%;
+        top:57.75%;
+        font-size:7px;
+        white-space:nowrap;
+      }
+      .dynamic-box{
+        font-size:10px;
+        line-height:1;
+      }
+      .material-select{
+        font-size:7px;
+        line-height:1;
+        padding:0 1.5vw 0 .2vw;
+      }
+      .material-select option{
+        font-size:7px;
+      }
+
+      .step-card{ width:min(420px,88vw); padding:1.4rem 1.2rem; }
+      .step-titulo{ font-size:1.2rem; }
+      .step-texto{ font-size:.86rem; }
+      .btn-continuar{ padding:.65rem 1.4rem; font-size:.9rem; }
+      .conclusao{ padding:2rem 1.2rem; }
+      .conclusao-titulo{ font-size:1.6rem; }
+    }
+  </style>
+  <style>
+    @media (min-width:701px){
+      body{background:#f7efe2;color:#2e1a08;}
+      .game-bg { object-fit:contain; object-position:center; filter:brightness(0.95); }
+      footer{ text-align:center; padding:16px 12px; background:#2e2016; color:#f5ead0; font-size:0.95rem; }
+    }
+  </style>
+</head>
+<body>
+  <div id="gameWrap">
+  <main class="game-shell" id="gameShell">
+  <img class="game-bg" src="../imagens/jogo-densidade2.jpg" alt="Desafio da Densidade — KiFácil" />
+
+    <div class="ui-layer">
+      <div id="scoreValue">0</div>
+
+      <div class="dynamic-box" id="massBox">162 g</div>
+      <div class="dynamic-box" id="volumeBox">60 cm³</div>
+      <div class="dynamic-box" id="objectCounter">Objeto 1 de 3</div>
+
+      <input class="density-input clickable" id="densityInput" inputmode="decimal" autocomplete="off" placeholder="Digite aqui..." aria-label="Digite o valor da densidade em g por centímetro cúbico" />
+      <span class="density-unit">g/cm³</span>
+      <button class="calc-btn clickable" id="calcBtn" aria-label="Calcular densidade">Calcular</button>
+
+      <select class="material-select clickable" id="materialSelect" aria-label="Escolha o material" disabled>
+        <option value="">Selecione...</option>
+        <option value="madeira">Madeira (pinus)</option>
+        <option value="alcool">Álcool</option>
+        <option value="agua">Água</option>
+        <option value="aluminio">Alumínio</option>
+        <option value="ferro">Ferro</option>
+        <option value="cobre">Cobre</option>
+        <option value="ouro">Ouro</option>
+      </select>
+
+      <button class="choice-btn clickable" id="btnFloat" aria-label="O objeto flutua" disabled>Flutua</button>
+      <button class="choice-btn clickable" id="btnSink" aria-label="O objeto afunda" disabled>Afunda</button>
+
+      <div class="progress-dot" id="dot1">1</div>
+      <div class="progress-dot" id="dot2">2</div>
+      <div class="progress-dot" id="dot3">3</div>
+      <div class="message" id="message">Complete os 3 desafios para finalizar!</div>
+      <div class="feedback-pop" id="feedbackPop"></div>
+
+    </div>
+
+    <!-- COLOQUE O LINK AQUI -->
+    <a class="link-aula" href="https://www.youtube.com/watch?v=Y3m7JmYPHok" target="_blank" rel="noopener" title="Assista à aula">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.6"/>
+        <path d="M10 8.5L16 12L10 15.5V8.5Z" fill="currentColor"/>
+      </svg>
+      <span>Assista à aula</span>
+    </a>
+  </main>
+  </div><!-- /gameWrap -->
+
+  <div class="step-modal" id="stepModal">
+    <div class="step-card">
+      <button class="step-fechar" onclick="fecharStep()">&times;</button>
+      <div class="step-titulo" id="stepTitulo"></div>
+      <div class="step-texto" id="stepTexto"></div>
+      <button class="btn-continuar" onclick="fecharStep()">Continuar &rarr;</button>
+    </div>
+  </div>
+
+  <section class="conclusao" id="conclusao">
+    <div class="conclusao-titulo">Desafio concluído!</div>
+    <div class="conclusao-placar" id="conclusaoPlacar"></div>
+    <p class="conclusao-mensagem" id="conclusaoMensagem"></p>
+    <button class="btn-reiniciar" onclick="reiniciar()">Jogar novamente</button>
+  </section>
+
+  <script>
+    const OBJETOS = [
+      {
+        nome: 'Alumínio', valor: 'aluminio', massa: 162, volume: 60, densidade: 2.70, flutua: false,
+        dica: 'Use d = m/V. 162 ÷ 60 = 2,70 g/cm³.',
+        explicacao: 'A densidade calculada é 2,70 g/cm³, valor correspondente ao alumínio. Como é maior que 1,00 g/cm³, ele afunda na água.'
+      },
+      {
+        nome: 'Madeira (pinus)', valor: 'madeira', massa: 25, volume: 50, densidade: 0.50, flutua: true,
+        dica: 'Use d = m/V. 25 ÷ 50 = 0,50 g/cm³.',
+        explicacao: 'A densidade calculada é 0,50 g/cm³, valor correspondente à madeira. Como é menor que 1,00 g/cm³, ela flutua na água.'
+      },
+      {
+        nome: 'Ferro', valor: 'ferro', massa: 472.2, volume: 60, densidade: 7.87, flutua: false,
+        dica: 'Use d = m/V. 472,2 ÷ 60 = 7,87 g/cm³.',
+        explicacao: 'A densidade calculada é 7,87 g/cm³, valor correspondente ao ferro. Como é maior que 1,00 g/cm³, ele afunda na água.'
+      }
+    ];
+
+    const densityInput = document.getElementById('densityInput');
+    const calcBtn = document.getElementById('calcBtn');
+    const materialSelect = document.getElementById('materialSelect');
+    const btnFloat = document.getElementById('btnFloat');
+    const btnSink = document.getElementById('btnSink');
+    const message = document.getElementById('message');
+    const feedbackPop = document.getElementById('feedbackPop');
+    const scoreValue = document.getElementById('scoreValue');
+    const gameShell = document.getElementById('gameShell');
+
+    let atual = 0;
+    let etapa = 1;
+    let pontos = 0;
+    let errosNoObjeto = 0;
+    let acertos = 0;
+
+    const ding = new Audio('../sons/ding.mp3');
+    ding.preload = 'auto';
+    function tocarDing(){ try{ ding.currentTime = 0; ding.play().catch(()=>{}); }catch(e){} }
+
+    function normalizarNumero(valor){
+      return Number(String(valor).trim().replace(',', '.'));
+    }
+
+    function formatarNumero(n){
+      return String(n).replace('.', ',');
+    }
+
+    function mostrarMensagem(texto, tipo = ''){
+      message.textContent = texto;
+      message.className = 'message' + (tipo ? ' ' + tipo : '');
+    }
+
+    function popup(titulo, texto){
+      feedbackPop.innerHTML = `<strong>${titulo}</strong>${texto}`;
+      feedbackPop.classList.add('show');
+      clearTimeout(feedbackPop._timer);
+      feedbackPop._timer = setTimeout(() => feedbackPop.classList.remove('show'), 3600);
+    }
+
+    function setPontos(valor){
+      pontos = valor;
+      scoreValue.textContent = pontos;
+    }
+
+    function somarPontos(qtd){
+      setPontos(pontos + qtd);
+    }
+
+    function habilitarEtapa(n){
+      etapa = n;
+      densityInput.disabled = n !== 1;
+      calcBtn.disabled = n !== 1;
+      materialSelect.disabled = n !== 2;
+      btnFloat.disabled = n !== 3;
+      btnSink.disabled = n !== 3;
+      if(n === 1) densityInput.focus();
+      if(n === 2) materialSelect.focus();
+    }
+
+    function atualizarTela(){
+      const obj = OBJETOS[atual];
+      document.getElementById('massBox').textContent = `${formatarNumero(obj.massa)} g`;
+      document.getElementById('volumeBox').textContent = `${formatarNumero(obj.volume)} cm³`;
+      document.getElementById('objectCounter').textContent = `Objeto ${atual + 1} de ${OBJETOS.length}`;
+      densityInput.value = '';
+      materialSelect.value = '';
+      errosNoObjeto = 0;
+      habilitarEtapa(1);
+      mostrarMensagem('', '');
+      feedbackPop.classList.remove('show');
+      // Reseta os 3 dots ao iniciar cada objeto
+      document.querySelectorAll('.progress-dot').forEach(dot => {
+        dot.style.display = 'none';
+        dot.textContent = '';
+      });
+    }
+
+    let _stepCb = null;
+    function mostrarStep(titulo, texto, callback){
+      document.getElementById('stepTitulo').textContent = titulo;
+      document.getElementById('stepTexto').textContent = texto;
+      _stepCb = callback;
+      document.getElementById('stepModal').classList.add('show');
+    }
+    function fecharStep(){
+      document.getElementById('stepModal').classList.remove('show');
+      if(_stepCb){ const cb = _stepCb; _stepCb = null; cb(); }
+    }
+
+    function mostrarCheck(el){
+      el.style.display        = 'flex';
+      el.style.alignItems     = 'center';
+      el.style.justifyContent = 'center';
+      el.style.background     = 'rgba(30,82,56,0.95)';
+      el.style.border         = '2.5px solid #c7e6c7';
+      el.style.boxShadow      = '0 2px 10px rgba(0,0,0,0.5)';
+      el.style.color          = '#fff';
+      el.style.fontFamily     = 'Libre Baskerville,serif';
+      el.style.fontSize       = '18px';
+      el.style.fontWeight     = '700';
+      el.textContent          = '✓';
+    }
+
+    function acertou(){
+      tocarDing();
+      somarPontos(10);
+      gameShell.classList.remove('correct-flash');
+      void gameShell.offsetWidth;
+      gameShell.classList.add('correct-flash');
+    }
+
+    function errou(texto, dica){
+      errosNoObjeto++;
+      gameShell.classList.remove('shake');
+      void gameShell.offsetWidth;
+      gameShell.classList.add('shake');
+      mostrarMensagem(texto, 'err');
+      if(dica) popup('Dica', dica);
+    }
+
+    function verificarDensidade(){
+      const obj = OBJETOS[atual];
+      const resposta = normalizarNumero(densityInput.value);
+      if(!densityInput.value.trim() || Number.isNaN(resposta)){
+        errou('Digite um número para a densidade.', 'Você pode usar vírgula ou ponto. Exemplo: 2,70');
+        return;
+      }
+      if(Math.abs(resposta - obj.densidade) <= 0.05){
+        acertou();
+        mostrarCheck(document.getElementById('dot1'));
+        mostrarStep('Densidade correta!', 'Agora identifique o material pela tabela ao lado.', () => habilitarEtapa(2));
+      }else{
+        errou('Ainda não. Revise a conta.', obj.dica);
+      }
+    }
+
+    function verificarMaterial(){
+      const obj = OBJETOS[atual];
+      if(!materialSelect.value){
+        errou('Escolha um material na lista.', 'Compare sua densidade com a tabela ao lado.');
+        return;
+      }
+      if(materialSelect.value === obj.valor){
+        acertou();
+        mostrarCheck(document.getElementById('dot2'));
+        mostrarStep('Material correto!', 'Agora decida se esse objeto flutua ou afunda na água.', () => habilitarEtapa(3));
+      }else{
+        errou('Esse material não corresponde à densidade calculada.', `A densidade encontrada foi ${formatarNumero(obj.densidade.toFixed(2))} g/cm³. Compare com a tabela.`);
+        materialSelect.value = '';
+      }
+    }
+
+    function verificarFlutuacao(escolhaFlutua){
+      const obj = OBJETOS[atual];
+      if(escolhaFlutua === obj.flutua){
+        acertos++;
+        acertou();
+        mostrarCheck(document.getElementById('dot3'));
+        const titulo = escolhaFlutua ? 'Esse objeto flutua!' : 'Esse objeto afunda!';
+        mostrarStep(titulo, obj.explicacao, proximoObjeto);
+      }else{
+        errou('Não é bem isso.', obj.flutua ? 'Densidade menor que 1,00 g/cm³: flutua na água.' : 'Densidade maior que 1,00 g/cm³: afunda na água.');
+      }
+    }
+
+    function proximoObjeto(){
+      atual++;
+      if(atual >= OBJETOS.length){
+        finalizar();
+      }else{
+        atualizarTela();
+      }
+    }
+
+    function finalizar(){
+      habilitarEtapa(0);
+      const mensagem = acertos === 3
+        ? 'Excelente! Você calculou a densidade corretamente e identificou os materiais sem errar. Continue assim!'
+        : acertos >= 2
+        ? 'Muito bem! Você domina o cálculo de densidade. Revise os casos em que precisou de ajuda e tente novamente.'
+        : 'Bom esforço! A densidade é d = m/V. Revise a tabela de materiais e jogue novamente para melhorar.';
+      document.getElementById('conclusaoPlacar').textContent = `Você acertou ${acertos} de 3 objetos`;
+      document.getElementById('conclusaoMensagem').textContent = mensagem;
+      const conclusao = document.getElementById('conclusao');
+      conclusao.classList.add('visivel');
+      conclusao.scrollIntoView({ behavior:'smooth', block:'start' });
+    }
+
+    function reiniciar(){
+      atual = 0;
+      etapa = 1;
+      acertos = 0;
+      setPontos(0);
+      document.getElementById('conclusao').classList.remove('visivel');
+      atualizarTela();
+    }
+
+    calcBtn.addEventListener('click', verificarDensidade);
+    densityInput.addEventListener('keydown', e => { if(e.key === 'Enter') verificarDensidade(); });
+    materialSelect.addEventListener('change', verificarMaterial);
+    btnFloat.addEventListener('click', () => verificarFlutuacao(true));
+    btnSink.addEventListener('click', () => verificarFlutuacao(false));
+
+    atualizarTela();
+  </script>
+<script>
+(function () {
+  var _clickSom = new Audio('../sons/click.mp3');
+  _clickSom.preload = 'auto';
+  document.addEventListener('click', function (e) {
+    var alvo = e.target.closest('button');
+    if (alvo) { try { _clickSom.currentTime = 0; _clickSom.play().catch(function () {}); } catch (err) {} }
+  }, true);
+})();
+</script>
+</body>
+</html>

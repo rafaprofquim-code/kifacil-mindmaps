@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow">
+  <title>Mol e Massa Molar — Jogo Premium | KiFácil</title>
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --fundo: #fdf8f0;
+      --fundo-card: #fffdf9;
+      --escuro: #2e2016;
+      --texto: #1a1208;
+      --texto-suave: #3d2e1a;
+      --dourado: #8a5e10;
+      --dourado-claro: #c8920a;
+      --borda: rgba(100,70,20,0.3);
+      --borda-forte: rgba(100,70,20,0.5);
+      --verde-escuro: #1e5238;
+      --vermelho-escuro: #7a1515;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Libre Baskerville', Georgia, serif;
+      background: var(--fundo);
+      color: var(--texto);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    .top-nav {
+      background: #1e1008;
+      border-bottom: 2px solid var(--dourado-claro);
+      padding: 0 2.5rem;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+    .brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.7rem;
+      font-weight: 600;
+      color: #fff8ee;
+      letter-spacing: 0.03em;
+      margin-right: auto;
+    }
+
+    /* MAIN */
+    main {
+      flex: 1;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 1rem 1.5rem 1rem;
+      width: 100%;
+    }
+    .titulo-jogo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.7rem, 3.8vw, 2.5rem);
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+      line-height: 1.1;
+    }
+    .subtitulo {
+      font-size: 1rem;
+      color: var(--texto);
+      margin-bottom: .9rem;
+      max-width: 680px;
+    }
+
+    .narrador {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: .8rem;
+      padding: .8rem 1.1rem;
+      border: 1.5px solid var(--borda-forte);
+      border-radius: 10px;
+      background: rgba(30,16,8,0.05);
+    }
+    .narrador img {
+      width: 68px;
+      height: 84px;
+      object-fit: cover;
+      object-position: top center;
+      border-radius: 10px;
+      border: 1px solid rgba(200,146,10,.35);
+      flex-shrink: 0;
+    }
+    .narrador-nome {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.78rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--dourado-claro);
+      margin-bottom: 0.3rem;
+    }
+    .narrador-texto {
+      font-size: 1rem;
+      line-height: 1.5;
+      color: var(--texto-suave);
+      min-height: 3.4em;
+    }
+
+    /* IMAGEM / PALCO DE ANIMAÇÃO */
+    .imagem-wrapper {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: min(100%, 900px);
+      max-height: 62vh;
+      min-height: 380px;
+      margin: 0 auto;
+      cursor: default;
+      border: 1.5px solid var(--borda-forte);
+      border-radius: 6px;
+      overflow: hidden;
+      background: #f7efe2;
+    }
+    .cena-fundo {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      user-select: none;
+      pointer-events: none;
+    }
+    .overlay-animacao {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .link-aula {
+      position: absolute; top: 10px; right: 10px; z-index: 10;
+      display: flex; flex-direction: column; align-items: center; gap: 2px;
+      text-decoration: none; color: #fff8ee;
+      background: rgba(30,16,8,0.72); border: 1.5px solid var(--dourado-claro, #c8920a);
+      border-radius: 8px; padding: 0.4rem 0.65rem;
+      font-family: 'Cormorant Garamond', serif; font-size: 0.68rem; font-weight: 600;
+      letter-spacing: 0.02em; text-align: center; line-height: 1.2;
+      cursor: pointer; transition: background 0.2s, transform 0.15s;
+    }
+    .link-aula:hover { background: rgba(30,16,8,0.92); transform: translateY(-1px); }
+    .link-aula svg { width: 22px; height: 22px; }
+
+    /* Componentes de animação */
+    .mol-fade { opacity: 0; animation: molFadeIn .45s ease forwards; }
+    @keyframes molFadeIn { to { opacity: 1; } }
+
+    .contador-central {
+      position: absolute;
+      top: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(30,16,8,0.85);
+      color: var(--dourado-claro);
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 600;
+      font-size: 1.4rem;
+      padding: 0.35rem 1.1rem;
+      border-radius: 6px;
+      border: 1px solid var(--dourado-claro);
+      z-index: 5;
+      white-space: nowrap;
+    }
+
+    .placa-dourada {
+      position: absolute;
+      bottom: 14px;
+      left: 50%;
+      transform: translate(-50%, 10px);
+      background: linear-gradient(135deg, #fff3d6, #e9c877);
+      color: #3d2600;
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 700;
+      font-size: clamp(0.95rem, 2.4vw, 1.2rem);
+      padding: 0.6rem 1.3rem;
+      border-radius: 8px;
+      border: 1px solid #a97c1f;
+      box-shadow: 0 3px 10px rgba(0,0,0,.25);
+      text-align: center;
+      max-width: 90%;
+      opacity: 0;
+      animation: placaIn .5s ease forwards;
+      z-index: 6;
+    }
+    @keyframes placaIn {
+      from { opacity: 0; transform: translate(-50%, 10px); }
+      to   { opacity: 1; transform: translate(-50%, 0); }
+    }
+
+    .balanca-central {
+      position: absolute;
+      left: 50%;
+      top: 8%;
+      transform: translateX(-50%);
+      width: 180px;
+      max-width: 40%;
+      opacity: 0;
+      animation: placaIn .6s ease forwards;
+      z-index: 3;
+    }
+
+    .cartao-elemento {
+      position: absolute;
+      width: 100px;
+      opacity: 0;
+      animation: placaIn .5s ease forwards;
+      z-index: 4;
+      text-align: center;
+    }
+    .cartao-elemento img {
+      width: 100%;
+      display: block;
+      pointer-events: none;
+      user-select: none;
+    }
+    .cartao-elemento .simbolo {
+      position: absolute;
+      top: 34%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 700;
+      font-size: 1.7rem;
+      color: var(--escuro);
+    }
+    .cartao-elemento .massa {
+      position: absolute;
+      bottom: 12%;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'Libre Baskerville', serif;
+      font-size: 0.72rem;
+      color: var(--texto-suave);
+      white-space: nowrap;
+    }
+
+    .cartoes-linha {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      padding: 3.2rem 1rem 1rem;
+    }
+    .cartoes-linha .cartao-elemento {
+      position: relative;
+      width: 88px;
+      opacity: 1;
+      animation: none;
+    }
+
+    .molecula-grande {
+      position: absolute;
+      inset: 0;
+    }
+
+    .quadro-resumo {
+      display: flex;
+      gap: 1.2rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      padding: 1rem;
+    }
+    .quadro-item {
+      background: var(--fundo-card);
+      border: 1.5px solid var(--borda-forte);
+      border-radius: 10px;
+      padding: 1rem 1.4rem;
+      min-width: 200px;
+      text-align: center;
+    }
+    .quadro-item .rotulo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.8rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--dourado-claro);
+      margin-bottom: 0.4rem;
+    }
+    .quadro-item .valor {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--texto);
+    }
+
+    /* PAINEL DE INTERAÇÃO (dentro da caixa da professora) */
+    #painelInteracao { margin-top: 0.7rem; }
+    .interacao-pergunta-texto {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      font-weight: 600;
+      line-height: 1.35;
+      margin-bottom: 0.7rem;
+    }
+    .interacao-linha {
+      display: flex;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .modal-input {
+      flex: 1;
+      min-width: 200px;
+      font-family: 'Libre Baskerville', Georgia, serif;
+      font-size: 1.05rem;
+      padding: 0.6rem 0.9rem;
+      background: var(--fundo);
+      border: 1.5px solid var(--borda-forte);
+      border-radius: 6px;
+      color: var(--texto);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .modal-input:focus { border-color: var(--dourado-claro); }
+    .modal-input:disabled { opacity: 0.5; cursor: default; }
+    .modal-btn-confirmar, .btn-continuar {
+      background: #1e1008;
+      color: var(--dourado-claro);
+      border: 1.5px solid var(--dourado-claro);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.6rem 1.6rem;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s, opacity .2s;
+    }
+    .modal-btn-confirmar:hover, .btn-continuar:hover { background: var(--dourado-claro); color: #1e1008; }
+    .modal-btn-confirmar:disabled, .btn-continuar:disabled { opacity: 0.4; cursor: default; }
+    .modal-btn-confirmar:disabled:hover, .btn-continuar:disabled:hover { background: #1e1008; color: var(--dourado-claro); }
+    .btn-continuar { display: inline-block; margin: 0.2rem 0 0; }
+
+    .modal-feedback {
+      margin-top: 1.1rem;
+      font-size: 0.88rem;
+      line-height: 1.7;
+      border-left: 3px solid var(--borda-forte);
+      padding-left: 1rem;
+      display: none;
+    }
+    .modal-feedback.visivel { display: block; }
+    .feedback-certo   { color: var(--verde-escuro); font-weight: 700; }
+    .feedback-errado  { color: var(--vermelho-escuro); font-weight: 700; }
+    .feedback-resposta{ color: var(--verde-escuro); font-weight: 700; }
+    .feedback-dica    { color: var(--texto-suave); }
+    .feedback-explicacao { color: var(--texto); margin-top: 0.5rem; }
+
+    /* CONCLUSÃO */
+    .conclusao {
+      display: none;
+      margin-top: 3rem;
+      background: var(--fundo-card);
+      border: 1.5px solid var(--borda-forte);
+      border-radius: 12px;
+      padding: 3rem 2rem;
+      text-align: center;
+    }
+    .conclusao.visivel { display: block; }
+    .conclusao-titulo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.8rem, 5vw, 2.8rem);
+      font-weight: 600;
+      margin-bottom: 0.8rem;
+    }
+    .conclusao-placar {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      color: var(--dourado-claro);
+      margin-bottom: 1rem;
+    }
+    .conclusao-mensagem {
+      font-size: 0.93rem;
+      color: var(--texto-suave);
+      max-width: 460px;
+      margin: 0 auto 2rem;
+      line-height: 1.8;
+    }
+    .btn-reiniciar {
+      background: #1e1008;
+      color: var(--dourado-claro);
+      border: 1.5px solid var(--dourado-claro);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.7rem 2rem;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+    .btn-reiniciar:hover { background: var(--dourado-claro); color: #1e1008; }
+
+    /* FOOTER */
+    footer {
+      background: var(--escuro);
+      border-top: 2px solid var(--dourado-claro);
+      padding: 1.2rem 2rem;
+      text-align: center;
+      font-size: 0.82rem;
+      color: rgba(255,248,238,0.5);
+    }
+
+    @media (min-width: 641px) {
+      .narrador {
+        max-width: 900px;
+        margin: 0 auto 1.2rem;
+      }
+      .narrador-texto {
+        font-size: 1.08rem;
+      }
+    }
+
+    /* RESPONSIVO */
+    @media (max-width: 640px) {
+      .top-nav { padding: 0 1.2rem; gap: 1.2rem; }
+      main { padding: .8rem 1rem 1rem; }
+      .modal-input { font-size: 1rem; }
+      .contador-central { font-size: 1.05rem; padding: 0.3rem 0.8rem; }
+      .placa-dourada { font-size: 0.85rem; padding: 0.5rem 0.9rem; }
+      .cartao-elemento { width: 76px; }
+      .cartao-elemento .simbolo { font-size: 1.2rem; }
+      .cartao-elemento .massa { font-size: 0.62rem; }
+      .balanca-central { width: 130px; }
+      .link-aula { top: 6px; right: 6px; padding: 0.3rem 0.5rem; font-size: 0.6rem; }
+      .link-aula svg { width: 18px; height: 18px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <div class="brand">KiFácil</div>
+</nav>
+
+<main>
+  <h1 class="titulo-jogo">Mol e Massa Molar</h1>
+  <p class="subtitulo">Descubra por que os químicos criaram o mol e aprenda a calcular a massa molar de qualquer substância.</p>
+
+  <div class="narrador">
+    <img src="../imagens/rafa-sorrindo.jpg" alt="Professora Rafaela" />
+    <div style="flex: 1;">
+      <div class="narrador-nome">Professora Rafaela</div>
+      <div class="narrador-texto" id="narradorTexto">Vamos começar.</div>
+      <div id="painelInteracao"></div>
+    </div>
+  </div>
+
+  <div class="imagem-wrapper" id="imagemWrapper">
+    <img src="../imagens/sala-massa-molar.jpg" alt="Sala da massa molar" class="cena-fundo" />
+    <div class="overlay-animacao" id="overlayAnimacao"></div>
+    <!-- COLOQUE O LINK AQUI -->
+    <a class="link-aula" href="https://www.youtube.com/watch?v=WvjgYsZsbc0" target="_blank" rel="noopener" title="Assista à aula">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.6"/>
+        <path d="M10 8.5L16 12L10 15.5V8.5Z" fill="currentColor"/>
+      </svg>
+      <span>Assista à aula</span>
+    </a>
+  </div>
+
+  <div class="conclusao" id="conclusao">
+    <div class="conclusao-titulo">Estudo concluído</div>
+    <div class="conclusao-placar" id="conclusaoPlacar"></div>
+    <p class="conclusao-mensagem" id="conclusaoMensagem"></p>
+    <button class="btn-reiniciar" onclick="reiniciar()">Jogar novamente</button>
+  </div>
+</main>
+
+<footer>© 2026 KiFácil</footer>
+
+<script>
+/* ==========================================================
+   DADOS QUÍMICOS
+   ========================================================== */
+const AVOGADRO = 6.02e23;
+const MASSAS = { H: 1.008, O: 15.999, C: 12.011, N: 14.007, Na: 22.990, Cl: 35.453 };
+const SUBSTANCIAS = [
+  { formula: 'CO₂',  atomos: [{ s: 'C', n: 1 }, { s: 'O', n: 2 }] },
+  { formula: 'NH₃',  atomos: [{ s: 'N', n: 1 }, { s: 'H', n: 3 }] },
+  { formula: 'NaCl', atomos: [{ s: 'Na', n: 1 }, { s: 'Cl', n: 1 }] },
+  { formula: 'CH₄',  atomos: [{ s: 'C', n: 1 }, { s: 'H', n: 4 }] }
+];
+function massaMolar(sub) {
+  return sub.atomos.reduce((acc, a) => acc + MASSAS[a.s] * a.n, 0);
+}
+
+/* ==========================================================
+   REFERÊNCIAS DOM
+   ========================================================== */
+const overlay = document.getElementById('overlayAnimacao');
+const painel  = document.getElementById('painelInteracao');
+
+const _ding = new Audio('../sons/ding.mp3');
+_ding.preload = 'auto';
+function tocarDing() { try { _ding.currentTime = 0; _ding.play().catch(function () {}); } catch (e) {} }
+
+function fala(texto) {
+  document.getElementById('narradorTexto').textContent = texto;
+}
+
+/* ==========================================================
+   TIMERS (para poder limpar ao reiniciar/avançar)
+   ========================================================== */
+let timersAtivos = [];
+function agendar(fn, ms) {
+  const id = setTimeout(fn, ms);
+  timersAtivos.push(id);
+  return id;
+}
+function limparTimers() {
+  timersAtivos.forEach(clearTimeout);
+  timersAtivos = [];
+}
+
+/* ==========================================================
+   HELPERS DE ANIMAÇÃO
+   ========================================================== */
+function bolinhasSVG(n, viewW, viewH) {
+  viewW = viewW || 800; viewH = viewH || 460;
+  let out = '';
+  const max = Math.min(n, 400);
+  const rBase = n <= 20 ? 16 : (n <= 100 ? 9 : 5);
+  const rVar = n <= 20 ? 3 : 3;
+  for (let i = 0; i < max; i++) {
+    const r = rBase + Math.random() * rVar;
+    const x = (r + 4) + Math.random() * (viewW - 2 * (r + 4));
+    const y = (r + 4) + Math.random() * (viewH - 2 * (r + 4));
+    const delay = (i % 60) * 6;
+    out += '<circle class="mol-fade" style="animation-delay:' + delay + 'ms" cx="' + x.toFixed(1) + '" cy="' + y.toFixed(1) + '" r="' + r.toFixed(1) + '" fill="#1c5f8a" stroke="#0d3550" stroke-width="1.4"/>';
+  }
+  return '<svg viewBox="0 0 ' + viewW + ' ' + viewH + '" style="width:100%;height:100%;position:absolute;inset:0;">' + out + '</svg>';
+}
+
+function caixinhasSVG(n, viewW, viewH) {
+  viewW = viewW || 800; viewH = viewH || 460;
+  const cols = Math.min(n, 5);
+  const rows = Math.ceil(n / cols);
+  const boxW = 76, boxH = 64, gap = 18;
+  const totalW = cols * boxW + (cols - 1) * gap;
+  const totalH = rows * boxH + (rows - 1) * gap;
+  const startX = (viewW - totalW) / 2;
+  const startY = (viewH - totalH) / 2;
+  let out = '';
+  for (let i = 0; i < n; i++) {
+    const col = i % cols, row = Math.floor(i / cols);
+    const x = startX + col * (boxW + gap);
+    const y = startY + row * (boxH + gap);
+    const delay = i * 60;
+    out += '<g class="mol-fade" style="animation-delay:' + delay + 'ms" transform="translate(' + x.toFixed(1) + ',' + y.toFixed(1) + ')">' +
+      '<rect width="' + boxW + '" height="' + boxH + '" rx="5" fill="#6b4020" stroke="#241505" stroke-width="2.4"/>' +
+      '<line x1="0" y1="' + (boxH * 0.36) + '" x2="' + boxW + '" y2="' + (boxH * 0.36) + '" stroke="#d9b878" stroke-width="2.4"/>' +
+      '</g>';
+  }
+  return '<svg viewBox="0 0 ' + viewW + ' ' + viewH + '" style="width:100%;height:100%;position:absolute;inset:0;">' + out + '</svg>';
+}
+
+function criarCartaoElemento(simbolo, massa, left, top) {
+  const div = document.createElement('div');
+  div.className = 'cartao-elemento';
+  div.style.left = left;
+  div.style.top = top || '25%';
+  div.innerHTML = '<img src="../imagens/cartao-elemento.png" alt="Cartão do elemento ' + simbolo + '">'
+    + '<div class="simbolo">' + simbolo + '</div>'
+    + '<div class="massa">' + massa.toFixed(3).replace('.', ',') + '</div>';
+  return div;
+}
+
+function parseNumeroCientifico(input) {
+  let s = input.toLowerCase().replace(/\s+/g, '').replace(/×/g, 'x').replace(/\*/g, 'x');
+  let m = s.match(/^([\d.,]+)x10\^?(-?\d+)$/);
+  if (m) {
+    const mant = parseFloat(m[1].replace(',', '.'));
+    const exp = parseInt(m[2], 10);
+    if (!isNaN(mant) && !isNaN(exp)) return mant * Math.pow(10, exp);
+  }
+  let m2 = s.match(/^([\d.,]+)e(-?\d+)$/);
+  if (m2) {
+    const mant = parseFloat(m2[1].replace(',', '.'));
+    const exp = parseInt(m2[2], 10);
+    if (!isNaN(mant) && !isNaN(exp)) return mant * Math.pow(10, exp);
+  }
+  const plain = parseFloat(s.replace(',', '.'));
+  if (!isNaN(plain)) return plain;
+  return NaN;
+}
+
+function botaoContinuar(delayMs) {
+  delayMs = delayMs || 0;
+  painel.innerHTML = '';
+  const wrap = document.createElement('div');
+  wrap.className = 'interacao-painel';
+  const btn = document.createElement('button');
+  btn.className = 'btn-continuar';
+  btn.textContent = 'Continuar →';
+  btn.disabled = delayMs > 0;
+  wrap.appendChild(btn);
+  painel.appendChild(wrap);
+  if (delayMs > 0) agendar(function () { btn.disabled = false; }, delayMs);
+  btn.addEventListener('click', avancar);
+  return btn;
+}
+
+function perguntaInterativa(opts) {
+  painel.innerHTML = '';
+  const wrap = document.createElement('div');
+  wrap.className = 'interacao-painel';
+  wrap.innerHTML =
+    '<div class="interacao-pergunta-texto">' + opts.pergunta + '</div>' +
+    '<div class="interacao-linha">' +
+      '<input class="modal-input" type="text" id="inputResposta" placeholder="Digite sua resposta..." autocomplete="off" spellcheck="false">' +
+      '<button class="modal-btn-confirmar" id="btnConfirmarResposta">Confirmar</button>' +
+    '</div>' +
+    '<div class="modal-feedback" id="feedbackResposta"></div>';
+  painel.appendChild(wrap);
+
+  let tentativas = 0;
+  const input = wrap.querySelector('#inputResposta');
+  const btn = wrap.querySelector('#btnConfirmarResposta');
+  const feedback = wrap.querySelector('#feedbackResposta');
+
+  function confirmar() {
+    const v = input.value.trim();
+    if (!v) return;
+    if (opts.validar(v)) {
+      input.disabled = true; btn.disabled = true;
+      tocarDing();
+      feedback.className = 'modal-feedback visivel';
+      feedback.innerHTML = '<span class="feedback-certo">Correto!</span><p class="feedback-explicacao">' + opts.explicacao + '</p>';
+      opts.aoAcertar();
+    } else {
+      tentativas++;
+      if (tentativas === 1) {
+        feedback.className = 'modal-feedback visivel';
+        feedback.innerHTML = '<span class="feedback-errado">Ainda não é isso.</span><p class="feedback-dica"><em>Dica:</em> ' + opts.dica + '</p>';
+        input.value = ''; input.focus();
+      } else {
+        input.disabled = true; btn.disabled = true;
+        feedback.className = 'modal-feedback visivel';
+        feedback.innerHTML = '<span class="feedback-resposta">Resposta: ' + opts.respostaExibicao + '</span><p class="feedback-explicacao">' + opts.explicacao + '</p>';
+        opts.aoAcertar();
+      }
+    }
+  }
+  btn.addEventListener('click', confirmar);
+  input.addEventListener('keydown', function (e) { if (e.key === 'Enter') confirmar(); });
+  setTimeout(function () { input.focus(); }, 60);
+}
+
+/* ==========================================================
+   PASSOS DA FASE
+   ========================================================== */
+
+function passoContarBolinhas(qtd, intro) {
+  return function () {
+    fala(intro);
+    const svgWrap = document.createElement('div');
+    svgWrap.style.position = 'absolute'; svgWrap.style.inset = '0';
+    svgWrap.innerHTML = bolinhasSVG(qtd);
+    overlay.appendChild(svgWrap);
+
+    perguntaInterativa({
+      pergunta: 'Quantas bolinhas você vê?',
+      validar: function (v) { return parseInt(v.replace(/\D/g, ''), 10) === qtd; },
+      dica: 'Conte uma a uma, com calma.',
+      respostaExibicao: String(qtd),
+      explicacao: 'Isso mesmo — são ' + qtd + '.',
+      aoAcertar: function () { botaoContinuar(300); }
+    });
+  };
+}
+const passoContar2 = passoContarBolinhas(2, 'Vou colocar algumas bolinhas nesta sala. Conte quantas tem e digite o número.');
+const passoContar5 = passoContarBolinhas(5, 'Agora vou colocar mais bolinhas. Conte de novo.');
+const passoContar10 = passoContarBolinhas(10, 'Mais uma vez — quantas bolinhas tem agora?');
+
+function passoMilBolinhas() {
+  fala('Agora vou colocar mil bolinhas nesta sala...');
+  const svgWrap = document.createElement('div');
+  svgWrap.style.position = 'absolute'; svgWrap.style.inset = '0';
+  svgWrap.innerHTML = bolinhasSVG(1000);
+  overlay.appendChild(svgWrap);
+  agendar(function () {
+    fala('Ficou difícil de contar, não é? Contar uma por uma não funciona mais quando a quantidade é muito grande.');
+    botaoContinuar(600);
+  }, 900);
+}
+
+function passoAgruparCaixas() {
+  fala('Vou agrupar todas essas bolinhas dentro de caixinhas, cada caixinha conterá a mesma quantidade de bolinhas que as demais. Essa caixinha é uma nova unidade que eu criei agora — vou chamá-la de "kifácil".');
+  const svgWrap = document.createElement('div');
+  svgWrap.style.position = 'absolute'; svgWrap.style.inset = '0';
+  svgWrap.innerHTML = caixinhasSVG(10);
+  overlay.appendChild(svgWrap);
+  botaoContinuar(700);
+}
+
+function passoContarCaixas() {
+  fala('Quantos kifácils você vê aqui?');
+  const svgWrap = document.createElement('div');
+  svgWrap.style.position = 'absolute'; svgWrap.style.inset = '0';
+  svgWrap.innerHTML = caixinhasSVG(10);
+  overlay.appendChild(svgWrap);
+
+  perguntaInterativa({
+    pergunta: 'Quantos kifácils existem nesta sala?',
+    validar: function (v) { return parseInt(v.replace(/\D/g, ''), 10) === 10; },
+    dica: 'Conte as caixinhas.',
+    respostaExibicao: '10 kifácils',
+    explicacao: 'Isso mesmo — são 10 kifácils.',
+    aoAcertar: function () { botaoContinuar(300); }
+  });
+}
+
+function passoRevelarTotal() {
+  const svgWrap = document.createElement('div');
+  svgWrap.style.position = 'absolute'; svgWrap.style.inset = '0';
+  svgWrap.innerHTML = caixinhasSVG(10);
+  overlay.appendChild(svgWrap);
+
+  perguntaInterativa({
+    pergunta: 'E se eu te disser que em cada kifácil tem 100 bolinhas — quantas bolinhas existiam ao todo nessa sala?',
+    validar: function (v) { return parseInt(v.replace(/\D/g, ''), 10) === 1000; },
+    dica: '10 kifácils × 100 bolinhas em cada um.',
+    respostaExibicao: '1.000 bolinhas',
+    explicacao: '10 × 100 = 1.000 bolinhas. O "kifácil" foi só uma unidade que criamos para facilitar a contagem de uma quantidade muito grande.',
+    aoAcertar: function () { botaoContinuar(500); }
+  });
+}
+
+function passoTransicaoMol() {
+  fala('É exatamente essa a ideia por trás do mol: uma unidade criada para contar quantidades imensas de partículas muito pequenas, como átomos e moléculas.');
+  botaoContinuar(600);
+}
+
+function passoAreia() {
+  fala('Existem mais moléculas de água em uma colher de chá do que grãos de areia em todas as praias do planeta Terra.');
+  const img = document.createElement('img');
+  img.src = '../imagens/areia.png';
+  img.alt = 'Grãos de areia';
+  img.style.position = 'absolute'; img.style.inset = '0';
+  img.style.width = '100%'; img.style.height = '100%'; img.style.objectFit = 'cover';
+  overlay.appendChild(img);
+  botaoContinuar(700);
+}
+
+function passoAvogadro() {
+  fala('Por isso os químicos criaram uma unidade para contar átomos e moléculas: o mol.');
+  const contador = document.createElement('div');
+  contador.className = 'contador-central';
+  contador.textContent = '1';
+  overlay.appendChild(contador);
+
+  const seq = ['10', '1.000', '1.000.000', '6,02 × 10²³'];
+  let i = 0;
+  function passoContador() {
+    contador.textContent = seq[i];
+    i++;
+    if (i < seq.length) {
+      agendar(passoContador, 550);
+    } else {
+      agendar(function () {
+        fala('1 mol equivale a 6,02 × 10²³ partículas — o número de Avogadro. É um número absurdamente grande: contando um átomo por segundo, você levaria muito mais tempo do que a idade do universo para terminar.');
+        const placa = document.createElement('div');
+        placa.className = 'placa-dourada';
+        placa.textContent = '1 mol = 6,02 × 10²³ partículas';
+        overlay.appendChild(placa);
+        botaoContinuar(600);
+      }, 500);
+    }
+  }
+  agendar(passoContador, 550);
+}
+
+function passoCalcular2Mols() {
+  fala('Agora é sua vez. Quantos átomos existem em 2 mols?');
+  perguntaInterativa({
+    pergunta: 'Quantos átomos existem em 2 mols? (escreva por exemplo 1,204x10^24)',
+    validar: function (v) {
+      const num = parseNumeroCientifico(v);
+      if (isNaN(num)) return false;
+      const alvo = 2 * AVOGADRO;
+      return Math.abs(num - alvo) / alvo < 0.06;
+    },
+    dica: 'Multiplique 2 pelo número de Avogadro: 2 × 6,02×10²³.',
+    respostaExibicao: '1,204 × 10²⁴ átomos',
+    explicacao: '2 × 6,02×10²³ = 1,204×10²⁴ átomos.',
+    aoAcertar: function () { botaoContinuar(400); }
+  });
+}
+
+function passoCalcular3Mols() {
+  fala('E quantos átomos existem em 3 mols?');
+  perguntaInterativa({
+    pergunta: 'Quantos átomos existem em 3 mols? (escreva por exemplo 1,806x10^24)',
+    validar: function (v) {
+      const num = parseNumeroCientifico(v);
+      if (isNaN(num)) return false;
+      const alvo = 3 * AVOGADRO;
+      return Math.abs(num - alvo) / alvo < 0.06;
+    },
+    dica: 'Multiplique 3 pelo número de Avogadro: 3 × 6,02×10²³.',
+    respostaExibicao: '1,806 × 10²⁴ átomos',
+    explicacao: '3 × 6,02×10²³ = 1,806×10²⁴ átomos.',
+    aoAcertar: function () { botaoContinuar(400); }
+  });
+}
+
+function passo10() {
+  fala('Vamos descobrir a massa molar da água.');
+  const balanca = document.createElement('img');
+  balanca.src = '../imagens/balanca-molar.png';
+  balanca.className = 'balanca-central';
+  overlay.appendChild(balanca);
+
+  agendar(function () {
+    fala('Esse é o Oxigênio: massa atômica 15,999.');
+    overlay.appendChild(criarCartaoElemento('O', MASSAS.O, '14%', '46%'));
+  }, 1100);
+
+  agendar(function () {
+    fala('Esse é o Hidrogênio: massa atômica 1,008.');
+    overlay.appendChild(criarCartaoElemento('H', MASSAS.H, '58%', '46%'));
+  }, 2400);
+
+  agendar(function () {
+    fala('A água tem 2 átomos de Hidrogênio.');
+    overlay.appendChild(criarCartaoElemento('H', MASSAS.H, '76%', '46%'));
+  }, 3600);
+
+  agendar(function () {
+    fala('Somando as massas: 15,999 + 1,008 + 1,008 = 18,015 g/mol. Essa é a massa molar da água!');
+    const placa = document.createElement('div');
+    placa.className = 'placa-dourada';
+    placa.textContent = 'H₂O: 15,999 + 1,008 + 1,008 = 18,015 g/mol';
+    overlay.appendChild(placa);
+    botaoContinuar(400);
+  }, 4900);
+}
+
+function passo11() {
+  fala('Agora é sua vez de montar a massa molar de outras substâncias.');
+  botaoContinuar(500);
+}
+
+function criarPassoSubstancia(sub) {
+  return function () {
+    fala('Monte a massa molar de ' + sub.formula + '.');
+    const cont = document.createElement('div');
+    cont.className = 'cartoes-linha';
+    const atomos = [];
+    sub.atomos.forEach(function (a) { for (let i = 0; i < a.n; i++) atomos.push(a.s); });
+    atomos.forEach(function (s) {
+      const c = document.createElement('div');
+      c.className = 'cartao-elemento';
+      c.innerHTML = '<img src="../imagens/cartao-elemento.png" alt="Cartão do elemento ' + s + '">'
+        + '<div class="simbolo">' + s + '</div>'
+        + '<div class="massa">' + MASSAS[s].toFixed(3).replace('.', ',') + '</div>';
+      cont.appendChild(c);
+    });
+    overlay.appendChild(cont);
+
+    const alvo = massaMolar(sub);
+    perguntaInterativa({
+      pergunta: 'Qual a massa molar de ' + sub.formula + ', em g/mol? Some as massas atômicas dos átomos mostrados.',
+      validar: function (v) {
+        const num = parseFloat(v.replace(',', '.'));
+        return !isNaN(num) && Math.abs(num - alvo) <= 0.1;
+      },
+      dica: 'Some a massa atômica de cada átomo presente na fórmula ' + sub.formula + '.',
+      respostaExibicao: alvo.toFixed(3).replace('.', ',') + ' g/mol',
+      explicacao: 'Somando as massas atômicas de ' + sub.formula + ': ' + alvo.toFixed(3).replace('.', ',') + ' g/mol.',
+      aoAcertar: function () { botaoContinuar(300); }
+    });
+  };
+}
+
+function passoFinal() {
+  fala('Excelente. Agora você entende por que utilizamos o mol e como calcular a massa molar de qualquer substância.');
+  overlay.innerHTML = '<div class="quadro-resumo" style="position:absolute;inset:0;align-items:center;">' +
+    '<div class="quadro-item"><div class="rotulo">Mol</div><div class="valor">6,02 × 10²³ partículas</div></div>' +
+    '<div class="quadro-item"><div class="rotulo">Massa molar</div><div class="valor">Massa de 1 mol (g/mol)</div></div>' +
+    '</div>';
+  painel.innerHTML = '';
+  const conclusao = document.getElementById('conclusao');
+  document.getElementById('conclusaoPlacar').textContent = 'Fase concluída';
+  document.getElementById('conclusaoMensagem').textContent = 'Você aprendeu o que é o mol e como calcular a massa molar de uma substância a partir das massas atômicas.';
+  conclusao.classList.add('visivel');
+  conclusao.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+/* ==========================================================
+   MOTOR DA FASE
+   ========================================================== */
+const PASSOS = [
+  passoContar2, passoContar5, passoContar10,
+  passoMilBolinhas,
+  passoAgruparCaixas, passoContarCaixas, passoRevelarTotal,
+  passoTransicaoMol, passoAreia, passoAvogadro,
+  passoCalcular2Mols, passoCalcular3Mols,
+  passo10, passo11,
+  criarPassoSubstancia(SUBSTANCIAS[0]),
+  criarPassoSubstancia(SUBSTANCIAS[1]),
+  criarPassoSubstancia(SUBSTANCIAS[2]),
+  criarPassoSubstancia(SUBSTANCIAS[3]),
+  passoFinal
+];
+
+let passoAtual = 0;
+
+function irPara(i) {
+  passoAtual = i;
+  limparTimers();
+  overlay.innerHTML = '';
+  painel.innerHTML = '';
+  PASSOS[i]();
+}
+function avancar() {
+  if (passoAtual + 1 < PASSOS.length) irPara(passoAtual + 1);
+}
+function reiniciar() {
+  document.getElementById('conclusao').classList.remove('visivel');
+  irPara(0);
+}
+
+/* ── INIT ── */
+irPara(0);
+</script>
+
+<script>
+(function () {
+  var _clickSom = new Audio('../sons/click.mp3');
+  _clickSom.preload = 'auto';
+  document.addEventListener('click', function (e) {
+    var alvo = e.target.closest('button');
+    if (alvo) { try { _clickSom.currentTime = 0; _clickSom.play().catch(function () {}); } catch (err) {} }
+  }, true);
+})();
+</script>
+</body>
+</html>

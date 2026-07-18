@@ -1,0 +1,1605 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow">
+  <title>Geometria Molecular — Jogo Premium | KiFácil</title>
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --fundo: #fdf8f0;
+      --fundo-card: #fffdf9;
+      --escuro: #2e2016;
+      --texto: #1a1208;
+      --texto-suave: #3d2e1a;
+      --dourado: #8a5e10;
+      --dourado-claro: #c8920a;
+      --borda: rgba(100,70,20,0.3);
+      --borda-forte: rgba(100,70,20,0.5);
+      --verde-escuro: #1e5238;
+      --vermelho-escuro: #7a1515;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Libre Baskerville', Georgia, serif;
+      background: var(--fundo);
+      color: var(--texto);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    .top-nav {
+      background: #1e1008;
+      border-bottom: 2px solid var(--dourado-claro);
+      padding: 0 2.5rem;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+    .brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.7rem;
+      font-weight: 600;
+      color: #fff8ee;
+      letter-spacing: 0.03em;
+      margin-right: auto;
+    }
+
+    /* MAIN */
+    main {
+      flex: 1;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 2.5rem;
+      width: 100%;
+    }
+    .titulo-jogo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+      line-height: 1.1;
+    }
+    .subtitulo {
+      font-size: 1.1rem;
+      color: var(--texto);
+      margin-bottom: 2.5rem;
+      max-width: 680px;
+    }
+
+    .narrador {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 1.4rem;
+      padding: 1rem 1.1rem;
+      border: 1.5px solid var(--borda-forte);
+      border-radius: 10px;
+      background: rgba(30,16,8,0.05);
+    }
+    .narrador img {
+      width: 78px;
+      height: 96px;
+      object-fit: cover;
+      object-position: top center;
+      border-radius: 10px;
+      border: 1px solid rgba(200,146,10,.35);
+      flex-shrink: 0;
+    }
+    .narrador-nome {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.8rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--dourado-claro);
+      margin-bottom: 0.4rem;
+    }
+    .narrador-texto {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: var(--texto-suave);
+    }
+
+    /* IMAGEM */
+    .imagem-wrapper {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: fit-content;
+      max-width: min(100%, 900px);
+      max-height: 70vh;
+      margin: 0 auto;
+      cursor: default;
+      border: 1.5px solid var(--borda-forte);
+      border-radius: 6px;
+      overflow: hidden;
+      background: #f7efe2;
+    }
+    .imagem-wrapper img {
+      display: block;
+      width: auto;
+      max-width: 100%;
+      height: auto;
+      max-height: 70vh;
+      object-fit: contain;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .link-aula {
+      position: absolute; top: 10px; right: 10px; z-index: 10;
+      display: flex; flex-direction: column; align-items: center; gap: 2px;
+      text-decoration: none; color: #fff8ee;
+      background: rgba(30,16,8,0.72); border: 1.5px solid var(--dourado-claro, #c8920a);
+      border-radius: 8px; padding: 0.4rem 0.65rem;
+      font-family: 'Cormorant Garamond', serif; font-size: 0.68rem; font-weight: 600;
+      letter-spacing: 0.02em; text-align: center; line-height: 1.2;
+      cursor: pointer; transition: background 0.2s, transform 0.15s;
+    }
+    .link-aula:hover { background: rgba(30,16,8,0.92); transform: translateY(-1px); }
+    .link-aula svg { width: 22px; height: 22px; }
+
+    /* HOTSPOTS (mantidos por identidade visual — não utilizados nesta mecânica) */
+    .hotspot {
+      position: absolute;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #1e1008;
+      border: 2px solid var(--dourado-claro);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transform: translate(-50%, -50%);
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--dourado-claro);
+      transition: box-shadow 0.2s;
+      z-index: 10;
+      user-select: none;
+    }
+    .hotspot:hover {
+      animation: pulsar 0.6s ease-in-out infinite alternate;
+    }
+    @keyframes pulsar {
+      from { transform: translate(-50%, -50%) scale(1);    box-shadow: 0 0 0 0   rgba(200,146,10,0.4); }
+      to   { transform: translate(-50%, -50%) scale(1.13); box-shadow: 0 0 0 7px rgba(200,146,10,0);   }
+    }
+    .hotspot.concluido { border-color: var(--dourado-claro); color: var(--dourado-claro); }
+    .hotspot.revelado  { border-color: var(--vermelho-escuro); color: var(--vermelho-escuro); }
+
+    /* OVERLAY */
+    .overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(30,16,8,0.65);
+      z-index: 100;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+    .overlay.ativo { display: flex; }
+
+    /* MODAL PERGUNTA */
+    .modal-pergunta {
+      background: var(--fundo-card);
+      border: 1.5px solid var(--borda-forte);
+      border-radius: 12px;
+      max-width: 520px;
+      width: 100%;
+      padding: 2.5rem 2rem 2rem;
+      position: relative;
+    }
+    .modal-fechar {
+      position: absolute;
+      top: 1rem;
+      right: 1.2rem;
+      background: none;
+      border: none;
+      font-size: 1.4rem;
+      color: var(--texto-suave);
+      cursor: pointer;
+      line-height: 1;
+      padding: 0;
+    }
+    .modal-fechar:hover { color: var(--texto); }
+    .modal-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--dourado-claro);
+      border: 1px solid var(--dourado-claro);
+      display: inline-block;
+      padding: 0.15em 0.7em;
+      border-radius: 2px;
+      margin-bottom: 0.8rem;
+    }
+    .modal-pergunta-texto {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem;
+      font-weight: 600;
+      line-height: 1.3;
+      margin-bottom: 1.4rem;
+    }
+    .tracados {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.3rem;
+      margin-bottom: 1.2rem;
+    }
+    .tracado-letra {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--dourado);
+      border-bottom: 2px solid var(--dourado);
+      width: 20px;
+      text-align: center;
+      line-height: 1.3;
+    }
+    .modal-input {
+      width: 100%;
+      font-family: 'Libre Baskerville', Georgia, serif;
+      font-size: 1.1rem;
+      padding: 0.65rem 1rem;
+      background: var(--fundo);
+      border: 1.5px solid var(--borda-forte);
+      border-radius: 6px;
+      color: var(--texto);
+      outline: none;
+      transition: border-color 0.2s;
+      margin-bottom: 1rem;
+    }
+    .modal-input:focus { border-color: var(--dourado-claro); }
+    .modal-input:disabled { opacity: 0.5; cursor: default; }
+    .modal-btn-confirmar {
+      background: #1e1008;
+      color: var(--dourado-claro);
+      border: 1.5px solid var(--dourado-claro);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.6rem 1.8rem;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+    .modal-btn-confirmar:hover { background: var(--dourado-claro); color: #1e1008; }
+    .modal-btn-confirmar:disabled { opacity: 0.4; cursor: default; }
+    .modal-btn-confirmar:disabled:hover { background: #1e1008; color: var(--dourado-claro); }
+    .modal-feedback {
+      margin-top: 1.2rem;
+      font-size: 0.88rem;
+      line-height: 1.7;
+      border-left: 3px solid var(--borda-forte);
+      padding-left: 1rem;
+      display: none;
+    }
+    .modal-feedback.visivel { display: block; }
+    .feedback-certo   { color: var(--verde-escuro); font-weight: 700; }
+    .feedback-errado  { color: var(--vermelho-escuro); font-weight: 700; }
+    .feedback-resposta{ color: var(--verde-escuro); font-weight: 700; }
+    .feedback-dica    { color: var(--texto-suave); }
+    .feedback-explicacao { color: var(--texto); margin-top: 0.5rem; }
+
+    /* MODAL ZOOM (mantido por identidade visual — não utilizado nesta mecânica) */
+    .modal-zoom {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(18,10,4,0.93);
+      z-index: 200;
+      align-items: center;
+      justify-content: center;
+      cursor: zoom-out;
+    }
+    .modal-zoom.ativo { display: flex; }
+    .modal-zoom img {
+      max-width: 95vw;
+      max-height: 90vh;
+      object-fit: contain;
+      border: 1px solid var(--borda-forte);
+      border-radius: 4px;
+      pointer-events: none;
+    }
+
+    /* CONCLUSÃO */
+    .conclusao {
+      display: none;
+      margin-top: 3rem;
+      background: var(--fundo-card);
+      border: 1.5px solid var(--borda-forte);
+      border-radius: 12px;
+      padding: 3rem 2rem;
+      text-align: center;
+    }
+    .conclusao.visivel { display: block; }
+    .conclusao-titulo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.8rem, 5vw, 2.8rem);
+      font-weight: 600;
+      margin-bottom: 0.8rem;
+    }
+    .conclusao-placar {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      color: var(--dourado-claro);
+      margin-bottom: 1rem;
+    }
+    .conclusao-mensagem {
+      font-size: 0.93rem;
+      color: var(--texto-suave);
+      max-width: 460px;
+      margin: 0 auto 2rem;
+      line-height: 1.8;
+    }
+    .btn-reiniciar {
+      background: #1e1008;
+      color: var(--dourado-claro);
+      border: 1.5px solid var(--dourado-claro);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.7rem 2rem;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+    .btn-reiniciar:hover { background: var(--dourado-claro); color: #1e1008; }
+
+    /* FOOTER */
+    footer {
+      background: var(--escuro);
+      border-top: 2px solid var(--dourado-claro);
+      padding: 1.2rem 2rem;
+      text-align: center;
+      font-size: 0.82rem;
+      color: rgba(255,248,238,0.5);
+    }
+
+    @media (min-width: 641px) {
+      .narrador {
+        max-width: 900px;
+        margin: 0 auto 1.2rem;
+      }
+      .narrador-texto {
+        font-size: 1.08rem;
+      }
+    }
+
+    /* RESPONSIVO */
+    @media (max-width: 640px) {
+      .top-nav { padding: 0 1.2rem; gap: 1.2rem; }
+      main { padding: 2rem 1rem 4rem; }
+      .modal-pergunta { padding: 2rem 1.2rem 1.5rem; }
+      .overlay { padding: 0.4rem; }
+      .modal-input { font-size: 1rem; }
+      .hotspot { width: 22px; height: 22px; font-size: 0.65rem; border-width: 1.5px; }
+    }
+
+    /* ==========================================================
+       MECÂNICA ESPECÍFICA — GEOMETRIA MOLECULAR (VSEPR)
+       Toda a ciência é desenhada em SVG; nada aqui altera o
+       "chame" visual acima (nav, narrador, imagem-wrapper, footer).
+       ========================================================== */
+    .narrador img { transition: opacity .25s ease; }
+    #btnContinuarFala { margin-top: .9rem; display: none; }
+
+    .palco-plataforma {
+      position: absolute;
+      left: 50%; top: 66%;
+      transform: translate(-50%, -50%);
+      width: 62%;
+      pointer-events: none;
+      display: none;
+      filter: drop-shadow(0 10px 24px rgba(0,0,0,.5));
+    }
+    .palco-svg-wrap {
+      position: absolute;
+      left: 50%; top: 60%;
+      transform: translate(-50%, -50%);
+      width: 44%;
+      aspect-ratio: 1 / 1;
+      display: none;
+    }
+    #palcoSvg { width: 100%; height: 100%; overflow: visible; touch-action: none; }
+
+    .eixo-par { stroke: rgba(232,184,75,0.4); stroke-width: 2; }
+    .par-eletronico {
+      fill: rgba(121,182,245,0.35);
+      stroke: #79b6f5;
+      stroke-width: 2;
+      filter: drop-shadow(0 0 6px rgba(121,182,245,.85));
+      cursor: grab;
+      transition: fill .3s, stroke .3s;
+      touch-action: none;
+    }
+    .par-eletronico:hover { filter: drop-shadow(0 0 11px rgba(121,182,245,1)); }
+    .par-eletronico.arrastando { cursor: grabbing; }
+    .par-eletronico.travado { cursor: pointer; }
+
+    .atomo-central-svg circle { fill: #2e1608; stroke: var(--dourado-claro); stroke-width: 2.5; }
+    .atomo-central-svg text {
+      font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 22px;
+      fill: #fff8ee; text-anchor: middle; dominant-baseline: central;
+    }
+    .atomo-ligante-circ {
+      fill: #3d2410; stroke: var(--dourado-claro); stroke-width: 2;
+      filter: drop-shadow(0 0 5px rgba(200,146,10,.6));
+    }
+    .atomo-ligante-texto {
+      font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 16px;
+      fill: #fff8ee; text-anchor: middle; dominant-baseline: central;
+      pointer-events: none;
+    }
+    .molecula-dourada .par-eletronico,
+    .molecula-dourada .atomo-ligante-circ {
+      stroke: #ffd76a;
+      filter: drop-shadow(0 0 10px rgba(255,215,106,.95));
+    }
+    /* PAR ISOLADO — marcado pelo aluno como 2 pontinhos vermelhos */
+    .par-isolado-marcado {
+      fill: rgba(200,40,40,0.12);
+      stroke: #d64b4b;
+    }
+    .ponto-eletron {
+      fill: #e23b3b;
+      stroke: #7a1515;
+      stroke-width: 0.6;
+      pointer-events: none;
+    }
+
+    .painel-flutuante {
+      position: absolute;
+      left: 50%; top: 6%;
+      transform: translateX(-50%);
+      background: rgba(30,16,8,0.9);
+      border: 2px solid var(--dourado-claro);
+      border-radius: 16px;
+      padding: .9rem 2.6rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 600;
+      color: #f5ead0;
+      text-align: center;
+      white-space: normal;
+      display: none;
+    }
+    #painelNomeGeo {
+      display: block;
+      margin-top: .4rem;
+      font-size: 1.64rem;
+      font-weight: 700;
+      letter-spacing: .03em;
+      color: #ffd76a;
+      opacity: 0;
+      transition: opacity .6s ease;
+    }
+    #painelNomeGeo.mostrar { opacity: 1; }
+
+    /* FORMAS REVELADAS (linha/plano ao estabilizar 2 ou 3 nuvens) */
+    .forma-final {
+      stroke: var(--dourado-claro);
+      stroke-width: 2.5;
+      fill: none;
+      opacity: 0;
+      transition: opacity .75s ease;
+      pointer-events: none;
+    }
+    .forma-final.mostrar { opacity: .9; }
+    .forma-final.plano {
+      fill: rgba(232,184,75,0.16);
+      stroke: rgba(232,184,75,0.65);
+      stroke-width: 1.5;
+    }
+
+    /* TETRAEDRO (4 nuvens — profundidade obrigatória) */
+    .aresta-tetraedro {
+      stroke: var(--dourado-claro);
+      stroke-width: 1.5;
+      stroke-dasharray: 5 4;
+      fill: none;
+      opacity: .8;
+      pointer-events: none;
+    }
+
+    /* ALVO DE ENCAIXE — marca cada vértice livre do tetraedro-guia */
+    .alvo-vertice {
+      fill: none;
+      stroke: rgba(232,184,75,0.6);
+      stroke-width: 2;
+      stroke-dasharray: 4 3;
+      pointer-events: none;
+    }
+    .alvo-vertice.preenchido {
+      stroke: var(--dourado-claro);
+      stroke-dasharray: none;
+      opacity: .35;
+    }
+
+    .esteric-info {
+      font-family: 'Libre Baskerville', Georgia, serif;
+      font-size: .92rem;
+      color: var(--texto-suave);
+      line-height: 1.7;
+      margin-bottom: 1.1rem;
+    }
+    .esteric-opcoes { display: flex; gap: .7rem; flex-wrap: wrap; margin-bottom: .2rem; }
+    .esteric-btn { padding: .55rem 1.5rem; }
+
+    .grade-revisao {
+      display: none;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      max-width: 900px;
+      margin: 1.8rem auto 0;
+    }
+    .molecula-card {
+      background: #1e1008;
+      color: var(--dourado-claro);
+      border: 1.5px solid var(--dourado-claro);
+      border-radius: 8px;
+      padding: 1.1rem 1.6rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background .2s, color .2s;
+    }
+    .molecula-card:hover { background: var(--dourado-claro); color: #1e1008; }
+    .molecula-card.concluida { border-color: var(--verde-escuro); color: var(--verde-escuro); }
+    .molecula-card.concluida::after { content: ' ✓'; }
+
+    .resumo-cadeia {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: .5rem;
+      margin: 1.4rem 0 1.8rem;
+    }
+    .resumo-passo {
+      background: var(--fundo);
+      border: 1px solid var(--borda-forte);
+      border-radius: 8px;
+      padding: .6rem 1.6rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 600;
+      font-size: 1.05rem;
+    }
+    .resumo-seta { color: var(--dourado-claro); font-size: 1.2rem; line-height: 1; }
+
+    /* MODELO MOLECULAR SÓLIDO — "bola-e-vareta" clássico, ao lado
+       da cena, com ligações sólidas (em vez das nuvens/arestas
+       tracejadas), reforçando a geometria final já revelada. */
+    .modelo-molecular {
+      position: absolute;
+      right: 3%; top: 50%;
+      transform: translateY(-50%);
+      width: 30%;
+      max-width: 170px;
+      background: rgba(30,16,8,0.88);
+      border: 1px solid var(--dourado-claro);
+      border-radius: 10px;
+      padding: .5rem .4rem .6rem;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      z-index: 6;
+      box-shadow: 0 6px 18px rgba(0,0,0,.4);
+    }
+    .modelo-molecular.visivel { display: flex; }
+    .modelo-molecular-titulo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: .68rem;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--dourado-claro);
+      margin-bottom: .25rem;
+      text-align: center;
+    }
+    #modeloSvg { width: 100%; aspect-ratio: 1 / 1; overflow: visible; }
+    .ligacao-solida { stroke: #c9a463; stroke-width: 5; stroke-linecap: round; }
+    .atomo-central-solido { fill: #2e1608; stroke: var(--dourado-claro); stroke-width: 2.5; }
+    .atomo-ligante-solido { fill: #f3e6c8; stroke: #8a5e10; stroke-width: 1.5; }
+    .atomo-central-solido-texto {
+      font-family: 'Cormorant Garamond', serif; font-weight: 700;
+      text-anchor: middle; dominant-baseline: central; fill: #fff8ee;
+    }
+    .atomo-ligante-solido-texto {
+      font-family: 'Cormorant Garamond', serif; font-weight: 700;
+      text-anchor: middle; dominant-baseline: central; fill: #3d2410;
+    }
+
+    @media (max-width: 640px) {
+      .palco-plataforma { width: 82%; top: 64%; }
+      .palco-svg-wrap { width: 62%; top: 58%; }
+      .painel-flutuante { font-size: 1.64rem; padding: .7rem 2rem; top: 4%; }
+      #painelNomeGeo { font-size: 1.3rem; }
+      .molecula-card { padding: .85rem 1.2rem; font-size: 1.1rem; }
+      .esteric-btn { padding: .45rem 1.1rem; }
+      .modelo-molecular { right: auto; left: 50%; top: auto; bottom: 4%; transform: translateX(-50%); width: 34%; max-width: 130px; }
+      .link-aula { top: 6px; right: 6px; padding: 0.3rem 0.5rem; font-size: 0.6rem; }
+      .link-aula svg { width: 18px; height: 18px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <div class="brand">KiFácil</div>
+</nav>
+
+<main>
+  <h1 class="titulo-jogo">Geometria Molecular</h1>
+  <p class="subtitulo">Descubra por que cada molécula tem a forma que tem, observando como nuvens eletrônicas se organizam ao redor de um átomo central.</p>
+
+  <div class="narrador">
+    <img src="../imagens/rafa-sorrindo.jpg" alt="Professora Rafaela" id="imgProfessora" />
+    <div>
+      <div class="narrador-nome">Professora Rafaela</div>
+      <div class="narrador-texto" id="narradorTexto">Hoje vamos entender por que as moléculas têm a forma que têm.</div>
+      <button class="modal-btn-confirmar" id="btnContinuarFala">Continuar</button>
+    </div>
+  </div>
+
+  <div class="imagem-wrapper" id="imagemWrapper">
+    <img src="../imagens/sala-geometria-molecular.jpg" alt="Sala de geometria molecular" id="imagemJogo" />
+    <img src="../imagens/plataforma-vsepr.png" alt="" class="palco-plataforma" id="palcoPlataforma" />
+    <div class="palco-svg-wrap" id="palcoWrap">
+      <svg id="palcoSvg" viewBox="0 0 400 400"></svg>
+    </div>
+    <div class="painel-flutuante" id="painelFlutuante"><span id="painelTexto"></span><span id="painelNomeGeo"></span></div>
+    <div class="modelo-molecular" id="modeloMolecular">
+      <div class="modelo-molecular-titulo" id="modeloTitulo"></div>
+      <svg id="modeloSvg" viewBox="0 0 200 200"></svg>
+    </div>
+    <!-- COLOQUE O LINK AQUI -->
+    <a class="link-aula" href="https://www.youtube.com/watch?v=pJ62IoMsA6Y" target="_blank" rel="noopener" title="Assista à aula">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.6"/>
+        <path d="M10 8.5L16 12L10 15.5V8.5Z" fill="currentColor"/>
+      </svg>
+      <span>Assista à aula</span>
+    </a>
+  </div>
+
+  <div style="text-align:center; margin-top:1.2rem;">
+    <button class="btn-reiniciar" id="btnVerificarPosicao" style="display:none;">Verificar posição</button>
+  </div>
+
+  <div class="grade-revisao" id="gradeRevisao"></div>
+
+  <div class="conclusao" id="conclusao">
+    <div class="conclusao-titulo">Você entendeu a origem da geometria molecular</div>
+    <div class="resumo-cadeia">
+      <div class="resumo-passo">Nuvens eletrônicas se repelem</div>
+      <div class="resumo-seta">↓</div>
+      <div class="resumo-passo">Organização espacial de menor energia</div>
+      <div class="resumo-seta">↓</div>
+      <div class="resumo-passo">Ligações × pares isolados</div>
+      <div class="resumo-seta">↓</div>
+      <div class="resumo-passo">Geometria molecular</div>
+    </div>
+    <p class="conclusao-mensagem">Agora você sabe por que o metano é tetraédrico, a amônia é piramidal e a água é angular — todas partem da mesma organização tetraédrica de nuvens eletrônicas.</p>
+    <button class="btn-reiniciar" onclick="reiniciar()">Jogar novamente</button>
+  </div>
+</main>
+
+<footer>© 2026 KiFácil</footer>
+
+<script>
+/* ==========================================================
+   DADOS DAS MOLÉCULAS (introduzidas só depois do tetraedro)
+   ========================================================== */
+const ELEMENTOS_TETRA = {
+  ch4: { formula: 'CH₄', nome: 'metano', central: 'C', ligantes: ['H','H','H','H'], isolados: 0, geometriaMolecular: 'tetraédrica' },
+  nh3: { formula: 'NH₃', nome: 'amônia', central: 'N', ligantes: ['H','H','H'],     isolados: 1, geometriaMolecular: 'piramidal' },
+  h2o: { formula: 'H₂O', nome: 'água',   central: 'O', ligantes: ['H','H'],         isolados: 2, geometriaMolecular: 'angular' }
+};
+const ORDEM_MOLECULAS = ['ch4', 'nh3', 'h2o'];
+
+/* ==========================================================
+   PROFESSORA RAFAELA
+   ========================================================== */
+const IMG_PROF = {
+  sorrindo:   '../imagens/rafa-sorrindo.jpg',
+  explicando: '../imagens/rafa-explicando.jpg',
+  pensando:   '../imagens/rafa-pensando.jpg',
+  animada:    '../imagens/rafa-animada.jpg'
+};
+const $prof = document.getElementById('imgProfessora');
+const $fala = document.getElementById('narradorTexto');
+const $btnContinuar = document.getElementById('btnContinuarFala');
+let _aoContinuar = null;
+
+function falar(mood, texto, aoContinuar) {
+  _aoContinuar = aoContinuar || null;
+  $prof.style.opacity = '0';
+  setTimeout(() => { $prof.src = IMG_PROF[mood] || IMG_PROF.explicando; $prof.style.opacity = '1'; }, 180);
+  $fala.textContent = texto;
+  $btnContinuar.style.display = _aoContinuar ? 'inline-block' : 'none';
+}
+$btnContinuar.addEventListener('click', () => {
+  const cb = _aoContinuar;
+  _aoContinuar = null;
+  $btnContinuar.style.display = 'none';
+  if (cb) cb();
+});
+
+const _ding = new Audio('../sons/ding.mp3');
+_ding.preload = 'auto';
+function tocarDing() { try { _ding.currentTime = 0; _ding.play().catch(() => {}); } catch (e) {} }
+
+/* ==========================================================
+   MOTOR DE REPULSÃO DE PARES ELETRÔNICOS (reutilizável)
+   — cada par é um ponto sobre um círculo, com força de repulsão
+     angular mútua; a única regra é "afastar-se ao máximo".
+   ========================================================== */
+const NS = 'http://www.w3.org/2000/svg';
+const svg = document.getElementById('palcoSvg');
+const CX = 200, CY = 200, RAIO_PAR = 130, RAIO_CENTRAL = 30, RAIO_PONTO = 16;
+
+function criarSvgEl(tag, attrs) {
+  const el = document.createElementNS(NS, tag);
+  for (const k in attrs) el.setAttribute(k, attrs[k]);
+  return el;
+}
+function anguloParaXY(angGraus, raio) {
+  const rad = angGraus * Math.PI / 180;
+  return { x: CX + raio * Math.cos(rad), y: CY + raio * Math.sin(rad) };
+}
+function diferencaAngular(a, b) {
+  return ((a - b + 540) % 360) - 180;
+}
+function coordenadasSvg(evt) {
+  const pt = svg.createSVGPoint();
+  pt.x = evt.clientX;
+  pt.y = evt.clientY;
+  return pt.matrixTransform(svg.getScreenCTM().inverse());
+}
+
+let pares = [];
+let onEstabilizar = null;
+
+function limparPalco() {
+  svg.innerHTML = '';
+  pares = [];
+  onEstabilizar = null;
+  pararRotacaoTetra();
+  tetraPares = [];
+  tetraArestas = [];
+  tetraGrupo = null;
+  alvosTetraedro = [];
+  nuvensEncaixe = [];
+  grupoEncaixe = null;
+  document.getElementById('palcoWrap').classList.remove('molecula-dourada');
+}
+
+function desenharAtomoCentral(simbolo) {
+  const g = criarSvgEl('g', { class: 'atomo-central-svg' });
+  g.appendChild(criarSvgEl('circle', { cx: CX, cy: CY, r: RAIO_CENTRAL }));
+  const t = criarSvgEl('text', { x: CX, y: CY });
+  t.textContent = simbolo;
+  g.appendChild(t);
+  svg.appendChild(g);
+}
+
+// As nuvens só se movem quando o aluno arrasta — nada de física
+// automática resolvendo sozinha. O travamento (e a revelação do
+// ângulo) só acontece quando ele solta numa posição estável.
+function iniciarPares(n, callbackEstabilizar) {
+  onEstabilizar = callbackEstabilizar;
+  const anguloBase = Math.random() * 360;
+  for (let i = 0; i < n; i++) {
+    // começa deliberadamente amontoado — está longe de resolvido
+    const angulo = anguloBase + (Math.random() - 0.5) * 20;
+    const eixo = criarSvgEl('line', { class: 'eixo-par', x1: CX, y1: CY, x2: CX, y2: CY });
+    const circ = criarSvgEl('circle', { class: 'par-eletronico', r: RAIO_PONTO, cx: CX, cy: CY });
+    svg.appendChild(eixo);
+    svg.appendChild(circ);
+    const par = { angulo, travado: false, arrastando: false, eixo, circ, ehAtomo: false, label: null };
+    ligarDragPar(par);
+    pares.push(par);
+  }
+  atualizarPosicoesPares();
+}
+
+function atualizarPosicoesPares() {
+  pares.forEach(p => {
+    const { x, y } = anguloParaXY(p.angulo, RAIO_PAR);
+    p.circ.setAttribute('cx', x);
+    p.circ.setAttribute('cy', y);
+    p.eixo.setAttribute('x2', x);
+    p.eixo.setAttribute('y2', y);
+    if (p.label) { p.label.setAttribute('x', x); p.label.setAttribute('y', y); }
+  });
+}
+
+// Enquanto o aluno arrasta uma nuvem, as demais (não travadas, não
+// sendo arrastadas) se afastam um pouco dela — dá a sensação de
+// repulsão sem resolver a posição sozinho. A força é proporcional
+// ao quanto a nuvem arrastada REALMENTE moveu neste evento (não um
+// valor fixo por evento), senão um arraste lento e cuidadoso (com
+// muitos eventos pequenos) empurraria as outras bem mais do que um
+// arraste rápido cobrindo a mesma distância — o que fazia as nuvens
+// já posicionadas saírem do lugar sem o aluno perceber.
+function empurrarOutrasNuvens(parArrastado, deltaMovimento) {
+  const intensidade = Math.min(Math.abs(deltaMovimento), 20) / 20;
+  if (intensidade <= 0) return;
+  pares.forEach(q => {
+    if (q === parArrastado || q.travado || q.arrastando) return;
+    const diff = diferencaAngular(q.angulo, parArrastado.angulo);
+    const dist = Math.max(Math.abs(diff), 1);
+    if (dist < 70) {
+      const forca = (70 - dist) * 0.18 * intensidade;
+      q.angulo = (q.angulo + Math.sign(diff || 1) * forca + 360) % 360;
+    }
+  });
+}
+
+// Margem de erro generosa (±12°): posicionar à mão nunca é exato,
+// e o aluno não deve ser barrado por um arranjo que já está certo
+// na prática só porque faltaram 2-3° para o valor perfeito.
+function verificarEstabilidade() {
+  const n = pares.length;
+  if (n < 2) return true;
+  const alvo = 360 / n;
+  const angulos = pares.map(p => p.angulo).sort((a, b) => a - b);
+  for (let i = 0; i < n; i++) {
+    let gap = angulos[(i + 1) % n] - angulos[i];
+    if (gap < 0) gap += 360;
+    if (Math.abs(gap - alvo) > 12) return false;
+  }
+  return true;
+}
+
+function mediaAngular(lista) {
+  let sx = 0, sy = 0;
+  lista.forEach(a => { const r = a * Math.PI / 180; sx += Math.cos(r); sy += Math.sin(r); });
+  return Math.atan2(sy, sx) * 180 / Math.PI;
+}
+
+function travarPares() {
+  const n = pares.length;
+  const ordenados = [...pares].sort((a, b) => a.angulo - b.angulo);
+  const base = mediaAngular(ordenados.map(p => p.angulo));
+  ordenados.forEach((p, i) => {
+    p.angulo = (base + i * (360 / n) + 360) % 360;
+    p.travado = true;
+    p.circ.classList.add('travado');
+  });
+  atualizarPosicoesPares();
+  document.getElementById('palcoWrap').classList.add('molecula-dourada');
+  const cb = onEstabilizar;
+  onEstabilizar = null;
+  if (cb) cb();
+}
+
+function ligarDragPar(par) {
+  par.circ.addEventListener('pointerdown', e => {
+    if (par.travado) return;
+    e.preventDefault();
+    par.arrastando = true;
+    par.circ.classList.add('arrastando');
+    par.circ.setPointerCapture(e.pointerId);
+  });
+  par.circ.addEventListener('pointermove', e => {
+    if (!par.arrastando) return;
+    const anguloAnterior = par.angulo;
+    const pt = coordenadasSvg(e);
+    par.angulo = Math.atan2(pt.y - CY, pt.x - CX) * 180 / Math.PI;
+    empurrarOutrasNuvens(par, diferencaAngular(par.angulo, anguloAnterior));
+    atualizarPosicoesPares();
+  });
+  const soltar = () => {
+    if (!par.arrastando) return;
+    par.arrastando = false;
+    par.circ.classList.remove('arrastando');
+  };
+  par.circ.addEventListener('pointerup', soltar);
+  par.circ.addEventListener('pointercancel', soltar);
+}
+
+/* ==========================================================
+   BOTÃO "VERIFICAR POSIÇÃO" — o aluno posiciona as nuvens e só
+   confirma quando clica; com margem de erro, e a resposta certa
+   corrige qualquer erro angular residual ao travar.
+   ========================================================== */
+const $btnVerificar = document.getElementById('btnVerificarPosicao');
+
+function mostrarBotaoVerificar(aoClicar) {
+  $btnVerificar.style.display = 'inline-block';
+  $btnVerificar.disabled = false;
+  $btnVerificar.textContent = 'Verificar posição';
+  $btnVerificar.onclick = aoClicar;
+}
+function esconderBotaoVerificar() {
+  $btnVerificar.style.display = 'none';
+  $btnVerificar.onclick = null;
+}
+function verificarPosicaoAtual() {
+  if (!pares.length) return;
+  if (verificarEstabilidade()) {
+    esconderBotaoVerificar();
+    travarPares();
+  } else {
+    $btnVerificar.textContent = 'Ainda não... ajuste e tente de novo';
+    setTimeout(() => { $btnVerificar.textContent = 'Verificar posição'; }, 1500);
+  }
+}
+
+/* ==========================================================
+   PAINEL FLUTUANTE (ângulo → nome da geometria, nesta ordem)
+   ========================================================== */
+function mostrarPainel(texto) {
+  const p = document.getElementById('painelFlutuante');
+  document.getElementById('painelTexto').textContent = texto;
+  const nomeEl = document.getElementById('painelNomeGeo');
+  nomeEl.textContent = '';
+  nomeEl.classList.remove('mostrar');
+  p.style.display = 'block';
+}
+function revelarNomeGeometria(nome, aoTerminar) {
+  const el = document.getElementById('painelNomeGeo');
+  el.textContent = nome;
+  requestAnimationFrame(() => el.classList.add('mostrar'));
+  setTimeout(() => { if (aoTerminar) aoTerminar(); }, 900);
+}
+function esconderPainel() {
+  document.getElementById('painelFlutuante').style.display = 'none';
+}
+
+/* ==========================================================
+   REVELAÇÃO DA FORMA PLANA (2 e 3 nuvens)
+   — linha dourada para 180°, plano translúcido para 120°.
+   ========================================================== */
+function revelarFormaFinal(n) {
+  return new Promise(resolve => {
+    const pontos = pares.map(p => anguloParaXY(p.angulo, RAIO_PAR));
+    let el;
+    if (n === 2) {
+      el = criarSvgEl('line', {
+        class: 'forma-final',
+        x1: pontos[0].x, y1: pontos[0].y, x2: pontos[1].x, y2: pontos[1].y
+      });
+    } else {
+      const d = `M${pontos[0].x},${pontos[0].y} L${pontos[1].x},${pontos[1].y} L${pontos[2].x},${pontos[2].y} Z`;
+      el = criarSvgEl('path', { class: 'forma-final plano', d });
+    }
+    svg.insertBefore(el, svg.firstChild);
+    tocarDing();
+    requestAnimationFrame(() => el.classList.add('mostrar'));
+    setTimeout(resolve, 750);
+  });
+}
+
+/* ==========================================================
+   TETRAEDRO 3D (4 nuvens — a profundidade é obrigatória)
+   Projeção simples: tilt fixo em X + giro contínuo em Y.
+   ========================================================== */
+let tetraPares = [];
+let tetraArestas = [];
+let tetraGrupo = null;
+let tetraTheta = 0.6;
+let tetraFrame = null;
+let tetraGirando = false;
+
+const TETRA_VERTICES = [
+  { x: 1, y: 1, z: 1 }, { x: 1, y: -1, z: -1 }, { x: -1, y: 1, z: -1 }, { x: -1, y: -1, z: 1 }
+].map(v => { const m = Math.sqrt(3); return { x: v.x / m, y: v.y / m, z: v.z / m }; });
+const ARESTAS_TETRA = [[0,1],[0,2],[0,3],[1,2],[1,3],[2,3]];
+const RAIO_TETRA = 112;
+const FI_TETRA = 0.5; // tilt fixo em X, para sugerir profundidade
+
+function projetar3D(v, theta) {
+  const y1 = v.y * Math.cos(FI_TETRA) - v.z * Math.sin(FI_TETRA);
+  const z1 = v.y * Math.sin(FI_TETRA) + v.z * Math.cos(FI_TETRA);
+  const x2 = v.x * Math.cos(theta) + z1 * Math.sin(theta);
+  const z2 = -v.x * Math.sin(theta) + z1 * Math.cos(theta);
+  return { x: x2, y: y1, z: z2 };
+}
+function pontoTelaTetra(proj) {
+  const prof = 1 + proj.z * 0.22;
+  return {
+    x: CX + proj.x * RAIO_TETRA * prof,
+    y: CY + proj.y * RAIO_TETRA * 0.86 * prof,
+    escala: prof
+  };
+}
+
+function atualizarTetraedro() {
+  const projetados = TETRA_VERTICES.map(v => projetar3D(v, tetraTheta));
+  const telas = projetados.map(pontoTelaTetra);
+
+  tetraArestas.forEach((linha, i) => {
+    const [a, b] = ARESTAS_TETRA[i];
+    linha.setAttribute('x1', telas[a].x);
+    linha.setAttribute('y1', telas[a].y);
+    linha.setAttribute('x2', telas[b].x);
+    linha.setAttribute('y2', telas[b].y);
+  });
+
+  tetraPares.forEach((par, i) => {
+    const t = telas[i];
+    par.circ.setAttribute('cx', t.x);
+    par.circ.setAttribute('cy', t.y);
+    par.circ.setAttribute('r', RAIO_PONTO * t.escala);
+    par.eixo.setAttribute('x2', t.x);
+    par.eixo.setAttribute('y2', t.y);
+    if (par.label) { par.label.setAttribute('x', t.x); par.label.setAttribute('y', t.y); }
+    if (par.pontosIsolado) {
+      const offset = RAIO_PONTO * t.escala * 0.32;
+      par.pontosIsolado[0].setAttribute('cx', t.x - offset);
+      par.pontosIsolado[0].setAttribute('cy', t.y);
+      par.pontosIsolado[0].setAttribute('r', 3.2 * t.escala);
+      par.pontosIsolado[1].setAttribute('cx', t.x + offset);
+      par.pontosIsolado[1].setAttribute('cy', t.y);
+      par.pontosIsolado[1].setAttribute('r', 3.2 * t.escala);
+    }
+  });
+
+  if (tetraGrupo) {
+    [...projetados.keys()]
+      .sort((a, b) => projetados[a].z - projetados[b].z)
+      .forEach(i => {
+        tetraGrupo.appendChild(tetraPares[i].eixo);
+        tetraGrupo.appendChild(tetraPares[i].circ);
+        if (tetraPares[i].label) tetraGrupo.appendChild(tetraPares[i].label);
+        if (tetraPares[i].pontosIsolado) {
+          tetraGrupo.appendChild(tetraPares[i].pontosIsolado[0]);
+          tetraGrupo.appendChild(tetraPares[i].pontosIsolado[1]);
+        }
+      });
+  }
+}
+
+function cicloTetra() {
+  tetraTheta += 0.0026;
+  atualizarTetraedro();
+  tetraFrame = requestAnimationFrame(cicloTetra);
+}
+function iniciarRotacaoTetra() {
+  if (tetraGirando) return;
+  tetraGirando = true;
+  tetraFrame = requestAnimationFrame(cicloTetra);
+}
+function pararRotacaoTetra() {
+  tetraGirando = false;
+  if (tetraFrame) cancelAnimationFrame(tetraFrame);
+  tetraFrame = null;
+}
+
+/* ==========================================================
+   MODELO MOLECULAR SÓLIDO ("bola-e-vareta") — painel ao lado,
+   com ligações sólidas e átomos opacos, reforçando a geometria
+   final já revelada (reaproveita a mesma projeção 3D do tetraedro).
+   ========================================================== */
+const CX_MODELO = 100, CY_MODELO = 100, RAIO_MODELO = 62;
+let modeloTheta = 0.6;
+let modeloFrame = null;
+let modeloLigacoes = [];
+let modeloAtomos = [];
+let modeloVetores = [];
+
+function pontoTelaModelo(proj) {
+  const prof = 1 + proj.z * 0.22;
+  return {
+    x: CX_MODELO + proj.x * RAIO_MODELO * prof,
+    y: CY_MODELO + proj.y * RAIO_MODELO * 0.86 * prof,
+    escala: prof
+  };
+}
+
+function atualizarModeloSolido() {
+  const telas = modeloVetores.map(v => pontoTelaModelo(projetar3D(v, modeloTheta)));
+  modeloLigacoes.forEach((linha, i) => {
+    linha.setAttribute('x1', CX_MODELO);
+    linha.setAttribute('y1', CY_MODELO);
+    linha.setAttribute('x2', telas[i].x);
+    linha.setAttribute('y2', telas[i].y);
+  });
+  modeloAtomos.forEach((a, i) => {
+    const t = telas[i];
+    a.circ.setAttribute('cx', t.x);
+    a.circ.setAttribute('cy', t.y);
+    a.circ.setAttribute('r', 14 * t.escala);
+    a.texto.setAttribute('x', t.x);
+    a.texto.setAttribute('y', t.y);
+    a.texto.setAttribute('font-size', 12 * t.escala);
+  });
+}
+
+function cicloModelo() {
+  modeloTheta += 0.006;
+  atualizarModeloSolido();
+  modeloFrame = requestAnimationFrame(cicloModelo);
+}
+
+function pararModeloSolido() {
+  if (modeloFrame) cancelAnimationFrame(modeloFrame);
+  modeloFrame = null;
+}
+
+function esconderModeloSolido() {
+  pararModeloSolido();
+  document.getElementById('modeloMolecular').classList.remove('visivel');
+  document.getElementById('modeloSvg').innerHTML = '';
+  modeloLigacoes = [];
+  modeloAtomos = [];
+  modeloVetores = [];
+}
+
+// Usa as mesmas direções tetraédricas do palco principal — só os N
+// primeiros vértices (N = nº de ligantes), o que já dá a forma certa:
+// 4 = tetraédrica, 3 = piramidal, 2 = angular.
+function mostrarModeloSolido(mol) {
+  esconderModeloSolido();
+  document.getElementById('modeloTitulo').textContent =
+    mol.geometriaMolecular.charAt(0).toUpperCase() + mol.geometriaMolecular.slice(1);
+  document.getElementById('modeloMolecular').classList.add('visivel');
+
+  const svgEl = document.getElementById('modeloSvg');
+  modeloVetores = TETRA_VERTICES.slice(0, mol.ligantes.length);
+
+  modeloVetores.forEach(() => {
+    const linha = criarSvgEl('line', { class: 'ligacao-solida' });
+    svgEl.appendChild(linha);
+    modeloLigacoes.push(linha);
+  });
+
+  const central = criarSvgEl('circle', { class: 'atomo-central-solido', cx: CX_MODELO, cy: CY_MODELO, r: 20 });
+  const textoCentral = criarSvgEl('text', {
+    class: 'atomo-central-solido-texto', x: CX_MODELO, y: CY_MODELO, 'font-size': 15
+  });
+  textoCentral.textContent = mol.central;
+  svgEl.appendChild(central);
+  svgEl.appendChild(textoCentral);
+
+  modeloVetores.forEach((v, i) => {
+    const circ = criarSvgEl('circle', { class: 'atomo-ligante-solido', r: 14, cx: CX_MODELO, cy: CY_MODELO });
+    const texto = criarSvgEl('text', { class: 'atomo-ligante-solido-texto', x: CX_MODELO, y: CY_MODELO, 'font-size': 12 });
+    texto.textContent = mol.ligantes[i];
+    svgEl.appendChild(circ);
+    svgEl.appendChild(texto);
+    modeloAtomos.push({ circ, texto });
+  });
+
+  atualizarModeloSolido();
+  modeloFrame = requestAnimationFrame(cicloModelo);
+}
+
+// Constrói o tetraedro de arame dourado, com entrada suave (fade-in).
+// girarImediatamente=false mantém um ângulo fixo, útil enquanto o
+// aluno ainda vai clicar nos vértices (alvo parado facilita o clique).
+function construirTetraedro(aoCompletar, girarImediatamente = true) {
+  tetraPares = [];
+  tetraArestas = [];
+
+  tetraGrupo = criarSvgEl('g', { class: 'grupo-tetraedro' });
+  tetraGrupo.style.opacity = '0';
+  svg.appendChild(tetraGrupo);
+
+  ARESTAS_TETRA.forEach(() => {
+    const linha = criarSvgEl('line', { class: 'aresta-tetraedro' });
+    tetraGrupo.appendChild(linha);
+    tetraArestas.push(linha);
+  });
+
+  TETRA_VERTICES.forEach(() => {
+    const eixo = criarSvgEl('line', { class: 'eixo-par', x1: CX, y1: CY, x2: CX, y2: CY });
+    const circ = criarSvgEl('circle', { class: 'par-eletronico', r: RAIO_PONTO, cx: CX, cy: CY });
+    tetraGrupo.appendChild(eixo);
+    tetraGrupo.appendChild(circ);
+    tetraPares.push({ eixo, circ, ehAtomo: false, label: null });
+  });
+
+  atualizarTetraedro();
+  tocarDing();
+
+  requestAnimationFrame(() => {
+    tetraGrupo.style.transition = 'opacity 1.1s ease';
+    tetraGrupo.style.opacity = '1';
+  });
+
+  setTimeout(() => {
+    if (girarImediatamente) iniciarRotacaoTetra();
+    if (aoCompletar) aoCompletar();
+  }, 1200);
+}
+
+/* ==========================================================
+   ENCAIXE NO TETRAEDRO (4 nuvens) — mecânica simples: o tetraedro
+   correto já aparece desenhado, com um "alvo" marcado em cada
+   vértice. O aluno só arrasta cada nuvem até encaixar num alvo
+   livre; ao soltar perto o bastante, ela gruda lá. Quando os 4
+   alvos estiverem ocupados, a etapa termina sozinha.
+   ========================================================== */
+let alvosTetraedro = [];
+let nuvensEncaixe = [];
+let grupoEncaixe = null;
+const RAIO_ENCAIXE = 34; // distância (em px do svg) para "grudar" no alvo
+
+function construirEncaixeTetraedro() {
+  grupoEncaixe = criarSvgEl('g', { class: 'grupo-tetraedro' });
+  svg.appendChild(grupoEncaixe);
+
+  // o tetraedro-guia fica parado (sem girar) enquanto o aluno encaixa
+  const telas = TETRA_VERTICES.map(v => pontoTelaTetra(projetar3D(v, tetraTheta)));
+
+  ARESTAS_TETRA.forEach(([a, b]) => {
+    grupoEncaixe.appendChild(criarSvgEl('line', {
+      class: 'aresta-tetraedro',
+      x1: telas[a].x, y1: telas[a].y, x2: telas[b].x, y2: telas[b].y
+    }));
+  });
+
+  alvosTetraedro = telas.map(t => ({ x: t.x, y: t.y, ocupado: false, marcador: null }));
+  alvosTetraedro.forEach(alvo => {
+    alvo.marcador = criarSvgEl('circle', {
+      class: 'alvo-vertice', cx: alvo.x, cy: alvo.y, r: RAIO_PONTO + 6
+    });
+    grupoEncaixe.appendChild(alvo.marcador);
+  });
+
+  // as 4 nuvens começam juntas perto do átomo, longe dos alvos
+  nuvensEncaixe = [];
+  const anguloBase = Math.random() * 360;
+  for (let i = 0; i < 4; i++) {
+    const ang = (anguloBase + i * 90 + (Math.random() - 0.5) * 15) * Math.PI / 180;
+    const cx = CX + 42 * Math.cos(ang), cy = CY + 42 * Math.sin(ang);
+    const eixo = criarSvgEl('line', { class: 'eixo-par', x1: CX, y1: CY, x2: cx, y2: cy });
+    const circ = criarSvgEl('circle', { class: 'par-eletronico', r: RAIO_PONTO, cx, cy });
+    grupoEncaixe.appendChild(eixo);
+    grupoEncaixe.appendChild(circ);
+    const nuvem = { eixo, circ, travado: false, arrastando: false };
+    ligarArrasteEncaixe(nuvem);
+    nuvensEncaixe.push(nuvem);
+  }
+}
+
+function ligarArrasteEncaixe(nuvem) {
+  nuvem.circ.addEventListener('pointerdown', e => {
+    if (nuvem.travado) return;
+    e.preventDefault();
+    nuvem.arrastando = true;
+    nuvem.circ.classList.add('arrastando');
+    nuvem.circ.setPointerCapture(e.pointerId);
+  });
+  nuvem.circ.addEventListener('pointermove', e => {
+    if (!nuvem.arrastando) return;
+    const pt = coordenadasSvg(e);
+    nuvem.circ.setAttribute('cx', pt.x);
+    nuvem.circ.setAttribute('cy', pt.y);
+    nuvem.eixo.setAttribute('x2', pt.x);
+    nuvem.eixo.setAttribute('y2', pt.y);
+  });
+  const soltar = () => {
+    if (!nuvem.arrastando) return;
+    nuvem.arrastando = false;
+    nuvem.circ.classList.remove('arrastando');
+    tentarEncaixar(nuvem);
+  };
+  nuvem.circ.addEventListener('pointerup', soltar);
+  nuvem.circ.addEventListener('pointercancel', soltar);
+}
+
+function tentarEncaixar(nuvem) {
+  const cx = parseFloat(nuvem.circ.getAttribute('cx'));
+  const cy = parseFloat(nuvem.circ.getAttribute('cy'));
+  let alvoMaisProximo = null, menorDist = Infinity;
+  alvosTetraedro.forEach(alvo => {
+    if (alvo.ocupado) return;
+    const dist = Math.hypot(cx - alvo.x, cy - alvo.y);
+    if (dist < menorDist) { menorDist = dist; alvoMaisProximo = alvo; }
+  });
+  if (!alvoMaisProximo || menorDist > RAIO_ENCAIXE) return;
+
+  nuvem.circ.setAttribute('cx', alvoMaisProximo.x);
+  nuvem.circ.setAttribute('cy', alvoMaisProximo.y);
+  nuvem.eixo.setAttribute('x2', alvoMaisProximo.x);
+  nuvem.eixo.setAttribute('y2', alvoMaisProximo.y);
+  nuvem.travado = true;
+  nuvem.circ.classList.add('travado');
+  alvoMaisProximo.ocupado = true;
+  alvoMaisProximo.marcador.classList.add('preenchido');
+  tocarDing();
+
+  if (alvosTetraedro.every(a => a.ocupado)) {
+    setTimeout(concluirEncaixeTetraedro, 500);
+  }
+}
+
+function limparEncaixeTetraedro() {
+  if (grupoEncaixe) grupoEncaixe.remove();
+  grupoEncaixe = null;
+  alvosTetraedro = [];
+  nuvensEncaixe = [];
+}
+
+function concluirEncaixeTetraedro() {
+  limparEncaixeTetraedro();
+  construirTetraedro(() => {
+    mostrarPainel('≈ 109,5°');
+    revelarNomeGeometria('Orientação tetraédrica', () => {
+      setTimeout(iniciarAplicacaoMoleculas, 1200);
+    });
+  }, true);
+}
+
+/* ==========================================================
+   POSICIONAMENTO NOS VÉRTICES DO TETRAEDRO — o aluno marca
+   quais nuvens são ligações (átomo) e quais são pares isolados
+   (2 pontinhos vermelhos, representando os 2 elétrons do par).
+   ========================================================== */
+function marcarParIsolado(par) {
+  par.circ.classList.remove('par-eletronico');
+  par.circ.classList.add('par-isolado-marcado');
+  const cx = parseFloat(par.circ.getAttribute('cx'));
+  const cy = parseFloat(par.circ.getAttribute('cy'));
+  const escala = parseFloat(par.circ.getAttribute('r')) / RAIO_PONTO || 1;
+  const offset = RAIO_PONTO * escala * 0.32;
+  const p1 = criarSvgEl('circle', { class: 'ponto-eletron', cx: cx - offset, cy, r: 3.2 * escala });
+  const p2 = criarSvgEl('circle', { class: 'ponto-eletron', cx: cx + offset, cy, r: 3.2 * escala });
+  tetraGrupo.appendChild(p1);
+  tetraGrupo.appendChild(p2);
+  par.pontosIsolado = [p1, p2];
+}
+
+function iniciarPosicionamentoTetra(mol, aoTerminar) {
+  let atribuidosAtomos = 0;
+  let atribuidosIsolados = 0;
+  const totalAlvo = mol.ligantes.length + mol.isolados;
+  let totalAtribuidos = 0;
+
+  tetraPares.forEach(par => {
+    par.circ.addEventListener('click', function handler() {
+      if (par.ehAtomo || par.ehIsolado) return;
+
+      if (atribuidosAtomos < mol.ligantes.length) {
+        par.ehAtomo = true;
+        par.circ.classList.remove('par-eletronico');
+        par.circ.classList.add('atomo-ligante-circ');
+        const label = criarSvgEl('text', {
+          class: 'atomo-ligante-texto',
+          x: par.circ.getAttribute('cx'),
+          y: par.circ.getAttribute('cy')
+        });
+        label.textContent = mol.ligantes[atribuidosAtomos];
+        tetraGrupo.appendChild(label);
+        par.label = label;
+        atribuidosAtomos++;
+      } else if (atribuidosIsolados < mol.isolados) {
+        par.ehIsolado = true;
+        marcarParIsolado(par);
+        atribuidosIsolados++;
+      } else {
+        return;
+      }
+
+      tocarDing();
+      totalAtribuidos++;
+      if (totalAtribuidos === totalAlvo) setTimeout(aoTerminar, 450);
+    });
+  });
+}
+
+function revelarSomenteAtomosTetra() {
+  tetraPares.forEach(par => {
+    if (!par.ehAtomo) {
+      par.circ.style.transition = 'opacity .6s';
+      par.circ.style.opacity = '0';
+      par.eixo.style.transition = 'opacity .6s';
+      par.eixo.style.opacity = '0';
+      if (par.pontosIsolado) {
+        par.pontosIsolado.forEach(p => { p.style.transition = 'opacity .6s'; p.style.opacity = '0'; });
+      }
+    }
+  });
+}
+
+/* ==========================================================
+   ETAPAS 1-3 — ABSTRATO: só nuvens, sem nomear moléculas
+   ========================================================== */
+function etapaNuvens2() {
+  limparPalco(); esconderPainel();
+  document.getElementById('palcoPlataforma').style.display = 'block';
+  document.getElementById('palcoWrap').style.display = 'block';
+  desenharAtomoCentral('');
+  iniciarPares(2, () => {
+    esconderBotaoVerificar();
+    revelarFormaFinal(2).then(() => {
+      mostrarPainel('180°');
+      falar('animada', 'Para duas nuvens, a maior distância possível ocorre quando elas ficam em lados opostos.', () => {
+        revelarNomeGeometria('Geometria linear', () => {
+          setTimeout(etapaNuvens3, 900);
+        });
+      });
+    });
+  });
+  mostrarBotaoVerificar(verificarPosicaoAtual);
+}
+
+function etapaNuvens3() {
+  limparPalco(); esconderPainel();
+  desenharAtomoCentral('');
+  falar('pensando', 'Agora surgem três nuvens. Tente posicioná-las.', () => {
+    iniciarPares(3, () => {
+      esconderBotaoVerificar();
+      revelarFormaFinal(3).then(() => {
+        mostrarPainel('120°');
+        falar('animada', 'Agora não é mais possível manter a maior distância usando apenas uma reta. As três nuvens passam a ocupar um mesmo plano.', () => {
+          revelarNomeGeometria('Trigonal plana', () => {
+            setTimeout(etapaNuvens4, 900);
+          });
+        });
+      });
+    });
+    mostrarBotaoVerificar(verificarPosicaoAtual);
+  });
+}
+
+// A etapa de 4 nuvens não tenta mais resolver no plano: isso é
+// impossível de fazer parecer "certo", já que a resposta real exige
+// profundidade. O tetraedro correto já aparece desenhado, com um
+// alvo marcado em cada vértice — o aluno só arrasta cada nuvem até
+// encaixar; a etapa termina sozinha quando os 4 alvos são ocupados.
+function etapaNuvens4() {
+  limparPalco(); esconderPainel();
+  desenharAtomoCentral('');
+  falar('pensando', 'Agora surgem quatro nuvens. Por mais que você tente, não dá para deixá-las igualmente afastadas usando só um plano — elas precisam sair do plano.', () => {
+    document.getElementById('palcoPlataforma').style.display = 'block';
+    document.getElementById('palcoWrap').style.display = 'block';
+    construirEncaixeTetraedro();
+    falar('explicando', 'Este é o tetraedro. Arraste cada nuvem até encaixar em um dos quatro vértices marcados.', null);
+  });
+}
+
+/* ==========================================================
+   SOMENTE AGORA: APLICAÇÃO EM MOLÉCULAS REAIS
+   O mesmo tetraedro é reaproveitado; o que muda é quais
+   vértices são átomos e quais são pares isolados.
+   ========================================================== */
+function iniciarAplicacaoMoleculas() {
+  esconderPainel();
+  esconderBotaoVerificar();
+  falar('sorrindo', 'Agora imagine que algumas dessas nuvens representam ligações e outras representam pares isolados.', () => {
+    rodarMolecula(ORDEM_MOLECULAS[0]);
+  });
+}
+
+function rodarMolecula(chave) {
+  const mol = ELEMENTOS_TETRA[chave];
+  esconderPainel();
+  esconderModeloSolido();
+  falar('explicando', `Vamos analisar a molécula de ${mol.nome} (${mol.formula}).`, () => {
+    limparPalco();
+    document.getElementById('palcoPlataforma').style.display = 'block';
+    document.getElementById('palcoWrap').style.display = 'block';
+    desenharAtomoCentral(mol.central);
+
+    construirTetraedro(() => {
+      const instrucaoAtomos = `Clique em ${mol.ligantes.length} ${mol.ligantes.length === 1 ? 'nuvem' : 'nuvens'} para encaixar ${mol.ligantes.join(', ')}`;
+      const instrucaoIsolados = mol.isolados > 0
+        ? `, e ${mol.isolados === 1 ? 'na nuvem restante, marque' : 'nas nuvens restantes, marque'} ${mol.isolados === 1 ? 'o par eletrônico isolado' : 'os pares eletrônicos isolados'} (2 pontinhos vermelhos).`
+        : '.';
+      falar('explicando', instrucaoAtomos + instrucaoIsolados, null);
+      iniciarPosicionamentoTetra(mol, () => {
+        const seguir = () => {
+          iniciarRotacaoTetra();
+          finalizarMolecula(mol, chave);
+        };
+        if (mol.isolados === 0) {
+          seguir();
+        } else {
+          falar('pensando', mol.isolados === 1
+            ? 'Muito bem. A organização das nuvens continua tetraédrica. Mas observando apenas os átomos, enxergamos uma pirâmide.'
+            : 'Muito bem. As quatro nuvens continuam organizadas em um tetraedro. Mas observando apenas os átomos, enxergamos outra forma.', () => {
+            revelarSomenteAtomosTetra();
+            setTimeout(seguir, 700);
+          });
+        }
+      });
+    }, false);
+  });
+}
+
+function finalizarMolecula(mol, chave) {
+  mostrarPainel('Geometria eletrônica: tetraédrica');
+  falar('animada', `A forma real da molécula é: geometria molecular ${mol.geometriaMolecular}.`, () => {
+    mostrarModeloSolido(mol);
+    revelarNomeGeometria('Geometria molecular: ' + mol.geometriaMolecular, () => {
+      const idx = ORDEM_MOLECULAS.indexOf(chave);
+      if (idx < ORDEM_MOLECULAS.length - 1) {
+        setTimeout(() => rodarMolecula(ORDEM_MOLECULAS[idx + 1]), 1200);
+      } else {
+        setTimeout(finalizarJogo, 1200);
+      }
+    });
+  });
+}
+
+/* ==========================================================
+   QUADRO-RESUMO FINAL
+   ========================================================== */
+function finalizarJogo() {
+  esconderPainel();
+  falar('animada', 'Excelente. Agora você entende por que cada geometria molecular surge — tudo começa com nuvens eletrônicas se afastando ao máximo.', null);
+  const conclusao = document.getElementById('conclusao');
+  conclusao.classList.add('visivel');
+  conclusao.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function reiniciar() {
+  document.getElementById('conclusao').classList.remove('visivel');
+  limparPalco();
+  document.getElementById('palcoWrap').style.display = 'none';
+  document.getElementById('palcoPlataforma').style.display = 'none';
+  esconderPainel();
+  esconderBotaoVerificar();
+  esconderModeloSolido();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  iniciarIntro();
+}
+
+/* ==========================================================
+   INTRODUÇÃO / INÍCIO
+   Nada de moléculas ainda — só átomo central e nuvens.
+   ========================================================== */
+function iniciarIntro() {
+  falar(
+    'sorrindo',
+    `Hoje vamos entender por que as moléculas têm a forma que têm.
+Imagine que existem algumas nuvens eletrônicas ligadas a um átomo central.`,
+    () => {
+      falar(
+        'explicando',
+        `Essas nuvens se repelem entre si.`,
+        () => {
+          falar(
+            'pensando',
+            `Como podemos colocá-las o mais afastadas possível no espaço?
+Você vai descobrir sozinho.`,
+            () => {
+              etapaNuvens2();
+            }
+          );
+        }
+      );
+    }
+  );
+}
+
+iniciarIntro();
+</script>
+
+<script>
+(function () {
+  var _clickSom = new Audio('../sons/click.mp3');
+  _clickSom.preload = 'auto';
+  document.addEventListener('click', function (e) {
+    var alvo = e.target.closest('button');
+    if (alvo) { try { _clickSom.currentTime = 0; _clickSom.play().catch(function () {}); } catch (err) {} }
+  }, true);
+})();
+</script>
+</body>
+</html>

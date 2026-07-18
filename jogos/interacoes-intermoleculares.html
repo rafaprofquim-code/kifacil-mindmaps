@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow">
+  <title>Interações Intermoleculares — Jogo Premium | KiFácil</title>
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --fundo: #fdf8f0;
+      --fundo-card: #fffdf9;
+      --escuro: #2e2016;
+      --texto: #1a1208;
+      --texto-suave: #3d2e1a;
+      --dourado: #8a5e10;
+      --dourado-claro: #c8920a;
+      --borda: rgba(100,70,20,0.3);
+      --borda-forte: rgba(100,70,20,0.5);
+      --verde-escuro: #1e5238;
+      --vermelho-escuro: #7a1515;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Libre Baskerville', Georgia, serif;
+      background: var(--fundo);
+      color: var(--texto);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    .top-nav {
+      background: #1e1008;
+      border-bottom: 2px solid var(--dourado-claro);
+      padding: 0 2.5rem;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+    .brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.7rem;
+      font-weight: 600;
+      color: #fff8ee;
+      letter-spacing: 0.03em;
+      margin-right: auto;
+    }
+
+    /* MAIN */
+    main {
+      flex: 1;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 1rem 1.5rem 1rem;
+      width: 100%;
+    }
+    .titulo-jogo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.7rem, 3.8vw, 2.5rem);
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+      line-height: 1.1;
+    }
+    .subtitulo {
+      font-size: 1rem;
+      color: var(--texto);
+      margin-bottom: .9rem;
+      max-width: 680px;
+    }
+
+    .narrador {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: .8rem;
+      padding: .8rem 1.1rem;
+      border: 1.5px solid var(--borda-forte);
+      border-radius: 10px;
+      background: rgba(30,16,8,0.05);
+    }
+    .narrador img {
+      width: 68px;
+      height: 84px;
+      object-fit: cover;
+      object-position: top center;
+      border-radius: 10px;
+      border: 1px solid rgba(200,146,10,.35);
+      flex-shrink: 0;
+    }
+    .narrador-nome {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.78rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--dourado-claro);
+      margin-bottom: 0.3rem;
+    }
+    .narrador-texto {
+      font-size: 1rem;
+      line-height: 1.5;
+      color: var(--texto-suave);
+      min-height: 3.4em;
+    }
+
+    /* PALCO DE ANIMAÇÃO */
+    .imagem-wrapper {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: min(100%, 900px);
+      max-height: 62vh;
+      min-height: 380px;
+      margin: 0 auto;
+      cursor: default;
+      border: 1.5px solid var(--borda-forte);
+      border-radius: 6px;
+      overflow: hidden;
+      background: #f7efe2;
+    }
+    .cena-fundo {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      user-select: none;
+      pointer-events: none;
+    }
+    .overlay-animacao { position: absolute; inset: 0; }
+
+    .link-aula {
+      position: absolute; top: 10px; right: 10px; z-index: 10;
+      display: flex; flex-direction: column; align-items: center; gap: 2px;
+      text-decoration: none; color: #fff8ee;
+      background: rgba(30,16,8,0.72); border: 1.5px solid var(--dourado-claro, #c8920a);
+      border-radius: 8px; padding: 0.4rem 0.65rem;
+      font-family: 'Cormorant Garamond', serif; font-size: 0.68rem; font-weight: 600;
+      letter-spacing: 0.02em; text-align: center; line-height: 1.2;
+      cursor: pointer; transition: background 0.2s, transform 0.15s;
+    }
+    .link-aula:hover { background: rgba(30,16,8,0.92); transform: translateY(-1px); }
+    .link-aula svg { width: 22px; height: 22px; }
+
+    /* Molécula (estática, com fundo pergaminho para leitura) */
+    .molecula-card {
+      position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+      background: var(--fundo-card); border: 1.5px solid var(--borda-forte); border-radius: 12px;
+      padding: 16px 22px; z-index: 3; text-align: center;
+    }
+    .molecula-card svg { display: block; margin: 0 auto; }
+    .molecula-card .molecula-legenda {
+      font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 0.95rem;
+      color: var(--texto-suave); margin-top: 6px;
+    }
+    .molecula-par { display: flex; gap: 18px; align-items: center; }
+
+    .placa-dourada {
+      position: absolute; bottom: 12px; left: 50%; transform: translate(-50%, 10px);
+      background: linear-gradient(135deg, #fff3d6, #e9c877); color: #3d2600;
+      font-family: 'Cormorant Garamond', serif; font-weight: 700;
+      font-size: clamp(0.82rem, 2.1vw, 1.02rem);
+      padding: 0.5rem 1.1rem; border-radius: 8px; border: 1px solid #a97c1f;
+      box-shadow: 0 3px 10px rgba(0,0,0,.25); text-align: center; max-width: 90%;
+      opacity: 0; animation: placaIn .5s ease forwards; z-index: 6; pointer-events: none;
+    }
+    @keyframes placaIn {
+      from { opacity: 0; transform: translate(-50%, 10px); }
+      to   { opacity: 1; transform: translate(-50%, 0); }
+    }
+
+    /* Jogo de associação (classificação por clique) */
+    .jogo-associacao { position: absolute; inset: 0; display: flex; justify-content: center; align-items: center; gap: 30px; padding: 6%; flex-wrap: wrap; }
+    .coluna-associacao { display: flex; flex-direction: column; gap: 8px; }
+    .item-associacao {
+      background: var(--fundo-card); border: 1.5px solid var(--borda-forte); border-radius: 8px; padding: 0.5rem 1rem;
+      font-family: 'Libre Baskerville', serif; font-size: 0.88rem; cursor: pointer; text-align: center; transition: border-color .2s;
+    }
+    .item-associacao:hover { border-color: var(--dourado-claro); }
+    .item-selecionado { border-color: var(--dourado-claro); background: rgba(200,146,10,.12); }
+    .associado { border-color: var(--verde-escuro); background: rgba(30,82,56,.12); cursor: default; opacity: 0.85; }
+    .erro-flash { outline: 3px solid var(--vermelho-escuro); border-radius: 8px; }
+
+    .quadro-resumo {
+      display: flex;
+      gap: 1.1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      padding: 1rem;
+    }
+    .quadro-item {
+      background: var(--fundo-card);
+      border: 1.5px solid var(--borda-forte);
+      border-radius: 10px;
+      padding: 1rem 1.3rem;
+      min-width: 190px;
+      text-align: center;
+    }
+    .quadro-item .rotulo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.78rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--dourado-claro);
+      margin-bottom: 0.4rem;
+    }
+    .quadro-item .valor {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--texto);
+    }
+
+    /* PAINEL DE INTERAÇÃO */
+    #painelInteracao { max-width: 900px; margin: 1.2rem auto 0; }
+    .interacao-painel {
+      background: var(--fundo-card);
+      border: 1.5px solid var(--borda-forte);
+      border-radius: 12px;
+      padding: 1.4rem 1.6rem 1.3rem;
+    }
+    .interacao-pergunta-texto {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+      line-height: 1.35;
+      margin-bottom: 1rem;
+    }
+    .opcoes-linha { display: flex; gap: 0.7rem; flex-wrap: wrap; margin-bottom: 0.6rem; }
+    .btn-opcao {
+      background: var(--fundo); border: 1.5px solid var(--borda-forte); border-radius: 6px;
+      padding: 0.55rem 1.1rem; font-family: 'Libre Baskerville', serif; font-size: 0.95rem;
+      color: var(--texto); cursor: pointer; transition: border-color .2s, background .2s;
+    }
+    .btn-opcao:hover:not(:disabled) { border-color: var(--dourado-claro); }
+    .btn-opcao:disabled { cursor: default; opacity: 0.75; }
+    .opcao-certa { border-color: var(--verde-escuro) !important; background: rgba(30,82,56,0.12); }
+    .opcao-errada { border-color: var(--vermelho-escuro) !important; background: rgba(122,21,21,0.08); }
+
+    .modal-feedback {
+      margin-top: 1rem; font-size: 0.86rem; line-height: 1.7;
+      border-left: 3px solid var(--borda-forte); padding-left: 1rem; display: none;
+    }
+    .modal-feedback.visivel { display: block; }
+    .feedback-certo   { color: var(--verde-escuro); font-weight: 700; }
+    .feedback-errado  { color: var(--vermelho-escuro); font-weight: 700; }
+    .feedback-resposta { color: var(--dourado-claro); font-weight: 700; }
+    .feedback-explicacao { color: var(--texto); margin-top: 0.5rem; }
+
+    .btn-continuar {
+      background: #1e1008;
+      color: var(--dourado-claro);
+      border: 1.5px solid var(--dourado-claro);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.6rem 1.6rem;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s, opacity .2s;
+      display: block;
+      margin: 0.2rem auto 0;
+    }
+    .btn-continuar:hover { background: var(--dourado-claro); color: #1e1008; }
+    .btn-continuar:disabled { opacity: 0.4; cursor: default; }
+    .btn-continuar:disabled:hover { background: #1e1008; color: var(--dourado-claro); }
+
+    /* Botão continuar dentro do balão da professora */
+    #continuarBalao { margin-top: 0.6rem; }
+    #continuarBalao .btn-continuar { display: inline-block; margin: 0; }
+
+    /* CONCLUSÃO */
+    .conclusao {
+      display: none;
+      margin-top: 2rem;
+      background: var(--fundo-card);
+      border: 1.5px solid var(--borda-forte);
+      border-radius: 12px;
+      padding: 2.4rem 2rem;
+      text-align: center;
+    }
+    .conclusao.visivel { display: block; }
+    .conclusao-titulo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.8rem, 5vw, 2.6rem);
+      font-weight: 600;
+      margin-bottom: 0.8rem;
+    }
+    .conclusao-placar {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      color: var(--dourado-claro);
+      margin-bottom: 1rem;
+    }
+    .conclusao-mensagem {
+      font-size: 0.93rem;
+      color: var(--texto-suave);
+      max-width: 460px;
+      margin: 0 auto 2rem;
+      line-height: 1.8;
+    }
+    .btn-reiniciar {
+      background: #1e1008;
+      color: var(--dourado-claro);
+      border: 1.5px solid var(--dourado-claro);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.7rem 2rem;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+    .btn-reiniciar:hover { background: var(--dourado-claro); color: #1e1008; }
+
+    /* FOOTER */
+    footer {
+      background: var(--escuro);
+      border-top: 2px solid var(--dourado-claro);
+      padding: .6rem 2rem;
+      text-align: center;
+      font-size: 0.78rem;
+      color: rgba(255,248,238,0.5);
+    }
+
+    @media (min-width: 641px) {
+      .narrador { max-width: 900px; margin: 0 auto .8rem; }
+      .narrador-texto { font-size: 1.05rem; }
+    }
+
+    @media (max-width: 640px) {
+      .top-nav { padding: 0 1.2rem; gap: 1.2rem; }
+      main { padding: .8rem 1rem 1rem; }
+      .interacao-painel { padding: 1.2rem 1rem; }
+      .molecula-par { gap: 10px; flex-wrap: wrap; justify-content: center; }
+      .opcoes-linha { gap: 0.5rem; }
+      .btn-opcao { font-size: 0.85rem; padding: 0.5rem 0.85rem; }
+      .jogo-associacao { gap: 14px; }
+      .item-associacao { font-size: 0.78rem; padding: 0.4rem 0.7rem; }
+      .link-aula { top: 6px; right: 6px; padding: 0.3rem 0.5rem; font-size: 0.6rem; }
+      .link-aula svg { width: 18px; height: 18px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <div class="brand">KiFácil</div>
+</nav>
+
+<main>
+  <h1 class="titulo-jogo">Interações Intermoleculares</h1>
+  <p class="subtitulo">Descubra por que algumas moléculas se atraem mais do que outras — e o que isso muda no comportamento das substâncias.</p>
+
+  <div class="narrador">
+    <img src="../imagens/rafa-sorrindo.jpg" alt="Professora Rafaela" />
+    <div style="flex: 1;">
+      <div class="narrador-nome">Professora Rafaela</div>
+      <div class="narrador-texto" id="narradorTexto">Vamos começar.</div>
+      <div id="continuarBalao"></div>
+    </div>
+  </div>
+
+  <div class="imagem-wrapper" id="imagemWrapper">
+    <img src="../imagens/laboratorio-ions.jpg" alt="Laboratório" class="cena-fundo" />
+    <div class="overlay-animacao" id="overlayAnimacao"></div>
+    <!-- COLOQUE O LINK AQUI -->
+    <a class="link-aula" href="https://www.youtube.com/watch?v=xSAlDzPGXgA&t=1s" target="_blank" rel="noopener" title="Assista à aula">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.6"/>
+        <path d="M10 8.5L16 12L10 15.5V8.5Z" fill="currentColor"/>
+      </svg>
+      <span>Assista à aula</span>
+    </a>
+  </div>
+
+  <div id="painelInteracao"></div>
+
+  <div class="conclusao" id="conclusao">
+    <div class="conclusao-titulo">Estudo concluído</div>
+    <div class="conclusao-placar" id="conclusaoPlacar"></div>
+    <p class="conclusao-mensagem" id="conclusaoMensagem"></p>
+    <button class="btn-reiniciar" onclick="reiniciar()">Jogar novamente</button>
+  </div>
+</main>
+
+<footer>© 2026 KiFácil</footer>
+
+<script>
+/* ==========================================================
+   MOLÉCULAS (desenhadas via SVG — nenhuma imagem utilizada)
+   H = dourado (δ+) | átomos eletronegativos (Cl, F, O, N) = vermelho-escuro (δ−)
+   ========================================================== */
+const MOLECULAS = {
+  H2:
+    '<svg viewBox="0 0 100 60" width="90" height="54">' +
+    '<line x1="30" y1="30" x2="70" y2="30" stroke="#3d2e1a" stroke-width="3"/>' +
+    '<circle cx="30" cy="30" r="15" fill="#c8920a"/><text x="30" y="35" font-size="12" text-anchor="middle" fill="#2e2016" font-family="Cormorant Garamond, serif">H</text>' +
+    '<circle cx="70" cy="30" r="15" fill="#c8920a"/><text x="70" y="35" font-size="12" text-anchor="middle" fill="#2e2016" font-family="Cormorant Garamond, serif">H</text>' +
+    '</svg>',
+
+  CH4:
+    '<svg viewBox="0 0 100 100" width="90" height="90">' +
+    '<line x1="50" y1="50" x2="50" y2="15" stroke="#3d2e1a" stroke-width="2.5"/>' +
+    '<line x1="50" y1="50" x2="50" y2="85" stroke="#3d2e1a" stroke-width="2.5"/>' +
+    '<line x1="50" y1="50" x2="15" y2="50" stroke="#3d2e1a" stroke-width="2.5"/>' +
+    '<line x1="50" y1="50" x2="85" y2="50" stroke="#3d2e1a" stroke-width="2.5"/>' +
+    '<circle cx="50" cy="50" r="15" fill="#7a1515"/><text x="50" y="55" font-size="12" text-anchor="middle" fill="#fff8ee" font-family="Cormorant Garamond, serif">C</text>' +
+    '<circle cx="50" cy="15" r="10" fill="#c8920a"/><text x="50" y="19" font-size="10" text-anchor="middle" fill="#2e2016" font-family="Cormorant Garamond, serif">H</text>' +
+    '<circle cx="50" cy="85" r="10" fill="#c8920a"/><text x="50" y="89" font-size="10" text-anchor="middle" fill="#2e2016" font-family="Cormorant Garamond, serif">H</text>' +
+    '<circle cx="15" cy="50" r="10" fill="#c8920a"/><text x="15" y="54" font-size="10" text-anchor="middle" fill="#2e2016" font-family="Cormorant Garamond, serif">H</text>' +
+    '<circle cx="85" cy="50" r="10" fill="#c8920a"/><text x="85" y="54" font-size="10" text-anchor="middle" fill="#2e2016" font-family="Cormorant Garamond, serif">H</text>' +
+    '</svg>',
+
+  HCl:
+    '<svg viewBox="0 0 110 60" width="100" height="54">' +
+    '<line x1="30" y1="30" x2="80" y2="30" stroke="#3d2e1a" stroke-width="3"/>' +
+    '<circle cx="30" cy="30" r="12" fill="#c8920a"/><text x="30" y="34" font-size="11" text-anchor="middle" fill="#2e2016" font-family="Cormorant Garamond, serif">H</text>' +
+    '<circle cx="80" cy="30" r="18" fill="#7a1515"/><text x="80" y="35" font-size="12" text-anchor="middle" fill="#fff8ee" font-family="Cormorant Garamond, serif">Cl</text>' +
+    '<text x="16" y="14" font-size="11" fill="#c8920a" font-weight="700" font-family="Cormorant Garamond, serif">δ+</text>' +
+    '<text x="94" y="14" font-size="11" fill="#7a1515" font-weight="700" font-family="Cormorant Garamond, serif">δ−</text>' +
+    '</svg>',
+
+  HF:
+    '<svg viewBox="0 0 110 60" width="100" height="54">' +
+    '<line x1="30" y1="30" x2="80" y2="30" stroke="#3d2e1a" stroke-width="3"/>' +
+    '<circle cx="30" cy="30" r="12" fill="#c8920a"/><text x="30" y="34" font-size="11" text-anchor="middle" fill="#2e2016" font-family="Cormorant Garamond, serif">H</text>' +
+    '<circle cx="80" cy="30" r="15" fill="#7a1515"/><text x="80" y="35" font-size="11" text-anchor="middle" fill="#fff8ee" font-family="Cormorant Garamond, serif">F</text>' +
+    '<text x="16" y="14" font-size="11" fill="#c8920a" font-weight="700" font-family="Cormorant Garamond, serif">δ+</text>' +
+    '<text x="92" y="14" font-size="11" fill="#7a1515" font-weight="700" font-family="Cormorant Garamond, serif">δ−</text>' +
+    '</svg>',
+
+  NH3:
+    '<svg viewBox="0 0 100 100" width="90" height="90">' +
+    '<line x1="50" y1="45" x2="50" y2="10" stroke="#3d2e1a" stroke-width="2.5"/>' +
+    '<line x1="50" y1="45" x2="20" y2="70" stroke="#3d2e1a" stroke-width="2.5"/>' +
+    '<line x1="50" y1="45" x2="80" y2="70" stroke="#3d2e1a" stroke-width="2.5"/>' +
+    '<circle cx="50" cy="45" r="16" fill="#7a1515"/><text x="50" y="50" font-size="12" text-anchor="middle" fill="#fff8ee" font-family="Cormorant Garamond, serif">N</text>' +
+    '<circle cx="50" cy="10" r="10" fill="#c8920a"/><text x="50" y="14" font-size="10" text-anchor="middle" fill="#2e2016" font-family="Cormorant Garamond, serif">H</text>' +
+    '<circle cx="20" cy="70" r="10" fill="#c8920a"/><text x="20" y="74" font-size="10" text-anchor="middle" fill="#2e2016" font-family="Cormorant Garamond, serif">H</text>' +
+    '<circle cx="80" cy="70" r="10" fill="#c8920a"/><text x="80" y="74" font-size="10" text-anchor="middle" fill="#2e2016" font-family="Cormorant Garamond, serif">H</text>' +
+    '<text x="50" y="32" font-size="10" fill="#7a1515" font-weight="700" font-family="Cormorant Garamond, serif">δ−</text>' +
+    '</svg>',
+
+  H2O:
+    '<svg viewBox="0 0 100 80" width="90" height="72">' +
+    '<line x1="50" y1="35" x2="20" y2="60" stroke="#3d2e1a" stroke-width="2.5"/>' +
+    '<line x1="50" y1="35" x2="80" y2="60" stroke="#3d2e1a" stroke-width="2.5"/>' +
+    '<circle cx="50" cy="35" r="16" fill="#7a1515"/><text x="50" y="40" font-size="12" text-anchor="middle" fill="#fff8ee" font-family="Cormorant Garamond, serif">O</text>' +
+    '<circle cx="20" cy="60" r="10" fill="#c8920a"/><text x="20" y="64" font-size="10" text-anchor="middle" fill="#2e2016" font-family="Cormorant Garamond, serif">H</text>' +
+    '<circle cx="80" cy="60" r="10" fill="#c8920a"/><text x="80" y="64" font-size="10" text-anchor="middle" fill="#2e2016" font-family="Cormorant Garamond, serif">H</text>' +
+    '<text x="50" y="20" font-size="10" fill="#7a1515" font-weight="700" font-family="Cormorant Garamond, serif">δ−</text>' +
+    '</svg>'
+};
+
+function rotuloFormula(tipo) {
+  return tipo.replace('H2O', 'H₂O').replace('CH4', 'CH₄').replace('NH3', 'NH₃').replace('HCl', 'HCl').replace('HF', 'HF').replace('H2', 'H₂');
+}
+
+/* ==========================================================
+   REFERÊNCIAS DOM
+   ========================================================== */
+const overlay = document.getElementById('overlayAnimacao');
+const painel  = document.getElementById('painelInteracao');
+const continuarBalao = document.getElementById('continuarBalao');
+
+const _ding = new Audio('../sons/ding.mp3');
+_ding.preload = 'auto';
+function tocarDing() { try { _ding.currentTime = 0; _ding.play().catch(function () {}); } catch (e) {} }
+
+function fala(texto) {
+  document.getElementById('narradorTexto').textContent = texto;
+}
+
+let timersAtivos = [];
+function agendar(fn, ms) {
+  const id = setTimeout(fn, ms);
+  timersAtivos.push(id);
+  return id;
+}
+function limparTimers() {
+  timersAtivos.forEach(clearTimeout);
+  timersAtivos = [];
+}
+
+function botaoContinuar(delayMs) {
+  delayMs = delayMs || 0;
+  continuarBalao.innerHTML = '';
+  const btn = document.createElement('button');
+  btn.className = 'btn-continuar';
+  btn.textContent = 'Continuar →';
+  btn.disabled = delayMs > 0;
+  continuarBalao.appendChild(btn);
+  if (delayMs > 0) agendar(function () { btn.disabled = false; }, delayMs);
+  btn.addEventListener('click', avancar);
+  return btn;
+}
+
+function escolhaBotoes(opts) {
+  painel.innerHTML = '';
+  const wrap = document.createElement('div');
+  wrap.className = 'interacao-painel';
+  wrap.innerHTML =
+    '<div class="interacao-pergunta-texto">' + opts.pergunta + '</div>' +
+    '<div class="opcoes-linha" id="opcoesLinha"></div>' +
+    '<div class="modal-feedback" id="feedbackEscolha"></div>';
+  painel.appendChild(wrap);
+
+  const opcoesLinha = wrap.querySelector('#opcoesLinha');
+  const feedback = wrap.querySelector('#feedbackEscolha');
+  let tentativas = 0;
+  let resolvido = false;
+
+  opts.opcoes.forEach(function (op) {
+    const btn = document.createElement('button');
+    btn.className = 'btn-opcao';
+    btn.textContent = op.rotulo;
+    btn.addEventListener('click', function () {
+      if (resolvido) return;
+      if (op.correta) {
+        tocarDing();
+        resolvido = true;
+        Array.from(opcoesLinha.children).forEach(function (b) { b.disabled = true; });
+        btn.classList.add('opcao-certa');
+        feedback.className = 'modal-feedback visivel';
+        feedback.innerHTML = '<span class="feedback-certo">Correto!</span><p class="feedback-explicacao">' + opts.explicacao + '</p>';
+        opts.aoAcertar();
+      } else {
+        tentativas++;
+        btn.classList.add('opcao-errada');
+        if (tentativas === 1 && opts.dica) {
+          feedback.className = 'modal-feedback visivel';
+          feedback.innerHTML = '<span class="feedback-errado">' + opts.dica + '</span>';
+        } else if (tentativas >= 2) {
+          resolvido = true;
+          Array.from(opcoesLinha.children).forEach(function (b, i) {
+            b.disabled = true;
+            if (opts.opcoes[i].correta) b.classList.add('opcao-certa');
+          });
+          feedback.className = 'modal-feedback visivel';
+          feedback.innerHTML = '<span class="feedback-resposta">Resposta correta destacada.</span><p class="feedback-explicacao">' + opts.explicacao + '</p>';
+          opts.aoAcertar();
+        }
+      }
+    });
+    opcoesLinha.appendChild(btn);
+  });
+}
+
+/* ==========================================================
+   CLASSIFICAÇÃO POR CATEGORIA (molécula → tipo de força), por clique
+   As categorias são fixas e reutilizáveis (várias moléculas podem
+   pertencer à mesma categoria).
+   ========================================================== */
+function criarClassificacaoPorCategoria(itens, categorias, mensagemErro, mensagemSucesso) {
+  const container = document.createElement('div');
+  container.className = 'jogo-associacao';
+  overlay.appendChild(container);
+
+  const colCategorias = document.createElement('div'); colCategorias.className = 'coluna-associacao';
+  const colItens = document.createElement('div'); colItens.className = 'coluna-associacao';
+  container.appendChild(colCategorias); container.appendChild(colItens);
+
+  const itensEmbaralhados = itens.slice().sort(function () { return Math.random() - 0.5; });
+
+  let categoriaAtiva = null, acertos = 0;
+  const elCategorias = {};
+
+  categorias.forEach(function (cat) {
+    const el = document.createElement('div');
+    el.className = 'item-associacao';
+    el.textContent = cat;
+    colCategorias.appendChild(el);
+    elCategorias[cat] = el;
+    el.addEventListener('click', function () {
+      Object.keys(elCategorias).forEach(function (k) { elCategorias[k].classList.remove('item-selecionado'); });
+      el.classList.add('item-selecionado');
+      categoriaAtiva = cat;
+    });
+  });
+
+  itensEmbaralhados.forEach(function (it) {
+    const el = document.createElement('div');
+    el.className = 'item-associacao';
+    el.textContent = rotuloFormula(it.chave) + ' ⋯ ' + rotuloFormula(it.chave);
+    colItens.appendChild(el);
+    el.addEventListener('click', function () {
+      if (el.classList.contains('associado')) return;
+      if (!categoriaAtiva) {
+        fala('Primeiro escolha um tipo de interação à esquerda.');
+        return;
+      }
+      if (it.categoria === categoriaAtiva) {
+        tocarDing();
+        el.classList.add('associado');
+        acertos++;
+        if (acertos === itens.length) {
+          agendar(function () { fala(mensagemSucesso); botaoContinuar(400); }, 300);
+        }
+      } else {
+        fala(mensagemErro);
+        el.classList.add('erro-flash');
+        setTimeout(function () { el.classList.remove('erro-flash'); }, 500);
+      }
+    });
+  });
+}
+
+/* ==========================================================
+   COMPONENTE: CARTÃO DE MOLÉCULA (estático)
+   ========================================================== */
+function criarCartaoMolecula(tipo, legenda) {
+  const div = document.createElement('div');
+  div.className = 'molecula-card';
+  div.innerHTML = MOLECULAS[tipo] + (legenda ? '<div class="molecula-legenda">' + legenda + '</div>' : '');
+  return div;
+}
+function criarParMoleculas(tipo, legenda) {
+  const div = document.createElement('div');
+  div.className = 'molecula-card';
+  div.innerHTML =
+    '<div class="molecula-par">' + MOLECULAS[tipo] + MOLECULAS[tipo] + '</div>' +
+    (legenda ? '<div class="molecula-legenda">' + legenda + '</div>' : '');
+  return div;
+}
+
+/* ==========================================================
+   INTRODUÇÃO
+   ========================================================== */
+function passoIntro() {
+  fala('Hoje vamos descobrir por que algumas substâncias evaporam facilmente enquanto outras permanecem líquidas. Tudo depende das forças intermoleculares.');
+  painel.innerHTML = '';
+  const wrap = document.createElement('div');
+  wrap.className = 'interacao-painel';
+  const btn = document.createElement('button');
+  btn.className = 'btn-continuar';
+  btn.textContent = 'INICIAR';
+  wrap.appendChild(btn);
+  painel.appendChild(wrap);
+  btn.addEventListener('click', avancar);
+}
+
+/* ==========================================================
+   ETAPA — DISPERSÃO DE LONDON (moléculas apolares)
+   ========================================================== */
+function passoDispersao() {
+  fala('Observe duas moléculas de H₂ — uma molécula apolar, sem polos permanentes.');
+  overlay.appendChild(criarParMoleculas('H2', 'H₂ + H₂'));
+
+  escolhaBotoes({
+    pergunta: 'Mesmo sem polos fixos, existe uma leve atração entre elas. Que força é essa?',
+    opcoes: [
+      { rotulo: 'Dipolo-dipolo', correta: false },
+      { rotulo: 'Forças de dispersão de London', correta: true },
+      { rotulo: 'Ligação de hidrogênio', correta: false }
+    ],
+    dica: 'É a força que ocorre entre moléculas apolares, como H₂, N₂, O₂ e CH₄.',
+    explicacao: 'Interações dipolo induzido-dipolo induzido (forças de dispersão de London) ocorrem entre moléculas apolares. É a mais fraca das interações intermoleculares.',
+    aoAcertar: function () { botaoContinuar(300); }
+  });
+}
+
+/* ==========================================================
+   ETAPA — DIPOLO-DIPOLO (moléculas polares)
+   ========================================================== */
+function passoDipoloDipolo() {
+  fala('Agora observe duas moléculas de HCl — uma molécula polar, com um lado δ+ e outro δ−.');
+  overlay.appendChild(criarParMoleculas('HCl', 'HCl + HCl'));
+
+  escolhaBotoes({
+    pergunta: 'O polo positivo de uma molécula se aproxima do polo negativo da outra. Que interação é essa?',
+    opcoes: [
+      { rotulo: 'Forças de dispersão de London', correta: false },
+      { rotulo: 'Dipolo-dipolo (dipolos permanentes)', correta: true },
+      { rotulo: 'Ligação de hidrogênio', correta: false }
+    ],
+    dica: 'Ocorre entre moléculas polares — quanto maior a polaridade, mais intensa a interação.',
+    explicacao: 'Interações dipolo-dipolo (entre dipolos permanentes) ocorrem entre moléculas polares. Quanto maior a polaridade da molécula, maior a intensidade dessa interação.',
+    aoAcertar: function () { botaoContinuar(300); }
+  });
+}
+
+/* ==========================================================
+   ETAPA — LIGAÇÃO DE HIDROGÊNIO
+   ========================================================== */
+function passoLigacaoH() {
+  fala('Agora observe duas moléculas de HF. O hidrogênio está ligado ao flúor.');
+  overlay.appendChild(criarParMoleculas('HF', 'HF + HF'));
+
+  escolhaBotoes({
+    pergunta: 'O flúor pertence ao grupo F, O, N. Que interação especialmente forte ocorre aqui?',
+    opcoes: [
+      { rotulo: 'Dipolo-dipolo comum', correta: false },
+      { rotulo: 'Ligação de hidrogênio', correta: true },
+      { rotulo: 'Nenhuma interação', correta: false }
+    ],
+    dica: 'Acontece quando o H está ligado a um átomo do grupo F, O ou N (FON).',
+    explicacao: 'Ligações de hidrogênio ocorrem entre moléculas altamente polares, quando um átomo de H está ligado a flúor, oxigênio ou nitrogênio (grupo FON). É a mais intensa das interações intermoleculares.',
+    aoAcertar: function () { botaoContinuar(300); }
+  });
+}
+
+/* ==========================================================
+   ETAPA — ORDEM DE INTENSIDADE
+   ========================================================== */
+function passoOrdem() {
+  fala('Vamos juntar tudo. Como essas três forças se comparam em intensidade?');
+
+  escolhaBotoes({
+    pergunta: 'Qual é a ordem correta, da mais fraca para a mais forte?',
+    opcoes: [
+      { rotulo: 'Dipolo-dipolo < Dispersão de London < Ligação de hidrogênio', correta: false },
+      { rotulo: 'Dispersão de London < Dipolo-dipolo < Ligação de hidrogênio', correta: true },
+      { rotulo: 'Ligação de hidrogênio < Dipolo-dipolo < Dispersão de London', correta: false }
+    ],
+    dica: 'A força mais fraca ocorre entre moléculas apolares; a mais forte envolve o grupo FON.',
+    explicacao: 'Dispersão de London < Dipolo-dipolo < Ligação de hidrogênio. Essa ordem explica diferenças de ponto de fusão e ebulição entre substâncias moleculares.',
+    aoAcertar: function () { botaoContinuar(300); }
+  });
+}
+
+/* ==========================================================
+   ETAPA — CLASSIFICAR AS MOLÉCULAS (associação)
+   ========================================================== */
+function passoClassificar() {
+  fala('Escolha um tipo de interação à esquerda e clique em todos os pares de moléculas que se encaixam nele. Depois, passe para o próximo tipo.');
+  criarClassificacaoPorCategoria([
+    { chave: 'H2', categoria: 'Dispersão de London' },
+    { chave: 'CH4', categoria: 'Dispersão de London' },
+    { chave: 'HCl', categoria: 'Dipolo-dipolo' },
+    { chave: 'HF', categoria: 'Ligação de hidrogênio' },
+    { chave: 'NH3', categoria: 'Ligação de hidrogênio' },
+    { chave: 'H2O', categoria: 'Ligação de hidrogênio' }
+  ], ['Dispersão de London', 'Dipolo-dipolo', 'Ligação de hidrogênio'],
+  'Lembre-se: apolares fazem dispersão de London; H ligado a F, O ou N faz ligação de hidrogênio.', 'Muito bem! Você classificou todas corretamente.');
+}
+
+/* ==========================================================
+   ETAPA — TEMPERATURA DE EBULIÇÃO
+   ========================================================== */
+function passoEbulicao() {
+  fala('As temperaturas de fusão e ebulição dependem da intensidade das interações intermoleculares.');
+  const linha = document.createElement('div');
+  linha.style.position = 'absolute'; linha.style.inset = '0';
+  linha.style.display = 'flex'; linha.style.justifyContent = 'center'; linha.style.alignItems = 'center';
+  linha.style.gap = '18px'; linha.style.flexWrap = 'wrap';
+  ['CH4', 'HCl', 'H2O'].forEach(function (tipo) {
+    const card = criarCartaoMolecula(tipo, rotuloFormula(tipo));
+    card.style.position = 'relative'; card.style.left = '0'; card.style.top = '0'; card.style.transform = 'none';
+    linha.appendChild(card);
+  });
+  overlay.appendChild(linha);
+
+  escolhaBotoes({
+    pergunta: 'Aquecendo essas três substâncias, qual evapora primeiro?',
+    opcoes: [
+      { rotulo: 'CH₄', correta: true },
+      { rotulo: 'HCl', correta: false },
+      { rotulo: 'H₂O', correta: false }
+    ],
+    dica: 'Qual delas tem as interações intermoleculares mais fracas?',
+    explicacao: 'O CH₄ só apresenta dispersão de London, a força mais fraca — por isso evapora com pouquíssima energia.',
+    aoAcertar: function () { agendar(passoEbulicao2, 300); }
+  });
+}
+function passoEbulicao2() {
+  escolhaBotoes({
+    pergunta: 'E qual delas resiste mais, evaporando por último?',
+    opcoes: [
+      { rotulo: 'CH₄', correta: false },
+      { rotulo: 'HCl', correta: false },
+      { rotulo: 'H₂O', correta: true }
+    ],
+    dica: 'Qual delas faz ligações de hidrogênio?',
+    explicacao: 'A água faz ligações de hidrogênio, a interação mais intensa — por isso exige muito mais energia (temperatura) para evaporar.',
+    aoAcertar: function () { botaoContinuar(400); }
+  });
+}
+
+/* ==========================================================
+   FINAL
+   ========================================================== */
+function passoFinal() {
+  fala('Agora você consegue prever a intensidade das forças intermoleculares observando apenas a molécula.');
+  overlay.innerHTML =
+    '<div class="quadro-resumo" style="position:absolute;inset:0;align-items:center;">' +
+    '<div class="quadro-item"><div class="rotulo">Dispersão de London</div><div class="valor">Mais fraca</div></div>' +
+    '<div class="quadro-item"><div class="rotulo">Dipolo-dipolo</div><div class="valor">Intermediária</div></div>' +
+    '<div class="quadro-item"><div class="rotulo">Ligação de hidrogênio</div><div class="valor">Mais intensa</div></div>' +
+    '</div>';
+  painel.innerHTML = '';
+  const conclusao = document.getElementById('conclusao');
+  document.getElementById('conclusaoPlacar').textContent = 'Fase concluída';
+  document.getElementById('conclusaoMensagem').textContent = 'Você percebeu por que algumas substâncias evaporam facilmente e outras não — tudo depende da intensidade das forças intermoleculares.';
+  conclusao.classList.add('visivel');
+  conclusao.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+/* ==========================================================
+   MOTOR DA FASE
+   ========================================================== */
+const PASSOS = [passoIntro, passoDispersao, passoDipoloDipolo, passoLigacaoH, passoOrdem, passoClassificar, passoEbulicao, passoFinal];
+let passoAtual = 0;
+
+function irPara(i) {
+  passoAtual = i;
+  limparTimers();
+  overlay.innerHTML = '';
+  painel.innerHTML = '';
+  continuarBalao.innerHTML = '';
+  PASSOS[i]();
+}
+function avancar() {
+  if (passoAtual + 1 < PASSOS.length) irPara(passoAtual + 1);
+}
+function reiniciar() {
+  document.getElementById('conclusao').classList.remove('visivel');
+  irPara(0);
+}
+
+/* ── INIT ── */
+irPara(0);
+</script>
+
+<script>
+(function () {
+  var _clickSom = new Audio('../sons/click.mp3');
+  _clickSom.preload = 'auto';
+  document.addEventListener('click', function (e) {
+    var alvo = e.target.closest('button');
+    if (alvo) { try { _clickSom.currentTime = 0; _clickSom.play().catch(function () {}); } catch (err) {} }
+  }, true);
+})();
+</script>
+</body>
+</html>

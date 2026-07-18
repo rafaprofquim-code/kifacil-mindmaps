@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow">
+  <title>O Dia da Matéria — Jogo Premium | KiFácil</title>
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --fundo: #fdf8f0;
+      --fundo-card: #fffdf9;
+      --escuro: #2e2016;
+      --texto: #1a1208;
+      --texto-suave: #3d2e1a;
+      --dourado: #8a5e10;
+      --dourado-claro: #c8920a;
+      --borda: rgba(100,70,20,0.3);
+      --borda-forte: rgba(100,70,20,0.5);
+      --verde-escuro: #1e5238;
+      --vermelho-escuro: #7a1515;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Libre Baskerville', Georgia, serif;
+      background: var(--fundo);
+      color: var(--texto);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    .top-nav {
+      background: #1e1008;
+      border-bottom: 2px solid var(--dourado-claro);
+      padding: 0 2.5rem;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+    .brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.7rem;
+      font-weight: 600;
+      color: #fff8ee;
+      letter-spacing: 0.03em;
+      margin-right: auto;
+    }
+
+    /* MAIN */
+    main {
+      flex: 1;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 2.5rem;
+      width: 100%;
+    }
+    .titulo-jogo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+      line-height: 1.1;
+    }
+    .subtitulo {
+      font-size: 1.1rem;
+      color: var(--texto);
+      margin-bottom: 2.5rem;
+      max-width: 680px;
+    }
+
+    .narrador {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 1.4rem;
+      padding: 1rem 1.1rem;
+      border: 1.5px solid var(--borda-forte);
+      border-radius: 10px;
+      background: rgba(30,16,8,0.05);
+    }
+    .narrador img {
+      width: 78px;
+      height: 96px;
+      object-fit: cover;
+      object-position: top center;
+      border-radius: 10px;
+      border: 1px solid rgba(200,146,10,.35);
+      flex-shrink: 0;
+    }
+    .narrador-nome {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.8rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--dourado-claro);
+      margin-bottom: 0.4rem;
+    }
+    .narrador-texto {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: var(--texto-suave);
+    }
+
+    /* IMAGEM */
+    .imagem-wrapper {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: fit-content;
+      max-width: min(100%, 900px);
+      max-height: 70vh;
+      margin: 0 auto;
+      cursor: zoom-in;
+      border: 1.5px solid var(--borda-forte);
+      border-radius: 6px;
+      overflow: hidden;
+      background: #f7efe2;
+    }
+    .imagem-wrapper img {
+      display: block;
+      width: auto;
+      max-width: 100%;
+      height: auto;
+      max-height: 70vh;
+      object-fit: contain;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .link-aula {
+      position: absolute; top: 10px; right: 10px; z-index: 10;
+      display: flex; flex-direction: column; align-items: center; gap: 2px;
+      text-decoration: none; color: #fff8ee;
+      background: rgba(30,16,8,0.72); border: 1.5px solid var(--dourado-claro, #c8920a);
+      border-radius: 8px; padding: 0.4rem 0.65rem;
+      font-family: 'Cormorant Garamond', serif; font-size: 0.68rem; font-weight: 600;
+      letter-spacing: 0.02em; text-align: center; line-height: 1.2;
+      cursor: pointer; transition: background 0.2s, transform 0.15s;
+    }
+    .link-aula:hover { background: rgba(30,16,8,0.92); transform: translateY(-1px); }
+    .link-aula svg { width: 22px; height: 22px; }
+
+    /* HOTSPOTS */
+    .hotspot {
+      position: absolute;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #1e1008;
+      border: 2px solid var(--dourado-claro);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transform: translate(-50%, -50%);
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--dourado-claro);
+      transition: box-shadow 0.2s;
+      z-index: 10;
+      user-select: none;
+    }
+    .hotspot:hover {
+      animation: pulsar 0.6s ease-in-out infinite alternate;
+    }
+    @keyframes pulsar {
+      from { transform: translate(-50%, -50%) scale(1);    box-shadow: 0 0 0 0   rgba(200,146,10,0.4); }
+      to   { transform: translate(-50%, -50%) scale(1.13); box-shadow: 0 0 0 7px rgba(200,146,10,0);   }
+    }
+    .hotspot.concluido { border-color: var(--dourado-claro); color: var(--dourado-claro); }
+    .hotspot.revelado  { border-color: var(--vermelho-escuro); color: var(--vermelho-escuro); }
+
+    /* OVERLAY */
+    .overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(30,16,8,0.65);
+      z-index: 100;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+    .overlay.ativo { display: flex; }
+
+    /* MODAL PERGUNTA */
+    .modal-pergunta {
+      background: var(--fundo-card);
+      border: 1.5px solid var(--borda-forte);
+      border-radius: 12px;
+      max-width: 520px;
+      width: 100%;
+      padding: 2.5rem 2rem 2rem;
+      position: relative;
+    }
+    .modal-fechar {
+      position: absolute;
+      top: 1rem;
+      right: 1.2rem;
+      background: none;
+      border: none;
+      font-size: 1.4rem;
+      color: var(--texto-suave);
+      cursor: pointer;
+      line-height: 1;
+      padding: 0;
+    }
+    .modal-fechar:hover { color: var(--texto); }
+    .modal-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--dourado-claro);
+      border: 1px solid var(--dourado-claro);
+      display: inline-block;
+      padding: 0.15em 0.7em;
+      border-radius: 2px;
+      margin-bottom: 0.8rem;
+    }
+    .modal-pergunta-texto {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem;
+      font-weight: 600;
+      line-height: 1.3;
+      margin-bottom: 1.4rem;
+    }
+    .tracados {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.3rem;
+      margin-bottom: 1.2rem;
+    }
+    .tracado-letra {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--dourado);
+      border-bottom: 2px solid var(--dourado);
+      width: 20px;
+      text-align: center;
+      line-height: 1.3;
+    }
+    .modal-input {
+      width: 100%;
+      font-family: 'Libre Baskerville', Georgia, serif;
+      font-size: 1.1rem;
+      padding: 0.65rem 1rem;
+      background: var(--fundo);
+      border: 1.5px solid var(--borda-forte);
+      border-radius: 6px;
+      color: var(--texto);
+      outline: none;
+      transition: border-color 0.2s;
+      margin-bottom: 1rem;
+    }
+    .modal-input:focus { border-color: var(--dourado-claro); }
+    .modal-input:disabled { opacity: 0.5; cursor: default; }
+    .modal-btn-confirmar {
+      background: #1e1008;
+      color: var(--dourado-claro);
+      border: 1.5px solid var(--dourado-claro);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.6rem 1.8rem;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+    .modal-btn-confirmar:hover { background: var(--dourado-claro); color: #1e1008; }
+    .modal-btn-confirmar:disabled { opacity: 0.4; cursor: default; }
+    .modal-btn-confirmar:disabled:hover { background: #1e1008; color: var(--dourado-claro); }
+    .modal-feedback {
+      margin-top: 1.2rem;
+      font-size: 0.88rem;
+      line-height: 1.7;
+      border-left: 3px solid var(--borda-forte);
+      padding-left: 1rem;
+      display: none;
+    }
+    .modal-feedback.visivel { display: block; }
+    .feedback-certo   { color: var(--verde-escuro); font-weight: 700; }
+    .feedback-errado  { color: var(--vermelho-escuro); font-weight: 700; }
+    .feedback-resposta{ color: var(--verde-escuro); font-weight: 700; }
+    .feedback-dica    { color: var(--texto-suave); }
+    .feedback-explicacao { color: var(--texto); margin-top: 0.5rem; }
+
+    /* MODAL ZOOM */
+    .modal-zoom {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(18,10,4,0.93);
+      z-index: 200;
+      align-items: center;
+      justify-content: center;
+      cursor: zoom-out;
+    }
+    .modal-zoom.ativo { display: flex; }
+    .modal-zoom img {
+      max-width: 95vw;
+      max-height: 90vh;
+      object-fit: contain;
+      border: 1px solid var(--borda-forte);
+      border-radius: 4px;
+      pointer-events: none;
+    }
+
+    /* CONCLUSÃO */
+    .conclusao {
+      display: none;
+      margin-top: 3rem;
+      background: var(--fundo-card);
+      border: 1.5px solid var(--borda-forte);
+      border-radius: 12px;
+      padding: 3rem 2rem;
+      text-align: center;
+    }
+    .conclusao.visivel { display: block; }
+    .conclusao-titulo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.8rem, 5vw, 2.8rem);
+      font-weight: 600;
+      margin-bottom: 0.8rem;
+    }
+    .conclusao-placar {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      color: var(--dourado-claro);
+      margin-bottom: 1rem;
+    }
+    .conclusao-mensagem {
+      font-size: 0.93rem;
+      color: var(--texto-suave);
+      max-width: 460px;
+      margin: 0 auto 2rem;
+      line-height: 1.8;
+    }
+    .btn-reiniciar {
+      background: #1e1008;
+      color: var(--dourado-claro);
+      border: 1.5px solid var(--dourado-claro);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.7rem 2rem;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+    .btn-reiniciar:hover { background: var(--dourado-claro); color: #1e1008; }
+
+    /* FOOTER */
+    footer {
+      background: var(--escuro);
+      border-top: 2px solid var(--dourado-claro);
+      padding: 1.2rem 2rem;
+      text-align: center;
+      font-size: 0.82rem;
+      color: rgba(255,248,238,0.5);
+    }
+
+    @media (min-width: 641px) {
+      .narrador {
+        max-width: 900px;
+        margin: 0 auto 1.2rem;
+      }
+      .narrador-texto {
+        font-size: 1.08rem;
+      }
+    }
+
+    /* RESPONSIVO */
+    @media (max-width: 640px) {
+      .top-nav { padding: 0 1.2rem; gap: 1.2rem; }
+      main { padding: 2rem 1rem 4rem; }
+      .modal-pergunta { padding: 2rem 1.2rem 1.5rem; }
+      .overlay { padding: 0.4rem; }
+      .modal-input { font-size: 1rem; }
+      .hotspot { width: 22px; height: 22px; font-size: 0.65rem; border-width: 1.5px; }
+      .link-aula { top: 6px; right: 6px; padding: 0.3rem 0.5rem; font-size: 0.6rem; }
+      .link-aula svg { width: 18px; height: 18px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <div class="brand">KiFácil</div>
+</nav>
+
+<main>
+  <h1 class="titulo-jogo">O Dia da Matéria</h1>
+  
+
+  <div class="narrador">
+    <img src="../imagens/rafa-sorrindo.jpg" alt="Professora Rafaela" />
+    <div>
+      <div class="narrador-nome">Professora Rafaela</div>
+      <div class="narrador-texto">Observe a cena e indique os fenômenos que aparecem.</div>
+    </div>
+  </div>
+
+  <div class="imagem-wrapper" id="imagemWrapper">
+    <img src="../imagens/jogo-materia.jpg" alt="Cena com fenômenos físicos e químicos" id="imagemJogo" />
+    <!-- COLOQUE O LINK AQUI -->
+    <a class="link-aula" href="https://www.youtube.com/watch?v=bwYxb80b1fQ&t=115s" target="_blank" rel="noopener" title="Assista à aula">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.6"/>
+        <path d="M10 8.5L16 12L10 15.5V8.5Z" fill="currentColor"/>
+      </svg>
+      <span>Assista à aula</span>
+    </a>
+  </div>
+
+  <div class="conclusao" id="conclusao">
+    <div class="conclusao-titulo">Estudo concluído</div>
+    <div class="conclusao-placar" id="conclusaoPlacar"></div>
+    <p class="conclusao-mensagem" id="conclusaoMensagem"></p>
+    <button class="btn-reiniciar" onclick="reiniciar()">Jogar novamente</button>
+  </div>
+</main>
+
+<footer>© 2026 KiFácil</footer>
+
+<!-- MODAL PERGUNTA -->
+<div class="overlay" id="overlayPergunta">
+  <div class="modal-pergunta">
+    <button class="modal-fechar" id="btnFechar" aria-label="Fechar">&times;</button>
+    <div class="modal-num" id="modalNum"></div>
+    <div class="modal-pergunta-texto" id="modalPerguntaTexto"></div>
+    <div class="tracados" id="modalTracados"></div>
+    <input class="modal-input" type="text" id="modalInput" placeholder="Digite sua resposta..." autocomplete="off" spellcheck="false" />
+    <button class="modal-btn-confirmar" id="modalBtnConfirmar">Confirmar</button>
+    <div class="modal-feedback" id="modalFeedback"></div>
+  </div>
+</div>
+
+<!-- MODAL ZOOM -->
+<div class="modal-zoom" id="modalZoom">
+  <img src="../imagens/jogo-materia.jpg" alt="Cena ampliada" />
+</div>
+
+<script>
+const ELEMENTOS = [
+  {
+    id: 1, left: '10%', top: '44%',
+    pergunta: 'Como se chama esse processo de vaporização?',
+    resposta: 'ebulição', letras: 8,
+    dica: 'Ocorre em toda a massa do líquido, com formação de bolhas em seu interior.',
+    explicacao: 'A ebulição é a vaporização que ocorre em toda a massa do líquido. É um processo endotérmico — absorve energia do ambiente.'
+  },
+  {
+    id: 2, left: '31%', top: '62%',
+    pergunta: 'Como se chama a mudança de estado observada?',
+    resposta: 'fusão', letras: 5,
+    dica: 'O sólido está absorvendo energia e passando para outro estado.',
+    explicacao: 'A fusão é a passagem do estado sólido para o líquido. É um processo endotérmico — o gelo absorve energia para derreter.'
+  },
+  {
+    id: 3, left: '46%', top: '50%',
+    pergunta: 'Como se chama o processo que forma as gotas na garrafa?',
+    resposta: 'condensação', letras: 11,
+    dica: 'O vapor de água do ar encontra uma superfície fria e muda de estado.',
+    explicacao: 'A condensação é a passagem do estado gasoso para o líquido. O vapor de água do ar se condensa ao tocar a superfície fria da garrafa.'
+  },
+  {
+    id: 4, left: '58%', top: '19%',
+    pergunta: 'Como se chama o processo que formou os cristais de gelo na janela?',
+    resposta: 'ressublimação', letras: 13,
+    dica: 'O vapor passou diretamente para o estado sólido, sem virar líquido antes.',
+    explicacao: 'A ressublimação é a passagem direta do estado gasoso para o sólido. O vapor de água do ar se transforma em cristais de gelo ao tocar a janela fria.'
+  },
+  {
+    id: 5, left: '74%', top: '41%',
+    pergunta: 'Como se chama esse tipo de vaporização?',
+    resposta: 'evaporação', letras: 10,
+    dica: 'Ocorre lentamente, apenas na superfície do líquido.',
+    explicacao: 'A evaporação é uma vaporização lenta que ocorre apenas na superfície do líquido. É o que faz as roupas secarem no varal.'
+  },
+  {
+    id: 6, left: '63%', top: '53%',
+    pergunta: ' Esse é um fenômeno:',
+    resposta: 'químico', letras: 7,
+    dica: 'O ferro reagiu com o oxigênio do ar e formou uma substância nova.',
+    explicacao: 'A ferrugem é um fenômeno químico: o ferro reage com o oxigênio formando óxido de ferro, uma substância completamente diferente do ferro original.'
+  },
+  {
+    id: 7, left: '87%', top: '66%', mobileTop: '77%',
+    pergunta: 'Como se chama o processo pelo qual a naftalina desaparece?',
+    resposta: 'sublimação', letras: 10,
+    dica: 'A substância passa diretamente do estado sólido para o gasoso.',
+    explicacao: 'A sublimação é a passagem direta do estado sólido para o gasoso, sem passar pelo líquido. É exatamente o que acontece com a naftalina.'
+  }
+];
+
+let estado = criarEstadoInicial();
+let elementoAtivo = null;
+
+function criarEstadoInicial() {
+  return ELEMENTOS.map(e => ({ id: e.id, tentativas: 0, status: 'pendente' }));
+}
+
+function getEstado(id) { return estado.find(e => e.id === id); }
+
+function normalizar(str) {
+  return str.toLowerCase()
+    .normalize('NFD')
+    .replace(/[̀-ͯ]/g, '')
+    .trim();
+}
+
+/* ── HOTSPOTS ── */
+function renderHotspots() {
+  const wrapper = document.getElementById('imagemWrapper');
+  wrapper.querySelectorAll('.hotspot').forEach(h => h.remove());
+
+  ELEMENTOS.forEach(el => {
+    const est = getEstado(el.id);
+    const btn = document.createElement('button');
+    btn.className = 'hotspot';
+    if (est.status === 'concluido') btn.classList.add('concluido');
+    if (est.status === 'revelado')  btn.classList.add('revelado');
+    const isMobile = window.innerWidth <= 640;
+    btn.style.left = el.left;
+    btn.style.top  = (isMobile && el.mobileTop) ? el.mobileTop : el.top;
+    btn.setAttribute('aria-label', `Elemento ${el.id}`);
+
+    if (est.status === 'concluido')   btn.textContent = '✓';
+    else if (est.status === 'revelado') btn.textContent = '✕';
+    else                               btn.textContent = el.id;
+
+    btn.addEventListener('click', e => { e.stopPropagation(); abrirModal(el.id); });
+    wrapper.appendChild(btn);
+  });
+}
+
+/* ── MODAL PERGUNTA ── */
+function abrirModal(id) {
+  const el  = ELEMENTOS.find(e => e.id === id);
+  const est = getEstado(id);
+  elementoAtivo = id;
+
+  document.getElementById('modalNum').textContent = `Elemento ${id}`;
+  document.getElementById('modalPerguntaTexto').textContent = el.pergunta;
+
+  const tracados = document.getElementById('modalTracados');
+  tracados.innerHTML = '';
+  for (let i = 0; i < el.letras; i++) {
+    const span = document.createElement('span');
+    span.className = 'tracado-letra';
+    span.innerHTML = '&nbsp;';
+    tracados.appendChild(span);
+  }
+
+  const input = document.getElementById('modalInput');
+  const btnOk = document.getElementById('modalBtnConfirmar');
+  const feedback = document.getElementById('modalFeedback');
+
+  input.value = '';
+  input.disabled = est.status !== 'pendente';
+  btnOk.disabled = est.status !== 'pendente';
+  feedback.className = 'modal-feedback';
+  feedback.innerHTML = '';
+
+  if (est.status === 'concluido') {
+    feedback.className = 'modal-feedback visivel';
+    feedback.innerHTML = `<span class="feedback-certo">Correto!</span><p class="feedback-explicacao">${el.explicacao}</p>`;
+  } else if (est.status === 'revelado') {
+    feedback.className = 'modal-feedback visivel';
+    feedback.innerHTML = `<span class="feedback-resposta">Resposta: ${el.resposta}</span><p class="feedback-explicacao">${el.explicacao}</p>`;
+  }
+
+  document.getElementById('overlayPergunta').classList.add('ativo');
+  if (est.status === 'pendente') setTimeout(() => input.focus(), 80);
+}
+
+function fecharModal() {
+  document.getElementById('overlayPergunta').classList.remove('ativo');
+  elementoAtivo = null;
+}
+
+const _ding = new Audio('../sons/ding.mp3');
+_ding.preload = 'auto';
+
+function tocarDing() { try{ _ding.currentTime = 0; _ding.play().catch(()=>{}); }catch(e){} }
+
+function confirmar() {
+  if (elementoAtivo === null) return;
+  const el  = ELEMENTOS.find(e => e.id === elementoAtivo);
+  const est = getEstado(elementoAtivo);
+  if (est.status !== 'pendente') return;
+
+  const input    = document.getElementById('modalInput');
+  const feedback = document.getElementById('modalFeedback');
+  const resposta = input.value;
+  if (!resposta.trim()) return;
+
+  if (normalizar(resposta) === normalizar(el.resposta)) {
+    tocarDing();
+    est.status = 'concluido';
+    input.disabled = true;
+    document.getElementById('modalBtnConfirmar').disabled = true;
+    feedback.className = 'modal-feedback visivel';
+    feedback.innerHTML = `<span class="feedback-certo">Correto!</span><p class="feedback-explicacao">${el.explicacao}</p>`;
+    renderHotspots();
+    verificarConclusao();
+  } else {
+    est.tentativas++;
+    if (est.tentativas === 1) {
+      feedback.className = 'modal-feedback visivel';
+      feedback.innerHTML = `<span class="feedback-errado">Resposta incorreta.</span><p class="feedback-dica" style="margin-top:.4rem"><em>Dica:</em> ${el.dica}</p>`;
+      input.value = '';
+      input.focus();
+    } else {
+      est.status = 'revelado';
+      input.disabled = true;
+      document.getElementById('modalBtnConfirmar').disabled = true;
+      feedback.className = 'modal-feedback visivel';
+      feedback.innerHTML = `<span class="feedback-resposta">Resposta: ${el.resposta}</span><p class="feedback-explicacao">${el.explicacao}</p>`;
+      renderHotspots();
+      verificarConclusao();
+    }
+  }
+}
+
+/* ── CONCLUSÃO ── */
+function verificarConclusao() {
+  if (!estado.every(e => e.status !== 'pendente')) return;
+
+  const acertos = estado.filter(e => e.status === 'concluido').length;
+  const total   = estado.length;
+
+  let mensagem;
+  if (acertos === total) {
+    mensagem = 'Excelente! Você identificou todos os fenômenos corretamente. Seu domínio sobre as mudanças de estado e fenômenos da matéria está consolidado.';
+  } else if (acertos >= 5) {
+    mensagem = 'Muito bem! Você domina a maior parte dos fenômenos. Revise os que ficaram em aberto e jogue novamente para fixar o conteúdo.';
+  } else if (acertos >= 3) {
+    mensagem = 'Bom esforço! Alguns conceitos ainda precisam de atenção. Leia as explicações com cuidado e tente novamente.';
+  } else {
+    mensagem = 'Continue estudando! As mudanças de estado são fundamentais. Revise seu mapa mental e jogue novamente.';
+  }
+
+  document.getElementById('conclusaoPlacar').textContent  = `Você acertou ${acertos} de ${total} fenômenos`;
+  document.getElementById('conclusaoMensagem').textContent = mensagem;
+  const conclusao = document.getElementById('conclusao');
+  conclusao.classList.add('visivel');
+  conclusao.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function reiniciar() {
+  estado = criarEstadoInicial();
+  document.getElementById('conclusao').classList.remove('visivel');
+  renderHotspots();
+}
+
+/* ── EVENTOS ── */
+document.getElementById('btnFechar').addEventListener('click', fecharModal);
+document.getElementById('overlayPergunta').addEventListener('click', e => {
+  if (e.target === e.currentTarget) fecharModal();
+});
+document.getElementById('modalBtnConfirmar').addEventListener('click', confirmar);
+document.getElementById('modalInput').addEventListener('keydown', e => {
+  if (e.key === 'Enter') confirmar();
+});
+
+// Zoom
+const imagemWrapper = document.getElementById('imagemWrapper');
+const modalZoom     = document.getElementById('modalZoom');
+
+imagemWrapper.addEventListener('click', e => {
+  if (e.target.closest('.hotspot')) return;
+  modalZoom.classList.add('ativo');
+});
+modalZoom.addEventListener('click', () => modalZoom.classList.remove('ativo'));
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') { fecharModal(); modalZoom.classList.remove('ativo'); }
+});
+
+/* ── INIT ── */
+renderHotspots();
+</script>
+
+<script>
+(function () {
+  var _clickSom = new Audio('../sons/click.mp3');
+  _clickSom.preload = 'auto';
+  document.addEventListener('click', function (e) {
+    var alvo = e.target.closest('button');
+    if (alvo) { try { _clickSom.currentTime = 0; _clickSom.play().catch(function () {}); } catch (err) {} }
+  }, true);
+})();
+</script>
+</body>
+</html>

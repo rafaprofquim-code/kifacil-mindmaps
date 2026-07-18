@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="canonical" href="https://kifaciledu.com.br/jogos/jogos-escaperoom/torre-quimica/fases/fase5-travessia-tabela-periodica.html">
+<title>A Travessia da Tabela Periódica | KiFácil</title>
+<meta name="description" content="Fase 5 do Escape Room dos Mapas da Academia KiFácil. Percorra a Tabela Periódica seguindo pistas de família e período até encontrar o elemento certo.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;1,500;1,600&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:          #2e2016;
+    --text:        #f5ead0;
+    --text-soft:   #e8d4b0;
+    --gold:        #e8b84b;
+    --border:      rgba(212,170,106,0.4);
+    --panel-bg:    rgba(14, 6, 0, 0.94);
+    --green-border:rgba(80,200,120,0.5);
+    --green-text:  #8fe0a0;
+    --red-border:  rgba(217,95,59,0.35);
+    --red-text:    #e8956a;
+  }
+
+  html, body {
+    height: 100%; overflow: hidden;
+    font-family: 'Libre Baskerville', serif;
+    color: var(--text);
+    background: var(--bg);
+  }
+  body { display: flex; flex-direction: column; }
+
+  /* ── HEADER ── */
+  .header {
+    background: #1a0f08;
+    padding: 14px 28px 12px;
+    border-bottom: 1px solid rgba(212,170,106,0.2);
+    display: flex; align-items: center; justify-content: space-between;
+    flex-shrink: 0;
+  }
+  .eyebrow { font-size: 9px; letter-spacing: .16em; text-transform: uppercase; color: var(--gold); margin-bottom: 3px; }
+  .page-title { font-family: 'Lora', serif; font-size: 24px; font-weight: 600; color: var(--text); line-height: 1.1; }
+  .progress-wrap { display: flex; align-items: center; gap: 4px; }
+  .prog-step {
+    width: 22px; height: 22px; border-radius: 50%;
+    border: 1px solid rgba(212,170,106,0.3);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 9px; color: rgba(232,216,176,0.4);
+    transition: all .4s; position: relative; flex-shrink: 0;
+  }
+  .prog-step.active { border-color: var(--gold); color: var(--gold); }
+  .prog-step.done { background: var(--gold); border-color: var(--gold); color: #1a0f08; font-weight: 700; }
+  .prog-line { width: 9px; height: 1px; background: rgba(212,170,106,0.25); flex-shrink: 0; }
+
+  /* ── GAME AREA ── */
+  #game-area {
+    position: relative;
+    flex: 1; min-height: 0;
+    overflow: hidden;
+  }
+
+  #scene-col {
+    position: absolute;
+    inset: 0;
+    background: #1a0f08;
+  }
+
+  /* #tabela-wrapper é dimensionado via JavaScript (função
+     ajustarWrapperTabela) para ocupar o MAIOR retângulo possível dentro
+     de #scene-col mantendo a proporção real da imagem (1436×924) — o
+     mesmo resultado visual de um object-fit:contain, mas calculado num
+     wrapper próprio, para que os hotspots e o pino (posicionados em %
+     relativas a ESTE wrapper) sempre coincidam exatamente com a tabela,
+     sem sobrar margem morta nem ficar preso ao tamanho nativo do PNG. */
+  #tabela-wrapper {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  #scene-img {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  /* ── HOTSPOTS DOS ELEMENTOS ──────────────────────────────────────────────
+     Cada um dos 118 elementos recebe um hotspot invisível, gerado via
+     JavaScript a partir da grade de colunas/linhas calculada em pixels
+     reais sobre a imagem tabela-periodica-kifacil.png (ver comentários
+     no <script> mais abaixo, seção "GRADE DA TABELA"). A posição de cada
+     hotspot é sempre relativa a #tabela-wrapper (que tem exatamente o
+     tamanho da imagem renderizada — ver comentário acima), diferente
+     da convenção usada nos hotspots das demais fases do escape room,
+     que ficam relativos a #scene-col inteiro.
+     ──────────────────────────────────────────────────────────────────────── */
+  .elem-hotspot {
+    position: absolute;
+    width: 4.5%; height: 6.6%;
+    transform: translate(-50%, -50%);
+    border-radius: 6px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: border-color .2s, background-color .2s;
+    z-index: 10;
+  }
+  .elem-hotspot:hover { border-color: rgba(232,184,75,0.45); background: rgba(232,184,75,0.08); }
+  /* Elemento onde o pino está posicionado no momento: brilho dourado suave */
+  .elem-hotspot.atual {
+    border-color: var(--gold);
+    box-shadow: 0 0 12px 2px rgba(232,184,75,0.55);
+  }
+
+  /* ── PINO DOURADO ── */
+  #pino {
+    position: absolute;
+    left: 6.51%; top: 16.18%;
+    width: 3.6%;
+    transform: translate(-50%, -55%);
+    z-index: 15;
+    pointer-events: none;
+    filter: drop-shadow(0 3px 7px rgba(0,0,0,.6));
+    transition: left .65s cubic-bezier(.4,0,.2,1), top .65s cubic-bezier(.4,0,.2,1);
+  }
+
+  /* ── PAINEL DE ETAPA — canto superior direito ── */
+  #etapa-painel {
+    position: absolute;
+    top: 14px; right: 14px;
+    z-index: 50;
+    background: var(--panel-bg);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: .6rem 1rem;
+    backdrop-filter: blur(6px);
+    box-shadow: 0 4px 18px rgba(0,0,0,.7);
+    text-align: center;
+  }
+  .etapa-titulo { font-size: 9px; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); margin-bottom: 4px; }
+  .etapa-contador { font-family: 'Lora', serif; font-size: 15px; font-weight: 600; color: var(--text); }
+
+  /* ── PROFESSORA RAFAELA (esquerda) ── */
+  #teacher-box {
+    position: absolute;
+    bottom: 0; left: 20px;
+    z-index: 95;
+    display: flex; flex-direction: column; align-items: flex-start;
+    gap: 6px;
+    width: 280px;
+    pointer-events: none;
+  }
+  #teacher-img {
+    width: 184px; height: 222px;
+    object-fit: cover; object-position: top center;
+    border-radius: 12px 12px 0 0;
+    border: 2px solid rgba(232,184,75,0.55);
+    border-bottom: none;
+    flex-shrink: 0;
+    filter: drop-shadow(0 -4px 20px rgba(0,0,0,.9));
+    transition: opacity .35s ease;
+  }
+  #teacher-bubble {
+    background: rgba(36,21,11,0.97);
+    border: 1.5px solid rgba(232,184,75,0.52);
+    border-radius: 4px 14px 0 0;
+    padding: .8rem .95rem;
+    width: 280px;
+    min-height: 76px;
+    display: flex; flex-direction: column;
+    justify-content: space-between; gap: .65rem;
+    pointer-events: all;
+    box-shadow: 0 -4px 24px rgba(0,0,0,.75);
+    backdrop-filter: blur(4px);
+  }
+  #teacher-name {
+    font-size: 9px; letter-spacing: .16em; text-transform: uppercase;
+    color: #d6b15b; margin-bottom: 2px;
+  }
+  #teacher-text {
+    font-family: 'Lora', serif;
+    font-size: 15px; line-height: 1.65;
+    color: #D4C5A8; font-weight: 400;
+    text-align: justify;
+  }
+  #btn-avancar {
+    align-self: flex-end;
+    background: linear-gradient(135deg, #e8b84b, #b8891e);
+    color: #160600; border: none; border-radius: 6px;
+    padding: .45rem 1.2rem;
+    font-family: 'Libre Baskerville', serif;
+    font-size: 11px; font-weight: 700;
+    letter-spacing: .06em; text-transform: uppercase;
+    cursor: pointer; opacity: 0; pointer-events: none;
+    transition: opacity .3s, transform .2s;
+  }
+  #btn-avancar.show { opacity: 1; pointer-events: all; }
+  #btn-avancar:hover { filter: brightness(1.1); transform: scale(1.03); }
+
+  /* ── VITÓRIA ── */
+  #win-screen {
+    display: none; position: fixed; inset: 0; z-index: 200;
+    background: rgba(14,6,0,0.92);
+    flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; padding: 40px;
+    backdrop-filter: blur(6px);
+  }
+  #win-screen.show { display: flex; }
+  .win-title { font-family: 'Lora', serif; font-size: 46px; font-weight: 600; color: var(--gold); margin-bottom: 12px; }
+  .win-sub { font-size: 15px; color: var(--text-soft); font-style: italic; margin-bottom: 36px; line-height: 1.8; max-width: 480px; }
+  .btn-next {
+    background: var(--gold); border: none; border-radius: 6px;
+    padding: 14px 36px; font-family: 'Libre Baskerville', serif;
+    font-size: 14px; font-weight: 700; color: #1a0f08;
+    cursor: pointer; letter-spacing: .06em; text-transform: uppercase;
+    transition: background .15s; text-decoration: none; display: inline-block;
+  }
+  .btn-next:hover { background: #f0c960; }
+
+  /* ── RESPONSIVO ──────────────────────────────────────────────────────────
+     Os hotspots e o pino usam coordenadas em % sobre #scene-col, então
+     acompanham a imagem automaticamente tanto no modo "contain" (desktop)
+     quanto no modo "largura total" (celular) — não é necessário reescrever
+     as 118 posições para o mobile, apenas trocar o comportamento do
+     próprio #scene-img/#scene-col, como nas demais fases.
+     ──────────────────────────────────────────────────────────────────────── */
+  /* ── BOTÃO DE MUDO ── */
+  #controle-volume {
+    position: fixed;
+    bottom: 16px; right: 16px;
+    z-index: 300;
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(14,6,0,0.85);
+    border: 1.5px solid var(--border);
+    border-radius: 24px;
+    padding: 8px 16px 8px 10px;
+  }
+  #btn-mute {
+    background: none; border: none;
+    color: var(--gold); font-size: 18px;
+    cursor: pointer; padding: 0;
+    width: 22px; height: 22px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  #slider-volume { width: 90px; accent-color: var(--gold); cursor: pointer; }
+
+  @media (max-width: 768px) {
+    html, body { overflow: auto; height: auto; }
+    body { min-height: 100vh; }
+
+    #game-area { display: flex; flex-direction: column; overflow: visible; min-height: auto; }
+
+    #teacher-box {
+      position: relative; bottom: auto; left: auto; width: 100%;
+      flex-direction: row; align-items: flex-end; gap: 10px;
+      background: #1a0f08; padding: 10px 12px;
+      border-bottom: 1px solid rgba(212,170,106,0.2);
+      pointer-events: all; z-index: 5;
+    }
+    #teacher-img { width: 60px; height: 73px; border-radius: 8px; border-bottom: 2px solid rgba(232,184,75,0.55); }
+    #teacher-bubble { width: auto; flex: 1; min-height: auto; border-radius: 8px; padding: .75rem; }
+    #teacher-text { font-size: 15px; }
+
+    #scene-col { position: relative; width: 100%; height: auto; }
+    #tabela-wrapper {
+      position: relative; top: auto; left: auto; transform: none;
+      width: 100%; height: auto; max-width: 100%; max-height: none;
+    }
+    #scene-img { width: 100%; height: auto; max-width: 100%; max-height: none; }
+
+    #etapa-painel { padding: .4rem .7rem; }
+    .etapa-titulo { font-size: 7px; }
+    .etapa-contador { font-size: 12px; }
+
+    .header { padding: 10px 14px; flex-wrap: wrap; gap: 8px; }
+    .page-title { font-size: 18px; }
+    .prog-step { width: 18px; height: 18px; font-size: 8px; }
+    .prog-line { width: 5px; }
+    .progress-wrap { flex-wrap: wrap; row-gap: 4px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div>
+    <div class="eyebrow">Camadas Profundas · KiFácil</div>
+    <h1 class="page-title">A Travessia da Tabela Periódica</h1>
+  </div>
+  <div class="progress-wrap">
+    <div class="prog-step done" id="ps1">✓</div>
+    <div class="prog-line"></div>
+    <div class="prog-step done" id="ps2">✓</div>
+    <div class="prog-line"></div>
+    <div class="prog-step done" id="ps3">✓</div>
+    <div class="prog-line"></div>
+    <div class="prog-step done" id="ps4">✓</div>
+    <div class="prog-line"></div>
+    <div class="prog-step active" id="ps5">3</div>
+    <div class="prog-line"></div>
+    <div class="prog-step" id="ps6">2</div>
+    <div class="prog-line"></div>
+    <div class="prog-step" id="ps7">1</div>
+  </div>
+</header>
+
+<!-- ÁREA DO JOGO -->
+<div id="game-area">
+
+  <!-- PROFESSORA RAFAELA -->
+  <aside id="teacher-box">
+    <img id="teacher-img" src="../imagens/rafa-sorrindo.jpg" alt="Professora Rafaela">
+    <div id="teacher-bubble">
+      <div id="teacher-name">Professora Rafaela</div>
+      <p id="teacher-text"></p>
+      <button id="btn-avancar" onclick="proximoPasso()">Continuar</button>
+    </div>
+  </aside>
+
+  <!-- CENA: TABELA PERIÓDICA -->
+  <div id="scene-col">
+    <!-- #tabela-wrapper tem exatamente o tamanho da imagem renderizada,
+         então tudo dentro dele (hotspots e pino) fica alinhado com a
+         tabela de verdade, mesmo quando sobra espaço vazio ao redor. -->
+    <div id="tabela-wrapper">
+      <img id="scene-img" src="../imagens/tabela-periodica-kifacil.png" alt="Tabela Periódica da Academia KiFácil">
+
+      <!-- Os 118 hotspots dos elementos são inseridos aqui via JavaScript -->
+      <div id="tabelaHotspots"></div>
+
+      <!-- Pino dourado indicando a posição atual do aluno -->
+      <img id="pino" src="../imagens/pino-tabela.png" alt="Posição atual">
+    </div>
+
+    <!-- Painel com o número da etapa atual -->
+    <div id="etapa-painel">
+      <div class="etapa-titulo">Travessia</div>
+      <div class="etapa-contador" id="etapaContador">Etapa 1 de 9</div>
+    </div>
+  </div><!-- #scene-col -->
+
+  <!-- TELA DE VITÓRIA -->
+  <div id="win-screen">
+    <div class="win-title">Travessia Concluída!</div>
+    <p class="win-sub">Você atravessou a Tabela Periódica seguindo pistas de família e período, sem precisar decorar uma única posição. A próxima passagem da Torre de Química foi aberta.</p>
+    <a href="sala6.html" class="btn-next">Avançar →</a>
+  </div>
+
+</div><!-- #game-area -->
+
+<script>
+  /* ══════════════════════════════════════════════════════════════════════
+     GRADE DA TABELA — coordenadas em % sobre a imagem tabela-periodica-
+     -kifacil.png (1436×924px), medidas diretamente nos pixels da imagem.
+     COLS[i]  = centro X (%) da coluna i+1 (1 a 18) do bloco principal.
+     FCOLS[i] = centro X (%) da coluna i+1 (1 a 15) do bloco dos
+                lantanídeos/actinídeos (linha "solta" abaixo da tabela).
+     ROWS[p]  = centro Y (%) do período p (1 a 7).
+     FROWS    = centro Y (%) das duas linhas do bloco f ("la" e "ac").
+     ══════════════════════════════════════════════════════════════════════ */
+  const COLS = [6.51,11.18,16.13,21.24,26.32,31.45,36.60,41.69,46.76,51.81,56.90,61.87,67.13,72.46,77.75,83.13,88.58,93.92];
+  const FCOLS = [15.98,20.33,24.93,29.57,34.09,38.65,43.11,47.60,52.09,56.66,61.14,65.71,70.24,74.79,79.25];
+  const ROWS = { 1: 16.18, 2: 24.30, 3: 32.09, 4: 39.94, 5: 47.84, 6: 55.63, 7: 63.37 };
+  const FROWS = { la: 73.11, ac: 81.06 };
+
+  /* Lista dos 118 elementos: símbolo (s), coluna (c) e período/linha (r).
+     "r" pode ser um número de 1 a 7 (bloco principal) ou 'la'/'ac'
+     (linha dos lantanídeos ou dos actinídeos). As colunas 3 dos períodos
+     6 e 7 não geram hotspot: ali ficam apenas os rótulos "57-71" e
+     "89-103" que remetem às linhas do bloco f. */
+  const ELEMENTOS = [
+    { s: 'H',  c: 1,  r: 1 }, { s: 'He', c: 18, r: 1 },
+
+    { s: 'Li', c: 1, r: 2 }, { s: 'Be', c: 2, r: 2 }, { s: 'B', c: 13, r: 2 }, { s: 'C', c: 14, r: 2 },
+    { s: 'N',  c: 15, r: 2 }, { s: 'O', c: 16, r: 2 }, { s: 'F', c: 17, r: 2 }, { s: 'Ne', c: 18, r: 2 },
+
+    { s: 'Na', c: 1, r: 3 }, { s: 'Mg', c: 2, r: 3 }, { s: 'Al', c: 13, r: 3 }, { s: 'Si', c: 14, r: 3 },
+    { s: 'P',  c: 15, r: 3 }, { s: 'S', c: 16, r: 3 }, { s: 'Cl', c: 17, r: 3 }, { s: 'Ar', c: 18, r: 3 },
+
+    { s: 'K',  c: 1, r: 4 }, { s: 'Ca', c: 2, r: 4 }, { s: 'Sc', c: 3, r: 4 }, { s: 'Ti', c: 4, r: 4 },
+    { s: 'V',  c: 5, r: 4 }, { s: 'Cr', c: 6, r: 4 }, { s: 'Mn', c: 7, r: 4 }, { s: 'Fe', c: 8, r: 4 },
+    { s: 'Co', c: 9, r: 4 }, { s: 'Ni', c: 10, r: 4 }, { s: 'Cu', c: 11, r: 4 }, { s: 'Zn', c: 12, r: 4 },
+    { s: 'Ga', c: 13, r: 4 }, { s: 'Ge', c: 14, r: 4 }, { s: 'As', c: 15, r: 4 }, { s: 'Se', c: 16, r: 4 },
+    { s: 'Br', c: 17, r: 4 }, { s: 'Kr', c: 18, r: 4 },
+
+    { s: 'Rb', c: 1, r: 5 }, { s: 'Sr', c: 2, r: 5 }, { s: 'Y', c: 3, r: 5 }, { s: 'Zr', c: 4, r: 5 },
+    { s: 'Nb', c: 5, r: 5 }, { s: 'Mo', c: 6, r: 5 }, { s: 'Tc', c: 7, r: 5 }, { s: 'Ru', c: 8, r: 5 },
+    { s: 'Rh', c: 9, r: 5 }, { s: 'Pd', c: 10, r: 5 }, { s: 'Ag', c: 11, r: 5 }, { s: 'Cd', c: 12, r: 5 },
+    { s: 'In', c: 13, r: 5 }, { s: 'Sn', c: 14, r: 5 }, { s: 'Sb', c: 15, r: 5 }, { s: 'Te', c: 16, r: 5 },
+    { s: 'I',  c: 17, r: 5 }, { s: 'Xe', c: 18, r: 5 },
+
+    { s: 'Cs', c: 1, r: 6 }, { s: 'Ba', c: 2, r: 6 }, { s: 'Hf', c: 4, r: 6 }, { s: 'Ta', c: 5, r: 6 },
+    { s: 'W',  c: 6, r: 6 }, { s: 'Re', c: 7, r: 6 }, { s: 'Os', c: 8, r: 6 }, { s: 'Ir', c: 9, r: 6 },
+    { s: 'Pt', c: 10, r: 6 }, { s: 'Au', c: 11, r: 6 }, { s: 'Hg', c: 12, r: 6 }, { s: 'Tl', c: 13, r: 6 },
+    { s: 'Pb', c: 14, r: 6 }, { s: 'Bi', c: 15, r: 6 }, { s: 'Po', c: 16, r: 6 }, { s: 'At', c: 17, r: 6 },
+    { s: 'Rn', c: 18, r: 6 },
+
+    { s: 'Fr', c: 1, r: 7 }, { s: 'Ra', c: 2, r: 7 }, { s: 'Rf', c: 4, r: 7 }, { s: 'Db', c: 5, r: 7 },
+    { s: 'Sg', c: 6, r: 7 }, { s: 'Bh', c: 7, r: 7 }, { s: 'Hs', c: 8, r: 7 }, { s: 'Mt', c: 9, r: 7 },
+    { s: 'Ds', c: 10, r: 7 }, { s: 'Rg', c: 11, r: 7 }, { s: 'Cn', c: 12, r: 7 }, { s: 'Nh', c: 13, r: 7 },
+    { s: 'Fl', c: 14, r: 7 }, { s: 'Mc', c: 15, r: 7 }, { s: 'Lv', c: 16, r: 7 }, { s: 'Ts', c: 17, r: 7 },
+    { s: 'Og', c: 18, r: 7 },
+
+    { s: 'La', c: 1, r: 'la' }, { s: 'Ce', c: 2, r: 'la' }, { s: 'Pr', c: 3, r: 'la' }, { s: 'Nd', c: 4, r: 'la' },
+    { s: 'Pm', c: 5, r: 'la' }, { s: 'Sm', c: 6, r: 'la' }, { s: 'Eu', c: 7, r: 'la' }, { s: 'Gd', c: 8, r: 'la' },
+    { s: 'Tb', c: 9, r: 'la' }, { s: 'Dy', c: 10, r: 'la' }, { s: 'Ho', c: 11, r: 'la' }, { s: 'Er', c: 12, r: 'la' },
+    { s: 'Tm', c: 13, r: 'la' }, { s: 'Yb', c: 14, r: 'la' }, { s: 'Lu', c: 15, r: 'la' },
+
+    { s: 'Ac', c: 1, r: 'ac' }, { s: 'Th', c: 2, r: 'ac' }, { s: 'Pa', c: 3, r: 'ac' }, { s: 'U', c: 4, r: 'ac' },
+    { s: 'Np', c: 5, r: 'ac' }, { s: 'Pu', c: 6, r: 'ac' }, { s: 'Am', c: 7, r: 'ac' }, { s: 'Cm', c: 8, r: 'ac' },
+    { s: 'Bk', c: 9, r: 'ac' }, { s: 'Cf', c: 10, r: 'ac' }, { s: 'Es', c: 11, r: 'ac' }, { s: 'Fm', c: 12, r: 'ac' },
+    { s: 'Md', c: 13, r: 'ac' }, { s: 'No', c: 14, r: 'ac' }, { s: 'Lr', c: 15, r: 'ac' }
+  ];
+
+  /* Converte a entrada de um elemento (coluna/linha) em % (x, y) reais,
+     escolhendo entre a grade principal (COLS/ROWS) e a grade do bloco f
+     (FCOLS/FROWS) conforme o valor de "r". */
+  function posicaoDoElemento(el) {
+    if (el.r === 'la') return { x: FCOLS[el.c - 1], y: FROWS.la };
+    if (el.r === 'ac') return { x: FCOLS[el.c - 1], y: FROWS.ac };
+    return { x: COLS[el.c - 1], y: ROWS[el.r] };
+  }
+
+  /* ══════════════════════════════════════════════════════════════════════
+     SEQUÊNCIA DE ETAPAS — cada etapa mostra uma instrução na fala da
+     professora e só avança quando o aluno clica no elemento correto.
+     ══════════════════════════════════════════════════════════════════════ */
+  /* Cada etapa tem:
+       instrucao  — a pista mostrada ANTES do aluno encontrar o elemento;
+       curiosidade — um fato mostrado DEPOIS de um clique correto, com uma
+                     abertura diferente em cada etapa (evitando repetir
+                     sempre a palavra "Curiosidade:");
+       resposta   — o símbolo do elemento certo daquela etapa. */
+  const ETAPAS = [
+    { instrucao: 'Comece no Hidrogênio. Desça dois períodos.',
+      curiosidade: 'Você sabia que o sódio metálico reage tão violentamente com a água que chega a pegar fogo?',
+      resposta: 'Na' },
+    { instrucao: 'Permaneça nesse período. Encontre o ametal que possui cinco elétrons na camada de valência.',
+      curiosidade: 'Uma curiosidade: o fósforo branco brilha fracamente no escuro, e foi isso que deu origem ao nome desse elemento.',
+      resposta: 'P' },
+    { instrucao: 'Agora suba um período na mesma família.',
+      curiosidade: 'O interessante é que esse elemento forma quase 80% do ar que você está respirando agora.',
+      resposta: 'N' },
+    { instrucao: 'Desça pela mesma família até o quinto período.',
+      curiosidade: 'Vale lembrar que esse elemento já era usado desde a Antiguidade em cosméticos, como o kohl para contornar os olhos.',
+      resposta: 'Sb' },
+    { instrucao: 'Volte pelo mesmo período até os metais de transição. Encontre o metal cujo número de oxidação é +1. Ele é o único metal deste período com esse valor, e isso está indicado na própria tabela.',
+      curiosidade: 'Repare que, por sua ação antibacteriana, esse metal é usado até hoje em curativos.',
+      resposta: 'Ag' },
+    { instrucao: 'Desça um período na mesma família. Este metal é um dos mais valiosos e cobiçados que existem.',
+      curiosidade: 'Um detalhe curioso: por ser extremamente maleável, um único grama desse metal pode virar uma folha de quase 1 metro quadrado.',
+      resposta: 'Au' },
+    { instrucao: 'Ao lado, está o único metal que permanece líquido à temperatura ambiente.',
+      curiosidade: 'Fica o registro: por ser tóxico, esse metal foi substituído em quase todos os termômetros modernos.',
+      resposta: 'Hg' },
+    { instrucao: 'Agora vá até o elemento de número atômico 53.',
+      curiosidade: 'Não deixe de notar que esse elemento é essencial para o funcionamento da tireoide, por isso é adicionado ao sal de cozinha iodado.',
+      resposta: 'I' },
+    { instrucao: 'Suba pela mesma família. Encontre o elemento mais eletronegativo da Tabela Periódica.',
+      curiosidade: 'Para fechar: na forma de fluoreto, esse elemento é usado em pastas de dente para fortalecer e proteger o esmalte dos dentes',
+      resposta: 'F' }
+  ];
+  let etapaIdx = 0;
+  let mecanicaAtiva = false;
+  let bloqueado = false;
+
+  /* ── PROFESSORA RAFAELA (digitação + troca de imagem) ── */
+  const IMG = {
+    sorrindo:   '../imagens/rafa-sorrindo.jpg',
+    explicando: '../imagens/rafa-explicando.jpg',
+    pensando:   '../imagens/rafa-pensando.jpg',
+    animada:    '../imagens/rafa-animada.jpg'
+  };
+  const $timg = document.getElementById('teacher-img');
+  const $ttxt = document.getElementById('teacher-text');
+  const $tbtn = document.getElementById('btn-avancar');
+  let _typingTimer;
+
+  function digitarTexto(el, txt, cb) {
+    clearTimeout(_typingTimer);
+    el.textContent = '';
+    const chars = [...txt];
+    let i = 0;
+    (function loop() {
+      if (i < chars.length) { el.textContent += chars[i++]; _typingTimer = setTimeout(loop, 22); }
+      else if (cb) cb();
+    })();
+  }
+
+  function fala(imgKey, txt, cb) {
+    $timg.style.opacity = '0';
+    $tbtn.classList.remove('show');
+    setTimeout(() => { $timg.src = IMG[imgKey]; $timg.style.opacity = '1'; }, 220);
+    digitarTexto($ttxt, txt, () => {
+      setTimeout(() => $tbtn.classList.add('show'), 350);
+      if (cb) cb();
+    });
+  }
+
+  /* Fala "informativa": esconde o botão de continuar (usada tanto para
+     as instruções de cada etapa quanto para os avisos de erro/vitória). */
+  function falarInfo(imgKey, txt, cb) {
+    $tbtn.style.display = 'none';
+    fala(imgKey, txt, () => { $tbtn.style.display = 'none'; if (cb) cb(); });
+  }
+
+  /* ── INTRODUÇÃO ── */
+  const introPassos = [
+    { img: 'sorrindo',   txt: 'O Professor Alceu sempre diz que a Tabela Periódica não é apenas uma lista de elementos.' },
+    { img: 'explicando', txt: 'A Tabela é um mapa.' },
+    { img: 'pensando',   txt: 'Quem aprende a caminhar por ela nunca mais precisa decorar posições.' },
+    { img: 'pensando',   txt: 'Siga exatamente cada instrução.' },
+    { img: 'animada',    txt: 'Somente quando chegar ao elemento correto poderá continuar.', ultimo: true }
+  ];
+  let introIdx = 0;
+
+  /* Música de fundo + controle de volume (a preferência fica salva e vale
+     para todas as fases). Toca em loop a partir do primeiro clique do
+     aluno (navegadores bloqueiam áudio automático sem interação); o
+     volume do slider vale tanto para a música quanto para os efeitos
+     sonoros (clique, ding, porta etc.). */
+  let volumeSalvo = parseFloat(localStorage.getItem('kifacil_volume'));
+  if (isNaN(volumeSalvo)) volumeSalvo = 0.35;
+  let silenciado = localStorage.getItem('kifacil_silenciado') === '1';
+  let musicaFundo = null;
+
+  function volumeEfetivo() {
+    return silenciado ? 0 : volumeSalvo;
+  }
+
+  /* A navegação entre fases sempre recarrega a página (não é uma SPA),
+     então o áudio para de tocar por um instante — isso não dá para
+     evitar. Mas guardamos o ponto exato da música em sessionStorage a
+     cada instante (evento "timeupdate") e retomamos dali na próxima
+     fase, em vez de reiniciar do zero — assim a música parece contínua
+     ao longo de toda a "Desafio das Camadas Profundas". */
+  function iniciarMusicaFundo() {
+    if (musicaFundo) return;
+    try {
+      musicaFundo = new Audio('../sons/camadas-profundas.mp3');
+      musicaFundo.loop = true;
+      musicaFundo.volume = volumeEfetivo();
+      const tempoSalvo = parseFloat(sessionStorage.getItem('kifacil_musica_tempo'));
+      if (!isNaN(tempoSalvo) && tempoSalvo > 0) musicaFundo.currentTime = tempoSalvo;
+      musicaFundo.addEventListener('timeupdate', () => {
+        sessionStorage.setItem('kifacil_musica_tempo', musicaFundo.currentTime);
+      });
+      musicaFundo.play().catch(() => {});
+    } catch (e) {}
+  }
+
+  function atualizarIconeMudo() {
+    const botao = document.getElementById('btn-mute');
+    if (!botao) return;
+    if (silenciado || volumeSalvo === 0) botao.textContent = '🔇';
+    else if (volumeSalvo < 0.5) botao.textContent = '🔉';
+    else botao.textContent = '🔊';
+  }
+
+  function alternarMudo() {
+    silenciado = !silenciado;
+    localStorage.setItem('kifacil_silenciado', silenciado ? '1' : '0');
+    if (musicaFundo) musicaFundo.volume = volumeEfetivo();
+    atualizarIconeMudo();
+  }
+
+  function ajustarVolume(valorSlider) {
+    volumeSalvo = Math.max(0, Math.min(1, valorSlider / 100));
+    localStorage.setItem('kifacil_volume', volumeSalvo);
+    if (volumeSalvo > 0 && silenciado) {
+      silenciado = false;
+      localStorage.setItem('kifacil_silenciado', '0');
+    }
+    if (musicaFundo) musicaFundo.volume = volumeEfetivo();
+    atualizarIconeMudo();
+  }
+
+  (function iniciarControleVolume() {
+    const slider = document.getElementById('slider-volume');
+    if (slider) slider.value = Math.round(volumeSalvo * 100);
+    atualizarIconeMudo();
+  })();
+
+  function tocarClick() {
+    iniciarMusicaFundo();
+    const v = volumeEfetivo();
+    if (v <= 0) return;
+    try { const a = new Audio('../sons/click.mp3'); a.volume = v; a.play().catch(function(){}); } catch(e) {}
+  }
+  function tocarDing() {
+    const v = volumeEfetivo();
+    if (v <= 0) return;
+    try { const a = new Audio('../sons/ding.mp3'); a.volume = v; a.play().catch(()=>{}); } catch(e) {}
+  }
+  function tocarPorta() {
+    const v = volumeEfetivo();
+    if (v <= 0) return;
+    try { const a = new Audio('../sons/porta-abrindo.mp3'); a.volume = v; a.play().catch(()=>{}); } catch(e) {}
+  }
+
+  function proximoPasso() {
+    tocarClick();
+    introIdx++;
+    if (introIdx >= introPassos.length) {
+      $tbtn.style.display = 'none';
+      ativarMecanica();
+      return;
+    }
+    const p = introPassos[introIdx];
+    $tbtn.textContent = p.ultimo ? 'Começar' : 'Continuar';
+    $tbtn.style.display = '';
+    fala(p.img, p.txt);
+  }
+
+  function iniciarIntro() {
+    $tbtn.textContent = 'Continuar';
+    $tbtn.style.display = '';
+    fala(introPassos[0].img, introPassos[0].txt);
+  }
+
+  setTimeout(iniciarIntro, 400);
+
+  /* Libera os cliques na tabela e mostra a instrução da primeira etapa. */
+  function ativarMecanica() {
+    mecanicaAtiva = true;
+    atualizarContadorEtapa();
+    falarInfo('explicando', ETAPAS[etapaIdx].instrucao);
+  }
+
+  /* ══════════════════════════════════════════════════════════════════════
+     TAMANHO DO WRAPPER DA TABELA
+     No desktop, calcula em px o maior retângulo com a proporção real da
+     imagem (1436×924) que cabe dentro de #scene-col — equivalente a um
+     object-fit:contain, só que aplicado a #tabela-wrapper (que carrega
+     os hotspots e o pino), não à <img> sozinha. No mobile, a imagem já
+     flui em largura total (ver media query), então o wrapper só precisa
+     acompanhar 100% de largura/altura automática.
+     ══════════════════════════════════════════════════════════════════════ */
+  const ASPECT_TABELA = 1436 / 924;
+  function ajustarWrapperTabela() {
+    const wrapper = document.getElementById('tabela-wrapper');
+    const scene = document.getElementById('scene-col');
+
+    if (window.innerWidth <= 768) {
+      wrapper.style.width = '';
+      wrapper.style.height = '';
+      return;
+    }
+
+    const larguraDisp = scene.clientWidth;
+    const alturaDisp = scene.clientHeight;
+    let w = larguraDisp;
+    let h = w / ASPECT_TABELA;
+    if (h > alturaDisp) {
+      h = alturaDisp;
+      w = h * ASPECT_TABELA;
+    }
+    wrapper.style.width = w + 'px';
+    wrapper.style.height = h + 'px';
+  }
+  window.addEventListener('resize', ajustarWrapperTabela);
+  ajustarWrapperTabela();
+
+  /* ══════════════════════════════════════════════════════════════════════
+     HOTSPOTS E PINO
+     ══════════════════════════════════════════════════════════════════════ */
+  const $pino = document.getElementById('pino');
+  const hotspotsPorSimbolo = {};
+  let hotspotAtual = null;
+
+  /* Cria os 118 hotspots (invisíveis, só a borda dourada do "atual"
+     aparece) a partir da lista ELEMENTOS, posicionando cada um em % via
+     posicaoDoElemento(). */
+  function montarHotspots() {
+    const container = document.getElementById('tabelaHotspots');
+    ELEMENTOS.forEach(el => {
+      const pos = posicaoDoElemento(el);
+      const div = document.createElement('div');
+      div.className = 'elem-hotspot';
+      div.style.left = pos.x + '%';
+      div.style.top = pos.y + '%';
+      div.title = el.s;
+      div.addEventListener('click', () => clicarElemento(el.s));
+      container.appendChild(div);
+      hotspotsPorSimbolo[el.s] = div;
+    });
+  }
+  montarHotspots();
+
+  /* Move o pino suavemente (a transição fica a cargo do CSS de #pino). */
+  function moverPino(x, y) {
+    $pino.style.left = x + '%';
+    $pino.style.top = y + '%';
+  }
+
+  /* Marca visualmente qual elemento é o "atual" (borda dourada), tirando
+     o destaque do anterior. */
+  function marcarAtual(simbolo) {
+    if (hotspotAtual) hotspotAtual.classList.remove('atual');
+    const div = hotspotsPorSimbolo[simbolo];
+    if (div) { div.classList.add('atual'); hotspotAtual = div; }
+  }
+  marcarAtual('H'); // posição inicial: pino sobre o Hidrogênio
+
+  function atualizarContadorEtapa() {
+    const n = Math.min(etapaIdx + 1, ETAPAS.length);
+    document.getElementById('etapaContador').textContent = 'Etapa ' + n + ' de ' + ETAPAS.length;
+  }
+
+  /* ── CLIQUE EM UM ELEMENTO ── */
+  function clicarElemento(simbolo) {
+    if (!mecanicaAtiva || bloqueado) return;
+
+    const etapa = ETAPAS[etapaIdx];
+    if (simbolo === etapa.resposta) {
+      // Acerto: som de ding, pino se move até o elemento certo, elemento
+      // novo recebe o brilho dourado. A curiosidade do elemento aparece
+      // primeiro; só depois dela a próxima instrução é mostrada.
+      tocarDing();
+      const pos = posicaoDoElemento(ELEMENTOS.find(e => e.s === simbolo));
+      moverPino(pos.x, pos.y);
+      marcarAtual(simbolo);
+
+      const curiosidade = etapa.curiosidade;
+      etapaIdx++;
+
+      // Em vez de um tempo fixo na tela, mostra um botão "Continuar" —
+      // o próprio aluno decide quando já terminou de ler a curiosidade.
+      mecanicaAtiva = false;
+      $tbtn.textContent = 'Continuar';
+      $tbtn.style.display = '';
+      $tbtn.onclick = avancarAposCuriosidade;
+      fala('animada', curiosidade);
+    } else {
+      // Erro: nenhum progresso é perdido, o pino permanece parado.
+      falarInfo('pensando', 'Observe novamente a Tabela.');
+    }
+  }
+
+  // Chamado quando o aluno clica em "Continuar" depois de ler a
+  // curiosidade — restaura o botão para seu uso normal (intro) e segue
+  // para a próxima instrução ou para o final da fase.
+  function avancarAposCuriosidade() {
+    tocarClick();
+    $tbtn.onclick = proximoPasso;
+    mecanicaAtiva = true;
+    if (etapaIdx >= ETAPAS.length) {
+      finalizarFase();
+    } else {
+      atualizarContadorEtapa();
+      falarInfo('explicando', ETAPAS[etapaIdx].instrucao);
+    }
+  }
+
+  /* ── FINAL DA FASE ── */
+  function finalizarFase() {
+    bloqueado = true;
+    document.getElementById('ps5').className = 'prog-step done';
+    document.getElementById('ps5').textContent = '✓';
+
+    falarInfo('animada', 'Excelente.', () => {
+      setTimeout(() => {
+        falarInfo('animada', 'Você percebeu que não precisou decorar.', () => {
+          setTimeout(() => {
+            falarInfo('animada', 'Você simplesmente aprendeu a navegar pela Tabela.', () => {
+              setTimeout(showWin, 1600);
+            });
+          }, 900);
+        });
+      }, 900);
+    });
+  }
+
+  function showWin() {
+    tocarPorta();
+    document.getElementById('win-screen').classList.add('show');
+  }
+</script>
+
+<div id="controle-volume">
+  <button id="btn-mute" onclick="alternarMudo()" aria-label="Silenciar ou ativar o som">🔊</button>
+  <input type="range" id="slider-volume" min="0" max="100" value="35" oninput="ajustarVolume(this.value)" aria-label="Volume">
+</div>
+
+<div id="cookie-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#1a0f08;border-top:1px solid rgba(212,170,106,0.4);padding:1rem 2rem;z-index:9999;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;"><p style="margin:0;font-family:'Libre Baskerville',serif;font-size:0.82rem;color:#e8d4b0;line-height:1.5;">Este site utiliza cookies para melhorar sua experiência. Ao continuar navegando, você concorda com nossa <a href="/politica-de-privacidade.html" style="color:#e8b84b;text-decoration:underline;text-underline-offset:2px;">Política de Privacidade</a>.</p><button onclick="document.getElementById('cookie-banner').style.display='none';localStorage.setItem('kifacil_cookies','1');" style="flex-shrink:0;background:#e8b84b;border:none;padding:0.55rem 1.5rem;font-family:'Libre Baskerville',serif;font-size:0.78rem;font-weight:700;color:#1a0f08;cursor:pointer;letter-spacing:0.04em;">Entendi</button></div>
+<script>if(!localStorage.getItem('kifacil_cookies'))document.getElementById('cookie-banner').style.display='flex';</script>
+
+<script type="module">
+  import { requireAuth }          from '../../../js/guards.js';
+  import { session }              from '../../../js/session.js';
+  import { registrarEntradaFase } from '../../../js/progresso.js';
+  import { iniciarNavTorre }      from '../../../js/nav-torre.js';
+  import { salvarPerfil }         from '../../../js/database.js';
+
+  await requireAuth('../../../login.html').catch(() => {});
+
+  iniciarNavTorre('quimica');
+
+  const emRevisao = new URLSearchParams(location.search).has('revisao');
+  const uid = session.usuario?.uid;
+
+  const _lk = document.querySelector('.btn-next[href="sala6.html"]');
+  if (_lk && uid) {
+    _lk.addEventListener('click', async e => {
+      e.preventDefault();
+      if (!emRevisao) {
+        await salvarPerfil(uid, { faseAtual: 'fase6-cartao-titanio' }).catch(e => console.error('[Progresso] Falha ao salvar faseAtual:', e));
+      }
+      window.location.href = _lk.href;
+    });
+  }
+</script>
+</body>
+</html>

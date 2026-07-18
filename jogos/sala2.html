@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="canonical" href="https://kifaciledu.com.br/jogos/jogos-escaperoom/torre-quimica/fases/escape-room-laboratorio.html">
+<title>Laboratório de Identificação de Reagentes | KiFácil</title>
+<meta name="description" content="Fase 2 do Escape Room dos Mapas da Academia KiFácil. Analise as fichas de cada frasco e descubra a identidade dos quatro reagentes.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;1,500;1,600&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:          #2e2016;
+    --text:        #f5ead0;
+    --text-soft:   #e8d4b0;
+    --gold:        #e8b84b;
+    --border:      rgba(212,170,106,0.4);
+    --panel-bg:    rgba(14, 6, 0, 0.94);
+    --green-border:rgba(80,200,120,0.5);
+    --green-text:  #8fe0a0;
+    --red-border:  rgba(217,95,59,0.35);
+    --red-text:    #e8956a;
+  }
+
+  html, body {
+    height: 100%; overflow: hidden;
+    font-family: 'Libre Baskerville', serif;
+    color: var(--text);
+    background: var(--bg);
+  }
+  body { display: flex; flex-direction: column; }
+
+  /* ── HEADER ── */
+  .header {
+    background: #1a0f08;
+    padding: 14px 28px 12px;
+    border-bottom: 1px solid rgba(212,170,106,0.2);
+    display: flex; align-items: center; justify-content: space-between;
+    flex-shrink: 0;
+  }
+  .eyebrow { font-size: 9px; letter-spacing: .16em; text-transform: uppercase; color: var(--gold); margin-bottom: 3px; }
+  .page-title { font-family: 'Lora', serif; font-size: 24px; font-weight: 600; color: var(--text); line-height: 1.1; }
+  .progress-wrap { display: flex; align-items: center; gap: 4px; }
+  .prog-step {
+    width: 22px; height: 22px; border-radius: 50%;
+    border: 1px solid rgba(212,170,106,0.3);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 9px; color: rgba(232,216,176,0.4);
+    transition: all .4s; position: relative; flex-shrink: 0;
+  }
+  .prog-step.active { border-color: var(--gold); color: var(--gold); }
+  .prog-step.done { background: var(--gold); border-color: var(--gold); color: #1a0f08; font-weight: 700; }
+  .prog-line { width: 9px; height: 1px; background: rgba(212,170,106,0.25); flex-shrink: 0; }
+
+  /* ── GAME AREA ── */
+  #game-area {
+    position: relative;
+    flex: 1; min-height: 0;
+    overflow: hidden;
+  }
+
+  #scene-col {
+    position: absolute;
+    inset: 0;
+    background: #1a0f08;
+  }
+  #scene-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    display: block;
+  }
+
+  /* ── HOTSPOTS ── */
+  .hotspot {
+    position: absolute;
+    cursor: pointer;
+    z-index: 10;
+  }
+
+  /* ── POSIÇÕES DOS HOTSPOTS (desktop) ─────────────────────────────────────
+     Ajustar left/top/width/height contra a imagem real de fundo.
+     Para o MOBILE, ver o bloco "HOTSPOTS MOBILE" mais abaixo.
+     ──────────────────────────────────────────────────────────────────────── */
+  #hs-A { left: 37.6%; top: 46%; width: 5%; height: 18%; }
+  #hs-B { left: 44.2%; top: 46%; width: 5%; height: 18%; }
+  #hs-C { left: 51.2%; top: 46%; width: 5%; height: 18%; }
+  #hs-D { left: 58%; top: 46%; width: 5%; height: 18%; }
+
+  .hotspot-ring {
+    position: absolute; inset: 0;
+    border: 2px solid transparent;
+    border-radius: 6px;
+  }
+  .hotspot:hover .hotspot-ring { border-color: rgba(232,184,75,0.5); }
+  .hotspot.solved .hotspot-ring { border-color: transparent; }
+  .hotspot-check {
+    display: none; position: absolute;
+    top: -14px; right: -14px;
+  }
+  .hotspot.solved .hotspot-check { display: block; }
+  .hotspot-check-inner {
+    width: 34px; height: 34px;
+    background: rgba(232,184,75,0.22);
+    border: 2px solid rgba(232,184,75,0.9);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; color: var(--gold);
+  }
+  .hotspot-label {
+    position: absolute; bottom: -22px; left: 50%; transform: translateX(-50%);
+    font-size: 9px; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--gold); white-space: nowrap; opacity: 0;
+    transition: opacity .2s; pointer-events: none;
+    background: rgba(14,6,0,0.92); padding: 2px 7px;
+    border-radius: 3px; border: 1px solid var(--border);
+  }
+  .hotspot:hover .hotspot-label { opacity: 1; }
+  .hotspot.solved:hover .hotspot-label { opacity: 0; }
+
+  .hotspot-assign {
+    display: none;
+    position: absolute; bottom: -42px; left: 50%; transform: translateX(-50%);
+    font-size: 20px; font-family: 'Lora', serif; font-weight: 700;
+    color: var(--text);
+    white-space: nowrap;
+    background: rgba(14,6,0,0.95); padding: 6px 14px;
+    border-radius: 4px; border: 1px solid rgba(212,170,106,0.5);
+    cursor: pointer; z-index: 11;
+  }
+  .hotspot.solved .hotspot-assign { display: block; }
+  .hotspot-assign.atribuida { color: #ff5c3c; border-color: #ff5c3c; background: rgba(14,6,0,0.95); }
+
+  /* ── PROFESSORA RAFAELA (esquerda) ── */
+  #teacher-box {
+    position: absolute;
+    bottom: 0; left: 20px;
+    z-index: 95;
+    display: flex; flex-direction: column; align-items: flex-start;
+    gap: 8px;
+    width: 350px;
+    pointer-events: none;
+  }
+  #teacher-img {
+    width: 153px; height: 185px;
+    object-fit: cover; object-position: top center;
+    border-radius: 12px 12px 0 0;
+    border: 2px solid rgba(232,184,75,0.55);
+    border-bottom: none;
+    flex-shrink: 0;
+    filter: drop-shadow(0 -4px 20px rgba(0,0,0,.9));
+    transition: opacity .35s ease;
+  }
+  #teacher-bubble {
+    background: rgba(36,21,11,0.97);
+    border: 1.5px solid rgba(232,184,75,0.52);
+    border-radius: 4px 14px 0 0;
+    padding: 1rem 1.15rem;
+    width: 350px;
+    min-height: 90px;
+    display: flex; flex-direction: column;
+    justify-content: space-between; gap: .65rem;
+    pointer-events: all;
+    box-shadow: 0 -4px 24px rgba(0,0,0,.75);
+    backdrop-filter: blur(4px);
+  }
+  #teacher-name {
+    font-size: 9px; letter-spacing: .16em; text-transform: uppercase;
+    color: #d6b15b; margin-bottom: 2px;
+  }
+  #teacher-text {
+    font-family: 'Lora', serif;
+    font-size: 20px; line-height: 1.9;
+    color: #D4C5A8; font-weight: 400;
+    text-align: justify;
+  }
+  #btn-avancar {
+    align-self: flex-end;
+    background: linear-gradient(135deg, #e8b84b, #b8891e);
+    color: #160600; border: none; border-radius: 6px;
+    padding: .45rem 1.2rem;
+    font-family: 'Libre Baskerville', serif;
+    font-size: 11px; font-weight: 700;
+    letter-spacing: .06em; text-transform: uppercase;
+    cursor: pointer; opacity: 0; pointer-events: none;
+    transition: opacity .3s, transform .2s;
+  }
+  #btn-avancar.show { opacity: 1; pointer-events: all; }
+  #btn-avancar:hover { filter: brightness(1.1); transform: scale(1.03); }
+
+  /* ── BANCADA DE IDENTIFICAÇÃO — canto superior direito ── */
+  #modelos-overlay {
+    display: none;
+    position: absolute;
+    top: 14px; right: 14px;
+    z-index: 50;
+    background: var(--panel-bg);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 1.3rem 1.7rem;
+    width: 560px;
+    max-height: calc(100% - 28px);
+    overflow-y: auto;
+    backdrop-filter: blur(6px);
+    box-shadow: 0 4px 18px rgba(0,0,0,.7);
+    animation: fadeUp .3s ease;
+  }
+  #modelos-overlay.show { display: block; }
+  .painel-secao { margin-bottom: 22px; }
+  .painel-secao:last-child { margin-bottom: 0; }
+  .painel-secao-title { font-size: 15px; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); margin-bottom: 13px; }
+
+  .densidade-tabela { display: flex; flex-direction: column; gap: 5px; font-size: 19px; margin-bottom: 10px; }
+  .dens-linha { display: flex; justify-content: space-between; color: var(--text-soft); }
+  .dens-linha span:last-child { color: var(--gold); font-family: 'Lora', serif; }
+  .densidade-nota { font-size: 17px; color: rgba(245,234,208,0.75); font-style: italic; line-height: 1.4; }
+
+  .bancada-cabecalho, .bancada-linha {
+    display: grid; grid-template-columns: .45fr 1fr .9fr 1fr .9fr; gap: 8px; align-items: center;
+  }
+  .bancada-cabecalho {
+    color: rgba(245,234,208,0.6); font-size: 14px; text-transform: uppercase; letter-spacing: .03em;
+    padding-bottom: 7px; border-bottom: 1px solid rgba(212,170,106,0.2); margin-bottom: 7px;
+  }
+  .bancada-tabela { display: flex; flex-direction: column; gap: 7px; }
+  .bancada-linha { font-size: 18px; color: var(--text-soft); animation: fadeUp .3s ease; }
+  .bancada-linha span:first-child { color: var(--gold); font-family: 'Lora', serif; font-weight: 700; }
+  .bancada-vazio { font-size: 19px; color: rgba(245,234,208,0.45); font-style: italic; }
+
+  #identificacaoBox { display: none; }
+  .placas-tray { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 17px; }
+  .placa-btn {
+    flex: 1 1 calc(50% - 10px);
+    background: rgba(255,255,255,0.04); border: 1px solid rgba(212,170,106,0.4);
+    border-radius: 6px; padding: 12px 10px;
+    font-family: 'Libre Baskerville', serif; font-size: 18px; color: var(--text-soft);
+    cursor: pointer; transition: all .15s; text-align: center;
+  }
+  .placa-btn:hover { border-color: var(--gold); }
+  .placa-btn.selecionada { border-color: var(--gold); background: rgba(232,184,75,0.18); color: var(--gold); }
+  .placa-btn.atribuida { border-color: var(--green-border); color: var(--green-text); }
+  .btn-verificar {
+    width: 100%;
+    background: linear-gradient(135deg, #e8b84b, #b8891e);
+    color: #160600; border: none; border-radius: 6px;
+    padding: 15px; font-family: 'Libre Baskerville', serif;
+    font-size: 19px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+    cursor: pointer; transition: filter .15s, opacity .15s;
+  }
+  .btn-verificar:disabled { opacity: 0.35; cursor: default; }
+  .btn-verificar:not(:disabled):hover { filter: brightness(1.1); }
+  .identificacao-msg {
+    display: none; margin-top: 14px; font-size: 18px; line-height: 1.5;
+    color: var(--red-text); text-align: center;
+  }
+  .identificacao-msg.show { display: block; }
+  .identificacao-msg.certo { color: var(--green-text); }
+
+  @keyframes shakeErro {
+    0%, 100% { transform: translateX(0); }
+    20% { transform: translateX(-5px); }
+    40% { transform: translateX(5px); }
+    60% { transform: translateX(-4px); }
+    80% { transform: translateX(4px); }
+  }
+  .shake-erro { animation: shakeErro .4s ease; }
+
+  /* Backdrop escurece a cena ao abrir o modal */
+  #modal-backdrop {
+    display: none;
+    position: absolute; inset: 0; z-index: 90;
+    background: rgba(0,0,0,0.55);
+  }
+  #modal-backdrop.show { display: block; }
+
+  /* Modal centralizado */
+  #stage-area {
+    display: none;
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px; max-width: calc(100% - 40px);
+    z-index: 100;
+    flex-direction: column; gap: 14px;
+    animation: fadeUp .25s ease;
+  }
+  #stage-area.show { display: flex; }
+
+  .enigma-panel {
+    background: var(--panel-bg);
+    border: 1.5px solid var(--border);
+    border-radius: 12px;
+    padding: 1.3rem 1.4rem;
+    backdrop-filter: blur(6px);
+    box-shadow: 0 8px 32px rgba(0,0,0,.75);
+    animation: fadeUp .3s ease;
+    max-height: 85vh;
+    overflow-y: auto;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .enigma-eyebrow {
+    font-size: 9px; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 6px;
+  }
+  .enigma-title {
+    font-family: 'Lora', serif; font-size: 20px; font-weight: 600;
+    color: var(--text); margin-bottom: 14px; line-height: 1.3;
+  }
+  .enigma-desc { display: none; }
+
+  /* Ficha de análise */
+  .ficha-teste {
+    display: flex; gap: 12px; align-items: flex-start;
+    padding-bottom: 12px; margin-bottom: 12px;
+    border-bottom: 1px solid rgba(212,170,106,0.15);
+  }
+  .ficha-teste:last-of-type { border-bottom: none; margin-bottom: 4px; padding-bottom: 0; }
+  .ficha-teste-num {
+    width: 24px; height: 24px; border-radius: 50%; flex-shrink: 0;
+    background: rgba(232,184,75,0.1); border: 1px solid rgba(232,184,75,0.4);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; color: var(--gold); font-family: 'Lora', serif;
+  }
+  .ficha-teste-desc { font-size: 13px; color: rgba(232,216,176,0.7); margin-bottom: 4px; }
+  .ficha-teste-resultado { font-size: 13.5px; color: var(--text); line-height: 1.6; }
+
+  .ficha-opcoes { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .btn-opcao {
+    background: rgba(255,255,255,0.04); border: 1px solid rgba(212,170,106,0.4);
+    border-radius: 6px; padding: 11px 10px;
+    font-family: 'Libre Baskerville', serif; font-size: 12.5px; color: var(--text-soft);
+    cursor: pointer; transition: all .15s; text-align: center;
+  }
+  .btn-opcao:hover { border-color: var(--gold); background: rgba(232,184,75,0.08); }
+  .btn-opcao.errada { border-color: rgba(217,95,59,0.7); background: rgba(217,95,59,0.1); animation: shake .3s; }
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-4px); }
+    75% { transform: translateX(4px); }
+  }
+
+  /* ── VITÓRIA ── */
+  #win-screen {
+    display: none; position: fixed; inset: 0; z-index: 200;
+    background: rgba(14,6,0,0.92);
+    flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; padding: 40px;
+    backdrop-filter: blur(6px);
+  }
+  #win-screen.show { display: flex; }
+  .win-title { font-family: 'Lora', serif; font-size: 46px; font-weight: 600; color: var(--gold); margin-bottom: 12px; }
+  .win-sub { font-size: 15px; color: var(--text-soft); font-style: italic; margin-bottom: 36px; line-height: 1.8; max-width: 480px; }
+  .btn-next {
+    background: var(--gold); border: none; border-radius: 6px;
+    padding: 14px 36px; font-family: 'Libre Baskerville', serif;
+    font-size: 14px; font-weight: 700; color: #1a0f08;
+    cursor: pointer; letter-spacing: .06em; text-transform: uppercase;
+    transition: background .15s; text-decoration: none; display: inline-block;
+  }
+  .btn-next:hover { background: #f0c960; }
+
+  /* ── RESPONSIVO ── */
+  /* ── BOTÃO DE MUDO ── */
+  #controle-volume {
+    position: fixed;
+    bottom: 16px; right: 16px;
+    z-index: 300;
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(14,6,0,0.85);
+    border: 1.5px solid var(--border);
+    border-radius: 24px;
+    padding: 8px 16px 8px 10px;
+  }
+  #btn-mute {
+    background: none; border: none;
+    color: var(--gold); font-size: 18px;
+    cursor: pointer; padding: 0;
+    width: 22px; height: 22px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  #slider-volume { width: 90px; accent-color: var(--gold); cursor: pointer; }
+
+  @media (max-width: 768px) {
+    html, body { overflow: auto; height: auto; }
+    body { min-height: 100vh; }
+
+    #game-area { display: flex; flex-direction: column; overflow: visible; min-height: auto; }
+
+    #teacher-box {
+      position: relative; bottom: auto; left: auto; width: 100%;
+      flex-direction: row; align-items: flex-end; gap: 10px;
+      background: #1a0f08; padding: 10px 12px;
+      border-bottom: 1px solid rgba(212,170,106,0.2);
+      pointer-events: all; z-index: 5;
+    }
+    #teacher-img { width: 60px; height: 73px; border-radius: 8px; border-bottom: 2px solid rgba(232,184,75,0.55); }
+    #teacher-bubble { width: auto; flex: 1; min-height: auto; border-radius: 8px; padding: .75rem; }
+    #teacher-text { font-size: 17px; }
+
+    #scene-col { position: relative; width: 100%; height: auto; }
+    #scene-img { width: 100%; height: auto; object-fit: unset; display: block; }
+
+    #modal-backdrop { position: fixed; z-index: 190; }
+    #stage-area { position: fixed; top: 50%; left: 50%; transform: translate(-50%,-50%);
+      width: calc(100% - 24px); max-height: 90vh; overflow-y: auto; z-index: 200; }
+
+    #modelos-overlay {
+      position: relative; top: auto; right: auto; width: 100%; max-height: none;
+      border-radius: 0; border-top: 1px solid var(--border);
+      padding: .5rem 1rem;
+    }
+    .painel-secao-title { font-size: 7px; }
+    .bancada-linha, .bancada-cabecalho { font-size: 9.5px; }
+    .placa-btn { font-size: 10px; padding: 6px 5px; }
+
+    .header { padding: 10px 14px; flex-wrap: wrap; gap: 8px; }
+    .page-title { font-size: 18px; }
+    .prog-step { width: 18px; height: 18px; font-size: 8px; }
+    .prog-line { width: 5px; }
+    .progress-wrap { flex-wrap: wrap; row-gap: 4px; }
+    .ficha-opcoes { grid-template-columns: 1fr; }
+
+    .hotspot-assign { bottom: -30px; font-size: 14px; padding: 4px 9px; }
+
+    /* ── HOTSPOTS MOBILE ──────────────────────────────────────────────────────
+       Ajustar contra a imagem real renderizada em largura total.
+       ──────────────────────────────────────────────────────────────────────── */
+    #hs-A { left: 34%;  top: 42%; width: 7%; height: 24%; }
+    #hs-B { left: 43%; top: 42%; width: 7%; height: 24%; }
+    #hs-C { left: 51%; top: 42%; width: 7%; height: 24%; }
+    #hs-D { left: 59%; top: 42%; width: 7%; height: 24%; }
+  }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div>
+    <div class="eyebrow">Camadas Profundas · KiFácil</div>
+    <h1 class="page-title">Laboratório de Identificação de Reagentes</h1>
+  </div>
+  <div class="progress-wrap">
+    <div class="prog-step done" id="ps1">✓</div>
+    <div class="prog-line"></div>
+    <div class="prog-step active" id="ps2">6</div>
+    <div class="prog-line"></div>
+    <div class="prog-step" id="ps3">5</div>
+    <div class="prog-line"></div>
+    <div class="prog-step" id="ps4">4</div>
+    <div class="prog-line"></div>
+    <div class="prog-step" id="ps5">3</div>
+    <div class="prog-line"></div>
+    <div class="prog-step" id="ps6">2</div>
+    <div class="prog-line"></div>
+    <div class="prog-step" id="ps7">1</div>
+  </div>
+</header>
+
+<!-- ÁREA DO JOGO -->
+<div id="game-area">
+
+  <!-- PROFESSORA RAFAELA -->
+  <aside id="teacher-box">
+    <img id="teacher-img" src="../imagens/rafa-sorrindo.jpg" alt="Professora Rafaela">
+    <div id="teacher-bubble">
+      <div id="teacher-name">Professora Rafaela</div>
+      <p id="teacher-text"></p>
+      <button id="btn-avancar" onclick="proximoPasso()">Continuar</button>
+    </div>
+  </aside>
+
+  <!-- CENA -->
+  <div id="scene-col">
+    <img id="scene-img" src="../imagens/laboratorio-identificacao-reagentes2.jpg" alt="Laboratório de Identificação de Reagentes da Academia KiFácil">
+
+    <!-- HOTSPOTS sobre os quatro frascos -->
+    <div class="hotspot" id="hs-A" onclick="onHotspotClick('A')">
+      <div class="hotspot-ring"></div>
+      <div class="hotspot-check"><div class="hotspot-check-inner">✓</div></div>
+      <span class="hotspot-label">Frasco A</span>
+      <span class="hotspot-assign" id="assign-A">?</span>
+    </div>
+    <div class="hotspot" id="hs-B" onclick="onHotspotClick('B')">
+      <div class="hotspot-ring"></div>
+      <div class="hotspot-check"><div class="hotspot-check-inner">✓</div></div>
+      <span class="hotspot-label">Frasco B</span>
+      <span class="hotspot-assign" id="assign-B">?</span>
+    </div>
+    <div class="hotspot" id="hs-C" onclick="onHotspotClick('C')">
+      <div class="hotspot-ring"></div>
+      <div class="hotspot-check"><div class="hotspot-check-inner">✓</div></div>
+      <span class="hotspot-label">Frasco C</span>
+      <span class="hotspot-assign" id="assign-C">?</span>
+    </div>
+    <div class="hotspot" id="hs-D" onclick="onHotspotClick('D')">
+      <div class="hotspot-ring"></div>
+      <div class="hotspot-check"><div class="hotspot-check-inner">✓</div></div>
+      <span class="hotspot-label">Frasco D</span>
+      <span class="hotspot-assign" id="assign-D">?</span>
+    </div>
+
+  </div><!-- #scene-col -->
+
+  <!-- Anote resultado dos experimentos — fora da cena -->
+  <div id="modelos-overlay">
+    <div class="painel-secao">
+      <div class="painel-secao-title">Tabela de densidades</div>
+      <div class="densidade-tabela">
+        <div class="dens-linha"><span>Etanol</span><span>0,79 g/mL</span></div>
+        <div class="dens-linha"><span>Óleo</span><span>0,92 g/mL</span></div>
+        <div class="dens-linha"><span>Água</span><span>1,00 g/mL</span></div>
+        <div class="dens-linha"><span>Solução de ácido acético</span><span>≈ 1,01 g/mL</span></div>
+        <div class="dens-linha"><span>Solução de NaOH</span><span>≈ 1,05 g/mL</span></div>
+      </div>
+      <div class="densidade-nota">Líquidos menos densos permanecem sobre líquidos mais densos.</div>
+    </div>
+
+    <div class="painel-secao">
+      <div class="painel-secao-title">Anote resultado dos experimentos</div>
+      <div class="bancada-cabecalho"><span>Fr.</span><span>Fenol.</span><span>Água</span><span>Ind.</span><span>Densid.</span></div>
+      <div class="bancada-tabela" id="bancadaBody">
+        <div class="bancada-vazio" id="bancadaPlaceholder">Analise os frascos para registrar os resultados...</div>
+      </div>
+    </div>
+
+    <div class="painel-secao" id="identificacaoBox">
+      <div class="painel-secao-title">Identifique os frascos</div>
+      <div class="placas-tray" id="placasTray"></div>
+      <button class="btn-verificar" id="btnVerificar" onclick="verificarIdentificacao()" disabled>Verificar identificação</button>
+      <div class="identificacao-msg" id="identificacaoMsg"></div>
+    </div>
+  </div>
+
+  <!-- Backdrop -->
+  <div id="modal-backdrop" onclick="fecharModal()"></div>
+
+  <!-- Modal centralizado -->
+  <div id="stage-area">
+    <div class="enigma-panel" id="enigmaBox">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px;">
+        <div class="enigma-eyebrow" id="eEyebrow"></div>
+        <button onclick="fecharModal()" style="background:none;border:none;color:rgba(245,234,208,0.4);font-size:18px;cursor:pointer;line-height:1;padding:0 0 0 12px;">✕</button>
+      </div>
+      <div class="enigma-title" id="eTitle"></div>
+      <div class="enigma-desc" id="eDesc"></div>
+      <div id="eBody"></div>
+    </div>
+  </div>
+
+  <!-- TELA DE VITÓRIA -->
+  <div id="win-screen">
+    <div class="win-title">Reagentes Identificados!</div>
+    <p class="win-sub">Você analisou as fichas de cada frasco e descobriu a identidade dos quatro reagentes. A porta para o próximo laboratório está aberta.</p>
+    <a href="sala3.html" class="btn-next">Avançar →</a>
+  </div>
+
+</div><!-- #game-area -->
+
+<script>
+  /* ── REAGENTES DESCONHECIDOS ── */
+  const LIQUIDOS = {
+    naoh:   { nome: 'Solução de NaOH',          curto: 'NaOH' },
+    acido:  { nome: 'Solução de Ácido Acético', curto: 'Ác. acético' },
+    etanol: { nome: 'Etanol',                   curto: 'Etanol' },
+    oleo:   { nome: 'Óleo',                      curto: 'Óleo' }
+  };
+
+  const analisado  = { A: false, B: false, C: false, D: false };
+  const atribuicao = { A: null,  B: null,  C: null,  D: null  };
+  let placaSelecionada = null;
+
+  /* ── FICHAS DE ANÁLISE ── */
+  const fichas = {
+    A: {
+      resposta: 'naoh',
+      testes: [
+        { desc: 'Foi adicionada fenolftaleína.', resultado: 'A solução ficou <strong>rosa intenso</strong>.' },
+        { desc: 'Foi misturado com água.', resultado: 'Foi observada apenas uma fase.' }
+      ],
+      reg: { fenol: 'Rosa intenso', agua: 'Uma fase', indicador: '—', densidade: '—' }
+    },
+    B: {
+      resposta: 'acido',
+      testes: [
+        { desc: 'Foi adicionada fenolftaleína.', resultado: 'A solução permaneceu incolor.' },
+        { desc: 'Foi misturado com água.', resultado: 'Foi observada apenas uma fase.' },
+        { desc: 'Foi testado com papel indicador universal.', resultado: 'O papel indicou que a solução <strong>apresenta caráter ácido</strong>.' }
+      ],
+      reg: { fenol: 'Incolor', agua: 'Uma fase', indicador: 'Ácido', densidade: '—' }
+    },
+    C: {
+      resposta: 'etanol',
+      testes: [
+        { desc: 'Foi adicionada fenolftaleína.', resultado: 'A solução permaneceu incolor.' },
+        { desc: 'Foi misturado com água.', resultado: 'Foi observada apenas uma fase.' },
+        { desc: 'Foi medida a densidade da amostra.', resultado: 'Densidade aproximada: <strong>0,79 g/mL</strong>.' }
+      ],
+      reg: { fenol: 'Incolor', agua: 'Uma fase', indicador: '—', densidade: '0,79 g/mL' }
+    },
+    D: {
+      resposta: 'oleo',
+      testes: [
+        { desc: 'Foi adicionada fenolftaleína.', resultado: 'A solução permaneceu incolor.' },
+        { desc: 'Foi misturado com água.', resultado: 'Foram observadas duas fases.<br>O líquido desconhecido permaneceu na fase <strong>superior</strong>.' },
+        { desc: 'Foi medida a densidade da amostra.', resultado: 'Densidade aproximada: <strong>0,92 g/mL</strong>.' }
+      ],
+      reg: { fenol: 'Incolor', agua: 'Duas fases (superior)', indicador: '—', densidade: '0,92 g/mL' }
+    }
+  };
+
+  /* ── PROFESSORA RAFAELA ── */
+  const IMG = {
+    sorrindo:   '../imagens/rafa-sorrindo.jpg',
+    explicando: '../imagens/rafa-explicando.jpg',
+    pensando:   '../imagens/rafa-pensando.jpg',
+    animada:    '../imagens/rafa-animada.jpg'
+  };
+  const $timg = document.getElementById('teacher-img');
+  const $ttxt = document.getElementById('teacher-text');
+  const $tbtn = document.getElementById('btn-avancar');
+  let _typingTimer;
+
+  function digitarTexto(el, txt, cb) {
+    clearTimeout(_typingTimer);
+    el.textContent = '';
+    const chars = [...txt];
+    let i = 0;
+    (function loop() {
+      if (i < chars.length) { el.textContent += chars[i++]; _typingTimer = setTimeout(loop, 22); }
+      else if (cb) cb();
+    })();
+  }
+
+  function fala(imgKey, txt, cb) {
+    $timg.style.opacity = '0';
+    $tbtn.classList.remove('show');
+    setTimeout(() => { $timg.src = IMG[imgKey]; $timg.style.opacity = '1'; }, 220);
+    digitarTexto($ttxt, txt, () => {
+      setTimeout(() => $tbtn.classList.add('show'), 350);
+      if (cb) cb();
+    });
+  }
+
+  function rafaFala(imgKey, msg) {
+    $tbtn.style.display = 'none';
+    fala(imgKey, msg, () => { $tbtn.style.display = 'none'; });
+  }
+
+  /* ── INTRO ── */
+  const introPassos = [
+    { img: 'sorrindo',   txt: 'Preciso da sua ajuda.' },
+    { img: 'explicando', txt: 'Eu havia separado alguns reagentes para entregar ao Professor Alceu...' },
+    { img: 'pensando',   txt: 'Mas o Bentinho lambeu os rótulos e agora não sei qual é qual.' },
+    { img: 'explicando', txt: 'Precisamos identificar qual frasco corresponde a cada substância.' },
+    { img: 'animada',    txt: 'Analise a ficha de cada frasco e registre os resultados. Depois, use a bancada e a tabela de densidades para descobrir quem é quem.', ultimo: true },
+  ];
+  let introIdx = 0;
+
+  /* Música de fundo + controle de volume (a preferência fica salva e vale
+     para todas as fases). Toca em loop a partir do primeiro clique do
+     aluno (navegadores bloqueiam áudio automático sem interação); o
+     volume do slider vale tanto para a música quanto para os efeitos
+     sonoros (clique, ding, porta etc.). */
+  let volumeSalvo = parseFloat(localStorage.getItem('kifacil_volume'));
+  if (isNaN(volumeSalvo)) volumeSalvo = 0.35;
+  let silenciado = localStorage.getItem('kifacil_silenciado') === '1';
+  let musicaFundo = null;
+
+  function volumeEfetivo() {
+    return silenciado ? 0 : volumeSalvo;
+  }
+
+  /* A navegação entre fases sempre recarrega a página (não é uma SPA),
+     então o áudio para de tocar por um instante — isso não dá para
+     evitar. Mas guardamos o ponto exato da música em sessionStorage a
+     cada instante (evento "timeupdate") e retomamos dali na próxima
+     fase, em vez de reiniciar do zero — assim a música parece contínua
+     ao longo de toda a "Desafio das Camadas Profundas". */
+  function iniciarMusicaFundo() {
+    if (musicaFundo) return;
+    try {
+      musicaFundo = new Audio('../sons/camadas-profundas.mp3');
+      musicaFundo.loop = true;
+      musicaFundo.volume = volumeEfetivo();
+      const tempoSalvo = parseFloat(sessionStorage.getItem('kifacil_musica_tempo'));
+      if (!isNaN(tempoSalvo) && tempoSalvo > 0) musicaFundo.currentTime = tempoSalvo;
+      musicaFundo.addEventListener('timeupdate', () => {
+        sessionStorage.setItem('kifacil_musica_tempo', musicaFundo.currentTime);
+      });
+      musicaFundo.play().catch(() => {});
+    } catch (e) {}
+  }
+
+  function atualizarIconeMudo() {
+    const botao = document.getElementById('btn-mute');
+    if (!botao) return;
+    if (silenciado || volumeSalvo === 0) botao.textContent = '🔇';
+    else if (volumeSalvo < 0.5) botao.textContent = '🔉';
+    else botao.textContent = '🔊';
+  }
+
+  function alternarMudo() {
+    silenciado = !silenciado;
+    localStorage.setItem('kifacil_silenciado', silenciado ? '1' : '0');
+    if (musicaFundo) musicaFundo.volume = volumeEfetivo();
+    atualizarIconeMudo();
+  }
+
+  function ajustarVolume(valorSlider) {
+    volumeSalvo = Math.max(0, Math.min(1, valorSlider / 100));
+    localStorage.setItem('kifacil_volume', volumeSalvo);
+    if (volumeSalvo > 0 && silenciado) {
+      silenciado = false;
+      localStorage.setItem('kifacil_silenciado', '0');
+    }
+    if (musicaFundo) musicaFundo.volume = volumeEfetivo();
+    atualizarIconeMudo();
+  }
+
+  (function iniciarControleVolume() {
+    const slider = document.getElementById('slider-volume');
+    if (slider) slider.value = Math.round(volumeSalvo * 100);
+    atualizarIconeMudo();
+  })();
+
+  function tocarClick() {
+    iniciarMusicaFundo();
+    const v = volumeEfetivo();
+    if (v <= 0) return;
+    try { const a = new Audio('../sons/click.mp3'); a.volume = v; a.play().catch(function(){}); } catch(e) {}
+  }
+  function proximoPasso() {
+    tocarClick();
+    introIdx++;
+    if (introIdx >= introPassos.length) {
+      $tbtn.style.display = 'none';
+      return;
+    }
+    const p = introPassos[introIdx];
+    $tbtn.textContent = p.ultimo ? 'Estou pronto!' : 'Continuar';
+    $tbtn.style.display = '';
+    fala(p.img, p.txt);
+  }
+
+  function iniciarIntro() {
+    $tbtn.textContent = 'Continuar';
+    $tbtn.style.display = '';
+    fala(introPassos[0].img, introPassos[0].txt);
+  }
+
+  setTimeout(iniciarIntro, 400);
+
+  /* ── FICHA DE ANÁLISE ── */
+  function onHotspotClick(id) {
+    if (!analisado[id]) { activateFicha(id); return; }
+    if (placaSelecionada) { atribuirFrasco(id); return; }
+    if (atribuicao[id]) { atribuirFrasco(id); return; }
+    activateFicha(id);
+  }
+
+  function activateFicha(id) {
+    const f = fichas[id];
+    const jaRegistrado = analisado[id];
+
+    document.getElementById('modelos-overlay').classList.add('show');
+
+    const testesHtml = f.testes.map((t, i) => `
+      <div class="ficha-teste">
+        <div class="ficha-teste-num">${i + 1}</div>
+        <div>
+          <div class="ficha-teste-desc">${t.desc}</div>
+          <div class="ficha-teste-resultado">${t.resultado}</div>
+        </div>
+      </div>`).join('');
+
+    const botaoHtml = jaRegistrado
+      ? `<button class="btn-opcao" style="border-color:var(--gold);background:rgba(232,184,75,.1);" onclick="fecharModal()">Fechar</button>`
+      : `<button class="btn-opcao" style="border-color:var(--gold);background:rgba(232,184,75,.1);" onclick="confirmarRegistro('${id}')">Registrar resultado</button>`;
+
+    showEnigmaPanel('Frasco ' + id + ' — Ficha de Análise', 'Resultados dos testes', '', `
+      ${testesHtml}
+      <div class="ficha-opcoes" style="grid-template-columns:1fr;">${botaoHtml}</div>`);
+
+    if (!jaRegistrado) {
+      rafaFala('explicando', 'Leia os resultados e clique em "Registrar resultado" para anotar esses dados na tabela ao lado.');
+    }
+  }
+
+  function confirmarRegistro(id) {
+    tocarClick();
+    registrarNaBancada(id);
+    fecharModal();
+    if (!['A', 'B', 'C', 'D'].every(k => analisado[k])) {
+      rafaFala('explicando', 'Resultado registrado. Compare com os demais frascos e com a tabela de densidades antes de identificar.');
+    }
+  }
+
+  function registrarNaBancada(id) {
+    analisado[id] = true;
+    const hs = document.getElementById('hs-' + id);
+    if (hs) hs.classList.add('solved');
+
+    const ph = document.getElementById('bancadaPlaceholder');
+    if (ph) ph.remove();
+    const r = fichas[id].reg;
+    const row = document.createElement('div');
+    row.className = 'bancada-linha';
+    row.innerHTML = `<span>${id}</span><span>${r.fenol}</span><span>${r.agua}</span><span>${r.indicador}</span><span>${r.densidade}</span>`;
+    document.getElementById('bancadaBody').appendChild(row);
+
+    if (['A', 'B', 'C', 'D'].every(k => analisado[k])) {
+      revelarIdentificacao();
+    }
+  }
+
+  function revelarIdentificacao() {
+    document.getElementById('identificacaoBox').style.display = 'block';
+    rafaFala('pensando', 'Agora compare a cor com fenolftaleína, a miscibilidade em água e a densidade — e identifique cada frasco.');
+  }
+
+  /* ── IDENTIFICAÇÃO POR PLACAS ── */
+  function renderPlacas() {
+    const tray = document.getElementById('placasTray');
+    tray.innerHTML = Object.keys(LIQUIDOS).map(k =>
+      `<button class="placa-btn" data-liquido="${k}" onclick="selecionarPlaca('${k}')">${LIQUIDOS[k].nome}</button>`
+    ).join('');
+  }
+  renderPlacas();
+
+  function selecionarPlaca(chave) {
+    tocarClick();
+    placaSelecionada = (placaSelecionada === chave) ? null : chave;
+    atualizarPlacasVisual();
+  }
+
+  function atribuirFrasco(id) {
+    tocarClick();
+    if (!placaSelecionada) {
+      if (atribuicao[id]) {
+        placaSelecionada = atribuicao[id];
+        atribuicao[id] = null;
+        atualizarBadgeFrasco(id);
+        atualizarPlacasVisual();
+        atualizarBotaoVerificar();
+      }
+      return;
+    }
+    // se a placa selecionada já estava em outro frasco, e este frasco de
+    // destino já tinha uma placa, elas trocam de lugar (nunca some nenhuma)
+    const origem = Object.keys(atribuicao).find(k => atribuicao[k] === placaSelecionada);
+    const ocupanteAnterior = atribuicao[id];
+    atribuicao[id] = placaSelecionada;
+    if (origem && origem !== id) {
+      atribuicao[origem] = ocupanteAnterior;
+      atualizarBadgeFrasco(origem);
+    }
+    placaSelecionada = null;
+    atualizarBadgeFrasco(id);
+    atualizarPlacasVisual();
+    atualizarBotaoVerificar();
+  }
+
+  function atualizarBadgeFrasco(id) {
+    const badge = document.getElementById('assign-' + id);
+    if (!badge) return;
+    badge.textContent = atribuicao[id] ? LIQUIDOS[atribuicao[id]].curto : '?';
+    badge.classList.toggle('atribuida', !!atribuicao[id]);
+  }
+
+  function atualizarPlacasVisual() {
+    document.querySelectorAll('.placa-btn').forEach(b => {
+      const chave = b.dataset.liquido;
+      const frascoAtual = Object.keys(atribuicao).find(k => atribuicao[k] === chave);
+      b.textContent = LIQUIDOS[chave].nome + (frascoAtual ? ' → ' + frascoAtual : '');
+      b.classList.toggle('selecionada', chave === placaSelecionada);
+      b.classList.toggle('atribuida', !!frascoAtual);
+    });
+  }
+
+  function atualizarBotaoVerificar() {
+    const pronto = ['A', 'B', 'C', 'D'].every(k => atribuicao[k]);
+    document.getElementById('btnVerificar').disabled = !pronto;
+    document.getElementById('identificacaoMsg').classList.remove('show');
+  }
+
+  function verificarIdentificacao() {
+    tocarClick();
+    const msg = document.getElementById('identificacaoMsg');
+    const todasCorretas = ['A', 'B', 'C', 'D'].every(id => atribuicao[id] === fichas[id].resposta);
+    if (todasCorretas) {
+      tocarDing();
+      document.getElementById('ps2').className = 'prog-step done';
+      document.getElementById('ps2').textContent = '✓';
+      const box = document.getElementById('identificacaoBox');
+      msg.textContent = 'Identificação correta!';
+      msg.classList.add('show', 'certo');
+      box.style.opacity = '0.5';
+      box.style.pointerEvents = 'none';
+      rafaFala('animada', 'Excelente! Você identificou corretamente os quatro reagentes. Agora podemos levar os reagentes ao Professor Alceu.');
+      setTimeout(showWin, 3500);
+    } else {
+      const trocouEtanolAcido = atribuicao.B === 'etanol' && atribuicao.C === 'acido';
+      if (trocouEtanolAcido) {
+        rafaFala('pensando', 'Os dois ficam incolores com fenolftaleína e formam uma só fase com água. Um deles tem caráter ácido — o outro tem densidade menor que a da água.');
+      } else {
+        rafaFala('pensando', 'Não analise cada resultado isoladamente. Compare a cor com fenolftaleína, a miscibilidade em água e a densidade antes de identificar os frascos.');
+      }
+      msg.textContent = 'Ainda não está certo. Ajuste as placas e clique em Verificar identificação novamente.';
+      msg.classList.remove('certo');
+      msg.classList.add('show');
+      const box = document.getElementById('identificacaoBox');
+      box.classList.add('shake-erro');
+      setTimeout(() => box.classList.remove('shake-erro'), 400);
+    }
+  }
+
+  /* ── MODAL ── */
+  function showEnigmaPanel(eyebrow, title, desc, body) {
+    document.getElementById('eEyebrow').textContent = eyebrow;
+    document.getElementById('eTitle').textContent = title;
+    document.getElementById('eDesc').innerHTML = desc;
+    document.getElementById('eBody').innerHTML = body;
+    document.getElementById('stage-area').classList.add('show');
+    document.getElementById('modal-backdrop').classList.add('show');
+  }
+
+  function fecharModal() {
+    document.getElementById('stage-area').classList.remove('show');
+    document.getElementById('modal-backdrop').classList.remove('show');
+  }
+
+  function tocarDing() {
+    const v = volumeEfetivo();
+    if (v <= 0) return;
+    try { const a = new Audio('../sons/ding.mp3'); a.volume = v; a.play().catch(()=>{}); } catch(e) {}
+  }
+  function tocarPorta() {
+    const v = volumeEfetivo();
+    if (v <= 0) return;
+    try { const a = new Audio('../sons/porta-abrindo.mp3'); a.volume = v; a.play().catch(()=>{}); } catch(e) {}
+  }
+
+  function showWin() {
+    tocarPorta();
+    document.getElementById('win-screen').classList.add('show');
+  }
+</script>
+
+<div id="controle-volume">
+  <button id="btn-mute" onclick="alternarMudo()" aria-label="Silenciar ou ativar o som">🔊</button>
+  <input type="range" id="slider-volume" min="0" max="100" value="35" oninput="ajustarVolume(this.value)" aria-label="Volume">
+</div>
+
+<div id="cookie-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#1a0f08;border-top:1px solid rgba(212,170,106,0.4);padding:1rem 2rem;z-index:9999;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;"><p style="margin:0;font-family:'Libre Baskerville',serif;font-size:0.82rem;color:#e8d4b0;line-height:1.5;">Este site utiliza cookies para melhorar sua experiência. Ao continuar navegando, você concorda com nossa <a href="/politica-de-privacidade.html" style="color:#e8b84b;text-decoration:underline;text-underline-offset:2px;">Política de Privacidade</a>.</p><button onclick="document.getElementById('cookie-banner').style.display='none';localStorage.setItem('kifacil_cookies','1');" style="flex-shrink:0;background:#e8b84b;border:none;padding:0.55rem 1.5rem;font-family:'Libre Baskerville',serif;font-size:0.78rem;font-weight:700;color:#1a0f08;cursor:pointer;letter-spacing:0.04em;">Entendi</button></div>
+<script>if(!localStorage.getItem('kifacil_cookies'))document.getElementById('cookie-banner').style.display='flex';</script>
+
+<script type="module">
+  import { requireAuth }          from '../../../js/guards.js';
+  import { session }              from '../../../js/session.js';
+  import { registrarEntradaFase } from '../../../js/progresso.js';
+  import { iniciarNavTorre }      from '../../../js/nav-torre.js';
+  import { salvarPerfil }         from '../../../js/database.js';
+
+  await requireAuth('../../../login.html').catch(() => {});
+
+  iniciarNavTorre('quimica');
+
+  const emRevisao = new URLSearchParams(location.search).has('revisao');
+  const uid = session.usuario?.uid;
+
+  const _lk = document.querySelector('.btn-next[href="sala3.html"]');
+  if (_lk && uid) {
+    _lk.addEventListener('click', async e => {
+      e.preventDefault();
+      if (!emRevisao) {
+        await salvarPerfil(uid, { faseAtual: 'fase3-camara-registros' }).catch(e => console.error('[Progresso] Falha ao salvar faseAtual:', e));
+      }
+      window.location.href = _lk.href;
+    });
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="canonical" href="https://kifaciledu.com.br/jogos/jogos-escaperoom/torre-quimica/fases/fase1-sala-entrada.html">
+<title>Sala de Entrada das Camadas Profundas | KiFácil</title>
+<meta name="description" content="Fase 1 do Escape Room dos Mapas da Academia KiFácil. Descubra os quatro modelos atômicos escondidos na sala e decifre a fechadura do cátion para abrir a primeira porta.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;1,500;1,600&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:          #2e2016;
+    --text:        #f5ead0;
+    --text-soft:   #e8d4b0;
+    --gold:        #e8b84b;
+    --border:      rgba(212,170,106,0.4);
+    --panel-bg:    rgba(14, 6, 0, 0.94);
+    --green-border:rgba(80,200,120,0.5);
+    --green-text:  #8fe0a0;
+    --red-border:  rgba(217,95,59,0.35);
+    --red-text:    #e8956a;
+  }
+
+  html, body {
+    height: 100%; overflow: hidden;
+    font-family: 'Libre Baskerville', serif;
+    color: var(--text);
+    background: var(--bg);
+  }
+  body { display: flex; flex-direction: column; }
+
+  /* ── HEADER ── */
+  .header {
+    background: #1a0f08;
+    padding: 14px 28px 12px;
+    border-bottom: 1px solid rgba(212,170,106,0.2);
+    display: flex; align-items: center; justify-content: space-between;
+    flex-shrink: 0;
+  }
+  .eyebrow { font-size: 9px; letter-spacing: .16em; text-transform: uppercase; color: var(--gold); margin-bottom: 3px; }
+  .page-title { font-family: 'Lora', serif; font-size: 24px; font-weight: 600; color: var(--text); line-height: 1.1; }
+  .progress-wrap { display: flex; align-items: center; gap: 4px; }
+  .prog-step {
+    width: 22px; height: 22px; border-radius: 50%;
+    border: 1px solid rgba(212,170,106,0.3);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 9px; color: rgba(232,216,176,0.4);
+    transition: all .4s; position: relative; flex-shrink: 0;
+  }
+  .prog-step.active { border-color: var(--gold); color: var(--gold); }
+  .prog-step.done { background: var(--gold); border-color: var(--gold); color: #1a0f08; font-weight: 700; }
+  .prog-line { width: 9px; height: 1px; background: rgba(212,170,106,0.25); flex-shrink: 0; }
+
+  /* ── GAME AREA ── */
+  #game-area {
+    position: relative;
+    flex: 1; min-height: 0;
+    overflow: hidden;
+  }
+
+  /* Cena ocupa tudo */
+  #scene-col {
+    position: absolute;
+    inset: 0;
+    background: #1a0f08;
+  }
+  #scene-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    display: block;
+  }
+
+  /* ── HOTSPOTS ── */
+  .hotspot {
+    position: absolute;
+    cursor: pointer;
+    z-index: 10;
+  }
+
+  /* ── POSIÇÕES DOS HOTSPOTS (desktop) ─────────────────────────────────────
+     Para ajustar no MOBILE, procure o bloco "HOTSPOTS MOBILE" mais abaixo.
+     ──────────────────────────────────────────────────────────────────────── */
+  #hs-dalton     { left: 26%; top: 55%; width: 15%; height: 44%; }
+  #hs-thomson    { left: 30%; top: 32%; width: 11%; height: 32%; }
+  #hs-rutherford { left: 38%; top:  0%; width: 22%; height: 40%; }
+  #hs-bohr       { left: 56%; top: 59%; width: 10%; height: 22%; }
+  #hs-porta      { left: 62%; top: 10%; width:  9%; height: 70%; }
+  .hotspot-ring {
+    position: absolute; inset: 0;
+    border: 2px solid transparent;
+    border-radius: 6px;
+  }
+  .hotspot.solved .hotspot-ring {
+    border-color: transparent;
+    background: transparent;
+  }
+  .hotspot-check {
+    display: none; position: absolute;
+    top: 50%; left: 50%; transform: translate(-50%,-50%);
+  }
+  .hotspot.solved .hotspot-check { display: block; }
+  .hotspot-check-inner {
+    width: 38px; height: 38px;
+    background: rgba(80,200,120,0.22);
+    border: 2px solid rgba(80,200,120,0.8);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; color: #5dc878;
+  }
+  .hotspot-label {
+    position: absolute; bottom: -22px; left: 50%; transform: translateX(-50%);
+    font-size: 9px; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--gold); white-space: nowrap; opacity: 0;
+    transition: opacity .2s; pointer-events: none;
+    background: rgba(14,6,0,0.92); padding: 2px 7px;
+    border-radius: 3px; border: 1px solid var(--border);
+  }
+  .hotspot:hover .hotspot-label { opacity: 0; }
+
+  /* hotspots desabilitados durante intro */
+  body.intro-ativa .hotspot { pointer-events: none; filter: brightness(.45); }
+
+  /* ── BENTINHO ── */
+  #bentinho-layer {
+    display: none;
+    position: absolute;
+    bottom: 6%;
+    width: 20%;
+    z-index: 20;
+    pointer-events: none;
+  }
+  #bentinho-img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* Flash de travamento na porta */
+  #porta-lock-flash {
+    display: none;
+    position: absolute;
+    top: 10%; left: 62%; width: 9%; height: 70%;
+    background: rgba(200,50,50,0.28);
+    border: 2px solid rgba(220,60,60,0.9);
+    border-radius: 6px;
+    z-index: 25;
+    pointer-events: none;
+  }
+  #porta-lock-flash.show { display: block; }
+
+  /* ── PROFESSORA RAFAELA (esquerda) ── */
+  #teacher-box {
+    position: absolute;
+    bottom: 0; left: 20px;
+    z-index: 95;
+    display: flex; flex-direction: column; align-items: flex-start;
+    gap: 8px;
+    width: 350px;
+    pointer-events: none;
+  }
+  #teacher-img {
+    width: 153px; height: 185px;
+    object-fit: cover; object-position: top center;
+    border-radius: 12px 12px 0 0;
+    border: 2px solid rgba(232,184,75,0.55);
+    border-bottom: none;
+    flex-shrink: 0;
+    filter: drop-shadow(0 -4px 20px rgba(0,0,0,.9));
+    transition: opacity .35s ease;
+  }
+  #teacher-bubble {
+    background: rgba(36,21,11,0.97);
+    border: 1.5px solid rgba(232,184,75,0.52);
+    border-radius: 4px 14px 0 0;
+    padding: 1rem 1.15rem;
+    width: 350px;
+    min-height: 90px;
+    display: flex; flex-direction: column;
+    justify-content: space-between; gap: .65rem;
+    pointer-events: all;
+    box-shadow: 0 -4px 24px rgba(0,0,0,.75);
+    backdrop-filter: blur(4px);
+  }
+  #teacher-name {
+    font-size: 9px; letter-spacing: .16em; text-transform: uppercase;
+    color: #d6b15b; margin-bottom: 2px;
+  }
+  #teacher-text {
+    font-family: 'Lora', serif;
+    font-size: 20px; line-height: 1.9;
+    color: #D4C5A8; font-weight: 400;
+    text-align: justify;
+  }
+  #btn-avancar {
+    align-self: flex-end;
+    background: linear-gradient(135deg, #e8b84b, #b8891e);
+    color: #160600; border: none; border-radius: 6px;
+    padding: .45rem 1.2rem;
+    font-family: 'Libre Baskerville', serif;
+    font-size: 11px; font-weight: 700;
+    letter-spacing: .06em; text-transform: uppercase;
+    cursor: pointer; opacity: 0; pointer-events: none;
+    transition: opacity .3s, transform .2s;
+  }
+  #btn-avancar.show { opacity: 1; pointer-events: all; }
+  #btn-avancar:hover { filter: brightness(1.1); transform: scale(1.03); }
+
+  /* Backdrop escurece a cena ao abrir o modal */
+  #modal-backdrop {
+    display: none;
+    position: absolute; inset: 0; z-index: 90;
+    background: rgba(0,0,0,0.55);
+  }
+  #modal-backdrop.show { display: block; }
+
+  /* Modal centralizado */
+  #stage-area {
+    display: none;
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px; max-width: calc(100% - 40px);
+    z-index: 100;
+    flex-direction: column; gap: 14px;
+    animation: fadeUp .25s ease;
+  }
+  #stage-area.show { display: flex; }
+
+  /* Modelos descobertos — canto superior direito */
+  #modelos-overlay {
+    position: absolute;
+    top: 14px; right: 14px;
+    z-index: 50;
+    background: var(--panel-bg);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: .75rem 1rem;
+    min-width: 200px;
+    backdrop-filter: blur(6px);
+    box-shadow: 0 4px 18px rgba(0,0,0,.7);
+  }
+
+  .enigma-panel {
+    background: var(--panel-bg);
+    border: 1.5px solid var(--border);
+    border-radius: 12px;
+    padding: 1.3rem 1.4rem;
+    backdrop-filter: blur(6px);
+    box-shadow: 0 8px 32px rgba(0,0,0,.75);
+    animation: fadeUp .3s ease;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .enigma-eyebrow {
+    font-size: 9px; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 6px;
+  }
+  .enigma-title {
+    font-family: 'Lora', serif; font-size: 20px; font-weight: 600;
+    color: var(--text); margin-bottom: 10px; line-height: 1.3;
+  }
+  .enigma-desc { display: none; }
+  .enigma-input-wrap { display: flex; gap: 10px; align-items: center; }
+  .enigma-input {
+    flex: 1; background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(212,170,106,0.4); border-radius: 6px;
+    padding: 11px 14px; font-family: 'Libre Baskerville', serif;
+    font-size: 14px; color: var(--text); outline: none;
+    caret-color: var(--gold); transition: border-color .15s;
+  }
+  .enigma-input:focus { border-color: rgba(232,184,75,.7); }
+  .enigma-input::placeholder { color: rgba(232,216,176,0.3); }
+  .btn-responder {
+    background: var(--gold); border: none; border-radius: 6px;
+    padding: 11px 18px; font-family: 'Libre Baskerville', serif;
+    font-size: 12px; font-weight: 700; color: #1a0f08;
+    cursor: pointer; letter-spacing: .04em; transition: background .15s; white-space: nowrap;
+  }
+  .btn-responder:hover { background: #f0c960; }
+  .enigma-feedback { display: none !important; }
+
+  /* Enigma porta — fechadura do cátion */
+  .evolucao-desc {
+    font-size: 13px; color: rgba(232,216,176,0.75);
+    line-height: 1.7; margin-bottom: 16px;
+  }
+  .cation-card {
+    background: rgba(232,184,75,0.08);
+    border: 1px solid rgba(232,184,75,0.3);
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin-bottom: 16px;
+    text-align: center;
+  }
+  .cation-simbolo {
+    font-family: 'Lora', serif; font-size: 32px; font-weight: 600;
+    color: var(--gold); margin-bottom: 10px;
+  }
+  .cation-dados {
+    font-size: 19px; color: rgba(245,234,208,0.9); line-height: 2;
+  }
+  .evolucao-grid { display: flex; flex-direction: column; gap: 10px; margin-bottom: 14px; }
+  .evolucao-field { display: flex; align-items: center; gap: 12px; }
+  .evolucao-num {
+    width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0;
+    background: rgba(232,184,75,0.1); border: 1px solid rgba(232,184,75,0.4);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; color: var(--gold); font-family: 'Lora', serif;
+  }
+  .evolucao-input {
+    flex: 1; background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(212,170,106,0.4); border-radius: 6px;
+    padding: 10px 14px; font-family: 'Libre Baskerville', serif;
+    font-size: 14px; color: var(--text); outline: none;
+    caret-color: var(--gold); transition: border-color .15s;
+  }
+  .evolucao-input:focus { border-color: rgba(232,184,75,.7); }
+  .evolucao-input::placeholder { color: rgba(232,216,176,0.3); }
+
+  /* Locked */
+  .locked-msg {
+    background: rgba(217,95,59,0.07); border: 1px solid rgba(217,95,59,0.25);
+    border-radius: 6px; padding: 14px 16px; font-size: 13px;
+    color: rgba(245,234,208,0.7); line-height: 1.7; font-style: italic;
+  }
+
+  /* Modelos descobertos (painel pequeno) */
+  .modelos-panel {
+    background: var(--panel-bg);
+    border: 1.5px solid var(--border);
+    border-radius: 12px; padding: 1rem 1.2rem;
+    backdrop-filter: blur(6px);
+    box-shadow: 0 8px 32px rgba(0,0,0,.75);
+  }
+  .modelos-title { font-size: 9px; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+  .modelos-list { display: flex; flex-direction: column; gap: 6px; }
+  .modelo-item { display: flex; align-items: center; gap: 8px; font-size: 12px; color: rgba(245,234,208,0.35); transition: color .3s; }
+  .modelo-item.found { color: var(--text); }
+  .modelo-dot { width: 7px; height: 7px; border-radius: 50%; border: 1px solid rgba(212,170,106,0.3); flex-shrink: 0; transition: all .3s; }
+  .modelo-item.found .modelo-dot { background: var(--gold); border-color: var(--gold); }
+
+  /* ── VITÓRIA ── */
+  #win-screen {
+    display: none; position: fixed; inset: 0; z-index: 200;
+    background: rgba(14,6,0,0.92);
+    flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; padding: 40px;
+    backdrop-filter: blur(6px);
+  }
+  #win-screen.show { display: flex; }
+  .win-title { font-family: 'Lora', serif; font-size: 46px; font-weight: 600; color: var(--gold); margin-bottom: 12px; }
+  .win-sub { font-size: 15px; color: var(--text-soft); font-style: italic; margin-bottom: 36px; line-height: 1.8; max-width: 480px; }
+  .btn-next {
+    background: var(--gold); border: none; border-radius: 6px;
+    padding: 14px 36px; font-family: 'Libre Baskerville', serif;
+    font-size: 14px; font-weight: 700; color: #1a0f08;
+    cursor: pointer; letter-spacing: .06em; text-transform: uppercase;
+    transition: background .15s; text-decoration: none; display: inline-block;
+  }
+  .btn-next:hover { background: #f0c960; }
+
+  /* ── RESPONSIVO ── */
+  /* ── BOTÃO DE MUDO ── */
+  #controle-volume {
+    position: fixed;
+    bottom: 16px; right: 16px;
+    z-index: 300;
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(14,6,0,0.85);
+    border: 1.5px solid var(--border);
+    border-radius: 24px;
+    padding: 8px 16px 8px 10px;
+  }
+  #btn-mute {
+    background: none; border: none;
+    color: var(--gold); font-size: 18px;
+    cursor: pointer; padding: 0;
+    width: 22px; height: 22px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  #slider-volume { width: 90px; accent-color: var(--gold); cursor: pointer; }
+
+  @media (max-width: 768px) {
+    html, body { overflow: auto; height: auto; }
+    body { min-height: 100vh; }
+
+    /* Rafaela em cima, cena embaixo */
+    #game-area { display: flex; flex-direction: column; overflow: visible; min-height: auto; }
+
+    /* Rafaela: fila horizontal no topo */
+    #teacher-box {
+      position: relative; bottom: auto; left: auto; width: 100%;
+      flex-direction: row; align-items: flex-end; gap: 10px;
+      background: #1a0f08; padding: 10px 12px;
+      border-bottom: 1px solid rgba(212,170,106,0.2);
+      pointer-events: all; z-index: 5;
+    }
+    #teacher-img { width: 60px; height: 73px; border-radius: 8px; border-bottom: 2px solid rgba(232,184,75,0.55); }
+    #teacher-bubble { width: auto; flex: 1; min-height: auto; border-radius: 8px; padding: .75rem; }
+    #teacher-text { font-size: 17px; }
+
+    /* Cena: altura automática — imagem renderiza no seu ratio natural,
+       garantindo que os hotspots (% do container) alinhem com o conteúdo real */
+    #scene-col { position: relative; width: 100%; height: auto; }
+    #scene-img { width: 100%; height: auto; object-fit: unset; display: block; }
+
+    /* Modal e backdrop fixos na viewport (funciona ao scrollar) */
+    #modal-backdrop { position: fixed; z-index: 190; }
+    #stage-area { position: fixed; top: 50%; left: 50%; transform: translate(-50%,-50%);
+      width: calc(100% - 24px); max-height: 90vh; overflow-y: auto; z-index: 200; }
+
+    /* Overlay modelos — abaixo da cena no mobile, não sobre a imagem */
+    #modelos-overlay {
+      position: relative; top: auto; right: auto; min-width: unset; width: 100%;
+      border-radius: 0; border-top: 1px solid var(--border);
+      padding: .5rem 1rem;
+    }
+    .modelos-title { font-size: 7px; }
+    .modelo-item { font-size: 11px; }
+
+    .header { padding: 10px 14px; flex-wrap: wrap; gap: 8px; }
+    .page-title { font-size: 18px; }
+    .prog-step { width: 18px; height: 18px; font-size: 8px; }
+    .prog-line { width: 5px; }
+    .progress-wrap { flex-wrap: wrap; row-gap: 4px; }
+    .enigma-input-wrap { flex-direction: column; }
+    .btn-responder { width: 100%; }
+
+    #bentinho-img { width: 100%; }
+
+    /* ── HOTSPOTS MOBILE ──────────────────────────────────────────────────────
+       Ajuste left/top/width/height de cada hotspot para o celular.
+       Os valores são % da IMAGEM (que ocupa 100% da largura da tela).
+       left  = distância da borda esquerda da imagem
+       top   = distância do topo da imagem
+       width = largura da área clicável
+       height= altura da área clicável
+       ──────────────────────────────────────────────────────────────────────── */
+    #hs-dalton     { left: 4%; top: 63%; width: 35%; height: 20%; }
+    #hs-thomson    { left: 8%; top: 30%; width: 16%; height: 30%; }
+    #hs-rutherford { left: 35%; top:  2%; width: 38%; height: 28%; }
+    #hs-bohr       { left: 66%; top: 60%; width: 16%; height: 20%; }
+    #hs-porta      { left: 80%; top: 10%; width: 16%; height: 68%; }
+
+    #porta-lock-flash { left: 80%; top: 10%; width: 16%; height: 68%; }
+  }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div>
+    <div class="eyebrow">Camadas Profundas · KiFácil</div>
+    <h1 class="page-title">Sala de Entrada das Camadas Profundas</h1>
+  </div>
+  <div class="progress-wrap">
+    <div class="prog-step active" id="ps1">7</div>
+    <div class="prog-line"></div>
+    <div class="prog-step" id="ps2">6</div>
+    <div class="prog-line"></div>
+    <div class="prog-step" id="ps3">5</div>
+    <div class="prog-line"></div>
+    <div class="prog-step" id="ps4">4</div>
+    <div class="prog-line"></div>
+    <div class="prog-step" id="ps5">3</div>
+    <div class="prog-line"></div>
+    <div class="prog-step" id="ps6">2</div>
+    <div class="prog-line"></div>
+    <div class="prog-step" id="ps7">1</div>
+  </div>
+</header>
+
+<!-- ÁREA DO JOGO -->
+<div id="game-area">
+
+  <!-- PROFESSORA RAFAELA — position:absolute no desktop / bloco acima da cena no mobile -->
+  <aside id="teacher-box">
+    <img id="teacher-img" src="../imagens/rafa-sorrindo.jpg" alt="Professora Rafaela">
+    <div id="teacher-bubble">
+      <div id="teacher-name">Professora Rafaela</div>
+      <p id="teacher-text"></p>
+      <button id="btn-avancar" onclick="proximoPasso()">Continuar</button>
+    </div>
+  </aside>
+
+  <!-- CENA -->
+  <div id="scene-col">
+    <img id="scene-img" src="../imagens/sala-vitoriana (1).jpg" alt="Sala de Entrada das Camadas Profundas da Academia KiFácil">
+
+    <!-- BENTINHO -->
+    <div id="bentinho-layer">
+      <img id="bentinho-img" src="../imagens/bentinho-alavanca.png" alt="Bentinho">
+    </div>
+
+    <!-- Flash de travamento da porta -->
+    <div id="porta-lock-flash"></div>
+
+    <!-- HOTSPOTS sobre a imagem -->
+    <div class="hotspot" id="hs-dalton"
+         onclick="activateEnigma('dalton')"
+         onmouseenter="showLabel(this,'Mesa de Bilhar')"
+         onmouseleave="hideLabel(this)">
+      <div class="hotspot-ring"></div>
+      <div class="hotspot-check"><div class="hotspot-check-inner">✓</div></div>
+      <span class="hotspot-label">Mesa de Bilhar</span>
+    </div>
+
+    <div class="hotspot" id="hs-thomson"
+         onclick="activateEnigma('thomson')"
+         onmouseenter="showLabel(this,'Bobina de Tesla')"
+         onmouseleave="hideLabel(this)">
+      <div class="hotspot-ring"></div>
+      <div class="hotspot-check"><div class="hotspot-check-inner">✓</div></div>
+      <span class="hotspot-label">Bobina de Tesla</span>
+    </div>
+
+    <div class="hotspot" id="hs-rutherford"
+         onclick="activateEnigma('rutherford')"
+         onmouseenter="showLabel(this,'Orrery Planetário')"
+         onmouseleave="hideLabel(this)">
+      <div class="hotspot-ring"></div>
+      <div class="hotspot-check"><div class="hotspot-check-inner">✓</div></div>
+      <span class="hotspot-label">Orrery Planetário</span>
+    </div>
+
+    <div class="hotspot" id="hs-bohr"
+         onclick="activateEnigma('bohr')"
+         onmouseenter="showLabel(this,'Prisma de Luz')"
+         onmouseleave="hideLabel(this)">
+      <div class="hotspot-ring"></div>
+      <div class="hotspot-check"><div class="hotspot-check-inner">✓</div></div>
+      <span class="hotspot-label">Prisma de Luz</span>
+    </div>
+
+    <div class="hotspot" id="hs-porta"
+         onclick="activateEnigma('porta')"
+         onmouseenter="showLabel(this,'Porta de Saída')"
+         onmouseleave="hideLabel(this)">
+      <div class="hotspot-ring"></div>
+      <div class="hotspot-check"><div class="hotspot-check-inner">✓</div></div>
+      <span class="hotspot-label">Porta de Saída</span>
+    </div>
+
+  </div><!-- #scene-col -->
+
+  <!-- Modelos descobertos — fora da cena, não sobrepõe hotspots nem imagem -->
+  <div id="modelos-overlay">
+    <div class="modelos-title">Modelos encontrados</div>
+    <div class="modelos-list" id="modelos-list">
+      <div id="modelos-placeholder" style="font-size:12px;color:rgba(245,234,208,0.3);font-style:italic;">Nenhum ainda...</div>
+    </div>
+  </div>
+
+  <!-- Backdrop -->
+  <div id="modal-backdrop" onclick="fecharModal()"></div>
+
+  <!-- Modal centralizado -->
+  <div id="stage-area">
+    <div class="enigma-panel" id="enigmaBox">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px;">
+        <div class="enigma-eyebrow" id="eEyebrow"></div>
+        <button onclick="fecharModal()" style="background:none;border:none;color:rgba(245,234,208,0.4);font-size:18px;cursor:pointer;line-height:1;padding:0 0 0 12px;">✕</button>
+      </div>
+      <div class="enigma-title" id="eTitle"></div>
+      <div class="enigma-desc" id="eDesc"></div>
+      <div id="eBody"></div>
+      <div class="enigma-feedback" id="eFeedback"></div>
+    </div>
+  </div>
+
+  <!-- TELA DE VITÓRIA -->
+  <div id="win-screen">
+    <div class="win-title">Sala de Entrada Concluída!</div>
+    <p class="win-sub">Você reconheceu os quatro modelos atômicos e decifrou a fechadura do cátion. A primeira porta das Camadas Profundas está aberta.</p>
+    <a href="sala2.html" class="btn-next">Avançar para o Laboratório →</a>
+  </div>
+
+</div><!-- #game-area -->
+
+<script>
+  const solved = { dalton: false, thomson: false, rutherford: false, bohr: false, porta: false };
+  let activeEnigmaId = null;
+
+  const enigmas = {
+    dalton: {
+      eyebrow: 'Mesa de Bilhar — Modelo Atômico',
+      title: 'O átomo como uma bola de bilhar',
+      desc: '',
+      dica: 'Átomo como esfera maciça e indivisível — como uma bola de bilhar. Qual é esse modelo?',
+      placeholder: 'Digite o nome do modelo ou cientista...',
+      keyword: 'dalton',
+      feedbackOk: '',
+      feedbackErr: '',
+      rafaOk: 'Correto! Dalton, o pioneiro. Continue explorando!'
+    },
+    thomson: {
+      eyebrow: 'Bobina de Tesla — Modelo Atômico',
+      title: 'Eletricidade e cargas negativas',
+      desc: '',
+      dica: 'Átomo como pudim de passas: elétrons negativos espalhados numa massa positiva. Quem propôs isso?',
+      placeholder: 'Digite o nome do modelo ou cientista...',
+      keyword: 'thomson',
+      keywords: ['thomson', 'thompson'],
+      feedbackOk: '',
+      feedbackErr: '',
+      rafaOk: 'Isso! Thomson descobriu o elétron. Siga em frente!'
+    },
+    rutherford: {
+      eyebrow: 'Orrery Planetário — Modelo Atômico',
+      title: 'O núcleo e os elétrons em órbita',
+      desc: '',
+      dica: 'Elétrons orbitando um núcleo central — igual aos planetas ao redor do Sol. Qual é esse modelo?',
+      placeholder: 'Digite o nome do modelo ou cientista...',
+      keyword: 'rutherford',
+      feedbackOk: '',
+      feedbackErr: '',
+      rafaOk: 'Perfeito! Rutherford e o núcleo central. Continue!'
+    },
+    bohr: {
+      eyebrow: 'Prisma de Luz — Modelo Atômico',
+      title: 'Espectros de luz e níveis de energia',
+      desc: '',
+      dica: 'Elétrons em níveis de energia que emitem luz colorida ao saltar. Qual modelo é esse?',
+      placeholder: 'Digite o nome do modelo ou cientista...',
+      keyword: 'bohr',
+      feedbackOk: '',
+      feedbackErr: '',
+      rafaOk: 'Isso! Bohr e os níveis de energia.'
+    },
+    porta: {
+      eyebrow: 'Porta de Saída — Enigma Final',
+      title: 'A fechadura do cátion',
+      keyword: null,
+      rafaOk: 'Perfeito! Você calculou nêutrons e elétrons corretamente. A fechadura reconheceu sua resposta.'
+    }
+  };
+
+  /* ── PROFESSORA RAFAELA ── */
+  const IMG = {
+    sorrindo:   '../imagens/rafa-sorrindo.jpg',
+    explicando: '../imagens/rafa-explicando.jpg',
+    pensando:   '../imagens/rafa-pensando.jpg',
+    animada:    '../imagens/rafa-animada.jpg'
+  };
+  const $timg = document.getElementById('teacher-img');
+  const $ttxt = document.getElementById('teacher-text');
+  const $tbtn = document.getElementById('btn-avancar');
+  let _typingTimer;
+
+  function digitarTexto(el, txt, cb) {
+    clearTimeout(_typingTimer);
+    el.textContent = '';
+    const chars = [...txt];
+    let i = 0;
+    (function loop() {
+      if (i < chars.length) { el.textContent += chars[i++]; _typingTimer = setTimeout(loop, 22); }
+      else if (cb) cb();
+    })();
+  }
+
+  function fala(imgKey, txt, cb) {
+    $timg.style.opacity = '0';
+    $tbtn.classList.remove('show');
+    setTimeout(() => { $timg.src = IMG[imgKey]; $timg.style.opacity = '1'; }, 220);
+    digitarTexto($ttxt, txt, () => {
+      setTimeout(() => $tbtn.classList.add('show'), 350);
+      if (cb) cb();
+    });
+  }
+
+  function rafaFala(imgKey, msg) {
+    $tbtn.style.display = 'none';
+    fala(imgKey, msg, () => { $tbtn.style.display = 'none'; });
+  }
+
+  /* ── INTRO ── */
+  const introPassos = [
+    { img: 'sorrindo',   txt: 'Bem-vindo às Camadas Profundas da Academia KiFácil. Esta é uma das construções mais antigas da nossa escola.' },
+    { img: 'explicando', txt: 'Cada objeto desta sala guarda uma parte importante da história da Química. Observe tudo com atenção.' },
+    { img: 'pensando',   txt: 'Alguns objetos escondem pistas sobre os principais modelos atômicos...' },
+    { bentinho: true },
+    { img: 'pensando',   txt: 'Bentinho...' },
+    { img: 'sorrindo',   txt: 'Parece que ele resolveu testar você. Não se preocupe, isso acontece com frequência por aqui.' },
+    { img: 'explicando', txt: 'Nesta sala existem quatro objetos. Cada um deles representa um importante modelo atômico.' },
+    { img: 'animada',    txt: 'Quando identificar os quatro modelos, a fechadura reconhecerá que você reuniu as pistas necessárias. Só então será possível resolver o enigma final da porta.', ultimo: true },
+  ];
+  let introIdx = 0;
+
+  /* Música de fundo + controle de volume (a preferência fica salva e vale
+     para todas as fases). Toca em loop a partir do primeiro clique do
+     aluno (navegadores bloqueiam áudio automático sem interação); o
+     volume do slider vale tanto para a música quanto para os efeitos
+     sonoros (clique, ding, porta etc.). */
+  let volumeSalvo = parseFloat(localStorage.getItem('kifacil_volume'));
+  if (isNaN(volumeSalvo)) volumeSalvo = 0.35;
+  let silenciado = localStorage.getItem('kifacil_silenciado') === '1';
+  let musicaFundo = null;
+
+  function volumeEfetivo() {
+    return silenciado ? 0 : volumeSalvo;
+  }
+
+  /* A navegação entre fases sempre recarrega a página (não é uma SPA),
+     então o áudio para de tocar por um instante — isso não dá para
+     evitar. Mas guardamos o ponto exato da música em sessionStorage a
+     cada instante (evento "timeupdate") e retomamos dali na próxima
+     fase, em vez de reiniciar do zero — assim a música parece contínua
+     ao longo de toda a "Desafio das Camadas Profundas". */
+  function iniciarMusicaFundo() {
+    if (musicaFundo) return;
+    try {
+      musicaFundo = new Audio('../sons/camadas-profundas.mp3');
+      musicaFundo.loop = true;
+      musicaFundo.volume = volumeEfetivo();
+      const tempoSalvo = parseFloat(sessionStorage.getItem('kifacil_musica_tempo'));
+      if (!isNaN(tempoSalvo) && tempoSalvo > 0) musicaFundo.currentTime = tempoSalvo;
+      musicaFundo.addEventListener('timeupdate', () => {
+        sessionStorage.setItem('kifacil_musica_tempo', musicaFundo.currentTime);
+      });
+      musicaFundo.play().catch(() => {});
+    } catch (e) {}
+  }
+
+  function atualizarIconeMudo() {
+    const botao = document.getElementById('btn-mute');
+    if (!botao) return;
+    if (silenciado || volumeSalvo === 0) botao.textContent = '🔇';
+    else if (volumeSalvo < 0.5) botao.textContent = '🔉';
+    else botao.textContent = '🔊';
+  }
+
+  function alternarMudo() {
+    silenciado = !silenciado;
+    localStorage.setItem('kifacil_silenciado', silenciado ? '1' : '0');
+    if (musicaFundo) musicaFundo.volume = volumeEfetivo();
+    atualizarIconeMudo();
+  }
+
+  function ajustarVolume(valorSlider) {
+    volumeSalvo = Math.max(0, Math.min(1, valorSlider / 100));
+    localStorage.setItem('kifacil_volume', volumeSalvo);
+    if (volumeSalvo > 0 && silenciado) {
+      silenciado = false;
+      localStorage.setItem('kifacil_silenciado', '0');
+    }
+    if (musicaFundo) musicaFundo.volume = volumeEfetivo();
+    atualizarIconeMudo();
+  }
+
+  (function iniciarControleVolume() {
+    const slider = document.getElementById('slider-volume');
+    if (slider) slider.value = Math.round(volumeSalvo * 100);
+    atualizarIconeMudo();
+  })();
+
+  function tocarClick() {
+    iniciarMusicaFundo();
+    const v = volumeEfetivo();
+    if (v <= 0) return;
+    try { const a = new Audio('../sons/click.mp3'); a.volume = v; a.play().catch(function(){}); } catch(e) {}
+  }
+  function proximoPasso() {
+    tocarClick();
+    introIdx++;
+    if (introIdx >= introPassos.length) {
+      document.body.classList.remove('intro-ativa');
+      $tbtn.style.display = 'none';
+      return;
+    }
+    const p = introPassos[introIdx];
+    if (p.bentinho) {
+      $tbtn.classList.remove('show');
+      $tbtn.style.display = 'none';
+      cenaBentinho(() => {
+        introIdx++;
+        const next = introPassos[introIdx];
+        $tbtn.textContent = 'Continuar';
+        $tbtn.style.display = '';
+        fala(next.img, next.txt);
+      });
+      return;
+    }
+    $tbtn.textContent = p.ultimo ? 'Estou pronto!' : 'Continuar';
+    $tbtn.style.display = '';
+    fala(p.img, p.txt);
+  }
+
+  function iniciarIntro() {
+    document.body.classList.add('intro-ativa');
+    $tbtn.textContent = 'Continuar';
+    $tbtn.style.display = '';
+    fala(introPassos[0].img, introPassos[0].txt);
+  }
+
+  setTimeout(iniciarIntro, 400);
+
+  /* ── CENA DO BENTINHO ── */
+  function cenaBentinho(callback) {
+    const layer = document.getElementById('bentinho-layer');
+    const img   = document.getElementById('bentinho-img');
+    const flash = document.getElementById('porta-lock-flash');
+
+    /* entra correndo da esquerda + miado */
+    layer.style.transition = 'none';
+    layer.style.left       = '-120px';
+    layer.style.display    = 'block';
+    img.src = '../imagens/bentinho-correndo.png';
+    try { new Audio('../sons/bentinho-miado.MP3').play().catch(()=>{}); } catch(e) {}
+
+    /* força reflow para que a transição dispare */
+    layer.offsetWidth;
+
+    /* corre até a porta */
+    layer.style.transition = 'left 1.4s ease-in';
+    layer.style.left       = '60%';
+
+    setTimeout(() => {
+      /* chega na porta com a alavanca */
+      layer.style.transition = 'none';
+      img.src = '../imagens/bentinho-alavanca (1).png';
+
+      /* flash vermelho + som de trancamento após 800ms */
+      setTimeout(() => {
+        try { new Audio('../sons/trancando.mp3').play().catch(()=>{}); } catch(e) {}
+        flash.classList.add('show');
+        setTimeout(() => flash.classList.remove('show'), 500);
+
+        /* sai correndo após 2s */
+        setTimeout(() => {
+          img.src = '../imagens/beninho-saindo.png';
+          layer.style.transition = 'left 1s ease-in';
+          layer.style.left       = 'calc(100% + 130px)';
+
+          setTimeout(() => {
+            layer.style.display = 'none';
+            if (callback) callback();
+          }, 1050);
+        }, 2000);
+      }, 800);
+    }, 1450);
+  }
+
+  /* ── ENIGMAS ── */
+  function showLabel(el, txt) {}
+  function hideLabel(el) {}
+
+  function activateEnigma(id) {
+    if (solved[id] && id !== 'porta') {
+      rafaFala('sorrindo', enigmas[id].rafaOk); return;
+    }
+    if (id === 'porta' && (!solved.dalton || !solved.thomson || !solved.rutherford || !solved.bohr)) {
+      showEnigmaPanel('Porta de Saída', 'Acesso bloqueado', '',
+        `<div class="locked-msg">A fechadura não responde. Encontre os quatro modelos atômicos antes de tentar abrir a porta.</div>`);
+      rafaFala('pensando', 'A fechadura não abre ainda. Encontre os quatro modelos atômicos escondidos na sala primeiro!');
+      return;
+    }
+
+    activeEnigmaId = id;
+    const e = enigmas[id];
+    showEnigmaPanel(e.eyebrow, e.title, '', '');
+
+    if (id === 'porta') {
+      document.getElementById('eBody').innerHTML = `
+        <p class="evolucao-desc">A fechadura mostra um átomo transformado em cátion. Use o número atômico e o número de massa para descobrir os dois números que faltam.</p>
+        <div class="cation-card">
+          <div class="cation-simbolo">Al&sup3;&#8314;</div>
+          <div class="cation-dados">
+            Número atômico (Z) = 13<br>
+            Número de massa (A) = 27
+          </div>
+        </div>
+        <div class="evolucao-grid">
+          <div class="evolucao-field">
+            <div class="evolucao-num">N</div>
+            <input class="evolucao-input" id="ev-neutrons" type="text" placeholder="Número de nêutrons..." onkeydown="if(event.key==='Enter')checkPortaEvolucao()">
+          </div>
+          <div class="evolucao-field">
+            <div class="evolucao-num">E</div>
+            <input class="evolucao-input" id="ev-eletrons" type="text" placeholder="Número de elétrons do cátion..." onkeydown="if(event.key==='Enter')checkPortaEvolucao()">
+          </div>
+        </div>
+        <button class="btn-responder" onclick="checkPortaEvolucao()" style="width:100%;">Confirmar senha</button>`;
+      rafaFala('pensando', 'A fechadura pede a estrutura do cátion. Calcule nêutrons e elétrons com cuidado — o Al³⁺ perdeu elétrons, não prótons!');
+      setTimeout(() => document.getElementById('ev-neutrons').focus(), 100);
+    } else {
+      if (solved[id]) return;
+      document.getElementById('eBody').innerHTML = `
+        <div class="enigma-input-wrap">
+          <input class="enigma-input" id="enigmaInput" type="text" placeholder="${e.placeholder}" onkeydown="if(event.key==='Enter')checkEnigma()">
+          <button class="btn-responder" onclick="checkEnigma()">Responder</button>
+        </div>`;
+      rafaFala('explicando', e.dica);
+      setTimeout(() => document.getElementById('enigmaInput')?.focus(), 100);
+    }
+  }
+
+  function showEnigmaPanel(eyebrow, title, desc, body) {
+    document.getElementById('eEyebrow').textContent = eyebrow;
+    document.getElementById('eTitle').textContent = title;
+    document.getElementById('eDesc').innerHTML = desc;
+    document.getElementById('eBody').innerHTML = body;
+    document.getElementById('eFeedback').className = 'enigma-feedback';
+    document.getElementById('stage-area').classList.add('show');
+    document.getElementById('modal-backdrop').classList.add('show');
+  }
+
+  function fecharModal() {
+    document.getElementById('stage-area').classList.remove('show');
+    document.getElementById('modal-backdrop').classList.remove('show');
+    activeEnigmaId = null;
+  }
+
+  function checkEnigma() {
+    const id = activeEnigmaId;
+    const e = enigmas[id];
+    const val = document.getElementById('enigmaInput').value.trim().toLowerCase();
+    const fb = document.getElementById('eFeedback');
+    const keywords = e.keywords || [e.keyword];
+    if (keywords.some(k => val.includes(k))) {
+      tocarDing();
+      fb.className = 'enigma-feedback show ok';
+      fb.innerHTML = e.feedbackOk;
+      markSolved(id);
+      const count = ['dalton','thomson','rutherford','bohr'].filter(k => solved[k]).length;
+      if (count === 4) {
+        rafaFala('animada', 'Todos os modelos encontrados! Agora resolva o enigma da porta.');
+      } else {
+        rafaFala('sorrindo', enigmas[id].rafaOk);
+      }
+      setTimeout(fecharModal, 900);
+    } else {
+      fb.className = 'enigma-feedback show err';
+      fb.innerHTML = `<strong>Não é esse.</strong> ${e.feedbackErr}`;
+      rafaFala('pensando', 'Não foi dessa vez. Releia a pista com atenção — você consegue!');
+    }
+  }
+
+  /* Enigma da porta: cátion Al³⁺ — Z = 13, A = 27
+     nêutrons = A - Z = 27 - 13 = 14
+     elétrons = Z - carga = 13 - 3 = 10 */
+  function checkPortaEvolucao() {
+    const soDigitos = s => s.trim().replace(/\D/g, '');
+    const neutrons = soDigitos(document.getElementById('ev-neutrons').value);
+    const eletrons = soDigitos(document.getElementById('ev-eletrons').value);
+
+    const okNeutrons = neutrons === '14';
+    const okEletrons = eletrons === '10';
+
+    if (okNeutrons && okEletrons) {
+      tocarDing();
+      markSolved('porta');
+      rafaFala('animada', enigmas.porta.rafaOk);
+      setTimeout(showWin, 5000);
+    } else {
+      rafaFala('pensando', 'Quase. Lembre-se: nêutrons = número de massa − número atômico. E o cátion Al³⁺ perdeu 3 elétrons, então elétrons = número atômico − 3.');
+    }
+  }
+
+  const modeloNomes = {
+    dalton: 'Modelo de Dalton',
+    thomson: 'Modelo de Thomson',
+    rutherford: 'Modelo de Rutherford',
+    bohr: 'Modelo de Bohr'
+  };
+
+  function markSolved(id) {
+    solved[id] = true;
+    const hs = document.getElementById('hs-' + id);
+    if (hs) hs.classList.add('solved');
+    if (modeloNomes[id]) {
+      const list = document.getElementById('modelos-list');
+      const ph = document.getElementById('modelos-placeholder');
+      if (ph) ph.remove();
+      const item = document.createElement('div');
+      item.className = 'modelo-item found';
+      item.innerHTML = '<div class="modelo-dot"></div><span>' + modeloNomes[id] + '</span>';
+      item.style.animation = 'fadeUp .4s ease';
+      list.appendChild(item);
+    }
+    const count = ['dalton','thomson','rutherford','bohr'].filter(k => solved[k]).length;
+    if (count === 4) {
+      document.getElementById('ps1').className = 'prog-step done';
+      document.getElementById('ps1').textContent = '✓';
+    }
+  }
+
+  function tocarDing() {
+    const v = volumeEfetivo();
+    if (v <= 0) return;
+    try { const a = new Audio('../sons/ding.mp3'); a.volume = v; a.play().catch(()=>{}); } catch(e) {}
+  }
+  function tocarPorta() {
+    const v = volumeEfetivo();
+    if (v <= 0) return;
+    try { const a = new Audio('../sons/porta-abrindo.mp3'); a.volume = v; a.play().catch(()=>{}); } catch(e) {}
+  }
+
+  function showWin() {
+    tocarPorta();
+    document.getElementById('win-screen').classList.add('show');
+  }
+</script>
+
+<div id="controle-volume">
+  <button id="btn-mute" onclick="alternarMudo()" aria-label="Silenciar ou ativar o som">🔊</button>
+  <input type="range" id="slider-volume" min="0" max="100" value="35" oninput="ajustarVolume(this.value)" aria-label="Volume">
+</div>
+
+<div id="cookie-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#1a0f08;border-top:1px solid rgba(212,170,106,0.4);padding:1rem 2rem;z-index:9999;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;"><p style="margin:0;font-family:'Libre Baskerville',serif;font-size:0.82rem;color:#e8d4b0;line-height:1.5;">Este site utiliza cookies para melhorar sua experiência. Ao continuar navegando, você concorda com nossa <a href="/politica-de-privacidade.html" style="color:#e8b84b;text-decoration:underline;text-underline-offset:2px;">Política de Privacidade</a>.</p><button onclick="document.getElementById('cookie-banner').style.display='none';localStorage.setItem('kifacil_cookies','1');" style="flex-shrink:0;background:#e8b84b;border:none;padding:0.55rem 1.5rem;font-family:'Libre Baskerville',serif;font-size:0.78rem;font-weight:700;color:#1a0f08;cursor:pointer;letter-spacing:0.04em;">Entendi</button></div>
+<script>if(!localStorage.getItem('kifacil_cookies'))document.getElementById('cookie-banner').style.display='flex';</script>
+
+<script type="module">
+  import { requireAuth }          from '../../../js/guards.js';
+  import { session }              from '../../../js/session.js';
+  import { registrarEntradaFase } from '../../../js/progresso.js';
+  import { iniciarNavTorre }      from '../../../js/nav-torre.js';
+  import { salvarPerfil }         from '../../../js/database.js';
+
+  await requireAuth('../../../login.html').catch(() => {});
+
+  iniciarNavTorre('quimica');
+
+  const emRevisao = new URLSearchParams(location.search).has('revisao');
+  const uid = session.usuario?.uid;
+
+  const _lk = document.querySelector('.btn-next[href="sala2.html"]');
+  if (_lk && uid) {
+    _lk.addEventListener('click', async e => {
+      e.preventDefault();
+      if (!emRevisao) {
+        await salvarPerfil(uid, { faseAtual: 'escape-room-laboratorio' }).catch(e => console.error('[Progresso] Falha ao salvar faseAtual:', e));
+      }
+      window.location.href = _lk.href;
+    });
+  }
+</script>
+</body>
+</html>

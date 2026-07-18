@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="canonical" href="https://kifaciledu.com.br/jogos/jogos-escaperoom/torre-quimica/fases/fase7-portao-conhecimento.html">
+<title>O Portão do Conhecimento | KiFácil</title>
+<meta name="description" content="Fase 7 (Camada 1) do Escape Room dos Mapas da Academia KiFácil. A fase final do Desafio das Camadas Profundas: decifre o código que abre o Portão do Conhecimento.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;1,500;1,600&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:          #2e2016;
+    --text:        #f5ead0;
+    --text-soft:   #e8d4b0;
+    --gold:        #e8b84b;
+    --border:      rgba(212,170,106,0.4);
+    --panel-bg:    rgba(14, 6, 0, 0.94);
+    --green-border:rgba(80,200,120,0.5);
+    --green-text:  #8fe0a0;
+    --red-border:  rgba(217,95,59,0.35);
+    --red-text:    #e8956a;
+  }
+
+  html, body {
+    height: 100%; overflow: hidden;
+    font-family: 'Libre Baskerville', serif;
+    color: var(--text);
+    background: var(--bg);
+  }
+  body { display: flex; flex-direction: column; }
+
+  /* ── HEADER ── */
+  .header {
+    background: #1a0f08;
+    padding: 14px 28px 12px;
+    border-bottom: 1px solid rgba(212,170,106,0.2);
+    display: flex; align-items: center; justify-content: space-between;
+    flex-shrink: 0;
+  }
+  .eyebrow { font-size: 9px; letter-spacing: .16em; text-transform: uppercase; color: var(--gold); margin-bottom: 3px; }
+  .page-title { font-family: 'Lora', serif; font-size: 24px; font-weight: 600; color: var(--text); line-height: 1.1; }
+  .progress-wrap { display: flex; align-items: center; gap: 4px; }
+  .prog-step {
+    width: 22px; height: 22px; border-radius: 50%;
+    border: 1px solid rgba(212,170,106,0.3);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 9px; color: rgba(232,216,176,0.4);
+    transition: all .4s; position: relative; flex-shrink: 0;
+  }
+  .prog-step.active { border-color: var(--gold); color: var(--gold); }
+  .prog-step.done { background: var(--gold); border-color: var(--gold); color: #1a0f08; font-weight: 700; }
+  .prog-line { width: 9px; height: 1px; background: rgba(212,170,106,0.25); flex-shrink: 0; }
+
+  /* ── GAME AREA ── */
+  #game-area {
+    position: relative;
+    flex: 1; min-height: 0;
+    overflow: hidden;
+  }
+
+  #scene-col {
+    position: absolute;
+    inset: 0;
+    background: #1a0f08 url('../imagens/camada1-fundo.jpg') center / cover no-repeat;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  /* ── PORTÃO DO CONHECIMENTO ───────────────────────────────────────────────
+     #porta-wrapper é dimensionado via JS para o maior retângulo possível
+     mantendo a proporção real de porta-codigo.png (1024×1536), a mesma
+     técnica usada nas fases anteriores (tabela periódica / eletrosfera).
+     A porta é dividida visualmente em duas metades (mesma imagem, cada
+     uma mostrando sua parte), que deslizam para os lados no final.
+     ──────────────────────────────────────────────────────────────────────── */
+  #porta-wrapper {
+    position: relative;
+    flex-shrink: 0;
+  }
+  #luz-dourada {
+    position: absolute; inset: 8%;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,224,140,0.95) 0%, rgba(255,180,60,0.55) 45%, rgba(255,180,60,0) 75%);
+    opacity: 0;
+    transition: opacity 1.4s ease;
+    pointer-events: none;
+  }
+  #porta-wrapper.aberta #luz-dourada { opacity: 1; }
+
+  .porta-metade {
+    position: absolute; top: 0; width: 50%; height: 100%;
+    overflow: hidden;
+    transition: transform 1.6s ease;
+  }
+  .porta-metade.esq { left: 0; }
+  .porta-metade.dir { right: 0; }
+  .porta-metade img { position: absolute; top: 0; width: 200%; height: 100%; object-fit: cover; display: block; }
+  .porta-metade.esq img { left: 0; }
+  .porta-metade.dir img { right: 0; }
+  #porta-wrapper.aberta .porta-metade.esq { transform: translateX(-104%); }
+  #porta-wrapper.aberta .porta-metade.dir { transform: translateX(104%); }
+
+  /* Os três espaços do código, sobre a porta (medidos nos pixels reais
+     da imagem: y ≈ 38.2% / 46.7% / 55.5%, sempre centralizados em x). */
+  .codigo-slot {
+    position: absolute;
+    left: 50%; width: 54%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    font-family: 'Lora', serif; font-weight: 700;
+    color: var(--gold);
+    letter-spacing: .06em;
+    text-shadow: 0 0 6px rgba(0,0,0,.7);
+    z-index: 5;
+    transition: opacity .5s ease;
+  }
+  .codigo-slot.brilho { animation: brilhoCodigo 1s ease; }
+  @keyframes brilhoCodigo {
+    0%   { text-shadow: 0 0 4px rgba(0,0,0,.7); }
+    40%  { text-shadow: 0 0 18px rgba(255,224,140,1), 0 0 30px rgba(255,224,140,.8); }
+    100% { text-shadow: 0 0 6px rgba(0,0,0,.7); }
+  }
+
+  /* Cadeados decorativos ao redor da porta — somem um a um no final. */
+  .cadeado-decor {
+    position: absolute;
+    width: 46px;
+    filter: drop-shadow(0 4px 10px rgba(0,0,0,.6));
+    opacity: .92;
+    transition: opacity .6s ease, transform .6s ease;
+    pointer-events: none;
+  }
+  .cadeado-decor.sumiu { opacity: 0; transform: scale(.4) rotate(25deg); }
+
+  /* ── QUADRO NEGRO (lado direito) ── */
+  #quadro-painel {
+    position: absolute;
+    top: 50%; right: 90px;
+    transform: translateY(-50%);
+    width: 300px;
+    background: rgba(10, 14, 10, 0.93);
+    border: 6px solid #5a3f22;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.6), inset 0 0 30px rgba(0,0,0,.5);
+    padding: 1.4rem 1.3rem;
+    z-index: 40;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .6s ease;
+  }
+  #quadro-painel.ativo { opacity: 1; pointer-events: all; }
+  .quadro-eyebrow { font-size: 9px; letter-spacing: .16em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; text-align: center; }
+  .equacao-fixa {
+    display: none;
+    text-align: center;
+    font-family: 'Lora', serif;
+    font-size: 15px; font-weight: 700;
+    color: var(--gold);
+    margin-bottom: 14px; padding-bottom: 12px;
+    border-bottom: 1px solid rgba(232,184,75,0.25);
+  }
+  .equacao-fixa.show { display: block; }
+  .quadro-pergunta {
+    font-family: 'Lora', serif; font-size: 16px; line-height: 1.6;
+    color: var(--text); text-align: center;
+    white-space: pre-line;
+    margin-bottom: 18px;
+    min-height: 96px;
+  }
+  .quadro-resposta-wrap { display: flex; flex-direction: column; gap: 10px; }
+  #campoResposta {
+    width: 100%;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 11px 12px;
+    font-family: 'Libre Baskerville', serif;
+    font-size: 15px;
+    color: var(--text);
+    outline: none;
+    text-align: center;
+    transition: border-color .15s;
+  }
+  #campoResposta:focus { border-color: var(--gold); }
+  #campoResposta.errado { border-color: rgba(217,95,59,.8); animation: shakeErro .4s ease; }
+  @keyframes shakeErro {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-6px); }
+    75% { transform: translateX(6px); }
+  }
+  .btn-verificar-fase {
+    width: 100%;
+    background: linear-gradient(135deg, #e8b84b, #b8891e);
+    color: #160600; border: none; border-radius: 6px;
+    padding: 12px 18px; font-family: 'Libre Baskerville', serif;
+    font-size: 13px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase;
+    cursor: pointer; transition: filter .15s;
+  }
+  .btn-verificar-fase:hover { filter: brightness(1.1); }
+  .quadro-feedback {
+    margin-top: 12px; min-height: 1.3em;
+    font-size: 12.5px; text-align: center;
+    color: var(--red-text);
+  }
+  .quadro-feedback.certo { color: var(--green-text); }
+
+  /* ── PROFESSORA RAFAELA (esquerda) ── */
+  #teacher-box {
+    position: absolute;
+    bottom: 0; left: 20px;
+    z-index: 95;
+    display: flex; flex-direction: column; align-items: flex-start;
+    gap: 8px;
+    width: 350px;
+    pointer-events: none;
+  }
+  #teacher-img {
+    width: 230px; height: 278px;
+    object-fit: cover; object-position: top center;
+    border-radius: 12px 12px 0 0;
+    border: 2px solid rgba(232,184,75,0.55);
+    border-bottom: none;
+    flex-shrink: 0;
+    filter: drop-shadow(0 -4px 20px rgba(0,0,0,.9));
+  }
+  #teacher-bubble {
+    background: rgba(36,21,11,0.97);
+    border: 1.5px solid rgba(232,184,75,0.52);
+    border-radius: 4px 14px 0 0;
+    padding: 1rem 1.15rem;
+    width: 350px;
+    min-height: 90px;
+    display: flex; flex-direction: column;
+    justify-content: space-between; gap: .65rem;
+    pointer-events: all;
+    box-shadow: 0 -4px 24px rgba(0,0,0,.75);
+    backdrop-filter: blur(4px);
+  }
+  #teacher-name {
+    font-size: 9px; letter-spacing: .16em; text-transform: uppercase;
+    color: #d6b15b; margin-bottom: 2px;
+  }
+  #teacher-text {
+    font-family: 'Lora', serif;
+    font-size: 19px; line-height: 1.85;
+    color: #D4C5A8; font-weight: 400;
+    text-align: justify;
+    white-space: pre-line;
+  }
+  #btn-avancar {
+    align-self: flex-end;
+    background: linear-gradient(135deg, #e8b84b, #b8891e);
+    color: #160600; border: none; border-radius: 6px;
+    padding: .45rem 1.2rem;
+    font-family: 'Libre Baskerville', serif;
+    font-size: 11px; font-weight: 700;
+    letter-spacing: .06em; text-transform: uppercase;
+    cursor: pointer; opacity: 0; pointer-events: none;
+    transition: opacity .3s, transform .2s;
+  }
+  #btn-avancar.show { opacity: 1; pointer-events: all; }
+  #btn-avancar:hover { filter: brightness(1.1); transform: scale(1.03); }
+
+  #btn-concluir {
+    align-self: flex-end;
+    background: var(--gold);
+    color: #1a0f08; border: none; border-radius: 6px;
+    padding: .5rem 1.3rem;
+    font-family: 'Libre Baskerville', serif;
+    font-size: 11px; font-weight: 700;
+    letter-spacing: .06em; text-transform: uppercase;
+    cursor: pointer; text-decoration: none;
+    display: inline-block;
+    opacity: 0; pointer-events: none;
+    transition: opacity .3s, transform .2s, background .15s;
+  }
+  #btn-concluir.show { opacity: 1; pointer-events: all; }
+  #btn-concluir:hover { background: #f0c960; transform: scale(1.03); }
+
+  /* ── RESPONSIVO ── */
+  /* ── BOTÃO DE MUDO ── */
+  #controle-volume {
+    position: fixed;
+    bottom: 16px; right: 16px;
+    z-index: 300;
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(14,6,0,0.85);
+    border: 1.5px solid var(--border);
+    border-radius: 24px;
+    padding: 8px 16px 8px 10px;
+  }
+  #btn-mute {
+    background: none; border: none;
+    color: var(--gold); font-size: 18px;
+    cursor: pointer; padding: 0;
+    width: 22px; height: 22px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  #slider-volume { width: 90px; accent-color: var(--gold); cursor: pointer; }
+
+  @media (max-width: 768px) {
+    html, body { overflow: auto; height: auto; }
+    body { min-height: 100vh; }
+
+    #game-area { display: flex; flex-direction: column; overflow: visible; min-height: auto; }
+
+    #teacher-box {
+      position: relative; bottom: auto; left: auto; width: 100%;
+      flex-direction: row; align-items: flex-end; gap: 10px;
+      background: #1a0f08; padding: 10px 12px;
+      border-bottom: 1px solid rgba(212,170,106,0.2);
+      pointer-events: all; z-index: 5;
+    }
+    #teacher-img { width: 60px; height: 73px; border-radius: 8px; border-bottom: 2px solid rgba(232,184,75,0.55); }
+    #teacher-bubble { width: auto; flex: 1; min-height: auto; border-radius: 8px; padding: .75rem; }
+    #teacher-text { font-size: 16px; }
+
+    #scene-col {
+      position: relative; width: 100%; height: auto; min-height: auto;
+      flex-direction: column; padding: 20px 16px; gap: 18px;
+    }
+    #porta-wrapper { width: 210px !important; height: 315px !important; }
+    .cadeado-decor { display: none; }
+
+    #quadro-painel {
+      position: relative; top: auto; right: auto; transform: none;
+      width: 100%;
+    }
+
+    .header { padding: 10px 14px; flex-wrap: wrap; gap: 8px; }
+    .page-title { font-size: 18px; }
+    .prog-step { width: 18px; height: 18px; font-size: 8px; }
+    .prog-line { width: 5px; }
+    .progress-wrap { flex-wrap: wrap; row-gap: 4px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div>
+    <div class="eyebrow">Camadas Profundas · KiFácil</div>
+    <h1 class="page-title">O Portão do Conhecimento</h1>
+  </div>
+  <div class="progress-wrap">
+    <div class="prog-step done" id="ps1">✓</div>
+    <div class="prog-line"></div>
+    <div class="prog-step done" id="ps2">✓</div>
+    <div class="prog-line"></div>
+    <div class="prog-step done" id="ps3">✓</div>
+    <div class="prog-line"></div>
+    <div class="prog-step done" id="ps4">✓</div>
+    <div class="prog-line"></div>
+    <div class="prog-step done" id="ps5">✓</div>
+    <div class="prog-line"></div>
+    <div class="prog-step done" id="ps6">✓</div>
+    <div class="prog-line"></div>
+    <div class="prog-step active" id="ps7">1</div>
+  </div>
+</header>
+
+<!-- ÁREA DO JOGO -->
+<div id="game-area">
+
+  <!-- PROFESSORA RAFAELA -->
+  <aside id="teacher-box">
+    <img id="teacher-img" src="../imagens/rafa-explicando.jpg" alt="Professora Rafaela">
+    <div id="teacher-bubble">
+      <div id="teacher-name">Professora Rafaela</div>
+      <p id="teacher-text"></p>
+      <button id="btn-avancar" onclick="proximoPasso()">Continuar</button>
+      <a id="btn-concluir" href="torre-quimica-concluida.html">Concluir</a>
+    </div>
+  </aside>
+
+  <!-- CENA -->
+  <div id="scene-col">
+
+    <!-- PORTÃO DO CONHECIMENTO -->
+    <div id="porta-wrapper">
+      <div id="luz-dourada"></div>
+      <div class="porta-metade esq"><img src="../imagens/porta-codigo.png" alt=""></div>
+      <div class="porta-metade dir"><img src="../imagens/porta-codigo.png" alt="Portão do Conhecimento"></div>
+
+      <div class="codigo-slot" id="slot-1" style="top: 38.2%; font-size: 26px;">_</div>
+      <div class="codigo-slot" id="slot-2" style="top: 46.7%; font-size: 26px;">_</div>
+      <div class="codigo-slot" id="slot-3" style="top: 55.5%; font-size: 20px;">_</div>
+
+      <!-- Cadeados decorativos ao redor da porta -->
+      <img class="cadeado-decor" src="../imagens/cadeado.png" alt="" style="left: -14%; top: 6%; transform: rotate(-8deg);">
+      <img class="cadeado-decor" src="../imagens/cadeado.png" alt="" style="left: 104%; top: 4%; transform: rotate(10deg);">
+      <img class="cadeado-decor" src="../imagens/cadeado.png" alt="" style="left: -18%; top: 40%; transform: rotate(6deg);">
+      <img class="cadeado-decor" src="../imagens/cadeado.png" alt="" style="left: 106%; top: 42%; transform: rotate(-12deg);">
+      <img class="cadeado-decor" src="../imagens/cadeado.png" alt="" style="left: -10%; top: 78%; transform: rotate(-4deg);">
+      <img class="cadeado-decor" src="../imagens/cadeado.png" alt="" style="left: 100%; top: 80%; transform: rotate(9deg);">
+    </div>
+
+  </div><!-- #scene-col -->
+
+  <!-- QUADRO NEGRO -->
+  <div id="quadro-painel">
+    <div class="quadro-eyebrow">Quadro Negro</div>
+    <div class="equacao-fixa" id="equacaoFixa"></div>
+    <div class="quadro-pergunta" id="quadroPergunta"></div>
+    <div class="quadro-resposta-wrap">
+      <input type="text" id="campoResposta" inputmode="decimal" placeholder="Resposta" autocomplete="off">
+      <button class="btn-verificar-fase" onclick="verificarResposta()">Verificar</button>
+    </div>
+    <div class="quadro-feedback" id="quadroFeedback"></div>
+  </div>
+
+</div><!-- #game-area -->
+
+<script>
+  /* ══════════════════════════════════════════════════════════════════════
+     PROFESSORA RAFAELA — esta fase usa uma única imagem
+     (rafa-explicando.jpg), então a fala só digita o texto.
+     ══════════════════════════════════════════════════════════════════════ */
+  const $ttxt = document.getElementById('teacher-text');
+  const $tbtn = document.getElementById('btn-avancar');
+  const $tconcluir = document.getElementById('btn-concluir');
+  let _typingTimer;
+
+  function digitarTexto(el, txt, cb) {
+    clearTimeout(_typingTimer);
+    el.textContent = '';
+    const chars = [...txt];
+    let i = 0;
+    (function loop() {
+      if (i < chars.length) { el.textContent += chars[i++]; _typingTimer = setTimeout(loop, 18); }
+      else if (cb) cb();
+    })();
+  }
+
+  function fala(txt, cb) {
+    $tbtn.classList.remove('show');
+    digitarTexto($ttxt, txt, () => {
+      if (cb) cb();
+    });
+  }
+
+  /* Música de fundo + controle de volume (a preferência fica salva e vale
+     para todas as fases). Toca em loop a partir do primeiro clique do
+     aluno (navegadores bloqueiam áudio automático sem interação); o
+     volume do slider vale tanto para a música quanto para os efeitos
+     sonoros (clique, ding, porta etc.). */
+  let volumeSalvo = parseFloat(localStorage.getItem('kifacil_volume'));
+  if (isNaN(volumeSalvo)) volumeSalvo = 0.35;
+  let silenciado = localStorage.getItem('kifacil_silenciado') === '1';
+  let musicaFundo = null;
+
+  function volumeEfetivo() {
+    return silenciado ? 0 : volumeSalvo;
+  }
+
+  /* A navegação entre fases sempre recarrega a página (não é uma SPA),
+     então o áudio para de tocar por um instante — isso não dá para
+     evitar. Mas guardamos o ponto exato da música em sessionStorage a
+     cada instante (evento "timeupdate") e retomamos dali na próxima
+     fase, em vez de reiniciar do zero — assim a música parece contínua
+     ao longo de toda a "Desafio das Camadas Profundas". */
+  function iniciarMusicaFundo() {
+    if (musicaFundo) return;
+    try {
+      musicaFundo = new Audio('../sons/camadas-profundas.mp3');
+      musicaFundo.loop = true;
+      musicaFundo.volume = volumeEfetivo();
+      const tempoSalvo = parseFloat(sessionStorage.getItem('kifacil_musica_tempo'));
+      if (!isNaN(tempoSalvo) && tempoSalvo > 0) musicaFundo.currentTime = tempoSalvo;
+      musicaFundo.addEventListener('timeupdate', () => {
+        sessionStorage.setItem('kifacil_musica_tempo', musicaFundo.currentTime);
+      });
+      musicaFundo.play().catch(() => {});
+    } catch (e) {}
+  }
+
+  function atualizarIconeMudo() {
+    const botao = document.getElementById('btn-mute');
+    if (!botao) return;
+    if (silenciado || volumeSalvo === 0) botao.textContent = '🔇';
+    else if (volumeSalvo < 0.5) botao.textContent = '🔉';
+    else botao.textContent = '🔊';
+  }
+
+  function alternarMudo() {
+    silenciado = !silenciado;
+    localStorage.setItem('kifacil_silenciado', silenciado ? '1' : '0');
+    if (musicaFundo) musicaFundo.volume = volumeEfetivo();
+    atualizarIconeMudo();
+  }
+
+  function ajustarVolume(valorSlider) {
+    volumeSalvo = Math.max(0, Math.min(1, valorSlider / 100));
+    localStorage.setItem('kifacil_volume', volumeSalvo);
+    if (volumeSalvo > 0 && silenciado) {
+      silenciado = false;
+      localStorage.setItem('kifacil_silenciado', '0');
+    }
+    if (musicaFundo) musicaFundo.volume = volumeEfetivo();
+    atualizarIconeMudo();
+  }
+
+  (function iniciarControleVolume() {
+    const slider = document.getElementById('slider-volume');
+    if (slider) slider.value = Math.round(volumeSalvo * 100);
+    atualizarIconeMudo();
+  })();
+
+  function tocarClick() {
+    iniciarMusicaFundo();
+    const v = volumeEfetivo();
+    if (v <= 0) return;
+    try { const a = new Audio('../sons/click.mp3'); a.volume = v; a.play().catch(function(){}); } catch(e) {}
+  }
+  function tocarDing() {
+    const v = volumeEfetivo();
+    if (v <= 0) return;
+    try { const a = new Audio('../sons/ding.mp3'); a.volume = v; a.play().catch(()=>{}); } catch(e) {}
+  }
+  function tocarPorta() {
+    const v = volumeEfetivo();
+    if (v <= 0) return;
+    try { const a = new Audio('../sons/porta-abrindo.mp3'); a.volume = v; a.play().catch(()=>{}); } catch(e) {}
+  }
+
+  /* ── INTRODUÇÃO ── */
+  const introPassos = [
+    'Parabéns.\nVocê chegou à última camada.',
+    'À sua frente está o Portão do Conhecimento.',
+    'Somente aqueles que dominam a linguagem da Química conseguem atravessá-lo.',
+    'Cada resposta correta revelará parte do código que rompe este selo.',
+    'Boa sorte.'
+  ];
+  let introIdx = 0;
+
+  function iniciarIntro() {
+    $tbtn.style.display = '';
+    $tbtn.textContent = 'Continuar';
+    fala(introPassos[0], () => setTimeout(() => $tbtn.classList.add('show'), 300));
+  }
+  setTimeout(iniciarIntro, 400);
+
+  function proximoPasso() {
+    tocarClick();
+    introIdx++;
+    if (introIdx >= introPassos.length) {
+      // Fechou a caixa de diálogo: some o botão e libera o quadro/porta.
+      $tbtn.classList.remove('show');
+      $tbtn.style.display = 'none';
+      liberarMecanica();
+      return;
+    }
+    fala(introPassos[introIdx], () => setTimeout(() => $tbtn.classList.add('show'), 300));
+  }
+
+  function liberarMecanica() {
+    document.getElementById('quadro-painel').classList.add('ativo');
+    mostrarPergunta();
+  }
+
+  /* ══════════════════════════════════════════════════════════════════════
+     AS TRÊS ETAPAS DO PORTÃO
+     ══════════════════════════════════════════════════════════════════════ */
+  const ETAPAS = [
+    {
+      pergunta: 'Balanceie a equação:\n\nN₂ + H₂ → NH₃\n\nQual é a soma dos coeficientes?',
+      resposta: 6,
+      digito: '6'
+    },
+    {
+      pergunta: 'Utilizando 12 mol de H₂,\nquantos mol de NH₃ são produzidos?',
+      resposta: 8,
+      digito: '8'
+    },
+    {
+      pergunta: 'Os 8 mol de NH₃ ocupam qual\nvolume nas CNTP?',
+      resposta: 179.2,
+      digito: '179,2'
+    }
+  ];
+  let etapaIdx = 0;
+
+  function mostrarPergunta() {
+    document.getElementById('quadroPergunta').textContent = ETAPAS[etapaIdx].pergunta;
+    document.getElementById('campoResposta').value = '';
+    document.getElementById('quadroFeedback').textContent = '';
+    document.getElementById('quadroFeedback').className = 'quadro-feedback';
+  }
+
+  // Aceita tanto vírgula quanto ponto decimal (ex.: 179,2 ou 179.2).
+  function normalizarNumero(valor) {
+    return parseFloat(valor.trim().replace(',', '.'));
+  }
+
+  function verificarResposta() {
+    const campo = document.getElementById('campoResposta');
+    const feedback = document.getElementById('quadroFeedback');
+    const numDigitado = normalizarNumero(campo.value);
+
+    if (isNaN(numDigitado)) return;
+
+    const numEsperado = ETAPAS[etapaIdx].resposta;
+    const correto = Math.abs(numDigitado - numEsperado) < 0.01;
+
+    if (correto) {
+      tocarDing();
+      feedback.textContent = 'Correto!';
+      feedback.className = 'quadro-feedback certo';
+      revelarDigitoPorta(etapaIdx, ETAPAS[etapaIdx].digito);
+
+      // Assim que a etapa 1 é resolvida, a equação balanceada fica fixa
+      // no quadro — as etapas 2 e 3 dependem dela para serem resolvidas.
+      if (etapaIdx === 0) {
+        const equacao = document.getElementById('equacaoFixa');
+        equacao.textContent = 'N₂ + 3 H₂ → 2 NH₃';
+        equacao.classList.add('show');
+      }
+
+      etapaIdx++;
+      if (etapaIdx >= ETAPAS.length) {
+        setTimeout(finalizarCodigos, 900);
+      } else {
+        setTimeout(mostrarPergunta, 900);
+      }
+    } else {
+      tocarClick();
+      campo.classList.remove('errado');
+      void campo.offsetWidth; // reinicia a animação de shake
+      campo.classList.add('errado');
+      feedback.textContent = 'Resposta incorreta. Tente novamente.';
+      feedback.className = 'quadro-feedback';
+    }
+  }
+
+  // Envia com Enter também, sem usar prompt()/alert().
+  document.getElementById('campoResposta').addEventListener('keydown', e => {
+    if (e.key === 'Enter') verificarResposta();
+  });
+
+  function revelarDigitoPorta(indice, digito) {
+    const slot = document.getElementById('slot-' + (indice + 1));
+    slot.textContent = digito;
+    slot.classList.remove('brilho');
+    void slot.offsetWidth;
+    slot.classList.add('brilho');
+  }
+
+  /* ══════════════════════════════════════════════════════════════════════
+     FINAL: cadeados somem, a porta se abre, a professora encerra a fase.
+     ══════════════════════════════════════════════════════════════════════ */
+  function finalizarCodigos() {
+    document.getElementById('ps7').className = 'prog-step done';
+    document.getElementById('ps7').textContent = '✓';
+
+    const cadeados = document.querySelectorAll('.cadeado-decor');
+    cadeados.forEach((cadeado, i) => {
+      setTimeout(() => cadeado.classList.add('sumiu'), i * 160);
+    });
+
+    setTimeout(abrirPorta, cadeados.length * 160 + 1000);
+  }
+
+  function abrirPorta() {
+    tocarPorta();
+    document.querySelectorAll('.codigo-slot').forEach(slot => { slot.style.opacity = '0'; });
+    document.getElementById('porta-wrapper').classList.add('aberta');
+    setTimeout(mostrarFalaFinal, 1900);
+  }
+
+  const falaFinal = [
+    'Excelente!',
+    'Você venceu o Desafio das Camadas Profundas.',
+    'Agora as portas da Torre de Química estão abertas para você.',
+    'A partir deste momento, novos conhecimentos aguardam além deste portal.'
+  ];
+  let falaFinalIdx = 0;
+
+  function mostrarFalaFinal() {
+    document.getElementById('quadro-painel').classList.remove('ativo');
+    falaFinalIdx = 0;
+    $tbtn.textContent = 'Continuar';
+    $tbtn.style.display = '';
+    fala(falaFinal[0], () => setTimeout(() => $tbtn.classList.add('show'), 300));
+    $tbtn.onclick = proximoPassoFinal;
+  }
+
+  function proximoPassoFinal() {
+    tocarClick();
+    falaFinalIdx++;
+    if (falaFinalIdx >= falaFinal.length - 1) {
+      // Última fala: some o botão "Continuar" e mostra "Concluir".
+      $tbtn.classList.remove('show');
+      $tbtn.style.display = 'none';
+      fala(falaFinal[falaFinal.length - 1], () => setTimeout(() => $tconcluir.classList.add('show'), 300));
+      return;
+    }
+    fala(falaFinal[falaFinalIdx], () => setTimeout(() => $tbtn.classList.add('show'), 300));
+  }
+
+  /* ══════════════════════════════════════════════════════════════════════
+     DIMENSIONAMENTO DO PORTÃO — maior retângulo possível respeitando a
+     proporção real de porta-codigo.png (1024×1536), a mesma técnica das
+     fases anteriores (evita sobra de espaço morto ou corte da imagem).
+     ══════════════════════════════════════════════════════════════════════ */
+  const ASPECT_PORTA = 1024 / 1536;
+  function ajustarTamanhoPorta() {
+    if (window.innerWidth <= 768) return; // no celular o tamanho é fixo via CSS
+    const wrapper = document.getElementById('porta-wrapper');
+    const cena = document.getElementById('scene-col');
+    const alturaDisponivel = cena.clientHeight * 0.86;
+    let altura = alturaDisponivel;
+    let largura = altura * ASPECT_PORTA;
+    const larguraMax = cena.clientWidth * 0.42;
+    if (largura > larguraMax) {
+      largura = larguraMax;
+      altura = largura / ASPECT_PORTA;
+    }
+    wrapper.style.width = largura + 'px';
+    wrapper.style.height = altura + 'px';
+  }
+  window.addEventListener('resize', ajustarTamanhoPorta);
+  ajustarTamanhoPorta();
+</script>
+
+<div id="controle-volume">
+  <button id="btn-mute" onclick="alternarMudo()" aria-label="Silenciar ou ativar o som">🔊</button>
+  <input type="range" id="slider-volume" min="0" max="100" value="35" oninput="ajustarVolume(this.value)" aria-label="Volume">
+</div>
+
+<div id="cookie-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#1a0f08;border-top:1px solid rgba(212,170,106,0.4);padding:1rem 2rem;z-index:9999;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;"><p style="margin:0;font-family:'Libre Baskerville',serif;font-size:0.82rem;color:#e8d4b0;line-height:1.5;">Este site utiliza cookies para melhorar sua experiência. Ao continuar navegando, você concorda com nossa <a href="/politica-de-privacidade.html" style="color:#e8b84b;text-decoration:underline;text-underline-offset:2px;">Política de Privacidade</a>.</p><button onclick="document.getElementById('cookie-banner').style.display='none';localStorage.setItem('kifacil_cookies','1');" style="flex-shrink:0;background:#e8b84b;border:none;padding:0.55rem 1.5rem;font-family:'Libre Baskerville',serif;font-size:0.78rem;font-weight:700;color:#1a0f08;cursor:pointer;letter-spacing:0.04em;">Entendi</button></div>
+<script>if(!localStorage.getItem('kifacil_cookies'))document.getElementById('cookie-banner').style.display='flex';</script>
+
+<script type="module">
+  import { requireAuth }          from '../../../js/guards.js';
+  import { session }              from '../../../js/session.js';
+  import { registrarEntradaFase } from '../../../js/progresso.js';
+  import { iniciarNavTorre }      from '../../../js/nav-torre.js';
+  import { salvarPerfil }         from '../../../js/database.js';
+
+  await requireAuth('../../../login.html').catch(() => {});
+
+  iniciarNavTorre('quimica');
+
+  const emRevisao = new URLSearchParams(location.search).has('revisao');
+  const uid = session.usuario?.uid;
+
+  const _lk = document.getElementById('btn-concluir');
+  if (_lk && uid) {
+    _lk.addEventListener('click', async e => {
+      e.preventDefault();
+      if (!emRevisao) {
+        await salvarPerfil(uid, { faseAtual: 'torre-quimica-concluida' }).catch(e => console.error('[Progresso] Falha ao salvar faseAtual:', e));
+      }
+      window.location.href = _lk.href;
+    });
+  }
+</script>
+</body>
+</html>

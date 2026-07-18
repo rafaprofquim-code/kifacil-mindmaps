@@ -1,0 +1,1553 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Íons — Torre de Química | Academia KiFácil</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --fundo: #fdf8f0;
+    --fundo-card: #fffdf9;
+    --escuro: #2e2016;
+    --texto: #1a1208;
+    --texto-suave: #3d2e1a;
+    --dourado: #8a5e10;
+    --dourado-claro: #c8920a;
+    --borda: rgba(100,70,20,0.3);
+    --borda-forte: rgba(100,70,20,0.5);
+    --verde-escuro: #1e5238;
+    --vermelho-escuro: #7a1515;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    background: var(--fundo);
+    color: var(--texto);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  .top-nav {
+    background: var(--escuro);
+    border-bottom: 2px solid var(--dourado-claro);
+    padding: 0 2.5rem;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+  .brand {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.7rem;
+    font-weight: 600;
+    color: var(--fundo-card);
+    letter-spacing: 0.03em;
+  }
+
+  /* MAIN */
+  main {
+    flex: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 2.5rem;
+    width: 100%;
+  }
+  .titulo-jogo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 600;
+    margin-bottom: 1rem;
+    line-height: 1.1;
+  }
+
+  /* NARRADOR (professora) */
+  .narrador {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1.4rem;
+    padding: 1rem 1.1rem;
+    border: 1.5px solid var(--borda-forte);
+    border-radius: 10px;
+    background: rgba(30,16,8,0.05);
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .narrador img {
+    width: 78px;
+    height: 96px;
+    object-fit: cover;
+    object-position: top center;
+    border-radius: 10px;
+    border: 1px solid rgba(200,146,10,.35);
+    flex-shrink: 0;
+  }
+  .narrador-nome {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.8rem;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--dourado-claro);
+    margin-bottom: 0.4rem;
+  }
+  .narrador-texto {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: var(--texto-suave);
+  }
+  #continuarBalao { margin-top: 0.6rem; }
+
+  /* LINHA: CENA + ATIVIDADE LADO A LADO */
+  .cena-atividade {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+  }
+
+  /* CENA / IMAGEM */
+  .imagem-wrapper {
+    position: relative;
+    flex: 1 1 56%;
+    min-width: 0;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border: 1.5px solid var(--borda-forte);
+    border-radius: 6px;
+    background: var(--fundo);
+  }
+  .imagem-cenario {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .link-aula {
+    position: absolute; top: 105px; right: 10px; z-index: 10;
+    display: flex; flex-direction: column; align-items: center; gap: 2px;
+    text-decoration: none; color: #fff8ee;
+    background: rgba(30,16,8,0.72); border: 1.5px solid var(--dourado-claro, #c8920a);
+    border-radius: 8px; padding: 0.4rem 0.65rem;
+    font-family: 'Cormorant Garamond', serif; font-size: 0.68rem; font-weight: 600;
+    letter-spacing: 0.02em; text-align: center; line-height: 1.2;
+    cursor: pointer; transition: background 0.2s, transform 0.15s;
+  }
+  .link-aula:hover { background: rgba(30,16,8,0.92); transform: translateY(-1px); }
+  .link-aula svg { width: 22px; height: 22px; }
+
+  /* HUD */
+  .hud {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 10px 12px;
+    background: rgba(253, 248, 240, 0.9);
+    border: 1px solid var(--borda);
+    border-radius: 7px;
+    color: var(--texto);
+  }
+  .hud.hud-grande {
+    transform: scale(1.5);
+    transform-origin: top right;
+  }
+  .hud.hud-mobile {
+    position: relative;
+    top: auto;
+    right: auto;
+    left: auto;
+    margin: 0 auto 1rem;
+    width: 100%;
+    max-width: 1100px;
+  }
+  .hud.hud-mobile.hud-grande {
+    transform: none;
+  }
+  .hud-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    font-size: 0.72rem;
+  }
+  .hud-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--texto-suave);
+  }
+  .hud-valor {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--dourado);
+  }
+
+  /* ÁTOMO */
+  .atomo-wrap {
+    position: absolute;
+    left: 50%;
+    top: 52%;
+    transform: translate(-50%, -50%);
+    width: 230px;
+    height: 230px;
+    z-index: 5;
+
+    /* ajuste fino do centro visual do átomo */
+    --centro-x: 50.5%;
+    --centro-y: 49.5%;
+  }
+  .camadas-eletronicas {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .camada {
+    position: absolute;
+    left: var(--centro-x);
+    top: var(--centro-y);
+    transform: translate(-50%, -50%);
+    border: 1px solid rgba(224, 181, 71, 0.9);
+    border-radius: 50%;
+    box-shadow: 0 0 3px rgba(224, 181, 71, 0.16);
+    transition: opacity 0.45s ease, transform 0.45s ease;
+  }
+
+  .camada-1 {
+    width: 122px;
+    height: 122px;
+  }
+
+  .camada-2 {
+    width: 158px;
+    height: 158px;
+  }
+
+  .camada-3 {
+    width: 194px;
+    height: 194px;
+  }
+
+  .camada-3.oculta {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.96);
+  }
+
+  .glow-nucleo {
+    position: absolute;
+    left: var(--centro-x);
+    top: var(--centro-y);
+    width: 132px;
+    height: 132px;
+    transform: translate(-50%, -50%);
+    object-fit: contain;
+    pointer-events: none;
+    user-select: none;
+    z-index: 2;
+  }
+  .nucleo-wrap {
+    position: absolute;
+    left: var(--centro-x);
+    top: var(--centro-y);
+    width: 0;
+    height: 0;
+    z-index: 3;
+    transform-origin: center center;
+    animation: respirarNucleo 4s ease-in-out infinite;
+  }
+  @keyframes respirarNucleo {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+  }
+  .nucleon {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    object-fit: contain;
+    pointer-events: none;
+    user-select: none;
+  }
+  .eletron {
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+    z-index: 4;
+    cursor: pointer;
+    --base-scale: 1;
+    --fx: 0px;
+    --fy: 0px;
+    --ft: 5s;
+    animation: flutuarEletron var(--ft) ease-in-out infinite;
+    transition: filter .15s;
+  }
+  @keyframes flutuarEletron {
+    0%, 100% { transform: translate(0, 0) scale(var(--base-scale)); }
+    50% { transform: translate(var(--fx), var(--fy)) scale(var(--base-scale)); }
+  }
+  .eletron.fixo { cursor: default; }
+  .eletron.removivel:hover { --base-scale: 1.1; }
+  .eletron.valencia-ativa {
+    --base-scale: 1.12;
+    filter: drop-shadow(0 0 5px rgba(200,146,10,.62));
+    cursor: pointer;
+  }
+  .eletron.saindo { animation: sair 0.72s cubic-bezier(.2,.7,.25,1) forwards; pointer-events:none; }
+  .eletron.entrando { animation: entrar 0.72s cubic-bezier(.2,.7,.25,1) forwards; pointer-events:none; }
+  @keyframes sair {
+    0%{transform:translate(0,0) scale(1.12);opacity:1}
+    28%{transform:translate(calc(var(--tx) * .22), calc(var(--ty) * .22)) scale(1.22);opacity:.95}
+    100%{transform:translate(var(--tx), var(--ty)) scale(.2);opacity:0}
+  }
+  @keyframes entrar {
+    0%{transform:translate(var(--sx), var(--sy)) scale(.2);opacity:0}
+    55%{transform:translate(var(--mx), var(--my)) scale(1.18);opacity:.9}
+    100%{transform:translate(0,0) scale(1);opacity:1}
+  }
+  .rastro-eletron {
+    position: absolute;
+    width: 44px;
+    height: 20px;
+    object-fit: contain;
+    pointer-events: none;
+    user-select: none;
+    z-index: 3;
+    opacity: 0;
+    transform-origin: center;
+  }
+  .rastro-eletron.saindo { animation: rastroSaindo 0.72s cubic-bezier(.2,.7,.25,1) forwards; }
+  .rastro-eletron.entrando { animation: rastroEntrando 0.72s cubic-bezier(.2,.7,.25,1) forwards; }
+  @keyframes rastroSaindo {
+    0% { opacity: .75; transform: translate(0,0) rotate(var(--rot)); }
+    100% { opacity: 0; transform: translate(calc(var(--tx) * .86), calc(var(--ty) * .86)) rotate(var(--rot)) scale(.75); }
+  }
+  @keyframes rastroEntrando {
+    0% { opacity: 0; transform: translate(var(--sx), var(--sy)) rotate(var(--rot)) scale(.55); }
+    25% { opacity: .75; }
+    100% { opacity: 0; transform: translate(0,0) rotate(var(--rot)) scale(.95); }
+  }
+
+  /* ÍON TAG */
+  .ion-tag {
+    position: absolute;
+    bottom: 14px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    display: none;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+    padding: 5px 16px;
+    border-radius: 8px;
+    border: 2px solid;
+    background: rgba(253,248,240,0.92);
+  }
+  .ion-tag.cation { color: var(--dourado); border-color: var(--dourado); }
+  .ion-tag.anion  { color: var(--verde-escuro); border-color: var(--verde-escuro); }
+  .ion-tag.neutro { color: var(--texto-suave); border-color: var(--borda-forte); }
+
+  /* ATIVIDADE (abaixo da imagem) */
+  .atividade-card {
+    flex: 1 1 44%;
+    min-width: 0;
+    padding: 1.5rem;
+    background: var(--fundo-card);
+    border: 1.5px solid var(--borda);
+    border-radius: 10px;
+    max-height: min(70vh, 560px);
+    overflow-y: auto;
+  }
+  .atividade-cabecalho { margin-bottom: 1rem; }
+  .atividade-eyebrow {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--dourado-claro);
+    margin-bottom: 0.3rem;
+  }
+  .atividade-titulo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+  .atividade-corpo {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  /* ELEMENTOS DE CONTEÚDO DA ATIVIDADE */
+  .questao-titulo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin-bottom: 0.2rem;
+  }
+  .opcao-btn, .resposta-opcao {
+    display: block;
+    width: 100%;
+    background: rgba(0,0,0,0.02);
+    border: 1px solid var(--borda);
+    border-radius: 6px;
+    padding: 10px 14px;
+    text-align: left;
+    margin-bottom: 8px;
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: 0.95rem;
+    color: var(--texto);
+    cursor: pointer;
+    transition: background .15s, border-color .15s;
+  }
+  .opcao-btn:hover, .resposta-opcao:hover { background: rgba(200,146,10,0.06); }
+  .opcao-btn.correta, .resposta-opcao.correta { border-color: var(--verde-escuro); background: rgba(30,82,56,0.07); }
+  .opcao-btn.errada, .resposta-opcao.errada { border-color: var(--vermelho-escuro); background: rgba(122,21,21,0.05); }
+  .opcao-btn.neutra { opacity: 0.55; }
+  .opcao-btn:disabled, .resposta-opcao:disabled { cursor: default; }
+
+  .feedback-box {
+    display: none;
+    padding: 10px 12px;
+    border-radius: 6px;
+    font-size: 0.92rem;
+    line-height: 1.6;
+    border-left: 3px solid var(--borda-forte);
+  }
+  .feedback-box.visivel { display: block; }
+  .feedback-box.ok  { border-color: var(--verde-escuro); background: rgba(30,82,56,0.06); color: var(--texto); }
+  .feedback-box.err { border-color: var(--vermelho-escuro); background: rgba(122,21,21,0.05); color: var(--texto); }
+  .feedback-box.info{ border-color: var(--borda-forte); background: rgba(100,70,20,0.05); color: var(--texto-suave); }
+
+  .desafio-box {
+    background: rgba(200,146,10,0.05);
+    border: 1px solid var(--borda);
+    border-radius: 8px;
+    padding: 12px 14px;
+  }
+  .desafio-titulo {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: 0.85rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--dourado-claro);
+    margin-bottom: 4px;
+  }
+  .desafio-texto { font-size: 0.95rem; color: var(--texto-suave); }
+  .eletron-controles { display: flex; align-items: center; gap: 10px; margin-top: 10px; }
+  .btn-eletron {
+    background: var(--escuro);
+    color: var(--dourado-claro);
+    border: 1.5px solid var(--dourado-claro);
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    padding: 7px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  .btn-eletron:hover { background: var(--dourado-claro); color: var(--escuro); }
+
+  .btn-avancar {
+    width: 100%;
+    background: var(--escuro);
+    color: var(--dourado-claro);
+    border: 1.5px solid var(--dourado-claro);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.7rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background .2s, color .2s;
+  }
+  .btn-avancar:hover { background: var(--dourado-claro); color: var(--escuro); }
+
+  .resumo-item {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--borda);
+  }
+  .resumo-item:last-of-type { border-bottom: none; }
+  .resumo-icone {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--dourado-claro);
+    width: 26px;
+    flex-shrink: 0;
+    text-align: center;
+  }
+  .resumo-texto { font-size: 0.94rem; line-height: 1.6; color: var(--texto-suave); }
+
+  /* FOOTER */
+  footer {
+    background: var(--escuro);
+    border-top: 2px solid var(--dourado-claro);
+    padding: 1.2rem 2rem;
+    text-align: center;
+    font-size: 0.82rem;
+    color: rgba(255,248,238,0.5);
+  }
+
+  @media (max-width: 860px) {
+    .cena-atividade { flex-direction: column; }
+    .imagem-wrapper { flex-basis: auto; width: 100%; }
+    .atividade-card { flex-basis: auto; width: 100%; max-height: none; overflow-y: visible; }
+  }
+
+  @media (max-width: 640px) {
+    .top-nav { padding: 0 1.2rem; }
+    main { padding: 1.5rem 1rem 3rem; }
+    .hud { top: 10px; left: 10px; padding: 7px 9px; }
+    .hud.hud-mobile { top: auto; left: auto; right: auto; }
+    .hud.hud-grande { transform-origin: top left; }
+    .atomo-wrap { width: 214px; height: 214px; }
+    .glow-nucleo { width: 120px; height: 120px; }
+    .rastro-eletron { width: 34px; height: 16px; }
+    .link-aula { top: 6px; right: 6px; padding: 0.3rem 0.5rem; font-size: 0.6rem; }
+    .link-aula svg { width: 18px; height: 18px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <div class="brand">KiFácil</div>
+</nav>
+
+<main>
+  <h1 class="titulo-jogo" id="tituloJogo">Átomo Neutro</h1>
+
+  <div class="narrador" id="teacherBox">
+    <img src="../imagens/rafa-sorrindo.jpg" alt="Professora Rafaela" id="teacherImg">
+    <div class="narrador-conteudo">
+      <div class="narrador-nome">Professora Rafaela</div>
+      <div class="narrador-texto" id="teacherText">Vamos explorar os íons com calma.</div>
+      <div id="continuarBalao"></div>
+    </div>
+  </div>
+
+  <div class="cena-atividade">
+    <div class="imagem-wrapper" id="imagemWrapper">
+      <img src="../imagens/laboratorio-ions.jpg" alt="Laboratório de íons" class="imagem-cenario">
+
+      <div class="hud" id="hud">
+        <div class="hud-item"><span class="hud-label">Prótons</span><span class="hud-valor" id="hudProtons">—</span></div>
+        <div class="hud-item"><span class="hud-label">Elétrons</span><span class="hud-valor" id="hudEletrons">—</span></div>
+        <div class="hud-item"><span class="hud-label">Carga</span><span class="hud-valor" id="hudCarga">—</span></div>
+      </div>
+
+      <div class="atomo-wrap" id="atomoWrap">
+        <div class="camadas-eletronicas" id="camadasEletronicas" aria-hidden="true">
+          <div class="camada camada-1"></div>
+          <div class="camada camada-2"></div>
+          <div class="camada camada-3"></div>
+        </div>
+        <img src="../imagens/glow-nucleo.png" alt="" class="glow-nucleo" draggable="false">
+        <div class="nucleo-wrap" id="nucleoWrap"></div>
+      </div>
+
+      <div class="ion-tag" id="ionTag"></div>
+      <!-- COLOQUE O LINK AQUI -->
+      <a class="link-aula" href="https://www.youtube.com/watch?v=0bHxgcdnbpY&t=8s" target="_blank" rel="noopener" title="Assista à aula">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.6"/>
+          <path d="M10 8.5L16 12L10 15.5V8.5Z" fill="currentColor"/>
+        </svg>
+        <span>Assista à aula</span>
+      </a>
+    </div>
+
+    <section class="atividade-card">
+      <div class="atividade-corpo" id="painelCorpo">
+        <!-- conteúdo das etapas inserido pelo JavaScript -->
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer>© 2026 KiFácil</footer>
+
+<script>
+// ══════════════════════════════════════════════════
+//  ESTADO GLOBAL
+// ══════════════════════════════════════════════════
+const estado = {
+  protons: 11,
+  eletrons: 11,
+  neutrons: 12,
+  etapa: 0,
+  laboratorio: { desafioIdx: 0, eletronesAtivos: 11 },
+  desafioFinal: { idx: 0, acertos: 0 }
+};
+
+const CENTRO_X = 0.505;
+const CENTRO_Y = 0.495;
+
+const _ding = new Audio('../sons/ding.mp3');
+_ding.preload = 'auto';
+function tocarDing() { try { _ding.currentTime = 0; _ding.play().catch(function () {}); } catch (e) {} }
+
+// ══════════════════════════════════════════════════
+//  HUD
+// ══════════════════════════════════════════════════
+function atualizarHUD() {
+  document.getElementById('hudProtons').textContent = estado.protons;
+  document.getElementById('hudEletrons').textContent = estado.eletrons;
+  const carga = estado.protons - estado.eletrons;
+  const mostrarCarga = estado.etapa !== 5;
+  document.getElementById('hudCarga').textContent = mostrarCarga
+    ? (carga === 0 ? '0' : `${Math.abs(carga)}${carga > 0 ? '+' : '−'}`)
+    : '—';
+}
+
+function setHudModoFinal(ativo) {
+  const hud = document.getElementById('hud');
+  if (!hud) return;
+  hud.classList.toggle('hud-grande', !!ativo);
+}
+
+function atualizarPosicaoHudMobile() {
+  const hud = document.getElementById('hud');
+  const teacherBox = document.getElementById('teacherBox');
+  const imagemWrapper = document.getElementById('imagemWrapper');
+  if (!hud || !teacherBox || !imagemWrapper) return;
+
+  const mobile = window.matchMedia('(max-width: 640px)').matches;
+
+  if (mobile) {
+    if (hud.parentElement !== teacherBox.parentElement) {
+      teacherBox.insertAdjacentElement('afterend', hud);
+    }
+    hud.classList.add('hud-mobile');
+    return;
+  }
+
+  if (hud.parentElement !== imagemWrapper) {
+    const atomoWrap = document.getElementById('atomoWrap');
+    if (atomoWrap) {
+      imagemWrapper.insertBefore(hud, atomoWrap);
+    } else {
+      imagemWrapper.appendChild(hud);
+    }
+  }
+  hud.classList.remove('hud-mobile');
+}
+
+function atualizarIonTag() {
+  const tag = document.getElementById('ionTag');
+  const carga = estado.protons - estado.eletrons;
+  tag.style.display = 'block';
+  tag.className = 'ion-tag';
+  if (carga > 0) {
+    tag.classList.add('cation');
+    tag.textContent = 'CÁTION';
+  } else if (carga < 0) {
+    tag.classList.add('anion');
+    tag.textContent = 'ÂNION';
+  } else {
+    tag.classList.add('neutro');
+    tag.textContent = 'NEUTRO';
+  }
+}
+
+// ══════════════════════════════════════════════════
+//  ALEATORIEDADE DETERMINÍSTICA (mesma semente = mesma posição)
+// ══════════════════════════════════════════════════
+function seededRandom(seed) {
+  const x = Math.sin(seed) * 10000;
+  return x - Math.floor(x);
+}
+
+// ══════════════════════════════════════════════════
+//  NÚCLEO — montado com prótons e nêutrons reais
+// ══════════════════════════════════════════════════
+function limparNucleo() {
+  const wrap = document.getElementById('nucleoWrap');
+  if (wrap) wrap.innerHTML = '';
+}
+
+function renderizarNucleo(protons, neutrons) {
+  limparNucleo();
+  const wrap = document.getElementById('nucleoWrap');
+  if (!wrap) return;
+
+  const total = protons + neutrons;
+  if (total <= 0) return;
+
+  // monta a lista de partículas e embaralha de forma determinística,
+  // assim prótons e nêutrons ficam misturados no aglomerado, não separados
+  const particulas = [];
+  for (let i = 0; i < protons; i++) particulas.push('proton');
+  for (let i = 0; i < neutrons; i++) particulas.push('neutron');
+  for (let i = particulas.length - 1; i > 0; i--) {
+    const j = Math.floor(seededRandom(i * 7.13 + total * 3.71) * (i + 1));
+    [particulas[i], particulas[j]] = [particulas[j], particulas[i]];
+  }
+
+  // distribuição em espiral áurea compacta para manter o núcleo mais denso
+  const R = Math.min(40, 5 + total * 1.05);
+  const anguloAureo = Math.PI * (3 - Math.sqrt(5));
+  const tamanho = 14;
+
+  particulas.forEach((tipo, i) => {
+    const r = R * Math.sqrt((i + 0.5) / total);
+    const theta = i * anguloAureo;
+    const x = r * Math.cos(theta);
+    const y = r * Math.sin(theta);
+
+    const img = document.createElement('img');
+    img.src = tipo === 'proton' ? '../imagens/proton.png' : '../imagens/neutron.png';
+    img.alt = '';
+    img.draggable = false;
+    img.className = 'nucleon';
+    img.style.left = (x - tamanho / 2) + 'px';
+    img.style.top  = (y - tamanho / 2) + 'px';
+
+    wrap.appendChild(img);
+  });
+}
+
+// ══════════════════════════════════════════════════
+//  ELÉTRONS — dispersos em nuvem eletrônica ao redor do núcleo
+// ══════════════════════════════════════════════════
+function criarEletron(idx, total, raioIgnorado, opcoes = {}) {
+  const wrap = document.getElementById('atomoWrap');
+
+  /*
+    Capacidade visual das camadas:
+    K = 2
+    L = 8
+    M = 8
+    N = 18
+
+    Cada elétron é localizado pela posição dele na sequência,
+    e não pelo número total de elétrons.
+  */
+  const capacidades = [2, 8, 8];
+  const raios = [61, 79, 97];
+
+  let camada = 0;
+  let primeiroIndiceDaCamada = 0;
+
+  while (
+    camada < capacidades.length - 1 &&
+    idx >= primeiroIndiceDaCamada + capacidades[camada]
+  ) {
+    primeiroIndiceDaCamada += capacidades[camada];
+    camada++;
+  }
+
+  const posicaoNaCamada = idx - primeiroIndiceDaCamada;
+
+  // Quantos elétrons realmente existem nesta camada neste momento
+  const eletronsAntesDaCamada = primeiroIndiceDaCamada;
+  const quantidadeNaCamada = Math.min(
+    capacidades[camada],
+    Math.max(0, total - eletronsAntesDaCamada)
+  );
+
+  /*
+    Rotação inicial diferente para cada camada.
+    Isso evita que todos os elétrons fiquem alinhados verticalmente.
+  */
+  const rotacoesIniciais = [
+    -Math.PI / 2,
+    -Math.PI / 8,
+    Math.PI / 10,
+    -Math.PI / 5
+  ];
+
+  const anguloBase =
+    rotacoesIniciais[camada] +
+    (2 * Math.PI * posicaoNaCamada) / quantidadeNaCamada;
+
+  // Variação muito pequena, apenas para não parecer mecanicamente perfeito
+  const variacaoAngular =
+    (seededRandom(idx * 17.31 + total * 4.27) - 0.5) * 0.08;
+
+  const angulo = anguloBase + variacaoAngular;
+
+  /*
+    Todos os elétrons da mesma camada usam exatamente
+    a mesma distância em relação ao centro.
+  */
+  const raioFinal = raios[camada];
+
+  const x = Math.cos(angulo) * raioFinal;
+  const y = Math.sin(angulo) * raioFinal;
+
+  const tamanho = 18;
+  const centroX = wrap.clientWidth * CENTRO_X;
+  const centroY = wrap.clientHeight * CENTRO_Y;
+
+  const el = document.createElement('img');
+  el.src = '../imagens/eletron.png';
+  el.alt = '';
+  el.draggable = false;
+  el.className = 'eletron' + (opcoes.removivel ? ' removivel' : ' fixo');
+
+  el.dataset.idx = idx;
+  el.dataset.shell = camada;
+  el.dataset.shellPos = posicaoNaCamada;
+
+  el.style.left = `${centroX + x - tamanho / 2}px`;
+  el.style.top = `${centroY + y - tamanho / 2}px`;
+
+  /*
+    Flutuação tangencial.
+    Não altera a distância entre o elétron e o núcleo.
+  */
+  const amplitudeFlutuacao = 1.5;
+
+  const flutuarX = -Math.sin(angulo) * amplitudeFlutuacao;
+  const flutuarY =  Math.cos(angulo) * amplitudeFlutuacao;
+
+  el.style.setProperty('--fx', `${flutuarX.toFixed(2)}px`);
+  el.style.setProperty('--fy', `${flutuarY.toFixed(2)}px`);
+
+  el.style.setProperty(
+    '--ft',
+    `${(4 + seededRandom(idx * 5.2 + total * 0.9) * 2).toFixed(2)}s`
+  );
+
+  if (opcoes.removivel) {
+    el.classList.add('valencia-ativa');
+  }
+
+  if (opcoes.animar === 'entrar') {
+    /*
+      O elétron começa fora do átomo, na mesma direção radial,
+      e termina exatamente na posição calculada.
+    */
+    const distanciaEntrada = 120;
+    const sx = Math.cos(angulo) * distanciaEntrada;
+    const sy = Math.sin(angulo) * distanciaEntrada;
+
+    const mx = Math.cos(angulo + 0.35) * 35;
+    const my = Math.sin(angulo + 0.35) * 35;
+
+    el.style.setProperty('--sx', `${sx.toFixed(2)}px`);
+    el.style.setProperty('--sy', `${sy.toFixed(2)}px`);
+    el.style.setProperty('--mx', `${mx.toFixed(2)}px`);
+    el.style.setProperty('--my', `${my.toFixed(2)}px`);
+
+    criarRastroEletron(
+      centroX + x,
+      centroY + y,
+      { tipo: 'entrando', sx, sy }
+    );
+
+    el.classList.add('entrando');
+  }
+
+  if (opcoes.onClick) {
+    el.addEventListener('click', opcoes.onClick);
+  }
+
+  wrap.appendChild(el);
+  return el;
+}
+
+function removerTodosEletrons() {
+  document.querySelectorAll('.eletron').forEach(e => e.remove());
+  document.querySelectorAll('.rastro-eletron').forEach(r => r.remove());
+}
+
+function atualizarCamadasVisiveis(qtdEletrons) {
+  const terceiraCamada = document.querySelector('.camada-3');
+
+  if (!terceiraCamada) return;
+
+  /*
+    Ate 10 eletrons:
+    distribuicao 2-8, portanto apenas duas camadas ocupadas.
+
+    Acima de 10 eletrons:
+    terceira camada ocupada.
+  */
+  if (qtdEletrons <= 10) {
+    terceiraCamada.classList.add('oculta');
+  } else {
+    terceiraCamada.classList.remove('oculta');
+  }
+}
+
+function renderizarEletrons(qtd, raio = 88, removivel = false, onClickFn = null) {
+  removerTodosEletrons();
+  atualizarCamadasVisiveis(qtd);
+  for (let i = 0; i < qtd; i++) {
+    criarEletron(i, qtd, raio, { removivel, onClick: removivel ? onClickFn : null });
+  }
+}
+
+function habilitarRemocaoSomenteNaCamadaExterna(onClickFn) {
+  const eletrons = [...document.querySelectorAll('.eletron')];
+  if (!eletrons.length) return;
+
+  const camadasValidas = eletrons
+    .map(el => Number(el.dataset.shell))
+    .filter(Number.isFinite);
+
+  // Fallback defensivo: se algum dataset vier inválido,
+  // mantém progresso liberando clique em todos os elétrons.
+  if (!camadasValidas.length) {
+    eletrons.forEach(el => {
+      el.classList.add('removivel', 'valencia-ativa');
+      el.classList.remove('fixo');
+      el.style.pointerEvents = 'auto';
+      if (onClickFn) el.addEventListener('click', () => onClickFn(el));
+    });
+    return;
+  }
+
+  const camadaMaisExterna = Math.max(...camadasValidas);
+
+  eletrons.forEach(el => {
+    const camadaDoEletron = Number(el.dataset.shell);
+
+    if (camadaDoEletron === camadaMaisExterna) {
+      el.classList.add('removivel', 'valencia-ativa');
+      el.classList.remove('fixo');
+      el.style.pointerEvents = 'auto';
+      if (onClickFn) el.addEventListener('click', () => onClickFn(el));
+    } else {
+      el.classList.add('fixo');
+      el.classList.remove('removivel', 'valencia-ativa');
+      el.style.pointerEvents = 'none';
+    }
+  });
+}
+
+function criarRastroEletron(x, y, opcoes = {}) {
+  const wrap = document.getElementById('atomoWrap');
+  if (!wrap) return;
+
+  const rastro = document.createElement('img');
+  rastro.src = '../imagens/rastro-eletron.png';
+  rastro.alt = '';
+  rastro.draggable = false;
+  rastro.className = 'rastro-eletron ' + (opcoes.tipo === 'entrando' ? 'entrando' : 'saindo');
+
+  rastro.style.left = (x - 22) + 'px';
+  rastro.style.top = (y - 10) + 'px';
+
+  const tx = opcoes.tx || 0;
+  const ty = opcoes.ty || 0;
+  const sx = opcoes.sx || 0;
+  const sy = opcoes.sy || 0;
+  const rot = Math.atan2(ty || sy, tx || sx) * 180 / Math.PI;
+
+  rastro.style.setProperty('--tx', tx.toFixed(2) + 'px');
+  rastro.style.setProperty('--ty', ty.toFixed(2) + 'px');
+  rastro.style.setProperty('--sx', sx.toFixed(2) + 'px');
+  rastro.style.setProperty('--sy', sy.toFixed(2) + 'px');
+  rastro.style.setProperty('--rot', rot.toFixed(2) + 'deg');
+
+  wrap.appendChild(rastro);
+  setTimeout(() => rastro.remove(), 760);
+}
+
+// ══════════════════════════════════════════════════
+//  PROFESSORA — muda apenas imagem e texto
+// ══════════════════════════════════════════════════
+const professorImagens = {
+  sorrindo: '../imagens/rafa-sorrindo.jpg',
+  explicando: '../imagens/rafa-explicando.jpg',
+  pensando: '../imagens/rafa-pensando.jpg',
+  animada: '../imagens/rafa-animada.jpg'
+};
+
+function mostrarProfessor(texto, imagem = 'explicando') {
+  const img = document.getElementById('teacherImg');
+  const txt = document.getElementById('teacherText');
+
+  if (img) {
+    img.src = professorImagens[imagem] || professorImagens.sorrindo;
+  }
+
+  if (txt) {
+    txt.innerHTML = texto;
+  }
+}
+
+function professora(texto, imagem = 'explicando') {
+  mostrarProfessor(texto, imagem);
+  return '';
+}
+
+// ══════════════════════════════════════════════════
+//  TÍTULO
+// ══════════════════════════════════════════════════
+function setTitulo(txt) {
+  const tituloJogo = document.getElementById('tituloJogo');
+  const painelTitulo = document.getElementById('painelTitulo');
+  if (tituloJogo) tituloJogo.textContent = txt;
+  if (painelTitulo) painelTitulo.textContent = txt;
+}
+
+// ══════════════════════════════════════════════════
+//  ÁREA DE ATIVIDADE (abaixo da imagem)
+// ══════════════════════════════════════════════════
+function renderCorpo(html) {
+  const corpo = document.getElementById('painelCorpo');
+  if (corpo) corpo.innerHTML = html;
+  const bal = document.getElementById('continuarBalao');
+  if (bal) bal.innerHTML = '';
+}
+
+function appendCorpo(html) {
+  const corpo = document.getElementById('painelCorpo');
+  if (corpo) corpo.insertAdjacentHTML('beforeend', html);
+}
+
+function btnAvancar(label, fn, id = 'btnAvancar') {
+  return `<button class="btn-avancar" id="${id}" onclick="${fn}">${label}</button>`;
+}
+
+function mostrarBotaoBalao(label, fn, id) {
+  const bal = document.getElementById('continuarBalao');
+  if (!bal) return;
+  bal.innerHTML = btnAvancar(label, fn, id);
+}
+
+// ══════════════════════════════════════════════════
+//  ETAPA 0 — Átomo Neutro
+// ══════════════════════════════════════════════════
+function etapa0() {
+  estado.etapa = 0;
+  setHudModoFinal(false);
+  estado.protons = 11;
+  estado.eletrons = 11;
+  estado.neutrons = 12;
+  atualizarHUD();
+  setTitulo('Átomo Neutro');
+  renderizarNucleo(11, 12);
+  renderizarEletrons(11, 88);
+  document.getElementById('ionTag').style.display = 'none';
+
+  professora('Este é um <strong>átomo neutro</strong>. Observe e clique em Próximo.', 'sorrindo');
+
+  renderCorpo(``);
+  mostrarBotaoBalao('Próximo →', 'etapa1()');
+}
+
+// ══════════════════════════════════════════════════
+//  ETAPA 1 — O que muda quando um íon é formado?
+// ══════════════════════════════════════════════════
+function etapa1() {
+  estado.etapa = 1;
+  setHudModoFinal(false);
+  setTitulo('Formação de Íons');
+  professora('Quando um átomo vira <strong>íon</strong>, o que muda? <strong>Escolha uma das opções abaixo.</strong>', 'explicando');
+
+  renderCorpo(`
+    <button class="opcao-btn" id="op-protons"  onclick="responderEtapa1('protons')">O número de prótons</button>
+    <button class="opcao-btn" id="op-neutrons" onclick="responderEtapa1('neutrons')">O número de nêutrons</button>
+    <button class="opcao-btn" id="op-eletrons" onclick="responderEtapa1('eletrons')">O número de elétrons</button>
+    <div class="feedback-box" id="fb1"></div>
+  `);
+}
+
+function responderEtapa1(opcao) {
+  const ids = ['protons', 'neutrons', 'eletrons'];
+  ids.forEach(id => {
+    const btn = document.getElementById('op-' + id);
+    btn.disabled = true;
+    btn.classList.add(id === 'eletrons' ? (id === opcao ? 'correta' : 'neutra') : (id === opcao ? 'errada' : 'neutra'));
+  });
+  document.getElementById('op-eletrons').classList.add('correta');
+
+  const fb = document.getElementById('fb1');
+  fb.classList.add('visivel');
+
+  if (opcao === 'eletrons') {
+    tocarDing();
+    fb.classList.add('ok');
+    fb.innerHTML = 'Correto: elétrons.';
+    setTimeout(() => {
+      mostrarBotaoBalao('Próximo →', 'etapa2()');
+    }, 500);
+  } else {
+    fb.classList.add('err');
+    fb.innerHTML = 'Não é essa. Tente novamente.';
+    ['protons', 'neutrons', 'eletrons'].forEach(id => {
+      const b = document.getElementById('op-' + id);
+      b.disabled = false;
+      b.className = 'opcao-btn';
+    });
+    fb.classList.remove('visivel');
+  }
+}
+
+// ══════════════════════════════════════════════════
+//  ETAPA 2 — Formação do Cátion
+// ══════════════════════════════════════════════════
+function etapa2() {
+  estado.etapa = 2;
+  setHudModoFinal(false);
+  estado.protons = 11;
+  estado.eletrons = 11;
+  estado.neutrons = 12;
+  atualizarHUD();
+  setTitulo('Formação do Cátion');
+  renderizarNucleo(11, 12);
+  renderizarEletrons(11, 88, false);
+  document.getElementById('ionTag').style.display = 'none';
+
+  professora('Sódio: clique no elétron da última camada para removê-lo.', 'explicando');
+
+  renderCorpo(`
+    <div class="feedback-box" id="fb2"></div>
+  `);
+
+  habilitarRemocaoSomenteNaCamadaExterna(removerEletronCation);
+}
+
+function removerEletronCation(el) {
+  document.querySelectorAll('.eletron').forEach(e => { e.style.pointerEvents = 'none'; });
+  const wrap = document.getElementById('atomoWrap');
+  const centroX = wrap.clientWidth * CENTRO_X;
+  const centroY = wrap.clientHeight * CENTRO_Y;
+  const ex = parseFloat(el.style.left) + 9;
+  const ey = parseFloat(el.style.top) + 9;
+  const dirX = ex - centroX;
+  const dirY = ey - centroY;
+  const m = Math.hypot(dirX, dirY) || 1;
+  const tx = (dirX / m) * 120;
+  const ty = (dirY / m) * 120;
+
+  el.style.setProperty('--tx', tx.toFixed(2) + 'px');
+  el.style.setProperty('--ty', ty.toFixed(2) + 'px');
+  criarRastroEletron(ex, ey, { tipo: 'saindo', tx, ty });
+  el.classList.add('saindo');
+
+  setTimeout(() => {
+    el.remove();
+    estado.eletrons = 10;
+    atualizarHUD();
+
+    removerTodosEletrons();
+    renderizarEletrons(10, 88, false);
+    atualizarIonTag();
+
+    tocarDing();
+    const fb = document.getElementById('fb2');
+    fb.classList.add('visivel', 'ok');
+    fb.innerHTML = `O sódio perdeu 1 elétron. Agora tem 11 prótons e 10 elétrons.
+    Como há <strong>1 próton a mais</strong> que elétrons, a carga resultante é <strong>1+</strong>.
+    Esse tipo de íon com carga positiva chama-se <strong>CÁTION</strong>.`;
+
+    setTimeout(() => {
+      mostrarBotaoBalao('Próximo →', 'etapa3()');
+    }, 500);
+  }, 750);
+}
+
+// ══════════════════════════════════════════════════
+//  ETAPA 3 — Formação do Ânion
+// ══════════════════════════════════════════════════
+function etapa3() {
+  estado.etapa = 3;
+  setHudModoFinal(false);
+  estado.protons = 8;
+  estado.eletrons = 8;
+  estado.neutrons = 8;
+  atualizarHUD();
+  setTitulo('Formação do Ânion');
+  renderizarNucleo(8, 8);
+  renderizarEletrons(8, 88, false);
+  document.getElementById('ionTag').style.display = 'none';
+
+  professora('Oxigênio: clique em <strong>Adicionar elétrons</strong>.', 'animada');
+
+  renderCorpo(`
+    <div class="feedback-box" id="fb3"></div>
+  `);
+  mostrarBotaoBalao('Adicionar elétrons', 'iniciarAnimacaoAnion()', 'btnAnion');
+}
+
+function iniciarAnimacaoAnion() {
+  document.getElementById('btnAnion').disabled = true;
+  let adicionados = 0;
+
+  function adicionarProximo() {
+    if (adicionados >= 2) {
+      estado.eletrons = 10;
+      const btnAnion = document.getElementById('btnAnion');
+      if (btnAnion) btnAnion.remove();
+      atualizarHUD();
+      atualizarIonTag();
+      tocarDing();
+      const fb = document.getElementById('fb3');
+      fb.classList.add('visivel', 'ok');
+      fb.innerHTML = `O oxigênio ganhou 2 elétrons. Agora tem 8 prótons e 10 elétrons.
+      Como há <strong>2 elétrons a mais</strong> que prótons, a carga é <strong>2−</strong>.
+      Esse tipo de íon com carga negativa chama-se <strong>ÂNION</strong>.`;
+      setTimeout(() => {
+        mostrarBotaoBalao('Próximo →', 'etapa4()');
+      }, 500);
+      return;
+    }
+    adicionados++;
+    estado.eletrons++;
+    removerTodosEletrons();
+    for (let i = 0; i < estado.eletrons - 1; i++) {
+      criarEletron(i, estado.eletrons, 88);
+    }
+    criarEletron(estado.eletrons - 1, estado.eletrons, 88, { animar: 'entrar' });
+    atualizarHUD();
+    setTimeout(adicionarProximo, 850);
+  }
+
+  adicionarProximo();
+}
+
+// ══════════════════════════════════════════════════
+//  ETAPA 4 — Laboratório Interativo
+// ══════════════════════════════════════════════════
+const DESAFIOS_LAB = [
+  { texto: 'Esse átomo possui 12 prótons e 12 elétrons. Precisamos transformá-lo em um <strong>cátion 2+</strong>. O que devemos fazer primeiro?', protons: 12, neutrons: 12, start: 12, meta: 10, tipo: 'remover', qtd: 2 },
+  { texto: 'Esse átomo possui 7 prótons e 7 elétrons. Transforme-o em um <strong>ânion 3−</strong>.<br>', protons: 7,  neutrons: 7,  start: 7,  meta: 10, tipo: 'adicionar', qtd: 3 },
+  { texto: 'Esse átomo possui 9 prótons e 7 elétrons, vamos fazê-lo voltar ao <strong>estado neutro</strong>.<br>Adicione 2 elétrons.', protons: 9,  neutrons: 10, start: 7,  meta: 9,  tipo: 'adicionar', qtd: 2 },
+];
+
+function etapa4() {
+  estado.etapa = 4;
+  setHudModoFinal(false);
+  estado.laboratorio.desafioIdx = 0;
+  setTitulo('Laboratório Interativo');
+  carregarDesafioLab();
+}
+
+function carregarDesafioLab() {
+  const idx = estado.laboratorio.desafioIdx;
+  if (idx >= DESAFIOS_LAB.length) { etapa5(); return; }
+
+  const d = DESAFIOS_LAB[idx];
+  estado.protons  = d.protons;
+  estado.eletrons = d.start;
+  estado.neutrons = d.neutrons;
+  estado.laboratorio.eletronesAtivos = d.start;
+  atualizarHUD();
+  renderizarNucleo(d.protons, d.neutrons);
+  renderizarEletrons(d.start, 88, idx === 0 ? false : d.tipo === 'remover');
+  document.getElementById('ionTag').style.display = 'none';
+
+  professora(d.texto, 'explicando');
+
+  if (idx === 0) {
+    renderCorpo(`
+      <div class="desafio-box">
+        <div class="desafio-titulo">Desafio ${idx + 1} de ${DESAFIOS_LAB.length}</div>
+        <button class="opcao-btn" onclick="responderEscolhaInicialLab('adicionar')">Adicionar 2 elétrons</button>
+        <button class="opcao-btn" onclick="responderEscolhaInicialLab('remover')">Remover 2 elétrons</button>
+      </div>
+      <div class="feedback-box" id="fbLab"></div>
+    `);
+    return;
+  }
+
+  renderCorpo(`
+    <div class="desafio-box">
+      <div class="desafio-titulo">Desafio ${idx + 1} de ${DESAFIOS_LAB.length}</div>
+      ${d.tipo === 'remover'
+        ? ``
+        : `
+           <div class="eletron-controles">
+             <button class="btn-eletron" id="btnAdd" onclick="adicionarEletronLab()">+ Elétron</button>
+             <span style="font-size:12px;color:var(--texto-suave)" id="labStatus">Elétrons: ${d.start}</span>
+           </div>`
+      }
+    </div>
+    <div class="feedback-box" id="fbLab"></div>
+  `);
+
+  if (d.tipo === 'remover') {
+    habilitarRemocaoSomenteNaCamadaExterna((el) => removerEletronLab(el, d));
+  }
+}
+
+function responderEscolhaInicialLab(acao) {
+  const d = DESAFIOS_LAB[0];
+
+  if (acao === 'adicionar') {
+    renderCorpo(`
+      <div class="feedback-box visivel info" id="fbLab">
+        Ao adicionar elétrons, o átomo passa a ter mais elétrons do que prótons, adquirindo carga negativa. Como o objetivo é formar um cátion (2+), essa não é a ação correta.
+      </div>
+      <div class="desafio-box">
+        <button class="opcao-btn" onclick="responderEscolhaInicialLab('adicionar')">Adicionar 2 elétrons</button>
+        <button class="opcao-btn" onclick="responderEscolhaInicialLab('remover')">Remover 2 elétrons</button>
+      </div>
+    `);
+    return;
+  }
+
+  tocarDing();
+  renderCorpo(`
+    <div class="feedback-box visivel ok" id="fbLab">
+      Muito bem! Para formar um cátion precisamos diminuir a quantidade de elétrons. Agora clique em dois elétrons da camada mais externa para removê-los.
+    </div>
+  `);
+  mostrarBotaoBalao('Continuar →', 'iniciarRemocaoLabInicial()', 'btnInicioRemocaoLab');
+
+  professora('Muito bem! Agora clique em <strong>Continuar</strong> e remova dois elétrons da camada mais externa.', 'explicando');
+}
+
+function iniciarRemocaoLabInicial() {
+  const d = DESAFIOS_LAB[0];
+  const btnInicio = document.getElementById('btnInicioRemocaoLab');
+  if (btnInicio) btnInicio.remove();
+  removerTodosEletrons();
+  renderizarEletrons(estado.eletrons, 88, false);
+  habilitarRemocaoSomenteNaCamadaExterna((el) => removerEletronLab(el, d));
+}
+
+function removerEletronLab(el, d) {
+  document.querySelectorAll('.eletron').forEach(e => e.style.pointerEvents = 'none');
+  const wrap = document.getElementById('atomoWrap');
+  const centroX = wrap.clientWidth * CENTRO_X;
+  const centroY = wrap.clientHeight * CENTRO_Y;
+  const ex = parseFloat(el.style.left) + 9;
+  const ey = parseFloat(el.style.top) + 9;
+  const dirX = ex - centroX;
+  const dirY = ey - centroY;
+  const m = Math.hypot(dirX, dirY) || 1;
+  const tx = (dirX / m) * 120;
+  const ty = (dirY / m) * 120;
+
+  el.style.setProperty('--tx', tx.toFixed(2) + 'px');
+  el.style.setProperty('--ty', ty.toFixed(2) + 'px');
+  criarRastroEletron(ex, ey, { tipo: 'saindo', tx, ty });
+  el.classList.add('saindo');
+  setTimeout(() => {
+    el.remove();
+    estado.eletrons--;
+    estado.laboratorio.eletronesAtivos--;
+    atualizarHUD();
+    atualizarIonTag();
+
+    if (estado.eletrons === d.meta) {
+      verificarDesafioLab();
+    } else {
+      removerTodosEletrons();
+      renderizarEletrons(estado.eletrons, 88, true);
+      habilitarRemocaoSomenteNaCamadaExterna((el2) => removerEletronLab(el2, d));
+    }
+  }, 750);
+}
+
+function adicionarEletronLab() {
+  const idx = estado.laboratorio.desafioIdx;
+  const d = DESAFIOS_LAB[idx];
+  if (estado.eletrons >= d.meta) return;
+
+  estado.eletrons++;
+  estado.laboratorio.eletronesAtivos++;
+  removerTodosEletrons();
+  for (let i = 0; i < estado.eletrons - 1; i++) criarEletron(i, estado.eletrons, 88);
+  criarEletron(estado.eletrons - 1, estado.eletrons, 88, { animar: 'entrar' });
+  atualizarHUD();
+  atualizarIonTag();
+  document.getElementById('labStatus').textContent = 'Elétrons: ' + estado.eletrons;
+
+  if (estado.eletrons === d.meta) {
+    document.getElementById('btnAdd').disabled = true;
+    verificarDesafioLab();
+  }
+}
+
+function verificarDesafioLab() {
+  const idx = estado.laboratorio.desafioIdx;
+  const d = DESAFIOS_LAB[idx];
+  const fb = document.getElementById('fbLab');
+  const carga = estado.protons - estado.eletrons;
+  const cargaTxt = carga === 0 ? '0' : `${Math.abs(carga)}${carga > 0 ? '+' : '−'}`;
+  tocarDing();
+  fb.classList.add('visivel', 'ok');
+  fb.innerHTML = `Correto! Prótons = ${estado.protons}, Elétrons = ${estado.eletrons}, Carga = ${cargaTxt}.`;
+
+  setTimeout(() => {
+    estado.laboratorio.desafioIdx++;
+    if (estado.laboratorio.desafioIdx < DESAFIOS_LAB.length) {
+      mostrarBotaoBalao('Próximo desafio →', 'carregarDesafioLab()');
+    } else {
+      mostrarBotaoBalao('Próximo →', 'etapa5()');
+    }
+  }, 600);
+}
+
+// ══════════════════════════════════════════════════
+//  ETAPA 5 — Desafio Final
+// ══════════════════════════════════════════════════
+const DESAFIOS_FINAIS = [
+  { protons: 15, neutrons: 16, eletrons: 17, opcoes: ['3−', '2−', '2+', '3+'], certa: '2−' },
+  { protons: 11, neutrons: 12, eletrons: 10, opcoes: ['1−', '0', '1+', '2+'],  certa: '1+' },
+  { protons: 8,  neutrons: 8,  eletrons: 10, opcoes: ['2+', '2−', '0', '1−'],  certa: '2−' },
+];
+
+function etapa5() {
+  estado.etapa = 5;
+  setHudModoFinal(true);
+  estado.desafioFinal.idx = 0;
+  estado.desafioFinal.acertos = 0;
+  setTitulo('Desafio Final');
+  carregarDesafioFinal();
+}
+
+function carregarDesafioFinal() {
+  const idx = estado.desafioFinal.idx;
+  if (idx >= DESAFIOS_FINAIS.length) { mostrarFim(); return; }
+
+  const d = DESAFIOS_FINAIS[idx];
+  estado.protons  = d.protons;
+  estado.eletrons = d.eletrons;
+  estado.neutrons = d.neutrons;
+  atualizarHUD();
+  renderizarNucleo(d.protons, d.neutrons);
+  renderizarEletrons(d.eletrons, 88, false);
+  atualizarIonTag();
+
+  professora(`Observe o quadro na figura: Prótons = ${d.protons}, Elétrons = ${d.eletrons}. <strong>Escolha uma das opções abaixo.</strong>`, 'pensando');
+
+  const ops = d.opcoes.map(op =>
+    `<button class="resposta-opcao" onclick="responderFinal(this, '${op}', '${d.certa}')">${op}</button>`
+  ).join('');
+
+  renderCorpo(`
+    <div class="desafio-box">
+      <div class="desafio-titulo">Desafio ${idx + 1} de ${DESAFIOS_FINAIS.length}</div>
+      <div class="desafio-texto">Qual é a carga elétrica desse átomo?</div>
+      ${ops}
+    </div>
+    <div class="feedback-box" id="fbFinal"></div>
+  `);
+}
+
+function responderFinal(btn, opcao, certa) {
+  document.querySelectorAll('.resposta-opcao').forEach(b => b.disabled = true);
+  const certo = opcao === certa;
+  btn.classList.add(certo ? 'correta' : 'errada');
+  if (!certo) {
+    document.querySelectorAll('.resposta-opcao').forEach(b => {
+      if (b.textContent.trim() === certa) b.classList.add('correta');
+    });
+  }
+
+  const fb = document.getElementById('fbFinal');
+  fb.classList.add('visivel');
+  if (certo) {
+    tocarDing();
+    estado.desafioFinal.acertos++;
+    fb.classList.add('ok');
+    fb.innerHTML = `Correto! Carga = prótons (${estado.protons}) − elétrons (${estado.eletrons}) = ${certa}.`;
+  } else {
+    fb.classList.add('err');
+    const diff = estado.protons - estado.eletrons;
+    const diffTxt = diff === 0 ? '0' : `${Math.abs(diff)}${diff > 0 ? '+' : '−'}`;
+    fb.innerHTML = `A carga correta é <strong>${certa}</strong>. Lembre: carga = prótons − elétrons = ${estado.protons} − ${estado.eletrons} = ${diffTxt}.`;
+  }
+
+  setTimeout(() => {
+    estado.desafioFinal.idx++;
+    if (estado.desafioFinal.idx < DESAFIOS_FINAIS.length) {
+      mostrarBotaoBalao('Próximo →', 'carregarDesafioFinal()');
+    } else {
+      mostrarBotaoBalao('Ver resumo →', 'mostrarFim()');
+    }
+  }, 700);
+}
+
+// ══════════════════════════════════════════════════
+//  TELA FINAL — Resumo
+// ══════════════════════════════════════════════════
+function mostrarFim() {
+  removerTodosEletrons();
+  limparNucleo();
+  document.getElementById('ionTag').style.display = 'none';
+  document.getElementById('hudProtons').textContent  = '—';
+  document.getElementById('hudEletrons').textContent = '—';
+  document.getElementById('hudCarga').textContent    = '—';
+
+  const acertos = estado.desafioFinal.acertos;
+  const total   = DESAFIOS_FINAIS.length;
+
+  setTitulo('Resumo');
+  professora(`Muito bem! Você completou a fase de Íons. Acertou <strong>${acertos} de ${total}</strong> no desafio final.`, 'animada');
+
+  renderCorpo(`
+    <div class="resumo-item">
+      <div class="resumo-icone">+</div>
+      <div class="resumo-texto">
+        <strong>Perde elétrons → Cátion → Carga positiva.</strong><br>
+        O átomo fica com mais prótons do que elétrons.
+      </div>
+    </div>
+    <div class="resumo-item">
+      <div class="resumo-icone">−</div>
+      <div class="resumo-texto">
+        <strong>Ganha elétrons → Ânion → Carga negativa.</strong><br>
+        O átomo fica com mais elétrons do que prótons.
+      </div>
+    </div>
+    <div class="resumo-item">
+      <div class="resumo-icone">○</div>
+      <div class="resumo-texto">
+        <strong>Prótons e nêutrons nunca mudam.</strong><br>
+        Somente elétrons são ganhos ou perdidos na formação de íons.
+      </div>
+    </div>
+
+    <div class="feedback-box visivel info" style="margin-top:4px">
+      Fórmula da carga: <strong>Carga = Prótons − Elétrons</strong>
+    </div>
+  `);
+  mostrarBotaoBalao('Recomeçar', 'etapa0()', 'btnFim');
+
+  try {
+    if (window.salvarProgresso) salvarProgresso({ fase: 'ions', concluida: true });
+  } catch(e) { /* offline ou sem auth */ }
+}
+
+// ══════════════════════════════════════════════════
+//  INIT
+// ══════════════════════════════════════════════════
+window.addEventListener('resize', atualizarPosicaoHudMobile);
+atualizarPosicaoHudMobile();
+etapa0();
+</script>
+
+<script>
+(function () {
+  var _clickSom = new Audio('../sons/click.mp3');
+  _clickSom.preload = 'auto';
+  document.addEventListener('click', function (e) {
+    var alvo = e.target.closest('button');
+    if (alvo) { try { _clickSom.currentTime = 0; _clickSom.play().catch(function () {}); } catch (err) {} }
+  }, true);
+})();
+</script>
+</body>
+</html>

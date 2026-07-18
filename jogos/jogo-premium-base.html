@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow">
+  <title>Bases ou Hidróxidos — Jogo Premium | KiFácil</title>
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --fundo: #fdf8f0;
+      --fundo-card: #fffdf9;
+      --escuro: #2e2016;
+      --texto: #1a1208;
+      --texto-suave: #3d2e1a;
+      --dourado: #8a5e10;
+      --dourado-claro: #c8920a;
+      --borda: rgba(100,70,20,0.3);
+      --borda-forte: rgba(100,70,20,0.5);
+      --verde-escuro: #1e5238;
+      --vermelho-escuro: #7a1515;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Libre Baskerville', Georgia, serif;
+      background: var(--fundo);
+      color: var(--texto);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    .top-nav {
+      background: #1e1008;
+      border-bottom: 2px solid var(--dourado-claro);
+      padding: 0 2.5rem;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+    .brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.7rem;
+      font-weight: 600;
+      color: #fff8ee;
+      letter-spacing: 0.03em;
+      margin-right: auto;
+    }
+
+    /* MAIN */
+    main {
+      flex: 1;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 1rem 1.5rem 1rem;
+      width: 100%;
+    }
+    .titulo-jogo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.7rem, 3.8vw, 2.5rem);
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+      line-height: 1.1;
+    }
+    .subtitulo {
+      font-size: 1rem;
+      color: var(--texto);
+      margin-bottom: .9rem;
+      max-width: 680px;
+    }
+
+    .narrador {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: .8rem;
+      padding: .8rem 1.1rem;
+      border: 1.5px solid var(--borda-forte);
+      border-radius: 10px;
+      background: rgba(30,16,8,0.05);
+    }
+    .narrador img {
+      width: 68px;
+      height: 84px;
+      object-fit: cover;
+      object-position: top center;
+      border-radius: 10px;
+      border: 1px solid rgba(200,146,10,.35);
+      flex-shrink: 0;
+    }
+    .narrador-nome {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.78rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--dourado-claro);
+      margin-bottom: 0.3rem;
+    }
+    .narrador-texto {
+      font-size: 1rem;
+      line-height: 1.5;
+      color: var(--texto-suave);
+      min-height: 3.4em;
+    }
+
+    /* PALCO DE ANIMAÇÃO */
+    .imagem-wrapper {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: min(100%, 900px);
+      max-height: 62vh;
+      min-height: 380px;
+      margin: 0 auto;
+      cursor: default;
+      border: 1.5px solid var(--borda-forte);
+      border-radius: 6px;
+      overflow: hidden;
+      background: #f7efe2;
+    }
+    .cena-fundo {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      user-select: none;
+      pointer-events: none;
+    }
+    .overlay-animacao { position: absolute; inset: 0; }
+
+    .link-aula {
+      position: absolute; top: 10px; right: 10px; z-index: 10;
+      display: flex; flex-direction: column; align-items: center; gap: 2px;
+      text-decoration: none; color: #fff8ee;
+      background: rgba(30,16,8,0.72); border: 1.5px solid var(--dourado-claro, #c8920a);
+      border-radius: 8px; padding: 0.4rem 0.65rem;
+      font-family: 'Cormorant Garamond', serif; font-size: 0.68rem; font-weight: 600;
+      letter-spacing: 0.02em; text-align: center; line-height: 1.2;
+      cursor: pointer; transition: background 0.2s, transform 0.15s;
+    }
+    .link-aula:hover { background: rgba(30,16,8,0.92); transform: translateY(-1px); }
+    .link-aula svg { width: 22px; height: 22px; }
+
+    .frasco-rotulo { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 0.72rem; color: var(--texto-suave); margin-top: 2px; }
+
+    /* Cartão simples de fórmula/íon */
+    .cartao-formula-simples {
+      background: var(--fundo-card); border: 1.5px solid var(--borda-forte); border-radius: 8px; padding: 0.5rem 1rem;
+      font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 1.1rem; color: var(--texto);
+    }
+    .linha-cartas-simples { position: absolute; inset: 0; display: flex; justify-content: center; align-items: center; gap: 14px; flex-wrap: wrap; padding: 6%; }
+
+    /* Circuito / lâmpada */
+    .circuito-visual {
+      position: absolute; left: 50%; top: 38%; transform: translate(-50%, -50%); text-align: center; z-index: 3;
+      background: var(--fundo-card); border: 1.5px solid var(--borda-forte); border-radius: 12px; padding: 14px 20px;
+    }
+    .ion-movendo { animation: moverIon 1.4s ease-in-out infinite alternate; }
+    @keyframes moverIon { from { transform: translateX(-14px); } to { transform: translateX(14px); } }
+
+    /* Recipientes / partículas */
+    .linha-recipientes { position: absolute; inset: 0; display: flex; justify-content: center; align-items: center; gap: 12px; padding: 8% 4%; flex-wrap: wrap; }
+    .coluna-recipiente {
+      display: flex; flex-direction: column; align-items: center; gap: 6px;
+      background: var(--fundo-card); border: 1.5px solid var(--borda-forte); border-radius: 10px; padding: 8px; min-width: 118px;
+    }
+    .recipiente-titulo { font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 0.92rem; color: var(--texto-suave); }
+    .recipiente-particulas { display: grid; grid-template-columns: repeat(5, 1fr); gap: 3px; width: 90px; }
+    .particula-molecula { width: 12px; height: 12px; border-radius: 50%; background: var(--texto-suave); opacity: 0.85; }
+    .particula-molecula.particula-ionizada { background: var(--dourado-claro); box-shadow: 0 0 4px rgba(200,146,10,.7); }
+    .recipiente-contador { font-family: 'Libre Baskerville', serif; font-size: 0.66rem; color: var(--texto); text-align: center; }
+
+    /* Cálculo passo a passo */
+    .painel-calculo { position: absolute; left: 50%; top: 8%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 6px; z-index: 3; max-width: 90%; }
+    .linha-calculo {
+      font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 1.15rem; color: var(--texto);
+      background: var(--fundo-card); border: 1px solid var(--borda-forte); border-radius: 8px; padding: 4px 14px;
+    }
+    .linha-calculo-final { color: var(--dourado-claro); border-color: var(--dourado-claro); }
+
+    /* Medidor de grau de dissociação */
+    .medidor-ionizacao {
+      position: absolute; left: 50%; bottom: 6%; transform: translateX(-50%); width: 82%; max-width: 400px; z-index: 3;
+      background: var(--fundo-card); border: 1.5px solid var(--borda-forte); border-radius: 10px; padding: 10px 14px;
+    }
+    .medidor-barra { position: relative; height: 16px; border-radius: 8px; overflow: hidden; border: 1.5px solid var(--borda-forte); display: flex; }
+    .zona-fraco { background: rgba(122,21,21,0.4); }
+    .zona-moderado { background: rgba(200,146,10,0.4); }
+    .zona-forte { background: rgba(30,82,56,0.4); }
+    .medidor-marcador { position: absolute; top: -4px; width: 4px; height: 24px; background: #1e1008; border-radius: 2px; transform: translateX(-50%); transition: left .8s ease; }
+    .medidor-legendas { display: flex; justify-content: space-between; font-family: 'Cormorant Garamond', serif; font-size: 0.7rem; color: var(--texto-suave); margin-top: 2px; }
+    .medidor-classificacao { text-align: center; font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 0.85rem; color: var(--dourado-claro); margin-top: 4px; }
+
+    /* Cartões de dissociação (clique/toque, ordenar) */
+    .linha-cartas-ionizacao { position: absolute; inset: 0; display: flex; justify-content: center; align-items: center; gap: 14px; flex-wrap: wrap; padding: 6%; }
+    .cartao-ionizacao {
+      position: relative; background: var(--fundo-card); border: 1.5px solid var(--borda-forte); border-radius: 10px;
+      padding: 10px; display: flex; flex-direction: column; align-items: center; gap: 6px; cursor: pointer; min-width: 116px;
+      transition: border-color .2s;
+    }
+    .cartao-ionizacao:hover { border-color: var(--dourado-claro); }
+    .cartao-selecionado { border-color: var(--dourado-claro); box-shadow: 0 0 8px rgba(200,146,10,.5); }
+    .cartao-ionizacao-formula { font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 1.15rem; color: var(--texto); }
+    .cartao-ionizacao-ordem {
+      position: absolute; top: -8px; right: -8px; background: #1e1008; color: var(--dourado-claro);
+      border: 1.5px solid var(--dourado-claro); border-radius: 50%; width: 24px; height: 24px;
+      display: flex; align-items: center; justify-content: center; font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 0.85rem;
+    }
+
+    /* Classificação por categoria (solubilidade) */
+    .jogo-associacao { position: absolute; inset: 0; display: flex; justify-content: center; align-items: center; gap: 30px; padding: 6%; flex-wrap: wrap; }
+    .coluna-associacao { display: flex; flex-direction: column; gap: 8px; }
+    .item-associacao {
+      background: var(--fundo-card); border: 1.5px solid var(--borda-forte); border-radius: 8px; padding: 0.5rem 1rem;
+      font-family: 'Libre Baskerville', serif; font-size: 0.88rem; cursor: pointer; text-align: center; transition: border-color .2s;
+    }
+    .item-associacao:hover { border-color: var(--dourado-claro); }
+    .item-selecionado { border-color: var(--dourado-claro); background: rgba(200,146,10,.12); }
+    .associado { border-color: var(--verde-escuro); background: rgba(30,82,56,.12); cursor: default; opacity: 0.85; }
+    .erro-flash { outline: 3px solid var(--vermelho-escuro); border-radius: 8px; }
+
+    /* Blocos de nomenclatura */
+    .formula-alvo {
+      display: inline-block; background: var(--fundo); border: 1.5px solid var(--dourado-claro); border-radius: 6px;
+      padding: 0.3rem 0.8rem; font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 1.2rem;
+      color: var(--dourado-claro); margin-bottom: 0.8rem;
+    }
+    .montagem-nome { display: flex; gap: 6px; flex-wrap: wrap; min-height: 34px; margin-bottom: 0.6rem; }
+    .bloco-montado {
+      background: rgba(30,82,56,.12); border: 1.5px solid var(--verde-escuro); border-radius: 6px; padding: 0.3rem 0.6rem;
+      font-family: 'Cormorant Garamond', serif; font-weight: 700; color: var(--verde-escuro);
+    }
+    .blocos-disponiveis { display: flex; gap: 8px; flex-wrap: wrap; }
+    .chip-bloco {
+      background: var(--fundo); border: 1.5px solid var(--borda-forte); border-radius: 6px; padding: 0.4rem 0.8rem;
+      font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 0.95rem; color: var(--texto); cursor: pointer;
+    }
+    .chip-bloco:hover:not(:disabled) { border-color: var(--dourado-claro); }
+    .chip-usado { opacity: 0.4; cursor: default; }
+
+    .placa-dourada {
+      position: absolute; bottom: 20px; left: 50%; transform: translate(-50%, 10px);
+      background: linear-gradient(135deg, #fff3d6, #e9c877); color: #3d2600;
+      font-family: 'Cormorant Garamond', serif; font-weight: 700;
+      font-size: clamp(0.95rem, 2.4vw, 1.2rem);
+      padding: 0.65rem 1.3rem; border-radius: 8px; border: 1px solid #a97c1f;
+      box-shadow: 0 3px 12px rgba(0,0,0,.3); text-align: center; max-width: 92%;
+      opacity: 0; animation: placaIn .5s ease forwards; z-index: 6; pointer-events: none;
+    }
+    @keyframes placaIn {
+      from { opacity: 0; transform: translate(-50%, 10px); }
+      to   { opacity: 1; transform: translate(-50%, 0); }
+    }
+
+    /* PAINEL DE INTERAÇÃO */
+    #painelInteracao { max-width: 900px; margin: 1.2rem auto 0; }
+    .interacao-painel {
+      background: var(--fundo-card); border: 1.5px solid var(--borda-forte); border-radius: 12px;
+      padding: 1.4rem 1.6rem 1.3rem;
+    }
+    .interacao-pergunta-texto {
+      font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 600;
+      line-height: 1.35; margin-bottom: 1rem;
+    }
+    .opcoes-linha { display: flex; gap: 0.7rem; flex-wrap: wrap; margin-bottom: 0.6rem; }
+    .btn-opcao {
+      background: var(--fundo); border: 1.5px solid var(--borda-forte); border-radius: 6px;
+      padding: 0.55rem 1.1rem; font-family: 'Libre Baskerville', serif; font-size: 0.95rem;
+      color: var(--texto); cursor: pointer; transition: border-color .2s, background .2s;
+    }
+    .btn-opcao:hover:not(:disabled) { border-color: var(--dourado-claro); }
+    .btn-opcao:disabled { cursor: default; opacity: 0.75; }
+    .opcao-certa { border-color: var(--verde-escuro) !important; background: rgba(30,82,56,0.12); }
+    .opcao-errada { border-color: var(--vermelho-escuro) !important; background: rgba(122,21,21,0.08); }
+
+    .btn-continuar {
+      background: #1e1008; color: var(--dourado-claro); border: 1.5px solid var(--dourado-claro);
+      font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-weight: 600;
+      letter-spacing: 0.06em; text-transform: uppercase; padding: 0.6rem 1.5rem;
+      border-radius: 4px; cursor: pointer; transition: background 0.2s, color 0.2s, opacity .2s;
+      display: block; margin: 0.2rem auto 0;
+    }
+    .btn-continuar:hover { background: var(--dourado-claro); color: #1e1008; }
+    .btn-continuar:disabled { opacity: 0.4; cursor: default; }
+    .btn-continuar:disabled:hover { background: #1e1008; color: var(--dourado-claro); }
+
+    /* Botão continuar dentro do balão da professora */
+    #continuarBalao { margin-top: 0.6rem; }
+    #continuarBalao .btn-continuar { display: inline-block; margin: 0; }
+
+    .modal-feedback {
+      margin-top: 1rem; font-size: 0.86rem; line-height: 1.7;
+      border-left: 3px solid var(--borda-forte); padding-left: 1rem; display: none;
+    }
+    .modal-feedback.visivel { display: block; }
+    .feedback-certo   { color: var(--verde-escuro); font-weight: 700; }
+    .feedback-errado  { color: var(--vermelho-escuro); font-weight: 700; }
+    .feedback-explicacao { color: var(--texto); margin-top: 0.5rem; }
+
+    .quadro-resumo-final {
+      background: var(--fundo-card); border: 1.5px solid var(--borda-forte); border-radius: 12px;
+      padding: 1.2rem 1.6rem; max-width: 88%; text-align: left;
+    }
+    .quadro-resumo-final .resumo-linha {
+      font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; font-weight: 600; color: var(--texto);
+      padding: 0.45rem 0; border-bottom: 1px solid var(--borda);
+    }
+    .quadro-resumo-final .resumo-linha:last-child { border-bottom: none; }
+
+    /* CONCLUSÃO */
+    .conclusao {
+      display: none; margin-top: 2rem; background: var(--fundo-card);
+      border: 1.5px solid var(--borda-forte); border-radius: 12px; padding: 2.4rem 2rem; text-align: center;
+    }
+    .conclusao.visivel { display: block; }
+    .conclusao-titulo {
+      font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 5vw, 2.6rem); font-weight: 600; margin-bottom: 0.8rem;
+    }
+    .conclusao-placar { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; color: var(--dourado-claro); margin-bottom: 1rem; }
+    .conclusao-mensagem { font-size: 0.93rem; color: var(--texto-suave); max-width: 460px; margin: 0 auto 2rem; line-height: 1.8; }
+    .btn-reiniciar {
+      background: #1e1008; color: var(--dourado-claro); border: 1.5px solid var(--dourado-claro);
+      font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase; padding: 0.7rem 2rem; border-radius: 4px;
+      cursor: pointer; transition: background 0.2s, color 0.2s;
+    }
+    .btn-reiniciar:hover { background: var(--dourado-claro); color: #1e1008; }
+
+    /* FOOTER */
+    footer {
+      background: var(--escuro); border-top: 2px solid var(--dourado-claro);
+      padding: .6rem 2rem; text-align: center; font-size: 0.78rem; color: rgba(255,248,238,0.5);
+    }
+
+    @media (min-width: 641px) {
+      .narrador { max-width: 900px; margin: 0 auto .8rem; }
+      .narrador-texto { font-size: 1.05rem; }
+    }
+
+    @media (max-width: 640px) {
+      .top-nav { padding: 0 1.2rem; gap: 1.2rem; }
+      main { padding: .8rem 1rem 1rem; }
+      .interacao-painel { padding: 1.2rem 1rem; }
+      .placa-dourada { font-size: 0.82rem; padding: 0.5rem 0.85rem; }
+      .coluna-recipiente { min-width: 92px; padding: 6px; }
+      .recipiente-particulas { width: 70px; }
+      .cartao-formula-simples { font-size: 0.95rem; padding: 0.4rem 0.8rem; }
+      .jogo-associacao { gap: 14px; }
+      .item-associacao { font-size: 0.78rem; padding: 0.4rem 0.7rem; }
+      .medidor-ionizacao { width: 92%; }
+      .link-aula { top: 6px; right: 6px; padding: 0.3rem 0.5rem; font-size: 0.6rem; }
+      .link-aula svg { width: 18px; height: 18px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <div class="brand">KiFácil</div>
+</nav>
+
+<main>
+  <h1 class="titulo-jogo">Bases ou Hidróxidos</h1>
+  <p class="subtitulo">Descubra o que acontece quando uma base é dissolvida em água — antes de decorar qualquer definição.</p>
+
+  <div class="narrador">
+    <img src="../imagens/rafa-sorrindo.jpg" alt="Professora Rafaela" />
+    <div style="flex: 1;">
+      <div class="narrador-nome">Professora Rafaela</div>
+      <div class="narrador-texto" id="narradorTexto">Vamos começar.</div>
+      <div id="continuarBalao"></div>
+    </div>
+  </div>
+
+  <div class="imagem-wrapper" id="imagemWrapper">
+    <img src="../imagens/patio-dos-alcalis.jpg" alt="Pátio dos Álcalis" class="cena-fundo" />
+    <div class="overlay-animacao" id="overlayAnimacao"></div>
+    <!-- COLOQUE O LINK AQUI -->
+    <a class="link-aula" href="https://www.youtube.com/watch?v=vvFWseJBcWY" target="_blank" rel="noopener" title="Assista à aula">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.6"/>
+        <path d="M10 8.5L16 12L10 15.5V8.5Z" fill="currentColor"/>
+      </svg>
+      <span>Assista à aula</span>
+    </a>
+  </div>
+
+  <div id="painelInteracao"></div>
+
+  <div class="conclusao" id="conclusao">
+    <div class="conclusao-titulo">Estudo concluído</div>
+    <div class="conclusao-placar" id="conclusaoPlacar"></div>
+    <p class="conclusao-mensagem" id="conclusaoMensagem"></p>
+    <button class="btn-reiniciar" onclick="reiniciar()">Jogar novamente</button>
+  </div>
+</main>
+
+<footer>© 2026 KiFácil</footer>
+
+<script>
+/* ==========================================================
+   REFERÊNCIAS DOM
+   ========================================================== */
+const overlay = document.getElementById('overlayAnimacao');
+const painel  = document.getElementById('painelInteracao');
+const continuarBalao = document.getElementById('continuarBalao');
+
+function fala(texto) { document.getElementById('narradorTexto').textContent = texto; }
+
+const _brilho = new Audio('../sons/brilho.MP3');
+_brilho.preload = 'auto';
+function tocarBrilho() { try { _brilho.currentTime = 0; _brilho.play().catch(() => {}); } catch (e) {} }
+
+const _ding = new Audio('../sons/ding.mp3');
+_ding.preload = 'auto';
+function tocarDing() { try { _ding.currentTime = 0; _ding.play().catch(function () {}); } catch (e) {} }
+
+let timersAtivos = [];
+function agendar(fn, ms) { const id = setTimeout(fn, ms); timersAtivos.push(id); return id; }
+function limparTimers() { timersAtivos.forEach(clearTimeout); timersAtivos = []; }
+
+/* ==========================================================
+   DADOS: FÓRMULAS E NOMENCLATURA
+   ========================================================== */
+const FORMULAS_BASE = {
+  NaOH: 'NaOH', KOH: 'KOH', NH4OH: 'NH₄OH',
+  'Fe(OH)3': 'Fe(OH)₃', 'Fe(OH)2': 'Fe(OH)₂'
+};
+const NOMENCLATURA_BASE = {
+  NaOH: ['HIDRÓXIDO', 'DE', 'SÓDIO'],
+  KOH: ['HIDRÓXIDO', 'DE', 'POTÁSSIO'],
+  'Fe(OH)3': ['HIDRÓXIDO', 'FÉRR', 'ICO'],
+  'Fe(OH)2': ['HIDRÓXIDO', 'FERR', 'OSO']
+};
+
+/* ==========================================================
+   COMPONENTE: CIRCUITO ELÉTRICO / LÂMPADA
+   ========================================================== */
+function criarCircuito(id) {
+  const div = document.createElement('div');
+  div.className = 'circuito-visual';
+  div.id = id;
+  div.innerHTML =
+    '<svg viewBox="0 0 200 160" width="280" height="224">' +
+    '<rect x="40" y="70" width="120" height="70" rx="6" fill="rgba(255,255,255,0.3)" stroke="#3d2e1a" stroke-width="2.5"/>' +
+    '<rect x="70" y="60" width="8" height="70" fill="#3d2e1a"/>' +
+    '<rect x="122" y="60" width="8" height="70" fill="#3d2e1a"/>' +
+    '<line x1="74" y1="60" x2="74" y2="30" stroke="#3d2e1a" stroke-width="2"/>' +
+    '<line x1="126" y1="60" x2="126" y2="30" stroke="#3d2e1a" stroke-width="2"/>' +
+    '<line x1="74" y1="30" x2="100" y2="30" stroke="#3d2e1a" stroke-width="2"/>' +
+    '<line x1="126" y1="30" x2="100" y2="30" stroke="#3d2e1a" stroke-width="2"/>' +
+    '<circle id="lampada-' + id + '" cx="100" cy="18" r="16" fill="#e9c877" stroke="#8a5e10" stroke-width="2" opacity="0.15"/>' +
+    '<line x1="100" y1="30" x2="100" y2="26" stroke="#3d2e1a" stroke-width="2"/>' +
+    '<g id="ions-' + id + '"></g>' +
+    '</svg>' +
+    '<div class="frasco-rotulo">Circuito de teste</div>';
+  return div;
+}
+function definirIntensidadeLampada(id, intensidade) {
+  const l = document.getElementById('lampada-' + id);
+  if (!l) return;
+  l.setAttribute('opacity', Math.max(0.15, Math.min(1, intensidade)));
+  l.style.filter = intensidade > 0.5 ? 'drop-shadow(0 0 10px rgba(232,184,75,0.9))' : 'none';
+}
+function animarIonsCircuito(id) {
+  const g = document.getElementById('ions-' + id);
+  if (!g) return;
+  for (let i = 0; i < 6; i++) {
+    const ion = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    const positivo = i % 2 === 0;
+    ion.setAttribute('r', '4');
+    ion.setAttribute('fill', positivo ? '#c8920a' : '#7a1515');
+    ion.setAttribute('cx', 80 + Math.random() * 40);
+    ion.setAttribute('cy', 90 + Math.random() * 30);
+    ion.setAttribute('class', 'ion-movendo');
+    ion.style.animationDelay = (Math.random() * 1.2).toFixed(2) + 's';
+    g.appendChild(ion);
+  }
+}
+
+/* ==========================================================
+   COMPONENTE: MEDIDOR DE GRAU DE DISSOCIAÇÃO
+   ========================================================== */
+function criarMedidorDissociacao(id) {
+  const div = document.createElement('div');
+  div.className = 'medidor-ionizacao';
+  div.id = id;
+  div.innerHTML =
+    '<div class="medidor-barra">' +
+    '<div class="medidor-zona zona-fraco" style="width:5%"></div>' +
+    '<div class="medidor-zona zona-moderado" style="width:45%"></div>' +
+    '<div class="medidor-zona zona-forte" style="width:50%"></div>' +
+    '<div class="medidor-marcador" id="marcador-' + id + '" style="left:0%"></div>' +
+    '</div>' +
+    '<div class="medidor-legendas"><span>Fraca</span><span>Moderada</span><span>Forte</span></div>' +
+    '<div class="medidor-classificacao" id="classificacao-' + id + '"></div>';
+  return div;
+}
+function atualizarMedidorDissociacao(id, pct) {
+  const marcador = document.getElementById('marcador-' + id);
+  const classif = document.getElementById('classificacao-' + id);
+  if (marcador) marcador.style.left = Math.max(0, Math.min(100, pct)) + '%';
+  const texto = pct < 5 ? 'BASE FRACA' : (pct <= 50 ? 'BASE MODERADA' : 'BASE FORTE');
+  if (classif) classif.textContent = texto + ' (α = ' + pct + '%)';
+}
+
+/* ==========================================================
+   HELPERS DE INTERAÇÃO
+   ========================================================== */
+function botaoContinuar(delayMs) {
+  delayMs = delayMs || 0;
+  painel.innerHTML = '';
+  continuarBalao.innerHTML = '';
+  const btn = document.createElement('button');
+  btn.className = 'btn-continuar';
+  btn.textContent = 'Continuar →';
+  btn.disabled = delayMs > 0;
+  continuarBalao.appendChild(btn);
+  if (delayMs > 0) agendar(function () { btn.disabled = false; }, delayMs);
+  btn.addEventListener('click', avancar);
+  return btn;
+}
+
+function botaoContinuarLocal(handler, delayMs) {
+  delayMs = delayMs || 0;
+  painel.innerHTML = '';
+  continuarBalao.innerHTML = '';
+  const btn = document.createElement('button');
+  btn.className = 'btn-continuar';
+  btn.textContent = 'Continuar →';
+  btn.disabled = delayMs > 0;
+  continuarBalao.appendChild(btn);
+  if (delayMs > 0) agendar(function () { btn.disabled = false; }, delayMs);
+  btn.addEventListener('click', function () { btn.disabled = true; handler(); });
+  return btn;
+}
+
+function escolhaBotoes(opts) {
+  painel.innerHTML = '';
+  const wrap = document.createElement('div');
+  wrap.className = 'interacao-painel';
+  wrap.innerHTML =
+    '<div class="interacao-pergunta-texto">' + opts.pergunta + '</div>' +
+    '<div class="opcoes-linha" id="opcoesLinha"></div>' +
+    '<div class="modal-feedback" id="feedbackEscolha"></div>';
+  painel.appendChild(wrap);
+
+  const opcoesLinha = wrap.querySelector('#opcoesLinha');
+  const feedback = wrap.querySelector('#feedbackEscolha');
+  let tentativas = 0;
+  let resolvido = false;
+
+  opts.opcoes.forEach(function (op) {
+    const btn = document.createElement('button');
+    btn.className = 'btn-opcao';
+    btn.textContent = op.rotulo;
+    btn.addEventListener('click', function () {
+      if (resolvido) return;
+      if (op.correta) {
+        resolvido = true;
+        tocarDing();
+        Array.from(opcoesLinha.children).forEach(function (b) { b.disabled = true; });
+        btn.classList.add('opcao-certa');
+        feedback.className = 'modal-feedback visivel';
+        feedback.innerHTML = '<span class="feedback-certo">Correto!</span><p class="feedback-explicacao">' + opts.explicacao + '</p>';
+        opts.aoAcertar();
+      } else {
+        tentativas++;
+        btn.classList.add('opcao-errada');
+        if (tentativas === 1 && opts.dica) {
+          feedback.className = 'modal-feedback visivel';
+          feedback.innerHTML = '<span class="feedback-errado">' + opts.dica + '</span>';
+        } else if (tentativas >= 2) {
+          resolvido = true;
+          Array.from(opcoesLinha.children).forEach(function (b, i) {
+            b.disabled = true;
+            if (opts.opcoes[i].correta) b.classList.add('opcao-certa');
+          });
+          feedback.className = 'modal-feedback visivel';
+          feedback.innerHTML = '<span class="feedback-resposta">Resposta correta destacada.</span><p class="feedback-explicacao">' + opts.explicacao + '</p>';
+          opts.aoAcertar();
+        }
+      }
+    });
+    opcoesLinha.appendChild(btn);
+  });
+}
+
+/* ==========================================================
+   CLASSIFICAÇÃO POR CATEGORIA (base → solubilidade)
+   ========================================================== */
+function criarClassificacaoPorCategoria(itens, categorias, mensagemErro, mensagemSucesso) {
+  const container = document.createElement('div');
+  container.className = 'jogo-associacao';
+  overlay.appendChild(container);
+
+  const colCategorias = document.createElement('div'); colCategorias.className = 'coluna-associacao';
+  const colItens = document.createElement('div'); colItens.className = 'coluna-associacao';
+  container.appendChild(colCategorias); container.appendChild(colItens);
+
+  const itensEmbaralhados = itens.slice().sort(function () { return Math.random() - 0.5; });
+
+  let categoriaAtiva = null, acertos = 0;
+  const elCategorias = {};
+
+  categorias.forEach(function (cat) {
+    const el = document.createElement('div');
+    el.className = 'item-associacao';
+    el.textContent = cat;
+    colCategorias.appendChild(el);
+    elCategorias[cat] = el;
+    el.addEventListener('click', function () {
+      Object.keys(elCategorias).forEach(function (k) { elCategorias[k].classList.remove('item-selecionado'); });
+      el.classList.add('item-selecionado');
+      categoriaAtiva = cat;
+    });
+  });
+
+  itensEmbaralhados.forEach(function (it) {
+    const el = document.createElement('div');
+    el.className = 'item-associacao';
+    el.textContent = it.rotulo;
+    colItens.appendChild(el);
+    el.addEventListener('click', function () {
+      if (el.classList.contains('associado')) return;
+      if (!categoriaAtiva) {
+        fala('Primeiro escolha uma categoria à esquerda.');
+        return;
+      }
+      if (it.categoria === categoriaAtiva) {
+        el.classList.add('associado');
+        tocarDing();
+        acertos++;
+        if (acertos === itens.length) {
+          agendar(function () { fala(mensagemSucesso); botaoContinuar(400); }, 300);
+        }
+      } else {
+        fala(mensagemErro);
+        el.classList.add('erro-flash');
+        setTimeout(function () { el.classList.remove('erro-flash'); }, 500);
+      }
+    });
+  });
+}
+
+/* ==========================================================
+   MONTAGEM DE NOME POR BLOCOS (clique/toque)
+   ========================================================== */
+function montarNomePorBlocosBase(chave, aoConcluir) {
+  painel.innerHTML = '';
+  const wrap = document.createElement('div');
+  wrap.className = 'interacao-painel';
+  wrap.innerHTML =
+    '<div class="interacao-pergunta-texto">Monte o nome clicando nos blocos, na ordem correta.</div>' +
+    '<div class="formula-alvo">' + FORMULAS_BASE[chave] + '</div>' +
+    '<div class="montagem-nome" id="montagemNome"></div>' +
+    '<div class="blocos-disponiveis" id="blocosDisponiveis"></div>' +
+    '<div class="modal-feedback" id="fbNomenclatura"></div>';
+  painel.appendChild(wrap);
+
+  const sequenciaCorreta = NOMENCLATURA_BASE[chave];
+  const montagemEl = wrap.querySelector('#montagemNome');
+  const blocosEl = wrap.querySelector('#blocosDisponiveis');
+  const fb = wrap.querySelector('#fbNomenclatura');
+  let progresso = 0;
+
+  const blocosEmbaralhados = sequenciaCorreta.slice().sort(function () { return Math.random() - 0.5; });
+  blocosEmbaralhados.forEach(function (bloco) {
+    const chip = document.createElement('button');
+    chip.className = 'chip-bloco';
+    chip.type = 'button';
+    chip.textContent = bloco;
+    chip.addEventListener('click', function () {
+      if (chip.disabled) return;
+      if (bloco === sequenciaCorreta[progresso]) {
+        tocarDing();
+        chip.disabled = true;
+        chip.classList.add('chip-usado');
+        const tag = document.createElement('span');
+        tag.className = 'bloco-montado';
+        tag.textContent = bloco;
+        montagemEl.appendChild(tag);
+        progresso++;
+        if (progresso === sequenciaCorreta.length) {
+          fb.className = 'modal-feedback visivel';
+          fb.innerHTML = '<span class="feedback-certo">Correto!</span><p class="feedback-explicacao">' + FORMULAS_BASE[chave] + ' → ' + sequenciaCorreta.join('').toLowerCase() + '</p>';
+          Array.from(blocosEl.children).forEach(function (b) { b.disabled = true; });
+          aoConcluir();
+        }
+      } else {
+        chip.classList.add('erro-flash');
+        setTimeout(function () { chip.classList.remove('erro-flash'); }, 500);
+        fb.className = 'modal-feedback visivel';
+        fb.innerHTML = '<span class="feedback-errado">Observe o elemento e o NOX indicado.</span>';
+      }
+    });
+    blocosEl.appendChild(chip);
+  });
+}
+
+/* ==========================================================
+   INTRODUÇÃO
+   ========================================================== */
+function passoIntro() {
+  fala('Na última fase vimos que os ácidos produzem H₃O⁺. Agora vamos descobrir o comportamento das bases.');
+  painel.innerHTML = '';
+  const wrap = document.createElement('div');
+  wrap.className = 'interacao-painel';
+  const btn = document.createElement('button');
+  btn.className = 'btn-continuar';
+  btn.textContent = 'INICIAR INVESTIGAÇÃO';
+  wrap.appendChild(btn);
+  painel.appendChild(wrap);
+  btn.addEventListener('click', avancar);
+}
+
+/* ==========================================================
+   ETAPA 1 — DISSOCIAÇÃO
+   ========================================================== */
+function passoDissociacao() {
+  fala('Vamos dissolver hidróxido de sódio (NaOH) em água.');
+  const naoh = document.createElement('div');
+  naoh.className = 'cartao-formula-simples';
+  naoh.style.position = 'absolute'; naoh.style.left = '50%'; naoh.style.top = '50%'; naoh.style.transform = 'translate(-50%,-50%)';
+  naoh.textContent = 'NaOH (sólido)';
+  overlay.appendChild(naoh);
+
+  painel.innerHTML = '';
+  const wrap = document.createElement('div');
+  wrap.className = 'interacao-painel';
+  const btn = document.createElement('button');
+  btn.className = 'btn-continuar';
+  btn.textContent = 'DISSOLVER EM ÁGUA';
+  wrap.appendChild(btn);
+  painel.appendChild(wrap);
+
+  btn.addEventListener('click', function () {
+    btn.disabled = true;
+    naoh.remove();
+    const linha = document.createElement('div');
+    linha.className = 'linha-cartas-simples';
+    ['Na⁺', 'OH⁻'].forEach(function (t) {
+      const c = document.createElement('div');
+      c.className = 'cartao-formula-simples';
+      c.textContent = t;
+      linha.appendChild(c);
+    });
+    overlay.appendChild(linha);
+    const placa = document.createElement('div');
+    placa.className = 'placa-dourada';
+    placa.textContent = 'NaOH → Na⁺ + OH⁻ (dissociação)';
+    overlay.appendChild(placa);
+    fala('As bases sofrem DISSOCIAÇÃO — os íons Na⁺ e OH⁻ já existiam prontos dentro do sólido, só foram separados pela água. Isso é diferente da ionização dos ácidos, em que os íons são formados na hora.');
+    painel.innerHTML = '';
+    botaoContinuar(600);
+  });
+}
+
+/* ==========================================================
+   ETAPA 2 — CONDUÇÃO DE ELETRICIDADE
+   ========================================================== */
+function passoConducao() {
+  fala('Vamos testar se a água pura conduz corrente elétrica.');
+  const circuito = criarCircuito('circ-base');
+  overlay.appendChild(circuito);
+
+  painel.innerHTML = '';
+  const wrap = document.createElement('div');
+  wrap.className = 'interacao-painel';
+  wrap.innerHTML = '<div class="interacao-pergunta-texto">Teste a água pura.</div>';
+  const btnTestar = document.createElement('button');
+  btnTestar.className = 'btn-continuar';
+  btnTestar.textContent = 'TESTAR';
+  wrap.appendChild(btnTestar);
+  painel.appendChild(wrap);
+
+  btnTestar.addEventListener('click', function () {
+    btnTestar.disabled = true;
+    definirIntensidadeLampada('circ-base', 0.1);
+    fala('A lâmpada quase não acende: a água pura tem pouquíssimos íons.');
+    botaoContinuarLocal(passoConducaoB, 700);
+  });
+}
+function passoConducaoB() {
+  const wrap = document.createElement('div');
+  wrap.className = 'interacao-painel';
+  wrap.innerHTML = '<div class="interacao-pergunta-texto">Agora adicione o NaOH.</div>';
+  const btnAdd = document.createElement('button');
+  btnAdd.className = 'btn-continuar';
+  btnAdd.textContent = 'Adicionar NaOH';
+  wrap.appendChild(btnAdd);
+  painel.innerHTML = '';
+  painel.appendChild(wrap);
+
+  btnAdd.addEventListener('click', function () {
+    btnAdd.disabled = true;
+    animarIonsCircuito('circ-base');
+    definirIntensidadeLampada('circ-base', 1);
+    tocarBrilho();
+    fala('Olha só a lâmpada acender! O NaOH libera Na⁺ e OH⁻ na água, e são esses íons que carregam a corrente elétrica.');
+    const placa = document.createElement('div');
+    placa.className = 'placa-dourada';
+    placa.textContent = 'NaOH → Na⁺ + OH⁻';
+    overlay.appendChild(placa);
+    painel.innerHTML = '';
+    botaoContinuar(600);
+  });
+}
+
+/* ==========================================================
+   ETAPA 3 — GRAU DE DISSOCIAÇÃO (α)
+   ========================================================== */
+function passoGrauDissociacao() {
+  fala('Vamos observar três bases diferentes se dissolvendo em água.');
+  const dados = [
+    { id: 'A', nome: 'Base A', dissociadas: 3 },
+    { id: 'B', nome: 'Base B', dissociadas: 10 },
+    { id: 'C', nome: 'Base C', dissociadas: 18 }
+  ];
+  const linha = document.createElement('div');
+  linha.className = 'linha-recipientes';
+  overlay.appendChild(linha);
+
+  dados.forEach(function (d) {
+    const col = document.createElement('div');
+    col.className = 'coluna-recipiente';
+    col.innerHTML =
+      '<div class="recipiente-titulo">' + d.nome + '</div>' +
+      '<div class="recipiente-particulas" id="part-' + d.id + '"></div>' +
+      '<div class="recipiente-contador" id="cont-' + d.id + '">Unidades dissolvidas: 20<br>Unidades dissociadas: 0</div>';
+    linha.appendChild(col);
+    const partContainer = col.querySelector('#part-' + d.id);
+    for (let i = 0; i < 20; i++) {
+      const p = document.createElement('div');
+      p.className = 'particula-molecula';
+      partContainer.appendChild(p);
+    }
+  });
+
+  painel.innerHTML = '';
+  const wrap = document.createElement('div');
+  wrap.className = 'interacao-painel';
+  wrap.innerHTML = '<div class="interacao-pergunta-texto">Observe a dissociação em cada recipiente.</div>';
+  const btn = document.createElement('button');
+  btn.className = 'btn-continuar';
+  btn.textContent = 'OBSERVAR A DISSOCIAÇÃO';
+  wrap.appendChild(btn);
+  painel.appendChild(wrap);
+
+  btn.addEventListener('click', function () {
+    btn.disabled = true;
+    dados.forEach(function (d) {
+      const partContainer = document.getElementById('part-' + d.id);
+      const particulas = Array.from(partContainer.children).sort(function () { return Math.random() - 0.5; });
+      for (let i = 0; i < d.dissociadas; i++) particulas[i].classList.add('particula-ionizada');
+      document.getElementById('cont-' + d.id).innerHTML = 'Unidades dissolvidas: 20<br>Unidades dissociadas: ' + d.dissociadas;
+    });
+    escolhaBotoes({
+      pergunta: 'Em qual solução ocorreu maior dissociação?',
+      opcoes: [
+        { rotulo: 'Base A', correta: false },
+        { rotulo: 'Base B', correta: false },
+        { rotulo: 'Base C', correta: true }
+      ],
+      dica: 'Conte quantas unidades realmente se dissociaram em cada recipiente.',
+      explicacao: 'A Base C teve quase todas as unidades dissociadas — maior grau de dissociação (α = unidades dissociadas ÷ unidades dissolvidas).',
+      aoAcertar: function () {
+        agendar(function () {
+          const medidor = criarMedidorDissociacao('med-diss');
+          overlay.appendChild(medidor);
+          const painelCalculo = document.createElement('div');
+          painelCalculo.className = 'painel-calculo';
+          painelCalculo.innerHTML = '<div class="linha-calculo">α = 18 ÷ 20</div><div class="linha-calculo linha-calculo-final">α = 90% — base forte</div>';
+          overlay.insertBefore(painelCalculo, linha);
+          atualizarMedidorDissociacao('med-diss', 90);
+          fala('Quanto maior a proporção de unidades dissociadas, maior o grau de dissociação. Como 90% é maior que 50%, a Base C é forte. Nem toda base tem o mesmo grau de dissociação!');
+          painel.innerHTML = '';
+          botaoContinuar(600);
+        }, 300);
+      }
+    });
+  });
+}
+
+/* ==========================================================
+   ETAPA 4 — SOLUBILIDADE
+   ========================================================== */
+function passoSolubilidade() {
+  fala('Associe cada base à sua solubilidade em água.');
+  criarClassificacaoPorCategoria([
+    { rotulo: 'NaOH', categoria: 'Muito solúvel' },
+    { rotulo: 'KOH', categoria: 'Muito solúvel' },
+    { rotulo: 'NH₄OH', categoria: 'Muito solúvel' },
+    { rotulo: 'Ca(OH)₂', categoria: 'Pouco solúvel' },
+    { rotulo: 'Fe(OH)₃', categoria: 'Praticamente insolúvel' },
+    { rotulo: 'Al(OH)₃', categoria: 'Praticamente insolúvel' }
+  ], ['Muito solúvel', 'Pouco solúvel', 'Praticamente insolúvel'],
+  'Lembre-se: hidróxidos de metais alcalinos e o hidróxido de amônio são muito solúveis; os de metais alcalinoterrosos são pouco solúveis; os demais são praticamente insolúveis.',
+  'Muito bem! Nem todas as bases apresentam a mesma solubilidade.');
+}
+
+/* ==========================================================
+   ETAPA 5 — NOMENCLATURA
+   ========================================================== */
+function passoNomenclatura() {
+  fala('Agora vamos nomear as bases. Quando o elemento forma apenas uma base, o nome é "hidróxido de + nome do elemento".');
+  montarNomePorBlocosBase('NaOH', function () {
+    agendar(function () { botaoContinuar(400); }, 300);
+  });
+}
+function passoNomenclaturaKOH() {
+  montarNomePorBlocosBase('KOH', function () {
+    agendar(function () { botaoContinuar(400); }, 300);
+  });
+}
+function passoNomenclaturaFerro() {
+  fala('O ferro forma duas bases diferentes. Quando isso acontece, usamos ÉRICO para o maior NOX e OSO para o menor. Monte o nome do Fe(OH)₃ primeiro.');
+  montarNomePorBlocosBase('Fe(OH)3', function () {
+    agendar(function () { botaoContinuarLocal(passoNomenclaturaFerroso, 400); }, 300);
+  });
+}
+function passoNomenclaturaFerroso() {
+  fala('Agora monte o nome do Fe(OH)₂ — o ferro com NOX menor.');
+  montarNomePorBlocosBase('Fe(OH)2', function () {
+    agendar(function () { botaoContinuar(400); }, 300);
+  });
+}
+
+/* ==========================================================
+   FINAL
+   ========================================================== */
+function passoFinal() {
+  fala('Excelente. Agora você consegue compreender o comportamento das bases em solução aquosa.');
+  function linha(txt) { return '<div class="resumo-linha">' + txt + '</div>'; }
+  overlay.innerHTML =
+    '<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:12px;">' +
+    '<div class="quadro-resumo-final">' +
+    linha('Bases em água sofrem dissociação, liberando OH⁻.') +
+    linha('Os íons produzidos conduzem corrente elétrica.') +
+    linha('Diferentes bases apresentam diferentes graus de dissociação (α).') +
+    linha('Bases têm solubilidades diferentes em água.') +
+    linha('Cada base segue regras próprias de nomenclatura.') +
+    '</div></div>';
+  painel.innerHTML = '';
+  const conclusao = document.getElementById('conclusao');
+  document.getElementById('conclusaoPlacar').textContent = 'Fase concluída';
+  document.getElementById('conclusaoMensagem').textContent = 'Você investigou as bases: como sofrem dissociação, como conduzem corrente elétrica, o que é grau de dissociação, solubilidade e como nomear hidróxidos.';
+  conclusao.classList.add('visivel');
+  conclusao.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+/* ==========================================================
+   MOTOR DA FASE
+   ========================================================== */
+const PASSOS = [
+  passoIntro, passoDissociacao, passoConducao, passoGrauDissociacao, passoSolubilidade,
+  passoNomenclatura, passoNomenclaturaKOH, passoNomenclaturaFerro,
+  passoFinal
+];
+let passoAtual = 0;
+
+function irPara(i) {
+  passoAtual = i;
+  limparTimers();
+  overlay.innerHTML = '';
+  painel.innerHTML = '';
+  continuarBalao.innerHTML = '';
+  PASSOS[i]();
+}
+function avancar() { if (passoAtual + 1 < PASSOS.length) irPara(passoAtual + 1); }
+function reiniciar() {
+  document.getElementById('conclusao').classList.remove('visivel');
+  irPara(0);
+}
+
+/* ── INIT ── */
+irPara(0);
+</script>
+
+<script>
+(function () {
+  var _clickSom = new Audio('../sons/click.mp3');
+  _clickSom.preload = 'auto';
+  document.addEventListener('click', function (e) {
+    var alvo = e.target.closest('button');
+    if (alvo) { try { _clickSom.currentTime = 0; _clickSom.play().catch(function () {}); } catch (err) {} }
+  }, true);
+})();
+</script>
+</body>
+</html>

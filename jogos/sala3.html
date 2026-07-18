@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="canonical" href="https://kifaciledu.com.br/jogos/jogos-escaperoom/torre-quimica/fases/fase3-camara-registros.html">
+<title>Câmara de Registros Atômicos | KiFácil</title>
+<meta name="description" content="Fase 3 do Escape Room dos Mapas da Academia KiFácil. Use pistas de isotonia e isobaria para descobrir a identidade de cada elemento e digite as respostas nos pergaminhos.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;1,500;1,600&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:          #2e2016;
+    --text:        #f5ead0;
+    --text-soft:   #e8d4b0;
+    --gold:        #e8b84b;
+    --border:      rgba(212,170,106,0.4);
+    --panel-bg:    rgba(14, 6, 0, 0.94);
+    --green-border:rgba(80,200,120,0.5);
+    --green-text:  #8fe0a0;
+    --red-border:  rgba(217,95,59,0.35);
+    --red-text:    #e8956a;
+  }
+
+  html, body {
+    height: 100%; overflow: hidden;
+    font-family: 'Libre Baskerville', serif;
+    color: var(--text);
+    background: var(--bg);
+  }
+  body { display: flex; flex-direction: column; }
+
+  /* ── HEADER ── */
+  .header {
+    background: #1a0f08;
+    padding: 14px 28px 12px;
+    border-bottom: 1px solid rgba(212,170,106,0.2);
+    display: flex; align-items: center; justify-content: space-between;
+    flex-shrink: 0;
+  }
+  .eyebrow { font-size: 9px; letter-spacing: .16em; text-transform: uppercase; color: var(--gold); margin-bottom: 3px; }
+  .page-title { font-family: 'Lora', serif; font-size: 24px; font-weight: 600; color: var(--text); line-height: 1.1; }
+  .progress-wrap { display: flex; align-items: center; gap: 4px; }
+  .prog-step {
+    width: 22px; height: 22px; border-radius: 50%;
+    border: 1px solid rgba(212,170,106,0.3);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 9px; color: rgba(232,216,176,0.4);
+    transition: all .4s; position: relative; flex-shrink: 0;
+  }
+  .prog-step.active { border-color: var(--gold); color: var(--gold); }
+  .prog-step.done { background: var(--gold); border-color: var(--gold); color: #1a0f08; font-weight: 700; }
+  .prog-line { width: 9px; height: 1px; background: rgba(212,170,106,0.25); flex-shrink: 0; }
+
+  /* ── GAME AREA ── */
+  #game-area {
+    position: relative;
+    flex: 1; min-height: 0;
+    overflow: hidden;
+  }
+
+  #scene-col {
+    position: absolute;
+    inset: 0;
+    background: #1a0f08;
+  }
+  #scene-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    display: block;
+  }
+
+  /* ── HOTSPOTS (pergaminhos) ────────────────────────────────────────────────
+     Ajustar left/top/width contra a imagem real de fundo.
+     Para o MOBILE, ver o bloco "HOTSPOTS MOBILE" mais abaixo.
+     ──────────────────────────────────────────────────────────────────────── */
+  .hotspot {
+    position: absolute;
+    cursor: pointer;
+    z-index: 10;
+  }
+  #hs-p1 { left: 22%; top: 40%; width: 13%; }
+  #hs-p2 { left: 43%; top: 38%; width: 13%; }
+  #hs-p3 { left: 64%; top: 42%; width: 13%; }
+
+  .pergaminho-img {
+    width: 100%; height: auto; display: block;
+    filter: drop-shadow(0 6px 14px rgba(0,0,0,.6));
+    transition: transform .15s;
+  }
+  .hotspot:hover .pergaminho-img { transform: scale(1.05); }
+  .hotspot.solved .pergaminho-img { filter: drop-shadow(0 6px 14px rgba(232,184,75,.5)); }
+
+  .hotspot-check {
+    display: none; position: absolute;
+    top: -10px; right: -10px;
+  }
+  .hotspot.solved .hotspot-check { display: block; }
+  .hotspot-check-inner {
+    width: 32px; height: 32px;
+    background: rgba(232,184,75,0.22);
+    border: 2px solid rgba(232,184,75,0.9);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 15px; color: var(--gold);
+  }
+  .hotspot-label {
+    position: absolute; bottom: -22px; left: 50%; transform: translateX(-50%);
+    font-size: 9px; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--gold); white-space: nowrap; opacity: 0;
+    transition: opacity .2s; pointer-events: none;
+    background: rgba(14,6,0,0.92); padding: 2px 7px;
+    border-radius: 3px; border: 1px solid var(--border);
+  }
+  .hotspot:hover .hotspot-label { opacity: 1; }
+  .hotspot.solved:hover .hotspot-label { opacity: 0; }
+
+  /* ── PROFESSORA RAFAELA (esquerda) ── */
+  #teacher-box {
+    position: absolute;
+    bottom: 0; left: 20px;
+    z-index: 95;
+    display: flex; flex-direction: column; align-items: flex-start;
+    gap: 8px;
+    width: 350px;
+    pointer-events: none;
+  }
+  #teacher-img {
+    width: 230px; height: 278px;
+    object-fit: cover; object-position: top center;
+    border-radius: 12px 12px 0 0;
+    border: 2px solid rgba(232,184,75,0.55);
+    border-bottom: none;
+    flex-shrink: 0;
+    filter: drop-shadow(0 -4px 20px rgba(0,0,0,.9));
+  }
+  #teacher-bubble {
+    background: rgba(36,21,11,0.97);
+    border: 1.5px solid rgba(232,184,75,0.52);
+    border-radius: 4px 14px 0 0;
+    padding: 1rem 1.15rem;
+    width: 350px;
+    min-height: 90px;
+    display: flex; flex-direction: column;
+    justify-content: space-between; gap: .65rem;
+    pointer-events: all;
+    box-shadow: 0 -4px 24px rgba(0,0,0,.75);
+    backdrop-filter: blur(4px);
+  }
+  #teacher-name {
+    font-size: 9px; letter-spacing: .16em; text-transform: uppercase;
+    color: #d6b15b; margin-bottom: 2px;
+  }
+  #teacher-text {
+    font-family: 'Lora', serif;
+    font-size: 20px; line-height: 1.9;
+    color: #D4C5A8; font-weight: 400;
+    text-align: justify;
+  }
+  #btn-avancar {
+    align-self: flex-end;
+    background: linear-gradient(135deg, #e8b84b, #b8891e);
+    color: #160600; border: none; border-radius: 6px;
+    padding: .45rem 1.2rem;
+    font-family: 'Libre Baskerville', serif;
+    font-size: 11px; font-weight: 700;
+    letter-spacing: .06em; text-transform: uppercase;
+    cursor: pointer; opacity: 0; pointer-events: none;
+    transition: opacity .3s, transform .2s;
+  }
+  #btn-avancar.show { opacity: 1; pointer-events: all; }
+  #btn-avancar:hover { filter: brightness(1.1); transform: scale(1.03); }
+
+  /* ── PERGAMINHOS IDENTIFICADOS — canto superior direito ── */
+  #modelos-overlay {
+    position: absolute;
+    top: 14px; right: 14px;
+    z-index: 50;
+    background: var(--panel-bg);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: .75rem 1rem;
+    min-width: 200px;
+    backdrop-filter: blur(6px);
+    box-shadow: 0 4px 18px rgba(0,0,0,.7);
+  }
+  .modelos-title { font-size: 9px; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+  .modelos-list { display: flex; flex-direction: column; gap: 6px; }
+  .modelo-item { display: flex; align-items: center; gap: 8px; font-size: 12px; color: rgba(245,234,208,0.35); transition: color .3s; }
+  .modelo-item.found { color: var(--text); }
+  .modelo-dot { width: 7px; height: 7px; border-radius: 50%; border: 1px solid rgba(212,170,106,0.3); flex-shrink: 0; transition: all .3s; }
+  .modelo-item.found .modelo-dot { background: var(--gold); border-color: var(--gold); }
+
+  /* Backdrop escurece a cena ao abrir o modal */
+  #modal-backdrop {
+    display: none;
+    position: absolute; inset: 0; z-index: 90;
+    background: rgba(0,0,0,0.55);
+  }
+  #modal-backdrop.show { display: block; }
+
+  /* Modal centralizado */
+  #stage-area {
+    display: none;
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px; max-width: calc(100% - 40px);
+    z-index: 100;
+    flex-direction: column; gap: 14px;
+    animation: fadeUp .25s ease;
+  }
+  #stage-area.show { display: flex; }
+
+  .enigma-panel {
+    background: var(--panel-bg);
+    border: 1.5px solid var(--border);
+    border-radius: 12px;
+    padding: 1.3rem 1.4rem;
+    backdrop-filter: blur(6px);
+    box-shadow: 0 8px 32px rgba(0,0,0,.75);
+    animation: fadeUp .3s ease;
+    max-height: 85vh;
+    overflow-y: auto;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .enigma-eyebrow {
+    font-size: 9px; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 6px;
+  }
+  .enigma-title {
+    font-family: 'Lora', serif; font-size: 20px; font-weight: 600;
+    color: var(--text); margin-bottom: 14px; line-height: 1.3;
+  }
+  .enigma-desc { display: none; }
+
+  /* Pistas do pergaminho */
+  .pistas-lista { list-style: none; margin: 0 0 16px; padding: 0; text-align: left; }
+  .pistas-lista li {
+    font-size: 14px; color: var(--text-soft); line-height: 1.6;
+    margin-bottom: 9px; padding-left: 1.3em; position: relative;
+  }
+  .pistas-lista li::before { content: '•'; position: absolute; left: 0; color: var(--gold); font-weight: 700; }
+
+  .nuclideo-inline {
+    display: inline-block; vertical-align: -.35em;
+    font-family: 'Lora', serif; font-weight: 700; color: var(--gold);
+    white-space: nowrap; line-height: 1;
+  }
+  .nuclideo-inline .nucl-numeros {
+    display: inline-block; vertical-align: bottom; text-align: left;
+    font-size: .68em; line-height: 1.15; margin-right: 2px;
+  }
+  .nuclideo-inline .nucl-numeros span { display: block; }
+  .nuclideo-inline .nucl-simbolo { display: inline-block; vertical-align: bottom; font-size: 1em; }
+
+  .resposta-input-wrap { display: flex; gap: 8px; }
+  .resposta-input {
+    flex: 1; background: rgba(255,255,255,0.05); border: 1px solid rgba(212,170,106,0.4);
+    border-radius: 6px; padding: 11px 14px; font-family: 'Libre Baskerville', serif;
+    font-size: 14px; color: var(--text); outline: none; transition: border-color .15s;
+  }
+  .resposta-input:focus { border-color: var(--gold); }
+  .resposta-input.errada { border-color: rgba(217,95,59,0.7); animation: shake .3s; }
+  .btn-confirmar-resposta {
+    background: linear-gradient(135deg, #e8b84b, #b8891e); color: #160600; border: none;
+    border-radius: 6px; padding: 11px 18px; font-family: 'Libre Baskerville', serif;
+    font-size: 13px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase;
+    cursor: pointer; transition: filter .15s;
+  }
+  .btn-confirmar-resposta:hover { filter: brightness(1.1); }
+  .resposta-feedback { margin-top: 10px; font-size: 12.5px; text-align: center; min-height: 1.2em; color: var(--red-text); }
+
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-4px); }
+    75% { transform: translateX(4px); }
+  }
+
+  /* ── VITÓRIA ── */
+  #win-screen {
+    display: none; position: fixed; inset: 0; z-index: 200;
+    background: rgba(14,6,0,0.92);
+    flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; padding: 40px;
+    backdrop-filter: blur(6px);
+  }
+  #win-screen.show { display: flex; }
+  .win-title { font-family: 'Lora', serif; font-size: 46px; font-weight: 600; color: var(--gold); margin-bottom: 12px; }
+  .win-sub { font-size: 15px; color: var(--text-soft); font-style: italic; margin-bottom: 36px; line-height: 1.8; max-width: 480px; }
+  .btn-next {
+    background: var(--gold); border: none; border-radius: 6px;
+    padding: 14px 36px; font-family: 'Libre Baskerville', serif;
+    font-size: 14px; font-weight: 700; color: #1a0f08;
+    cursor: pointer; letter-spacing: .06em; text-transform: uppercase;
+    transition: background .15s; text-decoration: none; display: inline-block;
+  }
+  .btn-next:hover { background: #f0c960; }
+
+  /* ── RESPONSIVO ── */
+  /* ── BOTÃO DE MUDO ── */
+  #controle-volume {
+    position: fixed;
+    bottom: 16px; right: 16px;
+    z-index: 300;
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(14,6,0,0.85);
+    border: 1.5px solid var(--border);
+    border-radius: 24px;
+    padding: 8px 16px 8px 10px;
+  }
+  #btn-mute {
+    background: none; border: none;
+    color: var(--gold); font-size: 18px;
+    cursor: pointer; padding: 0;
+    width: 22px; height: 22px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  #slider-volume { width: 90px; accent-color: var(--gold); cursor: pointer; }
+
+  @media (max-width: 768px) {
+    html, body { overflow: auto; height: auto; }
+    body { min-height: 100vh; }
+
+    #game-area { display: flex; flex-direction: column; overflow: visible; min-height: auto; }
+
+    #teacher-box {
+      position: relative; bottom: auto; left: auto; width: 100%;
+      flex-direction: row; align-items: flex-end; gap: 10px;
+      background: #1a0f08; padding: 10px 12px;
+      border-bottom: 1px solid rgba(212,170,106,0.2);
+      pointer-events: all; z-index: 5;
+    }
+    #teacher-img { width: 60px; height: 73px; border-radius: 8px; border-bottom: 2px solid rgba(232,184,75,0.55); }
+    #teacher-bubble { width: auto; flex: 1; min-height: auto; border-radius: 8px; padding: .75rem; }
+    #teacher-text { font-size: 17px; }
+
+    #scene-col { position: relative; width: 100%; height: auto; }
+    #scene-img { width: 100%; height: auto; object-fit: unset; display: block; }
+
+    #modal-backdrop { position: fixed; z-index: 190; }
+    #stage-area { position: fixed; top: 50%; left: 50%; transform: translate(-50%,-50%);
+      width: calc(100% - 24px); max-height: 90vh; overflow-y: auto; z-index: 200; }
+
+    #modelos-overlay {
+      position: relative; top: auto; right: auto; min-width: unset; width: 100%;
+      border-radius: 0; border-top: 1px solid var(--border);
+      padding: .5rem 1rem;
+    }
+    .modelos-title { font-size: 7px; }
+    .modelo-item { font-size: 11px; }
+
+    .header { padding: 10px 14px; flex-wrap: wrap; gap: 8px; }
+    .page-title { font-size: 18px; }
+    .prog-step { width: 18px; height: 18px; font-size: 8px; }
+    .prog-line { width: 5px; }
+    .progress-wrap { flex-wrap: wrap; row-gap: 4px; }
+
+    .resposta-input-wrap { flex-direction: column; }
+
+    /* ── HOTSPOTS MOBILE ──────────────────────────────────────────────────────
+       Ajustar contra a imagem real renderizada em largura total.
+       ──────────────────────────────────────────────────────────────────────── */
+    #hs-p1 { left: 8%;  top: 34%; width: 24%; }
+    #hs-p2 { left: 38%; top: 30%; width: 24%; }
+    #hs-p3 { left: 68%; top: 36%; width: 24%; }
+  }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div>
+    <div class="eyebrow">Camadas Profundas · KiFácil</div>
+    <h1 class="page-title">Câmara de Registros Atômicos</h1>
+  </div>
+  <div class="progress-wrap">
+    <div class="prog-step done" id="ps1">✓</div>
+    <div class="prog-line"></div>
+    <div class="prog-step done" id="ps2">✓</div>
+    <div class="prog-line"></div>
+    <div class="prog-step active" id="ps3">5</div>
+    <div class="prog-line"></div>
+    <div class="prog-step" id="ps4">4</div>
+    <div class="prog-line"></div>
+    <div class="prog-step" id="ps5">3</div>
+    <div class="prog-line"></div>
+    <div class="prog-step" id="ps6">2</div>
+    <div class="prog-line"></div>
+    <div class="prog-step" id="ps7">1</div>
+  </div>
+</header>
+
+<!-- ÁREA DO JOGO -->
+<div id="game-area">
+
+  <!-- PROFESSORA RAFAELA -->
+  <aside id="teacher-box">
+    <img id="teacher-img" src="../imagens/rafa-explicando.jpg" alt="Professora Rafaela">
+    <div id="teacher-bubble">
+      <div id="teacher-name">Professora Rafaela</div>
+      <p id="teacher-text"></p>
+      <button id="btn-avancar" onclick="proximoPasso()">Continuar</button>
+    </div>
+  </aside>
+
+  <!-- CENA -->
+  <div id="scene-col">
+    <img id="scene-img" src="../imagens/camara-registros-atomicos.jpg" alt="Câmara de Registros Atômicos da Academia KiFácil">
+
+    <!-- PERGAMINHOS -->
+    <div class="hotspot" id="hs-p1" onclick="activateFicha('p1')">
+      <img class="pergaminho-img" src="../imagens/pergaminho-atomico.png" alt="Pergaminho 1">
+      <div class="hotspot-check"><div class="hotspot-check-inner">✓</div></div>
+      <span class="hotspot-label">Pergaminho 1</span>
+    </div>
+    <div class="hotspot" id="hs-p2" onclick="activateFicha('p2')">
+      <img class="pergaminho-img" src="../imagens/pergaminho-atomico.png" alt="Pergaminho 2">
+      <div class="hotspot-check"><div class="hotspot-check-inner">✓</div></div>
+      <span class="hotspot-label">Pergaminho 2</span>
+    </div>
+    <div class="hotspot" id="hs-p3" onclick="activateFicha('p3')">
+      <img class="pergaminho-img" src="../imagens/pergaminho-atomico.png" alt="Pergaminho 3">
+      <div class="hotspot-check"><div class="hotspot-check-inner">✓</div></div>
+      <span class="hotspot-label">Pergaminho 3</span>
+    </div>
+
+  </div><!-- #scene-col -->
+
+  <!-- Pergaminhos identificados — fora da cena -->
+  <div id="modelos-overlay">
+    <div class="modelos-title">Registros decifrados</div>
+    <div class="modelos-list" id="modelos-list">
+      <div id="modelos-placeholder" style="font-size:12px;color:rgba(245,234,208,0.3);font-style:italic;">Nenhum ainda...</div>
+    </div>
+  </div>
+
+  <!-- Backdrop -->
+  <div id="modal-backdrop" onclick="fecharModal()"></div>
+
+  <!-- Modal centralizado -->
+  <div id="stage-area">
+    <div class="enigma-panel" id="enigmaBox">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px;">
+        <div class="enigma-eyebrow" id="eEyebrow"></div>
+        <button onclick="fecharModal()" style="background:none;border:none;color:rgba(245,234,208,0.4);font-size:18px;cursor:pointer;line-height:1;padding:0 0 0 12px;">✕</button>
+      </div>
+      <div class="enigma-title" id="eTitle"></div>
+      <div class="enigma-desc" id="eDesc"></div>
+      <div id="eBody"></div>
+    </div>
+  </div>
+
+  <!-- TELA DE VITÓRIA -->
+  <div id="win-screen">
+    <div class="win-title">Registros Decifrados!</div>
+    <p class="win-sub">Você decifrou os três registros e descobriu a identidade de cada elemento. A porta da Câmara de Registros está destrancada.</p>
+    <a href="sala4.html" class="btn-next">Avançar →</a>
+  </div>
+
+</div><!-- #game-area -->
+
+<script>
+  const solved = { p1: false, p2: false, p3: false };
+
+  /* Notação nuclídica: número de massa em cima, número atômico embaixo,
+     ambos à esquerda do símbolo — ex.: nuclideo(37, 17, 'Cl') → ³⁷₁₇Cl */
+  function nuclideo(massa, atomico, simbolo) {
+    return '<span class="nuclideo-inline"><span class="nucl-numeros"><span>' + massa + '</span><span>' + atomico + '</span></span><span class="nucl-simbolo">' + simbolo + '</span></span>';
+  }
+
+  /* ── PERGAMINHOS: cada um esconde um elemento, revelado por pistas de
+     isotonia/isobaria com elementos de referência já conhecidos ── */
+  const pergaminhos = {
+    p1: {
+      nomeExibicao: 'Cálcio (Ca)',
+      pistas: [
+        'É isótono do cloro (' + nuclideo(37, 17, 'Cl') + ').',
+        'É isóbaro do potássio (' + nuclideo(40, 19, 'K') + ').'
+      ],
+      respostas: ['calcio', 'ca']
+    },
+    p2: {
+      nomeExibicao: 'Carbono (C)',
+      pistas: [
+        'É isótono do boro (' + nuclideo(11, 5, 'B') + ').',
+        'Está no 2º período da Tabela Periódica.'
+      ],
+      respostas: ['carbono', 'c']
+    },
+    p3: {
+      nomeExibicao: 'Flúor (F)',
+      pistas: [
+        'É isótono do neônio (' + nuclideo(20, 10, 'Ne') + ').',
+        'É um halogênio do 2º período da Tabela Periódica.'
+      ],
+      respostas: ['fluor', 'f']
+    }
+  };
+
+  function normalizarResposta(str) {
+    return str.trim().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+  }
+
+  /* ── PROFESSORA RAFAELA ── */
+  const $timg = document.getElementById('teacher-img');
+  const $ttxt = document.getElementById('teacher-text');
+  const $tbtn = document.getElementById('btn-avancar');
+  let _typingTimer;
+
+  function digitarTexto(el, txt, cb) {
+    clearTimeout(_typingTimer);
+    el.textContent = '';
+    const chars = [...txt];
+    let i = 0;
+    (function loop() {
+      if (i < chars.length) { el.textContent += chars[i++]; _typingTimer = setTimeout(loop, 22); }
+      else if (cb) cb();
+    })();
+  }
+
+  function fala(txt, cb) {
+    $tbtn.classList.remove('show');
+    digitarTexto($ttxt, txt, () => {
+      setTimeout(() => $tbtn.classList.add('show'), 350);
+      if (cb) cb();
+    });
+  }
+
+  function rafaFala(msg) {
+    $tbtn.style.display = 'none';
+    fala(msg, () => { $tbtn.style.display = 'none'; });
+  }
+
+  /* ── INTRO ── */
+  const introPassos = [
+    { txt: 'Preciso da sua ajuda.' },
+    { txt: 'Cada um destes pergaminhos guarda vários segredos sobre um elemento químico, registradas para uma pesquisa do Professor Alceu.' },
+    { txt: 'Mas os rótulos com os nomes dos elementos sumiram e eu não faço ideia de quem poderia fazer algo assim! Agora não sei mais de qual elemento cada pergaminho está falando.', som: 'bentinho' },
+    { txt: 'Por sorte, quem escreveu os registros deixou pistas em cada um — número de prótons, de nêutrons, relações com outros elementos conhecidos...' },
+    { txt: 'Abra cada pergaminho, leia as pistas com atenção e digite o nome ou o símbolo do elemento correto para vencer esta fase.', ultimo: true },
+  ];
+  let introIdx = 0;
+
+  /* Música de fundo + controle de volume (a preferência fica salva e vale
+     para todas as fases). Toca em loop a partir do primeiro clique do
+     aluno (navegadores bloqueiam áudio automático sem interação); o
+     volume do slider vale tanto para a música quanto para os efeitos
+     sonoros (clique, ding, porta etc.). */
+  let volumeSalvo = parseFloat(localStorage.getItem('kifacil_volume'));
+  if (isNaN(volumeSalvo)) volumeSalvo = 0.35;
+  let silenciado = localStorage.getItem('kifacil_silenciado') === '1';
+  let musicaFundo = null;
+
+  function volumeEfetivo() {
+    return silenciado ? 0 : volumeSalvo;
+  }
+
+  /* A navegação entre fases sempre recarrega a página (não é uma SPA),
+     então o áudio para de tocar por um instante — isso não dá para
+     evitar. Mas guardamos o ponto exato da música em sessionStorage a
+     cada instante (evento "timeupdate") e retomamos dali na próxima
+     fase, em vez de reiniciar do zero — assim a música parece contínua
+     ao longo de toda a "Desafio das Camadas Profundas". */
+  function iniciarMusicaFundo() {
+    if (musicaFundo) return;
+    try {
+      musicaFundo = new Audio('../sons/camadas-profundas.mp3');
+      musicaFundo.loop = true;
+      musicaFundo.volume = volumeEfetivo();
+      const tempoSalvo = parseFloat(sessionStorage.getItem('kifacil_musica_tempo'));
+      if (!isNaN(tempoSalvo) && tempoSalvo > 0) musicaFundo.currentTime = tempoSalvo;
+      musicaFundo.addEventListener('timeupdate', () => {
+        sessionStorage.setItem('kifacil_musica_tempo', musicaFundo.currentTime);
+      });
+      musicaFundo.play().catch(() => {});
+    } catch (e) {}
+  }
+
+  function atualizarIconeMudo() {
+    const botao = document.getElementById('btn-mute');
+    if (!botao) return;
+    if (silenciado || volumeSalvo === 0) botao.textContent = '🔇';
+    else if (volumeSalvo < 0.5) botao.textContent = '🔉';
+    else botao.textContent = '🔊';
+  }
+
+  function alternarMudo() {
+    silenciado = !silenciado;
+    localStorage.setItem('kifacil_silenciado', silenciado ? '1' : '0');
+    if (musicaFundo) musicaFundo.volume = volumeEfetivo();
+    atualizarIconeMudo();
+  }
+
+  function ajustarVolume(valorSlider) {
+    volumeSalvo = Math.max(0, Math.min(1, valorSlider / 100));
+    localStorage.setItem('kifacil_volume', volumeSalvo);
+    if (volumeSalvo > 0 && silenciado) {
+      silenciado = false;
+      localStorage.setItem('kifacil_silenciado', '0');
+    }
+    if (musicaFundo) musicaFundo.volume = volumeEfetivo();
+    atualizarIconeMudo();
+  }
+
+  (function iniciarControleVolume() {
+    const slider = document.getElementById('slider-volume');
+    if (slider) slider.value = Math.round(volumeSalvo * 100);
+    atualizarIconeMudo();
+  })();
+
+  function tocarClick() {
+    iniciarMusicaFundo();
+    const v = volumeEfetivo();
+    if (v <= 0) return;
+    try { const a = new Audio('../sons/click.mp3'); a.volume = v; a.play().catch(function(){}); } catch(e) {}
+  }
+  function tocarBentinho() {
+    const v = volumeEfetivo();
+    if (v <= 0) return;
+    try { const a = new Audio('../sons/bentinho-miado.MP3'); a.volume = v; a.play().catch(()=>{}); } catch(e) {}
+  }
+  function proximoPasso() {
+    tocarClick();
+    introIdx++;
+    if (introIdx >= introPassos.length) {
+      $tbtn.style.display = 'none';
+      return;
+    }
+    const p = introPassos[introIdx];
+    $tbtn.textContent = p.ultimo ? 'Estou pronto!' : 'Continuar';
+    $tbtn.style.display = '';
+    fala(p.txt);
+    if (p.som === 'bentinho') tocarBentinho();
+  }
+
+  function iniciarIntro() {
+    $tbtn.textContent = 'Continuar';
+    $tbtn.style.display = '';
+    fala(introPassos[0].txt);
+  }
+
+  setTimeout(iniciarIntro, 400);
+
+  /* ── FICHA DO PERGAMINHO ── */
+  function activateFicha(id) {
+    if (solved[id]) {
+      rafaFala('Este pergaminho já foi decifrado.');
+      return;
+    }
+    const p = pergaminhos[id];
+    const pistasHtml = p.pistas.map(txt => `<li>${txt}</li>`).join('');
+
+    showEnigmaPanel('Registro Atômico', 'Qual é o elemento?', '', `
+      <ul class="pistas-lista">${pistasHtml}</ul>
+      <div class="resposta-input-wrap">
+        <input type="text" class="resposta-input" id="inputResposta" placeholder="Nome ou símbolo do elemento..." autocomplete="off" spellcheck="false">
+        <button class="btn-confirmar-resposta" onclick="responderFicha('${id}')">Confirmar</button>
+      </div>
+      <div class="resposta-feedback" id="feedbackResposta"></div>`);
+
+    rafaFala('Cada pergaminho guarda as propriedades de um elemento, mas os rótulos sumiram. Use as pistas para descobrir qual é.');
+
+    const input = document.getElementById('inputResposta');
+    setTimeout(() => input.focus(), 60);
+    input.addEventListener('keydown', e => { if (e.key === 'Enter') responderFicha(id); });
+  }
+
+  function responderFicha(id) {
+    const input = document.getElementById('inputResposta');
+    const feedback = document.getElementById('feedbackResposta');
+    const valor = normalizarResposta(input.value);
+    if (!valor) return;
+
+    const p = pergaminhos[id];
+    if (p.respostas.includes(valor)) {
+      tocarDing();
+      markSolved(id);
+      fecharModal();
+      const count = ['p1', 'p2', 'p3'].filter(k => solved[k]).length;
+      if (count === 3) {
+        document.getElementById('ps3').className = 'prog-step done';
+        document.getElementById('ps3').textContent = '✓';
+        rafaFala('Excelente! Você decifrou os três registros. Agora podemos devolvê-los ao arquivo do Professor Alceu.');
+        setTimeout(showWin, 3500);
+      } else {
+        rafaFala('Correto! Continue com os próximos pergaminhos.');
+      }
+    } else {
+      input.classList.add('errada');
+      setTimeout(() => input.classList.remove('errada'), 300);
+      feedback.textContent = 'Ainda não é esse elemento. Revise as pistas com atenção.';
+      input.value = '';
+      input.focus();
+    }
+  }
+
+  const modeloNomes = { p1: 'Pergaminho 1', p2: 'Pergaminho 2', p3: 'Pergaminho 3' };
+
+  function markSolved(id) {
+    solved[id] = true;
+    const hs = document.getElementById('hs-' + id);
+    if (hs) hs.classList.add('solved');
+    const list = document.getElementById('modelos-list');
+    const ph = document.getElementById('modelos-placeholder');
+    if (ph) ph.remove();
+    const item = document.createElement('div');
+    item.className = 'modelo-item found';
+    item.innerHTML = '<div class="modelo-dot"></div><span>' + modeloNomes[id] + ' — ' + pergaminhos[id].nomeExibicao + '</span>';
+    item.style.animation = 'fadeUp .4s ease';
+    list.appendChild(item);
+  }
+
+  /* ── MODAL ── */
+  function showEnigmaPanel(eyebrow, title, desc, body) {
+    document.getElementById('eEyebrow').textContent = eyebrow;
+    document.getElementById('eTitle').textContent = title;
+    document.getElementById('eDesc').innerHTML = desc;
+    document.getElementById('eBody').innerHTML = body;
+    document.getElementById('stage-area').classList.add('show');
+    document.getElementById('modal-backdrop').classList.add('show');
+  }
+
+  function fecharModal() {
+    document.getElementById('stage-area').classList.remove('show');
+    document.getElementById('modal-backdrop').classList.remove('show');
+  }
+
+  function tocarDing() {
+    const v = volumeEfetivo();
+    if (v <= 0) return;
+    try { const a = new Audio('../sons/ding.mp3'); a.volume = v; a.play().catch(()=>{}); } catch(e) {}
+  }
+  function tocarPorta() {
+    const v = volumeEfetivo();
+    if (v <= 0) return;
+    try { const a = new Audio('../sons/porta-abrindo.mp3'); a.volume = v; a.play().catch(()=>{}); } catch(e) {}
+  }
+
+  function showWin() {
+    tocarPorta();
+    document.getElementById('win-screen').classList.add('show');
+  }
+</script>
+
+<div id="controle-volume">
+  <button id="btn-mute" onclick="alternarMudo()" aria-label="Silenciar ou ativar o som">🔊</button>
+  <input type="range" id="slider-volume" min="0" max="100" value="35" oninput="ajustarVolume(this.value)" aria-label="Volume">
+</div>
+
+<div id="cookie-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#1a0f08;border-top:1px solid rgba(212,170,106,0.4);padding:1rem 2rem;z-index:9999;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;"><p style="margin:0;font-family:'Libre Baskerville',serif;font-size:0.82rem;color:#e8d4b0;line-height:1.5;">Este site utiliza cookies para melhorar sua experiência. Ao continuar navegando, você concorda com nossa <a href="/politica-de-privacidade.html" style="color:#e8b84b;text-decoration:underline;text-underline-offset:2px;">Política de Privacidade</a>.</p><button onclick="document.getElementById('cookie-banner').style.display='none';localStorage.setItem('kifacil_cookies','1');" style="flex-shrink:0;background:#e8b84b;border:none;padding:0.55rem 1.5rem;font-family:'Libre Baskerville',serif;font-size:0.78rem;font-weight:700;color:#1a0f08;cursor:pointer;letter-spacing:0.04em;">Entendi</button></div>
+<script>if(!localStorage.getItem('kifacil_cookies'))document.getElementById('cookie-banner').style.display='flex';</script>
+
+<script type="module">
+  import { requireAuth }          from '../../../js/guards.js';
+  import { session }              from '../../../js/session.js';
+  import { registrarEntradaFase } from '../../../js/progresso.js';
+  import { iniciarNavTorre }      from '../../../js/nav-torre.js';
+  import { salvarPerfil }         from '../../../js/database.js';
+
+  await requireAuth('../../../login.html').catch(() => {});
+
+  iniciarNavTorre('quimica');
+
+  const emRevisao = new URLSearchParams(location.search).has('revisao');
+  const uid = session.usuario?.uid;
+
+  const _lk = document.querySelector('.btn-next[href="sala4.html"]');
+  if (_lk && uid) {
+    _lk.addEventListener('click', async e => {
+      e.preventDefault();
+      if (!emRevisao) {
+        await salvarPerfil(uid, { faseAtual: 'fase4-medida-tres-gatos' }).catch(e => console.error('[Progresso] Falha ao salvar faseAtual:', e));
+      }
+      window.location.href = _lk.href;
+    });
+  }
+</script>
+</body>
+</html>

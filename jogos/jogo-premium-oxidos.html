@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow">
+  <title>O Pavilhão dos Óxidos — Jogo Premium | KiFácil</title>
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --fundo: #fdf8f0;
+      --fundo-card: #fffdf9;
+      --escuro: #2e2016;
+      --texto: #1a1208;
+      --texto-suave: #3d2e1a;
+      --dourado: #8a5e10;
+      --dourado-claro: #c8920a;
+      --borda: rgba(100,70,20,0.3);
+      --borda-forte: rgba(100,70,20,0.5);
+      --verde-escuro: #1e5238;
+      --vermelho-escuro: #7a1515;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Libre Baskerville', Georgia, serif;
+      background: var(--fundo);
+      color: var(--texto);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    .top-nav {
+      background: #1e1008;
+      border-bottom: 2px solid var(--dourado-claro);
+      padding: 0 2.5rem;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+    .brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.7rem;
+      font-weight: 600;
+      color: #fff8ee;
+      letter-spacing: 0.03em;
+      margin-right: auto;
+    }
+
+    /* MAIN */
+    main {
+      flex: 1;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 1rem 1.5rem 1rem;
+      width: 100%;
+    }
+    .titulo-jogo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.7rem, 3.8vw, 2.5rem);
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+      line-height: 1.1;
+    }
+    .subtitulo {
+      font-size: 1rem;
+      color: var(--texto);
+      margin-bottom: .9rem;
+      max-width: 680px;
+    }
+
+    .narrador {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: .8rem;
+      padding: .8rem 1.1rem;
+      border: 1.5px solid var(--borda-forte);
+      border-radius: 10px;
+      background: rgba(30,16,8,0.05);
+    }
+    .narrador img {
+      width: 68px;
+      height: 84px;
+      object-fit: cover;
+      object-position: top center;
+      border-radius: 10px;
+      border: 1px solid rgba(200,146,10,.35);
+      flex-shrink: 0;
+    }
+    .narrador-nome {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.78rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--dourado-claro);
+      margin-bottom: 0.3rem;
+    }
+    .narrador-texto {
+      font-size: 1rem;
+      line-height: 1.5;
+      color: var(--texto-suave);
+      min-height: 3.4em;
+    }
+
+    /* PALCO DE ANIMAÇÃO */
+    .imagem-wrapper {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: min(100%, 900px);
+      max-height: 62vh;
+      min-height: 380px;
+      margin: 0 auto;
+      cursor: default;
+      border: 1.5px solid var(--borda-forte);
+      border-radius: 6px;
+      overflow: hidden;
+      background: #f7efe2;
+    }
+    .cena-fundo {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      user-select: none;
+      pointer-events: none;
+    }
+    .overlay-animacao { position: absolute; inset: 0; }
+    .btn-iniciar-investigacao {
+      position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 5;
+    }
+
+    .link-aula {
+      position: absolute; top: 10px; right: 10px; z-index: 10;
+      display: flex; flex-direction: column; align-items: center; gap: 2px;
+      text-decoration: none; color: #fff8ee;
+      background: rgba(30,16,8,0.72); border: 1.5px solid var(--dourado-claro, #c8920a);
+      border-radius: 8px; padding: 0.4rem 0.65rem;
+      font-family: 'Cormorant Garamond', serif; font-size: 0.68rem; font-weight: 600;
+      letter-spacing: 0.02em; text-align: center; line-height: 1.2;
+      cursor: pointer; transition: background 0.2s, transform 0.15s;
+    }
+    .link-aula:hover { background: rgba(30,16,8,0.92); transform: translateY(-1px); }
+    .link-aula svg { width: 22px; height: 22px; }
+
+    /* Cartão simples de fórmula */
+    .cartao-formula-simples {
+      background: var(--fundo-card); border: 1.5px solid var(--borda-forte); border-radius: 8px; padding: 0.5rem 1rem;
+      font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 1.1rem; color: var(--texto);
+    }
+    .linha-cartas-simples { position: absolute; inset: 0; display: flex; justify-content: center; align-items: center; gap: 14px; flex-wrap: wrap; padding: 6%; }
+
+    /* Câmara de reação com indicador */
+    .camara-reacao {
+      position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 3; text-align: center;
+      background: var(--fundo-card); border: 1.5px solid var(--borda-forte); border-radius: 12px; padding: 16px 22px;
+    }
+    .camara-formula { font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 1.3rem; color: var(--texto); margin-bottom: 8px; }
+    .indicador-cor {
+      display: inline-block; width: 28px; height: 28px; border-radius: 50%; border: 2px dashed var(--borda-forte);
+      background: transparent; margin: 6px auto; transition: background .5s, border .5s;
+    }
+    .indicador-basico { background: #e0399b !important; border: 2px solid #e0399b !important; box-shadow: 0 0 10px rgba(224,57,155,.7); }
+    .camara-legenda { font-family: 'Cormorant Garamond', serif; font-size: 0.8rem; color: var(--texto-suave); }
+
+    /* Classificação por categoria */
+    .jogo-associacao { position: absolute; inset: 0; display: flex; justify-content: center; align-items: center; gap: 30px; padding: 6%; flex-wrap: wrap; }
+    .coluna-associacao { display: flex; flex-direction: column; gap: 8px; }
+    .item-associacao {
+      background: var(--fundo-card); border: 1.5px solid var(--borda-forte); border-radius: 8px; padding: 0.5rem 1rem;
+      font-family: 'Libre Baskerville', serif; font-size: 0.88rem; cursor: pointer; text-align: center; transition: border-color .2s;
+    }
+    .item-associacao:hover { border-color: var(--dourado-claro); }
+    .item-selecionado { border-color: var(--dourado-claro); background: rgba(200,146,10,.12); }
+    .associado { border-color: var(--verde-escuro); background: rgba(30,82,56,.12); cursor: default; opacity: 0.85; }
+    .erro-flash { outline: 3px solid var(--vermelho-escuro); border-radius: 8px; }
+
+    /* Blocos de nomenclatura */
+    .formula-alvo {
+      display: inline-block; background: var(--fundo); border: 1.5px solid var(--dourado-claro); border-radius: 6px;
+      padding: 0.3rem 0.8rem; font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 1.2rem;
+      color: var(--dourado-claro); margin-bottom: 0.8rem;
+    }
+    .montagem-nome { display: flex; gap: 6px; flex-wrap: wrap; min-height: 34px; margin-bottom: 0.6rem; }
+    .bloco-montado {
+      background: rgba(30,82,56,.12); border: 1.5px solid var(--verde-escuro); border-radius: 6px; padding: 0.3rem 0.6rem;
+      font-family: 'Cormorant Garamond', serif; font-weight: 700; color: var(--verde-escuro);
+    }
+    .blocos-disponiveis { display: flex; gap: 8px; flex-wrap: wrap; }
+    .chip-bloco {
+      background: var(--fundo); border: 1.5px solid var(--borda-forte); border-radius: 6px; padding: 0.4rem 0.8rem;
+      font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 0.95rem; color: var(--texto); cursor: pointer;
+    }
+    .chip-bloco:hover:not(:disabled) { border-color: var(--dourado-claro); }
+    .chip-usado { opacity: 0.4; cursor: default; }
+
+    .placa-dourada {
+      position: absolute; bottom: 20px; left: 50%; transform: translate(-50%, 10px);
+      background: linear-gradient(135deg, #fff3d6, #e9c877); color: #3d2600;
+      font-family: 'Cormorant Garamond', serif; font-weight: 700;
+      font-size: clamp(0.95rem, 2.4vw, 1.2rem);
+      padding: 0.65rem 1.3rem; border-radius: 8px; border: 1px solid #a97c1f;
+      box-shadow: 0 3px 12px rgba(0,0,0,.3); text-align: center; max-width: 92%;
+      opacity: 0; animation: placaIn .5s ease forwards; z-index: 6; pointer-events: none;
+    }
+    @keyframes placaIn {
+      from { opacity: 0; transform: translate(-50%, 10px); }
+      to   { opacity: 1; transform: translate(-50%, 0); }
+    }
+
+    /* PAINEL DE INTERAÇÃO */
+    #painelInteracao { max-width: 900px; margin: 1.2rem auto 0; }
+    .interacao-painel {
+      background: var(--fundo-card); border: 1.5px solid var(--borda-forte); border-radius: 12px;
+      padding: 1.4rem 1.6rem 1.3rem;
+    }
+    .interacao-pergunta-texto {
+      font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 600;
+      line-height: 1.35; margin-bottom: 1rem;
+    }
+    .opcoes-linha { display: flex; gap: 0.7rem; flex-wrap: wrap; margin-bottom: 0.6rem; }
+    .btn-opcao {
+      background: var(--fundo); border: 1.5px solid var(--borda-forte); border-radius: 6px;
+      padding: 0.55rem 1.1rem; font-family: 'Libre Baskerville', serif; font-size: 0.95rem;
+      color: var(--texto); cursor: pointer; transition: border-color .2s, background .2s;
+    }
+    .btn-opcao:hover:not(:disabled) { border-color: var(--dourado-claro); }
+    .btn-opcao:disabled { cursor: default; opacity: 0.75; }
+    .opcao-certa { border-color: var(--verde-escuro) !important; background: rgba(30,82,56,0.12); }
+    .opcao-errada { border-color: var(--vermelho-escuro) !important; background: rgba(122,21,21,0.08); }
+
+    .btn-continuar {
+      background: #1e1008; color: var(--dourado-claro); border: 1.5px solid var(--dourado-claro);
+      font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-weight: 600;
+      letter-spacing: 0.06em; text-transform: uppercase; padding: 0.6rem 1.5rem;
+      border-radius: 4px; cursor: pointer; transition: background 0.2s, color 0.2s, opacity .2s;
+      display: block; margin: 0.2rem auto 0;
+    }
+    .btn-continuar:hover { background: var(--dourado-claro); color: #1e1008; }
+    .btn-continuar:disabled { opacity: 0.4; cursor: default; }
+    .btn-continuar:disabled:hover { background: #1e1008; color: var(--dourado-claro); }
+
+    /* Botão continuar dentro do balão da professora */
+    #continuarBalao { margin-top: 0.6rem; }
+    #continuarBalao .btn-continuar { display: inline-block; margin: 0; }
+
+    .modal-feedback {
+      margin-top: 1rem; font-size: 0.86rem; line-height: 1.7;
+      border-left: 3px solid var(--borda-forte); padding-left: 1rem; display: none;
+    }
+    .modal-feedback.visivel { display: block; }
+    .feedback-certo   { color: var(--verde-escuro); font-weight: 700; }
+    .feedback-errado  { color: var(--vermelho-escuro); font-weight: 700; }
+    .feedback-resposta { color: var(--dourado-claro); font-weight: 700; }
+    .feedback-explicacao { color: var(--texto); margin-top: 0.5rem; }
+
+    .quadro-resumo-final {
+      background: var(--fundo-card); border: 1.5px solid var(--borda-forte); border-radius: 12px;
+      padding: 1.2rem 1.6rem; max-width: 88%; text-align: left;
+    }
+    .quadro-resumo-final .resumo-linha {
+      font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; font-weight: 600; color: var(--texto);
+      padding: 0.45rem 0; border-bottom: 1px solid var(--borda);
+    }
+    .quadro-resumo-final .resumo-linha:last-child { border-bottom: none; }
+
+    /* CONCLUSÃO */
+    .conclusao {
+      display: none; margin-top: 2rem; background: var(--fundo-card);
+      border: 1.5px solid var(--borda-forte); border-radius: 12px; padding: 2.4rem 2rem; text-align: center;
+    }
+    .conclusao.visivel { display: block; }
+    .conclusao-titulo {
+      font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 5vw, 2.6rem); font-weight: 600; margin-bottom: 0.8rem;
+    }
+    .conclusao-placar { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; color: var(--dourado-claro); margin-bottom: 1rem; }
+    .conclusao-mensagem { font-size: 0.93rem; color: var(--texto-suave); max-width: 460px; margin: 0 auto 2rem; line-height: 1.8; }
+    .btn-reiniciar {
+      background: #1e1008; color: var(--dourado-claro); border: 1.5px solid var(--dourado-claro);
+      font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase; padding: 0.7rem 2rem; border-radius: 4px;
+      cursor: pointer; transition: background 0.2s, color 0.2s;
+    }
+    .btn-reiniciar:hover { background: var(--dourado-claro); color: #1e1008; }
+
+    /* FOOTER */
+    footer {
+      background: var(--escuro); border-top: 2px solid var(--dourado-claro);
+      padding: .6rem 2rem; text-align: center; font-size: 0.78rem; color: rgba(255,248,238,0.5);
+    }
+
+    @media (min-width: 641px) {
+      .narrador { max-width: 900px; margin: 0 auto .8rem; }
+      .narrador-texto { font-size: 1.05rem; }
+    }
+
+    @media (max-width: 640px) {
+      .top-nav { padding: 0 1.2rem; gap: 1.2rem; }
+      main { padding: .8rem 1rem 1rem; }
+      .interacao-painel { padding: 1.2rem 1rem; }
+      .placa-dourada { font-size: 0.82rem; padding: 0.5rem 0.85rem; }
+      .cartao-formula-simples { font-size: 0.95rem; padding: 0.4rem 0.8rem; }
+      .jogo-associacao { gap: 14px; }
+      .item-associacao { font-size: 0.78rem; padding: 0.4rem 0.7rem; }
+      .link-aula { top: 6px; right: 6px; padding: 0.3rem 0.5rem; font-size: 0.6rem; }
+      .link-aula svg { width: 18px; height: 18px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <div class="brand">KiFácil</div>
+</nav>
+
+<main>
+  <h1 class="titulo-jogo">O Pavilhão dos Óxidos</h1>
+  <p class="subtitulo">Investigue substâncias formadas por dois elementos, sendo um deles o oxigênio — antes de decorar qualquer regra.</p>
+
+  <div class="narrador">
+    <img src="../imagens/rafa-sorrindo.jpg" alt="Professora Rafaela" />
+    <div style="flex: 1;">
+      <div class="narrador-nome">Professora Rafaela</div>
+      <div class="narrador-texto" id="narradorTexto">Vamos começar.</div>
+      <div id="continuarBalao"></div>
+    </div>
+  </div>
+
+  <div class="imagem-wrapper" id="imagemWrapper">
+    <img src="../imagens/pavilhao-dos-oxidos.jpg" alt="Pavilhão dos Óxidos" class="cena-fundo" />
+    <div class="overlay-animacao" id="overlayAnimacao"></div>
+    <!-- COLOQUE O LINK AQUI -->
+    <a class="link-aula" href="https://www.youtube.com/watch?v=C18isXTBUv0&t=1s" target="_blank" rel="noopener" title="Assista à aula">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.6"/>
+        <path d="M10 8.5L16 12L10 15.5V8.5Z" fill="currentColor"/>
+      </svg>
+      <span>Assista à aula</span>
+    </a>
+  </div>
+
+  <div id="painelInteracao"></div>
+
+  <div class="conclusao" id="conclusao">
+    <div class="conclusao-titulo">Estudo concluído</div>
+    <div class="conclusao-placar" id="conclusaoPlacar"></div>
+    <p class="conclusao-mensagem" id="conclusaoMensagem"></p>
+    <button class="btn-reiniciar" onclick="reiniciar()">Jogar novamente</button>
+  </div>
+</main>
+
+<footer>© 2026 KiFácil</footer>
+
+<script>
+/* ==========================================================
+   REFERÊNCIAS DOM
+   ========================================================== */
+const overlay = document.getElementById('overlayAnimacao');
+const painel  = document.getElementById('painelInteracao');
+const continuarBalao = document.getElementById('continuarBalao');
+
+function fala(texto) { document.getElementById('narradorTexto').textContent = texto; }
+
+const _brilho = new Audio('../sons/brilho.MP3');
+_brilho.preload = 'auto';
+function tocarBrilho() { try { _brilho.currentTime = 0; _brilho.play().catch(() => {}); } catch (e) {} }
+
+const _ding = new Audio('../sons/ding.mp3');
+_ding.preload = 'auto';
+function tocarDing() { try { _ding.currentTime = 0; _ding.play().catch(function () {}); } catch (e) {} }
+
+let timersAtivos = [];
+function agendar(fn, ms) { const id = setTimeout(fn, ms); timersAtivos.push(id); return id; }
+function limparTimers() { timersAtivos.forEach(clearTimeout); timersAtivos = []; }
+
+/* ==========================================================
+   DADOS: NOMENCLATURA DE ÓXIDOS
+   ========================================================== */
+const NOMENCLATURA_OXIDO = {
+  Na2O: ['ÓXIDO', 'DE', 'SÓDIO'],
+  Al2O3: ['ÓXIDO', 'DE', 'ALUMÍNIO'],
+  FeO: ['ÓXIDO', 'DE', 'FERRO', 'II'],
+  Fe2O3: ['ÓXIDO', 'DE', 'FERRO', 'III']
+};
+const FORMULAS_OXIDO = { Na2O: 'Na₂O', Al2O3: 'Al₂O₃', FeO: 'FeO', Fe2O3: 'Fe₂O₃' };
+
+/* ==========================================================
+   COMPONENTE: CÂMARA DE REAÇÃO COM INDICADOR
+   ========================================================== */
+function criarCamaraReacao(id, formulaTexto) {
+  const div = document.createElement('div');
+  div.className = 'camara-reacao';
+  div.id = id;
+  div.innerHTML =
+    '<div class="camara-formula">' + formulaTexto + '</div>' +
+    '<div class="indicador-cor" id="indicador-' + id + '"></div>' +
+    '<div class="camara-legenda" id="legenda-' + id + '">Fenolftaleína: incolor</div>';
+  return div;
+}
+function definirIndicador(id, tipo) {
+  const ind = document.getElementById('indicador-' + id);
+  const leg = document.getElementById('legenda-' + id);
+  if (!ind) return;
+  ind.classList.remove('indicador-basico');
+  if (tipo === 'basico') { ind.classList.add('indicador-basico'); leg.textContent = 'Fenolftaleína: ficou rosa (meio básico)'; }
+  else if (tipo === 'acido') { leg.textContent = 'Fenolftaleína: permanece incolor (meio ácido)'; }
+}
+
+/* ==========================================================
+   HELPERS DE INTERAÇÃO
+   ========================================================== */
+function botaoContinuar(delayMs) {
+  delayMs = delayMs || 0;
+  continuarBalao.innerHTML = '';
+  const btn = document.createElement('button');
+  btn.className = 'btn-continuar';
+  btn.textContent = 'Continuar →';
+  btn.disabled = delayMs > 0;
+  continuarBalao.appendChild(btn);
+  if (delayMs > 0) agendar(function () { btn.disabled = false; }, delayMs);
+  btn.addEventListener('click', avancar);
+  return btn;
+}
+
+function botaoContinuarLocal(handler, delayMs) {
+  delayMs = delayMs || 0;
+  painel.innerHTML = '';
+  continuarBalao.innerHTML = '';
+  const btn = document.createElement('button');
+  btn.className = 'btn-continuar';
+  btn.textContent = 'Continuar →';
+  btn.disabled = delayMs > 0;
+  continuarBalao.appendChild(btn);
+  if (delayMs > 0) agendar(function () { btn.disabled = false; }, delayMs);
+  btn.addEventListener('click', function () { btn.disabled = true; handler(); });
+  return btn;
+}
+
+function escolhaBotoes(opts) {
+  painel.innerHTML = '';
+  const wrap = document.createElement('div');
+  wrap.className = 'interacao-painel';
+  wrap.innerHTML =
+    '<div class="interacao-pergunta-texto">' + opts.pergunta + '</div>' +
+    '<div class="opcoes-linha" id="opcoesLinha"></div>' +
+    '<div class="modal-feedback" id="feedbackEscolha"></div>';
+  painel.appendChild(wrap);
+
+  const opcoesLinha = wrap.querySelector('#opcoesLinha');
+  const feedback = wrap.querySelector('#feedbackEscolha');
+  let tentativas = 0;
+  let resolvido = false;
+
+  opts.opcoes.forEach(function (op) {
+    const btn = document.createElement('button');
+    btn.className = 'btn-opcao';
+    btn.textContent = op.rotulo;
+    btn.addEventListener('click', function () {
+      if (resolvido) return;
+      if (op.correta) {
+        resolvido = true;
+        tocarDing();
+        Array.from(opcoesLinha.children).forEach(function (b) { b.disabled = true; });
+        btn.classList.add('opcao-certa');
+        feedback.className = 'modal-feedback visivel';
+        feedback.innerHTML = '<span class="feedback-certo">Correto!</span><p class="feedback-explicacao">' + opts.explicacao + '</p>';
+        opts.aoAcertar();
+      } else {
+        tentativas++;
+        btn.classList.add('opcao-errada');
+        if (tentativas === 1 && opts.dica) {
+          feedback.className = 'modal-feedback visivel';
+          feedback.innerHTML = '<span class="feedback-errado">' + opts.dica + '</span>';
+        } else if (tentativas >= 2) {
+          resolvido = true;
+          Array.from(opcoesLinha.children).forEach(function (b, i) {
+            b.disabled = true;
+            if (opts.opcoes[i].correta) b.classList.add('opcao-certa');
+          });
+          feedback.className = 'modal-feedback visivel';
+          feedback.innerHTML = '<span class="feedback-resposta">Resposta correta destacada.</span><p class="feedback-explicacao">' + opts.explicacao + '</p>';
+          opts.aoAcertar();
+        }
+      }
+    });
+    opcoesLinha.appendChild(btn);
+  });
+}
+
+/* ==========================================================
+   CLASSIFICAÇÃO POR CATEGORIA
+   ========================================================== */
+function criarClassificacaoPorCategoria(itens, categorias, mensagemErro, mensagemSucesso) {
+  const container = document.createElement('div');
+  container.className = 'jogo-associacao';
+  overlay.appendChild(container);
+
+  const colCategorias = document.createElement('div'); colCategorias.className = 'coluna-associacao';
+  const colItens = document.createElement('div'); colItens.className = 'coluna-associacao';
+  container.appendChild(colCategorias); container.appendChild(colItens);
+
+  const itensEmbaralhados = itens.slice().sort(function () { return Math.random() - 0.5; });
+
+  let categoriaAtiva = null, acertos = 0;
+  const elCategorias = {};
+
+  categorias.forEach(function (cat) {
+    const el = document.createElement('div');
+    el.className = 'item-associacao';
+    el.textContent = cat;
+    colCategorias.appendChild(el);
+    elCategorias[cat] = el;
+    el.addEventListener('click', function () {
+      Object.keys(elCategorias).forEach(function (k) { elCategorias[k].classList.remove('item-selecionado'); });
+      el.classList.add('item-selecionado');
+      categoriaAtiva = cat;
+    });
+  });
+
+  itensEmbaralhados.forEach(function (it) {
+    const el = document.createElement('div');
+    el.className = 'item-associacao';
+    el.textContent = it.rotulo;
+    colItens.appendChild(el);
+    el.addEventListener('click', function () {
+      if (el.classList.contains('associado')) return;
+      if (!categoriaAtiva) {
+        fala('Primeiro escolha uma categoria à esquerda.');
+        return;
+      }
+      if (it.categoria === categoriaAtiva) {
+        el.classList.add('associado');
+        tocarDing();
+        acertos++;
+        if (acertos === itens.length) {
+          agendar(function () { fala(mensagemSucesso); botaoContinuar(400); }, 300);
+        }
+      } else {
+        fala(mensagemErro);
+        el.classList.add('erro-flash');
+        setTimeout(function () { el.classList.remove('erro-flash'); }, 500);
+      }
+    });
+  });
+}
+
+/* ==========================================================
+   MONTAGEM DE NOME POR BLOCOS
+   ========================================================== */
+function montarNomeOxido(chave, aoConcluir) {
+  painel.innerHTML = '';
+  const wrap = document.createElement('div');
+  wrap.className = 'interacao-painel';
+  wrap.innerHTML =
+    '<div class="interacao-pergunta-texto">Monte o nome clicando nos blocos, na ordem correta.</div>' +
+    '<div class="formula-alvo">' + FORMULAS_OXIDO[chave] + '</div>' +
+    '<div class="montagem-nome" id="montagemNome"></div>' +
+    '<div class="blocos-disponiveis" id="blocosDisponiveis"></div>' +
+    '<div class="modal-feedback" id="fbNomenclatura"></div>';
+  painel.appendChild(wrap);
+
+  const sequenciaCorreta = NOMENCLATURA_OXIDO[chave];
+  const montagemEl = wrap.querySelector('#montagemNome');
+  const blocosEl = wrap.querySelector('#blocosDisponiveis');
+  const fb = wrap.querySelector('#fbNomenclatura');
+  let progresso = 0;
+
+  const blocosEmbaralhados = sequenciaCorreta.slice().sort(function () { return Math.random() - 0.5; });
+  blocosEmbaralhados.forEach(function (bloco) {
+    const chip = document.createElement('button');
+    chip.className = 'chip-bloco';
+    chip.type = 'button';
+    chip.textContent = bloco;
+    chip.addEventListener('click', function () {
+      if (chip.disabled) return;
+      if (bloco === sequenciaCorreta[progresso]) {
+        tocarDing();
+        chip.disabled = true;
+        chip.classList.add('chip-usado');
+        const tag = document.createElement('span');
+        tag.className = 'bloco-montado';
+        tag.textContent = bloco;
+        montagemEl.appendChild(tag);
+        progresso++;
+        if (progresso === sequenciaCorreta.length) {
+          fb.className = 'modal-feedback visivel';
+          fb.innerHTML = '<span class="feedback-certo">Correto!</span><p class="feedback-explicacao">' + FORMULAS_OXIDO[chave] + ' → ' + sequenciaCorreta.join(' ').toLowerCase() + '</p>';
+          Array.from(blocosEl.children).forEach(function (b) { b.disabled = true; });
+          aoConcluir();
+        }
+      } else {
+        chip.classList.add('erro-flash');
+        setTimeout(function () { chip.classList.remove('erro-flash'); }, 500);
+      }
+    });
+    blocosEl.appendChild(chip);
+  });
+}
+
+/* ==========================================================
+   INTRODUÇÃO
+   ========================================================== */
+function passoIntro() {
+  fala('Hoje vamos investigar substâncias formadas por apenas dois elementos, sendo um deles o oxigênio. Mas será que todos os óxidos se comportam da mesma forma?');
+  const btn = document.createElement('button');
+  btn.className = 'btn-continuar btn-iniciar-investigacao';
+  btn.textContent = 'INICIAR INVESTIGAÇÃO';
+  overlay.appendChild(btn);
+  btn.addEventListener('click', avancar);
+}
+
+/* ==========================================================
+   ETAPA 1 — RECONHECENDO UM ÓXIDO
+   ========================================================== */
+function passoReconhecer() {
+  fala('Associe cada fórmula à categoria certa: é um óxido, ou não é?');
+  criarClassificacaoPorCategoria([
+    { rotulo: 'Na₂O', categoria: 'É óxido' },
+    { rotulo: 'CO₂', categoria: 'É óxido' },
+    { rotulo: 'SO₃', categoria: 'É óxido' },
+    { rotulo: 'CaO', categoria: 'É óxido' },
+    { rotulo: 'NaCl', categoria: 'Não é óxido' },
+    { rotulo: 'H₂SO₄', categoria: 'Não é óxido' }
+  ], ['É óxido', 'Não é óxido'],
+  'Observe quantos elementos diferentes aparecem na fórmula, e se o oxigênio está presente.',
+  'Muito bem!');
+}
+function passoReconhecerPergunta() {
+  fala('O que Na₂O, CO₂, SO₃ e CaO têm em comum?');
+  escolhaBotoes({
+    pergunta: 'O que essas fórmulas têm em comum?',
+    opcoes: [
+      { rotulo: 'Possuem apenas dois elementos e um deles é o oxigênio', correta: true },
+      { rotulo: 'Possuem sempre hidrogênio', correta: false },
+      { rotulo: 'Possuem três elementos', correta: false }
+    ],
+    dica: 'Conte quantos elementos diferentes aparecem em cada fórmula.',
+    explicacao: 'Óxidos são compostos binários (dois elementos) nos quais o oxigênio está ligado a outro elemento. Essa é uma regra geral — existem compostos especiais do oxigênio que veremos mais adiante.',
+    aoAcertar: function () { botaoContinuar(400); }
+  });
+}
+
+/* ==========================================================
+   ETAPA 2 — METAL OU AMETAL
+   ========================================================== */
+function passoMetalOuAmetal() {
+  fala('Observe qual elemento está ligado ao oxigênio em cada óxido.');
+  criarClassificacaoPorCategoria([
+    { rotulo: 'Na₂O', categoria: 'Metal + Oxigênio' },
+    { rotulo: 'CaO', categoria: 'Metal + Oxigênio' },
+    { rotulo: 'CO₂', categoria: 'Ametal + Oxigênio' },
+    { rotulo: 'SO₃', categoria: 'Ametal + Oxigênio' }
+  ], ['Metal + Oxigênio', 'Ametal + Oxigênio'],
+  'Identifique se o elemento ligado ao oxigênio é metal ou ametal.',
+  'Essa divisão nos ajuda a prever o comportamento de muitos óxidos.');
+}
+function passoRegraMetalAmetal() {
+  const placa = document.createElement('div');
+  placa.className = 'placa-dourada';
+  placa.textContent = 'Óxido de metal → tendência básica  |  Óxido de ametal → tendência ácida';
+  overlay.appendChild(placa);
+  fala('Como tendência geral: óxido de metal costuma ter comportamento básico, e óxido de ametal costuma ter comportamento ácido. É uma tendência, não uma regra sem exceções.');
+  painel.innerHTML = '';
+  botaoContinuar(700);
+}
+
+/* ==========================================================
+   ETAPA 3 — ÓXIDO METÁLICO EM ÁGUA
+   ========================================================== */
+function passoOxidoMetalicoAgua() {
+  fala('Vamos testar um óxido formado por metal: o CaO. Usaremos a fenolftaleína como indicador — ela fica rosa em meio básico, e permanece incolor em meio ácido ou neutro.');
+  const camara = criarCamaraReacao('cam-cao', 'CaO');
+  overlay.appendChild(camara);
+
+  painel.innerHTML = '';
+  const wrap = document.createElement('div');
+  wrap.className = 'interacao-painel';
+  const btn = document.createElement('button');
+  btn.className = 'btn-continuar';
+  btn.textContent = 'ADICIONAR ÁGUA';
+  wrap.appendChild(btn);
+  painel.appendChild(wrap);
+
+  btn.addEventListener('click', function () {
+    btn.disabled = true;
+    document.getElementById('cam-cao').querySelector('.camara-formula').textContent = 'CaO + H₂O → Ca(OH)₂';
+    definirIndicador('cam-cao', 'basico');
+    fala('O CaO reagiu com a água formando Ca(OH)₂ — a fenolftaleína ficou rosa, indicando meio básico. Nesse exemplo, o óxido metálico reagiu com água formando uma base. (Nem todo óxido metálico reage facilmente com água.)');
+    painel.innerHTML = '';
+    botaoContinuar(700);
+  });
+}
+
+/* ==========================================================
+   ETAPA 4 — ÓXIDO DE AMETAL EM ÁGUA
+   ========================================================== */
+function passoOxidoAmetalAgua() {
+  fala('Agora vamos testar um óxido formado por ametal: o SO₃.');
+  const camara = criarCamaraReacao('cam-so3', 'SO₃');
+  overlay.appendChild(camara);
+
+  painel.innerHTML = '';
+  const wrap = document.createElement('div');
+  wrap.className = 'interacao-painel';
+  const btn = document.createElement('button');
+  btn.className = 'btn-continuar';
+  btn.textContent = 'ADICIONAR ÁGUA';
+  wrap.appendChild(btn);
+  painel.appendChild(wrap);
+
+  btn.addEventListener('click', function () {
+    btn.disabled = true;
+    document.getElementById('cam-so3').querySelector('.camara-formula').textContent = 'SO₃ + H₂O → H₂SO₄';
+    definirIndicador('cam-so3', 'acido');
+    fala('O SO₃ reagiu com a água formando H₂SO₄ — mas a fenolftaleína permanece incolor, porque esse indicador só muda de cor em meio básico; em meio ácido, como agora, ou neutro, ela continua transparente. O CO₂ também reage de forma parecida: CO₂ + H₂O ⇌ H₂CO₃. Muitos óxidos de ametais originam meios ácidos em água.');
+    painel.innerHTML = '';
+    botaoContinuar(700);
+  });
+}
+
+/* ==========================================================
+   ETAPA 5 — REAÇÃO COM ÁCIDOS E BASES
+   ========================================================== */
+function passoOxidoBasicoComAcido() {
+  fala('O CaO (óxido básico) reage com HCl. Quais são os produtos?');
+  escolhaBotoes({
+    pergunta: 'CaO + 2HCl → ?',
+    opcoes: [
+      { rotulo: 'CaCl₂ + H₂O', correta: true },
+      { rotulo: 'CaCl₂ apenas', correta: false },
+      { rotulo: 'Ca(OH)₂ + Cl₂', correta: false }
+    ],
+    dica: 'Um óxido básico reagindo com ácido forma sal e água, como uma neutralização.',
+    explicacao: 'CaO + 2HCl → CaCl₂ + H₂O. Um óxido básico pode reagir com um ácido, formando sal e água.',
+    aoAcertar: function () { botaoContinuarLocal(passoOxidoAcidoComBase, 400); }
+  });
+}
+function passoOxidoAcidoComBase() {
+  fala('Agora o SO₃ (óxido ácido) reage com NaOH. Quais são os produtos?');
+  escolhaBotoes({
+    pergunta: 'SO₃ + 2NaOH → ?',
+    opcoes: [
+      { rotulo: 'Na₂SO₄ + H₂O', correta: true },
+      { rotulo: 'Na₂SO₃ + H₂', correta: false },
+      { rotulo: 'NaOH + SO₃ (sem reação)', correta: false }
+    ],
+    dica: 'Um óxido ácido reagindo com base também forma sal e água.',
+    explicacao: 'SO₃ + 2NaOH → Na₂SO₄ + H₂O. Um óxido ácido pode reagir com uma base, formando sal e água.',
+    aoAcertar: function () { botaoContinuar(400); }
+  });
+}
+
+/* ==========================================================
+   ETAPA 6 — CONSTRUINDO A FÓRMULA (NOX)
+   ========================================================== */
+function passoFormulaNa() {
+  fala('O sódio tem NOX +1. O oxigênio tem NOX −2. Qual fórmula faz a soma das cargas ser zero?');
+  escolhaBotoes({
+    pergunta: 'Na (+1) e O (−2): qual fórmula é eletricamente neutra?',
+    opcoes: [
+      { rotulo: 'NaO', correta: false },
+      { rotulo: 'Na₂O', correta: true },
+      { rotulo: 'NaO₂', correta: false }
+    ],
+    dica: 'A soma das cargas precisa ser igual a zero.',
+    explicacao: 'Na₂O: 2 × (+1) + 1 × (−2) = 0. Por isso precisamos de 2 átomos de Na para cada átomo de O.',
+    aoAcertar: function () { botaoContinuarLocal(passoFormulaAl, 400); }
+  });
+}
+function passoFormulaAl() {
+  fala('Agora o alumínio, com NOX +3.');
+  escolhaBotoes({
+    pergunta: 'Al (+3) e O (−2): qual fórmula é eletricamente neutra?',
+    opcoes: [
+      { rotulo: 'AlO', correta: false },
+      { rotulo: 'Al₃O₂', correta: false },
+      { rotulo: 'Al₂O₃', correta: true }
+    ],
+    dica: 'Procure a combinação em que a soma das cargas dá exatamente zero.',
+    explicacao: 'Al₂O₃: 2 × (+3) + 3 × (−2) = +6 − 6 = 0.',
+    aoAcertar: function () { botaoContinuar(400); }
+  });
+}
+
+/* ==========================================================
+   ETAPA 7 — NOMENCLATURA (UM NOX)
+   ========================================================== */
+function passoNomenclaturaNa2O() {
+  fala('Quando o elemento forma apenas um óxido comum, o nome é "óxido de + nome do elemento". Monte o nome do Na₂O.');
+  montarNomeOxido('Na2O', function () {
+    agendar(function () { botaoContinuarLocal(passoNomenclaturaAl2O3, 400); }, 300);
+  });
+}
+function passoNomenclaturaAl2O3() {
+  fala('Agora monte o nome do Al₂O₃.');
+  montarNomeOxido('Al2O3', function () {
+    agendar(function () { botaoContinuar(400); }, 300);
+  });
+}
+
+/* ==========================================================
+   ETAPA 8 — ELEMENTO COM MAIS DE UM NOX (FERRO)
+   ========================================================== */
+function passoNomenclaturaFeO() {
+  fala('O ferro forma dois óxidos diferentes: no FeO, o ferro tem NOX +2; no Fe₂O₃, tem NOX +3. Usamos a nomenclatura de Stock: óxido de ferro + o NOX em algarismo romano. Monte o nome do FeO.');
+  montarNomeOxido('FeO', function () {
+    agendar(function () { botaoContinuarLocal(passoNomenclaturaFe2O3, 400); }, 300);
+  });
+}
+function passoNomenclaturaFe2O3() {
+  fala('Agora monte o nome do Fe₂O₃.');
+  montarNomeOxido('Fe2O3', function () {
+    agendar(function () {
+      fala('FeO também pode ser chamado de óxido ferroso, e Fe₂O₃ de óxido férrico — nomes tradicionais alternativos. Mas "ferro II" e "ferro III" indicam o NOX de forma mais direta.');
+      botaoContinuar(600);
+    }, 300);
+  });
+}
+
+/* ==========================================================
+   ETAPA 9 — ÓXIDOS DE AMETAIS (PREFIXOS)
+   ========================================================== */
+function passoPrefixosAmetais() {
+  fala('SO₂ e SO₃ têm o mesmo enxofre, mas quantidades diferentes de oxigênio. Para diferenciá-los, usamos prefixos: di-, tri-.');
+  const linha = document.createElement('div');
+  linha.className = 'linha-cartas-simples';
+  ['CO₂', 'SO₂', 'SO₃'].forEach(function (t) {
+    const c = document.createElement('div');
+    c.className = 'cartao-formula-simples';
+    c.textContent = t;
+    linha.appendChild(c);
+  });
+  overlay.appendChild(linha);
+
+  escolhaBotoes({
+    pergunta: 'Como se chama o SO₃, que tem três átomos de oxigênio?',
+    opcoes: [
+      { rotulo: 'Monóxido de enxofre', correta: false },
+      { rotulo: 'Dióxido de enxofre', correta: false },
+      { rotulo: 'Trióxido de enxofre', correta: true }
+    ],
+    dica: 'Conte os átomos de oxigênio: mono- (1), di- (2), tri- (3).',
+    explicacao: 'CO₂ → dióxido de carbono. SO₂ → dióxido de enxofre. SO₃ → trióxido de enxofre (também chamado, tradicionalmente, de anidrido sulfúrico).',
+    aoAcertar: function () { botaoContinuar(400); }
+  });
+}
+
+/* ==========================================================
+   FINAL
+   ========================================================== */
+function passoFinal() {
+  fala('Excelente. Agora você consegue reconhecer, formular, classificar e nomear diferentes óxidos.');
+  function linha(txt) { return '<div class="resumo-linha">' + txt + '</div>'; }
+  overlay.innerHTML =
+    '<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:12px;">' +
+    '<div class="quadro-resumo-final">' +
+    linha('Óxidos são compostos binários com oxigênio.') +
+    linha('Metal + oxigênio tende a óxido básico; ametal + oxigênio tende a óxido ácido.') +
+    linha('A fórmula se forma quando a soma dos NOX é igual a zero.') +
+    linha('A nomenclatura usa "óxido de + elemento", NOX em romano, ou prefixos (di-, tri-).') +
+    '</div></div>';
+  painel.innerHTML = '';
+  const conclusao = document.getElementById('conclusao');
+  document.getElementById('conclusaoPlacar').textContent = 'Fase concluída';
+  document.getElementById('conclusaoMensagem').textContent = 'Você investigou os óxidos: o que os caracteriza, como reagem com água, ácidos e bases, como montar suas fórmulas pela neutralidade elétrica e como nomeá-los.';
+  conclusao.classList.add('visivel');
+  conclusao.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+/* ==========================================================
+   MOTOR DA FASE
+   ========================================================== */
+const PASSOS = [
+  passoIntro, passoReconhecer, passoReconhecerPergunta,
+  passoMetalOuAmetal, passoRegraMetalAmetal,
+  passoOxidoMetalicoAgua, passoOxidoAmetalAgua,
+  passoOxidoBasicoComAcido,
+  passoFormulaNa,
+  passoNomenclaturaNa2O,
+  passoNomenclaturaFeO,
+  passoPrefixosAmetais,
+  passoFinal
+];
+let passoAtual = 0;
+
+function irPara(i) {
+  passoAtual = i;
+  limparTimers();
+  overlay.innerHTML = '';
+  painel.innerHTML = '';
+  continuarBalao.innerHTML = '';
+  PASSOS[i]();
+}
+function avancar() { if (passoAtual + 1 < PASSOS.length) irPara(passoAtual + 1); }
+function reiniciar() {
+  document.getElementById('conclusao').classList.remove('visivel');
+  irPara(0);
+}
+
+/* ── INIT ── */
+irPara(0);
+</script>
+
+<script>
+(function () {
+  var _clickSom = new Audio('../sons/click.mp3');
+  _clickSom.preload = 'auto';
+  document.addEventListener('click', function (e) {
+    var alvo = e.target.closest('button');
+    if (alvo) { try { _clickSom.currentTime = 0; _clickSom.play().catch(function () {}); } catch (err) {} }
+  }, true);
+})();
+</script>
+</body>
+</html>

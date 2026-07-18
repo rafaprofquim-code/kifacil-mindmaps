@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A Estrutura do Átomo — KiFácil</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+  <style>
+    /* ── Reset & Variáveis ─────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold:        #c9a227;
+      --gold-l:      #e8c84a;
+      --cream:       #f0e6d3;
+      --brown-dk:    #160900;
+      --brown-md:    #3d1f00;
+      --board-bg:    rgba(18, 32, 18, 0.90);
+      --board-border:rgba(201, 162, 39, 0.45);
+      --ff:          'Cormorant Garamond', Georgia, serif;
+    }
+
+    html, body {
+      width: 100%; height: 100%;
+      font-family: var(--ff);
+      background: var(--brown-dk);
+      color: var(--cream);
+      overflow: hidden;
+    }
+
+    /* ── Cenário ───────────────────────────────────────────── */
+    #bg {
+      position: fixed; inset: 11% 13%; z-index: 0;
+      border-radius: 10px;
+      background: url('../imagens/jogo-protons.jpg') center/cover no-repeat;
+      box-shadow: 0 0 80px rgba(0,0,0,.8);
+    }
+    #overlay {
+      position: fixed; inset: 11% 13%; z-index: 1;
+      border-radius: 10px;
+      background: rgba(10, 5, 0, 0.62);
+      transition: background 1.2s ease;
+    }
+
+    .link-aula {
+      position: absolute; top: 10px; right: 10px; z-index: 20;
+      display: flex; flex-direction: column; align-items: center; gap: 2px;
+      text-decoration: none; color: #fff8ee;
+      background: rgba(30,16,8,0.72); border: 1.5px solid var(--dourado-claro, #c8920a);
+      border-radius: 8px; padding: 0.4rem 0.65rem;
+      font-family: 'Cormorant Garamond', Georgia, serif; font-size: 0.68rem; font-weight: 600;
+      letter-spacing: 0.02em; text-align: center; line-height: 1.2;
+      cursor: pointer; transition: background 0.2s, transform 0.15s;
+    }
+    .link-aula:hover { background: rgba(30,16,8,0.92); transform: translateY(-1px); }
+    .link-aula svg { width: 22px; height: 22px; }
+
+    .teacher-compact {
+      position: fixed; top: 12%; left: 14%; z-index: 50;
+      display: flex; align-items: flex-end; gap: .7rem;
+      width: 320px; pointer-events: none;
+    }
+    .teacher-compact img {
+      width: 110px; height: 132px; object-fit: cover; object-position: top center;
+      border-radius: 10px; border: 2px solid rgba(201,162,39,.5);
+      box-shadow: 0 8px 24px rgba(0,0,0,.45);
+      flex-shrink: 0;
+    }
+    .teacher-compact .bubble {
+      background: rgba(14,7,0,0.95); border: 1.5px solid rgba(201,162,39,.48);
+      border-radius: 0 12px 12px 12px; padding: .8rem 1rem;
+      box-shadow: 0 4px 22px rgba(0,0,0,.55);
+      min-width: 200px;
+    }
+    .teacher-compact .bubble p { font-size: 1rem; line-height: 1.6; color: var(--cream); }
+
+    /* ── Área do Conteúdo ──────────────────────────────────── */
+    #stage-area {
+      position: fixed;
+      top: 12%; left: calc(14% + 300px); right: 14%;
+      bottom: 12%;
+      z-index: 10;
+      display: flex; align-items: center; justify-content: center;
+      padding: 1rem;
+      overflow: hidden;
+    }
+
+    /* ── Painel (quadro-negro) ─────────────────────────────── */
+    .panel {
+      background: var(--board-bg);
+      border: 1.5px solid var(--board-border);
+      border-radius: 12px;
+      padding: 2.2rem 2.8rem;
+      width: 100%; max-width: 100%;
+      max-height: 100%;
+      overflow-y: auto;
+      box-shadow: 0 10px 50px rgba(0,0,0,.75), inset 0 0 80px rgba(0,0,0,.25);
+      animation: panelIn .45s ease-out;
+    }
+    .panel h2 {
+      color: var(--gold);
+      font-size: 2rem; font-weight: 700;
+      text-align: center; letter-spacing: .07em;
+      margin-bottom: 1.2rem;
+      text-shadow: 0 0 24px rgba(201,162,39,.35);
+    }
+
+    @keyframes panelIn {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── Caixa da Professora (topo-esquerda) ──────────────── */
+    #teacher-box {
+      position: fixed;
+      top: 12%; left: 14%;
+      z-index: 50;
+      display: flex; flex-direction: column;
+      align-items: flex-start;
+      gap: .65rem;
+      width: 280px;
+      pointer-events: none;
+      transition: opacity .5s ease;
+    }
+
+    /* ── Hall de Entrada ───────────────────────────────────── */
+    .hall-wrap {
+      display: flex; align-items: center; gap: 2.4rem;
+    }
+    .hall-left {
+      flex: 1; display: flex; flex-direction: column; gap: 1.1rem;
+    }
+    .hall-left h1 {
+      font-size: 2.4rem; color: var(--gold);
+      letter-spacing: .08em; line-height: 1.2;
+    }
+    .hall-sub {
+      font-style: italic; opacity: .72; font-size: 1.1rem;
+    }
+    .hall-greeting {
+      font-size: 1.15rem; line-height: 1.65; color: var(--cream);
+      border-left: 2px solid rgba(201,162,39,.4);
+      padding-left: .9rem; font-style: italic;
+      min-height: 3.2rem;
+    }
+    .hall-right {
+      flex-shrink: 0; width: 210px;
+    }
+    .hall-right img {
+      width: 100%; border-radius: 12px;
+      border: 2px solid rgba(201,162,39,.5);
+      box-shadow: 0 10px 36px rgba(0,0,0,.75);
+      object-fit: cover; object-position: top center;
+    }
+    @media (max-width: 720px) {
+      .hall-wrap { flex-direction: column-reverse; align-items: center; }
+      .hall-right { width: 120px; }
+      .hall-left h1 { font-size: 1.7rem; }
+    }
+    #teacher-img {
+      width: 170px; height: 205px;
+      object-fit: cover; object-position: top center;
+      border-radius: 10px;
+      border: 2px solid rgba(201,162,39,.5);
+      flex-shrink: 0;
+      filter: drop-shadow(0 6px 18px rgba(0,0,0,.7));
+      transition: opacity .35s ease;
+    }
+    #teacher-bubble {
+      background: rgba(14, 7, 0, 0.95);
+      border: 1.5px solid rgba(201,162,39,.48);
+      border-radius: 4px 12px 12px 12px;
+      padding: .9rem 1.1rem;
+      width: 280px;
+      min-height: 82px;
+      display: flex; flex-direction: column;
+      justify-content: space-between; gap: .6rem;
+      pointer-events: all;
+      box-shadow: 0 4px 22px rgba(0,0,0,.55);
+    }
+    #teacher-text {
+      font-size: 1.12rem; line-height: 1.58;
+      color: var(--cream); min-height: 2.4rem;
+    }
+    #btn-continuar {
+      align-self: flex-end;
+      background: linear-gradient(135deg, #c9a227, #a07c15);
+      color: #160600; border: none; border-radius: 6px;
+      padding: .5rem 1.4rem;
+      font-family: var(--ff); font-size: 1rem; font-weight: 700;
+      letter-spacing: .06em; text-transform: uppercase;
+      cursor: pointer;
+      opacity: 0; pointer-events: none;
+      transition: opacity .3s, transform .2s;
+    }
+    #btn-continuar.show { opacity: 1; pointer-events: all; }
+    #btn-continuar:hover { filter: brightness(1.08); transform: scale(1.03); }
+
+    /* ── ETAPA 0 — Intro ───────────────────────────────────── */
+    .intro-wrap { text-align: center; padding: .5rem 0; }
+    .intro-wrap h1 {
+      font-size: 2.6rem; color: var(--gold);
+      letter-spacing: .1em; margin-bottom: .5rem;
+    }
+    .intro-sub { font-style: italic; opacity: .75; margin-bottom: 1.6rem; font-size: 1.15rem; }
+    #btn-comecar {
+      background: linear-gradient(135deg, #c9a227, #9a7412);
+      color: #160600; border: none; border-radius: 8px;
+      padding: .8rem 2.8rem;
+      font-family: var(--ff); font-size: 1.3rem; font-weight: 700;
+      letter-spacing: .08em; text-transform: uppercase;
+      cursor: pointer;
+      opacity: 0; pointer-events: none;
+      transition: opacity .4s, transform .2s, box-shadow .2s;
+      box-shadow: 0 4px 18px rgba(201,162,39,.3);
+    }
+    #btn-comecar.show { opacity: 1; pointer-events: all; }
+    #btn-comecar:hover { filter: brightness(1.08); transform: translateY(-2px); }
+
+    /* ── ETAPA 1 — Partículas ──────────────────────────────── */
+    .particles-grid {
+      display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
+      margin-top: .6rem;
+    }
+    .pcard {
+      background: rgba(10,22,10,.72);
+      border: 1.5px solid rgba(201,162,39,.3);
+      border-radius: 10px; padding: 1.25rem 1rem;
+      width: 196px; text-align: center;
+      cursor: pointer; position: relative;
+      transition: transform .25s, border-color .25s, box-shadow .25s;
+    }
+    .pcard:hover { transform: translateY(-4px); border-color: var(--gold); box-shadow: 0 6px 26px rgba(201,162,39,.22); }
+    .pcard.seen  { border-color: var(--gold); background: rgba(201,162,39,.08); }
+    .pcard-icon  { font-size: 3.1rem; margin-bottom: .4rem; line-height: 1; }
+    .pcard-name  { font-size: 1.4rem; font-weight: 700; color: var(--gold); margin-bottom: .28rem; }
+    .pcard-charge{ font-size: 1.6rem; font-weight: 700; margin-bottom: .35rem; }
+    .cp { color: #ff6e40; } .cn { color: #90a4ae; } .ce { color: #64b5f6; }
+    .pcard-info  {
+      max-height: 0; overflow: hidden; opacity: 0;
+      transition: max-height .4s ease, opacity .4s, padding .3s;
+      font-size: 1rem; line-height: 1.55; color: var(--cream);
+      border-top: 1px solid rgba(201,162,39,.18);
+    }
+    .pcard.open .pcard-info { max-height: 160px; opacity: 1; padding-top: .55rem; }
+    .pcard-check { position: absolute; top: .4rem; right: .55rem; color: var(--gold); font-size: .85rem; opacity: 0; transition: opacity .3s; }
+    .pcard.seen .pcard-check { opacity: 1; }
+
+    /* ── ETAPA 2 — Construtor do Átomo de Lítio ───────────── */
+    .atom-builder { display:flex; flex-direction:column; align-items:center; gap:1.1rem; }
+    .builder-instr { font-style:italic; opacity:.8; text-align:center; font-size:1rem; }
+
+    /* Zona visual do átomo */
+    .builder-visual { position:relative; width:264px; height:264px; flex-shrink:0; }
+
+    .zone-esph {
+      position:absolute; inset:0; border-radius:50%;
+      border:2.5px dashed rgba(100,181,246,.45);
+      background:rgba(100,181,246,.05);
+      cursor:pointer;
+      transition:border-color .25s, background .25s;
+    }
+    .zone-esph:hover, .zone-esph.hilight { border-color:#64b5f6; background:rgba(100,181,246,.13); }
+    .esph-label-top {
+      position:absolute; top:8px; left:50%; transform:translateX(-50%);
+      font-size:.78rem; font-weight:700; color:rgba(100,181,246,.8);
+      white-space:nowrap; pointer-events:none;
+    }
+
+    .zone-nuc {
+      position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+      width:112px; height:112px; border-radius:50%;
+      background:radial-gradient(circle at 35% 35%, rgba(255,130,90,.25), rgba(100,0,0,.55));
+      border:2.5px dashed rgba(255,110,64,.45);
+      display:flex; flex-direction:column; align-items:center; justify-content:center;
+      gap:4px; cursor:pointer; z-index:3;
+      transition:border-color .25s, background .25s;
+    }
+    .zone-nuc:hover, .zone-nuc.hilight { border-color:#ff6e40; background:radial-gradient(circle at 35% 35%, rgba(255,130,90,.5), rgba(160,0,0,.7)); }
+    .nuc-label { font-size:.76rem; font-weight:700; color:rgba(255,200,150,.9); pointer-events:none; }
+    .placed-row { display:flex; flex-wrap:wrap; gap:3px; justify-content:center; max-width:88px; pointer-events:none; }
+
+    /* Elétrons na eletrosfera */
+    .ee {
+      position:absolute; width:24px; height:24px; border-radius:50%;
+      background:radial-gradient(circle at 35% 35%, #90caf9, #1565c0);
+      display:none; align-items:center; justify-content:center;
+      font-size:.75rem; font-weight:700; color:#fff;
+      box-shadow:0 0 10px rgba(100,181,246,.7);
+      animation:popIn .35s ease-out; z-index:2; pointer-events:none;
+    }
+    .ee.vis { display:flex; }
+
+    /* Mini esferas dentro do núcleo */
+    .mini-s {
+      width:22px; height:22px; border-radius:50%;
+      display:flex; align-items:center; justify-content:center;
+      font-size:.7rem; font-weight:700; color:#fff;
+      animation:popIn .3s ease-out;
+    }
+    .mini-p { background:radial-gradient(circle at 35% 35%, #ff8b6a, #c0392b); }
+    .mini-n { background:radial-gradient(circle at 35% 35%, #b0bec5, #607d8b); }
+
+    /* Pool de partículas */
+    .pool { display:flex; flex-wrap:wrap; gap:.65rem; justify-content:center; max-width:340px; }
+    .psphere {
+      width:56px; height:56px; border-radius:50%;
+      display:flex; align-items:center; justify-content:center;
+      font-size:1.35rem; font-weight:700; color:#fff;
+      cursor:pointer; user-select:none;
+      transition:transform .18s, box-shadow .18s, opacity .3s;
+    }
+    .psphere:hover  { transform:scale(1.1); }
+    .psphere.sel    { box-shadow:0 0 0 3px var(--gold), 0 0 18px rgba(201,162,39,.55); transform:scale(1.14); }
+    .psphere.placed { opacity:.28; pointer-events:none; }
+    .psphere-p { background:radial-gradient(circle at 35% 35%, #ff8b6a, #c0392b); box-shadow:0 4px 12px rgba(192,57,43,.45); }
+    .psphere-n { background:radial-gradient(circle at 35% 35%, #b0bec5, #607d8b); box-shadow:0 4px 12px rgba(96,125,139,.45); }
+    .psphere-e { background:radial-gradient(circle at 35% 35%, #90caf9, #1565c0); box-shadow:0 4px 12px rgba(21,101,192,.45); }
+
+    .nucleus-hint { font-size:1rem; color:rgba(201,162,39,.75); font-style:italic; text-align:center; min-height:1.4rem; }
+
+    /* ── ETAPA 3 — Eletrosfera ─────────────────────────────── */
+    .atom-display { display: flex; flex-direction: column; align-items: center; gap: 1.2rem; padding: .5rem 0; }
+    .atom-visual { position: relative; width: 210px; height: 210px; display: flex; align-items: center; justify-content: center; }
+
+    .nucleus-core {
+      width: 72px; height: 72px; border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #ff8b6a, #bf3629, #7a0000);
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-size: .68rem; font-weight: 700; text-align: center; line-height: 1.35;
+      z-index: 3; box-shadow: 0 0 22px rgba(192,57,43,.6), 0 0 50px rgba(192,57,43,.2);
+      animation: nucPulse 3s ease-in-out infinite;
+    }
+    @keyframes nucPulse {
+      0%,100% { box-shadow: 0 0 22px rgba(192,57,43,.6), 0 0 50px rgba(192,57,43,.2); }
+      50%      { box-shadow: 0 0 32px rgba(192,57,43,.8), 0 0 70px rgba(192,57,43,.3); }
+    }
+
+    .electrosphere {
+      position: absolute;
+      width: 192px; height: 192px;
+      top: 50%; left: 50%; transform: translate(-50%,-50%);
+      border-radius: 50%;
+      background: rgba(100,181,246,.06);
+      border: 1.5px solid rgba(100,181,246,.22);
+      box-shadow: inset 0 0 40px rgba(100,181,246,.06), 0 0 30px rgba(100,181,246,.05);
+      opacity: 0; transition: opacity .9s ease;
+      z-index: 2;
+    }
+    .electrosphere.vis { opacity: 1; }
+    .esph-label {
+      position: absolute; bottom: -22px; left: 50%; transform: translateX(-50%);
+      font-size: .72rem; color: rgba(100,181,246,.8); white-space: nowrap;
+      opacity: 0; transition: opacity .6s .8s;
+    }
+    .electrosphere.vis .esph-label { opacity: 1; }
+
+    .electron-dot {
+      position: absolute; width: 13px; height: 13px; border-radius: 50%;
+      background: #64b5f6;
+      box-shadow: 0 0 10px rgba(100,181,246,.9), 0 0 22px rgba(100,181,246,.45);
+      z-index: 4; opacity: 0; transition: opacity .5s;
+    }
+    .electron-dot.vis { opacity: 1; animation: floatE 4s ease-in-out infinite; }
+    @keyframes floatE {
+      0%,100% { transform: translate(0,0); }
+      25%  { transform: translate(5px,-6px); }
+      50%  { transform: translate(-4px,7px); }
+      75%  { transform: translate(-6px,-3px); }
+    }
+
+    .atom-legend {
+      display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; font-size: .8rem;
+    }
+    .leg-item { display: flex; align-items: center; gap: .38rem; }
+    .leg-dot  { width: 11px; height: 11px; border-radius: 50%; flex-shrink: 0; }
+
+    /* ── ETAPAS 4 & 5 — Perguntas ──────────────────────────── */
+    .q-context {
+      background: rgba(0,0,0,.3); border-radius: 8px;
+      padding: .8rem 1.1rem; margin-bottom: 1.1rem;
+      text-align: center; font-size: 1.1rem;
+    }
+    .q-text { font-size: 1.3rem; text-align: center; margin-bottom: 1.2rem; line-height: 1.55; }
+    .opts-grid {
+      display: grid; grid-template-columns: repeat(2,1fr);
+      gap: .8rem; max-width: 400px; margin: 0 auto;
+    }
+    .opt {
+      background: rgba(10,20,10,.7);
+      border: 1.5px solid rgba(201,162,39,.28);
+      border-radius: 8px; padding: .85rem;
+      color: var(--cream); font-family: var(--ff);
+      font-size: 1.7rem; font-weight: 700;
+      cursor: pointer; text-align: center;
+      transition: transform .2s, border-color .2s, background .2s;
+    }
+    .opt:hover { border-color: var(--gold); transform: translateY(-2px); background: rgba(201,162,39,.08); }
+    .opt.correct { border-color: #4caf50; background: rgba(76,175,80,.18); color: #a5d6a7; pointer-events:none; }
+    .opt.wrong   { border-color: #e53935; background: rgba(229,57,53,.14); color: #ef9a9a; animation: shake .32s ease; }
+
+    /* ── ETAPA 5 — Número de Massa ─────────────────────────── */
+    .mass-stage { display: flex; flex-direction: column; align-items: center; gap: 1rem; }
+    .counts { display: flex; gap: 1.2rem; align-items: center; justify-content: center; flex-wrap: wrap; }
+    .cbox { text-align: center; padding: .9rem 1.3rem; background: rgba(0,0,0,.3); border-radius: 8px; border: 1px solid rgba(201,162,39,.22); }
+    .cbox-label { font-size: .9rem; text-transform: uppercase; letter-spacing: .08em; opacity: .65; margin-bottom: .28rem; }
+    .cbox-num   { font-size: 2.5rem; font-weight: 700; }
+    .op-sym { font-size: 1.8rem; opacity: .65; padding-top: .5rem; }
+    .mass-input-row { display: flex; align-items: center; gap: .7rem; margin-top: .4rem; }
+    .mass-input {
+      width: 90px; padding: .6rem;
+      background: rgba(10,20,10,.7);
+      border: 1.5px solid rgba(201,162,39,.4); border-radius: 6px;
+      color: var(--cream); font-family: var(--ff);
+      font-size: 1.7rem; font-weight: 700; text-align: center;
+    }
+    .mass-input:focus { outline: none; border-color: var(--gold); }
+    .btn-check {
+      background: linear-gradient(135deg,#c9a227,#a07c15);
+      color: #160600; border: none; border-radius: 6px;
+      padding: .6rem 1.5rem; font-family: var(--ff);
+      font-size: 1rem; font-weight: 700; letter-spacing: .05em;
+      text-transform: uppercase; cursor: pointer;
+      transition: filter .2s;
+    }
+    .btn-check:hover { filter: brightness(1.1); }
+    .mass-fb { min-height: 1.5rem; text-align: center; font-size: 1.05rem; margin-top: .25rem; }
+
+    /* ── ETAPA 6 — Desafio Final ───────────────────────────── */
+    .final-wrap { display: flex; flex-direction: column; align-items: center; gap: 1.1rem; }
+    .final-instr { font-style: italic; opacity: .8; text-align: center; font-size: 1.08rem; }
+
+    .atom-diagram {
+      position: relative; width: 310px; height: 280px;
+      flex-shrink: 0;
+    }
+    .atom-diagram .nucleus-core {
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%,-50%);
+      width: 86px; height: 86px; font-size: .62rem;
+    }
+    .atom-diagram .electrosphere {
+      width: 250px; height: 250px;
+    }
+    .atom-diagram .electron-dot {
+      top: 46px; right: 46px;
+    }
+
+    .clabel {
+      position: absolute;
+      background: rgba(10,20,10,.87);
+      border: 1.5px solid rgba(201,162,39,.38);
+      border-radius: 6px; padding: .38rem .75rem;
+      font-size: .95rem; font-weight: 700;
+      cursor: pointer; white-space: nowrap;
+      transition: border-color .22s, background .22s, transform .18s;
+      z-index: 10;
+    }
+    .clabel:hover  { border-color: var(--gold); background: rgba(201,162,39,.13); transform: scale(1.06); }
+    .clabel.ok     { border-color: #4caf50; color: #a5d6a7; background: rgba(76,175,80,.18); pointer-events:none; }
+    .clabel.err    { animation: shake .3s ease; border-color: #e53935; }
+
+    .order-track { display: flex; gap: .38rem; flex-wrap: wrap; justify-content: center; }
+    .obadge {
+      padding: .28rem .65rem; border-radius: 4px;
+      background: rgba(201,162,39,.12); border: 1px solid rgba(201,162,39,.28);
+      color: rgba(201,162,39,.6); font-size: .88rem;
+      transition: background .3s, color .3s, border-color .3s;
+    }
+    .obadge.done { background: rgba(76,175,80,.2); border-color: #4caf50; color: #a5d6a7; }
+
+    /* ── Conclusão ─────────────────────────────────────────── */
+    .conclusion-wrap { text-align: center; }
+    .conclusion-wrap h2 { font-size: 2.3rem; color: var(--gold); margin-bottom: .5rem; }
+    .conclusion-sub { font-size: 1.15rem; opacity: .8; margin-bottom: 1.3rem; line-height: 1.55; }
+    .summary-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(135px,1fr));
+      gap: .65rem; margin-top: .5rem;
+    }
+    .scard {
+      background: rgba(10,20,10,.6);
+      border: 1px solid rgba(201,162,39,.28);
+      border-radius: 8px; padding: .85rem .9rem;
+      font-size: .97rem; line-height: 1.55; text-align: left;
+    }
+    .scard strong { display: block; color: var(--gold); margin-bottom: .2rem; font-size: 1.05rem; }
+    .btn-reiniciar {
+      background: linear-gradient(135deg,#c9a227,#9a7412);
+      color: #160600; border: none; border-radius: 8px;
+      padding: .6rem 2rem; margin-top: 1.2rem;
+      font-family: var(--ff); font-size: 1rem; font-weight: 700;
+      letter-spacing: .07em; text-transform: uppercase; cursor: pointer;
+      transition: filter .2s, transform .2s;
+    }
+    .btn-reiniciar:hover { filter: brightness(1.1); transform: translateY(-2px); }
+
+    /* ── Animações genéricas ───────────────────────────────── */
+    @keyframes popIn  { from { transform:scale(0); opacity:0; } to { transform:scale(1); opacity:1; } }
+    @keyframes shake  { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-7px)} 75%{transform:translateX(7px)} }
+    @keyframes fadeUp { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
+
+    /* ── Responsivo ────────────────────────────────────────── */
+    @media (max-width:900px) {
+      #bg, #overlay { inset: 4% 3%; }
+      #teacher-box {
+        top: 5%; left: 4%;
+        flex-direction: row; align-items: flex-start;
+        width: calc(92vw);
+      }
+      #teacher-img { width: 90px; height: 110px; }
+      #teacher-bubble { max-width: calc(92vw - 105px); width: auto; }
+      #stage-area {
+        top: calc(5% + 170px);
+        left: 4%; right: 4%;
+        bottom: 5%;
+      }
+    }
+    @media (max-width:600px) {
+      #bg, #overlay { inset: 2% 2%; border-radius: 8px; }
+      .link-aula { top: 6px; right: 6px; padding: 0.3rem 0.5rem; font-size: 0.6rem; }
+      .link-aula svg { width: 18px; height: 18px; }
+      #teacher-box { top: 3%; left: 3%; width: 94vw; }
+      #teacher-img { width: 72px; height: 88px; }
+      #teacher-text { font-size: .92rem; }
+      #teacher-bubble { padding: .6rem .8rem; }
+      #stage-area { top: calc(3% + 148px); left: 3%; right: 3%; bottom: 3%; padding: .5rem .5rem; }
+      .panel { padding: 1rem .85rem; }
+      .panel h2 { font-size: 1.5rem; }
+      .pcard { width: 140px; padding: .9rem .7rem; }
+      .pcard-icon { font-size: 2.3rem; }
+      .pcard-name { font-size: 1.1rem; }
+      .pcard-info { font-size: .9rem; }
+      .q-text { font-size: 1.1rem; }
+      .opts-grid { max-width: 100%; }
+      .opt { font-size: 1.4rem; }
+      #progress-bar { right: 6px; }
+    }
+    @media (min-width:701px){
+      body{background:#f7efe2;color:#2e1a08;}
+      #bg, #overlay, .scene-img { max-height:68vh; background-position:center; }
+      #stage-area { top:12%; bottom: 20%; }
+      #teacher-box, .teacher-compact { top: 18px; left: 22px; }
+      #teacher-img { width:132px; height:158px; }
+      #teacher-bubble p { font-size:16px; }
+      footer{ text-align:center; padding:16px 12px; background:#2e2016; color:#f5ead0; font-size:0.95rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Cenário -->
+<div id="bg"></div>
+<div id="overlay">
+  <!-- COLOQUE O LINK AQUI -->
+  <a class="link-aula" href="https://www.youtube.com/watch?v=IAXfAOhapEU&t=13s" target="_blank" rel="noopener" title="Assista à aula">
+    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.6"/>
+      <path d="M10 8.5L16 12L10 15.5V8.5Z" fill="currentColor"/>
+    </svg>
+    <span>Assista à aula</span>
+  </a>
+</div>
+
+
+<!-- Conteúdo dinâmico -->
+<main id="stage-area"></main>
+
+<!-- Caixa da Professora -->
+<aside id="teacher-box" class="teacher-compact">
+  <img id="teacher-img" src="../imagens/rafa-sorrindo.jpg" alt="Professora Rafaela">
+  <div id="teacher-bubble" class="bubble">
+    <p id="teacher-text"></p>
+    <button id="btn-continuar">Continuar</button>
+  </div>
+</aside>
+
+<audio id="ding" src="../sons/ding.mp3" preload="auto"></audio>
+
+<script>
+'use strict';
+
+/* ═══════════════════════════════════════
+   CONSTANTES E ESTADO
+   ═══════════════════════════════════════ */
+const IMG = {
+  sorrindo:   '../imagens/rafa-sorrindo.jpg',
+  explicando: '../imagens/rafa-explicando.jpg',
+  pensando:   '../imagens/rafa-pensando.jpg',
+  animada:    '../imagens/rafa-animada.jpg'
+};
+
+const PARTICULAS = [
+  { id:'proton',
+    name:'Próton',  icon:'⊕', chargeClass:'cp', charge:'+1',
+    info:'Carga positiva. Fica no núcleo e define a identidade do elemento químico.' },
+  { id:'neutron',
+    name:'Nêutron', icon:'◉', chargeClass:'cn', charge:'0',
+    info:'Sem carga elétrica. Também fica no núcleo e contribui para o número de massa.' },
+  { id:'electron',
+    name:'Elétron', icon:'⊖', chargeClass:'ce', charge:'−1',
+    info:'Carga negativa. Ocupa a eletrosfera — a região ao redor do núcleo.' }
+];
+
+const ORDEM_FINAL = ['protons','neutrons','electrons','atomico','massa'];
+const LABELS_FINAL = { protons:'Prótons', neutrons:'Nêutrons', electrons:'Elétrons', atomico:'N. Atômico', massa:'N. de Massa' };
+
+const st = {
+  stage: 0,
+  seen: new Set(),
+  nucleus: [],
+  finalClicked: [],
+  typing: null
+};
+
+/* ═══════════════════════════════════════
+   REFS
+   ═══════════════════════════════════════ */
+const $stage   = document.getElementById('stage-area');
+const $img     = document.getElementById('teacher-img');
+const $text    = document.getElementById('teacher-text');
+const $btn     = document.getElementById('btn-continuar');
+const $ding    = document.getElementById('ding');
+
+/* ═══════════════════════════════════════
+   UTILITÁRIOS
+   ═══════════════════════════════════════ */
+function ding() {
+  try { $ding.currentTime = 0; $ding.play().catch(()=>{}); } catch(e) {}
+}
+
+function type(el, txt, cb) {
+  clearTimeout(st.typing);
+  el.textContent = txt;
+  cb && cb();
+}
+
+function fala(imgSrc, txt, cb) {
+  $img.style.opacity = '0';
+  setTimeout(() => { $img.src = imgSrc; $img.style.opacity = '1'; }, 220);
+  btnHide();
+  type($text, txt, cb);
+}
+
+function btnShow(fn, label = 'Continuar') {
+  $btn.textContent = label;
+  $btn.classList.add('show');
+  $btn.onclick = fn;
+}
+function btnHide() {
+  $btn.classList.remove('show');
+  $btn.onclick = null;
+}
+
+function progress(n) {
+  // Sem indicador visual de progresso.
+}
+
+function fade(cb) {
+  $stage.style.transition = 'opacity .35s';
+  $stage.style.opacity = '0';
+  setTimeout(() => {
+    $stage.innerHTML = '';
+    $stage.style.opacity = '1';
+    cb && cb();
+  }, 360);
+}
+
+function ir(n) {
+  st.stage = n;
+  progress(n);
+  fade(() => [stage0,stage1,stage2,stage3,stage4,stage5,stage6][n]());
+}
+
+/* ═══════════════════════════════════════
+   ETAPA 0 — INTRODUÇÃO
+   ═══════════════════════════════════════ */
+function stage0() {
+  $stage.innerHTML = `
+    <div class="panel">
+      <div class="hall-wrap">
+        <div class="hall-left">
+          <h1>A Estrutura do Átomo</h1>
+          <p class="hall-sub">Uma aula interativa com a Professora Rafaela</p>
+          <button id="btn-comecar" onclick="ir(1)">Entrar na Aula</button>
+        </div>
+        <div class="hall-right">
+          <img src="../imagens/rafa-sorrindo.jpg" alt="Professora Rafaela">
+        </div>
+      </div>
+    </div>`;
+
+  fala(IMG.sorrindo,
+    'Olá! Hoje vamos descobrir como o átomo é organizado.',
+    () => setTimeout(() =>
+      type($text,
+        'Não quero que você decore. Quero que descubra.',
+        () => { const b = document.getElementById('btn-comecar'); if(b) b.classList.add('show'); }
+      ), 1900)
+  );
+}
+
+/* ═══════════════════════════════════════
+   ETAPA 1 — PARTÍCULAS
+   ═══════════════════════════════════════ */
+function stage1() {
+  fala(IMG.explicando, 'Tudo começa pelas partículas. Clique em cada uma para conhecê-las melhor.');
+
+  $stage.innerHTML = `
+    <div class="panel">
+      <h2>As Partículas do Átomo</h2>
+      <div class="particles-grid">
+        ${PARTICULAS.map(p => `
+          <div class="pcard" id="pc-${p.id}" onclick="verParticula('${p.id}')">
+            <span class="pcard-check">✓</span>
+            <div class="pcard-icon">${p.icon}</div>
+            <div class="pcard-name">${p.name}</div>
+            <div class="pcard-charge ${p.chargeClass}">${p.charge}</div>
+            <div class="pcard-info">${p.info}</div>
+          </div>`).join('')}
+      </div>
+    </div>`;
+}
+
+function verParticula(id) {
+  const card = document.getElementById('pc-' + id);
+  if (!card) return;
+
+  const aberto = card.classList.contains('open');
+  document.querySelectorAll('.pcard').forEach(c => c.classList.remove('open'));
+  if (!aberto) card.classList.add('open');
+
+  if (!st.seen.has(id)) {
+    st.seen.add(id);
+    card.classList.add('seen');
+    ding();
+  }
+
+  if (st.seen.size === 3) {
+    setTimeout(() =>
+      fala(IMG.sorrindo, 'Ótimo! Você conheceu as três partículas. Agora vamos ver onde elas ficam.', () => {
+        btnShow(() => ir(2));
+      }), 700);
+  }
+}
+
+/* ═══════════════════════════════════════
+   ETAPA 2 — CONSTRUTOR DO ÁTOMO DE LÍTIO
+   (3p, 4n, 3e — clicar para selecionar + clicar na zona)
+   ═══════════════════════════════════════ */
+
+// Posições dos 3 elétrons na eletrosfera (ângulos 0°, 120°, 240° a r=95px do centro 132px)
+const EE_POS = [
+  { top: 14,  left: 121 },  // topo
+  { top: 158, left: 193 },  // baixo-direita
+  { top: 158, left: 28  }   // baixo-esquerda
+];
+
+function stage2() {
+  st.litNuc  = { proton: 0, neutron: 0 };
+  st.litEsph = 0;
+  st.selSphere = null;
+
+  fala(IMG.explicando,
+    'Conheça o átomo de Lítio! Selecione cada partícula e coloque-a no lugar certo: prótons e nêutrons no núcleo, elétrons na eletrosfera.');
+
+  const pool = [
+    ...Array.from({length:3}, (_,i) => `<div class="psphere psphere-p" id="sp-p${i}" data-type="proton"  onclick="selEsfera(this)" title="Próton (+)">+</div>`),
+    ...Array.from({length:4}, (_,i) => `<div class="psphere psphere-n" id="sp-n${i}" data-type="neutron" onclick="selEsfera(this)" title="Nêutron (0)">0</div>`),
+    ...Array.from({length:3}, (_,i) => `<div class="psphere psphere-e" id="sp-e${i}" data-type="electron" onclick="selEsfera(this)" title="Elétron (−)">−</div>`)
+  ].join('');
+
+  const eeSlots = EE_POS.map((p,i) =>
+    `<div class="ee" id="ee${i}" style="top:${p.top}px;left:${p.left}px">−</div>`
+  ).join('');
+
+  $stage.innerHTML = `
+    <div class="panel">
+      <h2>O Átomo de Lítio (Li)</h2>
+      <p class="builder-instr">Selecione uma partícula e clique na zona correta do átomo</p>
+      <div class="atom-builder">
+
+        <div class="builder-visual">
+          <!-- Zona eletrosfera (clicável) -->
+          <div class="zone-esph" id="zone-esph" onclick="colocarNaZona('esph')">
+            <span class="esph-label-top">Eletrosfera</span>
+            ${eeSlots}
+            <!-- Zona núcleo (clicável dentro da eletrosfera) -->
+            <div class="zone-nuc" id="zone-nuc" onclick="colocarNaZona('nuc'); event.stopPropagation()">
+              <span class="nuc-label">Núcleo</span>
+              <div class="placed-row" id="placed-nuc"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pool de partículas -->
+        <div class="pool">${pool}</div>
+      </div>
+      <div class="nucleus-hint" id="nhint"></div>
+    </div>`;
+}
+
+function selEsfera(el) {
+  document.querySelectorAll('.psphere').forEach(s => s.classList.remove('sel'));
+  el.classList.add('sel');
+  st.selSphere = el;
+  document.getElementById('nhint').textContent = 'Agora clique em "Núcleo" ou "Eletrosfera" para posicioná-la.';
+}
+
+function colocarNaZona(zona) {
+  if (!st.selSphere) {
+    document.getElementById('nhint').textContent = 'Primeiro selecione uma partícula clicando nela.';
+    return;
+  }
+  const tipo = st.selSphere.dataset.type;
+  const hint = document.getElementById('nhint');
+
+  // Verificar se é colocação errada
+  if (zona === 'nuc' && tipo === 'electron') {
+    hint.textContent = 'Os elétrons não ficam no núcleo. Coloque-os na eletrosfera!';
+    st.selSphere.classList.remove('sel');
+    st.selSphere = null;
+    return;
+  }
+  if (zona === 'esph' && tipo !== 'electron') {
+    hint.textContent = tipo === 'proton'
+      ? 'Os prótons pertencem ao núcleo!'
+      : 'Os nêutrons pertencem ao núcleo!';
+    st.selSphere.classList.remove('sel');
+    st.selSphere = null;
+    return;
+  }
+
+  // Colocação correta
+  ding();
+  hint.textContent = '';
+  st.selSphere.classList.remove('sel');
+  st.selSphere.classList.add('placed');
+  st.selSphere = null;
+
+  if (zona === 'nuc') {
+    st.litNuc[tipo]++;
+    const mini = document.createElement('div');
+    mini.className = 'mini-s mini-' + (tipo === 'proton' ? 'p' : 'n');
+    mini.textContent = tipo === 'proton' ? '+' : '0';
+    document.getElementById('placed-nuc').appendChild(mini);
+  } else {
+    const ee = document.getElementById('ee' + st.litEsph);
+    if (ee) ee.classList.add('vis');
+    st.litEsph++;
+  }
+
+  // Verificar conclusão (3p + 4n + 3e)
+  if (st.litNuc.proton === 3 && st.litNuc.neutron === 4 && st.litEsph === 3) {
+    setTimeout(() =>
+      fala(IMG.sorrindo,
+        'Perfeito! Você montou o átomo de Lítio. Os prótons e nêutrons estão no núcleo e os elétrons na eletrosfera!',
+        () => btnShow(() => ir(3))), 500);
+  }
+}
+
+/* ═══════════════════════════════════════
+   ETAPA 3 — ELETROSFERA
+   ═══════════════════════════════════════ */
+function stage3() {
+  fala(IMG.explicando, 'O núcleo fica no centro. Ao redor dele existe uma região chamada eletrosfera.');
+
+  $stage.innerHTML = `
+    <div class="panel">
+      <h2>A Organização do Átomo</h2>
+      <div class="atom-display">
+        <div class="atom-visual">
+          <div class="electrosphere" id="esph">
+            <span class="esph-label">Eletrosfera</span>
+          </div>
+          <div class="nucleus-core">Núcleo<br>(p⁺ e n⁰)</div>
+          <div class="electron-dot" id="edot" style="top:42px;right:44px;"></div>
+        </div>
+        <div class="atom-legend">
+          <div class="leg-item"><div class="leg-dot" style="background:#bf3629"></div>Núcleo</div>
+          <div class="leg-item"><div class="leg-dot" style="background:rgba(100,181,246,.3);border:1px solid #64b5f6"></div>Eletrosfera</div>
+          <div class="leg-item"><div class="leg-dot" style="background:#64b5f6"></div>Elétron</div>
+        </div>
+      </div>
+    </div>`;
+
+  setTimeout(() => document.getElementById('esph').classList.add('vis'), 500);
+  setTimeout(() => document.getElementById('edot').classList.add('vis'), 1300);
+  setTimeout(() =>
+    type($text,
+      'Os elétrons ficam nessa região ao redor do núcleo. Não há órbitas fixas — apenas uma região de probabilidade.',
+      () => btnShow(() => ir(4))
+    ), 1600);
+}
+
+/* ═══════════════════════════════════════
+   ETAPA 4 — NÚMERO ATÔMICO
+   ═══════════════════════════════════════ */
+function stage4() {
+  fala(IMG.pensando, 'Se um átomo possui 8 prótons, qual é o seu número atômico?');
+
+  $stage.innerHTML = `
+    <div class="panel">
+      <p class="q-text" style="font-size:1.45rem;margin-top:.4rem">
+        Se um átomo possui <strong style="color:var(--gold)">8 prótons</strong>,
+        qual é o seu número atômico?
+      </p>
+      <div class="opts-grid">
+        ${[6,8,10,16].map(n => `<button class="opt" onclick="checkZ(${n},this)">${n}</button>`).join('')}
+      </div>
+    </div>`;
+}
+
+function checkZ(val, btn) {
+  if (document.querySelector('.opt.correct')) return;
+  if (val === 8) {
+    btn.classList.add('correct');
+    ding();
+    setTimeout(() =>
+      fala(IMG.explicando, 'Correto! O número atômico (Z) é igual ao número de prótons. 8 prótons → Z = 8. Esse é o Oxigênio!', () => {
+        btnShow(() => ir(5));
+      }), 400);
+  } else {
+    btn.classList.add('wrong');
+    setTimeout(() => btn.classList.remove('wrong'), 380);
+    type($text, 'Pense bem: o número atômico representa exatamente o número de prótons do elemento.');
+  }
+}
+
+/* ═══════════════════════════════════════
+   ETAPA 5 — NÚMERO DE MASSA
+   ═══════════════════════════════════════ */
+function stage5() {
+  fala(IMG.pensando, 'Esse átomo tem 8 prótons e 8 nêutrons. Qual é o número de massa?');
+
+  $stage.innerHTML = `
+    <div class="panel">
+      <div class="mass-stage">
+        <div class="q-context" style="font-size:1.1rem;margin-bottom:1.1rem">
+          <span style="color:#ff6e40;font-weight:700">8 prótons</span>
+          &nbsp;&nbsp;|&nbsp;&nbsp;
+          <span style="color:#90a4ae;font-weight:700">8 nêutrons</span>
+        </div>
+        <p class="q-text">Qual é o número de massa desse átomo?</p>
+        <div class="mass-input-row">
+          <input class="mass-input" id="minput" type="number" min="1" max="300" placeholder="?">
+          <button class="btn-check" onclick="checkA()">Verificar</button>
+        </div>
+        <div class="mass-fb" id="mfb"></div>
+      </div>
+    </div>`;
+
+  document.getElementById('minput').addEventListener('keydown', e => { if(e.key==='Enter') checkA(); });
+}
+
+function checkA() {
+  if (document.getElementById('mfb').textContent.includes('✓')) return;
+  const val = parseInt(document.getElementById('minput').value) || 0;
+  const fb  = document.getElementById('mfb');
+  if (val === 16) {
+    fb.style.color = '#a5d6a7'; fb.textContent = '✓ Correto! 8 + 8 = 16';
+    ding();
+    setTimeout(() =>
+      fala(IMG.explicando, 'Perfeito! Número de massa (A) = prótons + nêutrons. A fórmula é: A = Z + N.', () => {
+        btnShow(() => ir(6));
+      }), 500);
+  } else {
+    fb.style.color = '#ef9a9a'; fb.textContent = 'Revise: some o número de prótons com o número de nêutrons.';
+  }
+}
+
+/* ═══════════════════════════════════════
+   ETAPA 6 — DESAFIO FINAL
+   ═══════════════════════════════════════ */
+function stage6() {
+  fala(IMG.pensando, 'Vamos testar tudo que você aprendeu com um desafio único. Pense com calma!');
+
+  $stage.innerHTML = `
+    <div class="panel">
+      <h2>Desafio Final</h2>
+      <div class="mass-stage">
+        <div class="q-context" style="font-size:1.05rem;line-height:1.9;text-align:left;padding:1rem 1.3rem">
+          Considere um átomo <strong style="color:var(--gold)">eletricamente neutro</strong>.<br>
+          Número de massa (A): <strong style="color:var(--gold)">9</strong><br>
+          Número de nêutrons (N): <strong style="color:#90a4ae">5</strong>
+        </div>
+        <p class="q-text" style="margin-top:.6rem">Qual é o número de elétrons desse átomo?</p>
+        <div class="mass-input-row">
+          <input class="mass-input" id="d-input" type="number" min="1" max="100" placeholder="?">
+          <button class="btn-check" onclick="verificarFinal()">Verificar</button>
+        </div>
+        <div class="mass-fb" id="d-fb"></div>
+      </div>
+    </div>`;
+
+  document.getElementById('d-input').addEventListener('keydown', e => {
+    if (e.key === 'Enter') verificarFinal();
+  });
+}
+
+function verificarFinal() {
+  const val = parseInt(document.getElementById('d-input').value) || 0;
+  const fb  = document.getElementById('d-fb');
+
+  if (val === 4) {
+    fb.style.color = '#a5d6a7';
+    fb.textContent = '✓ Correto! Z = A − N = 9 − 5 = 4 prótons → 4 elétrons.';
+    ding();
+    setTimeout(() =>
+      fala(IMG.explicando,
+        'Perfeito! Primeiro encontramos os prótons: Z = A − N = 9 − 5 = 4. Como o átomo é neutro, o número de elétrons é igual ao de prótons: 4!',
+        () => btnShow(vitoria)
+      ), 500);
+  } else {
+    fb.style.color = '#ef9a9a';
+    fb.textContent = 'Dica: primeiro encontre os prótons (Z = A − N). Depois lembre que, em átomo neutro, elétrons = prótons.';
+  }
+}
+
+/* ═══════════════════════════════════════
+   VITÓRIA / CONCLUSÃO
+   ═══════════════════════════════════════ */
+function vitoria() {
+  fala(IMG.animada, '');
+  fade(() => {
+    progress(7); // todos done
+
+    type($text, 'Excelente! Agora você compreende a estrutura básica do átomo. Parabéns!',
+      () => btnShow(() => window.location.reload(), 'Retorne a fase'));
+
+    $stage.innerHTML = `
+      <div class="panel">
+        <div class="conclusion-wrap">
+          <h2>Parabéns!</h2>
+          <p class="conclusion-sub">Você completou a aula sobre a estrutura do átomo com sucesso.</p>
+          <div class="summary-grid">
+            <div class="scard"><strong>Próton</strong>Carga +1. Fica no núcleo. Seu número define o elemento (Z).</div>
+            <div class="scard"><strong>Nêutron</strong>Sem carga. Fica no núcleo. Contribui para a massa (A).</div>
+            <div class="scard"><strong>Elétron</strong>Carga −1. Ocupa a eletrosfera ao redor do núcleo.</div>
+            <div class="scard"><strong>Número Atômico</strong>Z = número de prótons do átomo.</div>
+            <div class="scard"><strong>Número de Massa</strong>A = prótons + nêutrons (Z + N).</div>
+          </div>
+          <button class="btn-reiniciar" onclick="window.location.reload()">Estudar Novamente</button>
+        </div>
+      </div>`;
+  });
+}
+
+/* ═══════════════════════════════════════
+   INICIALIZAÇÃO
+   ═══════════════════════════════════════ */
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    document.getElementById('overlay').style.background = 'rgba(10,5,0,.60)';
+    setTimeout(() => ir(0), 500);
+  }, 400);
+});
+</script>
+<script>
+(function () {
+  var _clickSom = new Audio('../sons/click.mp3');
+  _clickSom.preload = 'auto';
+  document.addEventListener('click', function (e) {
+    var alvo = e.target.closest('button');
+    if (alvo) { try { _clickSom.currentTime = 0; _clickSom.play().catch(function () {}); } catch (err) {} }
+  }, true);
+})();
+</script>
+</body>
+</html>

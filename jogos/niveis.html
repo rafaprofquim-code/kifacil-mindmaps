@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Laboratório dos Níveis e Subníveis · KiFácil</title>
+<link rel="icon" type="image/png" href="../favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;1,500;1,600&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:       #2e2016;
+  --text:     #f5ead0;
+  --soft:     #e8d4b0;
+  --gold:     #e8b84b;
+  --border:   rgba(212,170,106,0.4);
+  --panel-bg: rgba(14,6,0,0.94);
+}
+
+html, body {
+  height: 100%; overflow: hidden;
+  font-family: 'Libre Baskerville', serif;
+  color: var(--text);
+  background: var(--bg);
+}
+body { display: flex; flex-direction: column; visibility: hidden; }
+
+#game-area { position: relative; flex: 1; min-height: 0; overflow: hidden; height: 100vh; }
+#scene-col { position: absolute; inset: 0; background: #1a0f08; }
+#scene-img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; opacity: 0.5; }
+
+.link-aula {
+  position: absolute; top: 10px; right: 10px; z-index: 10;
+  display: flex; flex-direction: column; align-items: center; gap: 2px;
+  text-decoration: none; color: #fff8ee;
+  background: rgba(30,16,8,0.72); border: 1.5px solid var(--dourado-claro, #c8920a);
+  border-radius: 8px; padding: 0.4rem 0.65rem;
+  font-family: 'Cormorant Garamond', Georgia, serif; font-size: 0.68rem; font-weight: 600;
+  letter-spacing: 0.02em; text-align: center; line-height: 1.2;
+  cursor: pointer; transition: background 0.2s, transform 0.15s;
+}
+.link-aula:hover { background: rgba(30,16,8,0.92); transform: translateY(-1px); }
+.link-aula svg { width: 22px; height: 22px; }
+
+#painel-experimento {
+  position: absolute; top: 212px; left: 50%; transform: translateX(-50%);
+  width: 460px; bottom: 14px;
+  background: rgba(6, 3, 0, 0.72); border: 1px solid rgba(212,170,106,0.22);
+  border-radius: 16px; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  z-index: 18; display: flex; flex-direction: column; align-items: center;
+  padding: 18px 22px; overflow-y: auto;
+}
+
+/* Seletor de nível */
+#nivel-label { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: rgba(232,216,176,0.5); margin-bottom: 6px; }
+#nivel-selector { display: flex; gap: 8px; margin-bottom: 16px; }
+.nivel-btn {
+  width: 46px; height: 46px; border-radius: 50%; cursor: pointer;
+  border: 1.5px solid var(--border); background: rgba(255,255,255,0.03); color: var(--soft);
+  font-family: 'Lora', serif; font-size: 15px; font-weight: 600;
+  display: flex; align-items: center; justify-content: center;
+  transition: border-color .2s, background .2s, color .2s, transform .15s;
+}
+.nivel-btn:hover { transform: scale(1.06); }
+.nivel-btn.ativo { border-color: var(--gold); background: rgba(232,184,75,0.14); color: var(--gold); box-shadow: 0 0 14px rgba(232,184,75,0.35); }
+@keyframes pulsoNivel { 0%,100% { box-shadow: 0 0 0 rgba(232,184,75,0); } 50% { box-shadow: 0 0 10px rgba(232,184,75,0.45); } }
+.nivel-btn.destaque { animation: pulsoNivel 1.4s ease-in-out infinite; border-color: rgba(232,184,75,0.6); }
+
+/* Badges de subnível */
+#subniveis-row { display: flex; gap: 10px; margin-bottom: 18px; }
+.subnivel-badge {
+  width: 56px; height: 56px; border-radius: 10px; cursor: pointer;
+  border: 1.5px solid rgba(212,170,106,0.2); background: rgba(255,255,255,0.02);
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
+  font-family: 'Lora', serif; font-size: 18px; font-weight: 700; color: rgba(232,216,176,0.25);
+  transition: border-color .2s, background .2s, color .2s, opacity .2s;
+  position: relative;
+}
+.subnivel-badge .cadeado { font-size: 10px; }
+.subnivel-badge.disponivel { color: var(--soft); border-color: var(--border); cursor: pointer; }
+.subnivel-badge.disponivel:hover { border-color: rgba(232,184,75,0.7); background: rgba(232,184,75,0.06); }
+.subnivel-badge.selecionado { border-color: var(--gold); background: rgba(232,184,75,0.14); color: var(--gold); box-shadow: 0 0 14px rgba(232,184,75,0.3); }
+.subnivel-badge.bloqueado { pointer-events: none; opacity: .35; }
+.subnivel-badge.disponivel .cadeado { display: none; }
+
+/* Diagrama de orbitais (caixas) */
+#diagrama-wrap { min-height: 48px; display: flex; align-items: center; justify-content: center; margin-bottom: 10px; }
+#diagrama-orbitais { display: flex; flex-direction: column; align-items: center; gap: 10px; max-width: 360px; }
+.diagrama-linha { display: flex; align-items: center; gap: 8px; opacity: 0; animation: fadeUp .35s ease forwards; }
+.diagrama-linha-label { flex-shrink: 0; width: 18px; text-align: center; font-family: 'Lora', serif; font-size: 15px; font-weight: 700; color: var(--gold); }
+.diagrama-linha-caixas { display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; }
+.orbital-caixa {
+  width: 38px; height: 38px; border: 1.5px solid rgba(232,184,75,0.55); border-radius: 4px;
+  display: flex; align-items: center; justify-content: center; gap: 2px;
+  background: rgba(232,184,75,0.05);
+}
+.eletron-seta { font-size: 16px; color: #79b6f5; text-shadow: 0 0 4px rgba(121,182,245,0.8); }
+.eletron-seta.baixo { transform: rotate(180deg); display: inline-block; }
+
+#diagrama-explicacao { font-size: 11px; color: rgba(232,216,176,0.5); text-align: center; margin-bottom: 10px; line-height: 1.5; }
+#diagrama-legenda { font-family: 'Lora', serif; font-size: 13px; color: var(--soft); text-align: center; margin-bottom: 16px; min-height: 20px; line-height: 1.5; }
+
+/* Quadro-resumo progressivo (preenche à medida que o aluno explora) */
+#resumo-progresso { width: 100%; max-width: 340px; margin: 4px auto 0; padding-top: 16px; border-top: 1px dashed rgba(212,170,106,0.2); }
+#resumo-progresso-titulo { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: rgba(232,216,176,0.5); text-align: center; margin-bottom: 10px; }
+#resumo-progresso-tabela { width: 100%; border-collapse: collapse; font-size: 12px; }
+#resumo-progresso-tabela th {
+  font-family: 'Lora', serif; font-size: 10px; letter-spacing: .04em; text-transform: uppercase;
+  color: rgba(232,216,176,0.5); border-bottom: 1px solid rgba(212,170,106,0.25); padding: 6px 4px; text-align: center;
+}
+#resumo-progresso-tabela td { text-align: center; padding: 7px 4px; border-bottom: 1px solid rgba(212,170,106,0.12); color: var(--soft); transition: color .3s; }
+#resumo-progresso-tabela td.subnivel-col { font-family: 'Lora', serif; font-weight: 700; color: var(--gold); }
+#resumo-progresso-tabela tr.linha-vazia td { color: rgba(232,216,176,0.2); font-style: italic; }
+
+/* ── PROFESSORA RAFAELA ── */
+#teacher-box { position:absolute; top:14px; left:50%; transform:translateX(-50%); z-index:40; display:flex; flex-direction:row; align-items:flex-end; gap:0; pointer-events:none; }
+#teacher-img {
+  width: 120px; height: 185px; object-fit: cover; object-position: top center;
+  border-radius: 12px 12px 0 0; border: 2px solid rgba(232,184,75,0.55); border-bottom: none;
+  flex-shrink: 0; filter: drop-shadow(0 -4px 20px rgba(0,0,0,.9)); transition: opacity .35s ease;
+}
+#teacher-bubble {
+  background: rgba(36,21,11,0.97); border: 1.5px solid rgba(232,184,75,0.52);
+  border-radius: 4px 14px 0 0; padding: 1rem 1.15rem; width: 320px; min-height: 90px;
+  display: flex; flex-direction: column; justify-content: space-between; gap: .65rem;
+  pointer-events: all; box-shadow: 0 -4px 24px rgba(0,0,0,.75); backdrop-filter: blur(4px);
+}
+#teacher-name { font-size: 9px; letter-spacing: .16em; text-transform: uppercase; color: #d6b15b; margin-bottom: 2px; }
+#teacher-text { font-family: 'Lora', serif; font-size: 18px; line-height: 1.8; color: #D4C5A8; font-weight: 400; text-align: justify; }
+#btn-avancar {
+  display: none; align-self: flex-end; background: linear-gradient(135deg, #e8b84b, #b8891e);
+  color: #160600; border: none; border-radius: 6px; padding: .42rem 1.2rem;
+  font-family: 'Libre Baskerville', serif; font-size: 11px; font-weight: 700;
+  letter-spacing: .06em; text-transform: uppercase; cursor: pointer;
+  transition: filter .15s, transform .15s; box-shadow: 0 2px 8px rgba(0,0,0,.4);
+}
+#btn-avancar.show { display: block; }
+#btn-avancar:hover { filter: brightness(1.12); transform: scale(1.04); }
+
+/* ── OVERLAYS ── */
+.overlay-base { display: none; position: fixed; inset: 0; z-index: 300; background: rgba(0,0,0,0.65); align-items: center; justify-content: center; }
+.overlay-base.show { display: flex; }
+
+.modal-box {
+  background: var(--panel-bg); border: 1.5px solid var(--border); border-radius: 12px;
+  padding: 1.6rem 1.8rem; max-width: 480px; width: calc(100% - 40px);
+  box-shadow: 0 12px 48px rgba(0,0,0,.85); animation: fadeUp .28s ease;
+}
+@keyframes fadeUp { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
+.modal-eyebrow { font-size: 9px; letter-spacing: .18em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+.modal-titulo { font-family: 'Lora', serif; font-size: 20px; font-weight: 600; color: var(--text); margin-bottom: 6px; line-height: 1.3; }
+.opcoes { display: flex; flex-direction: column; gap: 10px; }
+.btn-opcao {
+  background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 6px;
+  padding: .7rem 1rem; font-family: 'Libre Baskerville', serif; font-size: 13px; color: var(--soft);
+  cursor: pointer; text-align: left; transition: border-color .2s, background .2s;
+}
+.btn-opcao:hover { border-color: rgba(232,184,75,0.7); background: rgba(232,184,75,0.06); color: var(--text); }
+.btn-opcao.errado { border-color: rgba(217,95,59,0.6); background: rgba(217,95,59,0.08); animation: shake .3s; }
+.btn-opcao.certo  { border-color: rgba(80,200,120,0.7); background: rgba(80,200,120,0.08); color: #7fe898; }
+@keyframes shake { 0%,100%{transform:translateX(0);} 25%{transform:translateX(-6px);} 75%{transform:translateX(6px);} }
+
+/* quadro-resumo */
+#quadro-overlay { flex-direction: column; gap: 20px; }
+#quadro-box {
+  width: 460px; max-width: calc(100% - 40px); background: #141410;
+  border: 3px solid rgba(212,170,106,0.45); border-radius: 8px;
+  padding: 30px 36px 34px; box-shadow: 0 8px 40px rgba(0,0,0,.85);
+  max-height: 84vh; overflow-y: auto;
+}
+.quadro-titulo {
+  font-family: 'Lora', serif; font-size: 11px; letter-spacing: .18em; text-transform: uppercase;
+  color: rgba(245,230,180,0.6); text-align: center; margin-bottom: 22px;
+}
+.quadro-passo { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+.quadro-passo-num {
+  flex-shrink: 0; width: 22px; height: 22px; border-radius: 50%; background: rgba(232,184,75,0.16);
+  border: 1px solid rgba(232,184,75,0.5); color: var(--gold); font-family: 'Lora', serif; font-size: 12px;
+  font-weight: 700; display: flex; align-items: center; justify-content: center;
+}
+.quadro-passo-texto { font-family: 'Lora', serif; font-size: 14px; font-weight: 600; color: var(--text); line-height: 1.4; }
+.quadro-tabela { width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 22px; }
+.quadro-tabela th { font-family: 'Lora', serif; font-size: 10px; letter-spacing: .04em; text-transform: uppercase; color: rgba(245,230,180,0.55); border-bottom: 1px solid rgba(212,170,106,0.3); padding: 7px 4px; text-align: center; }
+.quadro-tabela td { text-align: center; padding: 8px 4px; border-bottom: 1px solid rgba(212,170,106,0.15); color: rgba(245,230,180,0.85); }
+.quadro-tabela td.subnivel-col { font-family: 'Lora', serif; font-weight: 700; color: var(--gold); }
+#quadro-regra {
+  font-family: 'Lora', serif; font-size: 15px; font-weight: 500; font-style: italic; color: var(--gold);
+  text-align: center; margin-top: 4px; margin-bottom: 0; line-height: 1.55;
+  padding-top: 16px; border-top: 1px dashed rgba(212,170,106,0.25);
+}
+
+/* desafio final */
+#desafio-final-overlay { flex-direction: column; gap: 4px; }
+#desafio-final-painel {
+  background: var(--panel-bg); border: 1.5px solid var(--border); border-radius: 12px;
+  padding: 1.5rem 1.7rem; max-width: 480px; width: calc(100% - 40px); box-shadow: 0 8px 32px rgba(0,0,0,.8);
+}
+.df-eyebrow { font-size: 9px; letter-spacing: .18em; text-transform: uppercase; color: var(--gold); margin-bottom: 5px; }
+.df-titulo { font-family: 'Lora', serif; font-size: 18px; font-weight: 600; color: var(--text); margin-bottom: 16px; line-height: 1.35; }
+.df-progresso { font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: rgba(232,216,176,0.4); margin-bottom: 6px; }
+.df-feedback { font-size: 14px; font-style: italic; color: rgba(217,150,100,0.9); margin-top: 12px; line-height: 1.6; min-height: 20px; }
+.df-feedback.ok { color: rgba(100,220,130,0.9); }
+.btn-prosseguir {
+  display: none; margin-top: 14px; background: var(--gold); border: none; border-radius: 6px;
+  padding: .6rem 1.4rem; font-family: 'Libre Baskerville', serif; font-size: 12px; font-weight: 700;
+  color: #1a0f08; cursor: pointer; letter-spacing: .05em; text-transform: uppercase; transition: background .15s;
+}
+.btn-prosseguir:hover { background: #f0c960; }
+.btn-prosseguir.show { display: block; }
+
+/* modal conclusão */
+#modal-conclusao { display: none; position: fixed; inset: 0; z-index: 400; background: rgba(0,0,0,0.8); align-items: center; justify-content: center; }
+#modal-conclusao.show { display: flex; }
+#conclusao-box {
+  background: var(--panel-bg); border: 1.5px solid var(--border); border-radius: 14px;
+  padding: 2rem 2.2rem; max-width: 430px; width: calc(100% - 40px); text-align: center;
+  box-shadow: 0 16px 64px rgba(0,0,0,.9); animation: fadeUp .35s ease;
+}
+.conc-eyebrow { font-size: 9px; letter-spacing: .18em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+.conc-titulo { font-family: 'Lora', serif; font-size: 24px; font-weight: 600; color: var(--text); margin-bottom: 12px; line-height: 1.25; }
+.conc-desc { font-size: 13px; color: var(--soft); line-height: 1.8; margin-bottom: 22px; font-style: italic; }
+.btn-conc {
+  display: inline-block; background: var(--gold); border: none; border-radius: 6px; padding: .65rem 2rem;
+  font-family: 'Libre Baskerville', serif; font-size: 12px; font-weight: 700; color: #1a0f08;
+  cursor: pointer; letter-spacing: .06em; text-transform: uppercase; text-decoration: none; transition: background .15s;
+}
+.btn-conc:hover { background: #f0c960; }
+
+/* ── MOBILE ── */
+@media (max-width: 768px) {
+  #teacher-box {
+    position: fixed; bottom: 0; left: 0; right: 0; top: auto; width: 100%; transform: none;
+    flex-direction: row; align-items: flex-end; gap: 8px; background: #1a0f08;
+    padding: 8px 10px; border-top: 1px solid rgba(212,170,106,0.2); pointer-events: all; z-index: 500;
+  }
+  #teacher-img { width: 52px; height: 64px; border-radius: 8px; border-bottom: 2px solid rgba(232,184,75,0.55); border-top: none; }
+  #teacher-bubble { width: auto; flex: 1; min-height: auto; border-radius: 8px; padding: .55rem; }
+  #teacher-text { font-size: 13px; line-height: 1.55; }
+
+  body { padding-bottom: 88px; }
+  #game-area { height: auto; }
+
+  #painel-experimento { width: calc(100% - 16px); top: 16px; bottom: 6px; padding: 14px; }
+  .nivel-btn { width: 38px; height: 38px; font-size: 13px; }
+  .subnivel-badge { width: 46px; height: 46px; font-size: 15px; }
+  .orbital-caixa { width: 30px; height: 30px; }
+  #diagrama-explicacao { font-size: 10px; }
+  #resumo-progresso-tabela { font-size: 11px; }
+
+  .overlay-base { bottom: 88px; overflow-y: auto; align-items: flex-start; padding-top: 20px; }
+  #quadro-box { width: calc(100% - 32px); padding: 20px 16px; max-height: 78vh; }
+  .quadro-passo-texto { font-size: 12.5px; }
+  .quadro-tabela { font-size: 12px; }
+  #quadro-regra { font-size: 13px; }
+  .link-aula { top: 6px; right: 6px; padding: 0.3rem 0.5rem; font-size: 0.6rem; }
+  .link-aula svg { width: 18px; height: 18px; }
+}
+</style>
+</head>
+<body>
+
+<div id="game-area">
+
+  <aside id="teacher-box">
+    <img id="teacher-img" src="../imagens/rafa-explicando.jpg" alt="Professora Rafaela">
+    <div id="teacher-bubble">
+      <div id="teacher-name">Professora Rafaela</div>
+      <p id="teacher-text"></p>
+      <button id="btn-avancar" onclick="avancarDialogo()">Continuar ›</button>
+    </div>
+  </aside>
+
+  <div id="scene-col">
+    <img id="scene-img" src="../imagens/laboratorio-niveis-subniveis.jpg" alt="Laboratório dos Níveis e Subníveis">
+
+    <div id="painel-experimento">
+      <div id="nivel-label">Nível de energia (n)</div>
+      <div id="nivel-selector">
+        <button class="nivel-btn ativo" onclick="mudarNivel(1)">n=1</button>
+        <button class="nivel-btn" onclick="mudarNivel(2)">n=2</button>
+        <button class="nivel-btn" onclick="mudarNivel(3)">n=3</button>
+        <button class="nivel-btn" onclick="mudarNivel(4)">n=4</button>
+      </div>
+
+      <div id="subniveis-row">
+        <div class="subnivel-badge" id="badge-s" onclick="selecionarSubnivel('s')">s</div>
+        <div class="subnivel-badge" id="badge-p" onclick="selecionarSubnivel('p')">p<span class="cadeado">🔒</span></div>
+        <div class="subnivel-badge" id="badge-d" onclick="selecionarSubnivel('d')">d<span class="cadeado">🔒</span></div>
+        <div class="subnivel-badge" id="badge-f" onclick="selecionarSubnivel('f')">f<span class="cadeado">🔒</span></div>
+      </div>
+
+      <div id="diagrama-wrap">
+        <div id="diagrama-orbitais"></div>
+      </div>
+      <div id="diagrama-explicacao">🔲 cada quadrado é um orbital &nbsp;·&nbsp; cada seta é um elétron (no máximo 2 por orbital)</div>
+      <div id="diagrama-legenda">Clique em um subnível disponível para ver seus orbitais.</div>
+
+      <div id="resumo-progresso">
+        <div id="resumo-progresso-titulo">O que você já descobriu</div>
+        <table id="resumo-progresso-tabela">
+          <thead>
+            <tr><th>Subnível</th><th>Orbitais</th><th>Máx. elétrons</th></tr>
+          </thead>
+          <tbody id="resumo-progresso-body">
+            <tr class="linha-vazia" data-sub="s"><td class="subnivel-col">s</td><td>—</td><td>—</td></tr>
+            <tr class="linha-vazia" data-sub="p"><td class="subnivel-col">p</td><td>—</td><td>—</td></tr>
+            <tr class="linha-vazia" data-sub="d"><td class="subnivel-col">d</td><td>—</td><td>—</td></tr>
+            <tr class="linha-vazia" data-sub="f"><td class="subnivel-col">f</td><td>—</td><td>—</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- COLOQUE O LINK AQUI -->
+    <a class="link-aula" href="https://www.youtube.com/watch?v=09PrmxKbp2k" target="_blank" rel="noopener" title="Assista à aula">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.6"/>
+        <path d="M10 8.5L16 12L10 15.5V8.5Z" fill="currentColor"/>
+      </svg>
+      <span>Assista à aula</span>
+    </a>
+  </div>
+</div>
+
+<!-- ── OVERLAY: QUADRO-RESUMO ── -->
+<div class="overlay-base" id="quadro-overlay">
+  <div id="quadro-box">
+    <div class="quadro-titulo">O Que Você Descobriu</div>
+
+    <div class="quadro-passo">
+      <div class="quadro-passo-num">1</div>
+      <div class="quadro-passo-texto">Cada nível de energia possui seus próprios subníveis.</div>
+    </div>
+    <table class="quadro-tabela">
+      <thead>
+        <tr><th>Nível</th><th>Subníveis disponíveis</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="subnivel-col">n = 1</td><td>s</td></tr>
+        <tr><td class="subnivel-col">n = 2</td><td>s, p</td></tr>
+        <tr><td class="subnivel-col">n = 3</td><td>s, p, d</td></tr>
+        <tr><td class="subnivel-col">n = 4</td><td>s, p, d, f</td></tr>
+      </tbody>
+    </table>
+
+    <div class="quadro-passo">
+      <div class="quadro-passo-num">2</div>
+      <div class="quadro-passo-texto">Cada subnível possui uma quantidade fixa de orbitais — e cada orbital comporta até 2 elétrons.</div>
+    </div>
+    <table class="quadro-tabela">
+      <thead>
+        <tr><th>Subnível</th><th>Nº de orbitais</th><th>Nº máx. de elétrons</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="subnivel-col">s</td><td>1</td><td>2</td></tr>
+        <tr><td class="subnivel-col">p</td><td>3</td><td>6</td></tr>
+        <tr><td class="subnivel-col">d</td><td>5</td><td>10</td></tr>
+        <tr><td class="subnivel-col">f</td><td>7</td><td>14</td></tr>
+      </tbody>
+    </table>
+
+    <div id="quadro-regra">A quantidade máxima de elétrons de cada subnível não é arbitrária — ela depende do número de orbitais. Como cada orbital comporta até dois elétrons, basta multiplicar o número de orbitais por dois.</div>
+  </div>
+  <button class="btn-opcao" style="max-width:220px; text-align:center; background:var(--gold); color:#1a0f08; font-weight:700; display:none;" id="btn-entendi" onclick="irParaDesafioFinal()">Ir para o desafio</button>
+</div>
+
+<!-- ── OVERLAY: DESAFIO FINAL ── -->
+<div class="overlay-base" id="desafio-final-overlay">
+  <div id="desafio-final-painel">
+    <div class="df-eyebrow">Desafio Final</div>
+    <div class="df-progresso" id="df-progresso">Pergunta 1 de 3</div>
+    <div class="df-titulo" id="df-titulo">—</div>
+    <div class="opcoes" id="df-opcoes"></div>
+    <div class="df-feedback" id="df-feedback"></div>
+    <button class="btn-prosseguir" id="btn-proximo-final" onclick="avancarPerguntaFinal()">Próxima pergunta →</button>
+  </div>
+</div>
+
+<!-- ── MODAL CONCLUSÃO ── -->
+<div id="modal-conclusao">
+  <div id="conclusao-box">
+    <div class="conc-eyebrow">Laboratório Concluído</div>
+    <div class="conc-titulo">Níveis e Subníveis</div>
+    <p class="conc-desc">Você descobriu sozinho por que cada nível de energia abre espaço para um novo tipo de subnível — e quantos elétrons cabem em cada um deles.</p>
+    <button class="btn-conc" onclick="reiniciarFase()">Refazer a fase</button>
+  </div>
+</div>
+
+<!-- ── GAME LOGIC ── -->
+<script>
+/* RAFAELA */
+const IMG = {
+  sorrindo:   '../imagens/rafa-sorrindo.jpg',
+  explicando: '../imagens/rafa-explicando.jpg',
+  pensando:   '../imagens/rafa-pensando.jpg',
+  animada:    '../imagens/rafa-animada.jpg',
+};
+let _onContinue = null;
+const $timg = document.getElementById('teacher-img');
+const $ttxt = document.getElementById('teacher-text');
+const $btn  = document.getElementById('btn-avancar');
+
+const _ding = new Audio('../sons/ding.mp3');
+_ding.preload = 'auto';
+function tocarDing() { try { _ding.currentTime = 0; _ding.play().catch(function () {}); } catch (e) {} }
+
+function avancarDialogo() {
+  $btn.classList.remove('show');
+  if (_onContinue) { const cb = _onContinue; _onContinue = null; cb(); }
+  ajustarEspacoTeacherBox();
+}
+function rafaFala(imgKey, txt, onContinue) {
+  _onContinue = onContinue || null;
+  $timg.style.opacity = '0';
+  setTimeout(() => { $timg.src = IMG[imgKey] || IMG.explicando; $timg.style.opacity = '1'; }, 220);
+  $ttxt.textContent = txt;
+  $btn.classList.toggle('show', !!_onContinue && !document.querySelector('.overlay-base.show'));
+  ajustarEspacoTeacherBox();
+}
+
+function ajustarEspacoTeacherBox() {
+  if (window.innerWidth <= 768) return;
+  const painel = document.getElementById('painel-experimento');
+  const teacherBox = document.getElementById('teacher-box');
+  if (!painel || !teacherBox) return;
+  painel.style.top = (teacherBox.offsetHeight + 26) + 'px';
+}
+
+/* ── DADOS ── */
+const ORDEM_SUB = ['s','p','d','f'];
+const INFO_SUB = {
+  s: { orbitais: 1, eletrons: 2 },
+  p: { orbitais: 3, eletrons: 6 },
+  d: { orbitais: 5, eletrons: 10 },
+  f: { orbitais: 7, eletrons: 14 },
+};
+const NARRACAO_DESCOBERTA = {
+  s: 'Observe: o subnível s tem apenas 1 orbital, representado por um quadrado. Como cada orbital acomoda no máximo 2 elétrons, o número máximo de elétrons do subnível s é 2. Veja o quadro-resumo logo abaixo.',
+  p: 'O subnível p tem 3 orbitais — 3 quadrados. Cada um comporta até 2 elétrons, então o máximo é 6. Repare no quadro-resumo.',
+  d: 'O subnível d tem 5 orbitais: 5 × 2 = 10 elétrons no máximo.',
+  f: 'E o subnível f, com 7 orbitais, chega a 14 elétrons no máximo.'
+};
+const FALAS_NIVEL = {
+  1: 'O nível 1 possui exatamente 1 subnível: o s. Clique nele para ver como ele é organizado.',
+  2: 'O nível 2 possui exatamente 2 subníveis: s e p. Clique em cada um deles, um de cada vez.',
+  3: 'O nível 3 possui exatamente 3 subníveis: s, p e d. Clique em cada um deles, um de cada vez.',
+  4: 'O nível 4 possui exatamente 4 subníveis: s, p, d e f. Clique em cada um deles, um de cada vez.'
+};
+
+let nivelAtual = 1;
+let subnivelSelecionado = null;
+let visitados = new Set();
+let subniveisMostrados = [];
+
+function mudarNivel(n) {
+  nivelAtual = n;
+  document.querySelectorAll('.nivel-btn').forEach((b, i) => {
+    b.classList.toggle('ativo', i + 1 === n);
+    b.classList.remove('destaque');
+  });
+  subnivelSelecionado = null;
+  subniveisMostrados = [];
+  document.getElementById('diagrama-orbitais').innerHTML = '';
+  document.getElementById('diagrama-legenda').textContent = 'Clique em cada subnível disponível para ver seus orbitais.';
+  atualizarBadges();
+  rafaFala('explicando', FALAS_NIVEL[n], null);
+}
+
+function atualizarBadges() {
+  ORDEM_SUB.forEach((s, i) => {
+    const badge = document.getElementById('badge-' + s);
+    const disponivel = (i + 1) <= nivelAtual;
+    badge.classList.toggle('disponivel', disponivel);
+    badge.classList.toggle('bloqueado', !disponivel);
+    badge.classList.toggle('selecionado', s === subnivelSelecionado);
+  });
+}
+
+function selecionarSubnivel(s) {
+  const idx = ORDEM_SUB.indexOf(s);
+  if ((idx + 1) > nivelAtual) return;
+  subnivelSelecionado = s;
+  atualizarBadges();
+  adicionarLinhaDiagrama(s);
+  const novaDescoberta = preencherLinhaResumo(s);
+  if (novaDescoberta) tocarDing();
+  visitados.add(s);
+
+  const info = INFO_SUB[s];
+  document.getElementById('diagrama-legenda').textContent =
+    'Subnível ' + s + ': ' + info.orbitais + (info.orbitais === 1 ? ' orbital' : ' orbitais') +
+    ', cada um com espaço para 2 elétrons — no máximo ' + info.eletrons + ' elétrons.';
+
+  const subniveisDoNivel = ORDEM_SUB.slice(0, nivelAtual);
+  const completouNivel = subniveisDoNivel.every(sub => subniveisMostrados.includes(sub));
+
+  const proximoPasso = () => {
+    if (nivelAtual === 4) {
+      rafaFala('animada', 'Você viu os quatro subníveis do nível 4, todos juntos. Repare no padrão: quantos subníveis apareceram em cada nível, e quantos elétrons cabem em cada um deles?', mostrarQuadro);
+    } else {
+      rafaFala('pensando', 'Agora clique em "n=' + (nivelAtual + 1) + '" ali em cima, no seletor de nível, para ver o que aparece de novo.', null);
+      const proximoBtn = document.querySelectorAll('.nivel-btn')[nivelAtual];
+      if (proximoBtn) proximoBtn.classList.add('destaque');
+    }
+  };
+
+  if (novaDescoberta) {
+    rafaFala('explicando', NARRACAO_DESCOBERTA[s], completouNivel ? proximoPasso : null);
+  } else if (completouNivel) {
+    setTimeout(proximoPasso, 500);
+  }
+}
+
+function adicionarLinhaDiagrama(s) {
+  if (subniveisMostrados.includes(s)) return;
+  subniveisMostrados.push(s);
+
+  const wrap = document.getElementById('diagrama-orbitais');
+  const info = INFO_SUB[s];
+  const idx = ORDEM_SUB.indexOf(s);
+
+  const linha = document.createElement('div');
+  linha.className = 'diagrama-linha';
+  linha.dataset.sub = s;
+
+  const label = document.createElement('div');
+  label.className = 'diagrama-linha-label';
+  label.textContent = s;
+  linha.appendChild(label);
+
+  const caixas = document.createElement('div');
+  caixas.className = 'diagrama-linha-caixas';
+  for (let i = 0; i < info.orbitais; i++) {
+    const caixa = document.createElement('div');
+    caixa.className = 'orbital-caixa';
+    const up = document.createElement('span');
+    up.className = 'eletron-seta';
+    up.textContent = '↑';
+    const down = document.createElement('span');
+    down.className = 'eletron-seta baixo';
+    down.textContent = '↑';
+    caixa.appendChild(up);
+    caixa.appendChild(down);
+    caixas.appendChild(caixa);
+  }
+  linha.appendChild(caixas);
+  const proximaLinha = Array.from(wrap.children).find(el => ORDEM_SUB.indexOf(el.dataset.sub) > idx);
+  wrap.insertBefore(linha, proximaLinha || null);
+}
+
+function preencherLinhaResumo(s) {
+  const linha = document.querySelector('#resumo-progresso-body tr[data-sub="' + s + '"]');
+  if (!linha.classList.contains('linha-vazia')) return false;
+  const info = INFO_SUB[s];
+  linha.classList.remove('linha-vazia');
+  linha.children[1].textContent = info.orbitais;
+  linha.children[2].textContent = info.eletrons;
+  return true;
+}
+
+/* QUADRO */
+function mostrarQuadro() {
+  document.getElementById('quadro-overlay').classList.add('show');
+  setTimeout(() => document.getElementById('btn-entendi').style.display = 'block', 900);
+}
+
+/* DESAFIO FINAL */
+const perguntasFinais = [
+  {
+    titulo: 'Quantos elétrons cabem, no máximo, no subnível d?',
+    opcoes: [
+      { texto: '10 elétrons.', correta: true },
+      { texto: '6 elétrons.', correta: false }
+    ],
+    certoMsg: 'Isso mesmo! O subnível d tem 5 orbitais, e cada orbital comporta até 2 elétrons: 5 × 2 = 10.',
+    erradoMsg: 'Volte à tabela: o subnível d tem 5 orbitais. Cada orbital cabe até 2 elétrons.'
+  },
+  {
+    titulo: 'Quantos orbitais tem o subnível f?',
+    opcoes: [
+      { texto: '7 orbitais.', correta: true },
+      { texto: '5 orbitais.', correta: false }
+    ],
+    certoMsg: 'Correto! O f é o subnível com mais orbitais entre os quatro: 7 orbitais, até 14 elétrons.',
+    erradoMsg: '5 orbitais é o subnível d. O f tem dois orbitais a mais que o d.'
+  },
+  {
+    titulo: 'Qual é o primeiro nível de energia em que aparece o subnível d?',
+    opcoes: [
+      { texto: 'Nível 3 (n = 3).', correta: true },
+      { texto: 'Nível 2 (n = 2).', correta: false }
+    ],
+    certoMsg: 'Exato. No nível 2 só existem s e p — o d só aparece a partir do nível 3.',
+    erradoMsg: 'Lembre do que você viu no laboratório: no nível 2 só havia s e p disponíveis.'
+  }
+];
+let dfIndice = 0;
+
+function irParaDesafioFinal() {
+  document.getElementById('quadro-overlay').classList.remove('show');
+  document.getElementById('desafio-final-overlay').classList.add('show');
+  dfIndice = 0;
+  renderPerguntaFinal();
+  rafaFala('animada', 'Três perguntas rápidas para confirmar o que você descobriu.', null);
+}
+
+function renderPerguntaFinal() {
+  const p = perguntasFinais[dfIndice];
+  document.getElementById('df-progresso').textContent = 'Pergunta ' + (dfIndice + 1) + ' de ' + perguntasFinais.length;
+  document.getElementById('df-titulo').textContent = p.titulo;
+  const wrap = document.getElementById('df-opcoes');
+  wrap.innerHTML = '';
+  p.opcoes.forEach(op => {
+    const b = document.createElement('button');
+    b.className = 'btn-opcao';
+    b.textContent = op.texto;
+    b.onclick = () => responderDF(b, op.correta);
+    wrap.appendChild(b);
+  });
+  const fb = document.getElementById('df-feedback');
+  fb.textContent = ''; fb.className = 'df-feedback';
+  const btnProx = document.getElementById('btn-proximo-final');
+  btnProx.classList.remove('show');
+  btnProx.textContent = (dfIndice === perguntasFinais.length - 1) ? 'Concluir laboratório' : 'Próxima pergunta →';
+}
+
+function responderDF(btn, correto) {
+  const p = perguntasFinais[dfIndice];
+  const fb = document.getElementById('df-feedback');
+  if (correto) {
+    tocarDing();
+    btn.classList.add('certo');
+    Array.from(document.getElementById('df-opcoes').children).forEach(b => b.onclick = null);
+    fb.className = 'df-feedback ok';
+    fb.textContent = p.certoMsg;
+    document.getElementById('btn-proximo-final').classList.add('show');
+  } else {
+    btn.classList.add('errado');
+    fb.className = 'df-feedback';
+    fb.textContent = p.erradoMsg;
+    setTimeout(() => btn.classList.remove('errado'), 700);
+  }
+}
+
+function avancarPerguntaFinal() {
+  dfIndice++;
+  if (dfIndice < perguntasFinais.length) {
+    renderPerguntaFinal();
+  } else {
+    concluirFase();
+  }
+}
+
+function concluirFase() {
+  document.getElementById('desafio-final-overlay').classList.remove('show');
+  document.getElementById('modal-conclusao').classList.add('show');
+  try { localStorage.setItem('kifacil_niveis_subniveis_ok', '1'); } catch(e) {}
+}
+
+function reiniciarFase() {
+  document.getElementById('modal-conclusao').classList.remove('show');
+  document.getElementById('quadro-overlay').classList.remove('show');
+  document.getElementById('desafio-final-overlay').classList.remove('show');
+
+  nivelAtual = 1;
+  subnivelSelecionado = null;
+  visitados = new Set();
+  subniveisMostrados = [];
+  dfIndice = 0;
+
+  document.querySelectorAll('.nivel-btn').forEach((b, i) => {
+    b.classList.toggle('ativo', i === 0);
+    b.classList.remove('destaque');
+  });
+  document.getElementById('diagrama-orbitais').innerHTML = '';
+  document.getElementById('diagrama-legenda').textContent = 'Clique em cada subnível disponível para ver seus orbitais.';
+  document.querySelectorAll('#resumo-progresso-body tr').forEach(tr => {
+    tr.classList.add('linha-vazia');
+    tr.children[1].textContent = '—';
+    tr.children[2].textContent = '—';
+  });
+  document.getElementById('btn-entendi').style.display = 'none';
+  atualizarBadges();
+
+  ajustarEspacoTeacherBox();
+  rafaFala('sorrindo', 'Vamos recomeçar. Escolha um nível de energia e descubra quais subníveis existem em cada um.', null);
+}
+
+/* INÍCIO */
+document.body.style.visibility = 'visible';
+atualizarBadges();
+ajustarEspacoTeacherBox();
+setTimeout(() => {
+  rafaFala('sorrindo', 'Bem-vindo ao Laboratório dos Níveis e Subníveis. Escolha um nível de energia e descubra quais subníveis existem em cada um.', null);
+}, 400);
+</script>
+<script>
+(function () {
+  var _clickSom = new Audio('../sons/click.mp3');
+  _clickSom.preload = 'auto';
+  document.addEventListener('click', function (e) {
+    var alvo = e.target.closest('button');
+    if (alvo) { try { _clickSom.currentTime = 0; _clickSom.play().catch(function () {}); } catch (err) {} }
+  }, true);
+})();
+</script>
+</body>
+</html>

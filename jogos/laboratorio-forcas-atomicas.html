@@ -1,0 +1,931 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Laboratório das Propriedades Periódicas · KiFácil</title>
+<link rel="icon" type="image/png" href="../favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;1,500;1,600&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --fundo: #fdf8f0;
+  --fundo-card: #fffdf9;
+  --escuro: #2e2016;
+  --texto: #1a1208;
+  --texto-suave: #3d2e1a;
+  --dourado: #8a5e10;
+  --dourado-claro: #c8920a;
+  --borda: rgba(100,70,20,0.3);
+  --borda-forte: rgba(100,70,20,0.5);
+  --verde-escuro: #1e5238;
+  --vermelho-escuro: #7a1515;
+  --text: #f5ead0;
+  --soft: #e8d4b0;
+  --gold: #e8b84b;
+  --border: rgba(212,170,106,0.4);
+  --panel-bg: rgba(14,6,0,0.94);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { min-height: 100%; }
+body {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  background: var(--fundo);
+  color: var(--texto);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+.top-nav {
+  background: #1e1008;
+  border-bottom: 2px solid var(--dourado-claro);
+  padding: 0 2.5rem;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+.brand {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.7rem;
+  font-weight: 600;
+  color: #fff8ee;
+  letter-spacing: 0.03em;
+  margin-right: auto;
+}
+
+main {
+  flex: 1;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 2.5rem;
+  width: 100%;
+}
+.titulo-jogo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+  line-height: 1.1;
+}
+.subtitulo {
+  font-size: 1.1rem;
+  color: var(--texto);
+  margin-bottom: 2rem;
+  max-width: 680px;
+}
+
+.narrador {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1.4rem;
+  padding: 1rem 1.1rem;
+  border: 1.5px solid var(--borda-forte);
+  border-radius: 10px;
+  background: rgba(30,16,8,0.05);
+}
+.narrador img {
+  width: 78px;
+  height: 96px;
+  object-fit: cover;
+  object-position: top center;
+  border-radius: 10px;
+  border: 1px solid rgba(200,146,10,.35);
+  flex-shrink: 0;
+}
+.narrador-nome {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.8rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--dourado-claro);
+  margin-bottom: 0.4rem;
+}
+.narrador-texto {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: var(--texto-suave);
+}
+
+.imagem-wrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: min(100%, 900px);
+  max-height: 70vh;
+  margin: 0 auto;
+  cursor: zoom-in;
+  border: 1.5px solid var(--borda-forte);
+  border-radius: 6px;
+  overflow: hidden;
+  background: #f7efe2;
+}
+
+#game-area {
+  position: relative;
+  width: 100%;
+  height: 70vh;
+  min-height: 480px;
+  overflow: hidden;
+}
+#scene-col { position: absolute; inset: 0; background: #1a0f08; }
+#scene-img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; opacity: 0.55; }
+
+.link-aula {
+  position: absolute; top: 10px; right: 10px; z-index: 10;
+  display: flex; flex-direction: column; align-items: center; gap: 2px;
+  text-decoration: none; color: #fff8ee;
+  background: rgba(30,16,8,0.72); border: 1.5px solid var(--dourado-claro, #c8920a);
+  border-radius: 8px; padding: 0.4rem 0.65rem;
+  font-family: 'Cormorant Garamond', serif; font-size: 0.68rem; font-weight: 600;
+  letter-spacing: 0.02em; text-align: center; line-height: 1.2;
+  cursor: pointer; transition: background 0.2s, transform 0.15s;
+}
+.link-aula:hover { background: rgba(30,16,8,0.92); transform: translateY(-1px); }
+.link-aula svg { width: 22px; height: 22px; }
+
+#painel-experimento {
+  position: absolute;
+  top: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(460px, calc(100% - 32px));
+  bottom: 14px;
+  background: var(--fundo-card);
+  border: 1.5px solid var(--borda-forte);
+  border-radius: 16px;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 18;
+  box-shadow: 0 30px 60px rgba(0,0,0,0.16);
+}
+
+#modo-tabs { display: flex; gap: 8px; margin-bottom: 16px; width: 100%; justify-content: center; }
+.modo-tab {
+  font-family: 'Libre Baskerville', serif;
+  font-size: 12px;
+  letter-spacing: .04em;
+  padding: .45rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  border: 1.5px solid rgba(100,70,20,0.15);
+  background: rgba(232,184,75,0.12);
+  color: var(--texto);
+  transition: border-color .2s, background .2s, color .2s;
+}
+.modo-tab.ativo { border-color: var(--dourado); background: rgba(232,184,75,0.18); color: var(--escuro); font-weight: 700; }
+.modo-tab:disabled { opacity: .4; pointer-events: none; }
+
+#atomo-area { position: relative; display: flex; align-items: center; justify-content: center; margin-top: 38px; }
+.seta-indicador { position: absolute; display: none; }
+.seta-indicador.show { display: block; }
+.seta-indicador .seta-linha { stroke: var(--dourado-claro); }
+.seta-indicador .seta-ponta { fill: var(--dourado-claro); }
+#seta-grupo { width: 34px; height: 118px; left: -50px; top: 50%; transform: translateY(-50%); }
+#seta-periodo { width: 180px; height: 36px; top: -48px; left: 50%; transform: translateX(-50%); }
+
+#atomo-svg-wrap { width: 260px; height: 260px; display: flex; align-items: center; justify-content: center; margin-bottom: 14px; }
+#atomo-svg { width: 100%; height: 100%; }
+.shell { fill: none; stroke: rgba(120,170,230,0.55); stroke-width: 1.5; transition: r .35s ease; }
+.eletron { fill: #79b6f5; filter: drop-shadow(0 0 3px rgba(121,182,245,0.9)); }
+.nucleo { transition: r .35s ease, fill .35s ease; }
+.proton-dot { fill: #e8b84b; }
+
+#atomo-legenda { font-family: 'Lora', serif; font-size: 0.95rem; color: var(--texto-suave); text-align: center; margin: 8px 0 14px; min-height: 22px; }
+
+#controles-atomo { display: flex; gap: 14px; margin-bottom: 6px; }
+.btn-ctrl {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  background: rgba(255,255,255,0.92);
+  border: 1.5px solid rgba(100,70,20,0.15);
+  border-radius: 10px;
+  padding: .55rem 1rem;
+  cursor: pointer;
+  font-family: 'Libre Baskerville', serif;
+  color: var(--texto);
+  transition: border-color .2s, background .2s;
+}
+.btn-ctrl:hover { border-color: var(--dourado); background: rgba(232,184,75,0.16); }
+.btn-ctrl:disabled { opacity: .35; pointer-events: none; }
+.btn-ctrl .ctrl-icone { font-family: 'Lora', serif; font-size: 20px; color: var(--dourado); font-weight: 700; }
+.btn-ctrl .ctrl-label { font-size: 9px; letter-spacing: .05em; text-transform: uppercase; }
+
+#contador-atomo { font-family: 'Lora', serif; font-size: 0.95rem; color: rgba(46,26,8,0.5); margin-top: 4px; }
+
+#teacher-img {
+  width: 98px;
+  height: 128px;
+  object-fit: cover;
+  object-position: top center;
+  border-radius: 10px;
+  border: 1.5px solid rgba(200,146,10,0.4);
+  flex-shrink: 0;
+  filter: drop-shadow(0 12px 30px rgba(0,0,0,0.25));
+}
+.narrador > div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+#teacher-text { font-family: 'Lora', serif; font-size: 1rem; line-height: 1.7; color: var(--texto-suave); font-weight: 500; text-align: justify; }
+#btn-avancar {
+  display: none;
+  align-self: flex-start;
+  background: linear-gradient(135deg, var(--dourado), #b8891e);
+  color: var(--escuro);
+  border: none;
+  border-radius: 6px;
+  padding: .45rem 1.2rem;
+  font-family: 'Libre Baskerville', serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: filter .15s, transform .15s;
+}
+#btn-avancar.show { display: block; }
+#btn-avancar:hover { filter: brightness(1.08); transform: scale(1.02); }
+
+/* ── OVERLAYS FIXOS ── */
+.overlay-base { display: none; position: fixed; inset: 0; z-index: 300; background: rgba(0,0,0,0.65); align-items: center; justify-content: center; }
+.overlay-base.show { display: flex; }
+
+.modal-box {
+  background: var(--fundo-card);
+  border: 1.5px solid var(--borda-forte);
+  border-radius: 12px;
+  padding: 1.6rem 1.8rem;
+  max-width: 480px;
+  width: calc(100% - 40px);
+  box-shadow: 0 12px 48px rgba(0,0,0,.25);
+  animation: fadeUp .28s ease;
+}
+@keyframes fadeUp { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
+.modal-eyebrow { font-size: 9px; letter-spacing: .18em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+.modal-titulo { font-family: 'Lora', serif; font-size: 20px; font-weight: 600; color: var(--text); margin-bottom: 6px; line-height: 1.3; }
+.modal-subtxt { font-size: 13px; color: var(--soft); line-height: 1.7; margin-bottom: 16px; font-style: italic; }
+.opcoes { display: flex; flex-direction: column; gap: 10px; }
+.btn-opcao {
+  background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 6px;
+  padding: .7rem 1rem; font-family: 'Libre Baskerville', serif; font-size: 13px; color: var(--soft);
+  cursor: pointer; text-align: left; transition: border-color .2s, background .2s;
+}
+.btn-opcao:hover { border-color: rgba(232,184,75,0.7); background: rgba(232,184,75,0.06); color: var(--text); }
+.btn-opcao.errado { border-color: rgba(217,95,59,0.6); background: rgba(217,95,59,0.08); animation: shake .3s; }
+.btn-opcao.certo  { border-color: rgba(80,200,120,0.7); background: rgba(80,200,120,0.08); color: #7fe898; }
+@keyframes shake { 0%,100%{transform:translateX(0);} 25%{transform:translateX(-6px);} 75%{transform:translateX(6px);} }
+
+/* modal-box tem fundo claro — usa a paleta clara, não a paleta dos painéis escuros */
+.modal-box .modal-eyebrow { color: var(--dourado-claro); }
+.modal-box .modal-titulo { color: var(--texto); }
+.modal-box .modal-subtxt { color: var(--texto-suave); }
+.modal-box .btn-opcao { color: var(--texto-suave); border-color: var(--borda); }
+.modal-box .btn-opcao:hover { color: var(--texto); }
+.modal-box .btn-opcao.certo { color: var(--verde-escuro); }
+.modal-box .btn-opcao.errado { color: var(--vermelho-escuro); }
+
+/* quadro-resumo */
+#quadro-overlay { flex-direction: column; gap: 20px; }
+#quadro-box {
+  width: 620px; max-width: calc(100% - 40px); background: #141410;
+  border: 3px solid rgba(212,170,106,0.45); border-radius: 8px;
+  padding: 32px 40px 36px; box-shadow: 0 8px 40px rgba(0,0,0,.85);
+}
+.quadro-titulo {
+  font-family: 'Lora', serif; font-size: 11px; letter-spacing: .18em; text-transform: uppercase;
+  color: rgba(245,230,180,0.6); text-align: center; margin-bottom: 24px;
+}
+.quadro-cards { display: flex; gap: 30px; justify-content: center; }
+.q-card { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 10px; opacity: 0; transform: translateY(6px); transition: opacity .6s, transform .6s; }
+.q-card.visivel { opacity: 1; transform: translateY(0); }
+.q-icone { font-family: 'Lora', serif; font-size: 32px; color: var(--gold); }
+.q-titulo { font-family: 'Lora', serif; font-size: 15px; font-weight: 600; color: var(--text); text-align: center; }
+.q-desc { font-size: 12px; color: rgba(245,230,180,0.65); text-align: center; line-height: 1.6; font-style: italic; }
+.q-seta { font-family: 'Lora', serif; font-size: 22px; color: var(--gold); font-weight: 700; }
+
+/* lousa */
+#lousa-overlay { flex-direction: column; gap: 20px; }
+#lousa-box {
+  background: #111810; border: 2px solid rgba(130,180,130,0.3); border-radius: 8px;
+  padding: 26px 36px; max-width: 560px; width: calc(100% - 40px);
+  box-shadow: inset 0 0 30px rgba(0,0,0,.5), 0 8px 32px rgba(0,0,0,.8);
+}
+.lousa-titulo { font-family: 'Lora', serif; font-size: 13px; letter-spacing: .12em; text-transform: uppercase; color: rgba(180,220,180,0.45); text-align: center; margin-bottom: 18px; }
+.lousa-linha { font-family: 'Lora', serif; font-size: 22px; font-weight: 500; color: #f5f0e8; margin-bottom: 12px; opacity: 0; transition: opacity .5s; display: flex; align-items: center; gap: 10px; }
+.lousa-linha.visivel { opacity: 1; }
+.lousa-linha .seta-up { color: #7fe898; }
+.lousa-linha .seta-down { color: #e07a5f; }
+.lousa-conclusao {
+  display: block; font-size: 14px; font-weight: 500; font-style: italic; line-height: 1.7;
+  color: rgba(245,240,232,0.8); margin-top: 6px; padding-top: 14px; border-top: 1px dashed rgba(130,180,130,0.25);
+}
+
+/* desafio final */
+#desafio-final-overlay { flex-direction: column; gap: 4px; }
+#desafio-final-painel {
+  background: var(--panel-bg); border: 1.5px solid var(--border); border-radius: 12px;
+  padding: 1.5rem 1.7rem; max-width: 480px; width: calc(100% - 40px); box-shadow: 0 8px 32px rgba(0,0,0,.8);
+}
+.df-eyebrow { font-size: 9px; letter-spacing: .18em; text-transform: uppercase; color: var(--gold); margin-bottom: 5px; }
+.df-titulo { font-family: 'Lora', serif; font-size: 18px; font-weight: 600; color: var(--text); margin-bottom: 16px; line-height: 1.35; }
+.df-progresso { font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: rgba(232,216,176,0.4); margin-bottom: 6px; }
+.df-feedback { font-size: 14px; font-style: italic; color: rgba(217,150,100,0.9); margin-top: 12px; line-height: 1.6; min-height: 20px; }
+.df-feedback.ok { color: rgba(100,220,130,0.9); }
+.btn-prosseguir {
+  display: none; margin-top: 14px; background: var(--gold); border: none; border-radius: 6px;
+  padding: .6rem 1.4rem; font-family: 'Libre Baskerville', serif; font-size: 12px; font-weight: 700;
+  color: #1a0f08; cursor: pointer; letter-spacing: .05em; text-transform: uppercase; transition: background .15s;
+}
+.btn-prosseguir:hover { background: #f0c960; }
+.btn-prosseguir.show { display: block; }
+
+/* modal conclusão */
+#modal-conclusao { display: none; position: fixed; inset: 0; z-index: 400; background: rgba(0,0,0,0.8); align-items: center; justify-content: center; }
+#modal-conclusao.show { display: flex; }
+#conclusao-box {
+  background: var(--panel-bg); border: 1.5px solid var(--border); border-radius: 14px;
+  padding: 2rem 2.2rem; max-width: 430px; width: calc(100% - 40px); text-align: center;
+  box-shadow: 0 16px 64px rgba(0,0,0,.9); animation: fadeUp .35s ease;
+}
+.conc-eyebrow { font-size: 9px; letter-spacing: .18em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+.conc-titulo { font-family: 'Lora', serif; font-size: 24px; font-weight: 600; color: var(--text); margin-bottom: 12px; line-height: 1.25; }
+.conc-desc { font-size: 13px; color: var(--soft); line-height: 1.8; margin-bottom: 22px; font-style: italic; }
+.conc-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.btn-conc {
+  display: inline-block; background: var(--gold); border: none; border-radius: 6px; padding: .65rem 2rem;
+  font-family: 'Libre Baskerville', serif; font-size: 12px; font-weight: 700; color: #1a0f08;
+  cursor: pointer; letter-spacing: .06em; text-transform: uppercase; text-decoration: none; transition: background .15s;
+}
+.btn-conc:hover { background: #f0c960; }
+
+/* ── MOBILE ── */
+@media (max-width: 768px) {
+  #teacher-box {
+    position: fixed; bottom: 0; left: 0; right: 0; top: auto; width: 100%;
+    flex-direction: row; align-items: flex-end; gap: 8px; background: #1a0f08;
+    padding: 8px 10px; border-top: 1px solid rgba(212,170,106,0.2); pointer-events: all; z-index: 500;
+  }
+  #teacher-img { width: 52px; height: 64px; border-radius: 8px; border-bottom: 2px solid rgba(232,184,75,0.55); border-top: none; }
+  #teacher-bubble { width: auto; flex: 1; min-height: auto; border-radius: 8px; padding: .55rem; }
+  #teacher-text { font-size: 12.5px; line-height: 1.5; }
+
+  body { padding-bottom: 88px; }
+  #game-area { height: auto; }
+
+  .subtitulo { font-size: .92rem; margin-bottom: 1.4rem; }
+
+  #painel-experimento { width: calc(100% - 16px); top: 40px; bottom: 6px; padding: 12px; }
+  #atomo-svg-wrap { width: 190px; height: 190px; }
+  #atomo-area { margin-top: 30px; }
+  #seta-grupo { width: 24px; height: 84px; left: -32px; }
+  #seta-periodo { width: 130px; height: 26px; top: -34px; }
+  #controles-atomo { gap: 8px; }
+  .btn-ctrl { padding: .4rem .6rem; }
+  .btn-ctrl .ctrl-icone { font-size: 17px; }
+  .btn-ctrl .ctrl-label { font-size: 8px; }
+  #atomo-legenda { font-size: .8rem; margin: 6px 0 10px; }
+  #contador-atomo { font-size: .8rem; }
+  .modo-tab { font-size: 10.5px; padding: .4rem .7rem; }
+
+  .overlay-base { bottom: 88px; overflow-y: auto; align-items: flex-start; padding-top: 20px; }
+  .link-aula { top: 6px; right: 6px; padding: 0.3rem 0.5rem; font-size: 0.6rem; }
+  .link-aula svg { width: 18px; height: 18px; }
+
+  .modal-box { padding: 1.1rem 1.2rem; }
+  .modal-eyebrow { font-size: 8px; margin-bottom: 6px; }
+  .modal-titulo { font-size: 16px; margin-bottom: 4px; }
+  .modal-subtxt { font-size: 11.5px; line-height: 1.5; margin-bottom: 12px; }
+  .opcoes { gap: 8px; }
+  .btn-opcao { font-size: 11.5px; padding: .55rem .8rem; }
+
+  #quadro-box { width: calc(100% - 32px); padding: 20px 16px; }
+  .quadro-titulo { font-size: 10px; margin-bottom: 16px; }
+  .quadro-cards { flex-direction: column; gap: 18px; }
+  .q-icone { font-size: 24px; }
+  .q-titulo { font-size: 13px; }
+  .q-seta { font-size: 16px; }
+  .q-desc { font-size: 11px; }
+
+  .lousa-titulo { font-size: 12px; margin-bottom: 12px; }
+  .lousa-linha { font-size: 17px; margin-bottom: 8px; }
+  .lousa-conclusao { font-size: 12px; }
+  #lousa-box { padding: 18px 18px; }
+
+  #desafio-final-painel { width: calc(100% - 24px); padding: 1rem 1.1rem; }
+  .df-eyebrow { font-size: 8px; margin-bottom: 4px; }
+  .df-titulo { font-size: 15px; margin-bottom: 12px; line-height: 1.3; }
+  .df-progresso { font-size: 9px; }
+  .df-feedback { font-size: 12.5px; margin-top: 10px; }
+  .btn-prosseguir { font-size: 11px; padding: .5rem 1.1rem; }
+
+  #conclusao-box { padding: 1.4rem 1.6rem; }
+  .conc-eyebrow { font-size: 8px; margin-bottom: 6px; }
+  .conc-titulo { font-size: 20px; margin-bottom: 8px; }
+  .conc-desc { font-size: 12px; line-height: 1.65; margin-bottom: 16px; }
+  .btn-conc { font-size: 11px; padding: .6rem 1.5rem; }
+}
+</style>
+</head>
+<body>
+<nav class="top-nav">
+  <div class="brand">KiFácil</div>
+</nav>
+<main>
+  <h1 class="titulo-jogo">Laboratório das Forças Atômicas</h1>
+  <p class="subtitulo">Explore o tamanho dos átomos e descubra como camadas eletrônicas e prótons disputam espaço.</p>
+
+  <div class="narrador">
+    <img id="teacher-img" src="../imagens/rafa-explicando.jpg" alt="Professora Rafaela">
+    <div>
+      <div class="narrador-nome">Professora Rafaela</div>
+      <div id="teacher-text" class="narrador-texto">Bem-vindo ao laboratório. Use os controles para aumentar ou diminuir o átomo e entenda o que muda.</div>
+      <button id="btn-avancar" onclick="avancarDialogo()">Continuar ›</button>
+    </div>
+  </div>
+
+  <div class="imagem-wrapper">
+    <div id="game-area">
+      <!-- CENA -->
+      <div id="scene-col">
+        <img id="scene-img" src="../imagens/laboratorio-forcas-atomicas.jpg" alt="Laboratório das Forças Atômicas">
+
+        <!-- COLOQUE O LINK AQUI -->
+        <a class="link-aula" href="https://www.youtube.com/watch?v=r6lWU5DbsDA" target="_blank" rel="noopener" title="Assista à aula">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.6"/>
+            <path d="M10 8.5L16 12L10 15.5V8.5Z" fill="currentColor"/>
+          </svg>
+          <span>Assista à aula</span>
+        </a>
+
+        <div id="painel-experimento">
+      <div id="modo-tabs">
+        <button class="modo-tab ativo" id="tab-grupo" onclick="mudarModo('grupo')">Descendo o Grupo</button>
+        <button class="modo-tab" id="tab-periodo" onclick="mudarModo('periodo')" disabled>Ao Longo do Período</button>
+      </div>
+
+      <div id="atomo-area">
+        <svg id="seta-grupo" class="seta-indicador show" viewBox="0 0 40 140" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <line class="seta-linha" x1="20" y1="6" x2="20" y2="108" stroke-width="12" stroke-linecap="round"></line>
+          <polygon class="seta-ponta" points="2,102 38,102 20,136"></polygon>
+        </svg>
+        <svg id="seta-periodo" class="seta-indicador" viewBox="0 0 200 40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <line class="seta-linha" x1="6" y1="20" x2="158" y2="20" stroke-width="12" stroke-linecap="round"></line>
+          <polygon class="seta-ponta" points="152,2 152,38 194,20"></polygon>
+        </svg>
+        <div id="atomo-svg-wrap">
+          <svg id="atomo-svg" viewBox="0 0 260 260" xmlns="http://www.w3.org/2000/svg">
+            <g id="shells-group"></g>
+            <circle id="nucleo" class="nucleo" cx="130" cy="130" r="16" fill="#c9863a"></circle>
+            <g id="protons-group"></g>
+          </svg>
+        </div>
+      </div>
+
+      <div id="atomo-legenda">Clique em "adicionar camada" para começar.</div>
+
+      <div id="controles-atomo">
+        <button class="btn-ctrl" id="btn-menos" onclick="alterarAtomo(-1)" disabled>
+          <span class="ctrl-icone">−</span>
+          <span class="ctrl-label" id="label-menos">camada</span>
+        </button>
+        <button class="btn-ctrl" id="btn-mais" onclick="alterarAtomo(1)">
+          <span class="ctrl-icone">+</span>
+          <span class="ctrl-label" id="label-mais">camada</span>
+        </button>
+    </div>
+    <div id="contador-atomo">0 de 3 camadas</div>
+<div class="overlay-base" id="overlay-pergunta">
+  <div class="modal-box">
+    <div class="modal-eyebrow">Reflexão</div>
+    <div class="modal-titulo">O que fez esse átomo crescer?</div>
+    <p class="modal-subtxt">Ao descermos a coluna na tabela periódica, os átomos ficaram maiores. </p>
+    <div class="opcoes">
+      <button class="btn-opcao" onclick="responderPergunta1(this,false)">O número de prótons no núcleo.</button>
+      <button class="btn-opcao" onclick="responderPergunta1(this,true)">O número de camadas eletrônicas.</button>
+      <button class="btn-opcao" onclick="responderPergunta1(this,false)">A cor do núcleo.</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── OVERLAY: QUADRO-RESUMO ── -->
+<div class="overlay-base" id="quadro-overlay">
+  <div id="quadro-box">
+    <div class="quadro-titulo">O Tamanho do Átomo Depende de Duas Coisas</div>
+    <div class="quadro-cards">
+      <div class="q-card" id="qc-1">
+        <div class="q-icone">⬡</div>
+        <div class="q-titulo">Mais camadas</div>
+        <div class="q-seta">↑ tamanho</div>
+        <div class="q-desc">Descendo em uma coluna da tabela, cada elemento ganha uma camada a mais. O átomo cresce.</div>
+      </div>
+      <div class="q-card" id="qc-2">
+        <div class="q-icone">⊙</div>
+        <div class="q-titulo">Mais prótons<br>(mesma camada)</div>
+        <div class="q-seta">↓ tamanho</div>
+        <div class="q-desc">Ao longo de um período, o núcleo fica mais carregado e puxa a nuvem eletrônica com mais força. O átomo encolhe.</div>
+      </div>
+    </div>
+  </div>
+  <button class="btn-opcao" style="max-width:200px; text-align:center; background:var(--gold); color:#1a0f08; font-weight:700; display:none;" id="btn-entendi" onclick="irParaLousa()">Entendi</button>
+</div>
+
+<!-- ── OVERLAY: LOUSA ── -->
+<div class="overlay-base" id="lousa-overlay">
+  <div id="lousa-box">
+    <div class="lousa-titulo">A Mesma Força Explica Tudo</div>
+    <div class="lousa-linha" id="lousa-1">Núcleo puxa mais forte <span class="seta-down">→</span> átomo menor</div>
+    <div class="lousa-linha" id="lousa-2">Átomo menor <span class="seta-up">→</span> eletronegatividade maior</div>
+    <div class="lousa-linha" id="lousa-3">Átomo menor <span class="seta-up">→</span> energia de ionização maior</div>
+    <div class="lousa-linha" id="lousa-4">Átomo menor <span class="seta-up">→</span> afinidade eletrônica maior</div>
+    <div class="lousa-linha lousa-conclusao" id="lousa-5">Perceba que todas essas propriedades vêm da mesma causa: quanto mais forte é a atração do núcleo sobre os elétrons, menor é o átomo — e maior é sua capacidade de atrair ou manter elétrons.</div>
+  </div>
+  <button class="btn-opcao" style="max-width:220px; text-align:center; background:var(--gold); color:#1a0f08; font-weight:700; display:none;" id="btn-continuar-lousa" onclick="irParaDesafioFinal()">Ir para o desafio</button>
+</div>
+
+<!-- ── OVERLAY: DESAFIO FINAL (perguntas comparativas) ── -->
+<div class="overlay-base" id="desafio-final-overlay">
+  <div id="desafio-final-painel">
+    <div class="df-eyebrow">Desafio Final</div>
+    <div class="df-progresso" id="df-progresso">Pergunta 1 de 4</div>
+    <div class="df-titulo" id="df-titulo">Comparando sódio (Na) e cloro (Cl), no mesmo período: qual átomo é maior?</div>
+    <div class="opcoes" id="df-opcoes">
+      <button class="btn-opcao" onclick="responderDF(this,true)">Sódio (Na) — tem menos prótons.</button>
+      <button class="btn-opcao" onclick="responderDF(this,false)">Cloro (Cl) — tem mais prótons.</button>
+    </div>
+    <div class="df-feedback" id="df-feedback"></div>
+    <button class="btn-prosseguir" id="btn-proximo-final" onclick="avancarPerguntaFinal()">Próxima pergunta →</button>
+  </div>
+</div>
+
+<!-- ── MODAL CONCLUSÃO ── -->
+<div id="modal-conclusao">
+  <div id="conclusao-box">
+    <div class="conc-eyebrow">Laboratório Concluído</div>
+    <div class="conc-titulo">Parabéns!</div>
+    <p class="conc-desc">Você descobriu que as propriedades periódicas não precisam ser decoradas uma por uma. Raio atômico, eletronegatividade, energia de ionização e afinidade eletrônica podem ser compreendidos a partir de uma única ideia: a intensidade da atração que o núcleo exerce sobre os elétrons. Quando essa atração aumenta, o raio atômico diminui — e as outras propriedades mudam de forma previsível.</p>
+    <div class="conc-btns">
+      <button class="btn-conc" onclick="reiniciarLaboratorio()">Refazer o laboratório</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── GAME LOGIC ── -->
+<script>
+/* RAFAELA */
+const IMG = {
+  sorrindo:   '../imagens/rafa-sorrindo.jpg',
+  explicando: '../imagens/rafa-explicando.jpg',
+  pensando:   '../imagens/rafa-pensando.jpg',
+  animada:    '../imagens/rafa-animada.jpg',
+};
+let _onContinue = null;
+const $timg = document.getElementById('teacher-img');
+const $ttxt = document.getElementById('teacher-text');
+const $btn  = document.getElementById('btn-avancar');
+
+const _ding = new Audio('../sons/ding.mp3');
+_ding.preload = 'auto';
+function tocarDing() { try { _ding.currentTime = 0; _ding.play().catch(function () {}); } catch (e) {} }
+
+function avancarDialogo() {
+  $btn.classList.remove('show');
+  if (_onContinue) { const cb = _onContinue; _onContinue = null; cb(); }
+}
+function rafaFala(imgKey, txt, onContinue) {
+  _onContinue = onContinue || null;
+  $timg.style.opacity = '0';
+  setTimeout(() => { $timg.src = IMG[imgKey] || IMG.explicando; $timg.style.opacity = '1'; }, 220);
+  $ttxt.textContent = txt;
+  $btn.classList.toggle('show', !document.querySelector('.overlay-base.show'));
+}
+
+/* ── ÁTOMO INTERATIVO ── */
+const NS = 'http://www.w3.org/2000/svg';
+const CX = 130, CY = 130;
+const shellsGroup = document.getElementById('shells-group');
+const protonsGroup = document.getElementById('protons-group');
+const nucleoEl = document.getElementById('nucleo');
+
+let modo = 'grupo';       // 'grupo' | 'periodo'
+let camadasGrupo = 0;     // 0 a 3
+let protonsPeriodo = 0;   // 0 a 3 (camadas fixas em 2 nesse modo)
+const RAIOS_GRUPO   = [0, 55, 85, 115];
+const ELETRONS_POR_CAMADA = [2, 8, 8]; // camada 1, 2, 3
+const RAIOS_PERIODO = [95, 82, 69, 56]; // encolhe conforme prótons aumentam (2 camadas fixas)
+
+function limparSVG() {
+  shellsGroup.innerHTML = '';
+  protonsGroup.innerHTML = '';
+}
+
+function desenharShell(r, numEletrons) {
+  const c = document.createElementNS(NS, 'circle');
+  c.setAttribute('class', 'shell');
+  c.setAttribute('cx', CX); c.setAttribute('cy', CY); c.setAttribute('r', r);
+  shellsGroup.appendChild(c);
+  const n = numEletrons || 2;
+  for (let i = 0; i < n; i++) {
+    const rad = (360 / n) * i * Math.PI / 180;
+    const ex = CX + r * Math.cos(rad);
+    const ey = CY + r * Math.sin(rad);
+    const e = document.createElementNS(NS, 'circle');
+    e.setAttribute('class', 'eletron');
+    e.setAttribute('cx', ex); e.setAttribute('cy', ey); e.setAttribute('r', 4);
+    shellsGroup.appendChild(e);
+  }
+}
+
+function desenharProtons(qtd) {
+  protonsGroup.innerHTML = '';
+  const raioNucleo = parseFloat(nucleoEl.getAttribute('r'));
+  for (let i = 0; i < qtd; i++) {
+    const ang = (360 / Math.max(qtd,1)) * i * Math.PI / 180;
+    const dist = raioNucleo * 0.45;
+    const px = CX + dist * Math.cos(ang);
+    const py = CY + dist * Math.sin(ang);
+    const p = document.createElementNS(NS, 'circle');
+    p.setAttribute('class', 'proton-dot');
+    p.setAttribute('cx', px); p.setAttribute('cy', py); p.setAttribute('r', 3);
+    protonsGroup.appendChild(p);
+  }
+}
+
+function renderAtomoGrupo() {
+  limparSVG();
+  nucleoEl.setAttribute('r', 16);
+  nucleoEl.setAttribute('fill', '#c9863a');
+  desenharProtons(3);
+  for (let i = 1; i <= camadasGrupo; i++) desenharShell(RAIOS_GRUPO[i], ELETRONS_POR_CAMADA[i - 1]);
+  document.getElementById('contador-atomo').textContent = camadasGrupo + ' de 3 camadas';
+  document.getElementById('btn-menos').disabled = camadasGrupo === 0;
+  document.getElementById('btn-mais').disabled = camadasGrupo === 3;
+
+  const legendas = [
+    'Clique em "adicionar camada" para começar.',
+    'Uma camada eletrônica. Esse é o menor átomo desse grupo.',
+    'Duas camadas. Repare que o átomo já ocupa mais espaço.',
+    'Três camadas. O núcleo continua do mesmo tamanho — só a nuvem eletrônica cresceu.'
+  ];
+  document.getElementById('atomo-legenda').textContent = legendas[camadasGrupo];
+
+  if (camadasGrupo === 3 && estadoJogo === 'modoGrupo') {
+    estadoJogo = 'aguardandoPergunta1';
+    setTimeout(() => document.getElementById('overlay-pergunta').classList.add('show'), 2200);
+  }
+}
+
+function renderAtomoPeriodo() {
+  limparSVG();
+  const raioAtual = RAIOS_PERIODO[protonsPeriodo];
+  const raioNucleo = 16 + protonsPeriodo * 2.5;
+  nucleoEl.setAttribute('r', raioNucleo);
+  nucleoEl.setAttribute('fill', protonsPeriodo === 0 ? '#c9863a' : '#e8b84b');
+  desenharProtons(3 + protonsPeriodo);
+  desenharShell(raioAtual, 8);
+  desenharShell(raioAtual * 0.6, 2);
+  document.getElementById('contador-atomo').textContent = protonsPeriodo + ' prótons adicionados';
+  document.getElementById('btn-menos').disabled = protonsPeriodo === 0;
+  document.getElementById('btn-mais').disabled = protonsPeriodo === 3;
+
+  const legendas = [
+    'As camadas continuam as mesmas de antes. Agora vamos mexer só no núcleo.',
+    'Um próton a mais. O núcleo ficou um pouco mais forte — observe a nuvem.',
+    'Dois prótons a mais. A nuvem eletrônica já está visivelmente mais próxima do núcleo.',
+    'Três prótons a mais, mesmas duas camadas de sempre. O átomo encolheu.'
+  ];
+  document.getElementById('atomo-legenda').textContent = legendas[protonsPeriodo];
+
+  if (protonsPeriodo === 3 && estadoJogo === 'modoPeriodo') {
+    estadoJogo = 'aguardandoQuadro';
+    setTimeout(() => {
+      rafaFala('animada', 'Mesmo número de camadas — mas o átomo encolheu porque o núcleo ficou mais forte. Vamos juntar as duas descobertas.', mostrarQuadro);
+    }, 500);
+  }
+}
+
+function alterarAtomo(delta) {
+  if (modo === 'grupo') {
+    camadasGrupo = Math.max(0, Math.min(3, camadasGrupo + delta));
+    renderAtomoGrupo();
+  } else {
+    protonsPeriodo = Math.max(0, Math.min(3, protonsPeriodo + delta));
+    renderAtomoPeriodo();
+  }
+}
+
+function mudarModo(novoModo) {
+  if (document.getElementById('tab-' + novoModo).disabled) return;
+  modo = novoModo;
+  document.getElementById('tab-grupo').classList.toggle('ativo', modo === 'grupo');
+  document.getElementById('tab-periodo').classList.toggle('ativo', modo === 'periodo');
+  document.getElementById('label-mais').textContent = modo === 'grupo' ? 'camada' : 'próton';
+  document.getElementById('label-menos').textContent = modo === 'grupo' ? 'camada' : 'próton';
+  document.getElementById('seta-grupo').classList.toggle('show', modo === 'grupo');
+  document.getElementById('seta-periodo').classList.toggle('show', modo === 'periodo');
+  if (modo === 'grupo') renderAtomoGrupo(); else renderAtomoPeriodo();
+}
+
+/* ── ESTADO GERAL ── */
+let estadoJogo = 'modoGrupo';
+
+function responderPergunta1(btn, correto) {
+  if (correto) {
+    tocarDing();
+    btn.classList.add('certo');
+    document.getElementById('overlay-pergunta').classList.remove('show');
+    document.getElementById('tab-periodo').disabled = false;
+    estadoJogo = 'modoPeriodo';
+    mudarModo('periodo');
+    rafaFala('explicando', 'Agora repare em outra coisa: dois elementos vizinhos, no mesmo período, têm o mesmo número de camadas. O que muda é o número de prótons. Adicione prótons e observe.', null);
+  } else {
+    btn.classList.add('errado');
+    rafaFala('pensando', 'Pense de novo: qual botão você clicou até agora? Só um deles esteve ativo.');
+    setTimeout(() => btn.classList.remove('errado'), 700);
+  }
+}
+
+/* QUADRO */
+function mostrarQuadro() {
+  document.getElementById('quadro-overlay').classList.add('show');
+  rafaFala('explicando', 'O tamanho de um átomo depende de duas disputas: quantas camadas ele tem, e o quanto o núcleo consegue puxar essas camadas para perto.', null);
+  setTimeout(() => document.getElementById('qc-1').classList.add('visivel'), 400);
+  setTimeout(() => document.getElementById('qc-2').classList.add('visivel'), 1200);
+  setTimeout(() => document.getElementById('btn-entendi').style.display = 'block', 2000);
+}
+
+function irParaLousa() {
+  document.getElementById('quadro-overlay').classList.remove('show');
+  document.getElementById('lousa-overlay').classList.add('show');
+  rafaFala('pensando', 'A mesma força que faz o átomo encolher explica também outras três propriedades da tabela periódica. Repare que não são regras separadas — é sempre a mesma causa.', null);
+  ['lousa-1','lousa-2','lousa-3','lousa-4','lousa-5'].forEach((id, i) => {
+    setTimeout(() => document.getElementById(id).classList.add('visivel'), i * 650);
+  });
+  setTimeout(() => document.getElementById('btn-continuar-lousa').style.display = 'block', 3500);
+}
+
+/* DESAFIO FINAL — perguntas comparativas */
+const perguntasFinais = [
+  {
+    titulo: 'Comparando sódio (Na) e cloro (Cl), no mesmo período: qual átomo é maior?',
+    opcoes: [
+      { texto: 'Sódio (Na) — tem menos prótons.', correta: true },
+      { texto: 'Cloro (Cl) — tem mais prótons.', correta: false }
+    ],
+    certoMsg: 'Isso mesmo. Mesmo período, mesmas camadas — o cloro tem mais prótons e puxa a nuvem com mais força, ficando menor.',
+    erradoMsg: 'Lembre: mais prótons no mesmo período significa um núcleo mais forte puxando a nuvem para dentro.'
+  },
+  {
+    titulo: 'Entre lítio (Li) e potássio (K), mesmo grupo: qual tem maior raio atômico?',
+    opcoes: [
+      { texto: 'Potássio (K) — tem mais camadas.', correta: true },
+      { texto: 'Lítio (Li) — tem menos camadas.', correta: false }
+    ],
+    certoMsg: 'Correto. Descendo no grupo, cada elemento ganha uma camada a mais — o potássio é maior.',
+    erradoMsg: 'Pense na primeira estação: mais camadas significa átomo maior.'
+  },
+  {
+    titulo: 'Flúor (F) é um átomo pequeno, com núcleo fortemente carregado. O que isso indica sobre sua eletronegatividade?',
+    opcoes: [
+      { texto: 'É alta — um núcleo forte atrai elétrons com mais facilidade.', correta: true },
+      { texto: 'É baixa — átomos pequenos atraem menos elétrons.', correta: false }
+    ],
+    certoMsg: 'Exato. Átomos menores, com núcleo mais forte, atraem elétrons de ligação com mais intensidade — por isso o flúor é o mais eletronegativo da tabela.',
+    erradoMsg: 'Volte à lousa: átomo menor está ligado a uma atração maior do núcleo, não menor.'
+  },
+  {
+    titulo: 'Qual é a principal ideia que explica as propriedades periódicas estudadas nesta atividade?',
+    opcoes: [
+      { texto: 'O aumento da massa atômica.', correta: false },
+      { texto: 'O número de elementos da tabela periódica.', correta: false },
+      { texto: 'A intensidade da atração do núcleo sobre os elétrons.', correta: true },
+      { texto: 'A cor e o tamanho do núcleo.', correta: false }
+    ],
+    certoMsg: 'Exatamente — essa é a grande ideia da fase. Raio atômico, eletronegatividade, energia de ionização e afinidade eletrônica são todos consequências da mesma força: a atração do núcleo sobre os elétrons.',
+    erradoMsg: 'Pense em tudo que vimos até aqui: uma única força explica todas as tendências periódicas — a atração do núcleo sobre os elétrons.'
+  }
+];
+let dfIndice = 0;
+
+function irParaDesafioFinal() {
+  document.getElementById('lousa-overlay').classList.remove('show');
+  document.getElementById('desafio-final-overlay').classList.add('show');
+  dfIndice = 0;
+  renderPerguntaFinal();
+  rafaFala('animada', 'Você acabou de descobrir algo muito importante: raio atômico, eletronegatividade, energia de ionização e afinidade eletrônica não são conceitos independentes. Todos eles podem ser compreendidos observando apenas a intensidade da atração que o núcleo exerce sobre os elétrons. Agora vamos ver se essa ideia ficou clara.', null);
+}
+
+function renderPerguntaFinal() {
+  const p = perguntasFinais[dfIndice];
+  document.getElementById('df-progresso').textContent = 'Pergunta ' + (dfIndice + 1) + ' de ' + perguntasFinais.length;
+  document.getElementById('df-titulo').textContent = p.titulo;
+  const wrap = document.getElementById('df-opcoes');
+  wrap.innerHTML = '';
+  p.opcoes.forEach(op => {
+    const b = document.createElement('button');
+    b.className = 'btn-opcao';
+    b.textContent = op.texto;
+    b.onclick = () => responderDF(b, op.correta);
+    wrap.appendChild(b);
+  });
+  const fb = document.getElementById('df-feedback');
+  fb.textContent = ''; fb.className = 'df-feedback';
+  const btnProx = document.getElementById('btn-proximo-final');
+  btnProx.classList.remove('show');
+  btnProx.textContent = (dfIndice === perguntasFinais.length - 1) ? 'Concluir laboratório' : 'Próxima pergunta →';
+}
+
+function responderDF(btn, correto) {
+  const p = perguntasFinais[dfIndice];
+  const fb = document.getElementById('df-feedback');
+  if (correto) {
+    tocarDing();
+    btn.classList.add('certo');
+    Array.from(document.getElementById('df-opcoes').children).forEach(b => b.onclick = null);
+    fb.className = 'df-feedback ok';
+    fb.textContent = p.certoMsg;
+    document.getElementById('btn-proximo-final').classList.add('show');
+  } else {
+    btn.classList.add('errado');
+    fb.className = 'df-feedback';
+    fb.textContent = p.erradoMsg;
+    setTimeout(() => btn.classList.remove('errado'), 700);
+  }
+}
+
+function avancarPerguntaFinal() {
+  dfIndice++;
+  if (dfIndice < perguntasFinais.length) {
+    renderPerguntaFinal();
+  } else {
+    concluirFase();
+  }
+}
+
+function concluirFase() {
+  document.getElementById('desafio-final-overlay').classList.remove('show');
+  document.getElementById('modal-conclusao').classList.add('show');
+  try { localStorage.setItem('kifacil_forcas_atomicas_ok', '1'); } catch(e) {}
+}
+
+function reiniciarLaboratorio() {
+  document.getElementById('modal-conclusao').classList.remove('show');
+  document.getElementById('overlay-pergunta').classList.remove('show');
+  document.getElementById('quadro-overlay').classList.remove('show');
+  document.getElementById('lousa-overlay').classList.remove('show');
+  document.getElementById('desafio-final-overlay').classList.remove('show');
+
+  document.querySelectorAll('#overlay-pergunta .btn-opcao').forEach(b => b.classList.remove('certo', 'errado'));
+  ['qc-1', 'qc-2'].forEach(id => document.getElementById(id).classList.remove('visivel'));
+  document.getElementById('btn-entendi').style.display = 'none';
+  ['lousa-1', 'lousa-2', 'lousa-3', 'lousa-4', 'lousa-5'].forEach(id => document.getElementById(id).classList.remove('visivel'));
+  document.getElementById('btn-continuar-lousa').style.display = 'none';
+
+  modo = 'grupo';
+  camadasGrupo = 0;
+  protonsPeriodo = 0;
+  estadoJogo = 'modoGrupo';
+  dfIndice = 0;
+
+  document.getElementById('tab-periodo').disabled = true;
+  document.getElementById('tab-grupo').classList.add('ativo');
+  document.getElementById('tab-periodo').classList.remove('ativo');
+  document.getElementById('label-mais').textContent = 'camada';
+  document.getElementById('label-menos').textContent = 'camada';
+  document.getElementById('seta-grupo').classList.add('show');
+  document.getElementById('seta-periodo').classList.remove('show');
+
+  renderAtomoGrupo();
+  rafaFala('sorrindo', 'Bem-vindo de volta ao Laboratório das Forças Atômicas. Vamos começar de novo: adicione uma camada eletrônica.', null);
+}
+
+/* INÍCIO */
+document.body.style.visibility = 'visible';
+renderAtomoGrupo();
+setTimeout(() => {
+  rafaFala('sorrindo', 'Bem-vindo ao Laboratório das Forças Atômicas. Aqui você vai descobrir sozinho por que os átomos têm tamanhos diferentes. Comece adicionando uma camada eletrônica.', null);
+}, 400);
+</script>
+<script>
+(function () {
+  var _clickSom = new Audio('../sons/click.mp3');
+  _clickSom.preload = 'auto';
+  document.addEventListener('click', function (e) {
+    var alvo = e.target.closest('button');
+    if (alvo) { try { _clickSom.currentTime = 0; _clickSom.play().catch(function () {}); } catch (err) {} }
+  }, true);
+})();
+</script>
+</body>
+</html>

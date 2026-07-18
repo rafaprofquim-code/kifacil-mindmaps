@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow">
+  <title>Funções Inorgânicas no Dia a Dia — Jogo Premium | KiFácil</title>
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --fundo: #fdf8f0;
+      --fundo-card: #fffdf9;
+      --escuro: #2e2016;
+      --texto: #1a1208;
+      --texto-suave: #3d2e1a;
+      --dourado: #8a5e10;
+      --dourado-claro: #c8920a;
+      --borda: rgba(100,70,20,0.3);
+      --borda-forte: rgba(100,70,20,0.5);
+      --verde-escuro: #1e5238;
+      --vermelho-escuro: #7a1515;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Libre Baskerville', Georgia, serif;
+      background: var(--fundo);
+      color: var(--texto);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    .top-nav {
+      background: #1e1008;
+      border-bottom: 2px solid var(--dourado-claro);
+      padding: 0 2.5rem;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+    .brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.7rem;
+      font-weight: 600;
+      color: #fff8ee;
+      letter-spacing: 0.03em;
+      margin-right: auto;
+    }
+
+    /* MAIN */
+    main {
+      flex: 1;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 1rem 1.5rem 1rem;
+      width: 100%;
+    }
+    .titulo-jogo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.7rem, 3.8vw, 2.5rem);
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+      line-height: 1.1;
+    }
+    .subtitulo {
+      font-size: 1rem;
+      color: var(--texto);
+      margin-bottom: .9rem;
+      max-width: 680px;
+    }
+
+    .narrador {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: .8rem;
+      padding: .8rem 1.1rem;
+      border: 1.5px solid var(--borda-forte);
+      border-radius: 10px;
+      background: rgba(30,16,8,0.05);
+    }
+    .narrador img {
+      width: 68px;
+      height: 84px;
+      object-fit: cover;
+      object-position: top center;
+      border-radius: 10px;
+      border: 1px solid rgba(200,146,10,.35);
+      flex-shrink: 0;
+    }
+    .narrador-nome {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.78rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--dourado-claro);
+      margin-bottom: 0.3rem;
+    }
+    .narrador-texto {
+      font-size: 1rem;
+      line-height: 1.5;
+      color: var(--texto-suave);
+      min-height: 3.4em;
+    }
+
+    /* PALCO DE ANIMAÇÃO */
+    .imagem-wrapper {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: min(100%, 900px);
+      max-height: 62vh;
+      min-height: 380px;
+      margin: 0 auto;
+      cursor: default;
+      border: 1.5px solid var(--borda-forte);
+      border-radius: 6px;
+      overflow: hidden;
+      background: #f7efe2;
+    }
+    .cena-fundo {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      user-select: none;
+      pointer-events: none;
+    }
+    .overlay-animacao { position: absolute; inset: 0; }
+    .btn-iniciar-investigacao {
+      position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 5;
+    }
+
+    .link-aula {
+      position: absolute; top: 10px; right: 10px; z-index: 10;
+      display: flex; flex-direction: column; align-items: center; gap: 2px;
+      text-decoration: none; color: #fff8ee;
+      background: rgba(30,16,8,0.72); border: 1.5px solid var(--dourado-claro, #c8920a);
+      border-radius: 8px; padding: 0.4rem 0.65rem;
+      font-family: 'Cormorant Garamond', serif; font-size: 0.68rem; font-weight: 600;
+      letter-spacing: 0.02em; text-align: center; line-height: 1.2;
+      cursor: pointer; transition: background 0.2s, transform 0.15s;
+    }
+    .link-aula:hover { background: rgba(30,16,8,0.92); transform: translateY(-1px); }
+    .link-aula svg { width: 22px; height: 22px; }
+
+    /* Progresso */
+    .contador-central {
+      position: absolute; top: 12px; left: 50%; transform: translateX(-50%);
+      background: rgba(30,16,8,0.85); color: var(--dourado-claro);
+      font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 0.9rem;
+      padding: 0.3rem 1rem; border-radius: 6px; border: 1px solid var(--dourado-claro);
+      z-index: 5; white-space: nowrap;
+    }
+
+    /* Cartão de pistas do composto */
+    .cartao-produto {
+      position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 3;
+      background: var(--fundo-card); border: 1.5px solid var(--borda-forte); border-radius: 12px;
+      padding: 20px 26px; text-align: center; max-width: 90%; width: 380px;
+    }
+    .cartao-produto .emoji { font-size: 2.6rem; margin-bottom: 10px; }
+    .lista-pistas { list-style: none; text-align: left; max-width: 320px; margin: 0 auto; }
+    .lista-pistas li {
+      font-size: 0.88rem; color: var(--texto-suave); line-height: 1.5;
+      margin-bottom: 8px; padding-left: 1.2em; position: relative;
+      animation: pistaIn .4s ease;
+    }
+    .lista-pistas li::before { content: '•'; position: absolute; left: 0; color: var(--dourado-claro); font-weight: 700; }
+    @keyframes pistaIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .substancia-revelada {
+      margin-top: 14px; padding-top: 12px; border-top: 1px dashed var(--borda-forte);
+      text-align: center; animation: pistaIn .4s ease;
+    }
+    .substancia-revelada .formula-revelada {
+      font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 1.5rem; color: var(--dourado-claro);
+    }
+    .substancia-revelada .nome-revelado { font-size: 0.86rem; color: var(--texto-suave); margin-top: 2px; }
+    .explicacao-revelada {
+      font-size: 0.84rem; color: var(--texto); line-height: 1.5; text-align: left;
+      max-width: 320px; margin: 10px auto 0;
+    }
+
+    /* Classificação por categoria (desafio final) */
+    .jogo-associacao { position: absolute; inset: 0; display: flex; justify-content: center; align-items: center; gap: 30px; padding: 6%; flex-wrap: wrap; }
+    .coluna-associacao { display: flex; flex-direction: column; gap: 8px; }
+    .coluna-associacao-grade { display: grid; grid-template-columns: repeat(2, minmax(118px, 1fr)); gap: 8px; }
+    .item-associacao {
+      background: var(--fundo-card); border: 1.5px solid var(--borda-forte); border-radius: 8px; padding: 0.5rem 1rem;
+      font-family: 'Libre Baskerville', serif; font-size: 0.88rem; cursor: pointer; text-align: center; transition: border-color .2s;
+    }
+    .coluna-associacao-grade .item-associacao { font-size: 0.76rem; padding: 0.45rem 0.6rem; line-height: 1.3; }
+    .item-associacao:hover { border-color: var(--dourado-claro); }
+    .item-selecionado { border-color: var(--dourado-claro); background: rgba(200,146,10,.12); }
+    .associado { border-color: var(--verde-escuro); background: rgba(30,82,56,.12); cursor: default; opacity: 0.85; }
+    .erro-flash { outline: 3px solid var(--vermelho-escuro); border-radius: 8px; }
+
+    .placa-dourada {
+      position: absolute; bottom: 20px; left: 50%; transform: translate(-50%, 10px);
+      background: linear-gradient(135deg, #fff3d6, #e9c877); color: #3d2600;
+      font-family: 'Cormorant Garamond', serif; font-weight: 700;
+      font-size: clamp(0.95rem, 2.4vw, 1.2rem);
+      padding: 0.65rem 1.3rem; border-radius: 8px; border: 1px solid #a97c1f;
+      box-shadow: 0 3px 12px rgba(0,0,0,.3); text-align: center; max-width: 92%;
+      opacity: 0; animation: placaIn .5s ease forwards; z-index: 6; pointer-events: none;
+    }
+    @keyframes placaIn {
+      from { opacity: 0; transform: translate(-50%, 10px); }
+      to   { opacity: 1; transform: translate(-50%, 0); }
+    }
+
+    /* PAINEL DE INTERAÇÃO */
+    #painelInteracao { max-width: 900px; margin: 1.2rem auto 0; }
+    .interacao-painel {
+      background: var(--fundo-card); border: 1.5px solid var(--borda-forte); border-radius: 12px;
+      padding: 1.4rem 1.6rem 1.3rem;
+    }
+    .interacao-pergunta-texto {
+      font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 600;
+      line-height: 1.35; margin-bottom: 1rem;
+    }
+    .opcoes-linha { display: flex; gap: 0.7rem; flex-wrap: wrap; margin-bottom: 0.6rem; }
+    .btn-opcao {
+      background: var(--fundo); border: 1.5px solid var(--borda-forte); border-radius: 6px;
+      padding: 0.7rem 1.3rem; font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 1rem;
+      color: var(--texto); cursor: pointer; transition: border-color .2s, background .2s; flex: 1; min-width: 120px;
+    }
+    .btn-opcao:hover:not(:disabled) { border-color: var(--dourado-claro); }
+    .btn-opcao:disabled { cursor: default; opacity: 0.75; }
+    .opcao-certa { border-color: var(--verde-escuro) !important; background: rgba(30,82,56,0.12); }
+    .opcao-errada { border-color: var(--vermelho-escuro) !important; background: rgba(122,21,21,0.08); }
+
+    .btn-continuar {
+      background: #1e1008; color: var(--dourado-claro); border: 1.5px solid var(--dourado-claro);
+      font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-weight: 600;
+      letter-spacing: 0.06em; text-transform: uppercase; padding: 0.6rem 1.5rem;
+      border-radius: 4px; cursor: pointer; transition: background 0.2s, color 0.2s, opacity .2s;
+      display: block; margin: 0.2rem auto 0;
+    }
+    .btn-continuar:hover { background: var(--dourado-claro); color: #1e1008; }
+    .btn-continuar:disabled { opacity: 0.4; cursor: default; }
+    .btn-continuar:disabled:hover { background: #1e1008; color: var(--dourado-claro); }
+
+    /* Botão continuar dentro do balão da professora */
+    #continuarBalao { margin-top: 0.6rem; }
+    #continuarBalao .btn-continuar { display: inline-block; margin: 0; }
+
+    .modal-feedback {
+      margin-top: 1rem; font-size: 0.86rem; line-height: 1.7;
+      border-left: 3px solid var(--borda-forte); padding-left: 1rem; display: none;
+    }
+    .modal-feedback.visivel { display: block; }
+    .feedback-certo   { color: var(--verde-escuro); font-weight: 700; }
+    .feedback-errado  { color: var(--vermelho-escuro); font-weight: 700; }
+    .feedback-resposta { color: var(--dourado-claro); font-weight: 700; }
+
+    .quadro-resumo { display: flex; gap: 1.1rem; justify-content: center; flex-wrap: wrap; padding: 1rem; }
+    .quadro-item {
+      background: var(--fundo-card); border: 1.5px solid var(--borda-forte); border-radius: 10px;
+      padding: 1rem 1.3rem; min-width: 170px; text-align: center;
+    }
+    .quadro-item .rotulo {
+      font-family: 'Cormorant Garamond', serif; font-size: 0.78rem; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--dourado-claro); margin-bottom: 0.4rem;
+    }
+    .quadro-item .valor { font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-weight: 600; color: var(--texto); }
+
+    /* CONCLUSÃO */
+    .conclusao {
+      display: none; margin-top: 2rem; background: var(--fundo-card);
+      border: 1.5px solid var(--borda-forte); border-radius: 12px; padding: 2.4rem 2rem; text-align: center;
+    }
+    .conclusao.visivel { display: block; }
+    .conclusao-titulo {
+      font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 5vw, 2.6rem); font-weight: 600; margin-bottom: 0.8rem;
+    }
+    .conclusao-placar { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; color: var(--dourado-claro); margin-bottom: 1rem; }
+    .conclusao-mensagem { font-size: 0.93rem; color: var(--texto-suave); max-width: 460px; margin: 0 auto 2rem; line-height: 1.8; }
+    .btn-reiniciar {
+      background: #1e1008; color: var(--dourado-claro); border: 1.5px solid var(--dourado-claro);
+      font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase; padding: 0.7rem 2rem; border-radius: 4px;
+      cursor: pointer; transition: background 0.2s, color 0.2s;
+    }
+    .btn-reiniciar:hover { background: var(--dourado-claro); color: #1e1008; }
+
+    /* FOOTER */
+    footer {
+      background: var(--escuro); border-top: 2px solid var(--dourado-claro);
+      padding: .6rem 2rem; text-align: center; font-size: 0.78rem; color: rgba(255,248,238,0.5);
+    }
+
+    @media (min-width: 641px) {
+      .narrador { max-width: 900px; margin: 0 auto .8rem; }
+      .narrador-texto { font-size: 1.05rem; }
+    }
+
+    @media (max-width: 640px) {
+      .top-nav { padding: 0 1.2rem; gap: 1.2rem; }
+      main { padding: .8rem 1rem 1rem; }
+      .interacao-painel { padding: 1.2rem 1rem; }
+      .opcoes-linha { flex-direction: column; }
+      .btn-opcao { width: 100%; }
+      .placa-dourada { font-size: 0.82rem; padding: 0.5rem 0.85rem; }
+      .jogo-associacao { gap: 14px; }
+      .item-associacao { font-size: 0.78rem; padding: 0.4rem 0.7rem; }
+      .link-aula { top: 6px; right: 6px; padding: 0.3rem 0.5rem; font-size: 0.6rem; }
+      .link-aula svg { width: 18px; height: 18px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <div class="brand">KiFácil</div>
+</nav>
+
+<main>
+  <h1 class="titulo-jogo">Funções Inorgânicas no Dia a Dia</h1>
+  <p class="subtitulo">Reconheça ácidos, bases, sais e óxidos em situações do cotidiano.</p>
+
+  <div class="narrador">
+    <img src="../imagens/rafa-sorrindo.jpg" alt="Professora Rafaela" />
+    <div style="flex: 1;">
+      <div class="narrador-nome">Professora Rafaela</div>
+      <div class="narrador-texto" id="narradorTexto">Vamos começar.</div>
+      <div id="continuarBalao"></div>
+    </div>
+  </div>
+
+  <div class="imagem-wrapper" id="imagemWrapper">
+    <img src="../imagens/sala-funcoes-cotidiano.jpg" alt="Sala das funções do cotidiano" class="cena-fundo" />
+    <div class="overlay-animacao" id="overlayAnimacao"></div>
+    <!-- COLOQUE O LINK AQUI -->
+    <a class="link-aula" href="#" target="_blank" rel="noopener" title="Assista à aula">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.6"/>
+        <path d="M10 8.5L16 12L10 15.5V8.5Z" fill="currentColor"/>
+      </svg>
+      <span>Assista à aula</span>
+    </a>
+  </div>
+
+  <div id="painelInteracao"></div>
+
+  <div class="conclusao" id="conclusao">
+    <div class="conclusao-titulo">Estudo concluído</div>
+    <div class="conclusao-placar" id="conclusaoPlacar"></div>
+    <p class="conclusao-mensagem" id="conclusaoMensagem"></p>
+    <button class="btn-reiniciar" onclick="reiniciar()">Jogar novamente</button>
+  </div>
+</main>
+
+<footer>© 2026 KiFácil</footer>
+
+<script>
+/* ==========================================================
+   DADOS: EXEMPLOS DO COTIDIANO
+   ========================================================== */
+const EXEMPLOS = [
+  { emoji: '🧴', categoria: 'Ácido', nome: 'Ácido clorídrico', formula: 'HCl', pistas: [
+      'Está presente no suco gástrico, dentro do nosso estômago.',
+      'Também é muito utilizado na limpeza de pisos de pedra e superfícies com cal.',
+      'Em solução aquosa, libera íons H⁺.'
+    ], explicacao: 'Correto! Ele é um ácido porque, dissolvido em água, libera íons H⁺ — e sua fórmula começa com hidrogênio, como a maioria dos ácidos.' },
+  { emoji: '🧼', categoria: 'Base', nome: 'Hidróxido de sódio', formula: 'NaOH', pistas: [
+      'É muito utilizado na fabricação de sabões e produtos de limpeza.',
+      'É uma substância corrosiva, que exige cuidado ao manusear.',
+      'Apresenta o grupo OH⁻ em sua fórmula.'
+    ], explicacao: 'Correto! Conhecido como soda cáustica, é uma base porque apresenta o grupo hidroxila (OH⁻), que libera em água — típico das bases de Arrhenius.' },
+  { emoji: '🔋', categoria: 'Ácido', nome: 'Ácido sulfúrico', formula: 'H₂SO₄', pistas: [
+      'É essencial para o funcionamento das baterias de carro.',
+      'Também é muito usado no refino do petróleo e na indústria química.',
+      'Sua fórmula começa com hidrogênio, e ele libera H⁺ em água.'
+    ], explicacao: 'Correto! Um dos ácidos mais usados pela indústria. Como todo ácido, libera H⁺ ao ser dissolvido em água.' },
+  { emoji: '🧱', categoria: 'Base', nome: 'Hidróxido de cálcio', formula: 'Ca(OH)₂', pistas: [
+      'É usado no preparo de argamassa, na construção civil.',
+      'Também é usado para caiar (pintar de branco) paredes e troncos de árvores.',
+      'Apresenta o grupo OH⁻ ligado a um metal em sua fórmula.'
+    ], explicacao: 'Correto! Conhecido como cal hidratada. Mais uma vez, o grupo OH⁻ na fórmula denuncia uma base.' },
+  { emoji: '🧂', categoria: 'Sal', nome: 'Cloreto de sódio', formula: 'NaCl', pistas: [
+      'Está presente em quase todas as refeições que você faz.',
+      'Não tem cheiro, e é usado para conservar e temperar alimentos.',
+      'Não possui hidrogênio ionizável nem grupo OH⁻: é formado por um cátion e um ânion diferentes de H⁺ e OH⁻.'
+    ], explicacao: 'Correto! O sal de cozinha. É um sal porque não libera H⁺ nem OH⁻ em água — ele é formado pela união de um cátion (Na⁺) com um ânion (Cl⁻).' },
+  { emoji: '🏗️', categoria: 'Óxido', nome: 'Óxido de cálcio', formula: 'CaO', pistas: [
+      'É usado na fabricação de cimento e em obras de construção civil.',
+      'Também é usado para corrigir a acidez de solos agrícolas.',
+      'É formado por apenas dois elementos, sendo um deles o oxigênio — e não há hidrogênio na fórmula.'
+    ], explicacao: 'Correto! É um óxido: formado pela união do oxigênio com apenas mais um elemento, sem H⁺ nem OH⁻.' },
+  { emoji: '🍾', categoria: 'Sal', nome: 'Carbonato de sódio', formula: 'Na₂CO₃', pistas: [
+      'É essencial na fabricação de vidro.',
+      'Também está presente em produtos de limpeza e no tratamento de piscinas.',
+      'Não libera H⁺ nem OH⁻ em água: é formado por um cátion e um ânion diferentes desses.'
+    ], explicacao: 'Correto! Mesmo sendo menos familiar que o sal de cozinha, também é um sal: nenhum H⁺, nenhum OH⁻, apenas a união de um cátion (Na⁺) com um ânion (CO₃²⁻).' },
+  { emoji: '🥤', categoria: 'Óxido', nome: 'Dióxido de carbono', formula: 'CO₂', pistas: [
+      'Está presente em refrigerantes, águas gaseificadas e no gelo-seco.',
+      'É liberado quando respiramos e também na queima de combustíveis.',
+      'É formado por apenas dois elementos — carbono e oxigênio — sem hidrogênio ionizável nem grupo OH⁻.'
+    ], explicacao: 'Correto! Um óxido molecular: formado pela união do oxigênio com apenas mais um elemento, sem H⁺ nem OH⁻ em sua estrutura.' }
+];
+const CATEGORIAS = ['Ácido', 'Base', 'Sal', 'Óxido'];
+const DESAFIO_FINAL = [
+  { rotulo: 'Suco gástrico do estômago', categoria: 'Ácido', nome: 'Ácido clorídrico', formula: 'HCl',
+    dica: 'Pense na fase dos Ácidos: essa substância libera H⁺ em água.',
+    explicacao: 'libera H⁺ em água, por isso é um ácido.' },
+  { rotulo: 'Baterias de carro', categoria: 'Ácido', nome: 'Ácido sulfúrico', formula: 'H₂SO₄',
+    dica: 'Sua fórmula começa com hidrogênio — sinal comum de ácido.',
+    explicacao: 'como todo ácido, libera H⁺ ao ser dissolvido em água.' },
+  { rotulo: 'Fabricação de sabões', categoria: 'Base', nome: 'Hidróxido de sódio', formula: 'NaOH',
+    dica: 'Observe se a fórmula tem o grupo OH⁻.',
+    explicacao: 'tem o grupo OH⁻ na fórmula, por isso é uma base.' },
+  { rotulo: 'Cal hidratada da construção', categoria: 'Base', nome: 'Hidróxido de cálcio', formula: 'Ca(OH)₂',
+    dica: 'O próprio nome "hidratada" já entrega o grupo OH⁻.',
+    explicacao: 'tem o grupo OH⁻ ligado a um metal, por isso é uma base.' },
+  { rotulo: 'O sal que usamos na comida', categoria: 'Sal', nome: 'Cloreto de sódio', formula: 'NaCl',
+    dica: 'Não tem H⁺ nem OH⁻: é formado por um cátion e um ânion.',
+    explicacao: 'não libera H⁺ nem OH⁻ — é formado por um cátion (Na⁺) e um ânion (Cl⁻), por isso é um sal.' },
+  { rotulo: 'Fabricação de vidro', categoria: 'Sal', nome: 'Carbonato de sódio', formula: 'Na₂CO₃',
+    dica: 'Assim como o sal de cozinha, não tem H⁺ nem OH⁻.',
+    explicacao: 'não libera H⁺ nem OH⁻ — é formado por um cátion (Na⁺) e um ânion (CO₃²⁻), por isso é um sal.' },
+  { rotulo: 'Correção da acidez do solo', categoria: 'Óxido', nome: 'Óxido de cálcio', formula: 'CaO',
+    dica: 'Formado por apenas dois elementos, um deles o oxigênio — sem hidrogênio.',
+    explicacao: 'é formado só por oxigênio e cálcio, sem H⁺ nem OH⁻, por isso é um óxido.' },
+  { rotulo: 'Gás dos refrigerantes', categoria: 'Óxido', nome: 'Dióxido de carbono', formula: 'CO₂',
+    dica: 'Formado só por carbono e oxigênio — sem hidrogênio.',
+    explicacao: 'é formado só por oxigênio e carbono, sem H⁺ nem OH⁻, por isso é um óxido.' }
+];
+
+/* ==========================================================
+   REFERÊNCIAS DOM
+   ========================================================== */
+const overlay = document.getElementById('overlayAnimacao');
+const painel  = document.getElementById('painelInteracao');
+const continuarBalao = document.getElementById('continuarBalao');
+
+const _ding = new Audio('../sons/ding.mp3');
+_ding.preload = 'auto';
+function tocarDing() { try { _ding.currentTime = 0; _ding.play().catch(function () {}); } catch (e) {} }
+
+function fala(texto) { document.getElementById('narradorTexto').textContent = texto; }
+
+const INCENTIVOS = ['Muito bem!', 'Isso mesmo!', 'Exato!', 'Mandou bem!', 'Ótimo raciocínio!', 'Excelente!'];
+function incentivoAleatorio() { return INCENTIVOS[Math.floor(Math.random() * INCENTIVOS.length)]; }
+
+let timersAtivos = [];
+function agendar(fn, ms) { const id = setTimeout(fn, ms); timersAtivos.push(id); return id; }
+function limparTimers() { timersAtivos.forEach(clearTimeout); timersAtivos = []; }
+
+let acertos = 0;
+
+/* ==========================================================
+   HELPERS DE INTERAÇÃO
+   ========================================================== */
+function botaoContinuar(delayMs) {
+  delayMs = delayMs || 0;
+  continuarBalao.innerHTML = '';
+  const btn = document.createElement('button');
+  btn.className = 'btn-continuar';
+  btn.textContent = 'Continuar →';
+  btn.disabled = delayMs > 0;
+  continuarBalao.appendChild(btn);
+  if (delayMs > 0) agendar(function () { btn.disabled = false; }, delayMs);
+  btn.addEventListener('click', avancar);
+  return btn;
+}
+
+function revelarSubstancia(ex, cartaoEl) {
+  const reveal = document.createElement('div');
+  reveal.className = 'substancia-revelada';
+  reveal.innerHTML =
+    '<div class="formula-revelada">' + ex.formula + '</div>' +
+    '<div class="nome-revelado">' + ex.nome + '</div>' +
+    '<p class="explicacao-revelada">' + ex.explicacao + '</p>';
+  cartaoEl.appendChild(reveal);
+}
+
+function perguntaComPistas(ex, listaPistasEl, cartaoEl, aoConcluir) {
+  painel.innerHTML = '';
+  const wrap = document.createElement('div');
+  wrap.className = 'interacao-painel';
+  wrap.innerHTML =
+    '<div class="interacao-pergunta-texto">A qual função inorgânica esse composto pertence?</div>' +
+    '<div class="opcoes-linha" id="opcoesLinha"></div>' +
+    '<div class="modal-feedback" id="feedbackEscolha"></div>';
+  painel.appendChild(wrap);
+
+  const opcoesLinha = wrap.querySelector('#opcoesLinha');
+  const feedback = wrap.querySelector('#feedbackEscolha');
+  let pistasReveladas = 1;
+  let resolvido = false;
+
+  CATEGORIAS.forEach(function (cat) {
+    const btn = document.createElement('button');
+    btn.className = 'btn-opcao';
+    btn.textContent = cat;
+    btn.addEventListener('click', function () {
+      if (resolvido) return;
+      if (cat === ex.categoria) {
+        resolvido = true;
+        acertos++;
+        tocarDing();
+        const incentivo = incentivoAleatorio();
+        fala(incentivo);
+        Array.from(opcoesLinha.children).forEach(function (b) { b.disabled = true; });
+        btn.classList.add('opcao-certa');
+        feedback.className = 'modal-feedback visivel';
+        feedback.innerHTML = '<span class="feedback-certo">' + incentivo + '</span>';
+        revelarSubstancia(ex, cartaoEl);
+        aoConcluir();
+      } else {
+        btn.classList.add('opcao-errada');
+        if (pistasReveladas < ex.pistas.length) {
+          const li = document.createElement('li');
+          li.textContent = ex.pistas[pistasReveladas];
+          listaPistasEl.appendChild(li);
+          pistasReveladas++;
+          feedback.className = 'modal-feedback visivel';
+          feedback.innerHTML = '<span class="feedback-errado">Ainda não é isso. Observe mais essa pista.</span>';
+        } else {
+          resolvido = true;
+          Array.from(opcoesLinha.children).forEach(function (b) {
+            b.disabled = true;
+            if (b.textContent === ex.categoria) b.classList.add('opcao-certa');
+          });
+          feedback.className = 'modal-feedback visivel';
+          feedback.innerHTML = '<span class="feedback-resposta">Resposta correta destacada.</span>';
+          revelarSubstancia(ex, cartaoEl);
+          aoConcluir();
+        }
+      }
+    });
+    opcoesLinha.appendChild(btn);
+  });
+}
+
+function criarClassificacaoPorCategoria(itens, categorias, mensagemErro, mensagemSucesso) {
+  const container = document.createElement('div');
+  container.className = 'jogo-associacao';
+  overlay.appendChild(container);
+
+  const colCategorias = document.createElement('div'); colCategorias.className = 'coluna-associacao';
+  const colItens = document.createElement('div'); colItens.className = 'coluna-associacao' + (itens.length > 5 ? ' coluna-associacao-grade' : '');
+  container.appendChild(colCategorias); container.appendChild(colItens);
+
+  const itensEmbaralhados = itens.slice().sort(function () { return Math.random() - 0.5; });
+
+  let categoriaAtiva = null, acertosLocais = 0;
+  const elCategorias = {};
+
+  categorias.forEach(function (cat) {
+    const el = document.createElement('div');
+    el.className = 'item-associacao';
+    el.textContent = cat;
+    colCategorias.appendChild(el);
+    elCategorias[cat] = el;
+    el.addEventListener('click', function () {
+      Object.keys(elCategorias).forEach(function (k) { elCategorias[k].classList.remove('item-selecionado'); });
+      el.classList.add('item-selecionado');
+      categoriaAtiva = cat;
+    });
+  });
+
+  itensEmbaralhados.forEach(function (it) {
+    const el = document.createElement('div');
+    el.className = 'item-associacao';
+    el.textContent = it.rotulo;
+    colItens.appendChild(el);
+    let tentativasItem = 0;
+    el.addEventListener('click', function () {
+      if (el.classList.contains('associado')) return;
+      if (!categoriaAtiva) {
+        fala('Primeiro escolha uma categoria à esquerda.');
+        return;
+      }
+      if (it.categoria === categoriaAtiva) {
+        el.classList.add('associado');
+        tocarDing();
+        acertosLocais++;
+        fala(incentivoAleatorio() + ' Essa é ' + it.nome + ' (' + it.formula + ') — ' + it.explicacao);
+        if (acertosLocais === itens.length) {
+          agendar(function () { fala(mensagemSucesso); botaoContinuar(400); }, 1400);
+        }
+      } else {
+        tentativasItem++;
+        el.classList.add('erro-flash');
+        setTimeout(function () { el.classList.remove('erro-flash'); }, 500);
+        if (tentativasItem === 1) {
+          fala(mensagemErro);
+        } else if (tentativasItem === 2) {
+          fala(it.dica);
+        } else {
+          el.classList.add('associado');
+          acertosLocais++;
+          fala('Essa é ' + it.nome + ' (' + it.formula + ') — ' + it.explicacao);
+          if (acertosLocais === itens.length) {
+            agendar(function () { fala(mensagemSucesso); botaoContinuar(400); }, 300);
+          }
+        }
+      }
+    });
+  });
+}
+
+/* ==========================================================
+   INTRODUÇÃO
+   ========================================================== */
+function passoIntro() {
+  fala('Você já conheceu os ácidos, as bases, os sais e os óxidos. Agora, em vez de decorar nomes, você vai investigar pistas do dia a dia e descobrir a função inorgânica de cada substância — como um verdadeiro químico.');
+  const btn = document.createElement('button');
+  btn.className = 'btn-continuar btn-iniciar-investigacao';
+  btn.textContent = 'INICIAR INVESTIGAÇÃO';
+  overlay.appendChild(btn);
+  btn.addEventListener('click', avancar);
+}
+
+/* ==========================================================
+   EXEMPLOS 1–8
+   ========================================================== */
+function criarPassoExemplo(indice) {
+  return function () {
+    const ex = EXEMPLOS[indice];
+    fala('Exemplo ' + (indice + 1) + ' de ' + EXEMPLOS.length + '. Leia as pistas e descubra a função inorgânica — se errar, você ganha mais uma pista.');
+
+    const contador = document.createElement('div');
+    contador.className = 'contador-central';
+    contador.textContent = 'Exemplo ' + (indice + 1) + ' de ' + EXEMPLOS.length + '   |   Acertos: ' + acertos;
+    overlay.appendChild(contador);
+
+    const cartao = document.createElement('div');
+    cartao.className = 'cartao-produto';
+    cartao.innerHTML = '<div class="emoji">' + ex.emoji + '</div><ul class="lista-pistas" id="listaPistas"></ul>';
+    overlay.appendChild(cartao);
+
+    const listaPistas = cartao.querySelector('#listaPistas');
+    const primeiraPista = document.createElement('li');
+    primeiraPista.textContent = ex.pistas[0];
+    listaPistas.appendChild(primeiraPista);
+
+    perguntaComPistas(ex, listaPistas, cartao, function () { botaoContinuar(400); });
+  };
+}
+
+/* ==========================================================
+   DESAFIO FINAL
+   ========================================================== */
+function passoDesafioFinal() {
+  fala('Para fechar, aqui estão oito situações do dia a dia. Escolha a categoria e depois a situação que combina com ela — sem nomes, só características.');
+  criarClassificacaoPorCategoria(DESAFIO_FINAL, CATEGORIAS, 'Pense: essa substância libera H⁺? Tem grupo OH⁻? Ou nenhum dos dois?', 'Muito bem! Você reconheceu todas as substâncias pelas suas características, não pelos nomes.');
+}
+
+/* ==========================================================
+   FINAL
+   ========================================================== */
+function passoFinal() {
+  fala('Excelente! Reconhecer uma função inorgânica não é decorar nomes — é entender o comportamento da substância: se ela libera H⁺, se tem grupo OH⁻, ou se é formada apenas por um cátion e um ânion, ou por oxigênio e outro elemento.');
+  overlay.innerHTML =
+    '<div class="quadro-resumo" style="position:absolute;inset:0;align-items:center;">' +
+    '<div class="quadro-item"><div class="rotulo">Ácidos</div><div class="valor">Ex.: HCl</div></div>' +
+    '<div class="quadro-item"><div class="rotulo">Bases</div><div class="valor">Ex.: NaOH</div></div>' +
+    '<div class="quadro-item"><div class="rotulo">Sais</div><div class="valor">Ex.: NaCl</div></div>' +
+    '<div class="quadro-item"><div class="rotulo">Óxidos</div><div class="valor">Ex.: CO₂</div></div>' +
+    '</div>';
+  painel.innerHTML = '';
+  const conclusao = document.getElementById('conclusao');
+  document.getElementById('conclusaoPlacar').textContent = 'Acertos: ' + acertos + ' de ' + EXEMPLOS.length;
+  document.getElementById('conclusaoMensagem').textContent = 'Você reconheceu ácidos, bases, sais e óxidos presentes em produtos e situações do dia a dia.';
+  conclusao.classList.add('visivel');
+  conclusao.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+/* ==========================================================
+   MOTOR DA FASE
+   ========================================================== */
+const PASSOS = [passoIntro]
+  .concat(EXEMPLOS.map(function (_, i) { return criarPassoExemplo(i); }))
+  .concat([passoDesafioFinal, passoFinal]);
+
+let passoAtual = 0;
+
+function irPara(i) {
+  passoAtual = i;
+  limparTimers();
+  overlay.innerHTML = '';
+  painel.innerHTML = '';
+  continuarBalao.innerHTML = '';
+  PASSOS[i]();
+}
+function avancar() { if (passoAtual + 1 < PASSOS.length) irPara(passoAtual + 1); }
+function reiniciar() {
+  acertos = 0;
+  document.getElementById('conclusao').classList.remove('visivel');
+  irPara(0);
+}
+
+/* ── INIT ── */
+irPara(0);
+</script>
+
+<script>
+(function () {
+  var _clickSom = new Audio('../sons/click.mp3');
+  _clickSom.preload = 'auto';
+  document.addEventListener('click', function (e) {
+    var alvo = e.target.closest('button');
+    if (alvo) { try { _clickSom.currentTime = 0; _clickSom.play().catch(function () {}); } catch (err) {} }
+  }, true);
+})();
+</script>
+</body>
+</html>
