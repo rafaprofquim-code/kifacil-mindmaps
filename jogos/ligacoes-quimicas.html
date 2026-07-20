@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex, nofollow">
-  <title>Ligações Químicas — Jogo Premium | KiFácil</title>
+  <title>Chemical Bonds — Premium Game | KiFácil</title>
   <link rel="icon" type="image/png" href="/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -108,7 +108,7 @@
       min-height: 3.4em;
     }
 
-    /* PALCO DE ANIMAÇÃO */
+    /* ANIMATION STAGE */
     .imagem-wrapper {
       position: relative;
       display: flex;
@@ -149,7 +149,7 @@
     .link-aula:hover { background: rgba(30,16,8,0.92); transform: translateY(-1px); }
     .link-aula svg { width: 22px; height: 22px; }
 
-    /* Cartão com o desenho da ligação */
+    /* Card with the bond diagram */
     .ligacao-card {
       position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
       background: var(--fundo-card); border: 1.5px solid var(--borda-forte); border-radius: 12px;
@@ -175,7 +175,7 @@
       to   { opacity: 1; transform: translate(-50%, 0); }
     }
 
-    /* Jogo de associação (classificação por categoria) */
+    /* Matching game (classification by category) */
     .jogo-associacao { position: absolute; inset: 0; display: flex; justify-content: center; align-items: center; gap: 30px; padding: 6%; flex-wrap: wrap; }
     .coluna-associacao { display: flex; flex-direction: column; gap: 8px; }
     .item-associacao {
@@ -198,7 +198,7 @@
     }
     .quadro-item .valor { font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-weight: 600; color: var(--texto); }
 
-    /* PAINEL DE INTERAÇÃO */
+    /* INTERACTION PANEL */
     #painelInteracao { max-width: 900px; margin: 1.2rem auto 0; }
     .interacao-painel {
       background: var(--fundo-card); border: 1.5px solid var(--borda-forte); border-radius: 12px;
@@ -230,7 +230,7 @@
     .btn-continuar:disabled { opacity: 0.4; cursor: default; }
     .btn-continuar:disabled:hover { background: #1e1008; color: var(--dourado-claro); }
 
-    /* Botão continuar dentro do balão da professora */
+    /* Continue button inside the teacher's speech bubble */
     #continuarBalao { margin-top: 0.6rem; }
     #continuarBalao .btn-continuar { display: inline-block; margin: 0; }
 
@@ -244,7 +244,7 @@
     .feedback-resposta { color: var(--dourado-claro); font-weight: 700; }
     .feedback-explicacao { color: var(--texto); margin-top: 0.5rem; }
 
-    /* CONCLUSÃO */
+    /* CONCLUSION */
     .conclusao {
       display: none; margin-top: 2rem; background: var(--fundo-card);
       border: 1.5px solid var(--borda-forte); border-radius: 12px; padding: 2.4rem 2rem; text-align: center;
@@ -294,38 +294,38 @@
 </nav>
 
 <main>
-  <h1 class="titulo-jogo">Ligações Químicas</h1>
-  <p class="subtitulo">Descubra por que os átomos se ligam e que tipo de substância cada ligação forma.</p>
+  <h1 class="titulo-jogo">Chemical Bonds</h1>
+  <p class="subtitulo">Discover why atoms bond and what type of substance each bond forms.</p>
 
   <div class="narrador">
-    <img src="../imagens/rafa-sorrindo.jpg" alt="Professora Rafaela" />
+    <img src="../imagens/rafa-sorrindo.jpg" alt="Professor Rafaela" />
     <div style="flex: 1;">
-      <div class="narrador-nome">Professora Rafaela</div>
-      <div class="narrador-texto" id="narradorTexto">Vamos começar.</div>
+      <div class="narrador-nome">Professor Rafaela</div>
+      <div class="narrador-texto" id="narradorTexto">Let's begin.</div>
       <div id="continuarBalao"></div>
     </div>
   </div>
 
   <div class="imagem-wrapper" id="imagemWrapper">
-    <img src="../imagens/laboratorio-ligacoes.jpg" alt="Laboratório de ligações químicas" class="cena-fundo" />
+    <img src="../imagens/laboratorio-ligacoes.jpg" alt="Chemical bonds laboratory" class="cena-fundo" />
     <div class="overlay-animacao" id="overlayAnimacao"></div>
-    <!-- COLOQUE O LINK AQUI -->
-    <a class="link-aula" href="https://www.youtube.com/watch?v=S6FtsrxYRPw&t=119s" target="_blank" rel="noopener" title="Assista à aula">
+    <!-- PUT THE LINK HERE -->
+    <a class="link-aula" href="https://www.youtube.com/watch?v=S6FtsrxYRPw&t=119s" target="_blank" rel="noopener" title="Watch the lesson">
       <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.6"/>
         <path d="M10 8.5L16 12L10 15.5V8.5Z" fill="currentColor"/>
       </svg>
-      <span>Assista à aula</span>
+      <span>Watch the lesson</span>
     </a>
   </div>
 
   <div id="painelInteracao"></div>
 
   <div class="conclusao" id="conclusao">
-    <div class="conclusao-titulo">Estudo concluído</div>
+    <div class="conclusao-titulo">Study completed</div>
     <div class="conclusao-placar" id="conclusaoPlacar"></div>
     <p class="conclusao-mensagem" id="conclusaoMensagem"></p>
-    <button class="btn-reiniciar" onclick="reiniciar()">Jogar novamente</button>
+    <button class="btn-reiniciar" onclick="reiniciar()">Play again</button>
   </div>
 </main>
 
@@ -333,7 +333,7 @@
 
 <script>
 /* ==========================================================
-   REFERÊNCIAS DOM
+   DOM REFERENCES
    ========================================================== */
 const overlay = document.getElementById('overlayAnimacao');
 const painel  = document.getElementById('painelInteracao');
@@ -350,7 +350,7 @@ function agendar(fn, ms) { const id = setTimeout(fn, ms); timersAtivos.push(id);
 function limparTimers() { timersAtivos.forEach(clearTimeout); timersAtivos = []; }
 
 /* ==========================================================
-   DESENHOS SVG DAS LIGAÇÕES
+   SVG DRAWINGS OF THE BONDS
    ========================================================== */
 function atomoSVG(simbolo, cor, cx, cy, r) {
   return '<circle cx="' + cx + '" cy="' + cy + '" r="' + r + '" fill="' + cor + '"/>' +
@@ -404,14 +404,14 @@ function criarCartaoLigacao(svgHtml, legenda) {
 }
 
 /* ==========================================================
-   HELPERS DE INTERAÇÃO
+   INTERACTION HELPERS
    ========================================================== */
 function botaoContinuar(delayMs) {
   delayMs = delayMs || 0;
   continuarBalao.innerHTML = '';
   const btn = document.createElement('button');
   btn.className = 'btn-continuar';
-  btn.textContent = 'Continuar →';
+  btn.textContent = 'Continue →';
   btn.disabled = delayMs > 0;
   continuarBalao.appendChild(btn);
   if (delayMs > 0) agendar(function () { btn.disabled = false; }, delayMs);
@@ -446,7 +446,7 @@ function escolhaBotoes(opts) {
         Array.from(opcoesLinha.children).forEach(function (b) { b.disabled = true; });
         btn.classList.add('opcao-certa');
         feedback.className = 'modal-feedback visivel';
-        feedback.innerHTML = '<span class="feedback-certo">Correto!</span><p class="feedback-explicacao">' + opts.explicacao + '</p>';
+        feedback.innerHTML = '<span class="feedback-certo">Correct!</span><p class="feedback-explicacao">' + opts.explicacao + '</p>';
         opts.aoAcertar();
       } else {
         tentativas++;
@@ -461,7 +461,7 @@ function escolhaBotoes(opts) {
             if (opts.opcoes[i].correta) b.classList.add('opcao-certa');
           });
           feedback.className = 'modal-feedback visivel';
-          feedback.innerHTML = '<span class="feedback-resposta">Resposta correta destacada.</span><p class="feedback-explicacao">' + opts.explicacao + '</p>';
+          feedback.innerHTML = '<span class="feedback-resposta">Correct answer highlighted.</span><p class="feedback-explicacao">' + opts.explicacao + '</p>';
           opts.aoAcertar();
         }
       }
@@ -471,7 +471,7 @@ function escolhaBotoes(opts) {
 }
 
 /* ==========================================================
-   CLASSIFICAÇÃO POR CATEGORIA (par de átomos → tipo de ligação)
+   CATEGORY CLASSIFICATION (pair of atoms → bond type)
    ========================================================== */
 function criarClassificacaoPorCategoria(itens, categorias, mensagemErro, mensagemSucesso) {
   const container = document.createElement('div');
@@ -508,7 +508,7 @@ function criarClassificacaoPorCategoria(itens, categorias, mensagemErro, mensage
     el.addEventListener('click', function () {
       if (el.classList.contains('associado')) return;
       if (!categoriaAtiva) {
-        fala('Primeiro escolha um tipo de ligação à esquerda.');
+        fala('First choose a type of bond on the left.');
         return;
       }
       if (it.categoria === categoriaAtiva) {
@@ -528,118 +528,118 @@ function criarClassificacaoPorCategoria(itens, categorias, mensagemErro, mensage
 }
 
 /* ==========================================================
-   INTRODUÇÃO
+   INTRODUCTION
    ========================================================== */
 function passoIntro() {
-  fala('Vamos descobrir por que os átomos se ligam e que tipo de substância cada ligação forma.');
+  fala('Let\'s find out why atoms bond and what type of substance each bond forms.');
   painel.innerHTML = '';
   const wrap = document.createElement('div');
   wrap.className = 'interacao-painel';
   const btn = document.createElement('button');
   btn.className = 'btn-continuar';
-  btn.textContent = 'INICIAR';
+  btn.textContent = 'START';
   wrap.appendChild(btn);
   painel.appendChild(wrap);
   btn.addEventListener('click', avancar);
 }
 
 /* ==========================================================
-   ETAPA — LIGAÇÃO COVALENTE
+   STEP — COVALENT BOND
    ========================================================== */
 function passoCovalente() {
-  fala('H e O são dois ametais se aproximando.');
+  fala('H and O are two nonmetals approaching each other.');
   overlay.appendChild(criarCartaoLigacao(ligacaoCovalenteSVG('H', 'O'), 'H + O'));
 
   escolhaBotoes({
-    pergunta: 'Como átomos de ametais se ligam entre si?',
+    pergunta: 'How do nonmetal atoms bond with each other?',
     opcoes: [
-      { rotulo: 'Transferência de elétrons', correta: false },
-      { rotulo: 'Compartilhamento de elétrons', correta: true },
-      { rotulo: 'Formação de um mar de elétrons', correta: false }
+      { rotulo: 'Electron transfer', correta: false },
+      { rotulo: 'Electron sharing', correta: true },
+      { rotulo: 'Formation of a sea of electrons', correta: false }
     ],
-    dica: 'Nenhum dos dois "rouba" o elétron do outro — eles dividem.',
-    explicacao: 'Ligação covalente: ocorre entre AMETAIS, por compartilhamento de elétrons. Forma substâncias moleculares (baixo ponto de fusão/ebulição) ou sólidos covalentes (alto ponto de fusão/ebulição). São maus condutores de eletricidade (exceto o grafite) e insolúveis em água.',
+    dica: 'Neither one "steals" the electron from the other — they share it.',
+    explicacao: 'Covalent bond: occurs between NONMETALS, through electron sharing. It forms molecular substances (low melting/boiling point) or covalent solids (high melting/boiling point). They are poor conductors of electricity (except graphite) and insoluble in water.',
     aoAcertar: function () { botaoContinuar(400); }
   });
 }
 
 /* ==========================================================
-   ETAPA — LIGAÇÃO METÁLICA
+   STEP — METALLIC BOND
    ========================================================== */
 function passoMetalica() {
-  fala('Agora observe vários átomos de um mesmo metal, bem próximos uns dos outros.');
-  overlay.appendChild(criarCartaoLigacao(marDeEletronsSVG(), 'Mar de elétrons'));
+  fala('Now observe several atoms of the same metal, very close to one another.');
+  overlay.appendChild(criarCartaoLigacao(marDeEletronsSVG(), 'Sea of electrons'));
 
   escolhaBotoes({
-    pergunta: 'O que se forma quando átomos de metais se unem?',
+    pergunta: 'What forms when metal atoms join together?',
     opcoes: [
-      { rotulo: 'Ligação iônica', correta: false },
-      { rotulo: 'Ligação covalente', correta: false },
-      { rotulo: 'Ligação metálica', correta: true }
+      { rotulo: 'Ionic bond', correta: false },
+      { rotulo: 'Covalent bond', correta: false },
+      { rotulo: 'Metallic bond', correta: true }
     ],
-    dica: 'Os elétrons ficam livres, "nadando" entre os átomos.',
-    explicacao: 'Ligação metálica: ocorre entre METAIS, formando um "mar de elétrons" livres. As substâncias metálicas têm altos pontos de fusão e ebulição, são boas condutoras de eletricidade, maleáveis, dúcteis e insolúveis em água.',
+    dica: 'The electrons become free, "swimming" among the atoms.',
+    explicacao: 'Metallic bond: occurs between METALS, forming a free "sea of electrons". Metallic substances have high melting and boiling points, are good conductors of electricity, malleable, ductile, and insoluble in water.',
     aoAcertar: function () { botaoContinuar(400); }
   });
 }
 
 /* ==========================================================
-   ETAPA — LIGAÇÃO IÔNICA
+   STEP — IONIC BOND
    ========================================================== */
 function passoIonica() {
-  fala('Agora um átomo de metal encontra um átomo de ametal.');
+  fala('Now a metal atom meets a nonmetal atom.');
   overlay.appendChild(criarCartaoLigacao(ligacaoIonicaSVG('Na', 'Cl'), 'Na + Cl'));
 
   escolhaBotoes({
-    pergunta: 'O que ocorre quando um metal reage com um ametal?',
+    pergunta: 'What happens when a metal reacts with a nonmetal?',
     opcoes: [
-      { rotulo: 'Compartilhamento de elétrons', correta: false },
-      { rotulo: 'Transferência de elétrons', correta: true },
-      { rotulo: 'Formação de um mar de elétrons', correta: false }
+      { rotulo: 'Electron sharing', correta: false },
+      { rotulo: 'Electron transfer', correta: true },
+      { rotulo: 'Formation of a sea of electrons', correta: false }
     ],
-    dica: 'Um átomo doa o elétron; o outro recebe.',
-    explicacao: 'Ligação iônica: ocorre entre METAL e AMETAL, por transferência de elétrons, formando sólidos iônicos. Têm altos pontos de fusão e ebulição; são maus condutores no estado sólido, mas bons condutores quando fundidos ou dissolvidos em água.',
+    dica: 'One atom donates the electron; the other receives it.',
+    explicacao: 'Ionic bond: occurs between METAL and NONMETAL, through electron transfer, forming ionic solids. They have high melting and boiling points; they are poor conductors in the solid state, but good conductors when molten or dissolved in water.',
     aoAcertar: function () { botaoContinuar(400); }
   });
 }
 
 /* ==========================================================
-   ETAPA — CLASSIFICAR OS PARES DE ÁTOMOS
+   STEP — CLASSIFY THE PAIRS OF ATOMS
    ========================================================== */
 function passoClassificar() {
-  fala('Escolha um tipo de ligação à esquerda e clique em todos os pares de átomos que formam esse tipo. Depois, passe para o próximo.');
+  fala('Choose a type of bond on the left and click all the pairs of atoms that form that type. Then move on to the next one.');
   criarClassificacaoPorCategoria([
-    { rotulo: 'Cl + Cl', categoria: 'Covalente' },
-    { rotulo: 'H + O', categoria: 'Covalente' },
-    { rotulo: 'Fe + Fe', categoria: 'Metálica' },
-    { rotulo: 'Na + Na', categoria: 'Metálica' },
-    { rotulo: 'Na + Cl', categoria: 'Iônica' },
-    { rotulo: 'Mg + O', categoria: 'Iônica' }
-  ], ['Covalente', 'Metálica', 'Iônica'],
-  'Lembre-se: ametal + ametal é covalente; metal + metal é metálica; metal + ametal é iônica.', 'Muito bem! Você classificou todas corretamente.');
+    { rotulo: 'Cl + Cl', categoria: 'Covalent' },
+    { rotulo: 'H + O', categoria: 'Covalent' },
+    { rotulo: 'Fe + Fe', categoria: 'Metallic' },
+    { rotulo: 'Na + Na', categoria: 'Metallic' },
+    { rotulo: 'Na + Cl', categoria: 'Ionic' },
+    { rotulo: 'Mg + O', categoria: 'Ionic' }
+  ], ['Covalent', 'Metallic', 'Ionic'],
+  'Remember: nonmetal + nonmetal is covalent; metal + metal is metallic; metal + nonmetal is ionic.', 'Well done! You classified them all correctly.');
 }
 
 /* ==========================================================
    FINAL
    ========================================================== */
 function passoFinal() {
-  fala('Agora você sabe reconhecer as três ligações químicas e as propriedades das substâncias que elas formam.');
+  fala('Now you know how to recognize the three chemical bonds and the properties of the substances they form.');
   overlay.innerHTML =
     '<div class="quadro-resumo" style="position:absolute;inset:0;align-items:center;">' +
-    '<div class="quadro-item"><div class="rotulo">Covalente</div><div class="valor">Ametal + Ametal<br>Compartilha elétrons</div></div>' +
-    '<div class="quadro-item"><div class="rotulo">Metálica</div><div class="valor">Metal + Metal<br>Mar de elétrons</div></div>' +
-    '<div class="quadro-item"><div class="rotulo">Iônica</div><div class="valor">Metal + Ametal<br>Transfere elétrons</div></div>' +
+    '<div class="quadro-item"><div class="rotulo">Covalent</div><div class="valor">Nonmetal + Nonmetal<br>Shares electrons</div></div>' +
+    '<div class="quadro-item"><div class="rotulo">Metallic</div><div class="valor">Metal + Metal<br>Sea of electrons</div></div>' +
+    '<div class="quadro-item"><div class="rotulo">Ionic</div><div class="valor">Metal + Nonmetal<br>Transfers electrons</div></div>' +
     '</div>';
   painel.innerHTML = '';
   const conclusao = document.getElementById('conclusao');
-  document.getElementById('conclusaoPlacar').textContent = 'Fase concluída';
-  document.getElementById('conclusaoMensagem').textContent = 'Você aprendeu a diferença entre ligação covalente, metálica e iônica, e como reconhecer cada uma a partir dos átomos envolvidos.';
+  document.getElementById('conclusaoPlacar').textContent = 'Stage completed';
+  document.getElementById('conclusaoMensagem').textContent = 'You learned the difference between covalent, metallic, and ionic bonds, and how to recognize each one from the atoms involved.';
   conclusao.classList.add('visivel');
   conclusao.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 /* ==========================================================
-   MOTOR DA FASE
+   STAGE ENGINE
    ========================================================== */
 const PASSOS = [passoIntro, passoCovalente, passoMetalica, passoIonica, passoClassificar, passoFinal];
 let passoAtual = 0;

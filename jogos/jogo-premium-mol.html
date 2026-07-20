@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex, nofollow">
-  <title>Mol e Massa Molar — Jogo Premium | KiFácil</title>
+  <title>The Mole and Molar Mass — Premium Game | KiFácil</title>
   <link rel="icon" type="image/png" href="/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -451,36 +451,36 @@
 </nav>
 
 <main>
-  <h1 class="titulo-jogo">Mol e Massa Molar</h1>
-  <p class="subtitulo">Descubra por que os químicos criaram o mol e aprenda a calcular a massa molar de qualquer substância.</p>
+  <h1 class="titulo-jogo">The Mole and Molar Mass</h1>
+  <p class="subtitulo">Discover why chemists created the mole and learn how to calculate the molar mass of any substance.</p>
 
   <div class="narrador">
-    <img src="../imagens/rafa-sorrindo.jpg" alt="Professora Rafaela" />
+    <img src="../imagens/rafa-sorrindo.jpg" alt="Professor Rafaela" />
     <div style="flex: 1;">
-      <div class="narrador-nome">Professora Rafaela</div>
-      <div class="narrador-texto" id="narradorTexto">Vamos começar.</div>
+      <div class="narrador-nome">Professor Rafaela</div>
+      <div class="narrador-texto" id="narradorTexto">Let's begin.</div>
       <div id="painelInteracao"></div>
     </div>
   </div>
 
   <div class="imagem-wrapper" id="imagemWrapper">
-    <img src="../imagens/sala-massa-molar.jpg" alt="Sala da massa molar" class="cena-fundo" />
+    <img src="../imagens/sala-massa-molar.jpg" alt="Molar mass room" class="cena-fundo" />
     <div class="overlay-animacao" id="overlayAnimacao"></div>
-    <!-- COLOQUE O LINK AQUI -->
-    <a class="link-aula" href="https://www.youtube.com/watch?v=WvjgYsZsbc0" target="_blank" rel="noopener" title="Assista à aula">
+    <!-- PUT THE LINK HERE -->
+    <a class="link-aula" href="https://www.youtube.com/watch?v=WvjgYsZsbc0" target="_blank" rel="noopener" title="Watch the lesson">
       <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.6"/>
         <path d="M10 8.5L16 12L10 15.5V8.5Z" fill="currentColor"/>
       </svg>
-      <span>Assista à aula</span>
+      <span>Watch the lesson</span>
     </a>
   </div>
 
   <div class="conclusao" id="conclusao">
-    <div class="conclusao-titulo">Estudo concluído</div>
+    <div class="conclusao-titulo">Study complete</div>
     <div class="conclusao-placar" id="conclusaoPlacar"></div>
     <p class="conclusao-mensagem" id="conclusaoMensagem"></p>
-    <button class="btn-reiniciar" onclick="reiniciar()">Jogar novamente</button>
+    <button class="btn-reiniciar" onclick="reiniciar()">Play again</button>
   </div>
 </main>
 
@@ -488,7 +488,7 @@
 
 <script>
 /* ==========================================================
-   DADOS QUÍMICOS
+   CHEMICAL DATA
    ========================================================== */
 const AVOGADRO = 6.02e23;
 const MASSAS = { H: 1.008, O: 15.999, C: 12.011, N: 14.007, Na: 22.990, Cl: 35.453 };
@@ -503,7 +503,7 @@ function massaMolar(sub) {
 }
 
 /* ==========================================================
-   REFERÊNCIAS DOM
+   DOM REFERENCES
    ========================================================== */
 const overlay = document.getElementById('overlayAnimacao');
 const painel  = document.getElementById('painelInteracao');
@@ -517,7 +517,7 @@ function fala(texto) {
 }
 
 /* ==========================================================
-   TIMERS (para poder limpar ao reiniciar/avançar)
+   TIMERS (so they can be cleared on restart/advance)
    ========================================================== */
 let timersAtivos = [];
 function agendar(fn, ms) {
@@ -531,7 +531,7 @@ function limparTimers() {
 }
 
 /* ==========================================================
-   HELPERS DE ANIMAÇÃO
+   ANIMATION HELPERS
    ========================================================== */
 function bolinhasSVG(n, viewW, viewH) {
   viewW = viewW || 800; viewH = viewH || 460;
@@ -577,9 +577,9 @@ function criarCartaoElemento(simbolo, massa, left, top) {
   div.className = 'cartao-elemento';
   div.style.left = left;
   div.style.top = top || '25%';
-  div.innerHTML = '<img src="../imagens/cartao-elemento.png" alt="Cartão do elemento ' + simbolo + '">'
+  div.innerHTML = '<img src="../imagens/cartao-elemento.png" alt="Card for element ' + simbolo + '">'
     + '<div class="simbolo">' + simbolo + '</div>'
-    + '<div class="massa">' + massa.toFixed(3).replace('.', ',') + '</div>';
+    + '<div class="massa">' + massa.toFixed(3) + '</div>';
   return div;
 }
 
@@ -609,7 +609,7 @@ function botaoContinuar(delayMs) {
   wrap.className = 'interacao-painel';
   const btn = document.createElement('button');
   btn.className = 'btn-continuar';
-  btn.textContent = 'Continuar →';
+  btn.textContent = 'Continue →';
   btn.disabled = delayMs > 0;
   wrap.appendChild(btn);
   painel.appendChild(wrap);
@@ -625,8 +625,8 @@ function perguntaInterativa(opts) {
   wrap.innerHTML =
     '<div class="interacao-pergunta-texto">' + opts.pergunta + '</div>' +
     '<div class="interacao-linha">' +
-      '<input class="modal-input" type="text" id="inputResposta" placeholder="Digite sua resposta..." autocomplete="off" spellcheck="false">' +
-      '<button class="modal-btn-confirmar" id="btnConfirmarResposta">Confirmar</button>' +
+      '<input class="modal-input" type="text" id="inputResposta" placeholder="Type your answer..." autocomplete="off" spellcheck="false">' +
+      '<button class="modal-btn-confirmar" id="btnConfirmarResposta">Confirm</button>' +
     '</div>' +
     '<div class="modal-feedback" id="feedbackResposta"></div>';
   painel.appendChild(wrap);
@@ -643,18 +643,18 @@ function perguntaInterativa(opts) {
       input.disabled = true; btn.disabled = true;
       tocarDing();
       feedback.className = 'modal-feedback visivel';
-      feedback.innerHTML = '<span class="feedback-certo">Correto!</span><p class="feedback-explicacao">' + opts.explicacao + '</p>';
+      feedback.innerHTML = '<span class="feedback-certo">Correct!</span><p class="feedback-explicacao">' + opts.explicacao + '</p>';
       opts.aoAcertar();
     } else {
       tentativas++;
       if (tentativas === 1) {
         feedback.className = 'modal-feedback visivel';
-        feedback.innerHTML = '<span class="feedback-errado">Ainda não é isso.</span><p class="feedback-dica"><em>Dica:</em> ' + opts.dica + '</p>';
+        feedback.innerHTML = '<span class="feedback-errado">Not quite.</span><p class="feedback-dica"><em>Hint:</em> ' + opts.dica + '</p>';
         input.value = ''; input.focus();
       } else {
         input.disabled = true; btn.disabled = true;
         feedback.className = 'modal-feedback visivel';
-        feedback.innerHTML = '<span class="feedback-resposta">Resposta: ' + opts.respostaExibicao + '</span><p class="feedback-explicacao">' + opts.explicacao + '</p>';
+        feedback.innerHTML = '<span class="feedback-resposta">Answer: ' + opts.respostaExibicao + '</span><p class="feedback-explicacao">' + opts.explicacao + '</p>';
         opts.aoAcertar();
       }
     }
@@ -665,7 +665,7 @@ function perguntaInterativa(opts) {
 }
 
 /* ==========================================================
-   PASSOS DA FASE
+   STAGE STEPS
    ========================================================== */
 
 function passoContarBolinhas(qtd, intro) {
@@ -677,33 +677,33 @@ function passoContarBolinhas(qtd, intro) {
     overlay.appendChild(svgWrap);
 
     perguntaInterativa({
-      pergunta: 'Quantas bolinhas você vê?',
+      pergunta: 'How many balls do you see?',
       validar: function (v) { return parseInt(v.replace(/\D/g, ''), 10) === qtd; },
-      dica: 'Conte uma a uma, com calma.',
+      dica: 'Count them one by one, calmly.',
       respostaExibicao: String(qtd),
-      explicacao: 'Isso mesmo — são ' + qtd + '.',
+      explicacao: 'That\'s right — there are ' + qtd + '.',
       aoAcertar: function () { botaoContinuar(300); }
     });
   };
 }
-const passoContar2 = passoContarBolinhas(2, 'Vou colocar algumas bolinhas nesta sala. Conte quantas tem e digite o número.');
-const passoContar5 = passoContarBolinhas(5, 'Agora vou colocar mais bolinhas. Conte de novo.');
-const passoContar10 = passoContarBolinhas(10, 'Mais uma vez — quantas bolinhas tem agora?');
+const passoContar2 = passoContarBolinhas(2, 'I\'m going to place some balls in this room. Count how many there are and type the number.');
+const passoContar5 = passoContarBolinhas(5, 'Now I\'m going to add more balls. Count again.');
+const passoContar10 = passoContarBolinhas(10, 'One more time — how many balls are there now?');
 
 function passoMilBolinhas() {
-  fala('Agora vou colocar mil bolinhas nesta sala...');
+  fala('Now I\'m going to place a thousand balls in this room...');
   const svgWrap = document.createElement('div');
   svgWrap.style.position = 'absolute'; svgWrap.style.inset = '0';
   svgWrap.innerHTML = bolinhasSVG(1000);
   overlay.appendChild(svgWrap);
   agendar(function () {
-    fala('Ficou difícil de contar, não é? Contar uma por uma não funciona mais quando a quantidade é muito grande.');
+    fala('It got hard to count, didn\'t it? Counting one by one stops working once the quantity gets too large.');
     botaoContinuar(600);
   }, 900);
 }
 
 function passoAgruparCaixas() {
-  fala('Vou agrupar todas essas bolinhas dentro de caixinhas, cada caixinha conterá a mesma quantidade de bolinhas que as demais. Essa caixinha é uma nova unidade que eu criei agora — vou chamá-la de "kifácil".');
+  fala('I\'m going to group all these balls into little boxes, each box will hold the same number of balls as the others. This little box is a new unit I\'ve just created — I\'ll call it a "kifácil".');
   const svgWrap = document.createElement('div');
   svgWrap.style.position = 'absolute'; svgWrap.style.inset = '0';
   svgWrap.innerHTML = caixinhasSVG(10);
@@ -712,18 +712,18 @@ function passoAgruparCaixas() {
 }
 
 function passoContarCaixas() {
-  fala('Quantos kifácils você vê aqui?');
+  fala('How many kifácils do you see here?');
   const svgWrap = document.createElement('div');
   svgWrap.style.position = 'absolute'; svgWrap.style.inset = '0';
   svgWrap.innerHTML = caixinhasSVG(10);
   overlay.appendChild(svgWrap);
 
   perguntaInterativa({
-    pergunta: 'Quantos kifácils existem nesta sala?',
+    pergunta: 'How many kifácils are there in this room?',
     validar: function (v) { return parseInt(v.replace(/\D/g, ''), 10) === 10; },
-    dica: 'Conte as caixinhas.',
+    dica: 'Count the little boxes.',
     respostaExibicao: '10 kifácils',
-    explicacao: 'Isso mesmo — são 10 kifácils.',
+    explicacao: 'That\'s right — there are 10 kifácils.',
     aoAcertar: function () { botaoContinuar(300); }
   });
 }
@@ -735,25 +735,25 @@ function passoRevelarTotal() {
   overlay.appendChild(svgWrap);
 
   perguntaInterativa({
-    pergunta: 'E se eu te disser que em cada kifácil tem 100 bolinhas — quantas bolinhas existiam ao todo nessa sala?',
+    pergunta: 'And what if I told you that each kifácil has 100 balls inside — how many balls were there in total in this room?',
     validar: function (v) { return parseInt(v.replace(/\D/g, ''), 10) === 1000; },
-    dica: '10 kifácils × 100 bolinhas em cada um.',
-    respostaExibicao: '1.000 bolinhas',
-    explicacao: '10 × 100 = 1.000 bolinhas. O "kifácil" foi só uma unidade que criamos para facilitar a contagem de uma quantidade muito grande.',
+    dica: '10 kifácils × 100 balls in each one.',
+    respostaExibicao: '1,000 balls',
+    explicacao: '10 × 100 = 1,000 balls. The "kifácil" was just a unit we created to make it easier to count a very large quantity.',
     aoAcertar: function () { botaoContinuar(500); }
   });
 }
 
 function passoTransicaoMol() {
-  fala('É exatamente essa a ideia por trás do mol: uma unidade criada para contar quantidades imensas de partículas muito pequenas, como átomos e moléculas.');
+  fala('That is exactly the idea behind the mole: a unit created to count immense quantities of very small particles, like atoms and molecules.');
   botaoContinuar(600);
 }
 
 function passoAreia() {
-  fala('Existem mais moléculas de água em uma colher de chá do que grãos de areia em todas as praias do planeta Terra.');
+  fala('There are more water molecules in a teaspoon than grains of sand on every beach on planet Earth.');
   const img = document.createElement('img');
   img.src = '../imagens/areia.png';
-  img.alt = 'Grãos de areia';
+  img.alt = 'Grains of sand';
   img.style.position = 'absolute'; img.style.inset = '0';
   img.style.width = '100%'; img.style.height = '100%'; img.style.objectFit = 'cover';
   overlay.appendChild(img);
@@ -761,13 +761,13 @@ function passoAreia() {
 }
 
 function passoAvogadro() {
-  fala('Por isso os químicos criaram uma unidade para contar átomos e moléculas: o mol.');
+  fala('That is why chemists created a unit to count atoms and molecules: the mole.');
   const contador = document.createElement('div');
   contador.className = 'contador-central';
   contador.textContent = '1';
   overlay.appendChild(contador);
 
-  const seq = ['10', '1.000', '1.000.000', '6,02 × 10²³'];
+  const seq = ['10', '1,000', '1,000,000', '6.02 × 10²³'];
   let i = 0;
   function passoContador() {
     contador.textContent = seq[i];
@@ -776,10 +776,10 @@ function passoAvogadro() {
       agendar(passoContador, 550);
     } else {
       agendar(function () {
-        fala('1 mol equivale a 6,02 × 10²³ partículas — o número de Avogadro. É um número absurdamente grande: contando um átomo por segundo, você levaria muito mais tempo do que a idade do universo para terminar.');
+        fala('1 mole equals 6.02 × 10²³ particles — Avogadro\'s number. It\'s an absurdly large number: counting one atom per second, it would take you far longer than the age of the universe to finish.');
         const placa = document.createElement('div');
         placa.className = 'placa-dourada';
-        placa.textContent = '1 mol = 6,02 × 10²³ partículas';
+        placa.textContent = '1 mole = 6.02 × 10²³ particles';
         overlay.appendChild(placa);
         botaoContinuar(600);
       }, 500);
@@ -789,79 +789,79 @@ function passoAvogadro() {
 }
 
 function passoCalcular2Mols() {
-  fala('Agora é sua vez. Quantos átomos existem em 2 mols?');
+  fala('Now it\'s your turn. How many atoms are there in 2 moles?');
   perguntaInterativa({
-    pergunta: 'Quantos átomos existem em 2 mols? (escreva por exemplo 1,204x10^24)',
+    pergunta: 'How many atoms are there in 2 moles? (write for example 1.204x10^24)',
     validar: function (v) {
       const num = parseNumeroCientifico(v);
       if (isNaN(num)) return false;
       const alvo = 2 * AVOGADRO;
       return Math.abs(num - alvo) / alvo < 0.06;
     },
-    dica: 'Multiplique 2 pelo número de Avogadro: 2 × 6,02×10²³.',
-    respostaExibicao: '1,204 × 10²⁴ átomos',
-    explicacao: '2 × 6,02×10²³ = 1,204×10²⁴ átomos.',
+    dica: 'Multiply 2 by Avogadro\'s number: 2 × 6.02×10²³.',
+    respostaExibicao: '1.204 × 10²⁴ atoms',
+    explicacao: '2 × 6.02×10²³ = 1.204×10²⁴ atoms.',
     aoAcertar: function () { botaoContinuar(400); }
   });
 }
 
 function passoCalcular3Mols() {
-  fala('E quantos átomos existem em 3 mols?');
+  fala('And how many atoms are there in 3 moles?');
   perguntaInterativa({
-    pergunta: 'Quantos átomos existem em 3 mols? (escreva por exemplo 1,806x10^24)',
+    pergunta: 'How many atoms are there in 3 moles? (write for example 1.806x10^24)',
     validar: function (v) {
       const num = parseNumeroCientifico(v);
       if (isNaN(num)) return false;
       const alvo = 3 * AVOGADRO;
       return Math.abs(num - alvo) / alvo < 0.06;
     },
-    dica: 'Multiplique 3 pelo número de Avogadro: 3 × 6,02×10²³.',
-    respostaExibicao: '1,806 × 10²⁴ átomos',
-    explicacao: '3 × 6,02×10²³ = 1,806×10²⁴ átomos.',
+    dica: 'Multiply 3 by Avogadro\'s number: 3 × 6.02×10²³.',
+    respostaExibicao: '1.806 × 10²⁴ atoms',
+    explicacao: '3 × 6.02×10²³ = 1.806×10²⁴ atoms.',
     aoAcertar: function () { botaoContinuar(400); }
   });
 }
 
 function passo10() {
-  fala('Vamos descobrir a massa molar da água.');
+  fala('Let\'s find out the molar mass of water.');
   const balanca = document.createElement('img');
   balanca.src = '../imagens/balanca-molar.png';
   balanca.className = 'balanca-central';
   overlay.appendChild(balanca);
 
   agendar(function () {
-    fala('Esse é o Oxigênio: massa atômica 15,999.');
+    fala('This is Oxygen: atomic mass 15.999.');
     overlay.appendChild(criarCartaoElemento('O', MASSAS.O, '14%', '46%'));
   }, 1100);
 
   agendar(function () {
-    fala('Esse é o Hidrogênio: massa atômica 1,008.');
+    fala('This is Hydrogen: atomic mass 1.008.');
     overlay.appendChild(criarCartaoElemento('H', MASSAS.H, '58%', '46%'));
   }, 2400);
 
   agendar(function () {
-    fala('A água tem 2 átomos de Hidrogênio.');
+    fala('Water has 2 atoms of Hydrogen.');
     overlay.appendChild(criarCartaoElemento('H', MASSAS.H, '76%', '46%'));
   }, 3600);
 
   agendar(function () {
-    fala('Somando as massas: 15,999 + 1,008 + 1,008 = 18,015 g/mol. Essa é a massa molar da água!');
+    fala('Adding up the masses: 15.999 + 1.008 + 1.008 = 18.015 g/mol. That is the molar mass of water!');
     const placa = document.createElement('div');
     placa.className = 'placa-dourada';
-    placa.textContent = 'H₂O: 15,999 + 1,008 + 1,008 = 18,015 g/mol';
+    placa.textContent = 'H₂O: 15.999 + 1.008 + 1.008 = 18.015 g/mol';
     overlay.appendChild(placa);
     botaoContinuar(400);
   }, 4900);
 }
 
 function passo11() {
-  fala('Agora é sua vez de montar a massa molar de outras substâncias.');
+  fala('Now it\'s your turn to work out the molar mass of other substances.');
   botaoContinuar(500);
 }
 
 function criarPassoSubstancia(sub) {
   return function () {
-    fala('Monte a massa molar de ' + sub.formula + '.');
+    fala('Work out the molar mass of ' + sub.formula + '.');
     const cont = document.createElement('div');
     cont.className = 'cartoes-linha';
     const atomos = [];
@@ -869,44 +869,44 @@ function criarPassoSubstancia(sub) {
     atomos.forEach(function (s) {
       const c = document.createElement('div');
       c.className = 'cartao-elemento';
-      c.innerHTML = '<img src="../imagens/cartao-elemento.png" alt="Cartão do elemento ' + s + '">'
+      c.innerHTML = '<img src="../imagens/cartao-elemento.png" alt="Card for element ' + s + '">'
         + '<div class="simbolo">' + s + '</div>'
-        + '<div class="massa">' + MASSAS[s].toFixed(3).replace('.', ',') + '</div>';
+        + '<div class="massa">' + MASSAS[s].toFixed(3) + '</div>';
       cont.appendChild(c);
     });
     overlay.appendChild(cont);
 
     const alvo = massaMolar(sub);
     perguntaInterativa({
-      pergunta: 'Qual a massa molar de ' + sub.formula + ', em g/mol? Some as massas atômicas dos átomos mostrados.',
+      pergunta: 'What is the molar mass of ' + sub.formula + ', in g/mol? Add up the atomic masses of the atoms shown.',
       validar: function (v) {
         const num = parseFloat(v.replace(',', '.'));
         return !isNaN(num) && Math.abs(num - alvo) <= 0.1;
       },
-      dica: 'Some a massa atômica de cada átomo presente na fórmula ' + sub.formula + '.',
-      respostaExibicao: alvo.toFixed(3).replace('.', ',') + ' g/mol',
-      explicacao: 'Somando as massas atômicas de ' + sub.formula + ': ' + alvo.toFixed(3).replace('.', ',') + ' g/mol.',
+      dica: 'Add up the atomic mass of each atom present in the formula ' + sub.formula + '.',
+      respostaExibicao: alvo.toFixed(3) + ' g/mol',
+      explicacao: 'Adding up the atomic masses of ' + sub.formula + ': ' + alvo.toFixed(3) + ' g/mol.',
       aoAcertar: function () { botaoContinuar(300); }
     });
   };
 }
 
 function passoFinal() {
-  fala('Excelente. Agora você entende por que utilizamos o mol e como calcular a massa molar de qualquer substância.');
+  fala('Excellent. Now you understand why we use the mole and how to calculate the molar mass of any substance.');
   overlay.innerHTML = '<div class="quadro-resumo" style="position:absolute;inset:0;align-items:center;">' +
-    '<div class="quadro-item"><div class="rotulo">Mol</div><div class="valor">6,02 × 10²³ partículas</div></div>' +
-    '<div class="quadro-item"><div class="rotulo">Massa molar</div><div class="valor">Massa de 1 mol (g/mol)</div></div>' +
+    '<div class="quadro-item"><div class="rotulo">Mole</div><div class="valor">6.02 × 10²³ particles</div></div>' +
+    '<div class="quadro-item"><div class="rotulo">Molar mass</div><div class="valor">Mass of 1 mole (g/mol)</div></div>' +
     '</div>';
   painel.innerHTML = '';
   const conclusao = document.getElementById('conclusao');
-  document.getElementById('conclusaoPlacar').textContent = 'Fase concluída';
-  document.getElementById('conclusaoMensagem').textContent = 'Você aprendeu o que é o mol e como calcular a massa molar de uma substância a partir das massas atômicas.';
+  document.getElementById('conclusaoPlacar').textContent = 'Stage complete';
+  document.getElementById('conclusaoMensagem').textContent = 'You learned what the mole is and how to calculate the molar mass of a substance from atomic masses.';
   conclusao.classList.add('visivel');
   conclusao.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 /* ==========================================================
-   MOTOR DA FASE
+   STAGE ENGINE
    ========================================================== */
 const PASSOS = [
   passoContar2, passoContar5, passoContar10,

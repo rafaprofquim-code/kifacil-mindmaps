@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex, nofollow">
-  <title>Classifique a Substância — Jogo | KiFácil</title>
+  <title>Classify the Substance — Game | KiFácil</title>
   <link rel="icon" type="image/png" href="/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;1,500&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
@@ -77,7 +77,7 @@
     .link-aula:hover { background: rgba(30,16,8,0.92); transform: translateY(-1px); }
     .link-aula svg { width: 22px; height: 22px; }
 
-    /* CABEÇALHO */
+    /* HEADER */
     .jogo-titulo {
       font-family: 'Lora', serif;
       font-size: clamp(1.7rem, 4vw, 2.4rem);
@@ -125,7 +125,7 @@
       color: var(--suave);
     }
 
-    /* CARTAS */
+    /* CARDS */
     #rodada1, #rodada2, #rodada3 {
       margin-top: 1rem;
     }
@@ -167,7 +167,7 @@
       line-height: 1.4;
     }
 
-    /* Estados de seleção */
+    /* Selection states */
     .carta.sel-simples  { background: #eef3fb; border-color: #163c6e; }
     .carta.sel-composta { background: #fff4e6; border-color: #8a4f00; }
     .carta.sel-mistura  { background: var(--verde-bg); border-color: var(--verde); }
@@ -178,7 +178,7 @@
     .carta.errada   { border-color: var(--vermelho) !important; animation: shake 0.35s ease; }
     @keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-4px)} 75%{transform:translateX(4px)} }
 
-    /* Badge na carta */
+    /* Card badge */
     .carta-badge {
       position: absolute;
       top: -8px; right: -8px;
@@ -192,7 +192,7 @@
     .badge-ok  { background: var(--verde); color: #fff; }
     .badge-err { background: var(--vermelho); color: #fff; }
 
-    /* OPÇÕES DE CLASSIFICAÇÃO */
+    /* CLASSIFICATION OPTIONS */
     .opcoes-wrap {
       display: flex;
       flex-wrap: wrap;
@@ -217,7 +217,7 @@
     .opcao-btn.ativa-homogenea   { background: var(--azul-bg); border-color: var(--azul); color: var(--azul); font-weight: 700; }
     .opcao-btn.ativa-heterogenea { background: var(--vermelho-bg); border-color: var(--vermelho); color: var(--vermelho); font-weight: 700; }
 
-    /* INSTRUÇÃO FLUTUANTE */
+    /* FLOATING INSTRUCTION */
     .instrucao {
       font-size: 0.85rem;
       color: var(--suave);
@@ -246,7 +246,7 @@
     .feedback-box strong { display: block; margin-bottom: 0.3rem; font-size: 0.92rem; }
     .feedback-box .explicacao { color: var(--suave); margin-top: 0.4rem; font-size: 0.83rem; }
 
-    /* BOTÃO PRINCIPAL */
+    /* PRIMARY BUTTON */
     .btn-primario {
       background: var(--escuro);
       color: var(--ouro-claro);
@@ -265,7 +265,7 @@
     .btn-primario:disabled { opacity: 0.35; cursor: default; }
     .btn-primario:disabled:hover { background: var(--escuro); color: var(--ouro-claro); }
 
-    /* RODADA 3 — CURVAS */
+    /* ROUND 3 — CURVES */
     .curva-wrap {
       background: var(--card);
       border: 1.5px solid var(--borda-forte);
@@ -306,10 +306,10 @@
       margin-bottom: 0.5rem;
     }
 
-    /* SVGs das curvas */
+    /* Curve SVGs */
     .curva-svg { width: 100%; height: auto; display: block; }
 
-    /* TEXTO LIVRE */
+    /* FREE TEXT */
     .textarea-resposta {
       width: 100%;
       font-family: 'Libre Baskerville', serif;
@@ -328,7 +328,7 @@
     .textarea-resposta:focus { border-color: var(--ouro-claro); }
     .textarea-resposta::placeholder { color: rgba(26,18,8,0.35); }
 
-    /* CONCLUSÃO */
+    /* CONCLUSION */
     .conclusao {
       display: none;
       margin-top: 2.5rem;
@@ -409,68 +409,68 @@
 </nav>
 
 <main>
-  <h1 class="jogo-titulo">Classifique a Substância</h1>
-  <p class="jogo-desc">Três rodadas de classificação progressiva — do geral para o específico.</p>
+  <h1 class="jogo-titulo">Classify the Substance</h1>
+  <p class="jogo-desc">Three rounds of progressive classification — from general to specific.</p>
 
   <div class="narrador">
-    <img src="../imagens/rafa-sorrindo.jpg" alt="Professora Rafaela" />
+    <img src="../imagens/rafa-sorrindo.jpg" alt="Professor Rafaela" />
     <div>
-      <div class="narrador-nome">Professora Rafaela</div>
-      <div class="narrador-texto" id="narradorTexto">Rodada 1: escolha uma categoria (Substância Simples, Composta ou Mistura) e clique em cada carta para classificar. Você pode trocar a categoria antes de confirmar cada carta e, ao final, clique em Verificar.</div>
+      <div class="narrador-nome">Professor Rafaela</div>
+      <div class="narrador-texto" id="narradorTexto">Round 1: choose a category (Simple Substance, Compound Substance, or Mixture) and click on each card to classify it. You can change the category before confirming each card, and when you're done, click Check.</div>
       <div id="narradorContinuar"></div>
     </div>
   </div>
 
-  <!-- RODADA 1 -->
+  <!-- ROUND 1 -->
   <div id="rodada1">
     <div class="opcoes-wrap" id="opcoes1">
-      <button class="opcao-btn" id="btn-simples"  onclick="selecionarOpcao('simples')">Substância Simples</button>
-      <button class="opcao-btn" id="btn-composta" onclick="selecionarOpcao('composta')">Substância Composta</button>
-      <button class="opcao-btn" id="btn-mistura"  onclick="selecionarOpcao('mistura')">Mistura</button>
+      <button class="opcao-btn" id="btn-simples"  onclick="selecionarOpcao('simples')">Simple Substance</button>
+      <button class="opcao-btn" id="btn-composta" onclick="selecionarOpcao('composta')">Compound Substance</button>
+      <button class="opcao-btn" id="btn-mistura"  onclick="selecionarOpcao('mistura')">Mixture</button>
     </div>
 
     <div class="cartas-grid" id="cartasR1"></div>
     <div class="feedback-box" id="feedbackR1"></div>
-    <button class="btn-primario" id="btnVerificarR1" onclick="verificarRodada1()">Verificar →</button>
+    <button class="btn-primario" id="btnVerificarR1" onclick="verificarRodada1()">Check →</button>
   </div>
 
-  <!-- RODADA 2 -->
+  <!-- ROUND 2 -->
   <div id="rodada2" style="display:none">
     <div class="opcoes-wrap" id="opcoes2">
-      <button class="opcao-btn" id="btn-homogenea"   onclick="selecionarOpcao2('homogenea')">Homogênea</button>
-      <button class="opcao-btn" id="btn-heterogenea" onclick="selecionarOpcao2('heterogenea')">Heterogênea</button>
+      <button class="opcao-btn" id="btn-homogenea"   onclick="selecionarOpcao2('homogenea')">Homogeneous</button>
+      <button class="opcao-btn" id="btn-heterogenea" onclick="selecionarOpcao2('heterogenea')">Heterogeneous</button>
     </div>
 
     <div class="cartas-grid" id="cartasR2"></div>
     <div class="feedback-box" id="feedbackR2"></div>
-    <button class="btn-primario" id="btnVerificarR2" onclick="verificarRodada2()">Verificar →</button>
+    <button class="btn-primario" id="btnVerificarR2" onclick="verificarRodada2()">Check →</button>
   </div>
 
-  <!-- RODADA 3 -->
+  <!-- ROUND 3 -->
   <div id="rodada3" style="display:none">
     <div class="curva-wrap">
-      <div class="curva-titulo">Qual é cada curva?</div>
+      <div class="curva-titulo">What is each curve?</div>
       <div class="curvas-grid" id="curvasGrid">
 
-        <!-- CURVA A: substância pura — patamares HORIZONTAIS reais (S+L e L+G) -->
+        <!-- CURVE A: pure substance — real HORIZONTAL plateaus (S+L and L+G) -->
         <div class="curva-item" id="curvaA" onclick="selecionarCurva('A')">
-          <div class="curva-label">Curva A</div>
+          <div class="curva-label">Curve A</div>
           <svg class="curva-svg" viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg">
             <line x1="22" y1="135" x2="22" y2="8"  stroke="#3d2e1a" stroke-width="1.5"/>
             <line x1="22" y1="135" x2="192" y2="135" stroke="#3d2e1a" stroke-width="1.5"/>
             <text x="4"   y="12"  font-size="9" fill="#3d2e1a" font-family="serif">T(°C)</text>
             <text x="178" y="144" font-size="9" fill="#3d2e1a" font-family="serif">t(s)</text>
-            <!-- S: subindo -->
+            <!-- S: rising -->
             <line x1="22" y1="120" x2="55"  y2="90"  stroke="#c8920a" stroke-width="2.5"/>
-            <!-- S+L: patamar horizontal -->
+            <!-- S+L: horizontal plateau -->
             <line x1="55" y1="90"  x2="90"  y2="90"  stroke="#c8920a" stroke-width="2.5"/>
-            <!-- L: subindo -->
+            <!-- L: rising -->
             <line x1="90" y1="90"  x2="125" y2="55"  stroke="#c8920a" stroke-width="2.5"/>
-            <!-- L+G: patamar horizontal -->
+            <!-- L+G: horizontal plateau -->
             <line x1="125" y1="55" x2="160" y2="55"  stroke="#c8920a" stroke-width="2.5"/>
-            <!-- G: subindo -->
+            <!-- G: rising -->
             <line x1="160" y1="55" x2="185" y2="30"  stroke="#c8920a" stroke-width="2.5"/>
-            <!-- rótulos -->
+            <!-- labels -->
             <text x="28"  y="110" font-size="8" fill="#8a5e10" font-family="serif">S</text>
             <text x="62"  y="86"  font-size="8" fill="#8a5e10" font-family="serif">S+L</text>
             <text x="96"  y="78"  font-size="8" fill="#8a5e10" font-family="serif">L</text>
@@ -479,31 +479,31 @@
           </svg>
         </div>
 
-        <!-- CURVA B: mistura — sem patamar horizontal, ΔT menor nas transições -->
+        <!-- CURVE B: mixture — no horizontal plateau, smaller ΔT at transitions -->
         <div class="curva-item" id="curvaB" onclick="selecionarCurva('B')">
-          <div class="curva-label">Curva B</div>
+          <div class="curva-label">Curve B</div>
           <svg class="curva-svg" viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg">
             <line x1="22" y1="135" x2="22" y2="8"  stroke="#3d2e1a" stroke-width="1.5"/>
             <line x1="22" y1="135" x2="192" y2="135" stroke="#3d2e1a" stroke-width="1.5"/>
             <text x="4"   y="12"  font-size="9" fill="#3d2e1a" font-family="serif">T(°C)</text>
             <text x="178" y="144" font-size="9" fill="#3d2e1a" font-family="serif">t(s)</text>
-            <!-- S: subindo -->
+            <!-- S: rising -->
             <line x1="22" y1="120" x2="55"  y2="95"  stroke="#163c6e" stroke-width="2.5"/>
-            <!-- S+L: inclinação menor (não horizontal) -->
+            <!-- S+L: smaller slope (not horizontal) -->
             <line x1="55" y1="95"  x2="90"  y2="85"  stroke="#163c6e" stroke-width="2.5"/>
-            <!-- L: subindo -->
+            <!-- L: rising -->
             <line x1="90" y1="85"  x2="125" y2="55"  stroke="#163c6e" stroke-width="2.5"/>
-            <!-- L+G: inclinação menor (não horizontal) -->
+            <!-- L+G: smaller slope (not horizontal) -->
             <line x1="125" y1="55" x2="158" y2="45"  stroke="#163c6e" stroke-width="2.5"/>
-            <!-- G: subindo -->
+            <!-- G: rising -->
             <line x1="158" y1="45" x2="185" y2="20"  stroke="#163c6e" stroke-width="2.5"/>
-            <!-- rótulos -->
+            <!-- labels -->
             <text x="28"  y="112" font-size="8" fill="#163c6e" font-family="serif">S</text>
             <text x="60"  y="82"  font-size="8" fill="#163c6e" font-family="serif">S+L</text>
             <text x="96"  y="74"  font-size="8" fill="#163c6e" font-family="serif">L</text>
             <text x="128" y="42"  font-size="8" fill="#163c6e" font-family="serif">L+G</text>
             <text x="164" y="35"  font-size="8" fill="#163c6e" font-family="serif">G</text>
-            <!-- indicador ΔT nas transições -->
+            <!-- ΔT indicator at transitions -->
             <text x="55" y="110" font-size="7" fill="#888" font-family="serif">ΔT</text>
             <text x="125" y="65" font-size="7" fill="#888" font-family="serif">ΔT</text>
           </svg>
@@ -512,83 +512,83 @@
       </div>
     </div>
 
-    <!-- Pergunta de texto livre -->
+    <!-- Free-text question -->
     <div style="margin-bottom:1.2rem">
       <div style="font-size:0.88rem; color:var(--suave); margin-bottom:0.6rem; line-height:1.6;">
-        Por que a curva de uma <strong style="color:var(--ouro)">substância pura</strong> apresenta um patamar durante a mudança de estado, enquanto a de uma mistura não?
+        Why does the curve of a <strong style="color:var(--ouro)">pure substance</strong> show a plateau during the change of state, while a mixture's curve doesn't?
       </div>
-      <textarea class="textarea-resposta" id="respostaR3" placeholder="Escreva com suas palavras..."></textarea>
+      <textarea class="textarea-resposta" id="respostaR3" placeholder="Write it in your own words..."></textarea>
     </div>
 
     <div class="feedback-box" id="feedbackR3"></div>
-    <button class="btn-primario" id="btnVerificarR3" onclick="verificarRodada3()">Finalizar →</button>
+    <button class="btn-primario" id="btnVerificarR3" onclick="verificarRodada3()">Finish →</button>
   </div>
 
-  <!-- CONCLUSÃO -->
+  <!-- CONCLUSION -->
   <div class="conclusao" id="conclusao">
-    <div class="conclusao-titulo">Estudo concluído!</div>
+    <div class="conclusao-titulo">Study Complete!</div>
     <div class="conclusao-placar" id="placar"></div>
     <p class="conclusao-msg" id="mensagemFinal"></p>
-    <button class="btn-primario" onclick="reiniciar()">Jogar novamente</button>
+    <button class="btn-primario" onclick="reiniciar()">Play Again</button>
   </div>
 
-  <!-- COLOQUE O LINK AQUI -->
-  <a class="link-aula" href="https://www.youtube.com/watch?v=jthAHASDD3I&t=2s" target="_blank" rel="noopener" title="Assista à aula">
+  <!-- PUT THE LINK HERE -->
+  <a class="link-aula" href="https://www.youtube.com/watch?v=jthAHASDD3I&t=2s" target="_blank" rel="noopener" title="Watch the lesson">
     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
       <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.6"/>
       <path d="M10 8.5L16 12L10 15.5V8.5Z" fill="currentColor"/>
     </svg>
-    <span>Assista à aula</span>
+    <span>Watch the lesson</span>
   </a>
 </main>
 
 <footer>© 2026 KiFácil</footer>
 
 <script>
-// ─── DADOS ───────────────────────────────────────────────────────────
+// ─── DATA ───────────────────────────────────────────────────────────
 const SUBSTANCIAS_R1 = [
-  { formula:'O₂',  nome:'Oxigênio',      tipo:'simples',
-    dica:'Formada por átomos de apenas UM elemento químico — o oxigênio.',
-    explicacao:'O₂ é uma substância simples: formada por átomos de apenas um único elemento químico (O).' },
-  { formula:'H₂O', nome:'Água',           tipo:'composta',
-    dica:'Possui H e O — dois elementos diferentes formando uma única substância.',
-    explicacao:'H₂O é uma substância composta: formada por átomos de dois elementos (H e O), com composição química definida.' },
-  { formula:'Fe',  nome:'Ferro',          tipo:'simples',
-    dica:'Metal formado por apenas um tipo de átomo.',
-    explicacao:'Fe é uma substância simples: formada por átomos de apenas um único elemento (ferro).' },
-  { formula:'CO₂', nome:'Gás carbônico',  tipo:'composta',
-    dica:'Possui C e O — dois elementos formando uma substância pura.',
-    explicacao:'CO₂ é uma substância composta: formada por C e O com composição definida (ponto de fusão/ebulição constante).' },
-  { formula:'O₃',  nome:'Ozônio',         tipo:'simples',
-    dica:'Três átomos do MESMO elemento formando uma molécula diferente do O₂.',
-    explicacao:'O₃ é uma substância simples: diferente do O₂, mas ainda formada por apenas um elemento — o oxigênio.' },
-  { formula:'ar',  nome:'Ar atmosférico', tipo:'mistura',
-    dica:'Contém N₂, O₂, CO₂ e outros — mais de uma substância.',
-    explicacao:'O ar atmosférico é uma mistura homogênea de N₂, O₂, CO₂ e outros gases. Sua composição varia, e não tem ponto de ebulição fixo.' },
-  { formula:'Leite',nome:'Leite',         tipo:'mistura',
-    dica:'Água, gorduras, proteínas, açúcares — diversas substâncias juntas.',
-    explicacao:'O leite é uma mistura (coloidal/heterogênea): contém água, gorduras, proteínas e açúcares, sem composição fixa.' },
-  { formula:'Água\ndo mar', nome:'Água do mar', tipo:'mistura',
-    dica:'Água + sais dissolvidos — mais de uma substância.',
-    explicacao:'A água do mar é uma mistura homogênea: água com sais (NaCl, MgCl₂ etc.) dissolvidos, sem composição fixa.' },
+  { formula:'O₂',  nome:'Oxygen',      tipo:'simples',
+    dica:'Made up of atoms of just ONE chemical element — oxygen.',
+    explicacao:'O₂ is a simple substance: made up of atoms of a single chemical element (O).' },
+  { formula:'H₂O', nome:'Water',           tipo:'composta',
+    dica:'Contains H and O — two different elements forming a single substance.',
+    explicacao:'H₂O is a compound substance: made up of atoms of two elements (H and O), with a defined chemical composition.' },
+  { formula:'Fe',  nome:'Iron',          tipo:'simples',
+    dica:'A metal made up of just one type of atom.',
+    explicacao:'Fe is a simple substance: made up of atoms of a single element (iron).' },
+  { formula:'CO₂', nome:'Carbon dioxide',  tipo:'composta',
+    dica:'Contains C and O — two elements forming a pure substance.',
+    explicacao:'CO₂ is a compound substance: made up of C and O with a defined composition (constant melting/boiling point).' },
+  { formula:'O₃',  nome:'Ozone',         tipo:'simples',
+    dica:'Three atoms of the SAME element forming a molecule different from O₂.',
+    explicacao:'O₃ is a simple substance: different from O₂, but still made up of just one element — oxygen.' },
+  { formula:'Air',  nome:'Atmospheric air', tipo:'mistura',
+    dica:'Contains N₂, O₂, CO₂ and others — more than one substance.',
+    explicacao:'Atmospheric air is a homogeneous mixture of N₂, O₂, CO₂, and other gases. Its composition varies, and it has no fixed boiling point.' },
+  { formula:'Milk',nome:'Milk',         tipo:'mistura',
+    dica:'Water, fats, proteins, sugars — several substances together.',
+    explicacao:'Milk is a mixture (colloidal/heterogeneous): it contains water, fats, proteins, and sugars, with no fixed composition.' },
+  { formula:'Sea\nwater', nome:'Sea water', tipo:'mistura',
+    dica:'Water + dissolved salts — more than one substance.',
+    explicacao:'Sea water is a homogeneous mixture: water with dissolved salts (NaCl, MgCl₂, etc.), with no fixed composition.' },
 ];
 
 const MISTURAS_R2 = [
-  { formula:'ar',       nome:'Ar atmosférico', tipo:'homogenea',
-    dica:'Uma única fase visível a olho nu — você não vê componentes separados.',
-    explicacao:'O ar atmosférico é homogêneo: apresenta uma única fase — impossível distinguir os componentes a olho nu ou com microscópio comum.' },
-  { formula:'Leite',    nome:'Leite',           tipo:'heterogenea',
-    dica:'Com microscópio é possível identificar partículas dispersas.',
-    explicacao:'O leite é uma mistura heterogênea (coloide): com microscópio comum é possível ver as partículas de gordura dispersas.' },
-  { formula:'Água\ndo mar', nome:'Água do mar', tipo:'homogenea',
-    dica:'Os sais estão completamente dissolvidos — apenas uma fase visível.',
-    explicacao:'A água do mar é homogênea: o sal está completamente dissolvido, formando uma única fase.' },
-  { formula:'Areia\n+ água', nome:'Areia + água', tipo:'heterogenea',
-    dica:'Dá para ver os dois componentes separados a olho nu.',
-    explicacao:'Areia + água é heterogênea: as fases são visíveis a olho nu — a areia não se dissolve na água.' },
+  { formula:'Air',       nome:'Atmospheric air', tipo:'homogenea',
+    dica:'A single phase visible to the naked eye — you can\'t see separate components.',
+    explicacao:'Atmospheric air is homogeneous: it shows a single phase — impossible to distinguish the components with the naked eye or an ordinary microscope.' },
+  { formula:'Milk',    nome:'Milk',           tipo:'heterogenea',
+    dica:'Under a microscope, you can identify dispersed particles.',
+    explicacao:'Milk is a heterogeneous mixture (a colloid): under an ordinary microscope, you can see the dispersed fat particles.' },
+  { formula:'Sea\nwater', nome:'Sea water', tipo:'homogenea',
+    dica:'The salts are completely dissolved — only one phase is visible.',
+    explicacao:'Sea water is homogeneous: the salt is completely dissolved, forming a single phase.' },
+  { formula:'Sand\n+ water', nome:'Sand + water', tipo:'heterogenea',
+    dica:'You can see the two components separately with the naked eye.',
+    explicacao:'Sand + water is heterogeneous: the phases are visible to the naked eye — the sand doesn\'t dissolve in the water.' },
 ];
 
-// ─── ESTADO ──────────────────────────────────────────────────────────
+// ─── STATE ──────────────────────────────────────────────────────────
 let opcaoSelecionada1 = null;
 let opcaoSelecionada2 = null;
 let curvaSelecionada = null;
@@ -598,7 +598,7 @@ let acertosR1 = 0;
 let acertosR2 = 0;
 let r3Acertou = false;
 
-// ─── UTILITÁRIOS ─────────────────────────────────────────────────────
+// ─── UTILITIES ─────────────────────────────────────────────────────
 function feedback(id, tipo, titulo, explicacao) {
   const el = document.getElementById(id);
   el.className = `feedback-box visivel ${tipo}`;
@@ -614,20 +614,20 @@ function atualizarProgresso(rodada) {
     progressoFill.style.width = pct[rodada] + '%';
   }
   if (progressoTexto) {
-    progressoTexto.textContent = rodada < 4 ? `Rodada ${rodada} de 3` : 'Concluído!';
+    progressoTexto.textContent = rodada < 4 ? `Round ${rodada} of 3` : 'Complete!';
   }
 }
 
 function atualizarNarrador(rodada) {
   const textos = {
-    1: 'Rodada 1: escolha uma categoria (Substância Simples, Composta ou Mistura) e clique em cada carta para classificar. Você pode trocar a categoria antes de confirmar cada carta e, ao final, clique em Verificar.',
-    2: 'Rodada 2: agora classifique as misturas como homogêneas ou heterogêneas. Escolha a categoria e clique em cada carta; depois clique em Verificar para conferir.',
-    3: 'Rodada 3: observe as curvas e selecione qual representa a substância pura. Em seguida, escreva sua explicação no campo de texto e clique em Finalizar.'
+    1: 'Round 1: choose a category (Simple Substance, Compound Substance, or Mixture) and click on each card to classify it. You can change the category before confirming each card, and when you\'re done, click Check.',
+    2: 'Round 2: now classify the mixtures as homogeneous or heterogeneous. Choose the category and click on each card; then click Check to review your answers.',
+    3: 'Round 3: look at the curves and select which one represents the pure substance. Then write your explanation in the text field and click Finish.'
   };
   document.getElementById('narradorTexto').textContent = textos[rodada];
 }
 
-// ─── RODADA 1 ─────────────────────────────────────────────────────────
+// ─── ROUND 1 ─────────────────────────────────────────────────────────
 function selecionarOpcao(tipo) {
   opcaoSelecionada1 = tipo;
   ['simples','composta','mistura'].forEach(t => {
@@ -651,7 +651,7 @@ function renderCartasR1() {
 
 function classificarR1(idx) {
   if (!opcaoSelecionada1) {
-    feedback('feedbackR1','info','Escolha uma categoria primeiro','Selecione Substância Simples, Composta ou Mistura antes de clicar na carta.');
+    feedback('feedbackR1','info','Choose a category first','Select Simple Substance, Compound Substance, or Mixture before clicking on the card.');
     return;
   }
   classificacoesR1[idx] = opcaoSelecionada1;
@@ -663,8 +663,8 @@ function classificarR1(idx) {
 
 function verificarRodada1() {
   if (Object.keys(classificacoesR1).length < SUBSTANCIAS_R1.length) {
-    feedback('feedbackR1','info','Classifique todas as substâncias',
-      `Você classificou ${Object.keys(classificacoesR1).length} de ${SUBSTANCIAS_R1.length}. Clique nas que faltam.`);
+    feedback('feedbackR1','info','Classify all the substances',
+      `You classified ${Object.keys(classificacoesR1).length} of ${SUBSTANCIAS_R1.length}. Click on the ones you missed.`);
     return;
   }
 
@@ -692,27 +692,27 @@ function verificarRodada1() {
   });
 
   if (erros.length === 0) {
-    feedback('feedbackR1','ok','Perfeito! Todas corretas.',
-      'Você domina a diferença entre substâncias simples, compostas e misturas.');
+    feedback('feedbackR1','ok','Perfect! All correct.',
+      'You\'ve mastered the difference between simple substances, compounds, and mixtures.');
   } else {
-    feedback('feedbackR1','err',`${acertosR1} de ${SUBSTANCIAS_R1.length} corretas. Observe as dicas:`,
+    feedback('feedbackR1','err',`${acertosR1} of ${SUBSTANCIAS_R1.length} correct. Check the hints:`,
       '<ul style="margin-top:0.4rem;padding-left:1.2rem">' + erros.map(e => `<li style="margin-bottom:0.3rem">${e}</li>`).join('') + '</ul>');
   }
 
   document.getElementById('btnVerificarR1').disabled = true;
 
-  // Mostrar botão para o aluno avançar quando estiver pronto
+  // Show a button so the student can advance when ready
   const btnAvancar1 = document.createElement('button');
   btnAvancar1.className = 'btn-primario';
   btnAvancar1.style.marginTop = '1rem';
-  btnAvancar1.textContent = 'Próxima rodada →';
+  btnAvancar1.textContent = 'Next round →';
   btnAvancar1.onclick = avancarParaR2;
   const narradorContinuar1 = document.getElementById('narradorContinuar');
   narradorContinuar1.innerHTML = '';
   narradorContinuar1.appendChild(btnAvancar1);
 }
 
-// ─── RODADA 2 ─────────────────────────────────────────────────────────
+// ─── ROUND 2 ─────────────────────────────────────────────────────────
 function avancarParaR2() {
   document.getElementById('rodada1').style.display = 'none';
   document.getElementById('rodada2').style.display = 'block';
@@ -745,7 +745,7 @@ function renderCartasR2() {
 
 function classificarR2(idx) {
   if (!opcaoSelecionada2) {
-    feedback('feedbackR2','info','Escolha uma categoria primeiro','Selecione Homogênea ou Heterogênea antes de clicar na carta.');
+    feedback('feedbackR2','info','Choose a category first','Select Homogeneous or Heterogeneous before clicking on the card.');
     return;
   }
   classificacoesR2[idx] = opcaoSelecionada2;
@@ -756,8 +756,8 @@ function classificarR2(idx) {
 
 function verificarRodada2() {
   if (Object.keys(classificacoesR2).length < MISTURAS_R2.length) {
-    feedback('feedbackR2','info','Classifique todas as misturas',
-      `Você classificou ${Object.keys(classificacoesR2).length} de ${MISTURAS_R2.length}.`);
+    feedback('feedbackR2','info','Classify all the mixtures',
+      `You classified ${Object.keys(classificacoesR2).length} of ${MISTURAS_R2.length}.`);
     return;
   }
 
@@ -785,10 +785,10 @@ function verificarRodada2() {
   });
 
   if (erros.length === 0) {
-    feedback('feedbackR2','ok','Perfeito!',
-      'Você sabe distinguir misturas homogêneas de heterogêneas.');
+    feedback('feedbackR2','ok','Perfect!',
+      'You know how to distinguish homogeneous from heterogeneous mixtures.');
   } else {
-    feedback('feedbackR2','err',`${acertosR2} de ${MISTURAS_R2.length} corretas:`,
+    feedback('feedbackR2','err',`${acertosR2} of ${MISTURAS_R2.length} correct:`,
       '<ul style="margin-top:0.4rem;padding-left:1.2rem">' + erros.map(e => `<li style="margin-bottom:0.3rem">${e}</li>`).join('') + '</ul>');
   }
 
@@ -797,14 +797,14 @@ function verificarRodada2() {
   const btnAvancar2 = document.createElement('button');
   btnAvancar2.className = 'btn-primario';
   btnAvancar2.style.marginTop = '1rem';
-  btnAvancar2.textContent = 'Próxima rodada →';
+  btnAvancar2.textContent = 'Next round →';
   btnAvancar2.onclick = avancarParaR3;
   const narradorContinuar2 = document.getElementById('narradorContinuar');
   narradorContinuar2.innerHTML = '';
   narradorContinuar2.appendChild(btnAvancar2);
 }
 
-// ─── RODADA 3 ─────────────────────────────────────────────────────────
+// ─── ROUND 3 ─────────────────────────────────────────────────────────
 function avancarParaR3() {
   document.getElementById('rodada2').style.display = 'none';
   document.getElementById('rodada3').style.display = 'block';
@@ -819,7 +819,7 @@ function selecionarCurva(letra) {
     const el = document.getElementById(`curva${l}`);
     el.className = 'curva-item';
     if (l === letra) {
-      // A = pura (tem patamar), B = mistura
+      // A = pure (has a plateau), B = mixture
       el.classList.add(l === 'A' ? 'selecionada-pura' : 'selecionada-mistura');
     }
   });
@@ -829,15 +829,15 @@ function selecionarCurva(letra) {
 function verificarRodada3() {
   const resposta = document.getElementById('respostaR3').value.trim();
   if (!curvaSelecionada) {
-    feedback('feedbackR3','info','Selecione uma curva','Clique na Curva A ou na Curva B para indicar qual é a substância pura.');
+    feedback('feedbackR3','info','Select a curve','Click on Curve A or Curve B to indicate which one is the pure substance.');
     return;
   }
 
-  // Curva A tem patamar = substância pura. Pergunta implícita: qual é a substância pura?
+  // Curve A has a plateau = pure substance. Implicit question: which is the pure substance?
   r3Acertou = curvaSelecionada === 'A';
   const curvaA = document.getElementById('curvaA');
   const curvaB = document.getElementById('curvaB');
-  curvaA.className = 'curva-item correta-curva'; // A é sempre a pura
+  curvaA.className = 'curva-item correta-curva'; // A is always the pure one
   curvaB.className = `curva-item ${curvaSelecionada === 'B' ? 'errada-curva' : ''}`;
   curvaA.style.pointerEvents = 'none';
   curvaB.style.pointerEvents = 'none';
@@ -845,13 +845,13 @@ function verificarRodada3() {
   if (r3Acertou) {
     tocarDing();
     feedback('feedbackR3','ok',
-      'A Curva A é a substância pura.',
-      'O patamar horizontal indica que a temperatura permanece constante durante a mudança de estado — toda a energia absorvida vai para a mudança de fase, não para elevar a temperatura. Em uma mistura, não existe temperatura fixa de mudança de estado, então a curva sobe continuamente.' +
-      (resposta ? `<br><br><em>Sua resposta:</em> "${resposta}" — boa reflexão!` : ''));
+      'Curve A is the pure substance.',
+      'The horizontal plateau indicates that the temperature stays constant during the change of state — all the absorbed energy goes into the phase change, not into raising the temperature. In a mixture, there is no fixed temperature for the change of state, so the curve rises continuously.' +
+      (resposta ? `<br><br><em>Your answer:</em> "${resposta}" — good thinking!` : ''));
   } else {
     feedback('feedbackR3','err',
-      'Não é bem isso. A Curva A é a substância pura.',
-      'A <strong>Curva A</strong> tem um patamar (segmento horizontal): durante a mudança de estado de uma substância pura, a temperatura não varia — toda a energia vai para romper as ligações. A <strong>Curva B</strong> sobe continuamente porque misturas não têm temperatura fixa de ebulição ou fusão.');
+      'Not quite. Curve A is the pure substance.',
+      'Curve A has a plateau (a horizontal segment): during the change of state of a pure substance, the temperature does not change — all the energy goes into breaking the bonds. Curve B rises continuously because mixtures do not have a fixed boiling or melting temperature.');
   }
 
   document.getElementById('btnVerificarR3').disabled = true;
@@ -859,14 +859,14 @@ function verificarRodada3() {
   const btnAvancar3 = document.createElement('button');
   btnAvancar3.className = 'btn-primario';
   btnAvancar3.style.marginTop = '1rem';
-  btnAvancar3.textContent = 'Ver resultado final →';
+  btnAvancar3.textContent = 'See final result →';
   btnAvancar3.onclick = mostrarConclusao;
   const narradorContinuar3 = document.getElementById('narradorContinuar');
   narradorContinuar3.innerHTML = '';
   narradorContinuar3.appendChild(btnAvancar3);
 }
 
-// ─── CONCLUSÃO ────────────────────────────────────────────────────────
+// ─── CONCLUSION ────────────────────────────────────────────────────────
 function mostrarConclusao() {
   document.getElementById('rodada3').style.display = 'none';
   document.getElementById('conclusao').classList.add('visivel');
@@ -877,13 +877,13 @@ function mostrarConclusao() {
   const acertos = acertosR1 + acertosR2 + (r3Acertou ? 1 : 0);
   const pct = Math.round((acertos / total) * 100);
 
-  document.getElementById('placar').textContent = `${acertos} de ${total} — ${pct}% de acerto`;
+  document.getElementById('placar').textContent = `${acertos} of ${total} — ${pct}% correct`;
 
   let msg;
-  if (pct === 100) msg = 'Excelente! Você classificou corretamente todas as substâncias e interpretou as curvas de aquecimento. Domínio completo do conteúdo.';
-  else if (pct >= 75) msg = 'Muito bem! Apenas alguns pontos merecem revisão. Releia o mapa e jogue novamente para fixar.';
-  else if (pct >= 50) msg = 'Bom início. Revise as diferenças entre substância simples, composta e mistura, e preste atenção nas curvas de aquecimento.';
-  else msg = 'Continue estudando! Revise o mapa mental de Substâncias e tente novamente. Cada rodada é uma chance de aprender.';
+  if (pct === 100) msg = 'Excellent! You correctly classified all the substances and interpreted the heating curves. Full command of the content.';
+  else if (pct >= 75) msg = 'Very good! Just a few points deserve review. Reread the mind map and play again to reinforce it.';
+  else if (pct >= 50) msg = 'Good start. Review the differences between simple substances, compounds, and mixtures, and pay attention to the heating curves.';
+  else msg = 'Keep studying! Review the Substances mind map and try again. Every round is a chance to learn.';
 
   document.getElementById('mensagemFinal').textContent = msg;
   document.getElementById('conclusao').scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -923,7 +923,7 @@ function reiniciar() {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// ─── SOM ─────────────────────────────────────────────────────────────
+// ─── SOUND ─────────────────────────────────────────────────────────────
 const _ding = new Audio('../sons/ding.mp3');
 _ding.preload = 'auto';
 function tocarDing() { try{ _ding.currentTime = 0; _ding.play().catch(()=>{}); }catch(e){} }

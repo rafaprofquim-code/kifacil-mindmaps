@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex, nofollow" />
-  <title>Desafio da Densidade — KiFácil</title>
+  <title>Density Challenge — KiFácil</title>
   <link rel="icon" type="image/png" href="/favicon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -63,7 +63,7 @@
     .ui-layer{position:absolute;inset:0}
     .clickable{pointer-events:auto}
 
-    /* Badge fica abaixo de #scoreValue (canto superior direito já ocupado pelo placar) */
+    /* Badge sits below #scoreValue (top-right corner already occupied by the score) */
     .link-aula {
       position: absolute; top: 100px; right: 10px; z-index: 10;
       display: flex; flex-direction: column; align-items: center; gap: 2px;
@@ -77,7 +77,7 @@
     .link-aula:hover { background: rgba(30,16,8,0.92); transform: translateY(-1px); }
     .link-aula svg { width: 22px; height: 22px; }
 
-    /* Campos posicionados sobre a arte */
+    /* Fields positioned over the artwork */
     .density-input{
       position:absolute;
       left:16.6%; top:56.45%; width:19.0%; height:4.15%;
@@ -154,7 +154,7 @@
     #btnFloat{left:70.22%; top:77.73%; width:12.65%; height:7.8%}
     #btnSink{left:83.68%; top:77.73%; width:12.65%; height:7.8%}
 
-    /* Pontos sobre o canto superior direito */
+    /* Score in the top-right corner */
     #scoreValue{
       position:absolute; left:93.1%; top:7.0%; width:3.7%; height:3%;
       display:flex;align-items:center;justify-content:center;
@@ -282,48 +282,48 @@
 <body>
   <div id="gameWrap">
   <main class="game-shell" id="gameShell">
-  <img class="game-bg" src="../imagens/jogo-densidade2.jpg" alt="Desafio da Densidade — KiFácil" />
+  <img class="game-bg" src="../imagens/jogo-densidade2.jpg" alt="Density Challenge — KiFácil" />
 
     <div class="ui-layer">
       <div id="scoreValue">0</div>
 
       <div class="dynamic-box" id="massBox">162 g</div>
       <div class="dynamic-box" id="volumeBox">60 cm³</div>
-      <div class="dynamic-box" id="objectCounter">Objeto 1 de 3</div>
+      <div class="dynamic-box" id="objectCounter">Object 1 of 3</div>
 
-      <input class="density-input clickable" id="densityInput" inputmode="decimal" autocomplete="off" placeholder="Digite aqui..." aria-label="Digite o valor da densidade em g por centímetro cúbico" />
+      <input class="density-input clickable" id="densityInput" inputmode="decimal" autocomplete="off" placeholder="Type here..." aria-label="Enter the density value in grams per cubic centimeter" />
       <span class="density-unit">g/cm³</span>
-      <button class="calc-btn clickable" id="calcBtn" aria-label="Calcular densidade">Calcular</button>
+      <button class="calc-btn clickable" id="calcBtn" aria-label="Calculate density">Calculate</button>
 
-      <select class="material-select clickable" id="materialSelect" aria-label="Escolha o material" disabled>
-        <option value="">Selecione...</option>
-        <option value="madeira">Madeira (pinus)</option>
-        <option value="alcool">Álcool</option>
-        <option value="agua">Água</option>
-        <option value="aluminio">Alumínio</option>
-        <option value="ferro">Ferro</option>
-        <option value="cobre">Cobre</option>
-        <option value="ouro">Ouro</option>
+      <select class="material-select clickable" id="materialSelect" aria-label="Choose the material" disabled>
+        <option value="">Select...</option>
+        <option value="madeira">Wood (pine)</option>
+        <option value="alcool">Alcohol</option>
+        <option value="agua">Water</option>
+        <option value="aluminio">Aluminum</option>
+        <option value="ferro">Iron</option>
+        <option value="cobre">Copper</option>
+        <option value="ouro">Gold</option>
       </select>
 
-      <button class="choice-btn clickable" id="btnFloat" aria-label="O objeto flutua" disabled>Flutua</button>
-      <button class="choice-btn clickable" id="btnSink" aria-label="O objeto afunda" disabled>Afunda</button>
+      <button class="choice-btn clickable" id="btnFloat" aria-label="The object floats" disabled>Floats</button>
+      <button class="choice-btn clickable" id="btnSink" aria-label="The object sinks" disabled>Sinks</button>
 
       <div class="progress-dot" id="dot1">1</div>
       <div class="progress-dot" id="dot2">2</div>
       <div class="progress-dot" id="dot3">3</div>
-      <div class="message" id="message">Complete os 3 desafios para finalizar!</div>
+      <div class="message" id="message">Complete all 3 challenges to finish!</div>
       <div class="feedback-pop" id="feedbackPop"></div>
 
     </div>
 
-    <!-- COLOQUE O LINK AQUI -->
-    <a class="link-aula" href="https://www.youtube.com/watch?v=Y3m7JmYPHok" target="_blank" rel="noopener" title="Assista à aula">
+    <!-- PUT THE LINK HERE -->
+    <a class="link-aula" href="https://www.youtube.com/watch?v=Y3m7JmYPHok" target="_blank" rel="noopener" title="Watch the lesson">
       <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.6"/>
         <path d="M10 8.5L16 12L10 15.5V8.5Z" fill="currentColor"/>
       </svg>
-      <span>Assista à aula</span>
+      <span>Watch the lesson</span>
     </a>
   </main>
   </div><!-- /gameWrap -->
@@ -333,33 +333,33 @@
       <button class="step-fechar" onclick="fecharStep()">&times;</button>
       <div class="step-titulo" id="stepTitulo"></div>
       <div class="step-texto" id="stepTexto"></div>
-      <button class="btn-continuar" onclick="fecharStep()">Continuar &rarr;</button>
+      <button class="btn-continuar" onclick="fecharStep()">Continue &rarr;</button>
     </div>
   </div>
 
   <section class="conclusao" id="conclusao">
-    <div class="conclusao-titulo">Desafio concluído!</div>
+    <div class="conclusao-titulo">Challenge complete!</div>
     <div class="conclusao-placar" id="conclusaoPlacar"></div>
     <p class="conclusao-mensagem" id="conclusaoMensagem"></p>
-    <button class="btn-reiniciar" onclick="reiniciar()">Jogar novamente</button>
+    <button class="btn-reiniciar" onclick="reiniciar()">Play again</button>
   </section>
 
   <script>
     const OBJETOS = [
       {
-        nome: 'Alumínio', valor: 'aluminio', massa: 162, volume: 60, densidade: 2.70, flutua: false,
-        dica: 'Use d = m/V. 162 ÷ 60 = 2,70 g/cm³.',
-        explicacao: 'A densidade calculada é 2,70 g/cm³, valor correspondente ao alumínio. Como é maior que 1,00 g/cm³, ele afunda na água.'
+        nome: 'Aluminum', valor: 'aluminio', massa: 162, volume: 60, densidade: 2.70, flutua: false,
+        dica: 'Use d = m/V. 162 ÷ 60 = 2.70 g/cm³.',
+        explicacao: 'The calculated density is 2.70 g/cm³, which matches aluminum. Since it is greater than 1.00 g/cm³, it sinks in water.'
       },
       {
-        nome: 'Madeira (pinus)', valor: 'madeira', massa: 25, volume: 50, densidade: 0.50, flutua: true,
-        dica: 'Use d = m/V. 25 ÷ 50 = 0,50 g/cm³.',
-        explicacao: 'A densidade calculada é 0,50 g/cm³, valor correspondente à madeira. Como é menor que 1,00 g/cm³, ela flutua na água.'
+        nome: 'Wood (pine)', valor: 'madeira', massa: 25, volume: 50, densidade: 0.50, flutua: true,
+        dica: 'Use d = m/V. 25 ÷ 50 = 0.50 g/cm³.',
+        explicacao: 'The calculated density is 0.50 g/cm³, which matches wood. Since it is less than 1.00 g/cm³, it floats in water.'
       },
       {
-        nome: 'Ferro', valor: 'ferro', massa: 472.2, volume: 60, densidade: 7.87, flutua: false,
-        dica: 'Use d = m/V. 472,2 ÷ 60 = 7,87 g/cm³.',
-        explicacao: 'A densidade calculada é 7,87 g/cm³, valor correspondente ao ferro. Como é maior que 1,00 g/cm³, ele afunda na água.'
+        nome: 'Iron', valor: 'ferro', massa: 472.2, volume: 60, densidade: 7.87, flutua: false,
+        dica: 'Use d = m/V. 472.2 ÷ 60 = 7.87 g/cm³.',
+        explicacao: 'The calculated density is 7.87 g/cm³, which matches iron. Since it is greater than 1.00 g/cm³, it sinks in water.'
       }
     ];
 
@@ -388,7 +388,7 @@
     }
 
     function formatarNumero(n){
-      return String(n).replace('.', ',');
+      return String(n);
     }
 
     function mostrarMensagem(texto, tipo = ''){
@@ -427,14 +427,14 @@
       const obj = OBJETOS[atual];
       document.getElementById('massBox').textContent = `${formatarNumero(obj.massa)} g`;
       document.getElementById('volumeBox').textContent = `${formatarNumero(obj.volume)} cm³`;
-      document.getElementById('objectCounter').textContent = `Objeto ${atual + 1} de ${OBJETOS.length}`;
+      document.getElementById('objectCounter').textContent = `Object ${atual + 1} of ${OBJETOS.length}`;
       densityInput.value = '';
       materialSelect.value = '';
       errosNoObjeto = 0;
       habilitarEtapa(1);
       mostrarMensagem('', '');
       feedbackPop.classList.remove('show');
-      // Reseta os 3 dots ao iniciar cada objeto
+      // Reset the 3 dots when starting each object
       document.querySelectorAll('.progress-dot').forEach(dot => {
         dot.style.display = 'none';
         dot.textContent = '';
@@ -481,37 +481,37 @@
       void gameShell.offsetWidth;
       gameShell.classList.add('shake');
       mostrarMensagem(texto, 'err');
-      if(dica) popup('Dica', dica);
+      if(dica) popup('Hint', dica);
     }
 
     function verificarDensidade(){
       const obj = OBJETOS[atual];
       const resposta = normalizarNumero(densityInput.value);
       if(!densityInput.value.trim() || Number.isNaN(resposta)){
-        errou('Digite um número para a densidade.', 'Você pode usar vírgula ou ponto. Exemplo: 2,70');
+        errou('Enter a number for the density.', 'You can use a decimal point. Example: 2.70');
         return;
       }
       if(Math.abs(resposta - obj.densidade) <= 0.05){
         acertou();
         mostrarCheck(document.getElementById('dot1'));
-        mostrarStep('Densidade correta!', 'Agora identifique o material pela tabela ao lado.', () => habilitarEtapa(2));
+        mostrarStep('Correct density!', 'Now identify the material using the table beside it.', () => habilitarEtapa(2));
       }else{
-        errou('Ainda não. Revise a conta.', obj.dica);
+        errou('Not yet. Check your math.', obj.dica);
       }
     }
 
     function verificarMaterial(){
       const obj = OBJETOS[atual];
       if(!materialSelect.value){
-        errou('Escolha um material na lista.', 'Compare sua densidade com a tabela ao lado.');
+        errou('Choose a material from the list.', 'Compare your density with the table beside it.');
         return;
       }
       if(materialSelect.value === obj.valor){
         acertou();
         mostrarCheck(document.getElementById('dot2'));
-        mostrarStep('Material correto!', 'Agora decida se esse objeto flutua ou afunda na água.', () => habilitarEtapa(3));
+        mostrarStep('Correct material!', 'Now decide whether this object floats or sinks in water.', () => habilitarEtapa(3));
       }else{
-        errou('Esse material não corresponde à densidade calculada.', `A densidade encontrada foi ${formatarNumero(obj.densidade.toFixed(2))} g/cm³. Compare com a tabela.`);
+        errou('That material does not match the calculated density.', `The density you found was ${formatarNumero(obj.densidade.toFixed(2))} g/cm³. Compare it with the table.`);
         materialSelect.value = '';
       }
     }
@@ -522,10 +522,10 @@
         acertos++;
         acertou();
         mostrarCheck(document.getElementById('dot3'));
-        const titulo = escolhaFlutua ? 'Esse objeto flutua!' : 'Esse objeto afunda!';
+        const titulo = escolhaFlutua ? 'This object floats!' : 'This object sinks!';
         mostrarStep(titulo, obj.explicacao, proximoObjeto);
       }else{
-        errou('Não é bem isso.', obj.flutua ? 'Densidade menor que 1,00 g/cm³: flutua na água.' : 'Densidade maior que 1,00 g/cm³: afunda na água.');
+        errou('Not quite.', obj.flutua ? 'Density less than 1.00 g/cm³: floats in water.' : 'Density greater than 1.00 g/cm³: sinks in water.');
       }
     }
 
@@ -541,11 +541,11 @@
     function finalizar(){
       habilitarEtapa(0);
       const mensagem = acertos === 3
-        ? 'Excelente! Você calculou a densidade corretamente e identificou os materiais sem errar. Continue assim!'
+        ? 'Excellent! You calculated the density correctly and identified the materials without a mistake. Keep it up!'
         : acertos >= 2
-        ? 'Muito bem! Você domina o cálculo de densidade. Revise os casos em que precisou de ajuda e tente novamente.'
-        : 'Bom esforço! A densidade é d = m/V. Revise a tabela de materiais e jogue novamente para melhorar.';
-      document.getElementById('conclusaoPlacar').textContent = `Você acertou ${acertos} de 3 objetos`;
+        ? 'Very good! You have mastered the density calculation. Review the cases where you needed help and try again.'
+        : 'Good effort! Density is d = m/V. Review the materials table and play again to improve.';
+      document.getElementById('conclusaoPlacar').textContent = `You got ${acertos} of 3 objects right`;
       document.getElementById('conclusaoMensagem').textContent = mensagem;
       const conclusao = document.getElementById('conclusao');
       conclusao.classList.add('visivel');

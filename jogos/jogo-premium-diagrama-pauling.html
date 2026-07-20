@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="robots" content="noindex, nofollow">
-<title>Construindo o Diagrama de Linus Pauling | KiFácil</title>
+<title>Building the Linus Pauling Diagram | KiFácil</title>
 <link rel="icon" type="image/png" href="/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -68,7 +68,7 @@
     line-height: 1.1;
   }
 
-  /* NARRADOR */
+  /* NARRATOR */
   .narrador {
     display: flex;
     align-items: center;
@@ -104,7 +104,7 @@
   }
   #continuarBalao { margin-top: 0.6rem; }
 
-  /* CENA / ATIVIDADE */
+  /* SCENE / ACTIVITY */
   .cena-atividade {
     display: flex;
     flex-wrap: wrap;
@@ -174,7 +174,7 @@
     color: var(--dourado-claro);
   }
 
-  /* PAINEL DE CAPACIDADE (sempre visível) */
+  /* CAPACITY PANEL (always visible) */
   .capacidade-painel {
     position: absolute;
     top: 10px;
@@ -202,7 +202,7 @@
   }
   .capacidade-item span:last-child { font-size: 0.68rem; }
 
-  /* DIAGRAMA */
+  /* DIAGRAM */
   .diagrama-wrap {
     position: absolute;
     inset: 0;
@@ -273,7 +273,7 @@
   .seta-cabeca { fill: var(--dourado-claro); }
   .seta-voo { will-change: transform, opacity; }
 
-  /* ATIVIDADE */
+  /* ACTIVITY */
   .atividade-card {
     flex: 1 1 40%;
     min-width: 280px;
@@ -415,10 +415,10 @@
   }
 
   @media (max-width: 860px) {
-    /* Em coluna, o eixo transversal do flex vira a LARGURA. Sem
-       align-items:stretch, os filhos não esticam para 100% —
-       a largura do .imagem-wrapper passa a ser derivada do
-       aspect-ratio a partir do min-height (bug real do overflow). */
+    /* In column layout, the flex cross-axis becomes WIDTH. Without
+       align-items:stretch, the children don't stretch to 100% —
+       .imagem-wrapper's width would end up derived from the
+       aspect-ratio based on min-height (a real overflow bug). */
     .cena-atividade { flex-direction: column; align-items: stretch; }
     .imagem-wrapper, .atividade-card { flex: 1 1 auto; width: 100%; max-width: 100%; }
   }
@@ -459,25 +459,25 @@
 </nav>
 
 <main>
-  <h1 class="titulo-jogo" id="tituloJogo">Construindo o Diagrama de Linus Pauling</h1>
+  <h1 class="titulo-jogo" id="tituloJogo">Building the Linus Pauling Diagram</h1>
 
   <div class="narrador" id="teacherBox">
-    <img src="../imagens/rafa-sorrindo.jpg" alt="Professora Rafaela" id="teacherImg">
+    <img src="../imagens/rafa-sorrindo.jpg" alt="Professor Rafaela" id="teacherImg">
     <div class="narrador-conteudo">
-      <div class="narrador-nome">Professora Rafaela</div>
-      <div class="narrador-texto" id="teacherText">Hoje você vai aprender o  diagrama de Linus Pauling SIMPLIFICADO e que é utilizado na maior parte dos elementos químicos mais comuns.</div>
+      <div class="narrador-nome">Professor Rafaela</div>
+      <div class="narrador-texto" id="teacherText">Today you're going to learn the SIMPLIFIED Linus Pauling diagram, which is used for most of the more common chemical elements.</div>
       <div id="continuarBalao"></div>
     </div>
   </div>
 
   <div class="cena-atividade">
     <div class="imagem-wrapper" id="imagemWrapper">
-      <img src="../imagens/linus-pauling-vazio.jpg" alt="Pergaminho vazio sobre a mesa" class="imagem-cenario">
+      <img src="../imagens/linus-pauling-vazio.jpg" alt="Empty scroll on the table" class="imagem-cenario">
 
       <div class="hud" id="hud">
-        <div class="hud-item"><span class="hud-label">Elemento</span><span class="hud-valor" id="hudElemento">—</span></div>
-        <div class="hud-item"><span class="hud-label">Elétrons</span><span class="hud-valor" id="hudEletrons">—</span></div>
-        <div class="hud-item"><span class="hud-label">Distribuídos</span><span class="hud-valor" id="hudDistribuidos">—</span></div>
+        <div class="hud-item"><span class="hud-label">Element</span><span class="hud-valor" id="hudElemento">—</span></div>
+        <div class="hud-item"><span class="hud-label">Electrons</span><span class="hud-valor" id="hudEletrons">—</span></div>
+        <div class="hud-item"><span class="hud-label">Distributed</span><span class="hud-valor" id="hudDistribuidos">—</span></div>
       </div>
 
       <div class="capacidade-painel" id="capacidadePainel">
@@ -489,20 +489,20 @@
 
       <div class="diagrama-wrap" id="diagramaWrap"></div>
       <svg class="setas-diagrama" id="setasSvg"></svg>
-      <!-- COLOQUE O LINK AQUI -->
-      <a class="link-aula" href="https://www.youtube.com/watch?v=jy5OEtQNDRY&t=4s" target="_blank" rel="noopener" title="Assista à aula">
+      <!-- PUT THE LINK HERE -->
+      <a class="link-aula" href="https://www.youtube.com/watch?v=jy5OEtQNDRY&t=4s" target="_blank" rel="noopener" title="Watch the lesson">
         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.6"/>
           <path d="M10 8.5L16 12L10 15.5V8.5Z" fill="currentColor"/>
         </svg>
-        <span>Assista à aula</span>
+        <span>Watch the lesson</span>
       </a>
     </div>
 
     <section class="atividade-card">
       <div class="atividade-cabecalho">
-        <div class="atividade-eyebrow">Torre de Química — Diagrama de Linus Pauling</div>
-        <h2 class="atividade-titulo" id="painelTitulo">Introdução</h2>
+        <div class="atividade-eyebrow">Chemistry Tower — Linus Pauling Diagram</div>
+        <h2 class="atividade-titulo" id="painelTitulo">Introduction</h2>
       </div>
       <div class="atividade-corpo" id="painelCorpo"></div>
     </section>
@@ -517,10 +517,10 @@ _ding.preload = 'auto';
 function tocarDing() { try { _ding.currentTime = 0; _ding.play().catch(function () {}); } catch (e) {} }
 
 // ══════════════════════════════════════════════════
-//  DADOS — DIAGRAMA SIMPLIFICADO (Ensino Médio)
-//  Cobre até o Rádio (Z=88) e os lantanídeos.
-//  Não inclui actinídeos, transição pesada nem
-//  elementos sintéticos.
+//  DATA — SIMPLIFIED DIAGRAM (High School)
+//  Covers up to Radium (Z=88) and the lanthanides.
+//  Does not include actinides, heavy transition metals,
+//  or synthetic elements.
 // ══════════════════════════════════════════════════
 const DIAGRAMA = [
   { n: 1, subniveis: ['s'] },
@@ -532,8 +532,8 @@ const DIAGRAMA = [
   { n: 7, subniveis: ['s'] }
 ];
 
-// Ordem real de preenchimento (regra de Madelung), apenas
-// os 16 subníveis que existem no diagrama simplificado.
+// Real filling order (Madelung's rule), just the 16
+// sublevels that exist in the simplified diagram.
 const ORDEM_PREENCHIMENTO = [
   '1s','2s','2p','3s','3p','4s','3d','4p',
   '5s','4d','5p','6s','4f','5d','6p','7s'
@@ -541,16 +541,16 @@ const ORDEM_PREENCHIMENTO = [
 
 const CAPACIDADE = { s: 2, p: 6, d: 10, f: 14 };
 
-// Objeto central de elementos — para adicionar um novo elemento
-// (Oxigênio, Cloro etc.) basta acrescentar uma entrada aqui e incluir
-// a chave em SEQUENCIA_ELEMENTOS.
+// Central elements object — to add a new element
+// (Oxygen, Chlorine, etc.) just add an entry here and include
+// the key in SEQUENCIA_ELEMENTOS.
 const ELEMENTOS = {
-  na: { simbolo: 'Na', nome: 'Sódio', z: 11, massa: '22,99', eletrons: 11 },
-  ca: { simbolo: 'Ca', nome: 'Cálcio', z: 20, massa: '40,08', eletrons: 20 },
-  fe: { simbolo: 'Fe', nome: 'Ferro', z: 26, massa: '55,85', eletrons: 26 }
+  na: { simbolo: 'Na', nome: 'Sodium', z: 11, massa: '22.99', eletrons: 11 },
+  ca: { simbolo: 'Ca', nome: 'Calcium', z: 20, massa: '40.08', eletrons: 20 },
+  fe: { simbolo: 'Fe', nome: 'Iron', z: 26, massa: '55.85', eletrons: 26 }
 };
 
-// Ordem em que os elementos são praticados na Etapa 5/6
+// Order in which the elements are practiced in Step 5/6
 const SEQUENCIA_ELEMENTOS = ['na', 'ca', 'fe'];
 
 function elementoAtual() {
@@ -558,16 +558,16 @@ function elementoAtual() {
 }
 
 // ══════════════════════════════════════════════════
-//  ESTADO GLOBAL
+//  GLOBAL STATE
 // ══════════════════════════════════════════════════
 const estado = {
   etapa: 0,
-  distribuicao: {},    // ex.: { '1s': 2, '2s': 2, ... }
-  _idxElemento: 0       // índice em SEQUENCIA_ELEMENTOS
+  distribuicao: {},    // e.g.: { '1s': 2, '2s': 2, ... }
+  _idxElemento: 0       // index in SEQUENCIA_ELEMENTOS
 };
 
 // ══════════════════════════════════════════════════
-//  PROFESSORA — contrato fixo, não improvisar
+//  TEACHER — fixed contract, do not improvise
 // ══════════════════════════════════════════════════
 const professorImagens = {
   sorrindo: '../imagens/rafa-sorrindo.jpg',
@@ -588,7 +588,7 @@ function professora(texto, imagem = 'explicando') {
 }
 
 // ══════════════════════════════════════════════════
-//  TÍTULO
+//  TITLE
 // ══════════════════════════════════════════════════
 function setTitulo(txt) {
   const tituloJogo = document.getElementById('tituloJogo');
@@ -598,7 +598,7 @@ function setTitulo(txt) {
 }
 
 // ══════════════════════════════════════════════════
-//  ÁREA DE ATIVIDADE
+//  ACTIVITY AREA
 // ══════════════════════════════════════════════════
 function renderCorpo(html) {
   const corpo = document.getElementById('painelCorpo');
@@ -620,7 +620,7 @@ function mostrarBotaoBalao(label, fn, id) {
 }
 
 // ══════════════════════════════════════════════════
-//  GRADE DO DIAGRAMA (CSS Grid, uma célula por elemento)
+//  DIAGRAM GRID (CSS Grid, one cell per element)
 // ══════════════════════════════════════════════════
 function renderGradeDiagrama() {
   const wrap = document.getElementById('diagramaWrap');
@@ -643,24 +643,24 @@ function renderGradeDiagrama() {
 
 function celula(n, sub) {
   const el = document.getElementById(`cel-${n}${sub}`);
-  if (!el) console.error(`Célula ${n}${sub} não existe no diagrama simplificado.`);
+  if (!el) console.error(`Cell ${n}${sub} does not exist in the simplified diagram.`);
   return el;
 }
 
 // ══════════════════════════════════════════════════
-//  ETAPA 1 — coluna do s (números 1 a 7)
+//  STEP 1 — the s column (numbers 1 to 7)
 // ══════════════════════════════════════════════════
 function etapa1() {
   estado.etapa = 1;
-  setTitulo('Etapa 1 — A primeira coluna');
-  professora('Hoje você vai aprender o  diagrama de Linus Pauling SIMPLIFICADO e que é utilizado na maior parte dos elementos químicos mais comuns.', 'sorrindo');
+  setTitulo('Step 1 — The first column');
+  professora('Today you\'re going to learn the SIMPLIFIED Linus Pauling diagram, which is used for most of the more common chemical elements.', 'sorrindo');
 
   renderCorpo(`
-    <div class="questao-titulo">Comece preenchendo a primeira coluna.</div>
-    <div class="feedback-box visivel info">Escreva os números de 1 até 7, em ordem, um de cada vez.</div>
+    <div class="questao-titulo">Start by filling in the first column.</div>
+    <div class="feedback-box visivel info">Write the numbers 1 through 7, in order, one at a time.</div>
     <div class="input-linha">
       <input class="campo-resposta" id="campoEtapa1" type="text" inputmode="numeric" maxlength="1" autocomplete="off">
-      <button class="btn-avancar" id="btnConfirmar1" onclick="confirmarEtapa1()">Confirmar</button>
+      <button class="btn-avancar" id="btnConfirmar1" onclick="confirmarEtapa1()">Confirm</button>
     </div>
     <div class="feedback-box" id="feedbackEtapa1"></div>
   `);
@@ -682,11 +682,11 @@ function confirmarEtapa1() {
     celula(esperado, 's').querySelector('.cel-numero').textContent = esperado;
     celula(esperado, 's').classList.add('acesa');
     feedback.className = 'feedback-box visivel ok';
-    feedback.textContent = `${esperado} — certo!`;
+    feedback.textContent = `${esperado} — correct!`;
     campo.value = '';
 
     if (esperado === 7) {
-      professora('Muito bem.', 'animada');
+      professora('Very good.', 'animada');
       setTimeout(() => etapa2(), 500);
     } else {
       estado._proximoS++;
@@ -694,19 +694,19 @@ function confirmarEtapa1() {
     }
   } else {
     feedback.className = 'feedback-box visivel err';
-    feedback.textContent = 'Observe a sequência.';
+    feedback.textContent = 'Look at the sequence.';
     campo.value = '';
     campo.focus();
   }
 }
 
 // ══════════════════════════════════════════════════
-//  ETAPA 2 — colunas p, d, f (intervalos reais)
+//  STEP 2 — columns p, d, f (real ranges)
 // ══════════════════════════════════════════════════
 const COLUNAS_ETAPA2 = [
-  { sub: 'p', inicio: 2, fim: 6, explicacao: 'A coluna do <strong>p</strong> começa na camada 2 e vai até a 6 — não existe 1p nem 7p neste diagrama simplificado.' },
-  { sub: 'd', inicio: 3, fim: 5, explicacao: 'A coluna do <strong>d</strong> começa na camada 3 e vai até a 5 — repare que não existe 6d no nosso diagrama.' },
-  { sub: 'f', inicio: 4, fim: 4, explicacao: 'A coluna do <strong>f</strong> aparece só na camada 4 neste diagrama simplificado — não existe 5f, 6f nem 7f aqui.' }
+  { sub: 'p', inicio: 2, fim: 6, explicacao: 'The <strong>p</strong> column starts at shell 2 and goes up to 6 — there is no 1p or 7p in this simplified diagram.' },
+  { sub: 'd', inicio: 3, fim: 5, explicacao: 'The <strong>d</strong> column starts at shell 3 and goes up to 5 — notice that there is no 6d in our diagram.' },
+  { sub: 'f', inicio: 4, fim: 4, explicacao: 'The <strong>f</strong> column only appears at shell 4 in this simplified diagram — there is no 5f, 6f, or 7f here.' }
 ];
 
 function etapa2(colIdx = 0) {
@@ -714,24 +714,24 @@ function etapa2(colIdx = 0) {
   const coluna = COLUNAS_ETAPA2[colIdx];
 
   if (!coluna) {
-    professora('Repare que a coluna parou de crescer aqui — isso porque, no diagrama simplificado que usamos no Ensino Médio, não chegamos a usar orbitais além desse ponto. Eles existem, mas só aparecem em elementos muito pesados, que você não vai encontrar em prova.', 'explicando');
-    setTitulo('Etapa 2 — Concluída');
+    professora('Notice that the column stopped growing here — that\'s because, in the simplified diagram we use in high school, we don\'t go beyond this point. They exist, but only appear in very heavy elements, which you won\'t find on a test.', 'explicando');
+    setTitulo('Step 2 — Complete');
     renderCorpo(`
-      <div class="feedback-box visivel ok">As colunas s, p, d e f estão completas com seus números.</div>
+      <div class="feedback-box visivel ok">The s, p, d, and f columns are complete with their numbers.</div>
     `);
-    mostrarBotaoBalao('Continuar →', 'etapa3()');
+    mostrarBotaoBalao('Continue →', 'etapa3()');
     return;
   }
 
-  setTitulo(`Etapa 2 — Coluna do ${coluna.sub}`);
+  setTitulo(`Step 2 — The ${coluna.sub} column`);
   professora(coluna.explicacao, colIdx === 0 ? 'explicando' : 'pensando');
 
   renderCorpo(`
-    <div class="questao-titulo">${colIdx === 0 ? 'Preencha a coluna, retirando o que não existe nas pontas.' : 'Percebeu o padrão? Complete sozinho.'}</div>
-    <div class="feedback-box visivel info">Digite os números de ${coluna.inicio} até ${coluna.fim}.</div>
+    <div class="questao-titulo">${colIdx === 0 ? 'Fill in the column, leaving out what doesn\'t exist at the ends.' : 'Noticed the pattern? Complete it on your own.'}</div>
+    <div class="feedback-box visivel info">Type the numbers from ${coluna.inicio} to ${coluna.fim}.</div>
     <div class="input-linha">
       <input class="campo-resposta" id="campoEtapa2" type="text" inputmode="numeric" maxlength="1" autocomplete="off">
-      <button class="btn-avancar" id="btnConfirmar2" onclick="confirmarEtapa2(${colIdx})">Confirmar</button>
+      <button class="btn-avancar" id="btnConfirmar2" onclick="confirmarEtapa2(${colIdx})">Confirm</button>
     </div>
     <div class="feedback-box" id="feedbackEtapa2"></div>
   `);
@@ -755,7 +755,7 @@ function confirmarEtapa2(colIdx) {
     celula(esperado, coluna.sub).querySelector('.cel-numero').textContent = esperado;
     celula(esperado, coluna.sub).classList.add('acesa');
     feedback.className = 'feedback-box visivel ok';
-    feedback.textContent = `${esperado}${coluna.sub} — certo!`;
+    feedback.textContent = `${esperado}${coluna.sub} — correct!`;
     campo.value = '';
 
     if (esperado === coluna.fim) {
@@ -766,14 +766,14 @@ function confirmarEtapa2(colIdx) {
     }
   } else {
     feedback.className = 'feedback-box visivel err';
-    feedback.textContent = 'Observe a sequência.';
+    feedback.textContent = 'Look at the sequence.';
     campo.value = '';
     campo.focus();
   }
 }
 
 // ══════════════════════════════════════════════════
-//  ETAPA 3 — letras (s, p, d, f)
+//  STEP 3 — letters (s, p, d, f)
 // ══════════════════════════════════════════════════
 const COLUNAS_ETAPA3 = ['s', 'p', 'd', 'f'];
 
@@ -781,23 +781,23 @@ function etapa3(colIdx = 0) {
   estado.etapa = 3;
 
   if (colIdx >= COLUNAS_ETAPA3.length) {
-    setTitulo('Etapa 3 — Concluída');
-    professora('Perfeito. Agora cada célula do nosso diagrama já tem camada e subnível.', 'animada');
+    setTitulo('Step 3 — Complete');
+    professora('Perfect. Now every cell in our diagram already has a shell and a sublevel.', 'animada');
     renderCorpo(`
-      <div class="feedback-box visivel ok">O diagrama está completo: 1s · 2s 2p · 3s 3p 3d · 4s 4p 4d 4f · 5s 5p 5d · 6s 6p · 7s.</div>
+      <div class="feedback-box visivel ok">The diagram is complete: 1s · 2s 2p · 3s 3p 3d · 4s 4p 4d 4f · 5s 5p 5d · 6s 6p · 7s.</div>
     `);
-    mostrarBotaoBalao('Continuar →', 'etapa4()');
+    mostrarBotaoBalao('Continue →', 'etapa4()');
     return;
   }
 
-  setTitulo('Etapa 3 — Letras do diagrama');
-  professora('Cada coluna representa um tipo de subnível.', 'explicando');
+  setTitulo('Step 3 — Diagram letters');
+  professora('Each column represents a type of sublevel.', 'explicando');
 
   renderCorpo(`
-    <div class="questao-titulo">Qual letra representa esta coluna? (coluna ${colIdx + 1})</div>
+    <div class="questao-titulo">Which letter represents this column? (column ${colIdx + 1})</div>
     <div class="input-linha">
       <input class="campo-resposta" id="campoEtapa3" type="text" maxlength="1" autocomplete="off">
-      <button class="btn-avancar" id="btnConfirmar3" onclick="confirmarEtapa3(${colIdx})">Confirmar</button>
+      <button class="btn-avancar" id="btnConfirmar3" onclick="confirmarEtapa3(${colIdx})">Confirm</button>
     </div>
     <div class="feedback-box" id="feedbackEtapa3"></div>
   `);
@@ -823,24 +823,24 @@ function confirmarEtapa3(colIdx) {
     setTimeout(() => etapa3(colIdx + 1), 400);
   } else {
     feedback.className = 'feedback-box visivel err';
-    feedback.textContent = 'Observe: primeira = s, segunda = p, terceira = d, quarta = f.';
+    feedback.textContent = 'Note: first = s, second = p, third = d, fourth = f.';
     campo.value = '';
     campo.focus();
   }
 }
 
 // ══════════════════════════════════════════════════
-//  ETAPA 4 — setas de preenchimento (animação)
+//  STEP 4 — filling arrows (animation)
 // ══════════════════════════════════════════════════
 function etapa4() {
   estado.etapa = 4;
-  setTitulo('Etapa 4 — A ordem de leitura');
-  professora('Agora observe como lemos esse diagrama. Este é o diagrama simplificado que usamos no Ensino Médio — cobre até o Rádio e os lantanídeos, o suficiente para qualquer prova.', 'explicando');
+  setTitulo('Step 4 — The reading order');
+  professora('Now watch how we read this diagram. This is the simplified diagram we use in high school — it covers up to Radium and the lanthanides, enough for any test.', 'explicando');
 
   renderCorpo(`
-    <div class="feedback-box visivel info">Acompanhe as setas douradas — elas mostram a ordem real de preenchimento dos subníveis.</div>
+    <div class="feedback-box visivel info">Follow the golden arrows — they show the real filling order of the sublevels.</div>
   `);
-  mostrarBotaoBalao('Concluir →', 'finalizarEtapa4()', 'btnFinalizarEtapa4');
+  mostrarBotaoBalao('Finish →', 'finalizarEtapa4()', 'btnFinalizarEtapa4');
   document.getElementById('btnFinalizarEtapa4').disabled = true;
 
   DIAGRAMA.forEach(l => l.subniveis.forEach(s => celula(l.n, s).classList.remove('acesa')));
@@ -866,8 +866,8 @@ function centroCelula(n, sub, svg) {
   };
 }
 
-// Agrupa os subníveis por n+l (regra de Madelung). Cada grupo é uma
-// diagonal só: 1s | 2s | 2p,3s | 3p,4s | 3d,4p,5s | 4d,5p,6s | 4f,5d,6p,7s
+// Groups the sublevels by n+l (Madelung's rule). Each group is a
+// single diagonal: 1s | 2s | 2p,3s | 3p,4s | 3d,4p,5s | 4d,5p,6s | 4f,5d,6p,7s
 const LETRA_L = { s: 0, p: 1, d: 2, f: 3 };
 function construirGruposDiagonais() {
   const mapa = new Map();
@@ -882,8 +882,8 @@ function construirGruposDiagonais() {
     .map(soma => mapa.get(soma).sort((a, b) => a.n - b.n));
 }
 
-// Vetor de um "passo" na diagonal (n+1, l-1), medido na própria grade —
-// assim a seta encaixa exatamente entre as células, seja qual for o tamanho de tela.
+// Vector of one "step" along the diagonal (n+1, l-1), measured on the grid
+// itself — so the arrow fits exactly between the cells, whatever the screen size.
 function passoDiagonal(svg) {
   const s1 = centroCelula(1, 's', svg);
   const s2 = centroCelula(2, 's', svg);
@@ -894,7 +894,7 @@ function passoDiagonal(svg) {
 function desenharDiagonal(idx, grupos, svg) {
   if (idx >= grupos.length) {
     setTimeout(() => {
-      professora('Cada seta diagonal une os subníveis de mesmo n+l — essa é a ordem real de preenchimento, e ela vale para todos os elementos que você vai estudar no Ensino Médio.', 'animada');
+      professora('Each diagonal arrow connects the sublevels with the same n+l — this is the real filling order, and it applies to every element you\'ll study in high school.', 'animada');
       document.getElementById('btnFinalizarEtapa4').disabled = false;
     }, 400);
     return;
@@ -924,7 +924,7 @@ function voarSeta(svg, p1, p2, aoTerminar) {
   const dist = Math.hypot(dx, dy) || 1;
   const ux = dx / dist, uy = dy / dist;
 
-  // encolhe a ponta final para a cabeça da flecha não invadir a célula
+  // shrink the endpoint so the arrowhead doesn't overlap the cell
   const encolhe = 9;
   const fx = p2.x - ux * encolhe;
   const fy = p2.y - uy * encolhe;
@@ -942,7 +942,7 @@ function voarSeta(svg, p1, p2, aoTerminar) {
   g.appendChild(linha);
   svg.appendChild(g);
 
-  // ponto de partida do voo: bem atrás, na direção oposta ao destino, com leve desvio lateral
+  // starting point of the flight: well behind, in the opposite direction from the target, with a slight lateral offset
   const distanciaVoo = 120;
   const desvio = 22 * (Math.random() < 0.5 ? -1 : 1);
   const partidaX = -ux * distanciaVoo - uy * desvio;
@@ -954,7 +954,7 @@ function voarSeta(svg, p1, p2, aoTerminar) {
   function anima(t) {
     const p = Math.min(1, (t - inicio) / duracao);
     const ease = 1 - Math.pow(1 - p, 3);
-    // pequeno "estica e finca" perto do fim, como se a flecha bicasse o alvo
+    // a small "stretch and stick" near the end, as if the arrow were pecking the target
     const fincada = p > 0.82 ? Math.sin((p - 0.82) / 0.18 * Math.PI) * 5 : 0;
     const tx = partidaX * (1 - ease) + ux * fincada;
     const ty = partidaY * (1 - ease) + uy * fincada;
@@ -974,20 +974,20 @@ function voarSeta(svg, p1, p2, aoTerminar) {
 function finalizarEtapa4() { etapa5(); }
 
 // ══════════════════════════════════════════════════
-//  ETAPA 5 — carta do elemento (número atômico x massa)
+//  STEP 5 — the element card (atomic number x mass)
 // ══════════════════════════════════════════════════
 function etapa5() {
   estado.etapa = 5;
   const el = elementoAtual();
-  setTitulo('Etapa 5 — A carta do elemento');
+  setTitulo('Step 5 — The element card');
   professora(estado._idxElemento === 0
-    ? 'Agora vamos utilizar esse diagrama.'
-    : `Vamos praticar de novo com outro elemento: ${el.nome}.`, 'sorrindo');
+    ? 'Now let\'s use this diagram.'
+    : `Let's practice again with another element: ${el.nome}.`, 'sorrindo');
 
   renderCorpo(`
     <div class="questao-titulo">${el.nome} · ${el.simbolo}</div>
-    <div class="feedback-box visivel info">Na carta aparecem dois números: ${el.z} e ${el.massa}.</div>
-    <div class="questao-titulo" id="perguntaCarta">Qual número representa a quantidade de prótons?</div>
+    <div class="feedback-box visivel info">Two numbers appear on the card: ${el.z} and ${el.massa}.</div>
+    <div class="questao-titulo" id="perguntaCarta">Which number represents the number of protons?</div>
     <div id="opcoesCarta"></div>
     <div class="feedback-box" id="feedbackCarta"></div>
   `);
@@ -1017,20 +1017,20 @@ function responderCarta(btn, valor) {
     btn.classList.add('correta');
     feedback.className = 'feedback-box visivel ok';
     feedback.textContent = etapaCarta === 'protons'
-      ? 'Correto! O menor número representa o número atômico.'
-      : 'Correto! O maior número representa aproximadamente a massa.';
+      ? 'Correct! The smaller number represents the atomic number.'
+      : 'Correct! The larger number represents approximately the mass.';
   } else {
     btn.classList.add('errada');
     feedback.className = 'feedback-box visivel err';
     feedback.textContent = etapaCarta === 'protons'
-      ? 'O menor número representa o número atômico.'
-      : 'O maior representa aproximadamente a massa.';
+      ? 'The smaller number represents the atomic number.'
+      : 'The larger one represents approximately the mass.';
   }
 
   setTimeout(() => {
     if (etapaCarta === 'protons') {
       estado._etapaCarta = 'massa';
-      document.getElementById('perguntaCarta').textContent = 'Qual número representa aproximadamente a massa atômica?';
+      document.getElementById('perguntaCarta').textContent = 'Which number represents approximately the atomic mass?';
       feedback.className = 'feedback-box';
       renderOpcoesCarta(el);
     } else {
@@ -1040,7 +1040,7 @@ function responderCarta(btn, valor) {
 }
 
 // ══════════════════════════════════════════════════
-//  DISTRIBUIÇÃO ELETRÔNICA
+//  ELECTRON DISTRIBUTION
 // ══════════════════════════════════════════════════
 function etapaDistribuicao() {
   estado.etapa = 6;
@@ -1048,8 +1048,8 @@ function etapaDistribuicao() {
   estado._idxDistribuicao = 0;
 
   const el = elementoAtual();
-  setTitulo('Distribuição Eletrônica');
-  professora('Agora vamos utilizar o diagrama para distribuir os elétrons, seguindo a mesma ordem das setas.', 'explicando');
+  setTitulo('Electron Distribution');
+  professora('Now let\'s use the diagram to distribute the electrons, following the same order as the arrows.', 'explicando');
 
   document.getElementById('hud').classList.add('visivel');
   document.getElementById('capacidadePainel').classList.add('visivel');
@@ -1063,12 +1063,12 @@ function etapaDistribuicao() {
   }));
 
   renderCorpo(`
-    <div class="questao-titulo">Distribua os ${el.eletrons} elétrons do ${el.nome}.</div>
-    <div class="feedback-box visivel info">Siga a ordem das setas. Comece pelo 1s.</div>
+    <div class="questao-titulo">Distribute the ${el.eletrons} electrons of ${el.nome}.</div>
+    <div class="feedback-box visivel info">Follow the order of the arrows. Start with 1s.</div>
     <div class="input-linha">
       <span id="labelSubnivelAtual" style="font-family:'Cormorant Garamond',serif;font-weight:700;font-size:1.1rem;">1s</span>
       <input class="campo-resposta" id="campoDistribuicao" type="text" inputmode="numeric" maxlength="2" autocomplete="off">
-      <button class="btn-avancar" id="btnConfirmarDist" onclick="confirmarDistribuicao()">Confirmar</button>
+      <button class="btn-avancar" id="btnConfirmarDist" onclick="confirmarDistribuicao()">Confirm</button>
     </div>
     <div class="feedback-box" id="feedbackDistribuicao"></div>
   `);
@@ -1111,7 +1111,7 @@ function confirmarDistribuicao() {
 
   if (valor > capacidadeMax) {
     feedback.className = 'feedback-box visivel err';
-    feedback.textContent = `Observe o quadro ao lado. O subnível ${sub} comporta no máximo ${capacidadeMax} elétrons.`;
+    feedback.textContent = `Look at the panel beside it. The ${sub} sublevel holds at most ${capacidadeMax} electrons.`;
     campo.value = '';
     campo.focus();
     return;
@@ -1120,8 +1120,8 @@ function confirmarDistribuicao() {
   if (valor !== maxPermitido) {
     feedback.className = 'feedback-box visivel err';
     feedback.textContent = maxPermitido === capacidadeMax
-      ? `Tente novamente — quantos elétrons cabem no subnível ${sub}?`
-      : `Restam apenas ${restantes} elétrons para distribuir.`;
+      ? `Try again — how many electrons fit in the ${sub} sublevel?`
+      : `Only ${restantes} electrons are left to distribute.`;
     campo.value = '';
     campo.focus();
     return;
@@ -1133,7 +1133,7 @@ function confirmarDistribuicao() {
   celula(n, sub).classList.remove('acesa');
   celula(n, sub).classList.add('dourada');
   feedback.className = 'feedback-box visivel ok';
-  feedback.textContent = `${codigo} = ${valor} elétrons — certo!`;
+  feedback.textContent = `${codigo} = ${valor} electrons — correct!`;
   campo.value = '';
   atualizarDistribuidos();
 
@@ -1156,19 +1156,19 @@ function concluirDistribuicao() {
 
   const temProximo = estado._idxElemento < SEQUENCIA_ELEMENTOS.length - 1;
 
-  setTitulo('Distribuição Concluída');
+  setTitulo('Distribution Complete');
   professora(temProximo
-    ? `Muito bem! Essa é a configuração do ${el.nome}. Vamos repetir o processo com outro elemento.`
-    : 'Excelente! Você concluiu a distribuição eletrônica dos três elementos.', 'animada');
+    ? `Very good! This is the configuration of ${el.nome}. Let's repeat the process with another element.`
+    : 'Excellent! You completed the electron distribution for all three elements.', 'animada');
 
   renderCorpo(`
-    <div class="feedback-box visivel ok">Configuração eletrônica do ${el.nome}:</div>
+    <div class="feedback-box visivel ok">Electron configuration of ${el.nome}:</div>
     <div class="config-final">${config}</div>
   `);
   if (temProximo) {
-    mostrarBotaoBalao('Próximo elemento →', 'avancarElemento()', 'btnProximoElemento');
+    mostrarBotaoBalao('Next element →', 'avancarElemento()', 'btnProximoElemento');
   } else {
-    mostrarBotaoBalao('Ver resumo →', 'mostrarResumoFinal()', 'btnResumoFinal');
+    mostrarBotaoBalao('See summary →', 'mostrarResumoFinal()', 'btnResumoFinal');
   }
 }
 
@@ -1178,15 +1178,15 @@ function avancarElemento() {
 }
 
 function mostrarResumoFinal() {
-  setTitulo('Fase Concluída');
-  professora('Você já sabe usar o diagrama de Linus Pauling para descobrir a distribuição eletrônica de qualquer elemento do Ensino Médio — é só seguir a ordem das diagonais.', 'sorrindo');
+  setTitulo('Stage Complete');
+  professora('You now know how to use the Linus Pauling diagram to work out the electron distribution of any high school element — just follow the order of the diagonals.', 'sorrindo');
 
   renderCorpo(`
-    <div class="feedback-box visivel ok">Você praticou com ${SEQUENCIA_ELEMENTOS.length} elementos: ${SEQUENCIA_ELEMENTOS.map(k => ELEMENTOS[k].nome).join(', ')}.</div>
-    <div class="questao-titulo" style="margin-top:1rem;">O que você aprendeu</div>
-    <div class="feedback-box visivel info">O diagrama organiza os subníveis em diagonais de mesmo n+l. Seguindo essas diagonais na ordem certa, você descobre a distribuição eletrônica de qualquer elemento até o Rádio.</div>
+    <div class="feedback-box visivel ok">You practiced with ${SEQUENCIA_ELEMENTOS.length} elements: ${SEQUENCIA_ELEMENTOS.map(k => ELEMENTOS[k].nome).join(', ')}.</div>
+    <div class="questao-titulo" style="margin-top:1rem;">What you learned</div>
+    <div class="feedback-box visivel info">The diagram organizes the sublevels into diagonals with the same n+l. Following these diagonals in the right order, you can work out the electron distribution of any element up to Radium.</div>
   `);
-  mostrarBotaoBalao('Recomeçar a fase', 'location.reload()', 'btnRecomecarFase');
+  mostrarBotaoBalao('Restart the stage', 'location.reload()', 'btnRecomecarFase');
 
   try { localStorage.setItem('kifacil_linus-pauling_ok', 'true'); } catch (e) {}
 }

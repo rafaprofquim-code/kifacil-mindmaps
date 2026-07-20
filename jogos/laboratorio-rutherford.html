@@ -1,13 +1,13 @@
-﻿﻿
+
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" type="image/png" href="/favicon.png">
 <link rel="canonical" href="https://kifaciledu.com.br/jogos/jogos-escaperoom/torre-quimica/fases/laboratorio-rutherford.html">
-<title>Laboratório de Rutherford — Cápsula do Tempo | KiFácil</title>
-<meta name="description" content="Viaje ao laboratório de Ernest Rutherford em 1911 e reviva a descoberta do núcleo atômico. Escape Room da Cápsula do Tempo — KiFácil.">
+<title>Rutherford's Laboratory — Time Capsule | KiFácil</title>
+<meta name="description" content="Travel to Ernest Rutherford's laboratory in 1911 and relive the discovery of the atomic nucleus. Time Capsule Escape Room — KiFácil.">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y1JGD5VVBD"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -39,7 +39,7 @@
 
   .main { display: flex; flex: 1; align-items: flex-start; }
 
-  /* CENA */
+  /* SCENE */
   .scene-wrap { background: var(--bg-dark); padding: 28px; display: flex; justify-content: center; align-items: flex-start; flex: 0 0 56%; }
   .scene-inner { position: relative; width: 100%; max-width: 620px; user-select: none; }
   .scene-img { width: 100%; display: block; border-radius: 8px; border: 1px solid rgba(212,170,106,0.4); }
@@ -69,7 +69,7 @@
   .btn-iniciar-exp:hover { background: #f0c960; }
   @keyframes fadeInBtn { from { opacity: 0; transform: translate(-50%, -46%) scale(.95); } to { opacity: 1; transform: translate(-50%, -50%) scale(1); } }
 
-  /* PAINEL DIREITO */
+  /* RIGHT PANEL */
   .panels-row { flex: 1; display: flex; flex-direction: column; gap: 18px; padding: 28px; border-left: 1px solid var(--border-faint); align-self: stretch; }
 
   .narr-box { background: var(--paper); border: 1px solid rgba(139,94,26,0.25); border-radius: 8px; padding: 20px 22px; }
@@ -97,12 +97,12 @@
   .card-close:hover { color: #4a2c10; }
   @keyframes cardIn { from { opacity: 0; transform: scale(.96) translateY(8px); } to { opacity: 1; transform: scale(1) translateY(0); } }
 
-  /* CABEÇALHO FIXO: eyebrow, título e diagrama nunca rolam */
+  /* FIXED HEADER: eyebrow, title and diagram never scroll */
   .card-fixed-top { padding: 32px 32px 18px; flex-shrink: 0; border-bottom: 1px solid rgba(139,94,26,0.18); background: var(--paper); }
   .card-eyebrow { font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--paper-gold); margin-bottom: 8px; }
   .card-title { font-family: 'Lora', serif; font-size: 24px; font-weight: 600; color: var(--paper-text); margin-bottom: 14px; line-height: 1.3; }
 
-  /* CORPO ROLÁVEL: fala inicial, perguntas, respostas e conclusões */
+  /* SCROLLABLE BODY: initial dialogue, questions, answers and conclusions */
   .card-scroll-body { padding: 18px 32px 32px; overflow-y: auto; flex: 1; }
 
   .card-fala { font-family: 'Lora', serif; font-size: 19px; line-height: 1.75; color: var(--paper-text); font-weight: 600; margin-bottom: 18px; }
@@ -149,7 +149,7 @@
   .btn-continuar.show { display: block; }
   .btn-continuar:hover { background: #6b3f0e; }
 
-  /* TELA FINAL */
+  /* FINAL SCREEN */
   .win-screen { display: none; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 60px 32px; flex: 1; }
   .win-screen.show { display: flex; }
   .win-title { font-family: 'Lora', serif; font-size: 44px; font-weight: 600; color: var(--gold); margin-bottom: 12px; }
@@ -162,7 +162,7 @@
   .btn-restart { background: none; border: 1px solid rgba(232,184,75,0.3); border-radius: 6px; padding: 10px 24px; font-family: 'Libre Baskerville', serif; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: rgba(232,184,75,0.6); cursor: pointer; transition: all .15s; }
   .btn-restart:hover { border-color: rgba(232,184,75,0.6); color: var(--gold); }
 
-  /* CINTILAÇÕES — 3 intensidades, mesma tela, nunca se move */
+  /* SCINTILLATIONS — 3 intensities, same screen, never moves */
   .cint { opacity: 0; transition: opacity .4s ease; }
   .cint.on { opacity: 1; }
   .cint-central.on { animation: blinkForte 1.2s ease-in-out infinite; }
@@ -191,17 +191,17 @@
 <body>
 
 <nav class="nav">
-  <a href="../../../torre-central/mapa-kifacil.html">Academia KiFácil</a>
+  <a href="../../../torre-central/mapa-kifacil.html">KiFácil Academy</a>
   <span class="nav-sep">›</span>
-  <a href="../../torre-ciencia.html">Torre de Ciências</a>
+  <a href="../../torre-ciencia.html">Science Tower</a>
   <span class="nav-sep">›</span>
-  Torre de Química · Fase 4 · Rutherford
+  Chemistry Tower · Stage 4 · Rutherford
 </nav>
 
 <header class="header">
   <div>
-    <div class="eyebrow">Escape Room · Cápsula do Tempo</div>
-    <h1 class="page-title">Laboratório de Rutherford</h1>
+    <div class="eyebrow">Escape Room · Time Capsule</div>
+    <h1 class="page-title">Rutherford's Laboratory</h1>
   </div>
 </header>
 
@@ -209,28 +209,28 @@
 
   <div class="scene-wrap">
     <div class="scene-inner">
-      <img src="../imagens/laboratorio-rut.jpg" alt="Laboratório de Ernest Rutherford no início do século XX" class="scene-img">
+      <img src="../imagens/laboratorio-rut.jpg" alt="Ernest Rutherford's laboratory in the early twentieth century" class="scene-img">
       <div class="scene-overlay">
-        <div class="scene-overlay-title">Laboratório de Ernest Rutherford</div>
-        <div class="scene-overlay-sub">1911 · Cápsula do Tempo</div>
+        <div class="scene-overlay-title">Ernest Rutherford's Laboratory</div>
+        <div class="scene-overlay-sub">1911 · Time Capsule</div>
       </div>
 
-      <!-- INTRO: 3 hotspots sequenciais — ajuste left/top/width/height conforme a imagem -->
-      <!-- hs-fonte: caixa de chumbo com polônio (esquerda) -->
+      <!-- INTRO: 3 sequential hotspots — adjust left/top/width/height according to the image -->
+      <!-- hs-fonte: lead box with polonium (left) -->
       <div class="hotspot active" id="hs-fonte"    style="left:2%;top:52%;width:28%;height:38%;"  onclick="clicarFonte()"></div>
-      <!-- hs-anteparo: aparato de ZnS (centro/direita, área maior) -->
+      <!-- hs-anteparo: ZnS apparatus (center/right, larger area) -->
       <div class="hotspot locked" id="hs-anteparo" style="left:58%;top:46%;width:45%;height:15%;" onclick="clicarAnteparo()"></div>
-      <!-- hs-folha: lâmina de ouro (dentro do aparato, área menor — z-index:5 quando active garante prioridade de clique) -->
+      <!-- hs-folha: gold foil (inside the apparatus, smaller area — z-index:5 when active ensures click priority) -->
       <div class="hotspot locked" id="hs-folha"    style="left:64%;top:46%;width:15%;height:14%;" onclick="clicarFolha()"></div>
-      <button class="btn-iniciar-exp" id="btnIniciarExp" onclick="iniciarExperimento()">⚡ Iniciar experimento</button>
+      <button class="btn-iniciar-exp" id="btnIniciarExp" onclick="iniciarExperimento()">⚡ Start experiment</button>
 
-      <!-- COLOQUE O LINK AQUI -->
-      <a class="link-aula" href="https://www.youtube.com/watch?v=Mab6V0QYYUs&t=1s" target="_blank" rel="noopener" title="Assista à aula">
+      <!-- PUT THE LINK HERE -->
+      <a class="link-aula" href="https://www.youtube.com/watch?v=Mab6V0QYYUs&t=1s" target="_blank" rel="noopener" title="Watch the lesson">
         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.6"/>
           <path d="M10 8.5L16 12L10 15.5V8.5Z" fill="currentColor"/>
         </svg>
-        <span>Assista à aula</span>
+        <span>Watch the lesson</span>
       </a>
     </div>
   </div>
@@ -238,39 +238,39 @@
   <div class="panels-row">
 
     <div class="narr-box">
-      <div class="narr-eyebrow">Cápsula do Tempo — 1911</div>
+      <div class="narr-eyebrow">Time Capsule — 1911</div>
       <div class="narr" id="narr">
-        <strong>Rutherford:</strong> <em>"Antes de começarmos, vamos relembrar a ideia de Thomson. Segundo ele, o átomo seria uma esfera de carga positiva espalhada por todo o seu volume, contendo elétrons distribuídos em seu interior, como passas em um pudim.
+        <strong>Rutherford:</strong> <em>"Before we begin, let's recall Thomson's idea. According to him, the atom would be a sphere of positive charge spread throughout its whole volume, containing electrons distributed within it, like raisins in a pudding.
 
-Durante algum tempo, esse modelo pareceu explicar bem o que os cientistas observavam. Mas, como todo bom cientista, não devemos aceitar uma ideia apenas porque ela parece correta.
+For a while, this model seemed to explain well what scientists observed. But, like every good scientist, we should not accept an idea just because it seems correct.
 
-Vamos colocá-la à prova.
+Let's put it to the test.
 
-Traga-me a fonte de polônio, dentro da caixa de chumbo."</em>
+Bring me the polonium source, inside the lead box."</em>
       </div>
     </div>
 
     <div class="progresso-wrap">
-      <div class="progresso-title">Observações do experimento</div>
+      <div class="progresso-title">Experiment observations</div>
       <div class="ato-item" id="ai-1">
         <div class="ato-dot"></div>
         <div>
-          <div class="ato-nome">A maioria atravessa</div>
-          <span class="ato-tag">confirma o modelo de Thomson</span>
+          <div class="ato-nome">Most particles pass through</div>
+          <span class="ato-tag">confirms Thomson's model</span>
         </div>
       </div>
       <div class="ato-item" id="ai-2">
         <div class="ato-dot"></div>
         <div>
-          <div class="ato-nome">Algumas desviam</div>
-          <span class="ato-tag">existe carga concentrada</span>
+          <div class="ato-nome">Some are deflected</div>
+          <span class="ato-tag">concentrated charge exists</span>
         </div>
       </div>
       <div class="ato-item" id="ai-3">
         <div class="ato-dot"></div>
         <div>
-          <div class="ato-nome">Raríssimas retornam quase por completo</div>
-          <span class="ato-tag">núcleo pequeno, denso e positivo</span>
+          <div class="ato-nome">Very rare ones bounce almost straight back</div>
+          <span class="ato-tag">small, dense, positive nucleus</span>
         </div>
       </div>
     </div>
@@ -278,17 +278,17 @@ Traga-me a fonte de polônio, dentro da caixa de chumbo."</em>
   </div>
 </div>
 
-<!-- TELA FINAL -->
+<!-- FINAL SCREEN -->
 <div class="win-screen" id="winScreen">
-  <div class="win-title">O núcleo atômico foi descoberto!</div>
-  <p class="win-sub">Você ajudou Rutherford a provar que o átomo de Thomson estava incompleto. A carga positiva não está espalhada por todo o volume — ela está concentrada num núcleo pequeno, denso, com quase toda a massa do átomo. Ao redor dele, um imenso espaço vazio onde os elétrons se movem. Esse é o modelo planetário: núcleo no centro, eletrosfera ao redor, como planetas girando em torno do Sol.</p>
+  <div class="win-title">The atomic nucleus has been discovered!</div>
+  <p class="win-sub">You helped Rutherford prove that Thomson's atom was incomplete. The positive charge is not spread throughout the whole volume — it is concentrated in a small, dense nucleus that holds almost all the atom's mass. Around it, an immense empty space where the electrons move. This is the planetary model: nucleus at the center, electrosphere around it, like planets orbiting the Sun.</p>
   <div class="win-badges">
-    <div class="badge"><div class="badge-icon">🕳️</div><div class="badge-label">Espaço vazio</div></div>
-    <div class="badge"><div class="badge-icon">⚡</div><div class="badge-label">Carga concentrada</div></div>
-    <div class="badge"><div class="badge-icon">☀️</div><div class="badge-label">Núcleo denso</div></div>
+    <div class="badge"><div class="badge-icon">🕳️</div><div class="badge-label">Empty space</div></div>
+    <div class="badge"><div class="badge-icon">⚡</div><div class="badge-label">Concentrated charge</div></div>
+    <div class="badge"><div class="badge-icon">☀️</div><div class="badge-label">Dense nucleus</div></div>
   </div>
   <div class="win-btns">
-    <button class="btn-restart" onclick="resetGame()">Reviver o experimento</button>
+    <button class="btn-restart" onclick="resetGame()">Replay the experiment</button>
   </div>
 </div>
 
@@ -311,8 +311,8 @@ function tocarDing() {
   a.play().catch(() => {});
 }
 
-// ── ESTADO DA INTRO ──────────────────────────────────────────────────────────
-// 0 = aguardando fonte | 1 = aguardando folha | 2 = aguardando anteparo | 3 = pronto
+// ── INTRO STATE ──────────────────────────────────────────────────────────────
+// 0 = waiting for source | 1 = waiting for foil | 2 = waiting for screen | 3 = ready
 let introStep = 0;
 
 function marcarFeito(id) {
@@ -326,7 +326,7 @@ function ativarHotspot(id) {
   el.classList.add('active');
 }
 
-// ── HELPER: avança entre falas do card de intro ──────────────────────────────
+// ── HELPER: advances between the intro card's dialogue lines ──────────────────
 function nextFala(idx) {
   let i = 0;
   while (true) {
@@ -349,36 +349,36 @@ function responderIntroFonte() {
   document.getElementById('btnConcluirFonte').style.display = 'block';
 }
 
-// ── CLIQUE 1: FONTE DE POLÔNIO ───────────────────────────────────────────────
+// ── CLICK 1: POLONIUM SOURCE ───────────────────────────────────────────────────
 function clicarFonte() {
   if (introStep !== 0) return;
   document.getElementById('card').innerHTML = `
-    <button class="card-close" onclick="closeOverlay()" aria-label="Fechar">×</button>
+    <button class="card-close" onclick="closeOverlay()" aria-label="Close">×</button>
     <div class="card-fixed-top">
-      <div class="card-eyebrow">Aparato · 1 de 3</div>
-      <div class="card-title">Fonte de Polônio-210</div>
+      <div class="card-eyebrow">Apparatus · 1 of 3</div>
+      <div class="card-title">Polonium-210 Source</div>
     </div>
     <div class="card-scroll-body">
       <div id="fala-0">
-        <div class="card-fala"><strong>Rutherford:</strong> "Esta é uma fonte de polônio. Ela emite continuamente partículas alfa através de uma pequena abertura no bloco de chumbo que a envolve, formando um feixe estreito e direcionado."</div>
-        <button class="btn-acao" onclick="nextFala(1)">Próximo →</button>
+        <div class="card-fala"><strong>Rutherford:</strong> "This is a polonium source. It continuously emits alpha particles through a small opening in the lead block surrounding it, forming a narrow, directed beam."</div>
+        <button class="btn-acao" onclick="nextFala(1)">Next →</button>
       </div>
       <div id="fala-1" style="display:none">
-        <div class="card-fala"><strong>Rutherford:</strong> "Já sabemos algumas coisas sobre essas partículas. Elas possuem carga elétrica positiva, são muito mais massivas que os elétrons e viajam a velocidades extremamente elevadas."</div>
-        <button class="btn-acao" onclick="nextFala(2)">Próximo →</button>
+        <div class="card-fala"><strong>Rutherford:</strong> "We already know a few things about these particles. They carry a positive electric charge, are far more massive than electrons, and travel at extremely high speeds."</div>
+        <button class="btn-acao" onclick="nextFala(2)">Next →</button>
       </div>
       <div id="fala-2" style="display:none">
-        <div class="card-fala"><strong>Rutherford:</strong> "Em outras palavras, vamos lançar partículas positivas, pesadas e muito rápidas contra a matéria. Será que atravessarão o átomo facilmente? Ou encontrarão algum obstáculo em seu caminho? Vamos descobrir."</div>
+        <div class="card-fala"><strong>Rutherford:</strong> "In other words, we are going to fire positive, heavy, very fast particles at matter. Will they pass through the atom easily? Or will they meet some obstacle along the way? Let's find out."</div>
         <div class="pergunta-box show" style="margin-bottom:14px;">
-          <div class="pergunta-texto">O que você imagina que aconteça quando partículas tão pesadas atingirem um obstáculo sólido?</div>
-          <textarea class="resposta-input" id="respIntroFonte" placeholder="Escreva sua hipótese..."></textarea>
-          <button class="btn-acao" id="btnResponderIntroFonte" onclick="responderIntroFonte()" style="margin-top:8px;">Responder a Rutherford</button>
+          <div class="pergunta-texto">What do you imagine happens when such heavy particles hit a solid obstacle?</div>
+          <textarea class="resposta-input" id="respIntroFonte" placeholder="Write your hypothesis..."></textarea>
+          <button class="btn-acao" id="btnResponderIntroFonte" onclick="responderIntroFonte()" style="margin-top:8px;">Answer Rutherford</button>
         </div>
         <div class="conclusao-box" id="conclusaoIntroFonte">
-          <div class="conclusao-eyebrow">Rutherford responde</div>
-          <div class="conclusao-texto">"A maioria dos cientistas esperava que as partículas atravessassem praticamente sem desvio — afinal, no modelo de Thomson a carga positiva está espalhada por todo o volume do átomo, sem nada concentrado capaz de repelir fortemente uma partícula tão rápida. Essa era minha expectativa também. Vamos ver se é isso que acontece."</div>
+          <div class="conclusao-eyebrow">Rutherford answers</div>
+          <div class="conclusao-texto">"Most scientists expected the particles to pass through with practically no deflection — after all, in Thomson's model the positive charge is spread throughout the atom's whole volume, with nothing concentrated capable of strongly repelling such a fast particle. That was my expectation too. Let's see if that is what happens."</div>
         </div>
-        <button class="btn-acao" id="btnConcluirFonte" onclick="concluirFonte()" style="display:none;margin-top:14px;">Entendido — examinar a lâmina de ouro →</button>
+        <button class="btn-acao" id="btnConcluirFonte" onclick="concluirFonte()" style="display:none;margin-top:14px;">Understood — examine the gold foil →</button>
       </div>
     </div>`;
   openOverlay();
@@ -389,30 +389,30 @@ function concluirFonte() {
   introStep = 1;
   marcarFeito('hs-fonte');
   ativarHotspot('hs-folha');
-  setNarr('<strong>Rutherford:</strong> <em>"Agora examine a lâmina de ouro — é ela que o feixe vai atravessar."</em>');
+  setNarr('<strong>Rutherford:</strong> <em>"Now examine the gold foil — it is what the beam will pass through."</em>');
 }
 
-// ── CLIQUE 2: LÂMINA DE OURO ─────────────────────────────────────────────────
+// ── CLICK 2: GOLD FOIL ─────────────────────────────────────────────────────────
 function clicarFolha() {
   if (introStep < 1) {
-    setNarr('<strong>Rutherford:</strong> <em>"Primeiro, examine a fonte de polônio — ela está ali, à esquerda."</em>');
+    setNarr('<strong>Rutherford:</strong> <em>"First, examine the polonium source — it is right there, on the left."</em>');
     return;
   }
   if (introStep !== 1) return;
   document.getElementById('card').innerHTML = `
-    <button class="card-close" onclick="closeOverlay()" aria-label="Fechar">×</button>
+    <button class="card-close" onclick="closeOverlay()" aria-label="Close">×</button>
     <div class="card-fixed-top">
-      <div class="card-eyebrow">Aparato · 2 de 3</div>
-      <div class="card-title">Lâmina de Ouro</div>
+      <div class="card-eyebrow">Apparatus · 2 of 3</div>
+      <div class="card-title">Gold Foil</div>
     </div>
     <div class="card-scroll-body">
       <div id="fala-0">
-        <div class="card-fala"><strong>Rutherford:</strong> "Esta é a lâmina de ouro. Eu precisava de um material que pudesse ser martelado até ficar extremamente fino, e o ouro é um dos metais mais maleáveis que existem. Conseguimos produzir lâminas com apenas algumas centenas de átomos de espessura."</div>
-        <button class="btn-acao" onclick="nextFala(1)">Próximo →</button>
+        <div class="card-fala"><strong>Rutherford:</strong> "This is the gold foil. I needed a material that could be hammered until extremely thin, and gold is one of the most malleable metals there are. We managed to produce foils only a few hundred atoms thick."</div>
+        <button class="btn-acao" onclick="nextFala(1)">Next →</button>
       </div>
       <div id="fala-1" style="display:none">
-        <div class="card-fala"><strong>Rutherford:</strong> "Se a lâmina fosse grossa, cada partícula alfa atravessaria muitas camadas de átomos e sofreria inúmeras interações, tornando os resultados difíceis de interpretar. Com uma lâmina extremamente fina, os desvios observados podem ser associados a um número muito menor de interações."</div>
-        <button class="btn-acao" onclick="concluirFolha()">Entendido — examinar o anteparo →</button>
+        <div class="card-fala"><strong>Rutherford:</strong> "If the foil were thick, each alpha particle would pass through many layers of atoms and undergo countless interactions, making the results difficult to interpret. With an extremely thin foil, the observed deflections can be attributed to a much smaller number of interactions."</div>
+        <button class="btn-acao" onclick="concluirFolha()">Understood — examine the screen →</button>
       </div>
     </div>`;
   openOverlay();
@@ -423,33 +423,33 @@ function concluirFolha() {
   introStep = 2;
   marcarFeito('hs-folha');
   ativarHotspot('hs-anteparo');
-  setNarr('<strong>Rutherford:</strong> <em>"E ali está o anteparo de sulfeto de zinco — nosso detector. Examine-o de perto."</em>');
+  setNarr('<strong>Rutherford:</strong> <em>"And there is the zinc sulfide screen — our detector. Examine it closely."</em>');
 }
 
-// ── CLIQUE 3: ANTEPARO DE SULFETO DE ZINCO ───────────────────────────────────
+// ── CLICK 3: ZINC SULFIDE SCREEN ───────────────────────────────────────────────
 function clicarAnteparo() {
   if (introStep < 2) {
     const msg = introStep === 0
-      ? 'Primeiro, examine a fonte de polônio — ela está ali, à esquerda.'
-      : 'Agora examine a lâmina de ouro ao centro.';
+      ? 'First, examine the polonium source — it is right there, on the left.'
+      : 'Now examine the gold foil in the center.';
     setNarr(`<strong>Rutherford:</strong> <em>"${msg}"</em>`);
     return;
   }
   if (introStep !== 2) return;
   document.getElementById('card').innerHTML = `
-    <button class="card-close" onclick="closeOverlay()" aria-label="Fechar">×</button>
+    <button class="card-close" onclick="closeOverlay()" aria-label="Close">×</button>
     <div class="card-fixed-top">
-      <div class="card-eyebrow">Aparato · 3 de 3</div>
-      <div class="card-title">Anteparo de Sulfeto de Zinco</div>
+      <div class="card-eyebrow">Apparatus · 3 of 3</div>
+      <div class="card-title">Zinc Sulfide Screen</div>
     </div>
     <div class="card-scroll-body">
       <div id="fala-0">
-        <div class="card-fala"><strong>Rutherford:</strong> "Este é o anteparo de sulfeto de zinco. Quando uma partícula alfa o atinge, surge um pequeno flash de luz exatamente no ponto do impacto. Chamamos esse flash de cintilação."</div>
-        <button class="btn-acao" onclick="nextFala(1)">Próximo →</button>
+        <div class="card-fala"><strong>Rutherford:</strong> "This is the zinc sulfide screen. When an alpha particle strikes it, a small flash of light appears exactly at the point of impact. We call this flash a scintillation."</div>
+        <button class="btn-acao" onclick="nextFala(1)">Next →</button>
       </div>
       <div id="fala-1" style="display:none">
-        <div class="card-fala"><strong>Rutherford:</strong> "As partículas alfa são invisíveis, então não posso observar sua trajetória diretamente. Por isso, coloquei o anteparo ao redor da lâmina de ouro — assim, consigo detectar partículas que seguem em frente, partículas que desviam para os lados e até partículas que retornam na direção da fonte. Cada cintilação nos mostrará para onde uma partícula alfa foi após atravessar a lâmina."</div>
-        <button class="btn-acao" onclick="concluirAnteparo()">Entendido — pronto para começar →</button>
+        <div class="card-fala"><strong>Rutherford:</strong> "Alpha particles are invisible, so I cannot observe their trajectory directly. That is why I placed the screen around the gold foil — this way, I can detect particles that keep going straight, particles that deflect sideways, and even particles that bounce back toward the source. Each scintillation will show us where an alpha particle went after passing through the foil."</div>
+        <button class="btn-acao" onclick="concluirAnteparo()">Understood — ready to begin →</button>
       </div>
     </div>`;
   openOverlay();
@@ -459,7 +459,7 @@ function concluirAnteparo() {
   closeOverlay();
   introStep = 3;
   marcarFeito('hs-anteparo');
-  setNarr('<strong>Rutherford:</strong> <em>"Agora que você entende cada peça do aparato, vamos ligar a fonte e observar."</em>');
+  setNarr('<strong>Rutherford:</strong> <em>"Now that you understand every piece of the apparatus, let\'s turn on the source and observe."</em>');
   document.getElementById('btnIniciarExp').style.display = 'block';
 }
 
@@ -468,56 +468,56 @@ function iniciarExperimento() {
   abrirExperimento();
 }
 
-// ── ESTADO DO EXPERIMENTO ────────────────────────────────────────────────────
+// ── EXPERIMENT STATE ────────────────────────────────────────────────────────────
 const expVisto = { central: false, media: false, rara: false };
 function todosVistos() { return expVisto.central && expVisto.media && expVisto.rara; }
 let quizQ2tentativas = 0;
 
-// ── CONTEÚDO DAS REGIÕES ──────────────────────────────────────────────────────
+// ── REGION CONTENT ──────────────────────────────────────────────────────────────
 const expConteudo = {
   central: {
-    titulo: '① Cintilação no centro da tela',
-    pergunta: '<strong>Rutherford:</strong> "Observe a tela: surge uma cintilação forte, bem no centro, exatamente na direção em que o feixe foi disparado — a grande maioria das partículas chegou ali. Pensando no modelo de Thomson que revisamos, isso era esperado ou surpreendente?"',
-    conclusao: '"Exatamente o que o modelo de Thomson previa: como a carga positiva estaria espalhada e diluída por todo o volume do átomo, nada deveria desviar fortemente as partículas alfa — e foi isso que vimos, a grande maioria atravessou quase sem desviar. Até aqui, o experimento <strong>confirma</strong> a expectativa."',
+    titulo: '① Scintillation at the center of the screen',
+    pergunta: '<strong>Rutherford:</strong> "Watch the screen: a strong scintillation appears right at the center, exactly in the direction the beam was fired — the great majority of the particles arrived there. Thinking about Thomson\'s model that we reviewed, was this expected or surprising?"',
+    conclusao: '"Exactly what Thomson\'s model predicted: since the positive charge would be spread and diluted throughout the atom\'s whole volume, nothing should strongly deflect the alpha particles — and that is what we saw, the great majority passed through with almost no deflection. So far, the experiment <strong>confirms</strong> the expectation."',
     idResp: 'respCentral'
   },
   media: {
-    titulo: '② Cintilações laterais — desvio moderado',
-    pergunta: '<strong>Rutherford:</strong> "Veja — aparecem cintilações mais fracas, fora do centro, em ângulos consideráveis. Essas partículas alfa são pesadas e extremamente velozes. Que tipo de coisa, dentro do átomo, seria capaz de desviar uma partícula tão energética desse jeito?"',
-    conclusao: '"Pense bem: se a carga positiva estivesse mesmo espalhada e diluída por todo o volume do átomo, como Thomson propôs, nenhum ponto teria força suficiente para desviar uma partícula alfa de forma tão acentuada. Para causar esses desvios, deve haver, em algum lugar do átomo, uma <strong>concentração de carga</strong> — pontual, e não espalhada. E como as partículas alfa são positivas, e foram repelidas, essa concentração também deve ser <strong>positiva</strong>."',
+    titulo: '② Lateral scintillations — moderate deflection',
+    pergunta: '<strong>Rutherford:</strong> "Look — fainter scintillations appear, off-center, at considerable angles. These alpha particles are heavy and extremely fast. What kind of thing, inside the atom, could be capable of deflecting such an energetic particle like that?"',
+    conclusao: '"Think about it: if the positive charge really were spread and diluted throughout the atom\'s whole volume, as Thomson proposed, no single point would have enough force to deflect an alpha particle so sharply. To cause these deflections, there must be, somewhere in the atom, a <strong>concentration of charge</strong> — localized, not spread out. And since the alpha particles are positive, and were repelled, that concentration must also be <strong>positive</strong>."',
     idResp: 'respMedia'
   },
   rara: {
-    titulo: '③ Cintilações extremas — retorno quase completo',
-    pergunta: '<strong>Rutherford:</strong> "Surgiram raríssimas cintilações, fracas, nas extremidades da tela — quase do mesmo lado de onde o feixe partiu! Uma partícula alfa, pesada e veloz, só pode ter chegado tão próximo dali se tivesse retornado quase por completo, como se tivesse colidido com algo muito mais pesado do que ela. O que precisaria existir, dentro do átomo de ouro, para fazer isso acontecer?"',
-    conclusao: '"Foi quase tão inacreditável como atirar uma granada de 38 centímetros contra uma folha de papel e vê-la voltar, atingindo-nos. Para uma partícula tão pesada e veloz retornar quase por completo, ela precisa colidir com algo extremamente denso e maciço, concentrado numa região muito pequena do átomo. Chamo essa região de núcleo. E aqui está o ponto central: se praticamente toda a carga positiva e toda a massa do átomo estão concentradas nesse núcleo minúsculo, então não resta mais nada preenchendo o resto do volume: o restante do átomo é, necessariamente, espaço vazio. As três observações não são três evidências separadas — são o mesmo fenômeno, visto a distâncias diferentes do núcleo. Obrigado, caro estudante — você acabou de reviver a descoberta do núcleo atômico."',
+    titulo: '③ Extreme scintillations — almost complete bounce-back',
+    pergunta: '<strong>Rutherford:</strong> "Extremely rare, faint scintillations appeared at the far edges of the screen — almost on the same side the beam started from! A heavy, fast alpha particle could only have ended up so close to there if it had bounced back almost completely, as if it had collided with something much heavier than itself. What would need to exist, inside the gold atom, to make this happen?"',
+    conclusao: '"It was almost as unbelievable as firing a 38-centimeter shell at a sheet of paper and seeing it bounce back and hit us. For such a heavy, fast particle to bounce back almost completely, it must collide with something extremely dense and massive, concentrated in a very small region of the atom. I call this region the nucleus. And here is the central point: if practically all of the positive charge and all of the atom\'s mass are concentrated in this tiny nucleus, then there is nothing left filling the rest of the volume: the remainder of the atom is, necessarily, empty space. The three observations are not three separate pieces of evidence — they are the same phenomenon, seen at different distances from the nucleus. Thank you, dear student — you have just relived the discovery of the atomic nucleus."',
     idResp: 'respRara'
   }
 };
 
-// ── DIAGRAMA DO EXPERIMENTO ───────────────────────────────────────────────────
+// ── EXPERIMENT DIAGRAM ───────────────────────────────────────────────────────────
 function diagramaExperimento() {
   return `
   <div class="diagrama-svg-wrap">
     <svg viewBox="0 0 380 210" xmlns="http://www.w3.org/2000/svg">
       <rect x="15" y="80" width="48" height="40" fill="#2e1a08"/>
-      <text x="6" y="135" font-family="Libre Baskerville, serif" font-size="9" fill="#8b5e1a">polônio</text>
-      <text x="0" y="146" font-family="Libre Baskerville, serif" font-size="9" fill="#8b5e1a">(caixa de chumbo)</text>
+      <text x="6" y="135" font-family="Libre Baskerville, serif" font-size="9" fill="#8b5e1a">polonium</text>
+      <text x="0" y="146" font-family="Libre Baskerville, serif" font-size="9" fill="#8b5e1a">(lead box)</text>
 
       <rect x="88" y="70" width="9" height="22" fill="#3d2010"/>
       <rect x="88" y="108" width="9" height="22" fill="#3d2010"/>
       <rect x="116" y="70" width="9" height="22" fill="#3d2010"/>
       <rect x="116" y="108" width="9" height="22" fill="#3d2010"/>
-      <text x="78" y="160" font-family="Libre Baskerville, serif" font-size="9" fill="#8b5e1a">placas de</text>
-      <text x="78" y="171" font-family="Libre Baskerville, serif" font-size="9" fill="#8b5e1a">chumbo</text>
+      <text x="78" y="160" font-family="Libre Baskerville, serif" font-size="9" fill="#8b5e1a">lead</text>
+      <text x="78" y="171" font-family="Libre Baskerville, serif" font-size="9" fill="#8b5e1a">plates</text>
 
       <rect x="205" y="55" width="6" height="90" fill="#c9a227"/>
-      <text x="180" y="180" font-family="Libre Baskerville, serif" font-size="9" fill="#8b5e1a">lâmina de ouro</text>
+      <text x="180" y="180" font-family="Libre Baskerville, serif" font-size="9" fill="#8b5e1a">gold foil</text>
 
       <path d="M 260 12 A 110 110 0 0 1 260 188" fill="none" stroke="#cbb98a" stroke-width="10" opacity="0.5"/>
-      <text x="252" y="6" font-family="Libre Baskerville, serif" font-size="10" fill="#8b5e1a">tela de ZnS</text>
+      <text x="252" y="6" font-family="Libre Baskerville, serif" font-size="10" fill="#8b5e1a">ZnS screen</text>
 
-      <!-- Cintilações — todas aparecem ao mesmo tempo ao ligar -->
+      <!-- Scintillations — all appear at the same time when turned on -->
       <circle id="cintCentralGlow" class="cint" cx="304" cy="100" r="15" fill="#f0c960" opacity="0.3"/>
       <circle id="cintCentral" class="cint cint-central" cx="304" cy="100" r="7" fill="#f0c960"/>
       <circle id="cintMedia1" class="cint cint-media" cx="297" cy="62" r="4" fill="#e8b84b"/>
@@ -535,17 +535,17 @@ function diagramaExperimento() {
 function abrirExperimento() {
   expVisto.central = false; expVisto.media = false; expVisto.rara = false;
   document.getElementById('card').innerHTML = `
-    <button class="card-close" onclick="closeOverlay()" aria-label="Fechar">×</button>
+    <button class="card-close" onclick="closeOverlay()" aria-label="Close">×</button>
     <div class="card-fixed-top">
-      <div class="card-eyebrow">O Experimento da Folha de Ouro</div>
-      <div class="card-title">O que acontece quando as partículas atingem a folha?</div>
+      <div class="card-eyebrow">The Gold Foil Experiment</div>
+      <div class="card-title">What happens when the particles hit the foil?</div>
       <div class="diagrama-wrap" id="diagramaExp">${diagramaExperimento()}</div>
     </div>
     <div class="card-scroll-body" id="expScrollBody">
       <div class="card-fala">
-        <strong>Rutherford:</strong> "Aqui está a fonte: um fragmento de polônio dentro de uma caixa de chumbo, emitindo partículas alfa — já sabemos que são pesadas e carregadas positivamente. As placas de chumbo, com pequenos orifícios, direcionam o feixe até a lâmina de ouro. Ao redor, a tela revestida de sulfeto de zinco vai brilhar onde as partículas chegarem. Ligue o aparato."
+        <strong>Rutherford:</strong> "Here is the source: a fragment of polonium inside a lead box, emitting alpha particles — we already know they are heavy and positively charged. The lead plates, with small holes, direct the beam toward the gold foil. Around it, the zinc-sulfide-coated screen will glow wherever the particles arrive. Turn on the apparatus."
       </div>
-      <button class="btn-acao" id="btnAcaoExp" onclick="ligarExperimento()">⚡ Ligar o aparato</button>
+      <button class="btn-acao" id="btnAcaoExp" onclick="ligarExperimento()">⚡ Turn on the apparatus</button>
     </div>`;
   openOverlay();
 }
@@ -556,7 +556,7 @@ function ligarExperimento() {
   ['marker-central','marker-media','marker-rara']
     .forEach(id => { const el = document.getElementById(id); if (el) el.style.display = 'flex'; });
   const btn = document.getElementById('btnAcaoExp');
-  btn.textContent = '✓ Aparato ligado'; btn.classList.add('feita'); btn.disabled = true;
+  btn.textContent = '✓ Apparatus on'; btn.classList.add('feita'); btn.disabled = true;
   setTimeout(renderMapaExp, 700);
 }
 
@@ -566,21 +566,21 @@ function renderMapaExp() {
     : '';
   document.getElementById('expScrollBody').innerHTML = `
     <p style="font-family:'Libre Baskerville',serif;font-size:12px;color:rgba(46,26,8,0.55);line-height:1.7;margin-bottom:16px;text-align:center;">
-      Observe a tela: as três cintilações aparecem <strong style="color:#6b3f0e">ao mesmo tempo</strong>.<br>
-      Clique em cada marcador numerado — ou nos botões abaixo — para investigar. Sem ordem obrigatória.
+      Watch the screen: the three scintillations appear <strong style="color:#6b3f0e">at the same time</strong>.<br>
+      Click each numbered marker — or the buttons below — to investigate. No required order.
     </p>
     <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:20px;">
       <button class="btn-acao${expVisto.central?' feita':''}" onclick="investigarRegiao('central')" ${expVisto.central?'disabled':''}>
-        ① Cintilação central${status('central')}
+        ① Central scintillation${status('central')}
       </button>
       <button class="btn-acao${expVisto.media?' feita':''}" onclick="investigarRegiao('media')" ${expVisto.media?'disabled':''}>
-        ② Cintilações laterais${status('media')}
+        ② Lateral scintillations${status('media')}
       </button>
       <button class="btn-acao${expVisto.rara?' feita':''}" onclick="investigarRegiao('rara')" ${expVisto.rara?'disabled':''}>
-        ③ Cintilações extremas (raras)${status('rara')}
+        ③ Extreme scintillations (rare)${status('rara')}
       </button>
     </div>
-    ${todosVistos() ? '<button class="btn-continuar show" onclick="finalizarExperimento()">Finalizar →</button>' : ''}`;
+    ${todosVistos() ? '<button class="btn-continuar show" onclick="finalizarExperimento()">Finish →</button>' : ''}`;
 }
 
 function investigarRegiao(tipo) {
@@ -588,13 +588,13 @@ function investigarRegiao(tipo) {
   document.getElementById('expScrollBody').innerHTML = `
     <div class="card-fala" style="margin-bottom:16px;">${c.pergunta}</div>
     <div class="pergunta-box show" id="pergInv">
-      <textarea class="resposta-input" id="${c.idResp}" placeholder="Escreva sua hipótese..."></textarea>
-      <button class="btn-acao" style="margin-top:8px;" onclick="responderExp('${tipo}')">Responder a Rutherford</button>
+      <textarea class="resposta-input" id="${c.idResp}" placeholder="Write your hypothesis..."></textarea>
+      <button class="btn-acao" style="margin-top:8px;" onclick="responderExp('${tipo}')">Answer Rutherford</button>
     </div>
     <div class="conclusao-box" id="conclusaoInv">
-      <div class="conclusao-eyebrow">Rutherford responde</div>
+      <div class="conclusao-eyebrow">Rutherford answers</div>
       <div class="conclusao-texto">${c.conclusao}</div>
-      <button class="btn-continuar" id="btnVoltarMapa" onclick="concluirInvestigacao('${tipo}')">← Voltar às observações</button>
+      <button class="btn-continuar" id="btnVoltarMapa" onclick="concluirInvestigacao('${tipo}')">← Back to observations</button>
     </div>`;
 }
 
@@ -632,19 +632,19 @@ function finalizarExperimento() {
 function mostrarQ1() {
   document.getElementById('expScrollBody').innerHTML = `
     <div class="card-fala" style="margin-bottom:20px;">
-      <strong>Rutherford:</strong> <em>"Antes de fecharmos o laboratório, quero ter certeza de que você entendeu o que acabamos de observar. Uma última análise dos resultados."</em>
+      <strong>Rutherford:</strong> <em>"Before we close the laboratory, I want to make sure you understood what we just observed. One last analysis of the results."</em>
     </div>
     <p style="font-family:'Lora',serif;font-size:17px;line-height:1.75;color:var(--paper-text);font-weight:600;margin-bottom:20px;">
-      Rutherford observou que a grande maioria das partículas alfa atravessou a lâmina de ouro sem sofrer nenhum desvio em sua trajetória. Considerando o conjunto completo dos resultados do experimento, ele concluiu que isso aconteceu porque:
+      Rutherford observed that the great majority of alpha particles passed through the gold foil without suffering any deflection in their trajectory. Considering the complete set of experimental results, he concluded this happened because:
     </p>
     <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:16px;">
       <button class="btn-opcao" id="q1-opcA" onclick="responderQ1('A')">
-        <strong style="font-size:12px;letter-spacing:.08em;opacity:0.6;display:block;margin-bottom:4px;">OPÇÃO A</strong>
-        O modelo de Thomson estava correto: a carga positiva, distribuída por todo o volume do átomo, não seria capaz de desviar significativamente as partículas alfa.
+        <strong style="font-size:12px;letter-spacing:.08em;opacity:0.6;display:block;margin-bottom:4px;">OPTION A</strong>
+        Thomson's model was correct: the positive charge, distributed throughout the atom's whole volume, would not be capable of significantly deflecting the alpha particles.
       </button>
       <button class="btn-opcao" id="q1-opcB" onclick="responderQ1('B')">
-        <strong style="font-size:12px;letter-spacing:.08em;opacity:0.6;display:block;margin-bottom:4px;">OPÇÃO B</strong>
-        A maior parte do volume do átomo é espaço vazio, o que permitiu que a maioria das partículas passasse direto, sem encontrar nenhum obstáculo em sua trajetória.
+        <strong style="font-size:12px;letter-spacing:.08em;opacity:0.6;display:block;margin-bottom:4px;">OPTION B</strong>
+        Most of the atom's volume is empty space, which allowed most of the particles to pass straight through, without encountering any obstacle in their path.
       </button>
     </div>
     <div class="quiz-feedback" id="fbQ1"></div>`;
@@ -657,15 +657,15 @@ function responderQ1(opc) {
     tocarDing();
     fb.className = 'quiz-feedback show ok';
     fb.innerHTML = `
-      <div class="conclusao-eyebrow">Rutherford responde</div>
-      <div class="conclusao-texto">"Exatamente. É a ausência de obstáculo na maioria das trajetórias que prova que o átomo é, em sua maior parte, espaço vazio. Essa conclusão só faz sentido em conjunto com os outros dois resultados — os desvios e a raríssima partícula que voltou — que revelaram o núcleo: pequeno, denso, concentrado."</div>
-      <button class="btn-continuar show" style="margin-top:16px;" onclick="mostrarQ2()">Continuar →</button>`;
+      <div class="conclusao-eyebrow">Rutherford answers</div>
+      <div class="conclusao-texto">"Exactly. It is the absence of an obstacle in most trajectories that proves the atom is, for the most part, empty space. This conclusion only makes sense together with the other two results — the deflections and the extremely rare particle that bounced back — which revealed the nucleus: small, dense, concentrated."</div>
+      <button class="btn-continuar show" style="margin-top:16px;" onclick="mostrarQ2()">Continue →</button>`;
   } else {
     fb.className = 'quiz-feedback show err';
     fb.innerHTML = `
-      <div class="conclusao-eyebrow">Rutherford comenta</div>
-      <div class="conclusao-texto">"Esse resultado isolado até poderia parecer compatível com Thomson — mas e as partículas que sofreram grandes desvios? E a que voltou quase em sentido contrário? Um modelo de carga espalhada e fraca não consegue explicar esses outros dois resultados. Leve o experimento inteiro em consideração e tente novamente."</div>
-      <button class="btn-acao" style="margin-top:12px;" onclick="mostrarQ1()">Tentar novamente →</button>`;
+      <div class="conclusao-eyebrow">Rutherford comments</div>
+      <div class="conclusao-texto">"This result on its own might even seem compatible with Thomson — but what about the particles that suffered large deflections? And the one that bounced back almost the opposite way? A model of spread-out, weak charge cannot explain those other two results. Take the whole experiment into consideration and try again."</div>
+      <button class="btn-acao" style="margin-top:12px;" onclick="mostrarQ1()">Try again →</button>`;
   }
   fb.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
@@ -674,14 +674,14 @@ function mostrarQ2() {
   quizQ2tentativas = 0;
   document.getElementById('expScrollBody').innerHTML = `
     <div class="card-fala" style="margin-bottom:20px;">
-      <strong>Rutherford:</strong> <em>"Muito bem. Uma última questão antes de fecharmos o laboratório."</em>
+      <strong>Rutherford:</strong> <em>"Very good. One last question before we close the laboratory."</em>
     </div>
     <p style="font-family:'Lora',serif;font-size:17px;line-height:1.75;color:var(--paper-text);font-weight:600;margin-bottom:16px;">
-      Vimos que os prótons estão concentrados no núcleo do átomo. Mas e os elétrons? No modelo de Rutherford, eles estariam espalhados pelo restante do volume do átomo — a região ao redor do núcleo que, atualmente, damos o nome de:
+      We saw that protons are concentrated in the atom's nucleus. But what about the electrons? In Rutherford's model, they would be spread across the rest of the atom's volume — the region around the nucleus that today we call:
     </p>
     <div class="pergunta-box show">
-      <input type="text" class="resposta-input" id="respQ2" placeholder="Nome da região..." autocomplete="off" style="min-height:auto;resize:none;height:48px;" onkeydown="if(event.key==='Enter')responderQ2()">
-      <button class="btn-acao" style="margin-top:8px;" onclick="responderQ2()">Confirmar →</button>
+      <input type="text" class="resposta-input" id="respQ2" placeholder="Name of the region..." autocomplete="off" style="min-height:auto;resize:none;height:48px;" onkeydown="if(event.key==='Enter')responderQ2()">
+      <button class="btn-acao" style="margin-top:8px;" onclick="responderQ2()">Confirm →</button>
     </div>
     <div class="quiz-feedback" id="fbQ2"></div>`;
   setTimeout(() => document.getElementById('respQ2')?.focus(), 100);
@@ -691,7 +691,7 @@ function responderQ2() {
   const raw = document.getElementById('respQ2')?.value || '';
   const val = raw.trim().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
   const fb = document.getElementById('fbQ2');
-  if (val === 'eletrosfera') {
+  if (val === 'electrosphere') {
     tocarDing();
     const inp = document.getElementById('respQ2');
     if (inp) inp.disabled = true;
@@ -699,22 +699,22 @@ function responderQ2() {
     if (btn) btn.disabled = true;
     fb.className = 'quiz-feedback show ok';
     fb.innerHTML = `
-      <div class="conclusao-eyebrow">Rutherford responde</div>
-      <div class="conclusao-texto">"Eletrosfera — correto. Núcleo e eletrosfera: dois territórios dentro do mesmo átomo. No núcleo, os prótons — concentrados, densos, com quase toda a massa. Na eletrosfera, os elétrons — dispersos pelo enorme espaço vazio ao redor. Esse é o modelo que construímos juntos hoje."</div>
-      <button class="btn-continuar show" style="margin-top:16px;" onclick="concluirSala()">Sair do laboratório →</button>`;
+      <div class="conclusao-eyebrow">Rutherford answers</div>
+      <div class="conclusao-texto">"Electrosphere — correct. Nucleus and electrosphere: two territories within the same atom. In the nucleus, the protons — concentrated, dense, holding almost all the mass. In the electrosphere, the electrons — scattered across the enormous empty space around it. This is the model we built together today."</div>
+      <button class="btn-continuar show" style="margin-top:16px;" onclick="concluirSala()">Leave the laboratory →</button>`;
   } else {
     quizQ2tentativas++;
     if (quizQ2tentativas === 1) {
       fb.className = 'quiz-feedback show err';
       fb.innerHTML = `
-        <div class="conclusao-eyebrow">Rutherford comenta</div>
-        <div class="conclusao-texto">"Pense na palavra que se opõe a 'núcleo' — qual é a região que <em>envolve</em> o núcleo do átomo, onde estão os elétrons? Tente novamente."</div>`;
+        <div class="conclusao-eyebrow">Rutherford comments</div>
+        <div class="conclusao-texto">"Think of the word that is the opposite of 'nucleus' — what is the region that <em>surrounds</em> the atom's nucleus, where the electrons are? Try again."</div>`;
     } else {
       fb.className = 'quiz-feedback show err';
       fb.innerHTML = `
-        <div class="conclusao-eyebrow">Rutherford revela</div>
-        <div class="conclusao-texto">"A região é a <strong>eletrosfera</strong> — o espaço ao redor do núcleo onde os elétrons se movem. Agora que você sabe, podemos avançar."</div>
-        <button class="btn-continuar show" style="margin-top:16px;" onclick="concluirSala()">Sair do laboratório →</button>`;
+        <div class="conclusao-eyebrow">Rutherford reveals</div>
+        <div class="conclusao-texto">"The region is the <strong>electrosphere</strong> — the space around the nucleus where the electrons move. Now that you know, we can move on."</div>
+        <button class="btn-continuar show" style="margin-top:16px;" onclick="concluirSala()">Leave the laboratory →</button>`;
     }
   }
   fb.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
@@ -749,11 +749,11 @@ function resetGame() {
   document.getElementById('mainScreen').style.display = '';
   document.getElementById('winScreen').classList.remove('show');
 
-  setNarr(`<strong>Rutherford:</strong> <em>"Antes de começarmos, vamos relembrar a ideia de Thomson. Segundo ele, o átomo seria uma esfera de carga positiva espalhada por todo o seu volume, contendo elétrons distribuídos em seu interior, como passas em um pudim.<br><br>Durante algum tempo, esse modelo pareceu explicar bem o que os cientistas observavam. Mas, como todo bom cientista, não devemos aceitar uma ideia apenas porque ela parece correta.<br><br>Vamos colocá-la à prova.<br><br>Traga-me a fonte de polônio, dentro da caixa de chumbo."</em>`);
+  setNarr(`<strong>Rutherford:</strong> <em>"Before we begin, let's recall Thomson's idea. According to him, the atom would be a sphere of positive charge spread throughout its whole volume, containing electrons distributed within it, like raisins in a pudding.<br><br>For a while, this model seemed to explain well what scientists observed. But, like every good scientist, we should not accept an idea just because it seems correct.<br><br>Let's put it to the test.<br><br>Bring me the polonium source, inside the lead box."</em>`);
 }
 </script>
 
-<div id="cookie-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#1a0f08;border-top:1px solid rgba(212,170,106,0.4);padding:1rem 2rem;z-index:9999;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;"><p style="margin:0;font-family:'Libre Baskerville',serif;font-size:0.82rem;color:#e8d4b0;line-height:1.5;">Este site utiliza cookies para melhorar sua experi&ecirc;ncia. Ao continuar navegando, voc&ecirc; concorda com nossa <a href="/politica-de-privacidade.html" style="color:#e8b84b;text-decoration:underline;text-underline-offset:2px;">Pol&iacute;tica de Privacidade</a>.</p><button onclick="document.getElementById('cookie-banner').style.display='none';localStorage.setItem('kifacil_cookies','1');" style="flex-shrink:0;background:#e8b84b;border:none;padding:0.55rem 1.5rem;font-family:'Libre Baskerville',serif;font-size:0.78rem;font-weight:700;color:#1a0f08;cursor:pointer;letter-spacing:0.04em;">Entendi</button></div>
+<div id="cookie-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#1a0f08;border-top:1px solid rgba(212,170,106,0.4);padding:1rem 2rem;z-index:9999;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;"><p style="margin:0;font-family:'Libre Baskerville',serif;font-size:0.82rem;color:#e8d4b0;line-height:1.5;">This site uses cookies to improve your experience. By continuing to browse, you agree to our <a href="/politica-de-privacidade.html" style="color:#e8b84b;text-decoration:underline;text-underline-offset:2px;">Privacy Policy</a>.</p><button onclick="document.getElementById('cookie-banner').style.display='none';localStorage.setItem('kifacil_cookies','1');" style="flex-shrink:0;background:#e8b84b;border:none;padding:0.55rem 1.5rem;font-family:'Libre Baskerville',serif;font-size:0.78rem;font-weight:700;color:#1a0f08;cursor:pointer;letter-spacing:0.04em;">Got it</button></div>
 <script>if(!localStorage.getItem('kifacil_cookies'))document.getElementById('cookie-banner').style.display='flex';</script>
 <script type="module">
   import { requireAuth }          from '../../../js/guards.js';

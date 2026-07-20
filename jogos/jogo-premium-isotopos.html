@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" type="image/png" href="/favicon.png">
 <link rel="canonical" href="https://kifaciledu.com.br/jogos/jogos-escaperoom/torre-quimica/fases/laboratorio-isotopos.html">
-<title>Laboratório de Isótopos — Cápsula do Tempo | KiFácil</title>
-<meta name="description" content="Explore o laboratório de isótopos e descubra isótopos, isótonos e isóbaros. Escape Room da Cápsula do Tempo — KiFácil.">
+<title>Isotope Laboratory — Time Capsule | KiFácil</title>
+<meta name="description" content="Explore the isotope laboratory and discover isotopes, isotones and isobars. Time Capsule Escape Room — KiFácil.">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y1JGD5VVBD"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -43,7 +43,7 @@
 
   .main { display: flex; flex: 1; align-items: flex-start; }
 
-  /* CENA */
+  /* SCENE */
   .scene-wrap { background: var(--bg-dark); padding: 28px; display: flex; justify-content: center; align-items: flex-start; flex: 0 0 56%; }
   .scene-inner { position: relative; width: 100%; max-width: 620px; user-select: none; }
   .scene-img { width: 100%; display: block; border-radius: 8px; border: 1px solid rgba(212,170,106,0.4); }
@@ -55,7 +55,7 @@
   .btn-iniciar-exp:hover { background: #f0c960; }
   .btn-iniciar-exp.oculto { display: none; }
 
-  /* PAINEL DIREITO */
+  /* RIGHT PANEL */
   .panels-row { flex: 1; display: flex; flex-direction: column; gap: 18px; padding: 28px; border-left: 1px solid var(--border-faint); align-self: stretch; }
 
   .narr-box { background: var(--paper); border: 1px solid rgba(139,94,26,0.25); border-radius: 8px; padding: 20px 22px; }
@@ -117,7 +117,7 @@
   .btn-continuar.show { display: block; }
   .btn-continuar:hover { background: #6b3f0e; }
 
-  /* PERGAMINHO DE REVELAÇÃO */
+  /* REVEAL SCROLL */
   .pergaminho-box { display: none; background-image: url('../imagens/pergaminho-info.png'); background-size: 100% 100%; background-repeat: no-repeat; padding: 30px 40px 40px; text-align: center; margin: 6px -18px 16px; width: calc(100% + 36px); min-height: 222px; }
   .pergaminho-box.show { display: block; animation: cardIn .4s ease; }
   .pergaminho-eyebrow { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: #6b3f0e; margin-bottom: 10px; }
@@ -126,7 +126,7 @@
   .pergaminho-texto.resumo-final p { margin: 0 0 6px; }
   .pergaminho-nome { font-family: 'Lora', serif; font-size: 28px; font-weight: 700; color: #6b3f0e; letter-spacing: .05em; }
 
-  /* ÁTOMOS DINÂMICOS */
+  /* DYNAMIC ATOMS */
   .atomos-linha { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin: 4px 0 18px; }
   .atomo-caixa { text-align: center; width: 140px; }
   .atomo-clicavel { position: relative; width: 120px; height: 120px; margin: 0 auto 8px; cursor: pointer; border-radius: 50%; background: rgba(255,244,216,0.65); border: 1.5px solid rgba(139,94,26,0.35); overflow: hidden; transition: border-color .2s, background .2s; }
@@ -193,7 +193,7 @@
   .atomo-info.show { display: block; }
   .atomo-clique-dica { font-size: 10px; color: rgba(46,26,8,0.4); margin-top: 2px; }
 
-  /* ETAPA 2 — MONTAR */
+  /* STAGE 2 — BUILD */
   .monte-box { display: flex; flex-direction: column; align-items: center; gap: 14px; margin: 6px 0 16px; }
   .monte-atomo { position: relative; width: 160px; height: 160px; border-radius: 50%; background: rgba(255,244,216,0.65); border: 1.5px solid rgba(139,94,26,0.35); overflow: hidden; }
   .monte-contagem { font-family: 'Lora', serif; font-size: 14px; color: var(--paper-text); text-align: center; }
@@ -206,7 +206,7 @@
   .aviso-titulo { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: #7a2515; margin-bottom: 6px; }
   .aviso-texto { font-family: 'Lora', serif; font-size: 15px; color: #4a2e08; font-weight: 600; line-height: 1.6; }
 
-  /* ETAPA 5 — CLASSIFICAR */
+  /* STAGE 5 — CLASSIFY */
   .banco-cartoes { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 16px; padding: 12px; background: rgba(139,94,26,0.05); border-radius: 8px; border: 1px dashed rgba(139,94,26,0.3); }
   .cartao-nuclideo { background: var(--paper-text); color: var(--paper); font-family: 'Lora', serif; font-weight: 700; font-size: 14px; padding: 8px 14px; border-radius: 6px; cursor: pointer; transition: background .15s, transform .15s; user-select: none; }
   .cartao-nuclideo:hover { background: #4a2c10; }
@@ -219,7 +219,7 @@
   .cartao-fixado { background: rgba(80,200,120,0.18); border: 1px solid rgba(80,200,120,0.5); color: #1f3d1f; font-family: 'Lora', serif; font-weight: 700; font-size: 12.5px; padding: 5px 9px; border-radius: 5px; }
   .cartao-fixado.errado { background: rgba(180,60,50,0.15); border-color: rgba(180,60,50,0.4); color: #6b1f10; }
 
-  /* TELA FINAL */
+  /* FINAL SCREEN */
   .win-screen { display: none; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 60px 32px; flex: 1; }
   .win-screen.show { display: flex; }
   .win-title { font-family: 'Lora', serif; font-size: 40px; font-weight: 600; color: var(--gold); margin-bottom: 12px; }
@@ -234,7 +234,7 @@
   .btn-restart { background: none; border: 1px solid rgba(232,184,75,0.3); border-radius: 6px; padding: 10px 24px; font-family: 'Libre Baskerville', serif; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: rgba(232,184,75,0.6); cursor: pointer; transition: all .15s; }
   .btn-restart:hover { border-color: rgba(232,184,75,0.6); color: var(--gold); }
 
-  /* ANIMAÇÃO FINAL — próton vs nêutron */
+  /* FINAL ANIMATION — proton vs neutron */
   .anim-final-wrap { display: flex; flex-direction: column; align-items: center; gap: 10px; margin: 14px 0 18px; }
   .anim-final-atomo { position: relative; width: 130px; height: 130px; }
   .anim-final-legenda { font-family: 'Lora', serif; font-size: 13.5px; color: var(--paper-text); font-weight: 600; text-align: center; min-height: 20px; }
@@ -511,42 +511,42 @@
 </nav>
 
 <main id="mainScreen">
-  <h1 class="titulo-jogo">Investigação Nuclear</h1>
-  <p class="subtitulo">Descubra isótopos, isótonos e isóbaros.</p>
+  <h1 class="titulo-jogo">Nuclear Investigation</h1>
+  <p class="subtitulo">Discover isotopes, isotones and isobars.</p>
 
   <div class="narrador">
-    <img src="../imagens/rafa-sorrindo.jpg" alt="Professora Rafaela">
+    <img src="../imagens/rafa-sorrindo.jpg" alt="Professor Rafaela">
     <div>
-      <div class="narrador-nome">Professora Rafaela</div>
-      <div id="narr" class="narrador-texto">Venha à bancada. Observe os átomos e identifique os padrões que definem isótopos, isótonos e isóbaros.</div>
+      <div class="narrador-nome">Professor Rafaela</div>
+      <div id="narr" class="narrador-texto">Come to the workbench. Observe the atoms and identify the patterns that define isotopes, isotones and isobars.</div>
     </div>
   </div>
 
   <div class="imagem-wrapper">
-    <img src="../imagens/laboratorio-isotopos.jpg" alt="Laboratório de isótopos no início do século XX" id="imagemJogo">
-    <button class="btn-iniciar-exp" id="btnIniciar" onclick="abrirEtapa1()">⚗ Entrar no laboratório</button>
-    <!-- COLOQUE O LINK AQUI -->
-    <a class="link-aula" href="https://www.youtube.com/watch?v=G9GUwdQqrkA" target="_blank" rel="noopener" title="Assista à aula">
+    <img src="../imagens/laboratorio-isotopos.jpg" alt="Isotope laboratory in the early twentieth century" id="imagemJogo">
+    <button class="btn-iniciar-exp" id="btnIniciar" onclick="abrirEtapa1()">⚗ Enter the laboratory</button>
+    <!-- PUT THE LINK HERE -->
+    <a class="link-aula" href="https://www.youtube.com/watch?v=G9GUwdQqrkA" target="_blank" rel="noopener" title="Watch the lesson">
       <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.6"/>
         <path d="M10 8.5L16 12L10 15.5V8.5Z" fill="currentColor"/>
       </svg>
-      <span>Assista à aula</span>
+      <span>Watch the lesson</span>
     </a>
   </div>
 </main>
 
-<!-- TELA FINAL -->
+<!-- FINAL SCREEN -->
 <div class="win-screen" id="winScreen">
-  <div class="win-title">Isótopos, isótonos e isóbaros descobertos!</div>
-  <p class="win-sub">Você investigou por que existiam átomos com propriedades químicas idênticas e massas diferentes. O número de prótons define o elemento — o número de nêutrons pode variar. Assim surgem os conceitos de isótopo, isótono e isóbaro.</p>
+  <div class="win-title">Isotopes, isotones and isobars discovered!</div>
+  <p class="win-sub">You investigated why atoms existed with identical chemical properties but different masses. The number of protons defines the element — the number of neutrons can vary. This is how the concepts of isotope, isotone and isobar arise.</p>
   <div class="win-badges">
-    <div class="badge"><div class="badge-icon">⚛️</div><div class="badge-label">Isótopos</div></div>
-    <div class="badge"><div class="badge-icon">🧲</div><div class="badge-label">Isótonos</div></div>
-    <div class="badge"><div class="badge-icon">⚖️</div><div class="badge-label">Isóbaros</div></div>
+    <div class="badge"><div class="badge-icon">⚛️</div><div class="badge-label">Isotopes</div></div>
+    <div class="badge"><div class="badge-icon">🧲</div><div class="badge-label">Isotones</div></div>
+    <div class="badge"><div class="badge-icon">⚖️</div><div class="badge-label">Isobars</div></div>
   </div>
   <div class="win-btns">
-    <button class="btn-restart" onclick="resetGame()">Reviver o experimento</button>
+    <button class="btn-restart" onclick="resetGame()">Replay the experiment</button>
   </div>
 </div>
 
@@ -557,9 +557,9 @@
 
 <script>
 /* ============================================================
-   ÁREA DE CONFIGURAÇÃO — confirme os caminhos das imagens
-   conforme a pasta real desta fase no seu projeto.
-   Convenção usada aqui: ../imagens/ (mesma das fases de Thomson/Rutherford)
+   CONFIGURATION AREA — confirm the image paths
+   match the actual folder for this stage in your project.
+   Convention used here: ../imagens/ (same as the Thomson/Rutherford stages)
    ============================================================ */
 const IMG = {
   proton: '../imagens/proton.png',
@@ -577,11 +577,11 @@ function tocarDing() {
 }
 
 /* ============================================================
-   RENDERIZAÇÃO DINÂMICA DE PARTÍCULAS (nunca via <img> fixa no HTML)
+   DYNAMIC PARTICLE RENDERING (never via a fixed <img> in the HTML)
    ============================================================ */
 function limparContainer(el) { el.innerHTML = ''; }
 
-// posiciona partículas em espiral compacta (ângulo áureo) — evita overlap feio
+// positions particles in a compact spiral (golden angle) — avoids ugly overlap
 function posicionarParticula(el, index, total, raioMax, tamanho) {
   const golden = 137.5;
   const angulo = index * golden * (Math.PI / 180);
@@ -601,13 +601,13 @@ function criarAtomoBase(container) {
 
 function obterLegendaParticulasHTML() {
   return `
-    <div class="legenda-particulas" aria-label="Legenda de partículas do núcleo">
-      <span class="legenda-item"><span class="legenda-simbolo proton">⊕</span> Próton</span>
-      <span class="legenda-item"><span class="legenda-simbolo neutron">0</span> Nêutron</span>
+    <div class="legenda-particulas" aria-label="Legend of nucleus particles">
+      <span class="legenda-item"><span class="legenda-simbolo proton">⊕</span> Proton</span>
+      <span class="legenda-item"><span class="legenda-simbolo neutron">0</span> Neutron</span>
     </div>`;
 }
 
-// renderiza núcleo (prótons + nêutrons) dinamicamente dentro do container
+// renders the nucleus (protons + neutrons) dynamically inside the container
 function renderNucleo(container, protons, neutrons, tamanhoContainer) {
   limparContainer(container);
   const total = protons + neutrons;
@@ -633,40 +633,40 @@ function renderNucleo(container, protons, neutrons, tamanhoContainer) {
 }
 
 /* ============================================================
-   ETAPA 1 — DESCOBRINDO OS ISÓTOPOS
+   STAGE 1 — DISCOVERING ISOTOPES
    ============================================================ */
 const ATOMOS_H = [
-  { id: 'h1', nome: 'Hidrogênio-1', protons: 1, neutrons: 0 },
-  { id: 'h2', nome: 'Hidrogênio-2', protons: 1, neutrons: 1 },
-  { id: 'h3', nome: 'Hidrogênio-3', protons: 1, neutrons: 2 }
+  { id: 'h1', nome: 'Hydrogen-1', protons: 1, neutrons: 0 },
+  { id: 'h2', nome: 'Hydrogen-2', protons: 1, neutrons: 1 },
+  { id: 'h3', nome: 'Hydrogen-3', protons: 1, neutrons: 2 }
 ];
 const revelado1 = { h1: false, h2: false, h3: false };
 
 function abrirEtapa1() {
   document.getElementById('btnIniciar').classList.add('oculto');
   document.getElementById('card').innerHTML = `
-    <button class="card-close" onclick="closeOverlay()" aria-label="Fechar">×</button>
+    <button class="card-close" onclick="closeOverlay()" aria-label="Close">×</button>
     <div class="card-fixed-top">
-      <div class="card-eyebrow">Descoberta 1 — Três Átomos de Hidrogênio</div>
-      <div class="card-title">Clique em cada átomo para abrir o núcleo</div>
+      <div class="card-eyebrow">Discovery 1 — Three Hydrogen Atoms</div>
+      <div class="card-title">Click each atom to open its nucleus</div>
     </div>
     <div class="card-scroll-body">
-      <div class="card-fala"><strong>Professora Rafaela:</strong> "Aqui estão três amostras de hidrogênio, retiradas de fontes diferentes. Abra o <strong>núcleo</strong> de cada uma e observe com atenção o que encontra lá dentro."</div>
+      <div class="card-fala"><strong>Professor Rafaela:</strong> "Here are three samples of hydrogen, taken from different sources. Open the <strong>nucleus</strong> of each one and observe carefully what you find inside."</div>
       <div class="atomos-linha" id="linhaAtomos1"></div>
       ${obterLegendaParticulasHTML()}
       <div class="pergunta-box" id="pergunta1">
-        <div class="pergunta-texto"><strong>Professora Rafaela:</strong> "Muito bem — você abriu os três núcleos. Agora me diga: o que permaneceu <strong>igual</strong> nos três átomos?"</div>
-        <button class="btn-opcao" onclick="responderEtapa1(this,'protons')">Número de prótons</button>
-        <button class="btn-opcao" onclick="responderEtapa1(this,'neutrons')">Número de nêutrons</button>
-        <button class="btn-opcao" onclick="responderEtapa1(this,'massa')">Número de massa</button>
+        <div class="pergunta-texto"><strong>Professor Rafaela:</strong> "Very good — you opened all three nuclei. Now tell me: what stayed the <strong>same</strong> in all three atoms?"</div>
+        <button class="btn-opcao" onclick="responderEtapa1(this,'protons')">Number of protons</button>
+        <button class="btn-opcao" onclick="responderEtapa1(this,'neutrons')">Number of neutrons</button>
+        <button class="btn-opcao" onclick="responderEtapa1(this,'massa')">Mass number</button>
       </div>
       <div class="quiz-feedback" id="fb1"></div>
       <div class="pergaminho-box" id="pergaminho1">
-        <div class="pergaminho-eyebrow">Explicação</div>
-        <div class="pergaminho-texto">Os três átomos têm exatamente 1 próton — por isso são todos hidrogênio. Apenas o número de nêutrons mudou. Átomos de um mesmo elemento, com números de massa diferentes, recebem um nome:</div>
-        <div class="pergaminho-nome">ISÓTOPOS</div>
+        <div class="pergaminho-eyebrow">Explanation</div>
+        <div class="pergaminho-texto">All three atoms have exactly 1 proton — that's why they're all hydrogen. Only the number of neutrons changed. Atoms of the same element, with different mass numbers, are given a name:</div>
+        <div class="pergaminho-nome">ISOTOPES</div>
       </div>
-      <button class="btn-continuar" id="btnContinuar1" onclick="fecharEtapa1()">Continuar →</button>
+      <button class="btn-continuar" id="btnContinuar1" onclick="fecharEtapa1()">Continue →</button>
     </div>`;
   openOverlay();
   renderLinhaAtomos1();
@@ -682,7 +682,7 @@ function renderLinhaAtomos1() {
       <div class="atomo-clicavel" id="clique-${atomo.id}"></div>
       <div class="atomo-legenda">${atomo.nome}</div>
       <div class="atomo-info" id="info-${atomo.id}"></div>
-      <div class="atomo-clique-dica" id="dica-${atomo.id}">clique para abrir</div>`;
+      <div class="atomo-clique-dica" id="dica-${atomo.id}">click to open</div>`;
     linha.appendChild(caixa);
     const clique = caixa.querySelector('.atomo-clicavel');
     clique.addEventListener('click', () => abrirNucleo1(atomo, clique));
@@ -695,7 +695,7 @@ function abrirNucleo1(atomo, container) {
   container.classList.add('revelado');
   renderNucleo(container, atomo.protons, atomo.neutrons, 120);
   document.getElementById('info-' + atomo.id).classList.add('show');
-  document.getElementById('info-' + atomo.id).textContent = `${atomo.protons} próton · ${atomo.neutrons} nêutron${atomo.neutrons === 1 ? '' : 's'}`;
+  document.getElementById('info-' + atomo.id).textContent = `${atomo.protons} proton · ${atomo.neutrons} neutron${atomo.neutrons === 1 ? '' : 's'}`;
   document.getElementById('dica-' + atomo.id).style.display = 'none';
   tocarDing();
   if (Object.values(revelado1).every(v => v)) {
@@ -710,13 +710,13 @@ function responderEtapa1(btn, escolha) {
     tocarDing();
     btn.classList.add('opcao-certa');
     fb.className = 'quiz-feedback show ok';
-    fb.innerHTML = `<div class="conclusao-eyebrow">Correto</div><div class="conclusao-texto">Os prótons permaneceram os mesmos nos três átomos — todos têm 1. Isso é o que define o elemento químico.</div>`;
+    fb.innerHTML = `<div class="conclusao-eyebrow">Correct</div><div class="conclusao-texto">The protons stayed the same in all three atoms — all have 1. That is what defines the chemical element.</div>`;
     document.getElementById('pergaminho1').classList.add('show');
     document.getElementById('btnContinuar1').classList.add('show');
   } else {
     btn.classList.add('opcao-errada');
     fb.className = 'quiz-feedback show err';
-    fb.innerHTML = `<div class="conclusao-eyebrow">Comentário</div><div class="conclusao-texto">Olhe de novo os números que você encontrou em cada núcleo — nêutrons e massa mudaram entre os três átomos. Só uma coisa não mudou. Tente outra vez.</div>`;
+    fb.innerHTML = `<div class="conclusao-eyebrow">Note</div><div class="conclusao-texto">Look again at the numbers you found in each nucleus — neutrons and mass changed among the three atoms. Only one thing didn\'t change. Try again.</div>`;
     setTimeout(() => {
       document.querySelectorAll('#pergunta1 .btn-opcao').forEach(b => { b.disabled = false; b.classList.remove('opcao-errada'); });
       fb.classList.remove('show');
@@ -725,14 +725,14 @@ function responderEtapa1(btn, escolha) {
 }
 
 function fecharEtapa1() {
-  setNarr('<strong>Professora Rafaela:</strong> <em>"Isótopos — mesmo número de prótons, número de massa diferente. Agora venha até a bancada de montagem: quero ver você representar um isótopo com as próprias mãos."</em>');
+  setNarr('<strong>Professor Rafaela:</strong> <em>"Isotopes — same number of protons, different mass number. Now come to the assembly bench: I want to see you build an isotope with your own hands."</em>');
   abrirEtapa2();
 }
 
 /* ============================================================
-   ETAPA 2 — MONTE OUTRO ISÓTOPO
+   STAGE 2 — BUILD ANOTHER ISOTOPE
    ============================================================ */
-const NOMES_ELEMENTOS = { 1: 'Hidrogênio', 2: 'Hélio', 3: 'Lítio', 4: 'Berílio', 5: 'Boro' };
+const NOMES_ELEMENTOS = { 1: 'Hydrogen', 2: 'Helium', 3: 'Lithium', 4: 'Beryllium', 5: 'Boron' };
 let monteProtons = 1;
 let monteNeutrons = 0;
 
@@ -740,30 +740,30 @@ function abrirEtapa2() {
   monteProtons = 1;
   monteNeutrons = 0;
   document.getElementById('card').innerHTML = `
-    <button class="card-close" onclick="closeOverlay()" aria-label="Fechar">×</button>
+    <button class="card-close" onclick="closeOverlay()" aria-label="Close">×</button>
     <div class="card-fixed-top">
-      <div class="card-eyebrow">Descoberta 2 — Represente outro Isótopo</div>
-      <div class="card-title">Use o painel para representar outro isótopo do hidrogênio</div>
+      <div class="card-eyebrow">Discovery 2 — Build Another Isotope</div>
+      <div class="card-title">Use the panel to build another isotope of hydrogen</div>
     </div>
     <div class="card-scroll-body">
-      <div class="card-fala"><strong>Professora Rafaela:</strong> "Este é um átomo de hidrogênio comum: 1 próton, nenhum nêutron. Use os botões abaixo para representar outro isótopo do hidrogênio."</div>
+      <div class="card-fala"><strong>Professor Rafaela:</strong> "This is a common hydrogen atom: 1 proton, no neutrons. Use the buttons below to build another isotope of hydrogen."</div>
       <div class="monte-box">
         <div class="monte-atomo" id="monteAtomo"></div>
         <div class="monte-contagem" id="monteContagem"></div>
         <div class="monte-botoes">
-          <button class="btn-particula" onclick="montarParticula('proton')">+ Próton</button>
-          <button class="btn-particula" id="btnAddNeutron" onclick="montarParticula('neutron')">+ Nêutron</button>
+          <button class="btn-particula" onclick="montarParticula('proton')">+ Proton</button>
+          <button class="btn-particula" id="btnAddNeutron" onclick="montarParticula('neutron')">+ Neutron</button>
         </div>
       </div>
       <div class="aviso-elemento" id="avisoElemento">
-        <div class="aviso-titulo">Atenção</div>
+        <div class="aviso-titulo">Warning</div>
         <div class="aviso-texto" id="avisoTexto"></div>
       </div>
       <div class="conclusao-box" id="conclusaoEtapa2">
-        <div class="conclusao-eyebrow">Isótopo representado</div>
-        <div class="conclusao-texto">Você manteve o mesmo número de prótons e alterou apenas a quantidade de nêutrons. Assim, este núcleo representa outro isótopo do hidrogênio, que é chamado de deutério.</div>
+        <div class="conclusao-eyebrow">Isotope built</div>
+        <div class="conclusao-texto">You kept the same number of protons and only changed the number of neutrons. This nucleus therefore represents another isotope of hydrogen, called deuterium.</div>
       </div>
-      <button class="btn-continuar" id="btnContinuar2" onclick="fecharEtapa2()">Continuar →</button>
+      <button class="btn-continuar" id="btnContinuar2" onclick="fecharEtapa2()">Continue →</button>
     </div>`;
   openOverlay();
   atualizarMonte();
@@ -772,7 +772,7 @@ function abrirEtapa2() {
 function atualizarMonte() {
   const container = document.getElementById('monteAtomo');
   renderNucleo(container, monteProtons, monteNeutrons, 160);
-  document.getElementById('monteContagem').textContent = `${monteProtons} próton${monteProtons === 1 ? '' : 's'} · ${monteNeutrons} nêutron${monteNeutrons === 1 ? '' : 's'}`;
+  document.getElementById('monteContagem').textContent = `${monteProtons} proton${monteProtons === 1 ? '' : 's'} · ${monteNeutrons} neutron${monteNeutrons === 1 ? '' : 's'}`;
 }
 
 function montarParticula(tipo) {
@@ -789,51 +789,51 @@ function montarParticula(tipo) {
   } else {
     monteProtons++;
     atualizarMonte();
-    const nomeNovo = NOMES_ELEMENTOS[monteProtons] || 'um novo elemento';
-    document.getElementById('avisoTexto').textContent = `Se você adiciona um próton, o átomo deixa de ser hidrogênio e passa a ser ${nomeNovo}! Isótopos mantêm sempre o mesmo número de prótons — vamos voltar a 1 próton e continuar explorando os nêutrons.`;
+    const nomeNovo = NOMES_ELEMENTOS[monteProtons] || 'a new element';
+    document.getElementById('avisoTexto').textContent = `If you add a proton, the atom stops being hydrogen and becomes ${nomeNovo}! Isotopes always keep the same number of protons — let\'s go back to 1 proton and keep exploring the neutrons.`;
     document.getElementById('avisoElemento').classList.add('show');
     setTimeout(() => { monteProtons = 1; atualizarMonte(); }, 2200);
   }
 }
 
 function fecharEtapa2() {
-  setNarr('<strong>Professora Rafaela:</strong> <em>"Perfeito — só os nêutrons mudam. Agora venha ver algo diferente: dois elementos diferentes que guardam uma semelhança inesperada."</em>');
+  setNarr('<strong>Professor Rafaela:</strong> <em>"Perfect — only the neutrons change. Now come see something different: two different elements that share an unexpected similarity."</em>');
   abrirEtapa3();
 }
 
 /* ============================================================
-   ETAPA 3 — DESCOBRINDO OS ISÓTONOS
+   STAGE 3 — DISCOVERING ISOTONES
    ============================================================ */
 const ATOMOS_ISOTONOS = [
-  { id: 'c14', nome: 'Carbono-14', simbolo: 'C', z: 6, n: 8 },
-  { id: 'n15', nome: 'Nitrogênio-15', simbolo: 'N', z: 7, n: 8 }
+  { id: 'c14', nome: 'Carbon-14', simbolo: 'C', z: 6, n: 8 },
+  { id: 'n15', nome: 'Nitrogen-15', simbolo: 'N', z: 7, n: 8 }
 ];
 const revelado3 = { c14: false, n15: false };
 
 function abrirEtapa3() {
   document.getElementById('card').innerHTML = `
-    <button class="card-close" onclick="closeOverlay()" aria-label="Fechar">×</button>
+    <button class="card-close" onclick="closeOverlay()" aria-label="Close">×</button>
     <div class="card-fixed-top">
-      <div class="card-eyebrow">Descoberta 3 — Carbono-14 e Nitrogênio-15</div>
-      <div class="card-title">Abra os dois núcleos e compare</div>
+      <div class="card-eyebrow">Discovery 3 — Carbon-14 and Nitrogen-15</div>
+      <div class="card-title">Open both nuclei and compare</div>
     </div>
     <div class="card-scroll-body">
-      <div class="card-fala"><strong>Professora Rafaela:</strong> "Estes dois átomos pertencem a elementos diferentes. Abra os núcleos e anote o que encontrar."</div>
+      <div class="card-fala"><strong>Professor Rafaela:</strong> "These two atoms belong to different elements. Open the nuclei and note what you find."</div>
       <div class="atomos-linha" id="linhaAtomos3"></div>
       ${obterLegendaParticulasHTML()}
       <div class="pergunta-box" id="pergunta3">
-        <div class="pergunta-texto"><strong>Professora Rafaela:</strong> "Repare bem nos números que você viu. O que permaneceu <strong>igual</strong> entre o carbono e o nitrogênio?"</div>
-        <button class="btn-opcao" onclick="responderEtapa3(this,'protons')">Número de prótons</button>
-        <button class="btn-opcao" onclick="responderEtapa3(this,'neutrons')">Número de nêutrons</button>
-        <button class="btn-opcao" onclick="responderEtapa3(this,'massa')">Número de massa</button>
+        <div class="pergunta-texto"><strong>Professor Rafaela:</strong> "Pay close attention to the numbers you saw. What stayed the <strong>same</strong> between carbon and nitrogen?"</div>
+        <button class="btn-opcao" onclick="responderEtapa3(this,'protons')">Number of protons</button>
+        <button class="btn-opcao" onclick="responderEtapa3(this,'neutrons')">Number of neutrons</button>
+        <button class="btn-opcao" onclick="responderEtapa3(this,'massa')">Mass number</button>
       </div>
       <div class="quiz-feedback" id="fb3"></div>
       <div class="pergaminho-box" id="pergaminho3">
-        <div class="pergaminho-eyebrow">Explicação</div>
-        <div class="pergaminho-texto">Carbono e nitrogênio são elementos diferentes — prótons diferentes — mas ambos têm 8 nêutrons. Átomos de elementos diferentes com o mesmo número de nêutrons recebem um nome:</div>
-        <div class="pergaminho-nome">ISÓTONOS</div>
+        <div class="pergaminho-eyebrow">Explanation</div>
+        <div class="pergaminho-texto">Carbon and nitrogen are different elements — different protons — but both have 8 neutrons. Atoms of different elements with the same number of neutrons are given a name:</div>
+        <div class="pergaminho-nome">ISOTONES</div>
       </div>
-      <button class="btn-continuar" id="btnContinuar3" onclick="fecharEtapa3()">Continuar →</button>
+      <button class="btn-continuar" id="btnContinuar3" onclick="fecharEtapa3()">Continue →</button>
     </div>`;
   openOverlay();
   renderLinhaAtomos3();
@@ -849,7 +849,7 @@ function renderLinhaAtomos3() {
       <div class="atomo-clicavel" id="clique-${atomo.id}"></div>
       <div class="atomo-legenda">${atomo.nome}</div>
       <div class="atomo-info" id="info-${atomo.id}"></div>
-      <div class="atomo-clique-dica" id="dica-${atomo.id}">clique para abrir</div>`;
+      <div class="atomo-clique-dica" id="dica-${atomo.id}">click to open</div>`;
     linha.appendChild(caixa);
     const clique = caixa.querySelector('.atomo-clicavel');
     clique.addEventListener('click', () => abrirNucleo3(atomo, clique));
@@ -877,13 +877,13 @@ function responderEtapa3(btn, escolha) {
     tocarDing();
     btn.classList.add('opcao-certa');
     fb.className = 'quiz-feedback show ok';
-    fb.innerHTML = `<div class="conclusao-eyebrow">Correto</div><div class="conclusao-texto">Os nêutrons permaneceram os mesmos: 8 em cada átomo, mesmo sendo elementos diferentes.</div>`;
+    fb.innerHTML = `<div class="conclusao-eyebrow">Correct</div><div class="conclusao-texto">The neutrons stayed the same: 8 in each atom, even though they are different elements.</div>`;
     document.getElementById('pergaminho3').classList.add('show');
     document.getElementById('btnContinuar3').classList.add('show');
   } else {
     btn.classList.add('opcao-errada');
     fb.className = 'quiz-feedback show err';
-    fb.innerHTML = `<div class="conclusao-eyebrow">Comentário</div><div class="conclusao-texto">Compare Z=6/N=8 com Z=7/N=8 outra vez. Um desses três números não mudou entre os dois átomos. Tente novamente.</div>`;
+    fb.innerHTML = `<div class="conclusao-eyebrow">Note</div><div class="conclusao-texto">Compare Z=6/N=8 with Z=7/N=8 again. One of these three numbers didn\'t change between the two atoms. Try again.</div>`;
     setTimeout(() => {
       document.querySelectorAll('#pergunta3 .btn-opcao').forEach(b => { b.disabled = false; b.classList.remove('opcao-errada'); });
       fb.classList.remove('show');
@@ -892,43 +892,43 @@ function responderEtapa3(btn, escolha) {
 }
 
 function fecharEtapa3() {
-  setNarr('<strong>Professora Rafaela:</strong> <em>"Isótonos — mesmo número de nêutrons. Agora um último par, ainda mais surpreendente."</em>');
+  setNarr('<strong>Professor Rafaela:</strong> <em>"Isotones — same number of neutrons. Now one last pair, even more surprising."</em>');
   abrirEtapa4();
 }
 
 /* ============================================================
-   ETAPA 4 — DESCOBRINDO OS ISÓBAROS
+   STAGE 4 — DISCOVERING ISOBARS
    ============================================================ */
 const ATOMOS_ISOBAROS = [
-  { id: 'ar40', nome: 'Argônio-40', simbolo: 'Ar', z: 18, n: 22 },
-  { id: 'ca40', nome: 'Cálcio-40', simbolo: 'Ca', z: 20, n: 20 }
+  { id: 'ar40', nome: 'Argon-40', simbolo: 'Ar', z: 18, n: 22 },
+  { id: 'ca40', nome: 'Calcium-40', simbolo: 'Ca', z: 20, n: 20 }
 ];
 const revelado4 = { ar40: false, ca40: false };
 
 function abrirEtapa4() {
   document.getElementById('card').innerHTML = `
-    <button class="card-close" onclick="closeOverlay()" aria-label="Fechar">×</button>
+    <button class="card-close" onclick="closeOverlay()" aria-label="Close">×</button>
     <div class="card-fixed-top">
-      <div class="card-eyebrow">Descoberta 4 — Argônio-40 e Cálcio-40</div>
-      <div class="card-title">Abra os dois núcleos e compare</div>
+      <div class="card-eyebrow">Discovery 4 — Argon-40 and Calcium-40</div>
+      <div class="card-title">Open both nuclei and compare</div>
     </div>
     <div class="card-scroll-body">
-      <div class="card-fala"><strong>Professora Rafaela:</strong> "Estes dois núcleos são ainda mais distantes um do outro em número de prótons. Abra-os e observe."</div>
+      <div class="card-fala"><strong>Professor Rafaela:</strong> "These two nuclei are even further apart from each other in number of protons. Open them and observe."</div>
       <div class="atomos-linha" id="linhaAtomos4"></div>
       ${obterLegendaParticulasHTML()}
       <div class="pergunta-box" id="pergunta4">
-        <div class="pergunta-texto"><strong>Professora Rafaela:</strong> "Prótons diferentes, nêutrons diferentes... o que ainda assim permaneceu <strong>igual</strong>?"</div>
-        <button class="btn-opcao" onclick="responderEtapa4(this,'protons')">Número de prótons</button>
-        <button class="btn-opcao" onclick="responderEtapa4(this,'neutrons')">Número de nêutrons</button>
-        <button class="btn-opcao" onclick="responderEtapa4(this,'massa')">Número de massa</button>
+        <div class="pergunta-texto"><strong>Professor Rafaela:</strong> "Different protons, different neutrons... what still stayed the <strong>same</strong>?"</div>
+        <button class="btn-opcao" onclick="responderEtapa4(this,'protons')">Number of protons</button>
+        <button class="btn-opcao" onclick="responderEtapa4(this,'neutrons')">Number of neutrons</button>
+        <button class="btn-opcao" onclick="responderEtapa4(this,'massa')">Mass number</button>
       </div>
       <div class="quiz-feedback" id="fb4"></div>
       <div class="pergaminho-box" id="pergaminho4">
-        <div class="pergaminho-eyebrow">Explicação</div>
-        <div class="pergaminho-texto">Argônio (18+22) e cálcio (20+20) têm prótons e nêutrons diferentes, mas a soma — o número de massa — é 40 nos dois. Átomos de elementos diferentes com o mesmo número de massa recebem um nome:</div>
-        <div class="pergaminho-nome">ISÓBAROS</div>
+        <div class="pergaminho-eyebrow">Explanation</div>
+        <div class="pergaminho-texto">Argon (18+22) and calcium (20+20) have different numbers of protons and neutrons, but the sum — the mass number — is 40 for both. Atoms of different elements with the same mass number are given a name:</div>
+        <div class="pergaminho-nome">ISOBARS</div>
       </div>
-      <button class="btn-continuar" id="btnContinuar4" onclick="fecharEtapa4()">Continuar →</button>
+      <button class="btn-continuar" id="btnContinuar4" onclick="fecharEtapa4()">Continue →</button>
     </div>`;
   openOverlay();
   renderLinhaAtomos4();
@@ -944,7 +944,7 @@ function renderLinhaAtomos4() {
       <div class="atomo-clicavel" id="clique-${atomo.id}"></div>
       <div class="atomo-legenda">${atomo.nome}</div>
       <div class="atomo-info" id="info-${atomo.id}"></div>
-      <div class="atomo-clique-dica" id="dica-${atomo.id}">clique para abrir</div>`;
+      <div class="atomo-clique-dica" id="dica-${atomo.id}">click to open</div>`;
     linha.appendChild(caixa);
     const clique = caixa.querySelector('.atomo-clicavel');
     clique.addEventListener('click', () => abrirNucleo4(atomo, clique));
@@ -972,13 +972,13 @@ function responderEtapa4(btn, escolha) {
     tocarDing();
     btn.classList.add('opcao-certa');
     fb.className = 'quiz-feedback show ok';
-    fb.innerHTML = `<div class="conclusao-eyebrow">Correto</div><div class="conclusao-texto">18+22=40 e 20+20=40 — o número de massa é igual nos dois átomos.</div>`;
+    fb.innerHTML = `<div class="conclusao-eyebrow">Correct</div><div class="conclusao-texto">18+22=40 and 20+20=40 — the mass number is the same in both atoms.</div>`;
     document.getElementById('pergaminho4').classList.add('show');
     document.getElementById('btnContinuar4').classList.add('show');
   } else {
     btn.classList.add('opcao-errada');
     fb.className = 'quiz-feedback show err';
-    fb.innerHTML = `<div class="conclusao-eyebrow">Comentário</div><div class="conclusao-texto">Some prótons + nêutrons de cada um e compare os resultados. Tente novamente.</div>`;
+    fb.innerHTML = `<div class="conclusao-eyebrow">Note</div><div class="conclusao-texto">Add protons + neutrons for each one and compare the results. Try again.</div>`;
     setTimeout(() => {
       document.querySelectorAll('#pergunta4 .btn-opcao').forEach(b => { b.disabled = false; b.classList.remove('opcao-errada'); });
       fb.classList.remove('show');
@@ -987,12 +987,12 @@ function responderEtapa4(btn, escolha) {
 }
 
 function fecharEtapa4() {
-  setNarr('<strong>Professora Rafaela:</strong> <em>"Isóbaros — mesmo número de massa. Agora vamos ao laboratório de desafios — quero testar o que você aprendeu com pares novos, nunca vistos antes."</em>');
+  setNarr('<strong>Professor Rafaela:</strong> <em>"Isobars — same mass number. Now let\'s go to the challenge lab — I want to test what you\'ve learned with new pairs you\'ve never seen before."</em>');
   abrirEtapa6();
 }
 
 /* ============================================================
-   ETAPA 6 — LABORATÓRIO (desafios aleatórios)
+   STAGE 6 — LAB (random challenges)
    ============================================================ */
 const DESAFIOS_LAB = [
   { a: { z: 8, n: 10 }, b: { z: 8, n: 8 }, resposta: 'isotopos' },
@@ -1004,7 +1004,7 @@ const DESAFIOS_LAB = [
   { a: { z: 16, n: 16 }, b: { z: 15, n: 16 }, resposta: 'isotonos' },
   { a: { z: 26, n: 30 }, b: { z: 27, n: 29 }, resposta: 'isobaros' }
 ];
-const NOMES_CATEGORIA = { isotopos: 'Isótopos', isotonos: 'Isótonos', isobaros: 'Isóbaros' };
+const NOMES_CATEGORIA = { isotopos: 'Isotopes', isotonos: 'Isotones', isobaros: 'Isobars' };
 let filaDesafios = [];
 let indiceDesafio = 0;
 let acertosLab = 0;
@@ -1023,10 +1023,10 @@ function abrirEtapa6() {
   indiceDesafio = 0;
   acertosLab = 0;
   document.getElementById('card').innerHTML = `
-    <button class="card-close" onclick="closeOverlay()" aria-label="Fechar">×</button>
+    <button class="card-close" onclick="closeOverlay()" aria-label="Close">×</button>
     <div class="card-fixed-top">
-      <div class="card-eyebrow">Descoberta 6 — Laboratório de Desafios</div>
-      <div class="card-title" id="tituloLab">Desafio 1 de ${filaDesafios.length}</div>
+      <div class="card-eyebrow">Discovery 6 — Challenge Lab</div>
+      <div class="card-title" id="tituloLab">Challenge 1 of ${filaDesafios.length}</div>
     </div>
     <div class="card-scroll-body" id="corpoLab"></div>`;
   openOverlay();
@@ -1036,16 +1036,16 @@ function abrirEtapa6() {
 function renderDesafioAtual() {
   if (indiceDesafio >= filaDesafios.length) { finalizarLab(); return; }
   const d = filaDesafios[indiceDesafio];
-  document.getElementById('tituloLab').textContent = `Desafio ${indiceDesafio + 1} de ${filaDesafios.length}`;
+  document.getElementById('tituloLab').textContent = `Challenge ${indiceDesafio + 1} of ${filaDesafios.length}`;
   document.getElementById('corpoLab').innerHTML = `
     <div class="pergunta-texto">
-      <strong>Átomo A</strong> — Z=${d.a.z}, N=${d.a.n}<br>
-      <strong>Átomo B</strong> — Z=${d.b.z}, N=${d.b.n}
+      <strong>Atom A</strong> — Z=${d.a.z}, N=${d.a.n}<br>
+      <strong>Atom B</strong> — Z=${d.b.z}, N=${d.b.n}
     </div>
-    <p style="font-family:'Lora',serif;font-size:15.5px;color:var(--paper-text);font-weight:600;margin-bottom:14px;">São:</p>
-    <button class="btn-opcao" onclick="responderLab(this,'isotopos')">Isótopos</button>
-    <button class="btn-opcao" onclick="responderLab(this,'isotonos')">Isótonos</button>
-    <button class="btn-opcao" onclick="responderLab(this,'isobaros')">Isóbaros</button>
+    <p style="font-family:'Lora',serif;font-size:15.5px;color:var(--paper-text);font-weight:600;margin-bottom:14px;">They are:</p>
+    <button class="btn-opcao" onclick="responderLab(this,'isotopos')">Isotopes</button>
+    <button class="btn-opcao" onclick="responderLab(this,'isotonos')">Isotones</button>
+    <button class="btn-opcao" onclick="responderLab(this,'isobaros')">Isobars</button>
     <div class="quiz-feedback" id="fbLab"></div>`;
 }
 
@@ -1058,13 +1058,13 @@ function responderLab(btn, escolha) {
     acertosLab++;
     btn.classList.add('opcao-certa');
     fb.className = 'quiz-feedback show ok';
-    fb.innerHTML = `<div class="conclusao-eyebrow">Correto</div><div class="conclusao-texto">São ${NOMES_CATEGORIA[d.resposta]}.</div>
-      <button class="btn-continuar show" style="margin-top:10px;" onclick="proximoDesafio()">Próximo →</button>`;
+    fb.innerHTML = `<div class="conclusao-eyebrow">Correct</div><div class="conclusao-texto">They are ${NOMES_CATEGORIA[d.resposta]}.</div>
+      <button class="btn-continuar show" style="margin-top:10px;" onclick="proximoDesafio()">Next →</button>`;
   } else {
     btn.classList.add('opcao-errada');
     fb.className = 'quiz-feedback show err';
-    fb.innerHTML = `<div class="conclusao-eyebrow">Não foi dessa vez</div><div class="conclusao-texto">A resposta correta é: ${NOMES_CATEGORIA[d.resposta]}.</div>
-      <button class="btn-continuar show" style="margin-top:10px;" onclick="proximoDesafio()">Próximo →</button>`;
+    fb.innerHTML = `<div class="conclusao-eyebrow">Not this time</div><div class="conclusao-texto">The correct answer is: ${NOMES_CATEGORIA[d.resposta]}.</div>
+      <button class="btn-continuar show" style="margin-top:10px;" onclick="proximoDesafio()">Next →</button>`;
   }
 }
 
@@ -1076,36 +1076,36 @@ function proximoDesafio() {
 function finalizarLab() {
   document.getElementById('corpoLab').innerHTML = `
     <div class="conclusao-box show">
-      <div class="conclusao-eyebrow">Laboratório concluído</div>
-      <div class="conclusao-texto">Você acertou ${acertosLab} de ${filaDesafios.length} desafios.</div>
+      <div class="conclusao-eyebrow">Lab complete</div>
+      <div class="conclusao-texto">You got ${acertosLab} out of ${filaDesafios.length} challenges right.</div>
     </div>
-    <button class="btn-continuar show" onclick="fecharEtapa6()">Continuar →</button>`;
+    <button class="btn-continuar show" onclick="fecharEtapa6()">Continue →</button>`;
 }
 
 function fecharEtapa6() {
-  setNarr('<strong>Professora Rafaela:</strong> <em>"Muito bem — venha ver o resumo de tudo o que descobrimos hoje."</em>');
+  setNarr('<strong>Professor Rafaela:</strong> <em>"Very good — come see a summary of everything we discovered today."</em>');
   abrirEtapaFinal();
 }
 
 /* ============================================================
-   ETAPA FINAL — RESUMO + ANIMAÇÃO
+   FINAL STAGE — SUMMARY + ANIMATION
    ============================================================ */
 function abrirEtapaFinal() {
   document.getElementById('card').innerHTML = `
-    <button class="card-close" onclick="closeOverlay()" aria-label="Fechar">×</button>
+    <button class="card-close" onclick="closeOverlay()" aria-label="Close">×</button>
     <div class="card-fixed-top">
-      <div class="card-eyebrow">Resumo Final</div>
-      <div class="card-title">O que você descobriu hoje</div>
+      <div class="card-eyebrow">Final Summary</div>
+      <div class="card-title">What you discovered today</div>
     </div>
     <div class="card-scroll-body">
       <div class="pergaminho-box resumo-final-box show" style="min-height:220px;">
         <div class="pergaminho-texto resumo-final" style="text-align:left;">
-          <p><strong>Isótopos</strong> → mesmo número de prótons.</p>
-          <p><strong>Isótonos</strong> → mesmo número de nêutrons.</p>
-          <p><strong>Isóbaros</strong> → mesmo número de massa.</p>
+          <p><strong>Isotopes</strong> → same number of protons.</p>
+          <p><strong>Isotones</strong> → same number of neutrons.</p>
+          <p><strong>Isobars</strong> → same mass number.</p>
         </div>
       </div>
-      <button class="btn-continuar show" onclick="fecharEtapaFinal()">Concluir laboratório →</button>
+      <button class="btn-continuar show" onclick="fecharEtapaFinal()">Finish lab →</button>
     </div>`;
   openOverlay();
 }
@@ -1132,11 +1132,11 @@ function resetGame() {
   document.getElementById('btnIniciar').classList.remove('oculto');
   document.getElementById('mainScreen').style.display = '';
   document.getElementById('winScreen').classList.remove('show');
-  setNarr('<strong>Professora Rafaela:</strong> <em>"Venha à bancada. Encontrei algo curioso estudando os produtos da desintegração radioativa: substâncias com propriedades químicas idênticas, mas com massas atômicas diferentes. Isso não deveria ser possível, segundo o que se ensinava até agora. Vamos investigar juntos."</em>');
+  setNarr('<strong>Professor Rafaela:</strong> <em>"Come to the workbench. I found something curious while studying the products of radioactive decay: substances with identical chemical properties, but different atomic masses. That shouldn\'t be possible, according to what has been taught so far. Let\'s investigate together."</em>');
 }
 </script>
 
-<div id="cookie-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#1a0f08;border-top:1px solid rgba(212,170,106,0.4);padding:1rem 2rem;z-index:9999;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;"><p style="margin:0;font-family:'Libre Baskerville',serif;font-size:0.82rem;color:#e8d4b0;line-height:1.5;">Este site utiliza cookies para melhorar sua experi&ecirc;ncia. Ao continuar navegando, voc&ecirc; concorda com nossa <a href="/politica-de-privacidade.html" style="color:#e8b84b;text-decoration:underline;text-underline-offset:2px;">Pol&iacute;tica de Privacidade</a>.</p><button onclick="document.getElementById('cookie-banner').style.display='none';localStorage.setItem('kifacil_cookies','1');" style="flex-shrink:0;background:#e8b84b;border:none;padding:0.55rem 1.5rem;font-family:'Libre Baskerville',serif;font-size:0.78rem;font-weight:700;color:#1a0f08;cursor:pointer;letter-spacing:0.04em;">Entendi</button></div>
+<div id="cookie-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#1a0f08;border-top:1px solid rgba(212,170,106,0.4);padding:1rem 2rem;z-index:9999;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;"><p style="margin:0;font-family:'Libre Baskerville',serif;font-size:0.82rem;color:#e8d4b0;line-height:1.5;">This site uses cookies to improve your experience. By continuing to browse, you agree to our <a href="/politica-de-privacidade.html" style="color:#e8b84b;text-decoration:underline;text-underline-offset:2px;">Privacy Policy</a>.</p><button onclick="document.getElementById('cookie-banner').style.display='none';localStorage.setItem('kifacil_cookies','1');" style="flex-shrink:0;background:#e8b84b;border:none;padding:0.55rem 1.5rem;font-family:'Libre Baskerville',serif;font-size:0.78rem;font-weight:700;color:#1a0f08;cursor:pointer;letter-spacing:0.04em;">Got it</button></div>
 <script>if(!localStorage.getItem('kifacil_cookies'))document.getElementById('cookie-banner').style.display='flex';</script>
 <script>
 (function () {

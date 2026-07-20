@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex, nofollow">
-  <title>O Gabinete de John Dalton — Jogo KiFácil</title>
+  <title>John Dalton's Cabinet — KiFácil Game</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;1,500;1,600&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
@@ -563,51 +563,51 @@
   <main>
     <section class="intro">
       <div>
-        <h1>O Gabinete de John Dalton</h1>
+        <h1>John Dalton's Cabinet</h1>
       </div>
     </section>
 
     <section class="narrador">
-      <img src="../imagens/rafa-sorrindo.jpg" alt="Professora Rafaela" />
+      <img src="../imagens/rafa-sorrindo.jpg" alt="Professor Rafaela" />
       <div>
-        <div class="narrador-nome">Professora Rafaela</div>
-        <div class="narrador-texto">Observe os objetos e escolha os que ajudam a reconstruir a teoria de Dalton.</div>
+        <div class="narrador-nome">Professor Rafaela</div>
+        <div class="narrador-texto">Observe the objects and choose the ones that help reconstruct Dalton's theory.</div>
       </div>
     </section>
 
     <section class="jogo-grid">
       <div class="cena-card">
         <section class="final" id="final">
-          <h2>Teoria de Dalton concluída</h2>
-          <p>Você reuniu as evidências que ajudaram Dalton a defender que a matéria é formada por átomos: partículas maciças, indivisíveis para aquele modelo, que se combinam em proporções fixas.</p>
-          <button class="btn" onclick="reiniciar()">Jogar novamente</button>
+          <h2>Dalton's Theory Complete</h2>
+          <p>You gathered the evidence that helped Dalton argue that matter is made up of atoms: solid particles, indivisible according to that model, that combine in fixed proportions.</p>
+          <button class="btn" onclick="reiniciar()">Play again</button>
         </section>
         <div class="cena-wrap" id="cenaWrap">
-          <img class="game-bg" src="../imagens/dalton-gabinete.jpg" alt="Gabinete de John Dalton com objetos científicos" />
+          <img class="game-bg" src="../imagens/dalton-gabinete.jpg" alt="John Dalton's cabinet with scientific objects" />
 
-          <button class="hotspot" data-id="gregos" aria-label="Ideias dos gregos" style="left:20%;top:8%;width:12.5%;height:27%;"></button>
-          <button class="hotspot" data-id="lavoisier" aria-label="Lei de Lavoisier" style="left:6.4%;top:48%;width:28%;height:28%;"></button>
-          <button class="hotspot" data-id="proust" aria-label="Lei de Proust" style="left:38.3%;top:65%;width:31%;height:31%;"></button>
-          <button class="hotspot" data-id="atomos" aria-label="Monte os átomos" style="left:61%;top:55%;width:25%;height:18%;"></button>
-          <button class="hotspot" data-id="postulados" aria-label="Postulados de Dalton" style="left:59.8%;top:8.5%;width:23%;height:39%;"></button>
-          <button class="hotspot" data-id="futuro" aria-label="Viagem no tempo" style="left:82%;top:80%;width:16%;height:14%;"></button>
+          <button class="hotspot" data-id="gregos" aria-label="Greek ideas" style="left:20%;top:8%;width:12.5%;height:27%;"></button>
+          <button class="hotspot" data-id="lavoisier" aria-label="Lavoisier's Law" style="left:6.4%;top:48%;width:28%;height:28%;"></button>
+          <button class="hotspot" data-id="proust" aria-label="Proust's Law" style="left:38.3%;top:65%;width:31%;height:31%;"></button>
+          <button class="hotspot" data-id="atomos" aria-label="Build the atoms" style="left:61%;top:55%;width:25%;height:18%;"></button>
+          <button class="hotspot" data-id="postulados" aria-label="Dalton's postulates" style="left:59.8%;top:8.5%;width:23%;height:39%;"></button>
+          <button class="hotspot" data-id="futuro" aria-label="Time travel" style="left:82%;top:80%;width:16%;height:14%;"></button>
 
           <div class="tooltip" id="tooltip"></div>
 
-          <!-- COLOQUE O LINK AQUI -->
-          <a class="link-aula" href="https://www.youtube.com/watch?v=1QYINY-xoIM&t=1s" target="_blank" rel="noopener" title="Assista à aula">
+          <!-- PUT THE LINK HERE -->
+          <a class="link-aula" href="https://www.youtube.com/watch?v=1QYINY-xoIM&t=1s" target="_blank" rel="noopener" title="Watch the lesson">
             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.6"/>
               <path d="M10 8.5L16 12L10 15.5V8.5Z" fill="currentColor"/>
             </svg>
-            <span>Assista à aula</span>
+            <span>Watch the lesson</span>
           </a>
         </div>
       </div>
 
       <aside class="painel">
-        <div class="painel-label">Missão</div>
-        <h2>Construa a teoria atômica</h2>
+        <div class="painel-label">Mission</div>
+        <h2>Build the atomic theory</h2>
         <div class="lista-etapas" id="listaEtapas"></div>
       </aside>
     </section>
@@ -616,24 +616,24 @@
 
   <div class="overlay" id="overlay">
     <div class="modal" id="modal">
-      <button class="fechar" onclick="fecharModal()" aria-label="Fechar">&times;</button>
+      <button class="fechar" onclick="fecharModal()" aria-label="Close">&times;</button>
       <div class="modal-kicker" id="modalKicker"></div>
       <h3 id="modalTitulo"></h3>
       <div class="modal-texto" id="modalTexto"></div>
       <div id="modalConteudo"></div>
       <div class="feedback" id="feedback"></div>
-      <button class="btn" id="btnContinuar" onclick="concluirAtual()" style="display:none">Registrar descoberta</button>
+      <button class="btn" id="btnContinuar" onclick="concluirAtual()" style="display:none">Record discovery</button>
     </div>
   </div>
 
 <script>
 const ETAPAS = [
-  { id:'gregos', nome:'Ideias dos gregos', dica:'Ideias dos gregos' },
-  { id:'lavoisier', nome:'Lei da Conservação das Massas', dica:'Balança de Lavoisier' },
-  { id:'proust', nome:'Lei das Proporções Definidas', dica:'Receitas e proporções' },
-  { id:'atomos', nome:'Monte os átomos', dica:'Caixa de esferas' },
-  { id:'postulados', nome:'Postulados de Dalton - Quadro Negro', dica:'Quadro negro' },
-  { id:'futuro', nome:'O que Dalton não sabia', dica:'Carta do futuro' }
+  { id:'gregos', nome:'Greek ideas', dica:'Greek ideas' },
+  { id:'lavoisier', nome:'Law of Conservation of Mass', dica:'Lavoisier\'s scale' },
+  { id:'proust', nome:'Law of Definite Proportions', dica:'Recipes and proportions' },
+  { id:'atomos', nome:'Build the atoms', dica:'Box of spheres' },
+  { id:'postulados', nome:'Dalton\'s Postulates - Chalkboard', dica:'Chalkboard' },
+  { id:'futuro', nome:'What Dalton didn\'t know', dica:'Letter from the future' }
 ];
 
 const estado = {
@@ -646,54 +646,54 @@ const estado = {
 
 const dados = {
   gregos: {
-    kicker:'Descoberta 1', titulo:'Antes de Dalton: a ideia do átomo',
-    texto:'Demócrito já havia proposto que a matéria poderia ser formada por partículas indivisíveis. Mas, na época, essa era uma ideia filosófica, sem base experimental suficiente.',
+    kicker:'Discovery 1', titulo:'Before Dalton: the idea of the atom',
+    texto:'Democritus had already proposed that matter might be made up of indivisible particles. But at the time, this was a philosophical idea, without enough experimental basis.',
     tipo:'opcoes', correta:'evidencias',
-    pergunta:'Por que Dalton foi tão importante nessa história?',
+    pergunta:'Why was Dalton so important in this story?',
     opcoes:[
-      ['nome','Porque ele apenas criou o nome átomo.'],
-      ['evidencias','Porque relacionou a ideia de átomo a evidências experimentais.'],
-      ['eletron','Porque descobriu o elétron.']
+      ['nome','Because he simply coined the word atom.'],
+      ['evidencias','Because he linked the idea of the atom to experimental evidence.'],
+      ['eletron','Because he discovered the electron.']
     ],
-    ok:'Isso mesmo. Dalton transformou a ideia filosófica em uma teoria científica apoiada nas leis ponderais.'
+    ok:'Exactly. Dalton turned the philosophical idea into a scientific theory backed by the laws of definite proportions.'
   },
   lavoisier: {
-    kicker:'Descoberta 2', titulo:'A balança e a conservação da massa',
-    texto:'Nos papéis da mesa, as massas dos reagentes e dos produtos permanecem iguais. Isso conversa com a Lei de Lavoisier.',
+    kicker:'Discovery 2', titulo:'The scale and the conservation of mass',
+    texto:'In the papers on the desk, the masses of the reactants and the products stay equal. This lines up with Lavoisier\'s Law.',
     tipo:'opcoes', correta:'nao',
-    pergunta:'Em uma reação química comum, considerando o sistema fechado, a massa total muda?',
+    pergunta:'In an ordinary chemical reaction, considering a closed system, does the total mass change?',
     opcoes:[
-      ['sim','Sim, porque os reagentes desaparecem.'],
-      ['nao','Não. A massa total se conserva.'],
-      ['sempre','Sempre aumenta, porque surgem produtos.']
+      ['sim','Yes, because the reactants disappear.'],
+      ['nao','No. The total mass is conserved.'],
+      ['sempre','It always increases, because products appear.']
     ],
-    ok:'Perfeito. Para Dalton, isso fazia sentido porque os átomos não seriam criados nem destruídos, apenas reorganizados.'
+    ok:'Perfect. For Dalton, this made sense because atoms would be neither created nor destroyed, only rearranged.'
   },
   proust: {
-    kicker:'Descoberta 3', titulo:'As proporções constantes',
-    texto:'Ao comparar diferentes amostras de água, Dalton percebeu que elas sempre apresentavam a mesma composição. Essa regularidade foi posteriormente formalizada pela Lei de Proust, conhecida como Lei das Proporções Constantes.',
+    kicker:'Discovery 3', titulo:'The constant proportions',
+    texto:'By comparing different samples of water, Dalton noticed that they always showed the same composition. This regularity was later formalized by Proust\'s Law, known as the Law of Definite Proportions.',
     tipo:'opcoes', correta:'combinacao',
-    pergunta:'Se a água sempre apresenta a mesma composição, o que Dalton poderia concluir?',
+    pergunta:'If water always shows the same composition, what could Dalton conclude?',
     opcoes:[
-      ['variar','Que a quantidade de átomos pode variar de uma amostra para outra.'],
-      ['combinacao','Que a água é formada pela mesma combinação de átomos em qualquer amostra.'],
-      ['desaparecer','Que os elementos podem desaparecer durante uma reação.']
+      ['variar','That the amount of atoms can vary from one sample to another.'],
+      ['combinacao','That water is made up of the same combination of atoms in any sample.'],
+      ['desaparecer','That elements can disappear during a reaction.']
     ],
-    ok:'Muito bom. Esse raciocínio ajudou Dalton a explicar a formação de compostos.'
+    ok:'Very good. This reasoning helped Dalton explain how compounds form.'
   },
   atomos: {
-    kicker:'Descoberta 4', titulo:'Monte as substâncias com esferas',
-    texto:'No modelo de Dalton, os átomos eram representados como esferas maciças. Monte as duas substâncias usando as quantidades indicadas.',
+    kicker:'Discovery 4', titulo:'Build the substances with spheres',
+    texto:'In Dalton\'s model, atoms were represented as solid spheres. Build the two substances using the indicated amounts.',
     tipo:'atomos'
   },
   postulados: {
-    kicker:'Descoberta 5', titulo:'Separe os postulados',
-    texto:'Clique em uma ideia e depois na área correspondente: o que Dalton defendia e o que não pertence ao modelo dele?',
+    kicker:'Discovery 5', titulo:'Sort the postulates',
+    texto:'Click an idea and then the matching area: what did Dalton argue for, and what does not belong to his model?',
     tipo:'postulados'
   },
   futuro: {
-    kicker:'Descoberta 6', titulo:'Uma carta do futuro',
-    texto:'Agora compare o modelo de Dalton com descobertas posteriores. Dalton não conhecia várias ideias que estudamos hoje.',
+    kicker:'Discovery 6', titulo:'A letter from the future',
+    texto:'Now compare Dalton\'s model with later discoveries. Dalton was not aware of several ideas we study today.',
     tipo:'futuro'
   }
 };
@@ -763,7 +763,7 @@ function responderOpcao(valor, botao) {
   } else {
     botao.classList.add('errada');
     fb.className = 'feedback erro visivel';
-    fb.innerHTML = 'Ainda não. Observe a pista histórica e tente pensar no que Dalton conseguiria concluir com os experimentos.';
+    fb.innerHTML = 'Not yet. Look at the historical clue and try to think about what Dalton would be able to conclude from the experiments.';
     setTimeout(() => {
       document.querySelectorAll('.opcao').forEach(b => { b.disabled = false; b.classList.remove('errada'); });
       fb.className = 'feedback';
@@ -776,19 +776,19 @@ function renderAtomos() {
   document.getElementById('modalConteudo').innerHTML = `
     <div class="moleculas">
       <div class="mol-card">
-        <div class="mol-titulo">Molécula 1 — Água: 2 H + 1 O</div>
+        <div class="mol-titulo">Molecule 1 — Water: 2 H + 1 O</div>
         <div class="bolinhas" id="atomosAguaBtns"></div>
-        <div class="montagem" id="montagemAgua">Clique nos átomos para montar a água.</div>
+        <div class="montagem" id="montagemAgua">Click the atoms to build water.</div>
       </div>
       <div class="mol-card">
-        <div class="mol-titulo">Molécula 2 — Dióxido de carbono: 1 C + 2 O</div>
+        <div class="mol-titulo">Molecule 2 — Carbon dioxide: 1 C + 2 O</div>
         <div class="bolinhas" id="atomosCo2Btns"></div>
-        <div class="montagem" id="montagemCo2">Clique nos átomos para montar o CO₂.</div>
+        <div class="montagem" id="montagemCo2">Click the atoms to build CO₂.</div>
       </div>
     </div>
     <div style="display:flex;gap:10px;flex-wrap:wrap">
-      <button class="btn" onclick="verificarAtomos()">Verificar montagem</button>
-      <button class="btn" onclick="renderAtomos()" style="background:transparent;border-color:rgba(100,70,20,.45);color:var(--suave)">Limpar</button>
+      <button class="btn" onclick="verificarAtomos()">Check assembly</button>
+      <button class="btn" onclick="renderAtomos()" style="background:transparent;border-color:rgba(100,70,20,.45);color:var(--suave)">Clear</button>
     </div>
   `;
   criarBotoesAtomos('Agua', ['H','H','H','O','O','C']);
@@ -813,7 +813,7 @@ function criarBotoesAtomos(sufixo, lista) {
 
 function renderMontagem(chave) {
   const el = document.getElementById(chave === 'agua' ? 'montagemAgua' : 'montagemCo2');
-  el.innerHTML = estado.atomosMontados[chave].map(a => `<span class="mini-atomo ${a}">${a}</span>`).join('') || 'Clique nos átomos para montar.';
+  el.innerHTML = estado.atomosMontados[chave].map(a => `<span class="mini-atomo ${a}">${a}</span>`).join('') || 'Click the atoms to build it.';
 }
 
 function contar(arr, simb) { return arr.filter(x => x === simb).length; }
@@ -826,34 +826,34 @@ function verificarAtomos() {
   const fb = document.getElementById('feedback');
   if (okAgua && okCo2) {
     fb.className = 'feedback ok visivel';
-    fb.innerHTML = 'Excelente. Você montou compostos com proporções fixas, exatamente o tipo de raciocínio que ajudava a sustentar o modelo de Dalton.';
+    fb.innerHTML = 'Excellent. You built compounds with fixed proportions — exactly the kind of reasoning that helped support Dalton\'s model.';
     document.getElementById('btnContinuar').style.display = 'inline-flex';
     playSuccess();
   } else {
     fb.className = 'feedback erro visivel';
-    fb.innerHTML = 'Quase. Água precisa de 2 H e 1 O. CO₂ precisa de 1 C e 2 O. Clique em <strong>Limpar</strong> para tentar de novo.';
+    fb.innerHTML = 'Almost. Water needs 2 H and 1 O. CO₂ needs 1 C and 2 O. Click <strong>Clear</strong> to try again.';
   }
 }
 
 function renderPostulados() {
   const cartoes = [
-    {t:'A matéria é formada por átomos.', grupo:'sim'},
-    {t:'Átomos seriam maciços e indivisíveis.', grupo:'sim'},
-    {t:'Átomos do mesmo elemento seriam iguais.', grupo:'sim'},
-    {t:'Átomos se reorganizam nas reações.', grupo:'sim'},
-    {t:'O átomo possui núcleo e eletrosfera.', grupo:'nao'},
-    {t:'Existem elétrons, prótons e nêutrons.', grupo:'nao'}
+    {t:'Matter is made up of atoms.', grupo:'sim'},
+    {t:'Atoms would be solid and indivisible.', grupo:'sim'},
+    {t:'Atoms of the same element would be identical.', grupo:'sim'},
+    {t:'Atoms rearrange in reactions.', grupo:'sim'},
+    {t:'The atom has a nucleus and an electron cloud.', grupo:'nao'},
+    {t:'Electrons, protons, and neutrons exist.', grupo:'nao'}
   ];
   document.getElementById('modalConteudo').innerHTML = `
     <div class="drag-area">
       <div class="cartoes" id="cartoesPostulados"></div>
       <div class="zonas">
-        <div class="zona" onclick="colocarPostulado('sim')"><div class="zona-titulo">Dalton defendia</div><div id="zonaSim"></div></div>
-        <div class="zona" onclick="colocarPostulado('nao')"><div class="zona-titulo">Não pertence ao modelo</div><div id="zonaNao"></div></div>
+        <div class="zona" onclick="colocarPostulado('sim')"><div class="zona-titulo">Dalton argued for</div><div id="zonaSim"></div></div>
+        <div class="zona" onclick="colocarPostulado('nao')"><div class="zona-titulo">Not part of the model</div><div id="zonaNao"></div></div>
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap">
-        <button class="btn" onclick="verificarPostulados()">Verificar postulados</button>
-        <button class="btn" onclick="renderPostulados()" style="background:transparent;border-color:rgba(100,70,20,.45);color:var(--suave)">Limpar</button>
+        <button class="btn" onclick="verificarPostulados()">Check postulates</button>
+        <button class="btn" onclick="renderPostulados()" style="background:transparent;border-color:rgba(100,70,20,.45);color:var(--suave)">Clear</button>
       </div>
     </div>`;
   window.postulados = cartoes.map((c,i) => ({...c, id:i, colocado:null}));
@@ -888,34 +888,34 @@ function verificarPostulados() {
   const ok = todos && window.postulados.every(c => c.colocado === c.grupo);
   if (ok) {
     fb.className = 'feedback ok visivel';
-    fb.innerHTML = 'Perfeito. Você separou o modelo de Dalton das descobertas que vieram depois.';
+    fb.innerHTML = 'Perfect. You separated Dalton\'s model from the discoveries that came later.';
     document.getElementById('btnContinuar').style.display = 'inline-flex';
     playSuccess();
   } else {
     fb.className = 'feedback erro visivel';
-    fb.innerHTML = todos ? 'Algum cartão está no lado errado. Lembre-se: núcleo, elétrons, prótons e nêutrons não faziam parte do modelo de Dalton.' : 'Coloque todos os cartões nas duas áreas antes de verificar.';
+    fb.innerHTML = todos ? 'One of the cards is in the wrong spot. Remember: nucleus, electrons, protons, and neutrons were not part of Dalton\'s model.' : 'Place all the cards in both areas before checking.';
   }
 }
 
 function renderFuturo() {
   const cartoes = [
-    {t:'Existem elétrons.', grupo:'nao'},
-    {t:'Existem prótons e nêutrons.', grupo:'nao'},
-    {t:'Existem isótopos.', grupo:'nao'},
-    {t:'Átomos podem se combinar formando compostos.', grupo:'sim'},
-    {t:'Átomos de elementos diferentes possuem massas diferentes.', grupo:'sim'},
-    {t:'Prótons e nêutrons são formados por quarks.', grupo:'nao'}
+    {t:'Electrons exist.', grupo:'nao'},
+    {t:'Protons and neutrons exist.', grupo:'nao'},
+    {t:'Isotopes exist.', grupo:'nao'},
+    {t:'Atoms can combine to form compounds.', grupo:'sim'},
+    {t:'Atoms of different elements have different masses.', grupo:'sim'},
+    {t:'Protons and neutrons are made up of quarks.', grupo:'nao'}
   ];
   document.getElementById('modalConteudo').innerHTML = `
     <div class="drag-area">
       <div class="cartoes" id="cartoesFuturo"></div>
       <div class="zonas">
-        <div class="zona" onclick="colocarFuturo('sim')"><div class="zona-titulo">Dalton acreditava</div><div id="zonaFuturoSim"></div></div>
-        <div class="zona" onclick="colocarFuturo('nao')"><div class="zona-titulo">Dalton não sabia</div><div id="zonaFuturoNao"></div></div>
+        <div class="zona" onclick="colocarFuturo('sim')"><div class="zona-titulo">Dalton believed</div><div id="zonaFuturoSim"></div></div>
+        <div class="zona" onclick="colocarFuturo('nao')"><div class="zona-titulo">Dalton didn't know</div><div id="zonaFuturoNao"></div></div>
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap">
-        <button class="btn" onclick="verificarFuturo()">Verificar carta</button>
-        <button class="btn" onclick="renderFuturo()" style="background:transparent;border-color:rgba(100,70,20,.45);color:var(--suave)">Limpar</button>
+        <button class="btn" onclick="verificarFuturo()">Check letter</button>
+        <button class="btn" onclick="renderFuturo()" style="background:transparent;border-color:rgba(100,70,20,.45);color:var(--suave)">Clear</button>
       </div>
     </div>`;
   window.futuro = cartoes.map((c,i) => ({...c, id:i, colocado:null}));
@@ -950,12 +950,12 @@ function verificarFuturo() {
   const ok = todos && window.futuro.every(c => c.colocado === c.grupo);
   if (ok) {
     fb.className = 'feedback ok visivel';
-    fb.innerHTML = 'Maravilha. Você entendeu a força e também os limites do modelo de Dalton.';
+    fb.innerHTML = 'Wonderful. You understood both the strength and the limits of Dalton\'s model.';
     document.getElementById('btnContinuar').style.display = 'inline-flex';
     playSuccess();
   } else {
     fb.className = 'feedback erro visivel';
-    fb.innerHTML = todos ? 'Revise a carta: elétrons, prótons, nêutrons, isótopos e quarks são conhecimentos posteriores a Dalton.' : 'Coloque todos os cartões antes de verificar.';
+    fb.innerHTML = todos ? 'Review the letter: electrons, protons, neutrons, isotopes, and quarks are knowledge that came after Dalton.' : 'Place all the cards before checking.';
   }
 }
 

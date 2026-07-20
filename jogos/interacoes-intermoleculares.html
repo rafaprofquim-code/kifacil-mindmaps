@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex, nofollow">
-  <title>Interações Intermoleculares — Jogo Premium | KiFácil</title>
+  <title>Intermolecular Interactions — Premium Game | KiFácil</title>
   <link rel="icon" type="image/png" href="/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -108,7 +108,7 @@
       min-height: 3.4em;
     }
 
-    /* PALCO DE ANIMAÇÃO */
+    /* ANIMATION STAGE */
     .imagem-wrapper {
       position: relative;
       display: flex;
@@ -149,7 +149,7 @@
     .link-aula:hover { background: rgba(30,16,8,0.92); transform: translateY(-1px); }
     .link-aula svg { width: 22px; height: 22px; }
 
-    /* Molécula (estática, com fundo pergaminho para leitura) */
+    /* Molecule (static, with parchment background for readability) */
     .molecula-card {
       position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
       background: var(--fundo-card); border: 1.5px solid var(--borda-forte); border-radius: 12px;
@@ -176,7 +176,7 @@
       to   { opacity: 1; transform: translate(-50%, 0); }
     }
 
-    /* Jogo de associação (classificação por clique) */
+    /* Matching game (classification by click) */
     .jogo-associacao { position: absolute; inset: 0; display: flex; justify-content: center; align-items: center; gap: 30px; padding: 6%; flex-wrap: wrap; }
     .coluna-associacao { display: flex; flex-direction: column; gap: 8px; }
     .item-associacao {
@@ -218,7 +218,7 @@
       color: var(--texto);
     }
 
-    /* PAINEL DE INTERAÇÃO */
+    /* INTERACTION PANEL */
     #painelInteracao { max-width: 900px; margin: 1.2rem auto 0; }
     .interacao-painel {
       background: var(--fundo-card);
@@ -274,11 +274,11 @@
     .btn-continuar:disabled { opacity: 0.4; cursor: default; }
     .btn-continuar:disabled:hover { background: #1e1008; color: var(--dourado-claro); }
 
-    /* Botão continuar dentro do balão da professora */
+    /* Continue button inside the teacher's speech bubble */
     #continuarBalao { margin-top: 0.6rem; }
     #continuarBalao .btn-continuar { display: inline-block; margin: 0; }
 
-    /* CONCLUSÃO */
+    /* CONCLUSION */
     .conclusao {
       display: none;
       margin-top: 2rem;
@@ -360,38 +360,38 @@
 </nav>
 
 <main>
-  <h1 class="titulo-jogo">Interações Intermoleculares</h1>
-  <p class="subtitulo">Descubra por que algumas moléculas se atraem mais do que outras — e o que isso muda no comportamento das substâncias.</p>
+  <h1 class="titulo-jogo">Intermolecular Interactions</h1>
+  <p class="subtitulo">Discover why some molecules attract each other more than others — and what that changes in the behavior of substances.</p>
 
   <div class="narrador">
-    <img src="../imagens/rafa-sorrindo.jpg" alt="Professora Rafaela" />
+    <img src="../imagens/rafa-sorrindo.jpg" alt="Professor Rafaela" />
     <div style="flex: 1;">
-      <div class="narrador-nome">Professora Rafaela</div>
-      <div class="narrador-texto" id="narradorTexto">Vamos começar.</div>
+      <div class="narrador-nome">Professor Rafaela</div>
+      <div class="narrador-texto" id="narradorTexto">Let's begin.</div>
       <div id="continuarBalao"></div>
     </div>
   </div>
 
   <div class="imagem-wrapper" id="imagemWrapper">
-    <img src="../imagens/laboratorio-ions.jpg" alt="Laboratório" class="cena-fundo" />
+    <img src="../imagens/laboratorio-ions.jpg" alt="Laboratory" class="cena-fundo" />
     <div class="overlay-animacao" id="overlayAnimacao"></div>
-    <!-- COLOQUE O LINK AQUI -->
-    <a class="link-aula" href="https://www.youtube.com/watch?v=xSAlDzPGXgA&t=1s" target="_blank" rel="noopener" title="Assista à aula">
+    <!-- PUT THE LINK HERE -->
+    <a class="link-aula" href="https://www.youtube.com/watch?v=xSAlDzPGXgA&t=1s" target="_blank" rel="noopener" title="Watch the lesson">
       <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.6"/>
         <path d="M10 8.5L16 12L10 15.5V8.5Z" fill="currentColor"/>
       </svg>
-      <span>Assista à aula</span>
+      <span>Watch the lesson</span>
     </a>
   </div>
 
   <div id="painelInteracao"></div>
 
   <div class="conclusao" id="conclusao">
-    <div class="conclusao-titulo">Estudo concluído</div>
+    <div class="conclusao-titulo">Study completed</div>
     <div class="conclusao-placar" id="conclusaoPlacar"></div>
     <p class="conclusao-mensagem" id="conclusaoMensagem"></p>
-    <button class="btn-reiniciar" onclick="reiniciar()">Jogar novamente</button>
+    <button class="btn-reiniciar" onclick="reiniciar()">Play again</button>
   </div>
 </main>
 
@@ -399,8 +399,8 @@
 
 <script>
 /* ==========================================================
-   MOLÉCULAS (desenhadas via SVG — nenhuma imagem utilizada)
-   H = dourado (δ+) | átomos eletronegativos (Cl, F, O, N) = vermelho-escuro (δ−)
+   MOLECULES (drawn via SVG — no images used)
+   H = gold (δ+) | electronegative atoms (Cl, F, O, N) = dark red (δ−)
    ========================================================== */
 const MOLECULAS = {
   H2:
@@ -469,7 +469,7 @@ function rotuloFormula(tipo) {
 }
 
 /* ==========================================================
-   REFERÊNCIAS DOM
+   DOM REFERENCES
    ========================================================== */
 const overlay = document.getElementById('overlayAnimacao');
 const painel  = document.getElementById('painelInteracao');
@@ -499,7 +499,7 @@ function botaoContinuar(delayMs) {
   continuarBalao.innerHTML = '';
   const btn = document.createElement('button');
   btn.className = 'btn-continuar';
-  btn.textContent = 'Continuar →';
+  btn.textContent = 'Continue →';
   btn.disabled = delayMs > 0;
   continuarBalao.appendChild(btn);
   if (delayMs > 0) agendar(function () { btn.disabled = false; }, delayMs);
@@ -534,7 +534,7 @@ function escolhaBotoes(opts) {
         Array.from(opcoesLinha.children).forEach(function (b) { b.disabled = true; });
         btn.classList.add('opcao-certa');
         feedback.className = 'modal-feedback visivel';
-        feedback.innerHTML = '<span class="feedback-certo">Correto!</span><p class="feedback-explicacao">' + opts.explicacao + '</p>';
+        feedback.innerHTML = '<span class="feedback-certo">Correct!</span><p class="feedback-explicacao">' + opts.explicacao + '</p>';
         opts.aoAcertar();
       } else {
         tentativas++;
@@ -549,7 +549,7 @@ function escolhaBotoes(opts) {
             if (opts.opcoes[i].correta) b.classList.add('opcao-certa');
           });
           feedback.className = 'modal-feedback visivel';
-          feedback.innerHTML = '<span class="feedback-resposta">Resposta correta destacada.</span><p class="feedback-explicacao">' + opts.explicacao + '</p>';
+          feedback.innerHTML = '<span class="feedback-resposta">Correct answer highlighted.</span><p class="feedback-explicacao">' + opts.explicacao + '</p>';
           opts.aoAcertar();
         }
       }
@@ -559,9 +559,9 @@ function escolhaBotoes(opts) {
 }
 
 /* ==========================================================
-   CLASSIFICAÇÃO POR CATEGORIA (molécula → tipo de força), por clique
-   As categorias são fixas e reutilizáveis (várias moléculas podem
-   pertencer à mesma categoria).
+   CATEGORY CLASSIFICATION (molecule → type of force), by click
+   The categories are fixed and reusable (several molecules can
+   belong to the same category).
    ========================================================== */
 function criarClassificacaoPorCategoria(itens, categorias, mensagemErro, mensagemSucesso) {
   const container = document.createElement('div');
@@ -598,7 +598,7 @@ function criarClassificacaoPorCategoria(itens, categorias, mensagemErro, mensage
     el.addEventListener('click', function () {
       if (el.classList.contains('associado')) return;
       if (!categoriaAtiva) {
-        fala('Primeiro escolha um tipo de interação à esquerda.');
+        fala('First choose a type of interaction on the left.');
         return;
       }
       if (it.categoria === categoriaAtiva) {
@@ -618,7 +618,7 @@ function criarClassificacaoPorCategoria(itens, categorias, mensagemErro, mensage
 }
 
 /* ==========================================================
-   COMPONENTE: CARTÃO DE MOLÉCULA (estático)
+   COMPONENT: MOLECULE CARD (static)
    ========================================================== */
 function criarCartaoMolecula(tipo, legenda) {
   const div = document.createElement('div');
@@ -636,121 +636,121 @@ function criarParMoleculas(tipo, legenda) {
 }
 
 /* ==========================================================
-   INTRODUÇÃO
+   INTRODUCTION
    ========================================================== */
 function passoIntro() {
-  fala('Hoje vamos descobrir por que algumas substâncias evaporam facilmente enquanto outras permanecem líquidas. Tudo depende das forças intermoleculares.');
+  fala('Today we are going to find out why some substances evaporate easily while others remain liquid. It all depends on intermolecular forces.');
   painel.innerHTML = '';
   const wrap = document.createElement('div');
   wrap.className = 'interacao-painel';
   const btn = document.createElement('button');
   btn.className = 'btn-continuar';
-  btn.textContent = 'INICIAR';
+  btn.textContent = 'START';
   wrap.appendChild(btn);
   painel.appendChild(wrap);
   btn.addEventListener('click', avancar);
 }
 
 /* ==========================================================
-   ETAPA — DISPERSÃO DE LONDON (moléculas apolares)
+   STEP — LONDON DISPERSION (nonpolar molecules)
    ========================================================== */
 function passoDispersao() {
-  fala('Observe duas moléculas de H₂ — uma molécula apolar, sem polos permanentes.');
+  fala('Observe two H₂ molecules — a nonpolar molecule, with no permanent poles.');
   overlay.appendChild(criarParMoleculas('H2', 'H₂ + H₂'));
 
   escolhaBotoes({
-    pergunta: 'Mesmo sem polos fixos, existe uma leve atração entre elas. Que força é essa?',
+    pergunta: 'Even without fixed poles, there is a slight attraction between them. What force is this?',
     opcoes: [
-      { rotulo: 'Dipolo-dipolo', correta: false },
-      { rotulo: 'Forças de dispersão de London', correta: true },
-      { rotulo: 'Ligação de hidrogênio', correta: false }
+      { rotulo: 'Dipole-dipole', correta: false },
+      { rotulo: 'London dispersion forces', correta: true },
+      { rotulo: 'Hydrogen bonding', correta: false }
     ],
-    dica: 'É a força que ocorre entre moléculas apolares, como H₂, N₂, O₂ e CH₄.',
-    explicacao: 'Interações dipolo induzido-dipolo induzido (forças de dispersão de London) ocorrem entre moléculas apolares. É a mais fraca das interações intermoleculares.',
+    dica: 'This is the force that occurs between nonpolar molecules, such as H₂, N₂, O₂ and CH₄.',
+    explicacao: 'Induced dipole-induced dipole interactions (London dispersion forces) occur between nonpolar molecules. This is the weakest of the intermolecular interactions.',
     aoAcertar: function () { botaoContinuar(300); }
   });
 }
 
 /* ==========================================================
-   ETAPA — DIPOLO-DIPOLO (moléculas polares)
+   STEP — DIPOLE-DIPOLE (polar molecules)
    ========================================================== */
 function passoDipoloDipolo() {
-  fala('Agora observe duas moléculas de HCl — uma molécula polar, com um lado δ+ e outro δ−.');
+  fala('Now observe two HCl molecules — a polar molecule, with one side δ+ and the other δ−.');
   overlay.appendChild(criarParMoleculas('HCl', 'HCl + HCl'));
 
   escolhaBotoes({
-    pergunta: 'O polo positivo de uma molécula se aproxima do polo negativo da outra. Que interação é essa?',
+    pergunta: 'The positive pole of one molecule approaches the negative pole of the other. What interaction is this?',
     opcoes: [
-      { rotulo: 'Forças de dispersão de London', correta: false },
-      { rotulo: 'Dipolo-dipolo (dipolos permanentes)', correta: true },
-      { rotulo: 'Ligação de hidrogênio', correta: false }
+      { rotulo: 'London dispersion forces', correta: false },
+      { rotulo: 'Dipole-dipole (permanent dipoles)', correta: true },
+      { rotulo: 'Hydrogen bonding', correta: false }
     ],
-    dica: 'Ocorre entre moléculas polares — quanto maior a polaridade, mais intensa a interação.',
-    explicacao: 'Interações dipolo-dipolo (entre dipolos permanentes) ocorrem entre moléculas polares. Quanto maior a polaridade da molécula, maior a intensidade dessa interação.',
+    dica: 'Occurs between polar molecules — the greater the polarity, the more intense the interaction.',
+    explicacao: 'Dipole-dipole interactions (between permanent dipoles) occur between polar molecules. The greater the polarity of the molecule, the greater the intensity of this interaction.',
     aoAcertar: function () { botaoContinuar(300); }
   });
 }
 
 /* ==========================================================
-   ETAPA — LIGAÇÃO DE HIDROGÊNIO
+   STEP — HYDROGEN BONDING
    ========================================================== */
 function passoLigacaoH() {
-  fala('Agora observe duas moléculas de HF. O hidrogênio está ligado ao flúor.');
+  fala('Now observe two HF molecules. The hydrogen is bonded to the fluorine.');
   overlay.appendChild(criarParMoleculas('HF', 'HF + HF'));
 
   escolhaBotoes({
-    pergunta: 'O flúor pertence ao grupo F, O, N. Que interação especialmente forte ocorre aqui?',
+    pergunta: 'Fluorine belongs to the F, O, N group. What especially strong interaction occurs here?',
     opcoes: [
-      { rotulo: 'Dipolo-dipolo comum', correta: false },
-      { rotulo: 'Ligação de hidrogênio', correta: true },
-      { rotulo: 'Nenhuma interação', correta: false }
+      { rotulo: 'Ordinary dipole-dipole', correta: false },
+      { rotulo: 'Hydrogen bonding', correta: true },
+      { rotulo: 'No interaction', correta: false }
     ],
-    dica: 'Acontece quando o H está ligado a um átomo do grupo F, O ou N (FON).',
-    explicacao: 'Ligações de hidrogênio ocorrem entre moléculas altamente polares, quando um átomo de H está ligado a flúor, oxigênio ou nitrogênio (grupo FON). É a mais intensa das interações intermoleculares.',
+    dica: 'This happens when H is bonded to an atom from the F, O, or N group (FON).',
+    explicacao: 'Hydrogen bonds occur between highly polar molecules, when an H atom is bonded to fluorine, oxygen, or nitrogen (the FON group). This is the most intense of the intermolecular interactions.',
     aoAcertar: function () { botaoContinuar(300); }
   });
 }
 
 /* ==========================================================
-   ETAPA — ORDEM DE INTENSIDADE
+   STEP — ORDER OF INTENSITY
    ========================================================== */
 function passoOrdem() {
-  fala('Vamos juntar tudo. Como essas três forças se comparam em intensidade?');
+  fala('Let\'s put it all together. How do these three forces compare in intensity?');
 
   escolhaBotoes({
-    pergunta: 'Qual é a ordem correta, da mais fraca para a mais forte?',
+    pergunta: 'What is the correct order, from weakest to strongest?',
     opcoes: [
-      { rotulo: 'Dipolo-dipolo < Dispersão de London < Ligação de hidrogênio', correta: false },
-      { rotulo: 'Dispersão de London < Dipolo-dipolo < Ligação de hidrogênio', correta: true },
-      { rotulo: 'Ligação de hidrogênio < Dipolo-dipolo < Dispersão de London', correta: false }
+      { rotulo: 'Dipole-dipole < London dispersion < Hydrogen bonding', correta: false },
+      { rotulo: 'London dispersion < Dipole-dipole < Hydrogen bonding', correta: true },
+      { rotulo: 'Hydrogen bonding < Dipole-dipole < London dispersion', correta: false }
     ],
-    dica: 'A força mais fraca ocorre entre moléculas apolares; a mais forte envolve o grupo FON.',
-    explicacao: 'Dispersão de London < Dipolo-dipolo < Ligação de hidrogênio. Essa ordem explica diferenças de ponto de fusão e ebulição entre substâncias moleculares.',
+    dica: 'The weakest force occurs between nonpolar molecules; the strongest involves the FON group.',
+    explicacao: 'London dispersion < Dipole-dipole < Hydrogen bonding. This order explains differences in melting and boiling points between molecular substances.',
     aoAcertar: function () { botaoContinuar(300); }
   });
 }
 
 /* ==========================================================
-   ETAPA — CLASSIFICAR AS MOLÉCULAS (associação)
+   STEP — CLASSIFY THE MOLECULES (matching)
    ========================================================== */
 function passoClassificar() {
-  fala('Escolha um tipo de interação à esquerda e clique em todos os pares de moléculas que se encaixam nele. Depois, passe para o próximo tipo.');
+  fala('Choose a type of interaction on the left and click all the pairs of molecules that fit it. Then move on to the next type.');
   criarClassificacaoPorCategoria([
-    { chave: 'H2', categoria: 'Dispersão de London' },
-    { chave: 'CH4', categoria: 'Dispersão de London' },
-    { chave: 'HCl', categoria: 'Dipolo-dipolo' },
-    { chave: 'HF', categoria: 'Ligação de hidrogênio' },
-    { chave: 'NH3', categoria: 'Ligação de hidrogênio' },
-    { chave: 'H2O', categoria: 'Ligação de hidrogênio' }
-  ], ['Dispersão de London', 'Dipolo-dipolo', 'Ligação de hidrogênio'],
-  'Lembre-se: apolares fazem dispersão de London; H ligado a F, O ou N faz ligação de hidrogênio.', 'Muito bem! Você classificou todas corretamente.');
+    { chave: 'H2', categoria: 'London dispersion' },
+    { chave: 'CH4', categoria: 'London dispersion' },
+    { chave: 'HCl', categoria: 'Dipole-dipole' },
+    { chave: 'HF', categoria: 'Hydrogen bonding' },
+    { chave: 'NH3', categoria: 'Hydrogen bonding' },
+    { chave: 'H2O', categoria: 'Hydrogen bonding' }
+  ], ['London dispersion', 'Dipole-dipole', 'Hydrogen bonding'],
+  'Remember: nonpolar molecules undergo London dispersion; H bonded to F, O, or N forms hydrogen bonds.', 'Well done! You classified them all correctly.');
 }
 
 /* ==========================================================
-   ETAPA — TEMPERATURA DE EBULIÇÃO
+   STEP — BOILING TEMPERATURE
    ========================================================== */
 function passoEbulicao() {
-  fala('As temperaturas de fusão e ebulição dependem da intensidade das interações intermoleculares.');
+  fala('Melting and boiling temperatures depend on the intensity of intermolecular interactions.');
   const linha = document.createElement('div');
   linha.style.position = 'absolute'; linha.style.inset = '0';
   linha.style.display = 'flex'; linha.style.justifyContent = 'center'; linha.style.alignItems = 'center';
@@ -763,27 +763,27 @@ function passoEbulicao() {
   overlay.appendChild(linha);
 
   escolhaBotoes({
-    pergunta: 'Aquecendo essas três substâncias, qual evapora primeiro?',
+    pergunta: 'Heating these three substances, which one evaporates first?',
     opcoes: [
       { rotulo: 'CH₄', correta: true },
       { rotulo: 'HCl', correta: false },
       { rotulo: 'H₂O', correta: false }
     ],
-    dica: 'Qual delas tem as interações intermoleculares mais fracas?',
-    explicacao: 'O CH₄ só apresenta dispersão de London, a força mais fraca — por isso evapora com pouquíssima energia.',
+    dica: 'Which one has the weakest intermolecular interactions?',
+    explicacao: 'CH₄ only exhibits London dispersion, the weakest force — that\'s why it evaporates with very little energy.',
     aoAcertar: function () { agendar(passoEbulicao2, 300); }
   });
 }
 function passoEbulicao2() {
   escolhaBotoes({
-    pergunta: 'E qual delas resiste mais, evaporando por último?',
+    pergunta: 'And which one resists the most, evaporating last?',
     opcoes: [
       { rotulo: 'CH₄', correta: false },
       { rotulo: 'HCl', correta: false },
       { rotulo: 'H₂O', correta: true }
     ],
-    dica: 'Qual delas faz ligações de hidrogênio?',
-    explicacao: 'A água faz ligações de hidrogênio, a interação mais intensa — por isso exige muito mais energia (temperatura) para evaporar.',
+    dica: 'Which one forms hydrogen bonds?',
+    explicacao: 'Water forms hydrogen bonds, the most intense interaction — that\'s why it requires much more energy (temperature) to evaporate.',
     aoAcertar: function () { botaoContinuar(400); }
   });
 }
@@ -792,23 +792,23 @@ function passoEbulicao2() {
    FINAL
    ========================================================== */
 function passoFinal() {
-  fala('Agora você consegue prever a intensidade das forças intermoleculares observando apenas a molécula.');
+  fala('Now you can predict the intensity of intermolecular forces just by looking at the molecule.');
   overlay.innerHTML =
     '<div class="quadro-resumo" style="position:absolute;inset:0;align-items:center;">' +
-    '<div class="quadro-item"><div class="rotulo">Dispersão de London</div><div class="valor">Mais fraca</div></div>' +
-    '<div class="quadro-item"><div class="rotulo">Dipolo-dipolo</div><div class="valor">Intermediária</div></div>' +
-    '<div class="quadro-item"><div class="rotulo">Ligação de hidrogênio</div><div class="valor">Mais intensa</div></div>' +
+    '<div class="quadro-item"><div class="rotulo">London dispersion</div><div class="valor">Weakest</div></div>' +
+    '<div class="quadro-item"><div class="rotulo">Dipole-dipole</div><div class="valor">Intermediate</div></div>' +
+    '<div class="quadro-item"><div class="rotulo">Hydrogen bonding</div><div class="valor">Strongest</div></div>' +
     '</div>';
   painel.innerHTML = '';
   const conclusao = document.getElementById('conclusao');
-  document.getElementById('conclusaoPlacar').textContent = 'Fase concluída';
-  document.getElementById('conclusaoMensagem').textContent = 'Você percebeu por que algumas substâncias evaporam facilmente e outras não — tudo depende da intensidade das forças intermoleculares.';
+  document.getElementById('conclusaoPlacar').textContent = 'Stage completed';
+  document.getElementById('conclusaoMensagem').textContent = 'You discovered why some substances evaporate easily and others don\'t — it all depends on the intensity of the intermolecular forces.';
   conclusao.classList.add('visivel');
   conclusao.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 /* ==========================================================
-   MOTOR DA FASE
+   STAGE ENGINE
    ========================================================== */
 const PASSOS = [passoIntro, passoDispersao, passoDipoloDipolo, passoLigacaoH, passoOrdem, passoClassificar, passoEbulicao, passoFinal];
 let passoAtual = 0;

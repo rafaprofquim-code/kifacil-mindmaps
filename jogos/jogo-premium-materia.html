@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex, nofollow">
-  <title>O Dia da Matéria — Jogo Premium | KiFácil</title>
+  <title>The Day of Matter — Premium Game | KiFácil</title>
   <link rel="icon" type="image/png" href="/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -150,6 +150,7 @@
     /* HOTSPOTS */
     .hotspot {
       position: absolute;
+      top: var(--top-desktop);
       width: 36px;
       height: 36px;
       border-radius: 50%;
@@ -391,7 +392,7 @@
       .modal-pergunta { padding: 2rem 1.2rem 1.5rem; }
       .overlay { padding: 0.4rem; }
       .modal-input { font-size: 1rem; }
-      .hotspot { width: 22px; height: 22px; font-size: 0.65rem; border-width: 1.5px; }
+      .hotspot { width: 22px; height: 22px; font-size: 0.65rem; border-width: 1.5px; top: var(--top-mobile, var(--top-desktop)); }
       .link-aula { top: 6px; right: 6px; padding: 0.3rem 0.5rem; font-size: 0.6rem; }
       .link-aula svg { width: 18px; height: 18px; }
     }
@@ -404,34 +405,34 @@
 </nav>
 
 <main>
-  <h1 class="titulo-jogo">O Dia da Matéria</h1>
-  
+  <h1 class="titulo-jogo">The Day of Matter</h1>
+
 
   <div class="narrador">
-    <img src="../imagens/rafa-sorrindo.jpg" alt="Professora Rafaela" />
+    <img src="../imagens/rafa-sorrindo.jpg" alt="Professor Rafaela" />
     <div>
-      <div class="narrador-nome">Professora Rafaela</div>
-      <div class="narrador-texto">Observe a cena e indique os fenômenos que aparecem.</div>
+      <div class="narrador-nome">Professor Rafaela</div>
+      <div class="narrador-texto">Observe the scene and identify the phenomena that appear.</div>
     </div>
   </div>
 
   <div class="imagem-wrapper" id="imagemWrapper">
-    <img src="../imagens/jogo-materia.jpg" alt="Cena com fenômenos físicos e químicos" id="imagemJogo" />
-    <!-- COLOQUE O LINK AQUI -->
-    <a class="link-aula" href="https://www.youtube.com/watch?v=bwYxb80b1fQ&t=115s" target="_blank" rel="noopener" title="Assista à aula">
+    <img src="../imagens/jogo-materia.jpg" alt="Scene with physical and chemical phenomena" id="imagemJogo" />
+    <!-- PUT THE LINK HERE -->
+    <a class="link-aula" href="https://www.youtube.com/watch?v=bwYxb80b1fQ&t=115s" target="_blank" rel="noopener" title="Watch the lesson">
       <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.6"/>
         <path d="M10 8.5L16 12L10 15.5V8.5Z" fill="currentColor"/>
       </svg>
-      <span>Assista à aula</span>
+      <span>Watch the lesson</span>
     </a>
   </div>
 
   <div class="conclusao" id="conclusao">
-    <div class="conclusao-titulo">Estudo concluído</div>
+    <div class="conclusao-titulo">Study complete</div>
     <div class="conclusao-placar" id="conclusaoPlacar"></div>
     <p class="conclusao-mensagem" id="conclusaoMensagem"></p>
-    <button class="btn-reiniciar" onclick="reiniciar()">Jogar novamente</button>
+    <button class="btn-reiniciar" onclick="reiniciar()">Play again</button>
   </div>
 </main>
 
@@ -440,71 +441,71 @@
 <!-- MODAL PERGUNTA -->
 <div class="overlay" id="overlayPergunta">
   <div class="modal-pergunta">
-    <button class="modal-fechar" id="btnFechar" aria-label="Fechar">&times;</button>
+    <button class="modal-fechar" id="btnFechar" aria-label="Close">&times;</button>
     <div class="modal-num" id="modalNum"></div>
     <div class="modal-pergunta-texto" id="modalPerguntaTexto"></div>
     <div class="tracados" id="modalTracados"></div>
-    <input class="modal-input" type="text" id="modalInput" placeholder="Digite sua resposta..." autocomplete="off" spellcheck="false" />
-    <button class="modal-btn-confirmar" id="modalBtnConfirmar">Confirmar</button>
+    <input class="modal-input" type="text" id="modalInput" placeholder="Type your answer..." autocomplete="off" spellcheck="false" />
+    <button class="modal-btn-confirmar" id="modalBtnConfirmar">Confirm</button>
     <div class="modal-feedback" id="modalFeedback"></div>
   </div>
 </div>
 
 <!-- MODAL ZOOM -->
 <div class="modal-zoom" id="modalZoom">
-  <img src="../imagens/jogo-materia.jpg" alt="Cena ampliada" />
+  <img src="../imagens/jogo-materia.jpg" alt="Enlarged scene" />
 </div>
 
 <script>
 const ELEMENTOS = [
   {
     id: 1, left: '10%', top: '44%',
-    pergunta: 'Como se chama esse processo de vaporização?',
-    resposta: 'ebulição', letras: 8,
-    dica: 'Ocorre em toda a massa do líquido, com formação de bolhas em seu interior.',
-    explicacao: 'A ebulição é a vaporização que ocorre em toda a massa do líquido. É um processo endotérmico — absorve energia do ambiente.'
+    pergunta: 'What is this vaporization process called?',
+    resposta: 'boiling', letras: 7,
+    dica: 'It happens throughout the whole mass of the liquid, with bubbles forming inside it.',
+    explicacao: 'Boiling is the vaporization that occurs throughout the whole mass of the liquid. It is an endothermic process — it absorbs energy from the environment.'
   },
   {
     id: 2, left: '31%', top: '62%',
-    pergunta: 'Como se chama a mudança de estado observada?',
-    resposta: 'fusão', letras: 5,
-    dica: 'O sólido está absorvendo energia e passando para outro estado.',
-    explicacao: 'A fusão é a passagem do estado sólido para o líquido. É um processo endotérmico — o gelo absorve energia para derreter.'
+    pergunta: 'What is the observed change of state called?',
+    resposta: 'melting', letras: 7,
+    dica: 'The solid is absorbing energy and changing into another state.',
+    explicacao: 'Melting is the change from the solid state to the liquid state. It is an endothermic process — the ice absorbs energy to melt.'
   },
   {
     id: 3, left: '46%', top: '50%',
-    pergunta: 'Como se chama o processo que forma as gotas na garrafa?',
-    resposta: 'condensação', letras: 11,
-    dica: 'O vapor de água do ar encontra uma superfície fria e muda de estado.',
-    explicacao: 'A condensação é a passagem do estado gasoso para o líquido. O vapor de água do ar se condensa ao tocar a superfície fria da garrafa.'
+    pergunta: 'What is the process that forms the droplets on the bottle called?',
+    resposta: 'condensation', letras: 12,
+    dica: 'Water vapor in the air meets a cold surface and changes state.',
+    explicacao: 'Condensation is the change from the gaseous state to the liquid state. Water vapor in the air condenses when it touches the bottle\'s cold surface.'
   },
   {
     id: 4, left: '58%', top: '19%',
-    pergunta: 'Como se chama o processo que formou os cristais de gelo na janela?',
-    resposta: 'ressublimação', letras: 13,
-    dica: 'O vapor passou diretamente para o estado sólido, sem virar líquido antes.',
-    explicacao: 'A ressublimação é a passagem direta do estado gasoso para o sólido. O vapor de água do ar se transforma em cristais de gelo ao tocar a janela fria.'
+    pergunta: 'What is the process that formed the ice crystals on the window called?',
+    resposta: 'deposition', letras: 10,
+    dica: 'The vapor changed directly into the solid state, without becoming liquid first.',
+    explicacao: 'Deposition is the direct change from the gaseous state to the solid state. Water vapor in the air turns into ice crystals when it touches the cold window.'
   },
   {
     id: 5, left: '74%', top: '41%',
-    pergunta: 'Como se chama esse tipo de vaporização?',
-    resposta: 'evaporação', letras: 10,
-    dica: 'Ocorre lentamente, apenas na superfície do líquido.',
-    explicacao: 'A evaporação é uma vaporização lenta que ocorre apenas na superfície do líquido. É o que faz as roupas secarem no varal.'
+    pergunta: 'What is this type of vaporization called?',
+    resposta: 'evaporation', letras: 11,
+    dica: 'It happens slowly, only at the surface of the liquid.',
+    explicacao: 'Evaporation is a slow vaporization that occurs only at the surface of the liquid. It is what makes clothes dry on the clothesline.'
   },
   {
     id: 6, left: '63%', top: '53%',
-    pergunta: ' Esse é um fenômeno:',
-    resposta: 'químico', letras: 7,
-    dica: 'O ferro reagiu com o oxigênio do ar e formou uma substância nova.',
-    explicacao: 'A ferrugem é um fenômeno químico: o ferro reage com o oxigênio formando óxido de ferro, uma substância completamente diferente do ferro original.'
+    pergunta: ' This is a:',
+    resposta: 'chemical', letras: 8,
+    dica: 'The iron reacted with oxygen in the air and formed a new substance.',
+    explicacao: 'Rust is a chemical phenomenon: iron reacts with oxygen forming iron oxide, a substance completely different from the original iron.'
   },
   {
     id: 7, left: '87%', top: '66%', mobileTop: '77%',
-    pergunta: 'Como se chama o processo pelo qual a naftalina desaparece?',
-    resposta: 'sublimação', letras: 10,
-    dica: 'A substância passa diretamente do estado sólido para o gasoso.',
-    explicacao: 'A sublimação é a passagem direta do estado sólido para o gasoso, sem passar pelo líquido. É exatamente o que acontece com a naftalina.'
+    pergunta: 'What is the process by which mothballs disappear called?',
+    resposta: 'sublimation', letras: 11,
+    dica: 'The substance changes directly from the solid state to the gaseous state.',
+    explicacao: 'Sublimation is the direct change from the solid state to the gaseous state, without passing through the liquid state. That is exactly what happens with mothballs.'
   }
 ];
 
@@ -535,10 +536,10 @@ function renderHotspots() {
     btn.className = 'hotspot';
     if (est.status === 'concluido') btn.classList.add('concluido');
     if (est.status === 'revelado')  btn.classList.add('revelado');
-    const isMobile = window.innerWidth <= 640;
     btn.style.left = el.left;
-    btn.style.top  = (isMobile && el.mobileTop) ? el.mobileTop : el.top;
-    btn.setAttribute('aria-label', `Elemento ${el.id}`);
+    btn.style.setProperty('--top-desktop', el.top);
+    if (el.mobileTop) btn.style.setProperty('--top-mobile', el.mobileTop);
+    btn.setAttribute('aria-label', `Element ${el.id}`);
 
     if (est.status === 'concluido')   btn.textContent = '✓';
     else if (est.status === 'revelado') btn.textContent = '✕';
@@ -549,13 +550,13 @@ function renderHotspots() {
   });
 }
 
-/* ── MODAL PERGUNTA ── */
+/* ── QUESTION MODAL ── */
 function abrirModal(id) {
   const el  = ELEMENTOS.find(e => e.id === id);
   const est = getEstado(id);
   elementoAtivo = id;
 
-  document.getElementById('modalNum').textContent = `Elemento ${id}`;
+  document.getElementById('modalNum').textContent = `Element ${id}`;
   document.getElementById('modalPerguntaTexto').textContent = el.pergunta;
 
   const tracados = document.getElementById('modalTracados');
@@ -579,10 +580,10 @@ function abrirModal(id) {
 
   if (est.status === 'concluido') {
     feedback.className = 'modal-feedback visivel';
-    feedback.innerHTML = `<span class="feedback-certo">Correto!</span><p class="feedback-explicacao">${el.explicacao}</p>`;
+    feedback.innerHTML = `<span class="feedback-certo">Correct!</span><p class="feedback-explicacao">${el.explicacao}</p>`;
   } else if (est.status === 'revelado') {
     feedback.className = 'modal-feedback visivel';
-    feedback.innerHTML = `<span class="feedback-resposta">Resposta: ${el.resposta}</span><p class="feedback-explicacao">${el.explicacao}</p>`;
+    feedback.innerHTML = `<span class="feedback-resposta">Answer: ${el.resposta}</span><p class="feedback-explicacao">${el.explicacao}</p>`;
   }
 
   document.getElementById('overlayPergunta').classList.add('ativo');
@@ -616,14 +617,14 @@ function confirmar() {
     input.disabled = true;
     document.getElementById('modalBtnConfirmar').disabled = true;
     feedback.className = 'modal-feedback visivel';
-    feedback.innerHTML = `<span class="feedback-certo">Correto!</span><p class="feedback-explicacao">${el.explicacao}</p>`;
+    feedback.innerHTML = `<span class="feedback-certo">Correct!</span><p class="feedback-explicacao">${el.explicacao}</p>`;
     renderHotspots();
     verificarConclusao();
   } else {
     est.tentativas++;
     if (est.tentativas === 1) {
       feedback.className = 'modal-feedback visivel';
-      feedback.innerHTML = `<span class="feedback-errado">Resposta incorreta.</span><p class="feedback-dica" style="margin-top:.4rem"><em>Dica:</em> ${el.dica}</p>`;
+      feedback.innerHTML = `<span class="feedback-errado">Incorrect answer.</span><p class="feedback-dica" style="margin-top:.4rem"><em>Hint:</em> ${el.dica}</p>`;
       input.value = '';
       input.focus();
     } else {
@@ -631,14 +632,14 @@ function confirmar() {
       input.disabled = true;
       document.getElementById('modalBtnConfirmar').disabled = true;
       feedback.className = 'modal-feedback visivel';
-      feedback.innerHTML = `<span class="feedback-resposta">Resposta: ${el.resposta}</span><p class="feedback-explicacao">${el.explicacao}</p>`;
+      feedback.innerHTML = `<span class="feedback-resposta">Answer: ${el.resposta}</span><p class="feedback-explicacao">${el.explicacao}</p>`;
       renderHotspots();
       verificarConclusao();
     }
   }
 }
 
-/* ── CONCLUSÃO ── */
+/* ── CONCLUSION ── */
 function verificarConclusao() {
   if (!estado.every(e => e.status !== 'pendente')) return;
 
@@ -647,16 +648,16 @@ function verificarConclusao() {
 
   let mensagem;
   if (acertos === total) {
-    mensagem = 'Excelente! Você identificou todos os fenômenos corretamente. Seu domínio sobre as mudanças de estado e fenômenos da matéria está consolidado.';
+    mensagem = 'Excellent! You correctly identified every phenomenon. Your mastery of changes of state and the phenomena of matter is solid.';
   } else if (acertos >= 5) {
-    mensagem = 'Muito bem! Você domina a maior parte dos fenômenos. Revise os que ficaram em aberto e jogue novamente para fixar o conteúdo.';
+    mensagem = 'Very good! You have mastered most of the phenomena. Review the ones you missed and play again to reinforce the content.';
   } else if (acertos >= 3) {
-    mensagem = 'Bom esforço! Alguns conceitos ainda precisam de atenção. Leia as explicações com cuidado e tente novamente.';
+    mensagem = 'Good effort! Some concepts still need attention. Read the explanations carefully and try again.';
   } else {
-    mensagem = 'Continue estudando! As mudanças de estado são fundamentais. Revise seu mapa mental e jogue novamente.';
+    mensagem = 'Keep studying! Changes of state are fundamental. Review your mind map and play again.';
   }
 
-  document.getElementById('conclusaoPlacar').textContent  = `Você acertou ${acertos} de ${total} fenômenos`;
+  document.getElementById('conclusaoPlacar').textContent  = `You got ${acertos} of ${total} phenomena right`;
   document.getElementById('conclusaoMensagem').textContent = mensagem;
   const conclusao = document.getElementById('conclusao');
   conclusao.classList.add('visivel');
@@ -669,7 +670,7 @@ function reiniciar() {
   renderHotspots();
 }
 
-/* ── EVENTOS ── */
+/* ── EVENTS ── */
 document.getElementById('btnFechar').addEventListener('click', fecharModal);
 document.getElementById('overlayPergunta').addEventListener('click', e => {
   if (e.target === e.currentTarget) fecharModal();

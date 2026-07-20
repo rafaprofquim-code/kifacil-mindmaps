@@ -427,6 +427,15 @@
     .progress-wrap { flex-wrap: wrap; row-gap: 4px; }
     .ficha-opcoes { grid-template-columns: 1fr; }
 
+    #controle-volume {
+      position: static;
+      bottom: auto; right: auto;
+      padding: 4px 10px 4px 8px;
+      gap: 6px;
+      margin-left: 4px;
+    }
+    #slider-volume { width: 60px; }
+
     .hotspot-assign { bottom: -30px; font-size: 14px; padding: 4px 9px; }
 
     /* ── MOBILE HOTSPOTS ─────────────────────────────────────────────────────
@@ -460,6 +469,10 @@
     <div class="prog-step" id="ps6">2</div>
     <div class="prog-line"></div>
     <div class="prog-step" id="ps7">1</div>
+    <div id="controle-volume">
+      <button id="btn-mute" onclick="alternarMudo()" aria-label="Mute or unmute sound">🔊</button>
+      <input type="range" id="slider-volume" min="0" max="100" value="35" oninput="ajustarVolume(this.value)" aria-label="Volume">
+    </div>
   </div>
 </header>
 
@@ -952,11 +965,6 @@
     document.getElementById('win-screen').classList.add('show');
   }
 </script>
-
-<div id="controle-volume">
-  <button id="btn-mute" onclick="alternarMudo()" aria-label="Mute or unmute sound">🔊</button>
-  <input type="range" id="slider-volume" min="0" max="100" value="35" oninput="ajustarVolume(this.value)" aria-label="Volume">
-</div>
 
 <div id="cookie-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#1a0f08;border-top:1px solid rgba(212,170,106,0.4);padding:1rem 2rem;z-index:9999;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;"><p style="margin:0;font-family:'Libre Baskerville',serif;font-size:0.82rem;color:#e8d4b0;line-height:1.5;">This site uses cookies to improve your experience. By continuing to browse, you agree to our <a href="/politica-de-privacidade.html" style="color:#e8b84b;text-decoration:underline;text-underline-offset:2px;">Privacy Policy</a>.</p><button onclick="document.getElementById('cookie-banner').style.display='none';localStorage.setItem('kifacil_cookies','1');" style="flex-shrink:0;background:#e8b84b;border:none;padding:0.55rem 1.5rem;font-family:'Libre Baskerville',serif;font-size:0.78rem;font-weight:700;color:#1a0f08;cursor:pointer;letter-spacing:0.04em;">Got it</button></div>
 <script>if(!localStorage.getItem('kifacil_cookies'))document.getElementById('cookie-banner').style.display='flex';</script>

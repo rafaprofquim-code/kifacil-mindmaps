@@ -1,12 +1,12 @@
-﻿﻿<!DOCTYPE html>
-<html lang="pt-BR">
+﻿<!DOCTYPE html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" type="image/png" href="/favicon.png">
 <link rel="canonical" href="https://kifaciledu.com.br/jogos/jogos-escaperoom/torre-quimica/fases/laboratorio-bohr.html">
-<title>Laboratório de Bohr — Cápsula do Tempo | KiFácil</title>
-<meta name="description" content="Viaje ao laboratório de Niels Bohr em 1913 e descubra os postulados do modelo atômico quântico. Escape Room da Cápsula do Tempo — KiFácil.">
+<title>Bohr's Laboratory — Time Capsule | KiFácil</title>
+<meta name="description" content="Travel to Niels Bohr's laboratory in 1913 and discover the postulates of the quantum atomic model. Time Capsule Escape Room — KiFácil.">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y1JGD5VVBD"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -37,7 +37,7 @@
 
   .main { display: flex; flex: 1; align-items: flex-start; }
 
-  /* CENA */
+  /* SCENE */
   .scene-wrap { background: var(--bg-dark); padding: 28px; display: flex; justify-content: center; align-items: flex-start; flex: 0 0 56%; }
   .scene-inner { position: relative; width: 100%; max-width: 620px; user-select: none; }
   .scene-img { width: 100%; display: block; border-radius: 8px; border: 1px solid rgba(212,170,106,0.4); }
@@ -58,14 +58,14 @@
   .link-aula:hover { background: rgba(30,16,8,0.92); transform: translateY(-1px); }
   .link-aula svg { width: 22px; height: 22px; }
 
-  /* HOTSPOTS — divs invisíveis posicionados sobre objetos da foto */
+  /* HOTSPOTS — invisible divs positioned over objects in the photo */
   .hotspot { position: absolute; cursor: pointer; display: none; border-radius: 8px; transition: box-shadow .4s; }
   .hotspot.active { display: block; z-index: 5; box-shadow: 0 0 0 2px rgba(232,184,75,0.6), 0 0 18px rgba(232,184,75,0.25); animation: pulseHS 2.2s ease-in-out infinite; }
   .hotspot.locked { display: block; z-index: 1; cursor: default; pointer-events: none; box-shadow: 0 0 0 1px rgba(232,184,75,0.15); }
   .hotspot.done { display: block; z-index: 2; cursor: default; pointer-events: none; background: rgba(232,184,75,0.1); box-shadow: 0 0 0 2px rgba(232,184,75,0.45); }
   @keyframes pulseHS { 0%, 100% { box-shadow: 0 0 0 2px rgba(232,184,75,0.45), 0 0 12px rgba(232,184,75,0.15); } 50% { box-shadow: 0 0 0 2.5px rgba(232,184,75,0.9), 0 0 24px rgba(232,184,75,0.4); } }
 
-  /* PAINEL DIREITO */
+  /* RIGHT PANEL */
   .panels-row { flex: 1; display: flex; flex-direction: column; gap: 18px; padding: 28px; border-left: 1px solid var(--border-faint); align-self: stretch; }
 
   .narr-box { background: var(--paper); border: 1px solid rgba(139,94,26,0.25); border-radius: 8px; padding: 20px 22px; }
@@ -102,7 +102,7 @@
   .card-fala strong { color: #6b3f0e; font-style: normal; }
   .card-fala em { color: #3d2010; }
 
-  /* Diagrama científico — dentro do card, nunca sobre a foto */
+  /* Scientific diagram — inside the card, never over the photo */
   .diagrama-wrap { background: #fff8ee; border: 1px solid rgba(139,94,26,0.2); border-radius: 8px; padding: 14px; margin-bottom: 0; text-align: center; }
   .diagrama-wrap svg { display: block; width: 100%; }
   .diagrama-svg-wrap { width: 100%; }
@@ -142,14 +142,14 @@
   .btn-continuar.show { display: block; }
   .btn-continuar:hover { background: #6b3f0e; }
 
-  /* TABELA TESTE DE CHAMA */
+  /* FLAME TEST TABLE */
   .flame-table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 14px; }
   .flame-table th { background: rgba(139,94,26,0.12); color: var(--paper-gold); text-transform: uppercase; letter-spacing: .08em; font-size: 11px; padding: 8px 12px; text-align: left; border-bottom: 1px solid rgba(139,94,26,0.25); }
   .flame-table td { padding: 8px 12px; border-bottom: 1px solid rgba(139,94,26,0.1); color: var(--paper-text); font-family: 'Lora', serif; font-size: 15px; }
   .flame-table tr:last-child td { border-bottom: none; }
   .flame-swatch { display: inline-block; width: 16px; height: 16px; border-radius: 50%; vertical-align: middle; margin-right: 6px; border: 1px solid rgba(0,0,0,0.15); }
 
-  /* SIMULADOR DE SALTOS */
+  /* QUANTUM JUMP SIMULATOR */
   .sim-controls { display: flex; gap: 12px; align-items: center; margin-bottom: 16px; flex-wrap: wrap; }
   .sim-select { background: #fff8ee; border: 1.5px solid rgba(139,94,26,0.4); border-radius: 6px; padding: 8px 12px; font-family: 'Lora', serif; font-size: 15px; color: var(--paper-text); outline: none; cursor: pointer; flex: 1; }
   .sim-select:focus { border-color: var(--paper-gold); }
@@ -157,7 +157,7 @@
   .sim-btn:hover { background: #4a2c10; }
   .sim-svg-wrap { background: #fff8ee; border: 1px solid rgba(139,94,26,0.2); border-radius: 8px; padding: 10px; margin-bottom: 14px; }
 
-  /* GALERIA — hotspots sobre a imagem de fundo */
+  /* GALLERY — hotspots over the background image */
   .gal-hotspot { position: absolute; cursor: pointer; border-radius: 8px; border: 2px solid transparent; transition: all .18s; }
   .gal-hotspot.active { border-color: rgba(232,184,75,0.7); background: rgba(232,184,75,0.08); box-shadow: 0 0 18px rgba(232,184,75,0.3); animation: pulseHS 2.2s ease-in-out infinite; }
   .gal-hotspot.locked { border-color: rgba(232,184,75,0.15); cursor: default; pointer-events: none; }
@@ -176,7 +176,7 @@
   .uv-toggle:checked::after { left: 22px; }
   .uv-label { font-family: 'Lora', serif; font-size: 15px; color: var(--paper-text); font-weight: 600; }
 
-  /* TELA FINAL */
+  /* FINAL SCREEN */
   .win-screen { display: none; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 60px 32px; flex: 1; }
   .win-screen.show { display: flex; }
   .win-title { font-family: 'Lora', serif; font-size: 44px; font-weight: 600; color: var(--gold); margin-bottom: 12px; }
@@ -209,177 +209,177 @@
 <body>
 
 <nav class="nav">
-  <a href="../../../torre-central/mapa-kifacil.html">Academia KiFácil</a>
+  <a href="../../../torre-central/mapa-kifacil.html">KiFácil Academy</a>
   <span class="nav-sep">›</span>
-  <a href="../../torre-ciencia.html">Torre de Ciências</a>
+  <a href="../../torre-ciencia.html">Science Tower</a>
   <span class="nav-sep">›</span>
-  Torre de Química · Fase 5 · Bohr
+  Chemistry Tower · Stage 5 · Bohr
 </nav>
 
 <header class="header">
   <div>
-    <div class="eyebrow">Escape Room · Cápsula do Tempo</div>
-    <h1 class="page-title">Laboratório de Bohr</h1>
+    <div class="eyebrow">Escape Room · Time Capsule</div>
+    <h1 class="page-title">Bohr's Laboratory</h1>
   </div>
 </header>
 
-<!-- ════════════════════════════ TELA PRINCIPAL ════════════════════════════ -->
+<!-- ════════════════════════════ MAIN SCREEN ════════════════════════════ -->
 <div class="main" id="mainScreen">
 
-  <!-- ── CENA 1: Escritório/cavalete (investigação + postulados) ── -->
+  <!-- ── SCENE 1: Office/easel (investigation + postulates) ── -->
   <div class="scene-wrap" id="sceneInvestigacao">
     <div class="scene-inner">
-      <img src="../imagens/sala-de-bohr.jpg" alt="Escritório de Niels Bohr com cavalete e espectroscópio de latão" class="scene-img">
+      <img src="../imagens/sala-de-bohr.jpg" alt="Niels Bohr's office with an easel and a brass spectroscope" class="scene-img">
       <div class="scene-overlay">
-        <div class="scene-overlay-title">Laboratório de Niels Bohr</div>
-        <div class="scene-overlay-sub">1913 · Cápsula do Tempo</div>
+        <div class="scene-overlay-title">Niels Bohr's Laboratory</div>
+        <div class="scene-overlay-sub">1913 · Time Capsule</div>
       </div>
 
       <!--
-        hs-cavalete: área de papel bege do cavalete (centro-esquerda).
-        Usado em múltiplos estágios — o conteúdo do card muda conforme cavaleteStage.
-        AJUSTE left/top/width/height conforme a imagem sala-de-bohr.jpg.
+        hs-cavalete: beige paper area of the easel (center-left).
+        Used across multiple stages — the card content changes according to cavaleteStage.
+        ADJUST left/top/width/height according to the sala-de-bohr.jpg image.
       -->
       <div class="hotspot active" id="hs-cavalete"
            style="left:14%;top:18%;width:32%;height:44%;"
            onclick="clicarCavalete()"
-           aria-label="Cavalete de Bohr"></div>
+           aria-label="Bohr's easel"></div>
 
       <!--
-        hs-telescopio: espectroscópio/telescópio de latão (direita da cena).
-        Locked até prob1 ser concluído. Usado apenas para Problema 2.
-        AJUSTE left/top/width/height conforme a imagem sala-de-bohr.jpg.
+        hs-telescopio: brass spectroscope/telescope (right side of the scene).
+        Locked until prob1 is completed. Used only for Problem 2.
+        ADJUST left/top/width/height according to the sala-de-bohr.jpg image.
       -->
       <div class="hotspot locked" id="hs-telescopio"
            style="left:62%;top:32%;width:24%;height:30%;"
            onclick="clicarTelescópio()"
-           aria-label="Espectroscópio"></div>
+           aria-label="Spectroscope"></div>
 
-      <!-- COLOQUE O LINK AQUI -->
-      <a class="link-aula" href="https://www.youtube.com/watch?v=8CZuX2PXAkI" target="_blank" rel="noopener" title="Assista à aula">
+      <!-- PUT THE LINK HERE -->
+      <a class="link-aula" href="https://www.youtube.com/watch?v=8CZuX2PXAkI" target="_blank" rel="noopener" title="Watch the lesson">
         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.6"/>
           <path d="M10 8.5L16 12L10 15.5V8.5Z" fill="currentColor"/>
         </svg>
-        <span>Assista à aula</span>
+        <span>Watch the lesson</span>
       </a>
     </div>
   </div>
 
-  <!-- ── CENA 2: Galeria de aplicações ── -->
+  <!-- ── SCENE 2: Gallery of Applications ── -->
   <div class="scene-wrap" id="sceneGaleria" style="display:none;">
     <div class="scene-inner">
-      <img src="../imagens/galeria-de-bohr.jpg" alt="Bancada com vela, lâmpada de neon, minerais fluorescentes, laser e vaga-lumes" class="scene-img">
+      <img src="../imagens/galeria-de-bohr.jpg" alt="Workbench with a candle, neon lamp, fluorescent minerals, laser and fireflies" class="scene-img">
       <div class="scene-overlay">
-        <div class="scene-overlay-title">Galeria de Aplicações</div>
-        <div class="scene-overlay-sub">Objetos da bancada</div>
+        <div class="scene-overlay-title">Gallery of Applications</div>
+        <div class="scene-overlay-sub">Objects on the workbench</div>
       </div>
-      <!-- Hotspot 1: vela com sal (teste de chama) — AJUSTE posições -->
+      <!-- Hotspot 1: candle with salt (flame test) — ADJUST positions -->
       <div class="gal-hotspot locked" id="gal-chama"
            style="left:5%;top:28%;width:14%;height:30%;"
            onclick="abrirTesteChama()">
-        <span class="gal-label">Teste de Chama</span>
+        <span class="gal-label">Flame Test</span>
       </div>
-      <!-- Hotspot 2: lâmpada de neon — AJUSTE posições -->
+      <!-- Hotspot 2: neon lamp — ADJUST positions -->
       <div class="gal-hotspot locked" id="gal-neon"
            style="left:19%;top:25%;width:16%;height:30%;"
            onclick="abrirNeon()">
         <span class="gal-label">Neon</span>
       </div>
-      <!-- Hotspot 3: vitrine de minerais fluorescentes — AJUSTE posições -->
+      <!-- Hotspot 3: fluorescent minerals display case — ADJUST positions -->
       <div class="gal-hotspot locked" id="gal-fluor"
            style="left:41%;top:20%;width:18%;height:55%;"
            onclick="abrirFluorescencia()">
-        <span class="gal-label">Minerais Fluorescentes</span>
+        <span class="gal-label">Fluorescent Minerals</span>
       </div>
-      <!-- Hotspot 4: laser — AJUSTE posições -->
+      <!-- Hotspot 4: laser — ADJUST positions -->
       <div class="gal-hotspot locked" id="gal-laser"
            style="left:64%;top:30%;width:16%;height:30%;"
            onclick="abrirLaser()">
         <span class="gal-label">Laser</span>
       </div>
-      <!-- Hotspot 5: vidro de vaga-lumes — AJUSTE posições -->
+      <!-- Hotspot 5: jar of fireflies — ADJUST positions -->
       <div class="gal-hotspot locked" id="gal-vagalume"
            style="left:85%;top:35%;width:17%;height:30%;"
            onclick="abrirVagalume()">
-        <span class="gal-label">Vaga-lumes</span>
+        <span class="gal-label">Fireflies</span>
       </div>
 
-      <!-- COLOQUE O LINK AQUI -->
-      <a class="link-aula" href="#" target="_blank" rel="noopener" title="Assista à aula">
+      <!-- PUT THE LINK HERE -->
+      <a class="link-aula" href="#" target="_blank" rel="noopener" title="Watch the lesson">
         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.6"/>
           <path d="M10 8.5L16 12L10 15.5V8.5Z" fill="currentColor"/>
         </svg>
-        <span>Assista à aula</span>
+        <span>Watch the lesson</span>
       </a>
     </div>
   </div>
 
-  <!-- ── PAINEL DIREITO ── -->
+  <!-- ── RIGHT PANEL ── -->
   <div class="panels-row">
 
     <div class="narr-box">
-      <div class="narr-eyebrow">Cápsula do Tempo — 1913</div>
+      <div class="narr-eyebrow">Time Capsule — 1913</div>
       <div class="narr" id="narr">
-        <strong>Bohr:</strong> <em>"Antes de começarmos, vamos revisitar o modelo de Rutherford. Segundo ele, o átomo seria como um pequeno sistema solar: um núcleo positivo e denso no centro, com elétrons orbitando ao seu redor. Esse modelo explicou muito bem o resultado do experimento da folha de ouro. Mas ele tem dois problemas sérios. Clique no cavalete para começarmos."</em>
+        <strong>Bohr:</strong> <em>"Before we begin, let's revisit Rutherford's model. According to him, the atom would be like a small solar system: a dense, positive nucleus at the center, with electrons orbiting around it. This model explained the result of the gold foil experiment very well. But it has two serious problems. Click on the easel to begin."</em>
       </div>
     </div>
 
     <div class="progresso-wrap">
-      <div class="progresso-title">Progresso na sala</div>
+      <div class="progresso-title">Room Progress</div>
       <div class="ato-item" id="ai-prob1">
         <div class="ato-dot"></div>
-        <div><div class="ato-nome">Problema 1 — Instabilidade do átomo</div><span class="ato-tag">por que o átomo não colapsa?</span></div>
+        <div><div class="ato-nome">Problem 1 — Instability of the Atom</div><span class="ato-tag">why doesn't the atom collapse?</span></div>
       </div>
       <div class="ato-item" id="ai-prob2">
         <div class="ato-dot"></div>
-        <div><div class="ato-nome">Problema 2 — Espectros discretos</div><span class="ato-tag">por que só certas cores?</span></div>
+        <div><div class="ato-nome">Problem 2 — Discrete Spectra</div><span class="ato-tag">why only certain colors?</span></div>
       </div>
       <div class="ato-item" id="ai-chama">
         <div class="ato-dot"></div>
-        <div><div class="ato-nome">Teste de chama</div><span class="ato-tag">cada elemento tem sua cor</span></div>
+        <div><div class="ato-nome">Flame Test</div><span class="ato-tag">each element has its own color</span></div>
       </div>
       <div class="ato-item" id="ai-post1">
         <div class="ato-dot"></div>
-        <div><div class="ato-nome">Postulado 1 — Órbitas estacionárias</div><span class="ato-tag">o átomo não colapsa</span></div>
+        <div><div class="ato-nome">Postulate 1 — Stationary Orbits</div><span class="ato-tag">the atom does not collapse</span></div>
       </div>
       <div class="ato-item" id="ai-post2">
         <div class="ato-dot"></div>
-        <div><div class="ato-nome">Postulado 2 — Quantização</div><span class="ato-tag">só certas energias são permitidas</span></div>
+        <div><div class="ato-nome">Postulate 2 — Quantization</div><span class="ato-tag">only certain energies are allowed</span></div>
       </div>
       <div class="ato-item" id="ai-post3">
         <div class="ato-dot"></div>
-        <div><div class="ato-nome">Postulado 3 — Absorção e emissão</div><span class="ato-tag">ΔE = h·v</span></div>
+        <div><div class="ato-nome">Postulate 3 — Absorption and Emission</div><span class="ato-tag">ΔE = h·v</span></div>
       </div>
       <div class="ato-item" id="ai-sim">
         <div class="ato-dot"></div>
-        <div><div class="ato-nome">Simulador de saltos quânticos</div><span class="ato-tag">quanto maior o salto, mais energético o fóton</span></div>
+        <div><div class="ato-nome">Quantum Jump Simulator</div><span class="ato-tag">the bigger the jump, the more energetic the photon</span></div>
       </div>
       <div class="ato-item" id="ai-galeria">
         <div class="ato-dot"></div>
-        <div><div class="ato-nome">Galeria de aplicações</div><span class="ato-tag">neon, fluorescência, laser, bioluminescência</span></div>
+        <div><div class="ato-nome">Gallery of Applications</div><span class="ato-tag">neon, fluorescence, laser, bioluminescence</span></div>
       </div>
       <div class="ato-item" id="ai-desafio">
         <div class="ato-dot"></div>
-        <div><div class="ato-nome">Desafio final</div><span class="ato-tag">identifique o elemento pela cor da chama</span></div>
+        <div><div class="ato-nome">Final Challenge</div><span class="ato-tag">identify the element by the flame's color</span></div>
       </div>
     </div>
 
   </div>
 </div>
 
-<!-- TELA FINAL -->
+<!-- FINAL SCREEN -->
 <div class="win-screen" id="winScreen">
-  <div class="win-title">O modelo quântico do átomo!</div>
-  <p class="win-sub">Você acompanhou Niels Bohr ao descobrir que os elétrons habitam apenas órbitas com energias definidas — e que cada transição entre níveis libera uma quantidade específica de energia, associada a frequências específicas de luz. Cada elemento possui uma assinatura espectral própria, determinada pelos seus próprios níveis de energia. Foi o primeiro passo rumo à mecânica quântica.</p>
+  <div class="win-title">The Quantum Model of the Atom!</div>
+  <p class="win-sub">You followed Niels Bohr as he discovered that electrons only inhabit orbits with defined energies — and that each transition between levels releases a specific amount of energy, associated with specific frequencies of light. Each element has its own spectral signature, determined by its own energy levels. It was the first step toward quantum mechanics.</p>
   <div class="win-badges">
-    <div class="badge"><div class="badge-icon">⚛️</div><div class="badge-label">Níveis quantizados</div></div>
-    <div class="badge"><div class="badge-icon">🌈</div><div class="badge-label">Espectros discretos</div></div>
+    <div class="badge"><div class="badge-icon">⚛️</div><div class="badge-label">Quantized levels</div></div>
+    <div class="badge"><div class="badge-icon">🌈</div><div class="badge-label">Discrete spectra</div></div>
     <div class="badge"><div class="badge-icon">💡</div><div class="badge-label">ΔE = h·v</div></div>
   </div>
   <div class="win-btns">
-    <button class="btn-restart" onclick="resetGame()">Reviver a sala</button>
+    <button class="btn-restart" onclick="resetGame()">Replay the room</button>
   </div>
 </div>
 
@@ -390,7 +390,7 @@
 
 <!-- ════════════════════════════ SCRIPT ════════════════════════════ -->
 <script>
-// ── ESTADO ────────────────────────────────────────────────────────────────────
+// ── STATE ────────────────────────────────────────────────────────────────────
 const estado = {
   prob1: false, prob2: false,
   chama: false,
@@ -399,13 +399,13 @@ const estado = {
   neon: false, fluor: false, laser: false, vagalume: false,
   desafio: false
 };
-// Estágio do cavalete: 'problema1' | 'solucao-bohr' | 'done'
+// Easel stage: 'problema1' | 'solucao-bohr' | 'done'
 let cavaleteStage = 'problema1';
 let simUsado = false;
 let simQuizFeito = false;
 let desafioTentativas = 0;
 
-// ── UTILITÁRIOS ───────────────────────────────────────────────────────────────
+// ── UTILITIES ───────────────────────────────────────────────────────────────
 function setNarr(html) { document.getElementById('narr').innerHTML = html; }
 function openOverlay() { document.getElementById('overlay').classList.add('show'); }
 function closeOverlay() { document.getElementById('overlay').classList.remove('show'); }
@@ -414,7 +414,7 @@ document.addEventListener('keydown', function(e) { if (e.key === 'Escape') close
 function tocarDing() { try { const a = new Audio('../sons/ding.mp3'); a.play().catch(() => {}); } catch(e) {} }
 function marcarAto(id) { document.getElementById(id)?.classList.add('done'); }
 
-// Hotspot do cavalete
+// Easel hotspot
 function ativarCavalete() {
   const el = document.getElementById('hs-cavalete');
   el.classList.remove('locked', 'done');
@@ -434,7 +434,7 @@ function marcarFeito(id) {
   el.style.pointerEvents = 'none';
 }
 
-// Hotspots da galeria
+// Gallery hotspots
 function ativarGalHotspot(id) {
   const el = document.getElementById(id);
   el.classList.remove('locked', 'done');
@@ -450,38 +450,38 @@ function marcarGalFeito(id) {
 
 function galeriaCompleta() { return estado.neon && estado.fluor && estado.laser && estado.vagalume; }
 
-// ── CAVALETE — DISPATCHER ────────────────────────────────────────────────────
+// ── EASEL — DISPATCHER ────────────────────────────────────────────────────
 function clicarCavalete() {
   if (cavaleteStage === 'problema1')    { abrirProblema1();    return; }
   if (cavaleteStage === 'solucao-bohr') { abrirSolucaoBohr(); return; }
 }
 
-// ── PROBLEMA 1 (cavalete, estágio inicial) ────────────────────────────────────
+// ── PROBLEM 1 (easel, initial stage) ────────────────────────────────────────
 function abrirProblema1() {
   document.getElementById('card').innerHTML = `
-    <button class="card-close" onclick="closeOverlay()" aria-label="Fechar">×</button>
+    <button class="card-close" onclick="closeOverlay()" aria-label="Close">×</button>
     <div class="card-fixed-top">
-      <div class="card-eyebrow">Problema 1 de 2</div>
-      <div class="card-title">A Instabilidade do Átomo</div>
+      <div class="card-eyebrow">Problem 1 of 2</div>
+      <div class="card-title">The Instability of the Atom</div>
       <div class="diagrama-wrap">${svgEspiral()}</div>
     </div>
     <div class="card-scroll-body">
       <div class="card-fala" style="margin-top:6px;">
-        <strong>Bohr:</strong> "Sabe-se que toda carga elétrica acelerada perde energia irradiando luz — e um elétron em órbita está <em>constantemente</em> acelerando."
+        <strong>Bohr:</strong> "It is known that every accelerated electric charge loses energy by radiating light — and an electron in orbit is <em>constantly</em> accelerating."
       </div>
       <div class="pergunta-box show">
-        <div class="pergunta-texto">Por que isso contradiz o modelo de Rutherford?</div>
-        <textarea class="resposta-input" id="respProb1" placeholder="Escreva sua hipótese..."></textarea>
-        <button class="btn-acao" id="btnRespProb1" onclick="responderProb1()">Responder a Bohr</button>
+        <div class="pergunta-texto">Why does this contradict Rutherford's model?</div>
+        <textarea class="resposta-input" id="respProb1" placeholder="Write your hypothesis..."></textarea>
+        <button class="btn-acao" id="btnRespProb1" onclick="responderProb1()">Answer Bohr</button>
       </div>
       <div class="conclusao-box" id="conclProb1">
-        <div class="conclusao-eyebrow">Bohr explica</div>
-        <div class="conclusao-texto">"Segundo a Física clássica, um elétron em movimento ao redor do núcleo deveria perder energia continuamente.
+        <div class="conclusao-eyebrow">Bohr explains</div>
+        <div class="conclusao-texto">"According to classical Physics, an electron moving around the nucleus should lose energy continuously.
 
-Se isso acontecesse, ele cairia sobre o núcleo e o átomo deixaria de existir.
+If that happened, it would fall onto the nucleus and the atom would cease to exist.
 
-Mas os átomos são estáveis. O que está faltando nessa explicação?"</div>
-        <button class="btn-continuar" id="btnConclProb1" onclick="concluirProb1()">Examinar o espectroscópio →</button>
+But atoms are stable. What is missing from this explanation?"</div>
+        <button class="btn-continuar" id="btnConclProb1" onclick="concluirProb1()">Examine the spectroscope →</button>
       </div>
     </div>`;
   openOverlay();
@@ -502,48 +502,48 @@ function concluirProb1() {
   closeOverlay();
   estado.prob1 = true;
   marcarAto('ai-prob1');
-  // Cavalete fica temporariamente done (sem novo conteúdo ainda)
+  // Easel temporarily becomes done (no new content yet)
   marcarFeito('hs-cavalete');
   cavaleteStage = 'esperando-prob2';
-  // Ativa o telescópio/espectroscópio
+  // Activates the telescope/spectroscope
   const tel = document.getElementById('hs-telescopio');
   tel.classList.remove('locked');
   tel.classList.add('active');
   tel.style.pointerEvents = '';
-  setNarr('<strong>Bohr:</strong> <em>"Muito bem. Mas há um segundo problema, ainda mais intrigante. Veja aquele espectroscópio ali na mesa."</em>');
+  setNarr('<strong>Bohr:</strong> <em>"Very good. But there is a second problem, even more intriguing. Look at that spectroscope on the table."</em>');
 }
 
-// ── PROBLEMA 2 (telescópio/espectroscópio) ────────────────────────────────────
+// ── PROBLEM 2 (telescope/spectroscope) ────────────────────────────────────────
 function clicarTelescópio() {
   if (!estado.prob1 || estado.prob2) return;
   document.getElementById('card').innerHTML = `
-    <button class="card-close" onclick="closeOverlay()" aria-label="Fechar">×</button>
+    <button class="card-close" onclick="closeOverlay()" aria-label="Close">×</button>
     <div class="card-fixed-top">
-      <div class="card-eyebrow">Problema 2 de 2</div>
-      <div class="card-title">Espectros que não deveriam existir</div>
+      <div class="card-eyebrow">Problem 2 of 2</div>
+      <div class="card-title">Spectra That Shouldn't Exist</div>
       <div class="diagrama-wrap">${svgEspectros()}</div>
     </div>
     <div class="card-scroll-body">
-      <div class="card-fala" style="margin-top:6px;"><strong>Bohr:</strong> "Bohr observa os resultados dos experimentos e parece intrigado."</div>
+      <div class="card-fala" style="margin-top:6px;"><strong>Bohr:</strong> "Bohr looks over the experiment results, seeming intrigued."</div>
       <div class="pergunta-box show">
-        <div class="pergunta-texto">"Se os elétrons pudessem ocupar qualquer órbita ao redor do núcleo, a energia emitida pelos átomos poderia assumir infinitos valores diferentes. Nesse caso, esperaríamos observar um espectro contínuo, com todas as cores aparecendo sem interrupções."
+        <div class="pergunta-texto">"If electrons could occupy any orbit around the nucleus, the energy emitted by atoms could take on infinite different values. In that case, we would expect to observe a continuous spectrum, with all colors appearing without interruption."
 
-"Mas quando os cientistas analisaram a luz emitida pelo hidrogênio, encontraram algo muito diferente..."
+"But when scientists analyzed the light emitted by hydrogen, they found something very different..."
 
-Compare os dois espectros acima. O que você percebe de diferente entre eles?</div>
-        <textarea class="resposta-input" id="respProb2" placeholder="Descreva o que observa..."></textarea>
-        <button class="btn-acao" id="btnRespProb2" onclick="responderProb2()">Responder a Bohr</button>
+Compare the two spectra above. What do you notice that's different between them?</div>
+        <textarea class="resposta-input" id="respProb2" placeholder="Describe what you observe..."></textarea>
+        <button class="btn-acao" id="btnRespProb2" onclick="responderProb2()">Answer Bohr</button>
       </div>
       <div class="conclusao-box" id="conclProb2">
-        <div class="conclusao-eyebrow">Bohr explica</div>
-        <div class="conclusao-texto">"O hidrogênio guarda um mistério."
+        <div class="conclusao-eyebrow">Bohr explains</div>
+        <div class="conclusao-texto">"Hydrogen holds a mystery."
 
-Se os elétrons pudessem ter qualquer energia, o átomo emitiria todas as cores possíveis.
+If electrons could have any energy, the atom would emit every possible color.
 
-Mas vemos apenas algumas cores específicas.
+But we only see a few specific colors.
 
-Por que apenas certas energias parecem ser permitidas?</div>
-        <button class="btn-continuar" id="btnConclProb2" onclick="concluirProb2()">Ir para a bancada →</button>
+Why do only certain energies seem to be allowed?</div>
+        <button class="btn-continuar" id="btnConclProb2" onclick="concluirProb2()">Go to the workbench →</button>
       </div>
     </div>`;
   openOverlay();
@@ -565,96 +565,96 @@ function concluirProb2() {
   estado.prob2 = true;
   marcarAto('ai-prob2');
   marcarFeito('hs-telescopio');
-  // Vai para galeria — apenas teste de chama disponível
+  // Go to gallery — only the flame test is available
   document.getElementById('sceneInvestigacao').style.display = 'none';
   document.getElementById('sceneGaleria').style.display = '';
   ativarGalHotspot('gal-chama');
-  setNarr('<strong>Bohr:</strong> <em>"Antes de eu te contar minha hipótese, quero que você veja isso com seus próprios olhos. Vá até a bancada e teste a chama com diferentes sais."</em>');
+  setNarr('<strong>Bohr:</strong> <em>"Before I tell you my hypothesis, I want you to see this with your own eyes. Go to the workbench and test the flame with different salts."</em>');
 }
 
-// ── TESTE DE CHAMA ────────────────────────────────────────────────────────────
+// ── FLAME TEST ────────────────────────────────────────────────────────────────
 function abrirTesteChama() {
   const revisita = estado.chama;
   const botaoAcao = revisita
     ? (galeriaCompleta() && !estado.desafio
-      ? '<button class="btn-continuar show" onclick="voltarDesafioAposChama()">Voltar ao desafio final →</button>'
-      : '<button class="btn-continuar show" onclick="closeOverlay()">Fechar</button>')
-    : '<button class="btn-continuar show" onclick="concluirChama()">Entendido — voltar ao cavalete →</button>';
+      ? '<button class="btn-continuar show" onclick="voltarDesafioAposChama()">Back to the final challenge →</button>'
+      : '<button class="btn-continuar show" onclick="closeOverlay()">Close</button>')
+    : '<button class="btn-continuar show" onclick="concluirChama()">Understood — back to the easel →</button>';
 
   document.getElementById('card').innerHTML = `
-    <button class="card-close" onclick="closeOverlay()" aria-label="Fechar">×</button>
+    <button class="card-close" onclick="closeOverlay()" aria-label="Close">×</button>
     <div class="card-fixed-top">
-      <div class="card-eyebrow">Galeria · Objeto 1</div>
-      <div class="card-title">Teste de Chama</div>
+      <div class="card-eyebrow">Gallery · Object 1</div>
+      <div class="card-title">Flame Test</div>
     </div>
     <div class="card-scroll-body">
-      <div class="card-fala"><strong>Bohr:</strong> "Quando um sal é aquecido na chama, seus elétrons absorvem energia e saltam para níveis mais altos. Ao retornarem, emitem luz em comprimentos de onda específicos. No teste de chama, observamos a cor predominante produzida por cada elemento."</div>
+      <div class="card-fala"><strong>Bohr:</strong> "When a salt is heated in the flame, its electrons absorb energy and jump to higher levels. As they return, they emit light at specific wavelengths. In the flame test, we observe the predominant color produced by each element."</div>
      <table class="flame-table">
   <thead>
     <tr>
-      <th>Elemento</th>
-      <th>Cor da chama</th>
+      <th>Element</th>
+      <th>Flame Color</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>Sódio</td>
+      <td>Sodium</td>
       <td>
         <span class="flame-swatch" style="background:#FFD200;"></span>
-        Amarelo intenso
+        Intense yellow
       </td>
     </tr>
 
     <tr>
-      <td>Potássio</td>
+      <td>Potassium</td>
       <td>
         <span class="flame-swatch" style="background:#7B2CBF;"></span>
-        Violeta
+        Violet
       </td>
     </tr>
 
     <tr>
-      <td>Cálcio</td>
+      <td>Calcium</td>
       <td>
         <span class="flame-swatch" style="background:#C94C1A;"></span>
-        Vermelho-tijolo
+        Brick red
       </td>
     </tr>
 
     <tr>
-      <td>Estrôncio</td>
+      <td>Strontium</td>
       <td>
         <span class="flame-swatch" style="background:#C0004B;"></span>
-        Carmim
+        Crimson
       </td>
     </tr>
 
     <tr>
-      <td>Bário</td>
+      <td>Barium</td>
       <td>
         <span class="flame-swatch" style="background:#4CCB3B;"></span>
-        Verde
+        Green
       </td>
     </tr>
 
     <tr>
-      <td>Cobre</td>
+      <td>Copper</td>
       <td>
         <span class="flame-swatch" style="background:#18B7B0;"></span>
-        Azul-esverdeado
+        Blue-green
       </td>
     </tr>
 
     <tr>
-      <td>Césio</td>
+      <td>Cesium</td>
       <td>
         <span class="flame-swatch" style="background:#5B7FFF;"></span>
-        Azul-violeta
+        Blue-violet
       </td>
     </tr>
   </tbody>
 </table>
-      <div class="card-fala"><strong>Bohr:</strong> "Veja: cada elemento produz um conjunto característico de emissões, como uma impressão digital. No teste de chama, percebemos principalmente a cor predominante. O hidrogênio não é uma exceção — esse comportamento aparece em todos os elementos. Guarde essa ideia; ela será útil mais à frente."</div>
+      <div class="card-fala"><strong>Bohr:</strong> "You see: each element produces a characteristic set of emissions, like a fingerprint. In the flame test, we mainly notice the predominant color. Hydrogen is no exception — this behavior appears in every element. Keep this idea in mind; it will be useful further ahead."</div>
       ${botaoAcao}
     </div>`;
   openOverlay();
@@ -676,15 +676,15 @@ function concluirChama() {
   estado.chama = true;
   marcarAto('ai-chama');
   marcarGalFeito('gal-chama');
-  // Volta para a cena de investigação — cavalete agora abre Postulado 1
+  // Back to the investigation scene — the easel now opens Postulate 1
   document.getElementById('sceneGaleria').style.display = 'none';
   document.getElementById('sceneInvestigacao').style.display = '';
   cavaleteStage = 'solucao-bohr';
   ativarCavalete();
-  setNarr('<strong>Bohr:</strong> <em>"Agora tenho uma hipótese para resolver os dois problemas. Volte ao cavalete uma última vez — vou organizar tudo em uma sequência."</em>');
+  setNarr('<strong>Bohr:</strong> <em>"Now I have a hypothesis to solve both problems. Go back to the easel one last time — I will lay it all out in a sequence."</em>');
 }
 
-// ── A SOLUÇÃO DE BOHR — card único com navegação interna ─────────────────────
+// ── BOHR'S SOLUTION — single card with internal navigation ─────────────────────
 function abrirSolucaoBohr() {
   mostrarTelaBohr(1);
   openOverlay();
@@ -699,60 +699,60 @@ function mostrarTelaBohr(tela) {
   let html = '';
   if (tela === 1) {
     html = `
-      <button class="card-close" onclick="closeOverlay()" aria-label="Fechar">×</button>
+      <button class="card-close" onclick="closeOverlay()" aria-label="Close">×</button>
       <div class="card-fixed-top">
-        <div class="card-eyebrow">A Solução de Bohr · Postulado 1 de 3</div>
-        <div class="card-title">Órbitas Estacionárias</div>
+        <div class="card-eyebrow">Bohr's Solution · Postulate 1 of 3</div>
+        <div class="card-title">Stationary Orbits</div>
         <div class="diagrama-wrap">${svgNiveisPost1()}</div>
       </div>
       <div class="card-scroll-body">
         <div class="card-fala" style="margin-top:6px;">
-          <strong>Bohr:</strong> "Para explicar por que os átomos não colapsam, fiz uma proposta ousada: os elétrons só podem ocupar certas órbitas específicas ao redor do núcleo.
+          <strong>Bohr:</strong> "To explain why atoms don't collapse, I made a bold proposal: electrons can only occupy certain specific orbits around the nucleus.
 
-Cada uma dessas órbitas possui uma energia bem definida. Enquanto permanecem nelas, os elétrons não emitem energia.
+Each of these orbits has a well-defined energy. As long as they remain in them, electrons do not emit energy.
 
-Assim, o elétron não perde energia continuamente e o átomo permanece estável."
+This way, the electron doesn't lose energy continuously and the atom remains stable."
         </div>
-        <button class="btn-continuar show" onclick="avancarBohr(2)">Próximo postulado →</button>
+        <button class="btn-continuar show" onclick="avancarBohr(2)">Next postulate →</button>
       </div>`;
   } else if (tela === 2) {
     tocarDing(); estado.post1 = true; marcarAto('ai-post1');
     html = `
-      <button class="card-close" onclick="closeOverlay()" aria-label="Fechar">×</button>
+      <button class="card-close" onclick="closeOverlay()" aria-label="Close">×</button>
       <div class="card-fixed-top">
-        <div class="card-eyebrow">A Solução de Bohr · Postulado 2 de 3</div>
-        <div class="card-title">Quantização das Energias</div>
+        <div class="card-eyebrow">Bohr's Solution · Postulate 2 of 3</div>
+        <div class="card-title">Quantization of Energies</div>
         <div class="diagrama-wrap">${svgNiveisPost2()}</div>
       </div>
       <div class="card-scroll-body">
         <div class="card-fala" style="margin-top:6px;">
-          <strong>Bohr:</strong> "Nem toda órbita é permitida — apenas algumas, com energias bem definidas. É como uma escada: você pode estar num degrau ou no outro, nunca entre eles. O elétron nunca tem uma energia intermediária. Isso explica o Problema 2: como só existem certos níveis permitidos, só existem certas <strong>diferenças de energia possíveis</strong> entre eles — e é exatamente isso que limita as frequências de luz que um átomo pode emitir."
+          <strong>Bohr:</strong> "Not every orbit is allowed — only some, with well-defined energies. It's like a staircase: you can be on one step or another, never in between. The electron never has an intermediate energy. This explains Problem 2: since only certain levels are allowed, only certain <strong>possible energy differences</strong> exist between them — and that is exactly what limits the frequencies of light an atom can emit."
         </div>
-        <button class="btn-continuar show" onclick="avancarBohr(3)">Último postulado →</button>
+        <button class="btn-continuar show" onclick="avancarBohr(3)">Last postulate →</button>
       </div>`;
   } else if (tela === 3) {
     tocarDing(); estado.post2 = true; marcarAto('ai-post2');
     html = `
-      <button class="card-close" onclick="closeOverlay()" aria-label="Fechar">×</button>
+      <button class="card-close" onclick="closeOverlay()" aria-label="Close">×</button>
       <div class="card-fixed-top">
-        <div class="card-eyebrow">A Solução de Bohr · Postulado 3 de 3</div>
-        <div class="card-title">Absorção e Emissão de Luz</div>
+        <div class="card-eyebrow">Bohr's Solution · Postulate 3 of 3</div>
+        <div class="card-title">Absorption and Emission of Light</div>
         <div class="diagrama-wrap">${svgNiveisPost3()}</div>
       </div>
       <div class="card-scroll-body">
         <div class="card-fala" style="margin-top:6px;">
-          <strong>Bohr:</strong> "Quando um elétron absorve energia, ele <strong>salta para um nível mais alto</strong>. Quando retorna a um nível mais baixo, libera essa energia na forma de luz. A energia desse fóton emitido é dada por: <strong>ΔE = h·v</strong>, onde <em>h</em> é a constante de Planck e <em>v</em> é a frequência da luz. Cada salto possível entre dois níveis libera uma quantidade específica de energia — e por isso, uma frequência específica de luz. Foi exatamente isso que você viu na chama há pouco."
+          <strong>Bohr:</strong> "When an electron absorbs energy, it <strong>jumps to a higher level</strong>. When it returns to a lower level, it releases that energy in the form of light. The energy of that emitted photon is given by: <strong>ΔE = h·v</strong>, where <em>h</em> is Planck's constant and <em>v</em> is the frequency of the light. Each possible jump between two levels releases a specific amount of energy — and therefore, a specific frequency of light. That is exactly what you just saw in the flame."
         </div>
-        <button class="btn-continuar show" onclick="avancarBohr(4)">Abrir simulador →</button>
+        <button class="btn-continuar show" onclick="avancarBohr(4)">Open simulator →</button>
       </div>`;
   } else if (tela === 4) {
     tocarDing(); estado.post3 = true; marcarAto('ai-post3');
     simUsado = false; simQuizFeito = false;
     html = `
-      <button class="card-close" onclick="closeOverlay()" aria-label="Fechar">×</button>
+      <button class="card-close" onclick="closeOverlay()" aria-label="Close">×</button>
       <div class="card-fixed-top">
-        <div class="card-eyebrow">A Solução de Bohr · Simulador</div>
-        <div class="card-title">Saltos Quânticos</div>
+        <div class="card-eyebrow">Bohr's Solution · Simulator</div>
+        <div class="card-title">Quantum Jumps</div>
         <div class="sim-svg-wrap" id="simSvgWrap">${svgSimulador(1, 3, 'neutro', null)}</div>
       </div>
       <div class="card-scroll-body" id="simBody">
@@ -772,7 +772,7 @@ Assim, o elétron não perde energia continuamente e o átomo permanece estável
             <option value="4">n = 4</option>
             <option value="5">n = 5</option>
           </select>
-          <button class="sim-btn" onclick="executarSalto()">Simular →</button>
+          <button class="sim-btn" onclick="executarSalto()">Simulate →</button>
         </div>
         <div id="simFeedback" style="font-family:'Lora',serif;font-size:16px;color:var(--paper-text);line-height:1.7;min-height:48px;margin-bottom:8px;"></div>
         <div id="simQuizWrap"></div>
@@ -783,19 +783,19 @@ Assim, o elétron não perde energia continuamente e o átomo permanece estável
   if (scrollBody) scrollBody.scrollTop = 0;
 }
 
-// ΔE qualitativo do modelo de Bohr: proporcional a |1/nf² − 1/ni²|
+// Qualitative ΔE of the Bohr model: proportional to |1/nf² − 1/ni²|
 function calcularDeltaBohr(nInicial, nFinal) {
   return Math.abs((1 / (nFinal * nFinal)) - (1 / (nInicial * nInicial)));
 }
 
-// Mapeamento didático qualitativo: ΔE → cor representativa
+// Qualitative didactic mapping: ΔE → representative color
 function corPorDeltaE(deltaE) {
-  if (deltaE > 0.60) return { cor: '#9b30d0', nome: 'ultravioleta (energia muito alta)' };
-  if (deltaE > 0.35) return { cor: '#7b2cbf', nome: 'violeta (energia alta)' };
-  if (deltaE > 0.18) return { cor: '#4488ff', nome: 'azul-violeta' };
-  if (deltaE > 0.10) return { cor: '#44cc44', nome: 'vermelho-visível' };
-  if (deltaE > 0.05) return { cor: '#e8b830', nome: 'infravermelho próximo' };
-  return                      { cor: '#e03030', nome: 'infravermelho (energia baixa)' };
+  if (deltaE > 0.60) return { cor: '#9b30d0', nome: 'ultraviolet (very high energy)' };
+  if (deltaE > 0.35) return { cor: '#7b2cbf', nome: 'violet (high energy)' };
+  if (deltaE > 0.18) return { cor: '#4488ff', nome: 'blue-violet' };
+  if (deltaE > 0.10) return { cor: '#44cc44', nome: 'visible red' };
+  if (deltaE > 0.05) return { cor: '#e8b830', nome: 'near infrared' };
+  return                      { cor: '#e03030', nome: 'infrared (low energy)' };
 }
 
 function executarSalto() {
@@ -803,17 +803,17 @@ function executarSalto() {
   const para = parseInt(document.getElementById('simPara').value);
   const fb   = document.getElementById('simFeedback');
   const svgW = document.getElementById('simSvgWrap');
-  if (de === para) { fb.innerHTML = '<em style="color:var(--paper-gold)">Escolha dois níveis diferentes.</em>'; return; }
+  if (de === para) { fb.innerHTML = '<em style="color:var(--paper-gold)">Choose two different levels.</em>'; return; }
   const emissao = de > para;
   const nI = emissao ? de : para;
   const nF = emissao ? para : de;
   const deltaE = calcularDeltaBohr(nI, nF);
   const info = corPorDeltaE(deltaE);
   svgW.innerHTML = svgSimulador(Math.min(de,para), Math.max(de,para), emissao ? 'emissao' : 'absorcao', info.cor);
-  const avisoDidatico = `<em style="font-size:13px;color:var(--paper-text-soft)"> (representação qualitativa — ΔE ∝ ${deltaE.toFixed(3)})</em>`;
+  const avisoDidatico = `<em style="font-size:13px;color:var(--paper-text-soft)"> (qualitative representation — ΔE ∝ ${deltaE.toFixed(3)})</em>`;
   fb.innerHTML = emissao
-    ? `<strong>Emissão:</strong> O elétron saltou de n=${de} para n=${para}. A energia liberada corresponde à faixa <strong style="color:${info.cor}">${info.nome}</strong>.${avisoDidatico}`
-    : `<strong>Absorção:</strong> O elétron absorveu energia e saltou de n=${de} para n=${para}. A energia absorvida corresponde à faixa <strong style="color:${info.cor}">${info.nome}</strong>.${avisoDidatico}`;
+    ? `<strong>Emission:</strong> The electron jumped from n=${de} to n=${para}. The energy released corresponds to the <strong style="color:${info.cor}">${info.nome}</strong> range.${avisoDidatico}`
+    : `<strong>Absorption:</strong> The electron absorbed energy and jumped from n=${de} to n=${para}. The energy absorbed corresponds to the <strong style="color:${info.cor}">${info.nome}</strong> range.${avisoDidatico}`;
   if (!simUsado) { simUsado = true; setTimeout(mostrarQuizSim, 900); }
 }
 
@@ -822,15 +822,15 @@ function mostrarQuizSim() {
   const w = document.getElementById('simQuizWrap');
   w.innerHTML = `
     <div style="font-family:'Lora',serif;font-size:17px;font-weight:600;color:var(--paper-text);margin-bottom:14px;line-height:1.7;">
-      Qual desses saltos libera luz com <strong>mais energia</strong>?
+      Which of these jumps releases light with <strong>more energy</strong>?
     </div>
     <button class="btn-opcao" id="simQA" onclick="responderQuizSim('A')">
-      <strong style="font-size:11px;letter-spacing:.08em;opacity:0.6;display:block;margin-bottom:4px;">OPÇÃO A</strong>
-      De n=2 para n=1 (salto curto)
+      <strong style="font-size:11px;letter-spacing:.08em;opacity:0.6;display:block;margin-bottom:4px;">OPTION A</strong>
+      From n=2 to n=1 (short jump)
     </button>
     <button class="btn-opcao" id="simQB" onclick="responderQuizSim('B')">
-      <strong style="font-size:11px;letter-spacing:.08em;opacity:0.6;display:block;margin-bottom:4px;">OPÇÃO B</strong>
-      De n=4 para n=1 (salto longo)
+      <strong style="font-size:11px;letter-spacing:.08em;opacity:0.6;display:block;margin-bottom:4px;">OPTION B</strong>
+      From n=4 to n=1 (long jump)
     </button>
     <div class="quiz-feedback" id="fbSimQuiz"></div>`;
   w.scrollIntoView({ behavior:'smooth', block:'nearest' });
@@ -844,15 +844,15 @@ function responderQuizSim(opc) {
     simQuizFeito = true;
     fb.className = 'quiz-feedback show ok';
     fb.innerHTML = `
-      <div class="conclusao-eyebrow">Bohr confirma</div>
-      <div class="conclusao-texto">"Correto! No modelo de Bohr, a energia emitida depende da diferença entre as energias dos níveis envolvidos, não apenas da distância numérica entre eles. Para o hidrogênio, essa diferença é proporcional a |1/n<sub>f</sub>² − 1/n<sub>i</sub>²|. O salto de n=4 para n=1 libera mais energia do que o salto de n=2 para n=1."</div>
-      <button class="btn-continuar show" style="margin-top:12px;" onclick="concluirSimulador()">Explorar a galeria de aplicações →</button>`;
+      <div class="conclusao-eyebrow">Bohr confirms</div>
+      <div class="conclusao-texto">"Correct! In the Bohr model, the energy emitted depends on the difference between the energies of the levels involved, not just the numerical distance between them. For hydrogen, this difference is proportional to |1/n<sub>f</sub>² − 1/n<sub>i</sub>²|. The jump from n=4 to n=1 releases more energy than the jump from n=2 to n=1."</div>
+      <button class="btn-continuar show" style="margin-top:12px;" onclick="concluirSimulador()">Explore the gallery of applications →</button>`;
   } else {
     fb.className = 'quiz-feedback show err';
     fb.innerHTML = `
-      <div class="conclusao-eyebrow">Bohr comenta</div>
-      <div class="conclusao-texto">"Pense na equação ΔE = h·v: quanto maior a diferença de energia entre os dois níveis, mais energético o fóton. Um salto de n=4 para n=1 atravessa três níveis de distância; o de n=2 para n=1, apenas um. Tente novamente."</div>
-      <button class="btn-acao" style="margin-top:8px;" onclick="resetQuizSim()">Tentar novamente →</button>`;
+      <div class="conclusao-eyebrow">Bohr comments</div>
+      <div class="conclusao-texto">"Think about the equation ΔE = h·v: the bigger the energy difference between the two levels, the more energetic the photon. A jump from n=4 to n=1 spans three levels of distance; the one from n=2 to n=1, only one. Try again."</div>
+      <button class="btn-acao" style="margin-top:8px;" onclick="resetQuizSim()">Try again →</button>`;
   }
   fb.scrollIntoView({ behavior:'smooth', block:'nearest' });
 }
@@ -870,7 +870,7 @@ function concluirSimulador() {
   marcarAto('ai-sim');
   cavaleteStage = 'done';
   marcarFeito('hs-cavalete');
-  // Galeria com os 4 objetos restantes
+  // Gallery with the 4 remaining objects
   document.getElementById('sceneInvestigacao').style.display = 'none';
   document.getElementById('sceneGaleria').style.display = '';
   const chama = document.getElementById('gal-chama');
@@ -881,21 +881,21 @@ function concluirSimulador() {
   ativarGalHotspot('gal-fluor');
   ativarGalHotspot('gal-laser');
   ativarGalHotspot('gal-vagalume');
-  setNarr('<strong>Bohr:</strong> <em>"Excelente. Agora explore os objetos da bancada. Os mesmos princípios aparecem em fenômenos muito diferentes."</em>');
+  setNarr('<strong>Bohr:</strong> <em>"Excellent. Now explore the objects on the workbench. The same principles appear in very different phenomena."</em>');
 }
 
-// ── GALERIA — 4 objetos ───────────────────────────────────────────────────────
+// ── GALLERY — 4 objects ───────────────────────────────────────────────────────
 function abrirNeon() {
   if (!estado.simulador || estado.neon) return;
   document.getElementById('card').innerHTML = `
-    <button class="card-close" onclick="closeOverlay()" aria-label="Fechar">×</button>
+    <button class="card-close" onclick="closeOverlay()" aria-label="Close">×</button>
     <div class="card-fixed-top">
-      <div class="card-eyebrow">Galeria · Objeto 2</div>
-      <div class="card-title">Lâmpada de Neon</div>
+      <div class="card-eyebrow">Gallery · Object 2</div>
+      <div class="card-title">Neon Lamp</div>
     </div>
     <div class="card-scroll-body">
-      <div class="card-fala"><strong>Bohr:</strong> "Aqui, em vez de calor, é <strong>eletricidade</strong> que fornece energia aos elétrons do gás neon. Eles saltam de nível, e ao retornar, emitem essa luz vermelho-alaranjada característica — o mesmo princípio do teste de chama, só que a fonte de energia é diferente."</div>
-      <button class="btn-continuar show" onclick="concluirObjeto('neon','gal-neon')">Continuar →</button>
+      <div class="card-fala"><strong>Bohr:</strong> "Here, instead of heat, it is <strong>electricity</strong> that supplies energy to the electrons of the neon gas. They jump levels, and as they return, they emit that characteristic reddish-orange light — the same principle as the flame test, only the energy source is different."</div>
+      <button class="btn-continuar show" onclick="concluirObjeto('neon','gal-neon')">Continue →</button>
     </div>`;
   openOverlay();
 }
@@ -903,21 +903,21 @@ function abrirNeon() {
 function abrirFluorescencia() {
   if (!estado.simulador || estado.fluor) return;
   document.getElementById('card').innerHTML = `
-    <button class="card-close" onclick="closeOverlay()" aria-label="Fechar">×</button>
+    <button class="card-close" onclick="closeOverlay()" aria-label="Close">×</button>
     <div class="card-fixed-top">
-      <div class="card-eyebrow">Galeria · Objeto 3</div>
-      <div class="card-title">Minerais Fluorescentes</div>
+      <div class="card-eyebrow">Gallery · Object 3</div>
+      <div class="card-title">Fluorescent Minerals</div>
     </div>
     <div class="card-scroll-body">
       <div class="uv-toggle-wrap">
         <input type="checkbox" class="uv-toggle" id="uvToggle" onchange="toggleUV(this)">
-        <label class="uv-label" for="uvToggle">Luz UV ligada</label>
+        <label class="uv-label" for="uvToggle">UV light on</label>
       </div>
       <div id="uvDemo" style="background:#0a0a18;border-radius:8px;padding:20px;margin:12px 0;text-align:center;min-height:70px;transition:background .4s;">
-        <span id="uvSpan" style="font-family:'Lora',serif;font-size:15px;color:rgba(200,200,200,0.3);transition:all .4s;">Minerais sem brilho</span>
+        <span id="uvSpan" style="font-family:'Lora',serif;font-size:15px;color:rgba(200,200,200,0.3);transition:all .4s;">Minerals not glowing</span>
       </div>
-      <div class="card-fala"><strong>Bohr:</strong> "Sob luz ultravioleta, estes minerais absorvem energia e a reemitem como luz visível — um fenômeno chamado <strong>fluorescência</strong>. Repare: assim que a luz UV se apaga, a maioria para de brilhar imediatamente. Alguns materiais, porém, continuam brilhando por mais tempo depois — chamamos isso de <strong>fosforescência</strong>, quando os elétrons demoram mais para retornar ao seu nível original."</div>
-      <button class="btn-continuar show" onclick="concluirObjeto('fluor','gal-fluor')">Continuar →</button>
+      <div class="card-fala"><strong>Bohr:</strong> "Under ultraviolet light, these minerals absorb energy and re-emit it as visible light — a phenomenon called <strong>fluorescence</strong>. Notice: as soon as the UV light turns off, most stop glowing immediately. Some materials, however, keep glowing for longer afterward — we call this <strong>phosphorescence</strong>, when the electrons take longer to return to their original level."</div>
+      <button class="btn-continuar show" onclick="concluirObjeto('fluor','gal-fluor')">Continue →</button>
     </div>`;
   openOverlay();
 }
@@ -928,12 +928,12 @@ function toggleUV(cb) {
   if (cb.checked) {
     demo.style.background = '#0a001a';
     span.style.color = '#00ffcc';
-    span.textContent = '✦ Minerais brilhando sob UV ✦';
+    span.textContent = '✦ Minerals glowing under UV ✦';
     span.style.textShadow = '0 0 12px #00ffcc, 0 0 28px #7b00ff';
   } else {
     demo.style.background = '#0a0a18';
     span.style.color = 'rgba(200,200,200,0.3)';
-    span.textContent = 'Minerais sem brilho';
+    span.textContent = 'Minerals not glowing';
     span.style.textShadow = 'none';
   }
 }
@@ -941,14 +941,14 @@ function toggleUV(cb) {
 function abrirLaser() {
   if (!estado.simulador || estado.laser) return;
   document.getElementById('card').innerHTML = `
-    <button class="card-close" onclick="closeOverlay()" aria-label="Fechar">×</button>
+    <button class="card-close" onclick="closeOverlay()" aria-label="Close">×</button>
     <div class="card-fixed-top">
-      <div class="card-eyebrow">Galeria · Objeto 4</div>
+      <div class="card-eyebrow">Gallery · Object 4</div>
       <div class="card-title">Laser</div>
     </div>
     <div class="card-scroll-body">
-      <div class="card-fala"><strong>Bohr:</strong> "Este aparelho produz luz de uma cor muito pura — luz praticamente <strong>monocromática</strong>. Isso acontece porque a emissão é estimulada: fótons já presentes induzem outros átomos ou moléculas excitados a emitir fótons com a mesma energia, direção e fase. Por isso, a luz do laser é tão organizada."</div>
-      <button class="btn-continuar show" onclick="concluirObjeto('laser','gal-laser')">Continuar →</button>
+      <div class="card-fala"><strong>Bohr:</strong> "This device produces light of a very pure color — practically <strong>monochromatic</strong> light. This happens because the emission is stimulated: photons already present induce other excited atoms or molecules to emit photons with the same energy, direction and phase. That is why laser light is so organized."</div>
+      <button class="btn-continuar show" onclick="concluirObjeto('laser','gal-laser')">Continue →</button>
     </div>`;
   openOverlay();
 }
@@ -956,14 +956,14 @@ function abrirLaser() {
 function abrirVagalume() {
   if (!estado.simulador || estado.vagalume) return;
   document.getElementById('card').innerHTML = `
-    <button class="card-close" onclick="closeOverlay()" aria-label="Fechar">×</button>
+    <button class="card-close" onclick="closeOverlay()" aria-label="Close">×</button>
     <div class="card-fixed-top">
-      <div class="card-eyebrow">Galeria · Objeto 5</div>
-      <div class="card-title">Vaga-lumes</div>
+      <div class="card-eyebrow">Gallery · Object 5</div>
+      <div class="card-title">Fireflies</div>
     </div>
     <div class="card-scroll-body">
-      <div class="card-fala"><strong>Bohr:</strong> "E aqui, a energia não vem nem do calor, nem da eletricidade — vem de uma <strong>reação química</strong> dentro do corpo do inseto. Essa energia é liberada em forma de luz em um processo chamado <strong>bioluminescência</strong>. Assim como nos outros exemplos, a luz emitida está relacionada a mudanças de energia em moléculas."</div>
-      <button class="btn-continuar show" onclick="concluirObjeto('vagalume','gal-vagalume')">Continuar →</button>
+      <div class="card-fala"><strong>Bohr:</strong> "And here, the energy comes from neither heat nor electricity — it comes from a <strong>chemical reaction</strong> inside the insect's body. This energy is released as light in a process called <strong>bioluminescence</strong>. As in the other examples, the emitted light is related to energy changes in molecules."</div>
+      <button class="btn-continuar show" onclick="concluirObjeto('vagalume','gal-vagalume')">Continue →</button>
     </div>`;
   openOverlay();
 }
@@ -975,27 +975,27 @@ function concluirObjeto(chave, galId) {
   marcarGalFeito(galId);
   if (galeriaCompleta()) {
     marcarAto('ai-galeria');
-    setNarr('<strong>Bohr:</strong> <em>"Você explorou todos os objetos. Há um padrão em comum: em todos os casos, elétrons saltando entre níveis de energia específicos. Agora o desafio final."</em>');
+    setNarr('<strong>Bohr:</strong> <em>"You explored every object. There is a common pattern: in every case, electrons jumping between specific energy levels. Now, the final challenge."</em>');
     setTimeout(abrirDesafioFinal, 900);
   }
 }
 
-// ── DESAFIO FINAL ─────────────────────────────────────────────────────────────
+// ── FINAL CHALLENGE ─────────────────────────────────────────────────────────────
 function abrirDesafioFinal() {
   desafioTentativas = 0;
   document.getElementById('card').innerHTML = `
-    <button class="card-close" onclick="closeOverlay()" aria-label="Fechar">×</button>
+    <button class="card-close" onclick="closeOverlay()" aria-label="Close">×</button>
     <div class="card-fixed-top">
-      <div class="card-eyebrow">Desafio Final — Trava de Saída</div>
-      <div class="card-title">Identifique o Elemento</div>
+      <div class="card-eyebrow">Final Challenge — Exit Lock</div>
+      <div class="card-title">Identify the Element</div>
     </div>
     <div class="card-scroll-body">
-      <div class="card-fala"><strong>Bohr:</strong> "Para sair, você vai precisar aplicar o que aprendeu. Testei uma amostra desconhecida na chama, e ela ficou com uma cor <strong style="color:#cc0044">vermelho-carmim</strong> bem característica. Qual elemento é esse?"</div>
+      <div class="card-fala"><strong>Bohr:</strong> "To leave, you'll need to apply what you learned. I tested an unknown sample in the flame, and it turned a very characteristic <strong style="color:#cc0044">crimson red</strong> color. Which element is this?"</div>
       <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:16px;">
-        <button class="btn-opcao" id="df-A" onclick="responderDesafio('A')"><strong style="font-size:11px;letter-spacing:.08em;opacity:0.6;display:block;margin-bottom:4px;">A</strong>Sódio</button>
-        <button class="btn-opcao" id="df-B" onclick="responderDesafio('B')"><strong style="font-size:11px;letter-spacing:.08em;opacity:0.6;display:block;margin-bottom:4px;">B</strong>Cálcio</button>
-        <button class="btn-opcao" id="df-C" onclick="responderDesafio('C')"><strong style="font-size:11px;letter-spacing:.08em;opacity:0.6;display:block;margin-bottom:4px;">C</strong>Estrôncio</button>
-        <button class="btn-opcao" id="df-D" onclick="responderDesafio('D')"><strong style="font-size:11px;letter-spacing:.08em;opacity:0.6;display:block;margin-bottom:4px;">D</strong>Bário</button>
+        <button class="btn-opcao" id="df-A" onclick="responderDesafio('A')"><strong style="font-size:11px;letter-spacing:.08em;opacity:0.6;display:block;margin-bottom:4px;">A</strong>Sodium</button>
+        <button class="btn-opcao" id="df-B" onclick="responderDesafio('B')"><strong style="font-size:11px;letter-spacing:.08em;opacity:0.6;display:block;margin-bottom:4px;">B</strong>Calcium</button>
+        <button class="btn-opcao" id="df-C" onclick="responderDesafio('C')"><strong style="font-size:11px;letter-spacing:.08em;opacity:0.6;display:block;margin-bottom:4px;">C</strong>Strontium</button>
+        <button class="btn-opcao" id="df-D" onclick="responderDesafio('D')"><strong style="font-size:11px;letter-spacing:.08em;opacity:0.6;display:block;margin-bottom:4px;">D</strong>Barium</button>
       </div>
       <div class="quiz-feedback" id="fbDesafio"></div>
     </div>`;
@@ -1009,25 +1009,25 @@ function responderDesafio(opc) {
     tocarDing();
     fb.className = 'quiz-feedback show ok';
     fb.innerHTML = `
-      <div class="conclusao-eyebrow">Bohr confirma</div>
-      <div class="conclusao-texto">"Correto — é o <strong>Estrôncio</strong>! Sua chama é carmim, um vermelho vivo e intenso. Já o Cálcio produz vermelho-tijolo, uma tonalidade mais opaca e acastanhada — cores próximas, mas distintas para um olho treinado. Cada elemento tem uma assinatura de luz única, determinada pelos seus próprios níveis de energia. Esse conhecimento é o coração do modelo atômico que construímos hoje."</div>
-      <button class="btn-continuar show" style="margin-top:12px;" onclick="concluirSala()">Sair do laboratório →</button>`;
+      <div class="conclusao-eyebrow">Bohr confirms</div>
+      <div class="conclusao-texto">"Correct — it's <strong>Strontium</strong>! Its flame is crimson, a vivid, intense red. Calcium, on the other hand, produces brick red, a more muted, brownish shade — close colors, but distinct to a trained eye. Each element has a unique light signature, determined by its own energy levels. This knowledge is the heart of the atomic model we built today."</div>
+      <button class="btn-continuar show" style="margin-top:12px;" onclick="concluirSala()">Leave the laboratory →</button>`;
     estado.desafio = true;
     marcarAto('ai-desafio');
   } else if (opc === 'B') {
     fb.className = 'quiz-feedback show err';
     fb.innerHTML = `
-      <div class="conclusao-eyebrow">Bohr comenta</div>
-      <div class="conclusao-texto">"O Cálcio também produz uma chama de tonalidade vermelha — mas o seu vermelho é <em>tijolo</em>, mais opaco e acastanhado. A amostra que testei tinha um vermelho <strong>carmim</strong>, mais vivo e intenso. Observe as cores com atenção e tente novamente."</div>
-      <button class="btn-acao" style="margin-top:10px;" onclick="tentarDesafioNovamente()">Tentar novamente →</button>
-      <button class="btn-acao" style="margin-top:8px;" onclick="refazerTesteChama()">Refaça o teste de chama →</button>`;
+      <div class="conclusao-eyebrow">Bohr comments</div>
+      <div class="conclusao-texto">"Calcium also produces a reddish flame — but its red is <em>brick</em>, more muted and brownish. The sample I tested had a <strong>crimson</strong> red, more vivid and intense. Look closely at the colors and try again."</div>
+      <button class="btn-acao" style="margin-top:10px;" onclick="tentarDesafioNovamente()">Try again →</button>
+      <button class="btn-acao" style="margin-top:8px;" onclick="refazerTesteChama()">Redo the flame test →</button>`;
   } else {
     fb.className = 'quiz-feedback show err';
     fb.innerHTML = `
-      <div class="conclusao-eyebrow">Bohr comenta</div>
-      <div class="conclusao-texto">"Não foi dessa vez. Revise a tabela do teste de chama e preste atenção nas cores de cada elemento. Cada um emite luz em frequências únicas — essa diferença é a chave para identificá-los."</div>
-      <button class="btn-acao" style="margin-top:10px;" onclick="tentarDesafioNovamente()">Tentar novamente →</button>
-      <button class="btn-acao" style="margin-top:8px;" onclick="refazerTesteChama()">Refaça o teste de chama →</button>`;
+      <div class="conclusao-eyebrow">Bohr comments</div>
+      <div class="conclusao-texto">"Not this time. Review the flame test table and pay attention to the colors of each element. Each one emits light at unique frequencies — that difference is the key to identifying them."</div>
+      <button class="btn-acao" style="margin-top:10px;" onclick="tentarDesafioNovamente()">Try again →</button>
+      <button class="btn-acao" style="margin-top:8px;" onclick="refazerTesteChama()">Redo the flame test →</button>`;
   }
   fb.scrollIntoView({ behavior:'smooth', block:'nearest' });
 }
@@ -1038,7 +1038,7 @@ function tentarDesafioNovamente() {
   document.getElementById('fbDesafio').innerHTML = '';
 }
 
-// ── CONCLUSÃO DA SALA ─────────────────────────────────────────────────────────
+// ── ROOM CONCLUSION ─────────────────────────────────────────────────────────────
 function concluirSala() {
   closeOverlay();
   localStorage.setItem('kifacil_bohr_ok', '1');
@@ -1072,14 +1072,14 @@ function resetGame() {
 
   document.getElementById('winScreen').classList.remove('show');
   document.getElementById('mainScreen').style.display = '';
-  setNarr('<strong>Bohr:</strong> <em>"Antes de começarmos, vamos revisitar o modelo de Rutherford. Segundo ele, o átomo seria como um pequeno sistema solar: um núcleo positivo e denso no centro, com elétrons orbitando ao seu redor. Esse modelo explicou muito bem o resultado do experimento da folha de ouro. Mas ele tem dois problemas sérios. Clique no cavalete para começarmos."</em>');
+  setNarr('<strong>Bohr:</strong> <em>"Before we begin, let\'s revisit Rutherford\'s model. According to him, the atom would be like a small solar system: a dense, positive nucleus at the center, with electrons orbiting around it. This model explained the result of the gold foil experiment very well. But it has two serious problems. Click on the easel to begin."</em>');
 }
 
 // ════════════════════════════════════════════════════════════
-// SVGs — aparecem APENAS dentro dos cards modais
+// SVGs — appear ONLY inside the modal cards
 // ════════════════════════════════════════════════════════════
 
-// Espiral de colapso — card do Problema 1
+// Collapse spiral — Problem 1 card
 function svgEspiral() {
   return `<div class="diagrama-svg-wrap">
 <svg viewBox="0 0 380 210" xmlns="http://www.w3.org/2000/svg">
@@ -1090,7 +1090,7 @@ function svgEspiral() {
   </defs>
 
   <path d="M 268.0,105.0 L 266.6,116.1 L 263.7,126.8 L 259.3,136.9 L 253.6,146.2 L 246.6,154.5 L 238.6,161.7 L 229.7,167.6 L 220.1,172.1 L 210.1,175.2 L 199.7,176.8 L 189.4,177.0 L 179.1,175.6 L 169.3,172.8 L 160.0,168.7 L 151.5,163.3 L 143.9,156.8 L 137.3,149.4 L 131.9,141.1 L 127.8,132.2 L 125.0,122.9 L 123.6,113.4 L 123.6,103.8 L 124.9,94.4 L 127.6,85.3 L 131.5,76.8 L 136.5,69.0 L 142.6,62.0 L 149.5,56.0 L 157.2,51.1 L 165.4,47.4 L 174.0,44.9 L 182.8,43.7 L 191.6,43.7 L 200.3,45.1 L 208.7,47.6 L 216.5,51.2 L 223.7,55.9 L 230.0,61.6 L 235.5,68.0 L 240.0,75.1 L 243.3,82.8 L 245.6,90.7 L 246.6,98.9 L 246.5,107.0 L 245.2,115.0 L 242.8,122.7 L 239.4,129.9 L 235.0,136.5 L 229.7,142.3 L 223.7,147.3 L 217.1,151.4 L 210.1,154.4 L 202.7,156.4 L 195.2,157.3 L 187.7,157.1 L 180.3,155.9 L 173.2,153.6 L 166.6,150.4 L 160.6,146.3 L 155.2,141.4 L 150.7,135.8 L 147.0,129.7 L 144.3,123.1 L 142.5,116.3 L 141.7,109.3 L 141.9,102.4 L 143.1,95.6 L 145.3,89.1 L 148.3,83.1 L 152.2,77.5 L 156.7,72.6 L 161.9,68.5 L 167.6,65.1 L 173.7,62.6 L 180.0,61.1 L 186.4,60.4 L 192.8,60.7 L 199.0,61.8 L 205.0,63.9 L 210.6,66.7 L 215.7,70.3 L 220.1,74.6 L 223.9,79.4 L 227.0,84.7 L 229.2,90.3 L 230.6,96.1 L 231.2,102.0 L 230.9,107.9 L 229.7,113.7 L 227.8,119.2 L 225.1,124.3 L 221.8,129.0 L 217.8,133.1 L 213.3,136.5 L 208.4,139.3 L 203.3,141.3 L 197.9,142.6 L 192.4,143.0 L 186.9,142.7 L 181.6,141.6 L 176.6,139.8 L 171.9,137.3 L 167.6,134.1 L 163.9,130.4 L 160.7,126.3 L 158.2,121.7 L 156.4,116.9 L 155.3,111.9 L 154.9,106.9 L 155.3,101.9 L 156.3,97.0 L 158.0,92.3 L 160.4,88.0 L 163.3,84.1 L 166.8,80.7 L 170.6,77.8 L 174.8,75.5 L 179.3,73.9 L 183.9,72.9 L 188.5,72.6 L 193.2,73.0 L 197.7,74.0 L 201.9,75.6 L 205.9,77.8 L 209.5,80.6 L 212.6,83.8 L 215.2,87.3 L 217.3,91.2 L 218.8,95.4 L 219.7,99.6 L 219.9,103.9 L 219.5,108.2 L 218.6,112.3 L 217.0,116.3 L 214.9,119.9 L 212.4,123.2 L 209.4,126.0 L 206.1,128.4 L 202.5,130.3 L 198.7,131.6"
-        fill="none" stroke="#8b5e1a" stroke-width="1.6" stroke-linecap="round" opacity="0.9"/>
+    fill="none" stroke="#8b5e1a" stroke-width="1.6" stroke-linecap="round" opacity="0.9"/>
 
   <line x1="198.7" y1="131.6" x2="176.0" y2="127.9" stroke="#8b5e1a" stroke-width="1.6" stroke-linecap="round" marker-end="url(#arrowSpiral)"/>
 
@@ -1101,22 +1101,22 @@ function svgEspiral() {
   <circle cx="268" cy="105" r="3.9" fill="none" stroke="#8b5e1a" stroke-width="0.8"/>
 
   <line x1="272.1" y1="99.5" x2="301.8" y2="78.2" stroke="#8b5e1a" stroke-width="0.5" stroke-dasharray="2 2"/>
-  <text x="304" y="80" font-family="Libre Baskerville, serif" font-size="9" fill="#3d2010">elétron</text>
-  <text x="304" y="91" font-family="Libre Baskerville, serif" font-size="8" fill="#8b5e1a">posição inicial</text>
+  <text x="304" y="80" font-family="Libre Baskerville, serif" font-size="9" fill="#3d2010">electron</text>
+  <text x="304" y="91" font-family="Libre Baskerville, serif" font-size="8" fill="#8b5e1a">initial position</text>
 
   <line x1="190" y1="97.8" x2="190" y2="33.5" stroke="#8b5e1a" stroke-width="0.5" stroke-dasharray="2 2"/>
-  <text x="190" y="27" font-family="Libre Baskerville, serif" font-size="9" fill="#3d2010" text-anchor="middle">núcleo (+)</text>
+  <text x="190" y="27" font-family="Libre Baskerville, serif" font-size="9" fill="#3d2010" text-anchor="middle">nucleus (+)</text>
 
   <line x1="125.7" y1="136.9" x2="83.8" y2="162.1" stroke="#8b5e1a" stroke-width="0.5" stroke-dasharray="2 2"/>
-  <text x="33.5" y="170.4" font-family="Libre Baskerville, serif" font-size="8" fill="#8b5e1a">perde energia</text>
-  <text x="33.5" y="180.8" font-family="Libre Baskerville, serif" font-size="8" fill="#8b5e1a">a cada volta</text>
+  <text x="33.5" y="170.4" font-family="Libre Baskerville, serif" font-size="8" fill="#8b5e1a">loses energy</text>
+  <text x="33.5" y="180.8" font-family="Libre Baskerville, serif" font-size="8" fill="#8b5e1a">on each loop</text>
 
-  <text x="190" y="200" font-family="Libre Baskerville, serif" font-size="8" fill="#8b5e1a" text-anchor="middle" font-style="italic">previsão clássica: colapso em frações de segundo</text>
+  <text x="190" y="200" font-family="Libre Baskerville, serif" font-size="8" fill="#8b5e1a" text-anchor="middle" font-style="italic">classical prediction: collapse within fractions of a second</text>
 </svg>
 </div>`;
 }
 
-// Espectro contínuo vs espectro de linhas — card do Problema 2
+// Continuous spectrum vs. line spectrum — Problem 2 card
 function svgEspectros() {
   return `<div class="diagrama-svg-wrap">
 <svg viewBox="0 0 380 210" xmlns="http://www.w3.org/2000/svg">
@@ -1132,27 +1132,27 @@ function svgEspectros() {
     </linearGradient>
   </defs>
 
-  <text x="190" y="51" font-family="Libre Baskerville, serif" font-size="10" fill="#3d2010" text-anchor="middle" font-weight="bold">Espectro contínuo (hipotético)</text>
+  <text x="190" y="51" font-family="Libre Baskerville, serif" font-size="10" fill="#3d2010" text-anchor="middle" font-weight="bold">Continuous spectrum (hypothetical)</text>
   <rect x="33.5" y="59" width="312.9" height="24.6" rx="3" fill="url(#rainbow)"/>
-  <text x="190" y="94" font-family="Libre Baskerville, serif" font-size="8" fill="#8b5e1a" text-anchor="middle" font-style="italic">esperado se qualquer órbita fosse permitida</text>
+  <text x="190" y="94" font-family="Libre Baskerville, serif" font-size="8" fill="#8b5e1a" text-anchor="middle" font-style="italic">expected if any orbit were allowed</text>
 
-  <text x="190" y="118" font-family="Libre Baskerville, serif" font-size="10" fill="#3d2010" text-anchor="middle" font-weight="bold">Espectro do hidrogênio (observado)</text>
+  <text x="190" y="118" font-family="Libre Baskerville, serif" font-size="10" fill="#3d2010" text-anchor="middle" font-weight="bold">Hydrogen spectrum (observed)</text>
   <rect x="33.5" y="126" width="312.9" height="24.6" rx="3" fill="#1a1008"/>
   <line x1="62.9" y1="128.4" x2="62.9" y2="149.6" stroke="#6a3fa0" stroke-width="3.5" stroke-linecap="round"/>
   <line x1="86.3" y1="128.4" x2="86.3" y2="149.6" stroke="#3b6fd4" stroke-width="3.5" stroke-linecap="round"/>
   <line x1="137.2" y1="128.4" x2="137.2" y2="149.6" stroke="#2fa6a0" stroke-width="3.5" stroke-linecap="round"/>
   <line x1="303.4" y1="128.4" x2="303.4" y2="149.6" stroke="#c0392b" stroke-width="3.5" stroke-linecap="round"/>
 
-  <text x="190" y="161" font-family="Libre Baskerville, serif" font-size="8" fill="#8b5e1a" text-anchor="middle" font-style="italic">apenas linhas isoladas — nunca contínuo</text>
+  <text x="190" y="161" font-family="Libre Baskerville, serif" font-size="8" fill="#8b5e1a" text-anchor="middle" font-style="italic">only isolated lines — never continuous</text>
 </svg>
 </div>`;
 }
 
-// Postulado 1 — apenas n=1 destacado, outros fantasmas
+// Postulate 1 — only n=1 highlighted, others ghosted
 function svgNiveisPost1() {
   return `<div class="diagrama-svg-wrap">
 <svg viewBox="0 0 380 210" xmlns="http://www.w3.org/2000/svg">
-  <text x="190" y="14" font-family="Libre Baskerville, serif" font-size="9" fill="#3d2010" text-anchor="middle" font-weight="bold">Órbita estacionária n = 1 — sem irradiação</text>
+  <text x="190" y="14" font-family="Libre Baskerville, serif" font-size="9" fill="#3d2010" text-anchor="middle" font-weight="bold">Stationary orbit n = 1 — no radiation</text>
 
   <circle cx="110" cy="108" r="68" fill="none" stroke="#8b5e1a" stroke-width="1" stroke-dasharray="3 3" opacity="0.55"/>
   <circle cx="110" cy="108" r="50" fill="none" stroke="#8b5e1a" stroke-width="1" stroke-dasharray="3 3" opacity="0.55"/>
@@ -1163,19 +1163,19 @@ function svgNiveisPost1() {
   <text x="110" y="68" font-family="Libre Baskerville, serif" font-size="9" fill="#6b3f0e" text-anchor="middle" font-weight="bold">n = 1</text>
 
   <circle cx="110" cy="108" r="6" fill="#6b3f0e"/>
-  <text x="110" y="124" font-family="Libre Baskerville, serif" font-size="7" fill="#3d2010" text-anchor="middle">núcleo (+)</text>
+  <text x="110" y="124" font-family="Libre Baskerville, serif" font-size="7" fill="#3d2010" text-anchor="middle">nucleus (+)</text>
 
   <circle cx="134.5" cy="87.4" r="4" fill="#e8b84b"/>
   <circle cx="134.5" cy="87.4" r="4" fill="none" stroke="#8b5e1a" stroke-width="0.8"/>
   <line x1="138" y1="84" x2="200" y2="60" stroke="#8b5e1a" stroke-width="0.5" stroke-dasharray="2 2"/>
-  <text x="204" y="62" font-family="Libre Baskerville, serif" font-size="8" fill="#3d2010">elétron</text>
+  <text x="204" y="62" font-family="Libre Baskerville, serif" font-size="8" fill="#3d2010">electron</text>
 
-  <text x="190" y="196" font-family="Libre Baskerville, serif" font-size="8" fill="#6b3f0e" text-anchor="middle" font-style="italic">enquanto na órbita, não perde energia — átomo estável</text>
+  <text x="190" y="196" font-family="Libre Baskerville, serif" font-size="8" fill="#6b3f0e" text-anchor="middle" font-style="italic">while in orbit, it loses no energy — atom stable</text>
 </svg>
 </div>`;
 }
 
-// Postulado 2 — Quantização (escada de energia)
+// Postulate 2 — Quantization (energy staircase)
 function svgNiveisPost2() {
   return `<div class="diagrama-svg-wrap">
 <svg viewBox="0 0 380 210" xmlns="http://www.w3.org/2000/svg">
@@ -1185,7 +1185,7 @@ function svgNiveisPost2() {
 </marker>
 </defs>
 
-<text x="190" y="16" font-family="Libre Baskerville, serif" font-size="9" fill="#3d2010" text-anchor="middle" font-weight="bold">Apenas certos níveis de energia são permitidos</text>
+<text x="190" y="16" font-family="Libre Baskerville, serif" font-size="9" fill="#3d2010" text-anchor="middle" font-weight="bold">Only certain energy levels are allowed</text>
 
 <line x1="70" y1="175" x2="260" y2="175" stroke="#e8b84b" stroke-width="2.2"/>
 <line x1="70" y1="140" x2="260" y2="140" stroke="#8b5e1a" stroke-width="1.3" opacity="0.85"/>
@@ -1201,17 +1201,17 @@ function svgNiveisPost2() {
 <circle cx="165" cy="175" r="4" fill="none" stroke="#8b5e1a" stroke-width="0.8"/>
 
 <line x1="300" y1="185" x2="300" y2="70" stroke="#8b5e1a" stroke-width="0.6" marker-end="url(#arrowUpQ2)"/>
-<text x="305" y="68" font-family="Libre Baskerville, serif" font-size="8" fill="#6b3f0e">energia</text>
+<text x="305" y="68" font-family="Libre Baskerville, serif" font-size="8" fill="#6b3f0e">energy</text>
 
 <text x="320" y="128" font-family="Libre Baskerville, serif" font-size="11" fill="#a98c5e" text-anchor="middle">×</text>
 <line x1="310" y1="124" x2="280" y2="124" stroke="#8b5e1a" stroke-width="0.5" stroke-dasharray="2 2"/>
 
-<text x="190" y="201" font-family="Libre Baskerville, serif" font-size="8" fill="#6b3f0e" text-anchor="middle" font-style="italic">como uma escada: nunca uma energia intermediária</text>
+<text x="190" y="201" font-family="Libre Baskerville, serif" font-size="8" fill="#6b3f0e" text-anchor="middle" font-style="italic">like a staircase: never an intermediate energy</text>
 </svg>
 </div>`;
 }
 
-// Postulado 3 — Absorção e Emissão
+// Postulate 3 — Absorption and Emission
 function svgNiveisPost3() {
   return `<div class="diagrama-svg-wrap">
 <svg viewBox="0 0 380 210" xmlns="http://www.w3.org/2000/svg">
@@ -1224,7 +1224,7 @@ function svgNiveisPost3() {
 </marker>
 </defs>
 
-<text x="190" y="16" font-family="Libre Baskerville, serif" font-size="9" fill="#3d2010" text-anchor="middle" font-weight="bold">Absorção e emissão de energia</text>
+<text x="190" y="16" font-family="Libre Baskerville, serif" font-size="9" fill="#3d2010" text-anchor="middle" font-weight="bold">Absorption and emission of energy</text>
 
 <line x1="70" y1="175" x2="260" y2="175" stroke="#8b5e1a" stroke-width="1.3" opacity="0.85"/>
 <line x1="70" y1="140" x2="260" y2="140" stroke="#8b5e1a" stroke-width="1.3" opacity="0.85"/>
@@ -1238,24 +1238,24 @@ function svgNiveisPost3() {
 
 <line x1="115" y1="172" x2="115" y2="111" stroke="#3b6fd4" stroke-width="1.8" marker-end="url(#arrowAbs)"/>
 <circle cx="115" cy="175" r="3.5" fill="#3b6fd4"/>
-<text x="119" y="128" font-family="Libre Baskerville, serif" font-size="8" fill="#3b6fd4">absorção</text>
+<text x="119" y="128" font-family="Libre Baskerville, serif" font-size="8" fill="#3b6fd4">absorption</text>
 
 <line x1="210" y1="111" x2="210" y2="172" stroke="#e8843c" stroke-width="1.8" marker-end="url(#arrowEmi)"/>
 <circle cx="210" cy="108" r="3.5" fill="#e8843c"/>
-<text x="214" y="128" font-family="Libre Baskerville, serif" font-size="8" fill="#e8843c">emissão</text>
+<text x="214" y="128" font-family="Libre Baskerville, serif" font-size="8" fill="#e8843c">emission</text>
 
-<text x="190" y="201" font-family="Libre Baskerville, serif" font-size="8" fill="#6b3f0e" text-anchor="middle" font-style="italic">ΔE = h·v — cada salto libera uma cor exata de luz</text>
+<text x="190" y="201" font-family="Libre Baskerville, serif" font-size="8" fill="#6b3f0e" text-anchor="middle" font-style="italic">ΔE = h·v — each jump releases an exact color of light</text>
 </svg>
 </div>`;
 }
 
-// Simulador — diagrama de órbitas com salto animado
+// Simulator — orbit diagram with animated jump
 function svgSimulador(nivelBaixo, nivelAlto, tipo, cor) {
   const cx = 160, cy = 140;
   const raios = [0, 24, 46, 66, 84, 100];
   let s = `<svg viewBox="0 0 360 180" xmlns="http://www.w3.org/2000/svg" style="max-height:170px;">`;
   s += `<circle cx="${cx}" cy="${cy}" r="6" fill="#e8b84b"/>`;
-  s += `<text x="${cx}" y="${cy+16}" text-anchor="middle" font-family="Lora,serif" font-size="8" fill="#8b5e1a">núcleo</text>`;
+  s += `<text x="${cx}" y="${cy+16}" text-anchor="middle" font-family="Lora,serif" font-size="8" fill="#8b5e1a">nucleus</text>`;
   for (let n=1;n<=5;n++) {
     const r = raios[n];
     const ativo = (n===nivelBaixo||n===nivelAlto);
@@ -1284,7 +1284,7 @@ function svgSimulador(nivelBaixo, nivelAlto, tipo, cor) {
 }
 </script>
 
-<div id="cookie-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#1a0f08;border-top:1px solid rgba(212,170,106,0.4);padding:1rem 2rem;z-index:9999;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;"><p style="margin:0;font-family:'Libre Baskerville',serif;font-size:0.82rem;color:#e8d4b0;line-height:1.5;">Este site utiliza cookies para melhorar sua experi&ecirc;ncia. Ao continuar navegando, voc&ecirc; concorda com nossa <a href="/politica-de-privacidade.html" style="color:#e8b84b;text-decoration:underline;text-underline-offset:2px;">Pol&iacute;tica de Privacidade</a>.</p><button onclick="document.getElementById('cookie-banner').style.display='none';localStorage.setItem('kifacil_cookies','1');" style="flex-shrink:0;background:#e8b84b;border:none;padding:0.55rem 1.5rem;font-family:'Libre Baskerville',serif;font-size:0.78rem;font-weight:700;color:#1a0f08;cursor:pointer;letter-spacing:0.04em;">Entendi</button></div>
+<div id="cookie-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#1a0f08;border-top:1px solid rgba(212,170,106,0.4);padding:1rem 2rem;z-index:9999;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;"><p style="margin:0;font-family:'Libre Baskerville',serif;font-size:0.82rem;color:#e8d4b0;line-height:1.5;">This site uses cookies to improve your experience. By continuing to browse, you agree to our <a href="/politica-de-privacidade.html" style="color:#e8b84b;text-decoration:underline;text-underline-offset:2px;">Privacy Policy</a>.</p><button onclick="document.getElementById('cookie-banner').style.display='none';localStorage.setItem('kifacil_cookies','1');" style="flex-shrink:0;background:#e8b84b;border:none;padding:0.55rem 1.5rem;font-family:'Libre Baskerville',serif;font-size:0.78rem;font-weight:700;color:#1a0f08;cursor:pointer;letter-spacing:0.04em;">Got it</button></div>
 <script>if(!localStorage.getItem('kifacil_cookies'))document.getElementById('cookie-banner').style.display='flex';</script>
 <script type="module">
   import { requireAuth }          from '../../../js/guards.js';

@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex, nofollow">
-  <title>A Galeria dos Ácidos — Jogo Premium | KiFácil</title>
+  <title>The Gallery of Acids — Premium Game | KiFácil</title>
   <link rel="icon" type="image/png" href="/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -108,7 +108,7 @@
       min-height: 5.2em;
     }
 
-    /* PALCO DE ANIMAÇÃO */
+    /* ANIMATION STAGE */
     .imagem-wrapper {
       position: relative;
       display: flex;
@@ -154,7 +154,7 @@
 
     .frasco-rotulo { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 0.72rem; color: var(--texto-suave); margin-top: 2px; }
 
-    /* Circuito / lâmpada */
+    /* Circuit / bulb */
     .circuito-visual {
       position: absolute; left: 50%; top: 38%; transform: translate(-50%, -50%); text-align: center; z-index: 3;
       background: var(--fundo-card); border: 1.5px solid var(--borda-forte); border-radius: 12px; padding: 14px 20px;
@@ -162,7 +162,7 @@
     .ion-movendo { animation: moverIon 1.4s ease-in-out infinite alternate; }
     @keyframes moverIon { from { transform: translateX(-14px); } to { transform: translateX(14px); } }
 
-    /* Recipientes / partículas */
+    /* Containers / particles */
     .linha-recipientes { position: absolute; inset: 0; display: flex; justify-content: center; align-items: center; gap: 12px; padding: 8% 4%; flex-wrap: wrap; }
     .coluna-recipiente {
       display: flex; flex-direction: column; align-items: center; gap: 6px;
@@ -174,7 +174,7 @@
     .particula-molecula.particula-ionizada { background: var(--dourado-claro); box-shadow: 0 0 4px rgba(200,146,10,.7); }
     .recipiente-contador { font-family: 'Libre Baskerville', serif; font-size: 0.66rem; color: var(--texto); text-align: center; }
 
-    /* Cálculo passo a passo */
+    /* Step-by-step calculation */
     .painel-calculo { position: absolute; left: 50%; top: 8%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 6px; z-index: 3; max-width: 90%; }
     .linha-calculo {
       font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 1.15rem; color: var(--texto);
@@ -182,7 +182,7 @@
     }
     .linha-calculo-final { color: var(--dourado-claro); border-color: var(--dourado-claro); }
 
-    /* Medidor de ionização */
+    /* Ionization meter */
     .medidor-ionizacao {
       position: absolute; left: 50%; bottom: 6%; transform: translateX(-50%); width: 82%; max-width: 400px; z-index: 3;
       background: var(--fundo-card); border: 1.5px solid var(--borda-forte); border-radius: 10px; padding: 10px 14px;
@@ -195,7 +195,7 @@
     .medidor-legendas { display: flex; justify-content: space-between; font-family: 'Cormorant Garamond', serif; font-size: 0.7rem; color: var(--texto-suave); margin-top: 2px; }
     .medidor-classificacao { text-align: center; font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 0.85rem; color: var(--dourado-claro); margin-top: 4px; }
 
-    /* Cartões de ionização (etapa 5) */
+    /* Ionization cards (step 5) */
     .linha-cartas-ionizacao { position: absolute; inset: 0; display: flex; justify-content: center; align-items: center; gap: 14px; flex-wrap: wrap; padding: 6%; }
     .cartao-ionizacao {
       position: relative; background: var(--fundo-card); border: 1.5px solid var(--borda-forte); border-radius: 10px;
@@ -211,7 +211,7 @@
       display: flex; align-items: center; justify-content: center; font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 0.85rem;
     }
 
-    /* Cartões simples de fórmula */
+    /* Simple formula cards */
     .linha-cartas-simples { position: absolute; inset: 0; display: flex; justify-content: center; align-items: center; gap: 14px; flex-wrap: wrap; padding: 6%; }
     .cartao-formula-simples {
       background: var(--fundo-card); border: 1.5px solid var(--borda-forte); border-radius: 8px; padding: 0.5rem 1rem;
@@ -222,7 +222,7 @@
       font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 1.4rem; color: var(--texto); z-index: 3;
     }
 
-    /* Jogo de associação (etapa 6b) */
+    /* Matching game (step 6b) */
     .jogo-associacao { position: absolute; inset: 0; display: flex; justify-content: center; align-items: center; gap: 30px; padding: 6%; flex-wrap: wrap; }
     .coluna-associacao { display: flex; flex-direction: column; gap: 8px; }
     .item-associacao {
@@ -234,7 +234,7 @@
     .associado { border-color: var(--verde-escuro); background: rgba(30,82,56,.12); cursor: default; opacity: 0.85; }
     .erro-flash { outline: 3px solid var(--vermelho-escuro); border-radius: 8px; }
 
-    /* Blocos de nomenclatura */
+    /* Nomenclature blocks */
     .formula-alvo {
       display: inline-block; background: var(--fundo); border: 1.5px solid var(--dourado-claro); border-radius: 6px;
       padding: 0.3rem 0.8rem; font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 1.2rem;
@@ -267,7 +267,7 @@
       to   { opacity: 1; transform: translate(-50%, 0); }
     }
 
-    /* PAINEL DE INTERAÇÃO */
+    /* INTERACTION PANEL */
     #painelInteracao { max-width: 900px; margin: 1.2rem auto 0; }
     .interacao-painel {
       background: var(--fundo-card); border: 1.5px solid var(--borda-forte); border-radius: 12px;
@@ -298,7 +298,7 @@
     .btn-continuar:hover { background: var(--dourado-claro); color: #1e1008; }
     .btn-continuar:disabled { opacity: 0.4; cursor: default; }
 
-    /* Botão continuar dentro do balão da professora */
+    /* Continue button inside the teacher's speech bubble */
     #continuarBalao { margin-top: 0.6rem; }
     #continuarBalao .btn-continuar { display: inline-block; margin: 0; }
     .btn-continuar:disabled:hover { background: #1e1008; color: var(--dourado-claro); }
@@ -328,7 +328,7 @@
     }
     .quadro-resumo-final .resumo-linha:last-child { border-bottom: none; }
 
-    /* CONCLUSÃO */
+    /* CONCLUSION */
     .conclusao {
       display: none; margin-top: 3rem; background: var(--fundo-card);
       border: 1.5px solid var(--borda-forte); border-radius: 12px; padding: 3rem 2rem; text-align: center;
@@ -382,38 +382,38 @@
 </nav>
 
 <main>
-  <h1 class="titulo-jogo">A Galeria dos Ácidos</h1>
-  <p class="subtitulo">Investigue o que acontece quando um ácido é colocado em água — antes de decorar qualquer definição.</p>
+  <h1 class="titulo-jogo">The Gallery of Acids</h1>
+  <p class="subtitulo">Investigate what happens when an acid is placed in water — before memorizing any definition.</p>
 
   <div class="narrador">
-    <img src="../imagens/rafa-sorrindo.jpg" alt="Professora Rafaela" />
+    <img src="../imagens/rafa-sorrindo.jpg" alt="Professor Rafaela" />
     <div style="flex: 1;">
-      <div class="narrador-nome">Professora Rafaela</div>
-      <div class="narrador-texto" id="narradorTexto">Vamos começar.</div>
+      <div class="narrador-nome">Professor Rafaela</div>
+      <div class="narrador-texto" id="narradorTexto">Let's begin.</div>
       <div id="continuarBalao"></div>
     </div>
   </div>
 
   <div class="imagem-wrapper" id="imagemWrapper">
-    <img src="../imagens/galeria-dos-acidos.jpg" alt="Galeria dos Ácidos" class="cena-fundo" />
+    <img src="../imagens/galeria-dos-acidos.jpg" alt="Gallery of Acids" class="cena-fundo" />
     <div class="overlay-animacao" id="overlayAnimacao"></div>
-    <!-- COLOQUE O LINK AQUI -->
-    <a class="link-aula" href="https://www.youtube.com/watch?v=uwa0Mbkmo_g" target="_blank" rel="noopener" title="Assista à aula">
+    <!-- PUT THE LINK HERE -->
+    <a class="link-aula" href="https://www.youtube.com/watch?v=uwa0Mbkmo_g" target="_blank" rel="noopener" title="Watch the lesson">
       <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.6"/>
         <path d="M10 8.5L16 12L10 15.5V8.5Z" fill="currentColor"/>
       </svg>
-      <span>Assista à aula</span>
+      <span>Watch the lesson</span>
     </a>
   </div>
 
   <div id="painelInteracao"></div>
 
   <div class="conclusao" id="conclusao">
-    <div class="conclusao-titulo">Estudo concluído</div>
+    <div class="conclusao-titulo">Study completed</div>
     <div class="conclusao-placar" id="conclusaoPlacar"></div>
     <p class="conclusao-mensagem" id="conclusaoMensagem"></p>
-    <button class="btn-reiniciar" onclick="reiniciar()">Jogar novamente</button>
+    <button class="btn-reiniciar" onclick="reiniciar()">Play again</button>
   </div>
 </main>
 
@@ -421,7 +421,7 @@
 
 <script>
 /* ==========================================================
-   REFERÊNCIAS DOM
+   DOM REFERENCES
    ========================================================== */
 const overlay = document.getElementById('overlayAnimacao');
 const painel  = document.getElementById('painelInteracao');
@@ -442,7 +442,7 @@ function agendar(fn, ms) { const id = setTimeout(fn, ms); timersAtivos.push(id);
 function limparTimers() { timersAtivos.forEach(clearTimeout); timersAtivos = []; }
 
 /* ==========================================================
-   DADOS: FÓRMULAS, TIPOS E NOMENCLATURA
+   DATA: FORMULAS, TYPES AND NOMENCLATURE
    ========================================================== */
 const FORMULAS = {
   HCl: 'HCl', HBr: 'HBr', HI: 'HI', HF: 'HF', H2S: 'H₂S',
@@ -454,19 +454,19 @@ const TIPO_ACIDO = {
   HNO3: 'oxiacido', HNO2: 'oxiacido', H2SO4: 'oxiacido', H2SO3: 'oxiacido', H3PO4: 'oxiacido', H2CO3: 'oxiacido'
 };
 const NOMENCLATURA_BLOCOS = {
-  HCl: ['ÁCIDO', 'CLOR', 'ÍDRICO'],
-  HBr: ['ÁCIDO', 'BROM', 'ÍDRICO'],
-  H2S: ['ÁCIDO', 'SULF', 'ÍDRICO'],
-  HNO3: ['ÁCIDO', 'NITR', 'ICO'],
-  HNO2: ['ÁCIDO', 'NITR', 'OSO'],
-  H2SO4: ['ÁCIDO', 'SULFÚR', 'ICO'],
-  H2SO3: ['ÁCIDO', 'SULFUR', 'OSO'],
-  H3PO4: ['ÁCIDO', 'FOSFÓR', 'ICO'],
-  H2CO3: ['ÁCIDO', 'CARBÔN', 'ICO']
+  HCl: ['HYDRO', 'CHLOR', 'IC ACID'],
+  HBr: ['HYDRO', 'BROM', 'IC ACID'],
+  H2S: ['HYDRO', 'SULFUR', 'IC ACID'],
+  HNO3: ['NITR', 'IC', ' ACID'],
+  HNO2: ['NITR', 'OUS', ' ACID'],
+  H2SO4: ['SULFUR', 'IC', ' ACID'],
+  H2SO3: ['SULFUR', 'OUS', ' ACID'],
+  H3PO4: ['PHOSPHOR', 'IC', ' ACID'],
+  H2CO3: ['CARBON', 'IC', ' ACID']
 };
 
 /* ==========================================================
-   COMPONENTE: CIRCUITO ELÉTRICO / LÂMPADA
+   COMPONENT: ELECTRIC CIRCUIT / BULB
    ========================================================== */
 function criarCircuito(id) {
   const div = document.createElement('div');
@@ -485,7 +485,7 @@ function criarCircuito(id) {
     '<line x1="100" y1="30" x2="100" y2="26" stroke="#3d2e1a" stroke-width="2"/>' +
     '<g id="ions-' + id + '"></g>' +
     '</svg>' +
-    '<div class="frasco-rotulo">Circuito de teste</div>';
+    '<div class="frasco-rotulo">Test circuit</div>';
   return div;
 }
 function definirIntensidadeLampada(id, intensidade) {
@@ -511,7 +511,7 @@ function animarIonsCircuito(id) {
 }
 
 /* ==========================================================
-   COMPONENTE: MEDIDOR DE GRAU DE IONIZAÇÃO
+   COMPONENT: DEGREE-OF-IONIZATION METER
    ========================================================== */
 function criarMedidorIonizacao(id) {
   const div = document.createElement('div');
@@ -524,7 +524,7 @@ function criarMedidorIonizacao(id) {
     '<div class="medidor-zona zona-forte" style="width:50%"></div>' +
     '<div class="medidor-marcador" id="marcador-' + id + '" style="left:0%"></div>' +
     '</div>' +
-    '<div class="medidor-legendas"><span>Fraco</span><span>Moderado</span><span>Forte</span></div>' +
+    '<div class="medidor-legendas"><span>Weak</span><span>Moderate</span><span>Strong</span></div>' +
     '<div class="medidor-classificacao" id="classificacao-' + id + '"></div>';
   return div;
 }
@@ -532,19 +532,19 @@ function atualizarMedidorIonizacao(id, pct) {
   const marcador = document.getElementById('marcador-' + id);
   const classif = document.getElementById('classificacao-' + id);
   if (marcador) marcador.style.left = Math.max(0, Math.min(100, pct)) + '%';
-  const texto = pct < 5 ? 'ÁCIDO FRACO' : (pct <= 50 ? 'ÁCIDO MODERADO' : 'ÁCIDO FORTE');
+  const texto = pct < 5 ? 'WEAK ACID' : (pct <= 50 ? 'MODERATE ACID' : 'STRONG ACID');
   if (classif) classif.textContent = texto + ' (α = ' + pct + '%)';
 }
 
 /* ==========================================================
-   HELPERS DE INTERAÇÃO
+   INTERACTION HELPERS
    ========================================================== */
 function botaoContinuar(delayMs) {
   delayMs = delayMs || 0;
   continuarBalao.innerHTML = '';
   const btn = document.createElement('button');
   btn.className = 'btn-continuar';
-  btn.textContent = 'Continuar →';
+  btn.textContent = 'Continue →';
   btn.disabled = delayMs > 0;
   continuarBalao.appendChild(btn);
   if (delayMs > 0) agendar(function () { btn.disabled = false; }, delayMs);
@@ -558,7 +558,7 @@ function botaoContinuarLocal(handler, delayMs) {
   continuarBalao.innerHTML = '';
   const btn = document.createElement('button');
   btn.className = 'btn-continuar';
-  btn.textContent = 'Continuar →';
+  btn.textContent = 'Continue →';
   btn.disabled = delayMs > 0;
   continuarBalao.appendChild(btn);
   if (delayMs > 0) agendar(function () { btn.disabled = false; }, delayMs);
@@ -593,7 +593,7 @@ function escolhaBotoes(opts) {
         Array.from(opcoesLinha.children).forEach(function (b) { b.disabled = true; });
         btn.classList.add('opcao-certa');
         feedback.className = 'modal-feedback visivel';
-        feedback.innerHTML = '<span class="feedback-certo">Correto!</span><p class="feedback-explicacao">' + opts.explicacao + '</p>';
+        feedback.innerHTML = '<span class="feedback-certo">Correct!</span><p class="feedback-explicacao">' + opts.explicacao + '</p>';
         opts.aoAcertar();
       } else {
         tentativas++;
@@ -608,7 +608,7 @@ function escolhaBotoes(opts) {
             if (opts.opcoes[i].correta) b.classList.add('opcao-certa');
           });
           feedback.className = 'modal-feedback visivel';
-          feedback.innerHTML = '<span class="feedback-resposta">Resposta correta destacada.</span><p class="feedback-explicacao">' + opts.explicacao + '</p>';
+          feedback.innerHTML = '<span class="feedback-resposta">Correct answer highlighted.</span><p class="feedback-explicacao">' + opts.explicacao + '</p>';
           opts.aoAcertar();
         }
       }
@@ -618,7 +618,7 @@ function escolhaBotoes(opts) {
 }
 
 /* ==========================================================
-   JOGO DE ASSOCIAÇÃO (fórmula ↔ nome), por clique/toque
+   MATCHING GAME (formula ↔ name), by click/touch
    ========================================================== */
 function criarJogoDeAssociacao(pares, mensagemErro, mensagemSucesso) {
   const container = document.createElement('div');
@@ -691,14 +691,14 @@ function criarJogoDeAssociacao(pares, mensagemErro, mensagemSucesso) {
 }
 
 /* ==========================================================
-   MONTAGEM DE NOME POR BLOCOS (clique/toque)
+   NAME ASSEMBLY WITH BLOCKS (click/touch)
    ========================================================== */
 function montarNomePorBlocos(chave, aoConcluir) {
   painel.innerHTML = '';
   const wrap = document.createElement('div');
   wrap.className = 'interacao-painel';
   wrap.innerHTML =
-    '<div class="interacao-pergunta-texto">Monte o nome clicando nos blocos, na ordem correta.</div>' +
+    '<div class="interacao-pergunta-texto">Build the name by clicking the blocks, in the correct order.</div>' +
     '<div class="formula-alvo">' + FORMULAS[chave] + '</div>' +
     '<div class="montagem-nome" id="montagemNome"></div>' +
     '<div class="blocos-disponiveis" id="blocosDisponiveis"></div>' +
@@ -730,7 +730,7 @@ function montarNomePorBlocos(chave, aoConcluir) {
         progresso++;
         if (progresso === sequenciaCorreta.length) {
           fb.className = 'modal-feedback visivel';
-          fb.innerHTML = '<span class="feedback-certo">Correto!</span><p class="feedback-explicacao">' + FORMULAS[chave] + ' → ' + sequenciaCorreta.join('').toLowerCase() + '</p>';
+          fb.innerHTML = '<span class="feedback-certo">Correct!</span><p class="feedback-explicacao">' + FORMULAS[chave] + ' → ' + sequenciaCorreta.join('').toLowerCase() + '</p>';
           Array.from(blocosEl.children).forEach(function (b) { b.disabled = true; });
           aoConcluir();
         }
@@ -738,7 +738,7 @@ function montarNomePorBlocos(chave, aoConcluir) {
         chip.classList.add('erro-flash');
         setTimeout(function () { chip.classList.remove('erro-flash'); }, 500);
         fb.className = 'modal-feedback visivel';
-        fb.innerHTML = '<span class="feedback-errado">Observe o nome do ânion e a terminação usada.</span>';
+        fb.innerHTML = '<span class="feedback-errado">Look at the anion\'s name and the suffix used.</span>';
       }
     });
     blocosEl.appendChild(chip);
@@ -746,39 +746,39 @@ function montarNomePorBlocos(chave, aoConcluir) {
 }
 
 /* ==========================================================
-   INTRODUÇÃO
+   INTRODUCTION
    ========================================================== */
 function passoIntro() {
-  fala('Hoje vamos investigar os ácidos, vamos aprender o que são e como nomeá-los');
+  fala('Today we are going to investigate acids — we will learn what they are and how to name them.');
   const btn = document.createElement('button');
   btn.className = 'btn-continuar btn-iniciar-investigacao';
-  btn.textContent = 'INICIAR INVESTIGAÇÃO';
+  btn.textContent = 'START INVESTIGATION';
   overlay.appendChild(btn);
   btn.addEventListener('click', avancar);
 }
 
 /* ==========================================================
-   ETAPA 2 — CONDUÇÃO DE ELETRICIDADE
+   STEP 2 — ELECTRICAL CONDUCTIVITY
    ========================================================== */
 function passoEtapa2() {
-  fala('Vamos testar se a água pura conduz corrente elétrica.');
+  fala('Let\'s test whether pure water conducts electric current.');
   const circuito = criarCircuito('circ-e2');
   overlay.appendChild(circuito);
 
   painel.innerHTML = '';
   const wrap = document.createElement('div');
   wrap.className = 'interacao-painel';
-  wrap.innerHTML = '<div class="interacao-pergunta-texto">Teste a água pura.</div>';
+  wrap.innerHTML = '<div class="interacao-pergunta-texto">Test the pure water.</div>';
   const btnTestar = document.createElement('button');
   btnTestar.className = 'btn-continuar';
-  btnTestar.textContent = 'TESTAR';
+  btnTestar.textContent = 'TEST';
   wrap.appendChild(btnTestar);
   painel.appendChild(wrap);
 
   btnTestar.addEventListener('click', function () {
     btnTestar.disabled = true;
     definirIntensidadeLampada('circ-e2', 0.1);
-    fala('A lâmpada quase não acende: a água pura tem pouquíssimos íons.');
+    fala('The bulb barely lights up: pure water has very few ions.');
     botaoContinuarLocal(passoEtapa2b, 700);
   });
 }
@@ -786,10 +786,10 @@ function passoEtapa2() {
 function passoEtapa2b() {
   const wrap = document.createElement('div');
   wrap.className = 'interacao-painel';
-  wrap.innerHTML = '<div class="interacao-pergunta-texto">Agora adicione a solução de HCl.</div>';
+  wrap.innerHTML = '<div class="interacao-pergunta-texto">Now add the HCl solution.</div>';
   const btnAdd = document.createElement('button');
   btnAdd.className = 'btn-continuar';
-  btnAdd.textContent = 'Adicionar HCl';
+  btnAdd.textContent = 'Add HCl';
   wrap.appendChild(btnAdd);
   painel.innerHTML = '';
   painel.appendChild(wrap);
@@ -799,7 +799,7 @@ function passoEtapa2b() {
     animarIonsCircuito('circ-e2');
     definirIntensidadeLampada('circ-e2', 1);
     tocarBrilho();
-    fala('Olha só a lâmpada acende! O que será que o ácido libera na água que permite conduzir corrente elétrica?');
+    fala('Look, the bulb lights up! What do you think the acid releases into the water that allows it to conduct electric current?');
     botaoContinuarLocal(passoEtapa2c, 900);
   });
 }
@@ -809,7 +809,7 @@ function passoEtapa2c() {
   placa.className = 'placa-dourada';
   placa.textContent = 'H⁺ + H₂O → H₃O⁺';
   overlay.appendChild(placa);
-  fala('Segundo Arrhenius, todo ácido libera H⁺ (um próton) em água. Mas o próton não fica livre — ele se associa a uma molécula de água, formando o H₃O⁺.');
+  fala('According to Arrhenius, every acid releases H⁺ (a proton) into water. But the proton doesn\'t stay free — it bonds with a water molecule, forming H₃O⁺.');
   painel.innerHTML = '';
   botaoContinuarLocal(passoEtapa2d, 700);
 }
@@ -818,22 +818,22 @@ function passoEtapa2d() {
   overlay.querySelectorAll('.placa-dourada').forEach(function (p) { p.remove(); });
   const placa = document.createElement('div');
   placa.className = 'placa-dourada';
-  placa.textContent = 'HCl + H₂O → H₃O⁺ + Cl⁻ (equação de ionização)';
+  placa.textContent = 'HCl + H₂O → H₃O⁺ + Cl⁻ (ionization equation)';
   overlay.appendChild(placa);
-  fala('Essa é a equação de ionização do HCl: o H⁺ liberado se une à água formando H₃O⁺, enquanto o Cl⁻ fica livre na solução. São esses íons que carregam a corrente elétrica.');
+  fala('This is the ionization equation for HCl: the H⁺ released combines with water to form H₃O⁺, while Cl⁻ remains free in solution. These are the ions that carry the electric current.');
   painel.innerHTML = '';
   botaoContinuar(500);
 }
 
 /* ==========================================================
-   ETAPA 3 — IONIZAÇÃO E GRAU DE IONIZAÇÃO (α)
+   STEP 3 — IONIZATION AND DEGREE OF IONIZATION (α)
    ========================================================== */
 function passoIonizacao() {
-  fala('Vamos observar três ácidos diferentes se dissolvendo em água.');
+  fala('Let\'s observe three different acids dissolving in water.');
   const dados = [
-    { id: 'A', nome: 'Ácido A', ionizadas: 3 },
-    { id: 'B', nome: 'Ácido B', ionizadas: 10 },
-    { id: 'C', nome: 'Ácido C', ionizadas: 18 }
+    { id: 'A', nome: 'Acid A', ionizadas: 3 },
+    { id: 'B', nome: 'Acid B', ionizadas: 10 },
+    { id: 'C', nome: 'Acid C', ionizadas: 18 }
   ];
   const linha = document.createElement('div');
   linha.className = 'linha-recipientes';
@@ -845,7 +845,7 @@ function passoIonizacao() {
     col.innerHTML =
       '<div class="recipiente-titulo">' + d.nome + '</div>' +
       '<div class="recipiente-particulas" id="part-' + d.id + '"></div>' +
-      '<div class="recipiente-contador" id="cont-' + d.id + '">Moléculas dissolvidas: 20<br>Moléculas ionizadas: 0</div>';
+      '<div class="recipiente-contador" id="cont-' + d.id + '">Dissolved molecules: 20<br>Ionized molecules: 0</div>';
     linha.appendChild(col);
     const partContainer = col.querySelector('#part-' + d.id);
     for (let i = 0; i < 20; i++) {
@@ -858,10 +858,10 @@ function passoIonizacao() {
   painel.innerHTML = '';
   const wrap = document.createElement('div');
   wrap.className = 'interacao-painel';
-  wrap.innerHTML = '<div class="interacao-pergunta-texto">Observe a ionização em cada recipiente.</div>';
+  wrap.innerHTML = '<div class="interacao-pergunta-texto">Observe the ionization in each container.</div>';
   const btn = document.createElement('button');
   btn.className = 'btn-continuar';
-  btn.textContent = 'OBSERVAR A IONIZAÇÃO';
+  btn.textContent = 'OBSERVE THE IONIZATION';
   wrap.appendChild(btn);
   painel.appendChild(wrap);
 
@@ -871,27 +871,27 @@ function passoIonizacao() {
       const partContainer = document.getElementById('part-' + d.id);
       const particulas = Array.from(partContainer.children).sort(function () { return Math.random() - 0.5; });
       for (let i = 0; i < d.ionizadas; i++) particulas[i].classList.add('particula-ionizada');
-      document.getElementById('cont-' + d.id).innerHTML = 'Moléculas dissolvidas: 20<br>Moléculas ionizadas: ' + d.ionizadas;
+      document.getElementById('cont-' + d.id).innerHTML = 'Dissolved molecules: 20<br>Ionized molecules: ' + d.ionizadas;
     });
     escolhaBotoes({
-      pergunta: 'Em qual solução ocorreu maior ionização?',
+      pergunta: 'In which solution did the greatest ionization occur?',
       opcoes: [
-        { rotulo: 'Ácido A', correta: false },
-        { rotulo: 'Ácido B', correta: false },
-        { rotulo: 'Ácido C', correta: true }
+        { rotulo: 'Acid A', correta: false },
+        { rotulo: 'Acid B', correta: false },
+        { rotulo: 'Acid C', correta: true }
       ],
-      dica: 'Conte quantas moléculas realmente se ionizaram em cada recipiente.',
-      explicacao: 'O Ácido C teve quase todas as moléculas ionizadas — maior grau de ionização (α = moléculas ionizadas ÷ moléculas dissolvidas). Quanto maior o grau de ionização, mais forte é o ácido.',
+      dica: 'Count how many molecules actually ionized in each container.',
+      explicacao: 'Acid C had almost all of its molecules ionized — the highest degree of ionization (α = ionized molecules ÷ dissolved molecules). The higher the degree of ionization, the stronger the acid.',
       aoAcertar: function () {
         agendar(function () {
           const medidor = criarMedidorIonizacao('med-ion');
           overlay.appendChild(medidor);
           const painelCalculo = document.createElement('div');
           painelCalculo.className = 'painel-calculo';
-          painelCalculo.innerHTML = '<div class="linha-calculo">α = 18 ÷ 20</div><div class="linha-calculo linha-calculo-final">α = 90% — ácido forte</div>';
+          painelCalculo.innerHTML = '<div class="linha-calculo">α = 18 ÷ 20</div><div class="linha-calculo linha-calculo-final">α = 90% — strong acid</div>';
           overlay.insertBefore(painelCalculo, linha);
           atualizarMedidorIonizacao('med-ion', 90);
-          fala('Quanto maior a proporção de moléculas ionizadas, maior o grau de ionização. Como 90% é maior que 50%, o Ácido C é forte.');
+          fala('The higher the proportion of ionized molecules, the higher the degree of ionization. Since 90% is greater than 50%, Acid C is strong.');
           botaoContinuar(500);
         }, 300);
       }
@@ -900,10 +900,10 @@ function passoIonizacao() {
 }
 
 /* ==========================================================
-   ETAPA 5 — COMPARAÇÃO VISUAL (ordenar por clique)
+   STEP 5 — VISUAL COMPARISON (rank by clicking)
    ========================================================== */
 function passoEtapa5() {
-  fala('Observe estas três substâncias em solução. Clique nelas na ordem da maior para a menor ionização.');
+  fala('Observe these three substances in solution. Click them in order from greatest to least ionization.');
   const substancias = [
     { chave: 'HCl', ionizadas: 18 },
     { chave: 'HF', ionizadas: 6 },
@@ -949,10 +949,10 @@ function passoEtapa5() {
           const acertou = selecaoAtual.every(function (c, i) { return c === ordemCorreta[i]; });
           if (acertou) {
             tocarDing();
-            fala('Não é a quantidade de hidrogênios da fórmula que determina sozinha a força do ácido. A força está relacionada à proporção que efetivamente se ioniza em água.');
+            fala('The number of hydrogens in the formula alone doesn\'t determine the strength of the acid. Strength is related to the proportion that actually ionizes in water.');
             botaoContinuar(500);
           } else {
-            fala('Compare a quantidade de partículas douradas (ionizadas) em cada recipiente e tente novamente.');
+            fala('Compare the number of golden (ionized) particles in each container and try again.');
             selecaoAtual.length = 0;
             Object.keys(cartaoEls).forEach(function (k) {
               cartaoEls[k].cartao.classList.remove('cartao-selecionado');
@@ -966,24 +966,24 @@ function passoEtapa5() {
 }
 
 /* ==========================================================
-   ETAPA 6 — HIDRÁCIDOS
+   STEP 6 — HYDRACIDS
    ========================================================== */
 function passoHidracidos() {
-  fala('Agora vamos dar nomes aos ácidos. Estas fórmulas não têm oxigênio: são os HIDRÁCIDOS, nomeados por ÁCIDO + nome do ânion + ÍDRICO. Associe cada fórmula ao seu nome.');
+  fala('Now let\'s name the acids. These formulas have no oxygen: they are the HYDRACIDS, named HYDRO + anion root + -IC ACID. Match each formula to its name.');
 
   criarJogoDeAssociacao([
-    { chave: 'HCl', nome: 'ácido clorídrico' },
-    { chave: 'HBr', nome: 'ácido bromídrico' },
-    { chave: 'HI', nome: 'ácido iodídrico' },
-    { chave: 'HF', nome: 'ácido fluorídrico' }
-  ], 'Observe o nome do ânion e a terminação usada nos hidrácidos.', 'Muito bem! Você nomeou todos os hidrácidos corretamente.');
+    { chave: 'HCl', nome: 'hydrochloric acid' },
+    { chave: 'HBr', nome: 'hydrobromic acid' },
+    { chave: 'HI', nome: 'hydroiodic acid' },
+    { chave: 'HF', nome: 'hydrofluoric acid' }
+  ], 'Look at the anion\'s name and the suffix used in hydracids.', 'Well done! You named all the hydracids correctly.');
 }
 
 /* ==========================================================
-   ETAPA 7 — OXIÁCIDOS
+   STEP 7 — OXYACIDS
    ========================================================== */
 function passoOxiacidos() {
-  fala('Estes ácidos têm oxigênio: são os OXIÁCIDOS. Compare os pares abaixo — o que diferencia cada dupla?');
+  fala('These acids contain oxygen: they are the OXYACIDS. Compare the pairs below — what differentiates each pair?');
   const linha = document.createElement('div');
   linha.className = 'linha-cartas-simples';
   ['HNO3', 'HNO2', 'H2SO4', 'H2SO3'].forEach(function (c) {
@@ -996,19 +996,19 @@ function passoOxiacidos() {
 
   agendar(function () {
     escolhaBotoes({
-      pergunta: 'O que diferencia cada dupla de oxiácidos do mesmo elemento?',
+      pergunta: 'What differentiates each pair of oxyacids of the same element?',
       opcoes: [
-        { rotulo: 'A quantidade de oxigênio', correta: true },
-        { rotulo: 'A quantidade de hidrogênio', correta: false },
-        { rotulo: 'O elemento central', correta: false }
+        { rotulo: 'The amount of oxygen', correta: true },
+        { rotulo: 'The amount of hydrogen', correta: false },
+        { rotulo: 'The central element', correta: false }
       ],
-      dica: 'Compare os dois oxiácidos de cada elemento e conte os átomos de oxigênio.',
-      explicacao: 'Mais oxigênio → maior NOX → terminação ICO (nítrico, sulfúrico). Menos oxigênio → menor NOX → terminação OSO (nitroso, sulfuroso). Essa comparação só vale entre oxiácidos do mesmo elemento central.',
+      dica: 'Compare the two oxyacids of each element and count the oxygen atoms.',
+      explicacao: 'More oxygen → higher oxidation number → -IC ending (nitric, sulfuric). Less oxygen → lower oxidation number → -OUS ending (nitrous, sulfurous). This comparison only applies between oxyacids of the same central element.',
       aoAcertar: function () {
         agendar(function () {
           const placa = document.createElement('div');
           placa.className = 'placa-dourada';
-          placa.textContent = 'Maior NOX → ICO   |   Menor NOX → OSO';
+          placa.textContent = 'Higher oxidation number → -IC   |   Lower oxidation number → -OUS';
           overlay.appendChild(placa);
           botaoContinuar(400);
         }, 300);
@@ -1018,11 +1018,11 @@ function passoOxiacidos() {
 }
 
 /* ==========================================================
-   ETAPA 8 — DESAFIO DE NOMENCLATURA
+   STEP 8 — NOMENCLATURE CHALLENGE
    ========================================================== */
 function criarPassoNomenclatura(chave) {
   return function () {
-    fala('Identifique e nomeie o ácido: ' + FORMULAS[chave] + '.');
+    fala('Identify and name the acid: ' + FORMULAS[chave] + '.');
     const cartaoFormula = document.createElement('div');
     cartaoFormula.className = 'cartao-formula-grande';
     cartaoFormula.style.position = 'absolute';
@@ -1031,13 +1031,13 @@ function criarPassoNomenclatura(chave) {
     overlay.appendChild(cartaoFormula);
 
     escolhaBotoes({
-      pergunta: 'Esse ácido é um hidrácido ou um oxiácido?',
+      pergunta: 'Is this acid a hydracid or an oxyacid?',
       opcoes: [
-        { rotulo: 'Hidrácido', correta: TIPO_ACIDO[chave] === 'hidracido' },
-        { rotulo: 'Oxiácido', correta: TIPO_ACIDO[chave] === 'oxiacido' }
+        { rotulo: 'Hydracid', correta: TIPO_ACIDO[chave] === 'hidracido' },
+        { rotulo: 'Oxyacid', correta: TIPO_ACIDO[chave] === 'oxiacido' }
       ],
-      dica: 'Observe se a fórmula possui oxigênio.',
-      explicacao: TIPO_ACIDO[chave] === 'hidracido' ? 'Sem oxigênio: é um hidrácido.' : 'Com oxigênio: é um oxiácido.',
+      dica: 'Check whether the formula contains oxygen.',
+      explicacao: TIPO_ACIDO[chave] === 'hidracido' ? 'No oxygen: it is a hydracid.' : 'With oxygen: it is an oxyacid.',
       aoAcertar: function () {
         agendar(function () {
           montarNomePorBlocos(chave, function () { agendar(function () { botaoContinuar(400); }, 300); });
@@ -1050,18 +1050,18 @@ const NOMENCLATURA_ORDEM = ['HCl', 'HNO3', 'HNO2', 'H2SO4', 'H2SO3'];
 const passosNomenclatura = NOMENCLATURA_ORDEM.map(function (c) { return criarPassoNomenclatura(c); });
 
 /* ==========================================================
-   CONCLUSÃO
+   CONCLUSION
    ========================================================== */
 function passoFinal() {
-  fala('Excelente. Agora você consegue reconhecer um ácido, interpretar sua ionização e construir seu nome.');
+  fala('Excellent. Now you can recognize an acid, interpret its ionization, and build its name.');
   function linha(txt) { return '<div class="resumo-linha">' + txt + '</div>'; }
   overlay.innerHTML =
     '<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:12px;">' +
     '<div class="quadro-resumo-final">' +
-    linha('Ácidos em água formam H₃O⁺.') +
-    linha('Os íons produzidos conduzem corrente elétrica.') +
-    linha('Diferentes ácidos apresentam diferentes graus de ionização (α).') +
-    linha('Hidrácidos e oxiácidos seguem regras próprias de nomenclatura.') +
+    linha('Acids in water form H₃O⁺.') +
+    linha('The ions produced conduct electric current.') +
+    linha('Different acids have different degrees of ionization (α).') +
+    linha('Hydracids and oxyacids follow their own naming rules.') +
     '</div></div>';
 
   painel.innerHTML = '';
@@ -1070,15 +1070,15 @@ function passoFinal() {
   wrap.style.display = 'flex'; wrap.style.gap = '0.8rem'; wrap.style.justifyContent = 'center'; wrap.style.flexWrap = 'wrap';
   const btnRevisar = document.createElement('button');
   btnRevisar.className = 'btn-continuar';
-  btnRevisar.textContent = 'REVISAR A FASE';
+  btnRevisar.textContent = 'REVIEW THE STAGE';
   btnRevisar.addEventListener('click', function () { irPara(0); });
   const btnConcluir = document.createElement('button');
   btnConcluir.className = 'btn-continuar';
-  btnConcluir.textContent = 'CONCLUIR';
+  btnConcluir.textContent = 'FINISH';
   btnConcluir.addEventListener('click', function () {
     const conclusao = document.getElementById('conclusao');
-    document.getElementById('conclusaoPlacar').textContent = 'Fase concluída';
-    document.getElementById('conclusaoMensagem').textContent = 'Você investigou os ácidos: como formam H₃O⁺ em água, como conduzem corrente elétrica, o que é grau de ionização e como nomear hidrácidos e oxiácidos.';
+    document.getElementById('conclusaoPlacar').textContent = 'Stage completed';
+    document.getElementById('conclusaoMensagem').textContent = 'You investigated acids: how they form H₃O⁺ in water, how they conduct electric current, what degree of ionization is, and how to name hydracids and oxyacids.';
     conclusao.classList.add('visivel');
     conclusao.scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
@@ -1087,7 +1087,7 @@ function passoFinal() {
 }
 
 /* ==========================================================
-   MOTOR DA FASE
+   STAGE ENGINE
    ========================================================== */
 const PASSOS = [passoIntro, passoEtapa2, passoIonizacao, passoEtapa5, passoHidracidos, passoOxiacidos]
   .concat(passosNomenclatura)

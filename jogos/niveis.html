@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Laboratório dos Níveis e Subníveis · KiFácil</title>
+<title>Energy Levels and Sublevels Laboratory · KiFácil</title>
 <link rel="icon" type="image/png" href="../favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;1,500;1,600&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
@@ -53,7 +53,7 @@ body { display: flex; flex-direction: column; visibility: hidden; }
   padding: 18px 22px; overflow-y: auto;
 }
 
-/* Seletor de nível */
+/* Level selector */
 #nivel-label { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: rgba(232,216,176,0.5); margin-bottom: 6px; }
 #nivel-selector { display: flex; gap: 8px; margin-bottom: 16px; }
 .nivel-btn {
@@ -68,7 +68,7 @@ body { display: flex; flex-direction: column; visibility: hidden; }
 @keyframes pulsoNivel { 0%,100% { box-shadow: 0 0 0 rgba(232,184,75,0); } 50% { box-shadow: 0 0 10px rgba(232,184,75,0.45); } }
 .nivel-btn.destaque { animation: pulsoNivel 1.4s ease-in-out infinite; border-color: rgba(232,184,75,0.6); }
 
-/* Badges de subnível */
+/* Sublevel badges */
 #subniveis-row { display: flex; gap: 10px; margin-bottom: 18px; }
 .subnivel-badge {
   width: 56px; height: 56px; border-radius: 10px; cursor: pointer;
@@ -85,7 +85,7 @@ body { display: flex; flex-direction: column; visibility: hidden; }
 .subnivel-badge.bloqueado { pointer-events: none; opacity: .35; }
 .subnivel-badge.disponivel .cadeado { display: none; }
 
-/* Diagrama de orbitais (caixas) */
+/* Orbital diagram (boxes) */
 #diagrama-wrap { min-height: 48px; display: flex; align-items: center; justify-content: center; margin-bottom: 10px; }
 #diagrama-orbitais { display: flex; flex-direction: column; align-items: center; gap: 10px; max-width: 360px; }
 .diagrama-linha { display: flex; align-items: center; gap: 8px; opacity: 0; animation: fadeUp .35s ease forwards; }
@@ -102,7 +102,7 @@ body { display: flex; flex-direction: column; visibility: hidden; }
 #diagrama-explicacao { font-size: 11px; color: rgba(232,216,176,0.5); text-align: center; margin-bottom: 10px; line-height: 1.5; }
 #diagrama-legenda { font-family: 'Lora', serif; font-size: 13px; color: var(--soft); text-align: center; margin-bottom: 16px; min-height: 20px; line-height: 1.5; }
 
-/* Quadro-resumo progressivo (preenche à medida que o aluno explora) */
+/* Progressive summary table (fills in as the student explores) */
 #resumo-progresso { width: 100%; max-width: 340px; margin: 4px auto 0; padding-top: 16px; border-top: 1px dashed rgba(212,170,106,0.2); }
 #resumo-progresso-titulo { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: rgba(232,216,176,0.5); text-align: center; margin-bottom: 10px; }
 #resumo-progresso-tabela { width: 100%; border-collapse: collapse; font-size: 12px; }
@@ -114,7 +114,7 @@ body { display: flex; flex-direction: column; visibility: hidden; }
 #resumo-progresso-tabela td.subnivel-col { font-family: 'Lora', serif; font-weight: 700; color: var(--gold); }
 #resumo-progresso-tabela tr.linha-vazia td { color: rgba(232,216,176,0.2); font-style: italic; }
 
-/* ── PROFESSORA RAFAELA ── */
+/* ── PROFESSOR RAFAELA ── */
 #teacher-box { position:absolute; top:14px; left:50%; transform:translateX(-50%); z-index:40; display:flex; flex-direction:row; align-items:flex-end; gap:0; pointer-events:none; }
 #teacher-img {
   width: 120px; height: 185px; object-fit: cover; object-position: top center;
@@ -162,7 +162,7 @@ body { display: flex; flex-direction: column; visibility: hidden; }
 .btn-opcao.certo  { border-color: rgba(80,200,120,0.7); background: rgba(80,200,120,0.08); color: #7fe898; }
 @keyframes shake { 0%,100%{transform:translateX(0);} 25%{transform:translateX(-6px);} 75%{transform:translateX(6px);} }
 
-/* quadro-resumo */
+/* summary table */
 #quadro-overlay { flex-direction: column; gap: 20px; }
 #quadro-box {
   width: 460px; max-width: calc(100% - 40px); background: #141410;
@@ -191,7 +191,7 @@ body { display: flex; flex-direction: column; visibility: hidden; }
   padding-top: 16px; border-top: 1px dashed rgba(212,170,106,0.25);
 }
 
-/* desafio final */
+/* final challenge */
 #desafio-final-overlay { flex-direction: column; gap: 4px; }
 #desafio-final-painel {
   background: var(--panel-bg); border: 1.5px solid var(--border); border-radius: 12px;
@@ -210,7 +210,7 @@ body { display: flex; flex-direction: column; visibility: hidden; }
 .btn-prosseguir:hover { background: #f0c960; }
 .btn-prosseguir.show { display: block; }
 
-/* modal conclusão */
+/* conclusion modal */
 #modal-conclusao { display: none; position: fixed; inset: 0; z-index: 400; background: rgba(0,0,0,0.8); align-items: center; justify-content: center; }
 #modal-conclusao.show { display: flex; }
 #conclusao-box {
@@ -264,19 +264,19 @@ body { display: flex; flex-direction: column; visibility: hidden; }
 <div id="game-area">
 
   <aside id="teacher-box">
-    <img id="teacher-img" src="../imagens/rafa-explicando.jpg" alt="Professora Rafaela">
+    <img id="teacher-img" src="../imagens/rafa-explicando.jpg" alt="Professor Rafaela">
     <div id="teacher-bubble">
-      <div id="teacher-name">Professora Rafaela</div>
+      <div id="teacher-name">Professor Rafaela</div>
       <p id="teacher-text"></p>
-      <button id="btn-avancar" onclick="avancarDialogo()">Continuar ›</button>
+      <button id="btn-avancar" onclick="avancarDialogo()">Continue ›</button>
     </div>
   </aside>
 
   <div id="scene-col">
-    <img id="scene-img" src="../imagens/laboratorio-niveis-subniveis.jpg" alt="Laboratório dos Níveis e Subníveis">
+    <img id="scene-img" src="../imagens/laboratorio-niveis-subniveis.jpg" alt="Energy Levels and Sublevels Laboratory">
 
     <div id="painel-experimento">
-      <div id="nivel-label">Nível de energia (n)</div>
+      <div id="nivel-label">Energy level (n)</div>
       <div id="nivel-selector">
         <button class="nivel-btn ativo" onclick="mudarNivel(1)">n=1</button>
         <button class="nivel-btn" onclick="mudarNivel(2)">n=2</button>
@@ -294,14 +294,14 @@ body { display: flex; flex-direction: column; visibility: hidden; }
       <div id="diagrama-wrap">
         <div id="diagrama-orbitais"></div>
       </div>
-      <div id="diagrama-explicacao">🔲 cada quadrado é um orbital &nbsp;·&nbsp; cada seta é um elétron (no máximo 2 por orbital)</div>
-      <div id="diagrama-legenda">Clique em um subnível disponível para ver seus orbitais.</div>
+      <div id="diagrama-explicacao">🔲 each square is an orbital &nbsp;·&nbsp; each arrow is an electron (at most 2 per orbital)</div>
+      <div id="diagrama-legenda">Click an available sublevel to see its orbitals.</div>
 
       <div id="resumo-progresso">
-        <div id="resumo-progresso-titulo">O que você já descobriu</div>
+        <div id="resumo-progresso-titulo">What you've discovered so far</div>
         <table id="resumo-progresso-tabela">
           <thead>
-            <tr><th>Subnível</th><th>Orbitais</th><th>Máx. elétrons</th></tr>
+            <tr><th>Sublevel</th><th>Orbitals</th><th>Max. electrons</th></tr>
           </thead>
           <tbody id="resumo-progresso-body">
             <tr class="linha-vazia" data-sub="s"><td class="subnivel-col">s</td><td>—</td><td>—</td></tr>
@@ -313,29 +313,29 @@ body { display: flex; flex-direction: column; visibility: hidden; }
       </div>
     </div>
 
-    <!-- COLOQUE O LINK AQUI -->
-    <a class="link-aula" href="https://www.youtube.com/watch?v=09PrmxKbp2k" target="_blank" rel="noopener" title="Assista à aula">
+    <!-- PUT THE LINK HERE -->
+    <a class="link-aula" href="https://www.youtube.com/watch?v=09PrmxKbp2k" target="_blank" rel="noopener" title="Watch the lesson">
       <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.6"/>
         <path d="M10 8.5L16 12L10 15.5V8.5Z" fill="currentColor"/>
       </svg>
-      <span>Assista à aula</span>
+      <span>Watch the lesson</span>
     </a>
   </div>
 </div>
 
-<!-- ── OVERLAY: QUADRO-RESUMO ── -->
+<!-- ── OVERLAY: SUMMARY TABLE ── -->
 <div class="overlay-base" id="quadro-overlay">
   <div id="quadro-box">
-    <div class="quadro-titulo">O Que Você Descobriu</div>
+    <div class="quadro-titulo">What You Discovered</div>
 
     <div class="quadro-passo">
       <div class="quadro-passo-num">1</div>
-      <div class="quadro-passo-texto">Cada nível de energia possui seus próprios subníveis.</div>
+      <div class="quadro-passo-texto">Each energy level has its own sublevels.</div>
     </div>
     <table class="quadro-tabela">
       <thead>
-        <tr><th>Nível</th><th>Subníveis disponíveis</th></tr>
+        <tr><th>Level</th><th>Available sublevels</th></tr>
       </thead>
       <tbody>
         <tr><td class="subnivel-col">n = 1</td><td>s</td></tr>
@@ -347,11 +347,11 @@ body { display: flex; flex-direction: column; visibility: hidden; }
 
     <div class="quadro-passo">
       <div class="quadro-passo-num">2</div>
-      <div class="quadro-passo-texto">Cada subnível possui uma quantidade fixa de orbitais — e cada orbital comporta até 2 elétrons.</div>
+      <div class="quadro-passo-texto">Each sublevel has a fixed number of orbitals — and each orbital holds up to 2 electrons.</div>
     </div>
     <table class="quadro-tabela">
       <thead>
-        <tr><th>Subnível</th><th>Nº de orbitais</th><th>Nº máx. de elétrons</th></tr>
+        <tr><th>Sublevel</th><th>No. of orbitals</th><th>Max. no. of electrons</th></tr>
       </thead>
       <tbody>
         <tr><td class="subnivel-col">s</td><td>1</td><td>2</td></tr>
@@ -361,30 +361,30 @@ body { display: flex; flex-direction: column; visibility: hidden; }
       </tbody>
     </table>
 
-    <div id="quadro-regra">A quantidade máxima de elétrons de cada subnível não é arbitrária — ela depende do número de orbitais. Como cada orbital comporta até dois elétrons, basta multiplicar o número de orbitais por dois.</div>
+    <div id="quadro-regra">The maximum number of electrons in each sublevel isn't arbitrary — it depends on the number of orbitals. Since each orbital holds up to two electrons, you just multiply the number of orbitals by two.</div>
   </div>
-  <button class="btn-opcao" style="max-width:220px; text-align:center; background:var(--gold); color:#1a0f08; font-weight:700; display:none;" id="btn-entendi" onclick="irParaDesafioFinal()">Ir para o desafio</button>
+  <button class="btn-opcao" style="max-width:220px; text-align:center; background:var(--gold); color:#1a0f08; font-weight:700; display:none;" id="btn-entendi" onclick="irParaDesafioFinal()">Go to the challenge</button>
 </div>
 
-<!-- ── OVERLAY: DESAFIO FINAL ── -->
+<!-- ── OVERLAY: FINAL CHALLENGE ── -->
 <div class="overlay-base" id="desafio-final-overlay">
   <div id="desafio-final-painel">
-    <div class="df-eyebrow">Desafio Final</div>
-    <div class="df-progresso" id="df-progresso">Pergunta 1 de 3</div>
+    <div class="df-eyebrow">Final Challenge</div>
+    <div class="df-progresso" id="df-progresso">Question 1 of 3</div>
     <div class="df-titulo" id="df-titulo">—</div>
     <div class="opcoes" id="df-opcoes"></div>
     <div class="df-feedback" id="df-feedback"></div>
-    <button class="btn-prosseguir" id="btn-proximo-final" onclick="avancarPerguntaFinal()">Próxima pergunta →</button>
+    <button class="btn-prosseguir" id="btn-proximo-final" onclick="avancarPerguntaFinal()">Next question →</button>
   </div>
 </div>
 
-<!-- ── MODAL CONCLUSÃO ── -->
+<!-- ── CONCLUSION MODAL ── -->
 <div id="modal-conclusao">
   <div id="conclusao-box">
-    <div class="conc-eyebrow">Laboratório Concluído</div>
-    <div class="conc-titulo">Níveis e Subníveis</div>
-    <p class="conc-desc">Você descobriu sozinho por que cada nível de energia abre espaço para um novo tipo de subnível — e quantos elétrons cabem em cada um deles.</p>
-    <button class="btn-conc" onclick="reiniciarFase()">Refazer a fase</button>
+    <div class="conc-eyebrow">Laboratory Completed</div>
+    <div class="conc-titulo">Levels and Sublevels</div>
+    <p class="conc-desc">You discovered on your own why each energy level opens space for a new type of sublevel — and how many electrons fit in each one.</p>
+    <button class="btn-conc" onclick="reiniciarFase()">Redo the stage</button>
   </div>
 </div>
 
@@ -428,7 +428,7 @@ function ajustarEspacoTeacherBox() {
   painel.style.top = (teacherBox.offsetHeight + 26) + 'px';
 }
 
-/* ── DADOS ── */
+/* ── DATA ── */
 const ORDEM_SUB = ['s','p','d','f'];
 const INFO_SUB = {
   s: { orbitais: 1, eletrons: 2 },
@@ -437,16 +437,16 @@ const INFO_SUB = {
   f: { orbitais: 7, eletrons: 14 },
 };
 const NARRACAO_DESCOBERTA = {
-  s: 'Observe: o subnível s tem apenas 1 orbital, representado por um quadrado. Como cada orbital acomoda no máximo 2 elétrons, o número máximo de elétrons do subnível s é 2. Veja o quadro-resumo logo abaixo.',
-  p: 'O subnível p tem 3 orbitais — 3 quadrados. Cada um comporta até 2 elétrons, então o máximo é 6. Repare no quadro-resumo.',
-  d: 'O subnível d tem 5 orbitais: 5 × 2 = 10 elétrons no máximo.',
-  f: 'E o subnível f, com 7 orbitais, chega a 14 elétrons no máximo.'
+  s: 'Notice: the s sublevel has only 1 orbital, represented by a square. Since each orbital holds a maximum of 2 electrons, the maximum number of electrons in the s sublevel is 2. See the summary table just below.',
+  p: 'The p sublevel has 3 orbitals — 3 squares. Each holds up to 2 electrons, so the maximum is 6. Notice the summary table.',
+  d: 'The d sublevel has 5 orbitals: 5 × 2 = 10 electrons at most.',
+  f: 'And the f sublevel, with 7 orbitals, reaches up to 14 electrons at most.'
 };
 const FALAS_NIVEL = {
-  1: 'O nível 1 possui exatamente 1 subnível: o s. Clique nele para ver como ele é organizado.',
-  2: 'O nível 2 possui exatamente 2 subníveis: s e p. Clique em cada um deles, um de cada vez.',
-  3: 'O nível 3 possui exatamente 3 subníveis: s, p e d. Clique em cada um deles, um de cada vez.',
-  4: 'O nível 4 possui exatamente 4 subníveis: s, p, d e f. Clique em cada um deles, um de cada vez.'
+  1: 'Level 1 has exactly 1 sublevel: s. Click it to see how it is organized.',
+  2: 'Level 2 has exactly 2 sublevels: s and p. Click each one, one at a time.',
+  3: 'Level 3 has exactly 3 sublevels: s, p, and d. Click each one, one at a time.',
+  4: 'Level 4 has exactly 4 sublevels: s, p, d, and f. Click each one, one at a time.'
 };
 
 let nivelAtual = 1;
@@ -463,7 +463,7 @@ function mudarNivel(n) {
   subnivelSelecionado = null;
   subniveisMostrados = [];
   document.getElementById('diagrama-orbitais').innerHTML = '';
-  document.getElementById('diagrama-legenda').textContent = 'Clique em cada subnível disponível para ver seus orbitais.';
+  document.getElementById('diagrama-legenda').textContent = 'Click each available sublevel to see its orbitals.';
   atualizarBadges();
   rafaFala('explicando', FALAS_NIVEL[n], null);
 }
@@ -490,17 +490,17 @@ function selecionarSubnivel(s) {
 
   const info = INFO_SUB[s];
   document.getElementById('diagrama-legenda').textContent =
-    'Subnível ' + s + ': ' + info.orbitais + (info.orbitais === 1 ? ' orbital' : ' orbitais') +
-    ', cada um com espaço para 2 elétrons — no máximo ' + info.eletrons + ' elétrons.';
+    'Sublevel ' + s + ': ' + info.orbitais + (info.orbitais === 1 ? ' orbital' : ' orbitals') +
+    ', each with room for 2 electrons — at most ' + info.eletrons + ' electrons.';
 
   const subniveisDoNivel = ORDEM_SUB.slice(0, nivelAtual);
   const completouNivel = subniveisDoNivel.every(sub => subniveisMostrados.includes(sub));
 
   const proximoPasso = () => {
     if (nivelAtual === 4) {
-      rafaFala('animada', 'Você viu os quatro subníveis do nível 4, todos juntos. Repare no padrão: quantos subníveis apareceram em cada nível, e quantos elétrons cabem em cada um deles?', mostrarQuadro);
+      rafaFala('animada', 'You saw all four sublevels of level 4 together. Notice the pattern: how many sublevels appeared in each level, and how many electrons fit in each one?', mostrarQuadro);
     } else {
-      rafaFala('pensando', 'Agora clique em "n=' + (nivelAtual + 1) + '" ali em cima, no seletor de nível, para ver o que aparece de novo.', null);
+      rafaFala('pensando', 'Now click "n=' + (nivelAtual + 1) + '" up there, in the level selector, to see what appears next.', null);
       const proximoBtn = document.querySelectorAll('.nivel-btn')[nivelAtual];
       if (proximoBtn) proximoBtn.classList.add('destaque');
     }
@@ -560,40 +560,40 @@ function preencherLinhaResumo(s) {
   return true;
 }
 
-/* QUADRO */
+/* SUMMARY TABLE */
 function mostrarQuadro() {
   document.getElementById('quadro-overlay').classList.add('show');
   setTimeout(() => document.getElementById('btn-entendi').style.display = 'block', 900);
 }
 
-/* DESAFIO FINAL */
+/* FINAL CHALLENGE */
 const perguntasFinais = [
   {
-    titulo: 'Quantos elétrons cabem, no máximo, no subnível d?',
+    titulo: 'How many electrons fit, at most, in the d sublevel?',
     opcoes: [
-      { texto: '10 elétrons.', correta: true },
-      { texto: '6 elétrons.', correta: false }
+      { texto: '10 electrons.', correta: true },
+      { texto: '6 electrons.', correta: false }
     ],
-    certoMsg: 'Isso mesmo! O subnível d tem 5 orbitais, e cada orbital comporta até 2 elétrons: 5 × 2 = 10.',
-    erradoMsg: 'Volte à tabela: o subnível d tem 5 orbitais. Cada orbital cabe até 2 elétrons.'
+    certoMsg: "That's right! The d sublevel has 5 orbitals, and each orbital holds up to 2 electrons: 5 × 2 = 10.",
+    erradoMsg: 'Go back to the table: the d sublevel has 5 orbitals. Each orbital holds up to 2 electrons.'
   },
   {
-    titulo: 'Quantos orbitais tem o subnível f?',
+    titulo: 'How many orbitals does the f sublevel have?',
     opcoes: [
-      { texto: '7 orbitais.', correta: true },
-      { texto: '5 orbitais.', correta: false }
+      { texto: '7 orbitals.', correta: true },
+      { texto: '5 orbitals.', correta: false }
     ],
-    certoMsg: 'Correto! O f é o subnível com mais orbitais entre os quatro: 7 orbitais, até 14 elétrons.',
-    erradoMsg: '5 orbitais é o subnível d. O f tem dois orbitais a mais que o d.'
+    certoMsg: 'Correct! f is the sublevel with the most orbitals among the four: 7 orbitals, up to 14 electrons.',
+    erradoMsg: '5 orbitals is the d sublevel. f has two more orbitals than d.'
   },
   {
-    titulo: 'Qual é o primeiro nível de energia em que aparece o subnível d?',
+    titulo: 'What is the first energy level in which the d sublevel appears?',
     opcoes: [
-      { texto: 'Nível 3 (n = 3).', correta: true },
-      { texto: 'Nível 2 (n = 2).', correta: false }
+      { texto: 'Level 3 (n = 3).', correta: true },
+      { texto: 'Level 2 (n = 2).', correta: false }
     ],
-    certoMsg: 'Exato. No nível 2 só existem s e p — o d só aparece a partir do nível 3.',
-    erradoMsg: 'Lembre do que você viu no laboratório: no nível 2 só havia s e p disponíveis.'
+    certoMsg: 'Exactly. In level 2 only s and p exist — d only appears starting at level 3.',
+    erradoMsg: 'Remember what you saw in the laboratory: in level 2 only s and p were available.'
   }
 ];
 let dfIndice = 0;
@@ -603,12 +603,12 @@ function irParaDesafioFinal() {
   document.getElementById('desafio-final-overlay').classList.add('show');
   dfIndice = 0;
   renderPerguntaFinal();
-  rafaFala('animada', 'Três perguntas rápidas para confirmar o que você descobriu.', null);
+  rafaFala('animada', 'Three quick questions to confirm what you discovered.', null);
 }
 
 function renderPerguntaFinal() {
   const p = perguntasFinais[dfIndice];
-  document.getElementById('df-progresso').textContent = 'Pergunta ' + (dfIndice + 1) + ' de ' + perguntasFinais.length;
+  document.getElementById('df-progresso').textContent = 'Question ' + (dfIndice + 1) + ' of ' + perguntasFinais.length;
   document.getElementById('df-titulo').textContent = p.titulo;
   const wrap = document.getElementById('df-opcoes');
   wrap.innerHTML = '';
@@ -623,7 +623,7 @@ function renderPerguntaFinal() {
   fb.textContent = ''; fb.className = 'df-feedback';
   const btnProx = document.getElementById('btn-proximo-final');
   btnProx.classList.remove('show');
-  btnProx.textContent = (dfIndice === perguntasFinais.length - 1) ? 'Concluir laboratório' : 'Próxima pergunta →';
+  btnProx.textContent = (dfIndice === perguntasFinais.length - 1) ? 'Finish laboratory' : 'Next question →';
 }
 
 function responderDF(btn, correto) {
@@ -675,7 +675,7 @@ function reiniciarFase() {
     b.classList.remove('destaque');
   });
   document.getElementById('diagrama-orbitais').innerHTML = '';
-  document.getElementById('diagrama-legenda').textContent = 'Clique em cada subnível disponível para ver seus orbitais.';
+  document.getElementById('diagrama-legenda').textContent = 'Click each available sublevel to see its orbitals.';
   document.querySelectorAll('#resumo-progresso-body tr').forEach(tr => {
     tr.classList.add('linha-vazia');
     tr.children[1].textContent = '—';
@@ -685,15 +685,15 @@ function reiniciarFase() {
   atualizarBadges();
 
   ajustarEspacoTeacherBox();
-  rafaFala('sorrindo', 'Vamos recomeçar. Escolha um nível de energia e descubra quais subníveis existem em cada um.', null);
+  rafaFala('sorrindo', "Let's start over. Choose an energy level and discover which sublevels exist in each one.", null);
 }
 
-/* INÍCIO */
+/* START */
 document.body.style.visibility = 'visible';
 atualizarBadges();
 ajustarEspacoTeacherBox();
 setTimeout(() => {
-  rafaFala('sorrindo', 'Bem-vindo ao Laboratório dos Níveis e Subníveis. Escolha um nível de energia e descubra quais subníveis existem em cada um.', null);
+  rafaFala('sorrindo', 'Welcome to the Energy Levels and Sublevels Laboratory. Choose an energy level and discover which sublevels exist in each one.', null);
 }, 400);
 </script>
 <script>

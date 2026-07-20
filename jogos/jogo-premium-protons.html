@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>A Estrutura do Átomo — KiFácil</title>
+  <title>The Structure of the Atom — KiFácil</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
   <style>
-    /* ── Reset & Variáveis ─────────────────────────────────── */
+    /* ── Reset & Variables ─────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
@@ -29,7 +29,7 @@
       overflow: hidden;
     }
 
-    /* ── Cenário ───────────────────────────────────────────── */
+    /* ── Scene ───────────────────────────────────────────── */
     #bg {
       position: fixed; inset: 11% 13%; z-index: 0;
       border-radius: 10px;
@@ -75,7 +75,7 @@
     }
     .teacher-compact .bubble p { font-size: 1rem; line-height: 1.6; color: var(--cream); }
 
-    /* ── Área do Conteúdo ──────────────────────────────────── */
+    /* ── Content Area ──────────────────────────────────────── */
     #stage-area {
       position: fixed;
       top: 12%; left: calc(14% + 300px); right: 14%;
@@ -86,7 +86,7 @@
       overflow: hidden;
     }
 
-    /* ── Painel (quadro-negro) ─────────────────────────────── */
+    /* ── Panel (chalkboard) ─────────────────────────────── */
     .panel {
       background: var(--board-bg);
       border: 1.5px solid var(--board-border);
@@ -111,7 +111,7 @@
       to   { opacity: 1; transform: translateY(0); }
     }
 
-    /* ── Caixa da Professora (topo-esquerda) ──────────────── */
+    /* ── Teacher Box (top-left) ──────────────── */
     #teacher-box {
       position: fixed;
       top: 12%; left: 14%;
@@ -124,7 +124,7 @@
       transition: opacity .5s ease;
     }
 
-    /* ── Hall de Entrada ───────────────────────────────────── */
+    /* ── Entrance Hall ───────────────────────────────────── */
     .hall-wrap {
       display: flex; align-items: center; gap: 2.4rem;
     }
@@ -197,7 +197,7 @@
     #btn-continuar.show { opacity: 1; pointer-events: all; }
     #btn-continuar:hover { filter: brightness(1.08); transform: scale(1.03); }
 
-    /* ── ETAPA 0 — Intro ───────────────────────────────────── */
+    /* ── STAGE 0 — Intro ───────────────────────────────────── */
     .intro-wrap { text-align: center; padding: .5rem 0; }
     .intro-wrap h1 {
       font-size: 2.6rem; color: var(--gold);
@@ -218,7 +218,7 @@
     #btn-comecar.show { opacity: 1; pointer-events: all; }
     #btn-comecar:hover { filter: brightness(1.08); transform: translateY(-2px); }
 
-    /* ── ETAPA 1 — Partículas ──────────────────────────────── */
+    /* ── STAGE 1 — Particles ──────────────────────────────── */
     .particles-grid {
       display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
       margin-top: .6rem;
@@ -247,11 +247,11 @@
     .pcard-check { position: absolute; top: .4rem; right: .55rem; color: var(--gold); font-size: .85rem; opacity: 0; transition: opacity .3s; }
     .pcard.seen .pcard-check { opacity: 1; }
 
-    /* ── ETAPA 2 — Construtor do Átomo de Lítio ───────────── */
+    /* ── STAGE 2 — Lithium Atom Builder ───────────── */
     .atom-builder { display:flex; flex-direction:column; align-items:center; gap:1.1rem; }
     .builder-instr { font-style:italic; opacity:.8; text-align:center; font-size:1rem; }
 
-    /* Zona visual do átomo */
+    /* Visual zone of the atom */
     .builder-visual { position:relative; width:264px; height:264px; flex-shrink:0; }
 
     .zone-esph {
@@ -281,7 +281,7 @@
     .nuc-label { font-size:.76rem; font-weight:700; color:rgba(255,200,150,.9); pointer-events:none; }
     .placed-row { display:flex; flex-wrap:wrap; gap:3px; justify-content:center; max-width:88px; pointer-events:none; }
 
-    /* Elétrons na eletrosfera */
+    /* Electrons in the electron cloud */
     .ee {
       position:absolute; width:24px; height:24px; border-radius:50%;
       background:radial-gradient(circle at 35% 35%, #90caf9, #1565c0);
@@ -292,7 +292,7 @@
     }
     .ee.vis { display:flex; }
 
-    /* Mini esferas dentro do núcleo */
+    /* Mini spheres inside the nucleus */
     .mini-s {
       width:22px; height:22px; border-radius:50%;
       display:flex; align-items:center; justify-content:center;
@@ -302,7 +302,7 @@
     .mini-p { background:radial-gradient(circle at 35% 35%, #ff8b6a, #c0392b); }
     .mini-n { background:radial-gradient(circle at 35% 35%, #b0bec5, #607d8b); }
 
-    /* Pool de partículas */
+    /* Particle pool */
     .pool { display:flex; flex-wrap:wrap; gap:.65rem; justify-content:center; max-width:340px; }
     .psphere {
       width:56px; height:56px; border-radius:50%;
@@ -320,7 +320,7 @@
 
     .nucleus-hint { font-size:1rem; color:rgba(201,162,39,.75); font-style:italic; text-align:center; min-height:1.4rem; }
 
-    /* ── ETAPA 3 — Eletrosfera ─────────────────────────────── */
+    /* ── STAGE 3 — Electron Cloud ─────────────────────────────── */
     .atom-display { display: flex; flex-direction: column; align-items: center; gap: 1.2rem; padding: .5rem 0; }
     .atom-visual { position: relative; width: 210px; height: 210px; display: flex; align-items: center; justify-content: center; }
 
@@ -376,7 +376,7 @@
     .leg-item { display: flex; align-items: center; gap: .38rem; }
     .leg-dot  { width: 11px; height: 11px; border-radius: 50%; flex-shrink: 0; }
 
-    /* ── ETAPAS 4 & 5 — Perguntas ──────────────────────────── */
+    /* ── STAGES 4 & 5 — Questions ──────────────────────────── */
     .q-context {
       background: rgba(0,0,0,.3); border-radius: 8px;
       padding: .8rem 1.1rem; margin-bottom: 1.1rem;
@@ -400,7 +400,7 @@
     .opt.correct { border-color: #4caf50; background: rgba(76,175,80,.18); color: #a5d6a7; pointer-events:none; }
     .opt.wrong   { border-color: #e53935; background: rgba(229,57,53,.14); color: #ef9a9a; animation: shake .32s ease; }
 
-    /* ── ETAPA 5 — Número de Massa ─────────────────────────── */
+    /* ── STAGE 5 — Mass Number ─────────────────────────── */
     .mass-stage { display: flex; flex-direction: column; align-items: center; gap: 1rem; }
     .counts { display: flex; gap: 1.2rem; align-items: center; justify-content: center; flex-wrap: wrap; }
     .cbox { text-align: center; padding: .9rem 1.3rem; background: rgba(0,0,0,.3); border-radius: 8px; border: 1px solid rgba(201,162,39,.22); }
@@ -427,7 +427,7 @@
     .btn-check:hover { filter: brightness(1.1); }
     .mass-fb { min-height: 1.5rem; text-align: center; font-size: 1.05rem; margin-top: .25rem; }
 
-    /* ── ETAPA 6 — Desafio Final ───────────────────────────── */
+    /* ── STAGE 6 — Final Challenge ───────────────────────────── */
     .final-wrap { display: flex; flex-direction: column; align-items: center; gap: 1.1rem; }
     .final-instr { font-style: italic; opacity: .8; text-align: center; font-size: 1.08rem; }
 
@@ -470,7 +470,7 @@
     }
     .obadge.done { background: rgba(76,175,80,.2); border-color: #4caf50; color: #a5d6a7; }
 
-    /* ── Conclusão ─────────────────────────────────────────── */
+    /* ── Conclusion ─────────────────────────────────────────── */
     .conclusion-wrap { text-align: center; }
     .conclusion-wrap h2 { font-size: 2.3rem; color: var(--gold); margin-bottom: .5rem; }
     .conclusion-sub { font-size: 1.15rem; opacity: .8; margin-bottom: 1.3rem; line-height: 1.55; }
@@ -495,12 +495,12 @@
     }
     .btn-reiniciar:hover { filter: brightness(1.1); transform: translateY(-2px); }
 
-    /* ── Animações genéricas ───────────────────────────────── */
+    /* ── Generic Animations ───────────────────────────────── */
     @keyframes popIn  { from { transform:scale(0); opacity:0; } to { transform:scale(1); opacity:1; } }
     @keyframes shake  { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-7px)} 75%{transform:translateX(7px)} }
     @keyframes fadeUp { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
 
-    /* ── Responsivo ────────────────────────────────────────── */
+    /* ── Responsive ────────────────────────────────────────── */
     @media (max-width:900px) {
       #bg, #overlay { inset: 4% 3%; }
       #teacher-box {
@@ -549,29 +549,29 @@
 </head>
 <body>
 
-<!-- Cenário -->
+<!-- Scene -->
 <div id="bg"></div>
 <div id="overlay">
-  <!-- COLOQUE O LINK AQUI -->
-  <a class="link-aula" href="https://www.youtube.com/watch?v=IAXfAOhapEU&t=13s" target="_blank" rel="noopener" title="Assista à aula">
+  <!-- PUT THE LINK HERE -->
+  <a class="link-aula" href="https://www.youtube.com/watch?v=IAXfAOhapEU&t=13s" target="_blank" rel="noopener" title="Watch the lesson">
     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
       <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.6"/>
       <path d="M10 8.5L16 12L10 15.5V8.5Z" fill="currentColor"/>
     </svg>
-    <span>Assista à aula</span>
+    <span>Watch the lesson</span>
   </a>
 </div>
 
 
-<!-- Conteúdo dinâmico -->
+<!-- Dynamic content -->
 <main id="stage-area"></main>
 
-<!-- Caixa da Professora -->
+<!-- Teacher Box -->
 <aside id="teacher-box" class="teacher-compact">
-  <img id="teacher-img" src="../imagens/rafa-sorrindo.jpg" alt="Professora Rafaela">
+  <img id="teacher-img" src="../imagens/rafa-sorrindo.jpg" alt="Professor Rafaela">
   <div id="teacher-bubble" class="bubble">
     <p id="teacher-text"></p>
-    <button id="btn-continuar">Continuar</button>
+    <button id="btn-continuar">Continue</button>
   </div>
 </aside>
 
@@ -581,7 +581,7 @@
 'use strict';
 
 /* ═══════════════════════════════════════
-   CONSTANTES E ESTADO
+   CONSTANTS AND STATE
    ═══════════════════════════════════════ */
 const IMG = {
   sorrindo:   '../imagens/rafa-sorrindo.jpg',
@@ -592,18 +592,18 @@ const IMG = {
 
 const PARTICULAS = [
   { id:'proton',
-    name:'Próton',  icon:'⊕', chargeClass:'cp', charge:'+1',
-    info:'Carga positiva. Fica no núcleo e define a identidade do elemento químico.' },
+    name:'Proton',  icon:'⊕', chargeClass:'cp', charge:'+1',
+    info:'Positive charge. Located in the nucleus, it defines the identity of the chemical element.' },
   { id:'neutron',
-    name:'Nêutron', icon:'◉', chargeClass:'cn', charge:'0',
-    info:'Sem carga elétrica. Também fica no núcleo e contribui para o número de massa.' },
+    name:'Neutron', icon:'◉', chargeClass:'cn', charge:'0',
+    info:'No electric charge. Also located in the nucleus, it contributes to the mass number.' },
   { id:'electron',
-    name:'Elétron', icon:'⊖', chargeClass:'ce', charge:'−1',
-    info:'Carga negativa. Ocupa a eletrosfera — a região ao redor do núcleo.' }
+    name:'Electron', icon:'⊖', chargeClass:'ce', charge:'−1',
+    info:'Negative charge. Occupies the electron cloud — the region around the nucleus.' }
 ];
 
 const ORDEM_FINAL = ['protons','neutrons','electrons','atomico','massa'];
-const LABELS_FINAL = { protons:'Prótons', neutrons:'Nêutrons', electrons:'Elétrons', atomico:'N. Atômico', massa:'N. de Massa' };
+const LABELS_FINAL = { protons:'Protons', neutrons:'Neutrons', electrons:'Electrons', atomico:'At. Number', massa:'Mass Number' };
 
 const st = {
   stage: 0,
@@ -623,7 +623,7 @@ const $btn     = document.getElementById('btn-continuar');
 const $ding    = document.getElementById('ding');
 
 /* ═══════════════════════════════════════
-   UTILITÁRIOS
+   UTILITIES
    ═══════════════════════════════════════ */
 function ding() {
   try { $ding.currentTime = 0; $ding.play().catch(()=>{}); } catch(e) {}
@@ -642,7 +642,7 @@ function fala(imgSrc, txt, cb) {
   type($text, txt, cb);
 }
 
-function btnShow(fn, label = 'Continuar') {
+function btnShow(fn, label = 'Continue') {
   $btn.textContent = label;
   $btn.classList.add('show');
   $btn.onclick = fn;
@@ -653,7 +653,7 @@ function btnHide() {
 }
 
 function progress(n) {
-  // Sem indicador visual de progresso.
+  // No visual progress indicator.
 }
 
 function fade(cb) {
@@ -673,42 +673,42 @@ function ir(n) {
 }
 
 /* ═══════════════════════════════════════
-   ETAPA 0 — INTRODUÇÃO
+   STAGE 0 — INTRODUCTION
    ═══════════════════════════════════════ */
 function stage0() {
   $stage.innerHTML = `
     <div class="panel">
       <div class="hall-wrap">
         <div class="hall-left">
-          <h1>A Estrutura do Átomo</h1>
-          <p class="hall-sub">Uma aula interativa com a Professora Rafaela</p>
-          <button id="btn-comecar" onclick="ir(1)">Entrar na Aula</button>
+          <h1>The Structure of the Atom</h1>
+          <p class="hall-sub">An interactive lesson with Professor Rafaela</p>
+          <button id="btn-comecar" onclick="ir(1)">Enter the Lesson</button>
         </div>
         <div class="hall-right">
-          <img src="../imagens/rafa-sorrindo.jpg" alt="Professora Rafaela">
+          <img src="../imagens/rafa-sorrindo.jpg" alt="Professor Rafaela">
         </div>
       </div>
     </div>`;
 
   fala(IMG.sorrindo,
-    'Olá! Hoje vamos descobrir como o átomo é organizado.',
+    'Hello! Today we\'re going to discover how the atom is organized.',
     () => setTimeout(() =>
       type($text,
-        'Não quero que você decore. Quero que descubra.',
+        'I don\'t want you to memorize. I want you to discover.',
         () => { const b = document.getElementById('btn-comecar'); if(b) b.classList.add('show'); }
       ), 1900)
   );
 }
 
 /* ═══════════════════════════════════════
-   ETAPA 1 — PARTÍCULAS
+   STAGE 1 — PARTICLES
    ═══════════════════════════════════════ */
 function stage1() {
-  fala(IMG.explicando, 'Tudo começa pelas partículas. Clique em cada uma para conhecê-las melhor.');
+  fala(IMG.explicando, 'Everything starts with the particles. Click on each one to get to know them better.');
 
   $stage.innerHTML = `
     <div class="panel">
-      <h2>As Partículas do Átomo</h2>
+      <h2>The Atom's Particles</h2>
       <div class="particles-grid">
         ${PARTICULAS.map(p => `
           <div class="pcard" id="pc-${p.id}" onclick="verParticula('${p.id}')">
@@ -738,22 +738,22 @@ function verParticula(id) {
 
   if (st.seen.size === 3) {
     setTimeout(() =>
-      fala(IMG.sorrindo, 'Ótimo! Você conheceu as três partículas. Agora vamos ver onde elas ficam.', () => {
+      fala(IMG.sorrindo, 'Great! You\'ve gotten to know all three particles. Now let\'s see where they\'re located.', () => {
         btnShow(() => ir(2));
       }), 700);
   }
 }
 
 /* ═══════════════════════════════════════
-   ETAPA 2 — CONSTRUTOR DO ÁTOMO DE LÍTIO
-   (3p, 4n, 3e — clicar para selecionar + clicar na zona)
+   STAGE 2 — LITHIUM ATOM BUILDER
+   (3p, 4n, 3e — click to select + click on the zone)
    ═══════════════════════════════════════ */
 
-// Posições dos 3 elétrons na eletrosfera (ângulos 0°, 120°, 240° a r=95px do centro 132px)
+// Positions of the 3 electrons in the electron cloud (angles 0°, 120°, 240° at r=95px from center 132px)
 const EE_POS = [
-  { top: 14,  left: 121 },  // topo
-  { top: 158, left: 193 },  // baixo-direita
-  { top: 158, left: 28  }   // baixo-esquerda
+  { top: 14,  left: 121 },  // top
+  { top: 158, left: 193 },  // bottom-right
+  { top: 158, left: 28  }   // bottom-left
 ];
 
 function stage2() {
@@ -762,12 +762,12 @@ function stage2() {
   st.selSphere = null;
 
   fala(IMG.explicando,
-    'Conheça o átomo de Lítio! Selecione cada partícula e coloque-a no lugar certo: prótons e nêutrons no núcleo, elétrons na eletrosfera.');
+    'Meet the lithium atom! Select each particle and place it in the right spot: protons and neutrons in the nucleus, electrons in the electron cloud.');
 
   const pool = [
-    ...Array.from({length:3}, (_,i) => `<div class="psphere psphere-p" id="sp-p${i}" data-type="proton"  onclick="selEsfera(this)" title="Próton (+)">+</div>`),
-    ...Array.from({length:4}, (_,i) => `<div class="psphere psphere-n" id="sp-n${i}" data-type="neutron" onclick="selEsfera(this)" title="Nêutron (0)">0</div>`),
-    ...Array.from({length:3}, (_,i) => `<div class="psphere psphere-e" id="sp-e${i}" data-type="electron" onclick="selEsfera(this)" title="Elétron (−)">−</div>`)
+    ...Array.from({length:3}, (_,i) => `<div class="psphere psphere-p" id="sp-p${i}" data-type="proton"  onclick="selEsfera(this)" title="Proton (+)">+</div>`),
+    ...Array.from({length:4}, (_,i) => `<div class="psphere psphere-n" id="sp-n${i}" data-type="neutron" onclick="selEsfera(this)" title="Neutron (0)">0</div>`),
+    ...Array.from({length:3}, (_,i) => `<div class="psphere psphere-e" id="sp-e${i}" data-type="electron" onclick="selEsfera(this)" title="Electron (−)">−</div>`)
   ].join('');
 
   const eeSlots = EE_POS.map((p,i) =>
@@ -776,24 +776,24 @@ function stage2() {
 
   $stage.innerHTML = `
     <div class="panel">
-      <h2>O Átomo de Lítio (Li)</h2>
-      <p class="builder-instr">Selecione uma partícula e clique na zona correta do átomo</p>
+      <h2>The Lithium Atom (Li)</h2>
+      <p class="builder-instr">Select a particle and click on the correct zone of the atom</p>
       <div class="atom-builder">
 
         <div class="builder-visual">
-          <!-- Zona eletrosfera (clicável) -->
+          <!-- Electron cloud zone (clickable) -->
           <div class="zone-esph" id="zone-esph" onclick="colocarNaZona('esph')">
-            <span class="esph-label-top">Eletrosfera</span>
+            <span class="esph-label-top">Electron Cloud</span>
             ${eeSlots}
-            <!-- Zona núcleo (clicável dentro da eletrosfera) -->
+            <!-- Nucleus zone (clickable inside the electron cloud) -->
             <div class="zone-nuc" id="zone-nuc" onclick="colocarNaZona('nuc'); event.stopPropagation()">
-              <span class="nuc-label">Núcleo</span>
+              <span class="nuc-label">Nucleus</span>
               <div class="placed-row" id="placed-nuc"></div>
             </div>
           </div>
         </div>
 
-        <!-- Pool de partículas -->
+        <!-- Particle pool -->
         <div class="pool">${pool}</div>
       </div>
       <div class="nucleus-hint" id="nhint"></div>
@@ -804,34 +804,34 @@ function selEsfera(el) {
   document.querySelectorAll('.psphere').forEach(s => s.classList.remove('sel'));
   el.classList.add('sel');
   st.selSphere = el;
-  document.getElementById('nhint').textContent = 'Agora clique em "Núcleo" ou "Eletrosfera" para posicioná-la.';
+  document.getElementById('nhint').textContent = 'Now click on "Nucleus" or "Electron Cloud" to place it.';
 }
 
 function colocarNaZona(zona) {
   if (!st.selSphere) {
-    document.getElementById('nhint').textContent = 'Primeiro selecione uma partícula clicando nela.';
+    document.getElementById('nhint').textContent = 'First select a particle by clicking on it.';
     return;
   }
   const tipo = st.selSphere.dataset.type;
   const hint = document.getElementById('nhint');
 
-  // Verificar se é colocação errada
+  // Check for wrong placement
   if (zona === 'nuc' && tipo === 'electron') {
-    hint.textContent = 'Os elétrons não ficam no núcleo. Coloque-os na eletrosfera!';
+    hint.textContent = 'Electrons don\'t belong in the nucleus. Place them in the electron cloud!';
     st.selSphere.classList.remove('sel');
     st.selSphere = null;
     return;
   }
   if (zona === 'esph' && tipo !== 'electron') {
     hint.textContent = tipo === 'proton'
-      ? 'Os prótons pertencem ao núcleo!'
-      : 'Os nêutrons pertencem ao núcleo!';
+      ? 'Protons belong in the nucleus!'
+      : 'Neutrons belong in the nucleus!';
     st.selSphere.classList.remove('sel');
     st.selSphere = null;
     return;
   }
 
-  // Colocação correta
+  // Correct placement
   ding();
   hint.textContent = '';
   st.selSphere.classList.remove('sel');
@@ -850,36 +850,36 @@ function colocarNaZona(zona) {
     st.litEsph++;
   }
 
-  // Verificar conclusão (3p + 4n + 3e)
+  // Check for completion (3p + 4n + 3e)
   if (st.litNuc.proton === 3 && st.litNuc.neutron === 4 && st.litEsph === 3) {
     setTimeout(() =>
       fala(IMG.sorrindo,
-        'Perfeito! Você montou o átomo de Lítio. Os prótons e nêutrons estão no núcleo e os elétrons na eletrosfera!',
+        'Perfect! You\'ve built the lithium atom. The protons and neutrons are in the nucleus, and the electrons are in the electron cloud!',
         () => btnShow(() => ir(3))), 500);
   }
 }
 
 /* ═══════════════════════════════════════
-   ETAPA 3 — ELETROSFERA
+   STAGE 3 — ELECTRON CLOUD
    ═══════════════════════════════════════ */
 function stage3() {
-  fala(IMG.explicando, 'O núcleo fica no centro. Ao redor dele existe uma região chamada eletrosfera.');
+  fala(IMG.explicando, 'The nucleus sits at the center. Around it there is a region called the electron cloud.');
 
   $stage.innerHTML = `
     <div class="panel">
-      <h2>A Organização do Átomo</h2>
+      <h2>The Organization of the Atom</h2>
       <div class="atom-display">
         <div class="atom-visual">
           <div class="electrosphere" id="esph">
-            <span class="esph-label">Eletrosfera</span>
+            <span class="esph-label">Electron Cloud</span>
           </div>
-          <div class="nucleus-core">Núcleo<br>(p⁺ e n⁰)</div>
+          <div class="nucleus-core">Nucleus<br>(p⁺ and n⁰)</div>
           <div class="electron-dot" id="edot" style="top:42px;right:44px;"></div>
         </div>
         <div class="atom-legend">
-          <div class="leg-item"><div class="leg-dot" style="background:#bf3629"></div>Núcleo</div>
-          <div class="leg-item"><div class="leg-dot" style="background:rgba(100,181,246,.3);border:1px solid #64b5f6"></div>Eletrosfera</div>
-          <div class="leg-item"><div class="leg-dot" style="background:#64b5f6"></div>Elétron</div>
+          <div class="leg-item"><div class="leg-dot" style="background:#bf3629"></div>Nucleus</div>
+          <div class="leg-item"><div class="leg-dot" style="background:rgba(100,181,246,.3);border:1px solid #64b5f6"></div>Electron Cloud</div>
+          <div class="leg-item"><div class="leg-dot" style="background:#64b5f6"></div>Electron</div>
         </div>
       </div>
     </div>`;
@@ -888,22 +888,22 @@ function stage3() {
   setTimeout(() => document.getElementById('edot').classList.add('vis'), 1300);
   setTimeout(() =>
     type($text,
-      'Os elétrons ficam nessa região ao redor do núcleo. Não há órbitas fixas — apenas uma região de probabilidade.',
+      'Electrons are found in this region around the nucleus. There are no fixed orbits — just a region of probability.',
       () => btnShow(() => ir(4))
     ), 1600);
 }
 
 /* ═══════════════════════════════════════
-   ETAPA 4 — NÚMERO ATÔMICO
+   STAGE 4 — ATOMIC NUMBER
    ═══════════════════════════════════════ */
 function stage4() {
-  fala(IMG.pensando, 'Se um átomo possui 8 prótons, qual é o seu número atômico?');
+  fala(IMG.pensando, 'If an atom has 8 protons, what is its atomic number?');
 
   $stage.innerHTML = `
     <div class="panel">
       <p class="q-text" style="font-size:1.45rem;margin-top:.4rem">
-        Se um átomo possui <strong style="color:var(--gold)">8 prótons</strong>,
-        qual é o seu número atômico?
+        If an atom has <strong style="color:var(--gold)">8 protons</strong>,
+        what is its atomic number?
       </p>
       <div class="opts-grid">
         ${[6,8,10,16].map(n => `<button class="opt" onclick="checkZ(${n},this)">${n}</button>`).join('')}
@@ -917,34 +917,34 @@ function checkZ(val, btn) {
     btn.classList.add('correct');
     ding();
     setTimeout(() =>
-      fala(IMG.explicando, 'Correto! O número atômico (Z) é igual ao número de prótons. 8 prótons → Z = 8. Esse é o Oxigênio!', () => {
+      fala(IMG.explicando, 'Correct! The atomic number (Z) equals the number of protons. 8 protons → Z = 8. That\'s Oxygen!', () => {
         btnShow(() => ir(5));
       }), 400);
   } else {
     btn.classList.add('wrong');
     setTimeout(() => btn.classList.remove('wrong'), 380);
-    type($text, 'Pense bem: o número atômico representa exatamente o número de prótons do elemento.');
+    type($text, 'Think carefully: the atomic number represents exactly the number of protons in the element.');
   }
 }
 
 /* ═══════════════════════════════════════
-   ETAPA 5 — NÚMERO DE MASSA
+   STAGE 5 — MASS NUMBER
    ═══════════════════════════════════════ */
 function stage5() {
-  fala(IMG.pensando, 'Esse átomo tem 8 prótons e 8 nêutrons. Qual é o número de massa?');
+  fala(IMG.pensando, 'This atom has 8 protons and 8 neutrons. What is its mass number?');
 
   $stage.innerHTML = `
     <div class="panel">
       <div class="mass-stage">
         <div class="q-context" style="font-size:1.1rem;margin-bottom:1.1rem">
-          <span style="color:#ff6e40;font-weight:700">8 prótons</span>
+          <span style="color:#ff6e40;font-weight:700">8 protons</span>
           &nbsp;&nbsp;|&nbsp;&nbsp;
-          <span style="color:#90a4ae;font-weight:700">8 nêutrons</span>
+          <span style="color:#90a4ae;font-weight:700">8 neutrons</span>
         </div>
-        <p class="q-text">Qual é o número de massa desse átomo?</p>
+        <p class="q-text">What is this atom's mass number?</p>
         <div class="mass-input-row">
           <input class="mass-input" id="minput" type="number" min="1" max="300" placeholder="?">
-          <button class="btn-check" onclick="checkA()">Verificar</button>
+          <button class="btn-check" onclick="checkA()">Check</button>
         </div>
         <div class="mass-fb" id="mfb"></div>
       </div>
@@ -958,36 +958,36 @@ function checkA() {
   const val = parseInt(document.getElementById('minput').value) || 0;
   const fb  = document.getElementById('mfb');
   if (val === 16) {
-    fb.style.color = '#a5d6a7'; fb.textContent = '✓ Correto! 8 + 8 = 16';
+    fb.style.color = '#a5d6a7'; fb.textContent = '✓ Correct! 8 + 8 = 16';
     ding();
     setTimeout(() =>
-      fala(IMG.explicando, 'Perfeito! Número de massa (A) = prótons + nêutrons. A fórmula é: A = Z + N.', () => {
+      fala(IMG.explicando, 'Perfect! Mass number (A) = protons + neutrons. The formula is: A = Z + N.', () => {
         btnShow(() => ir(6));
       }), 500);
   } else {
-    fb.style.color = '#ef9a9a'; fb.textContent = 'Revise: some o número de prótons com o número de nêutrons.';
+    fb.style.color = '#ef9a9a'; fb.textContent = 'Review: add the number of protons to the number of neutrons.';
   }
 }
 
 /* ═══════════════════════════════════════
-   ETAPA 6 — DESAFIO FINAL
+   STAGE 6 — FINAL CHALLENGE
    ═══════════════════════════════════════ */
 function stage6() {
-  fala(IMG.pensando, 'Vamos testar tudo que você aprendeu com um desafio único. Pense com calma!');
+  fala(IMG.pensando, 'Let\'s test everything you\'ve learned with one final challenge. Take your time!');
 
   $stage.innerHTML = `
     <div class="panel">
-      <h2>Desafio Final</h2>
+      <h2>Final Challenge</h2>
       <div class="mass-stage">
         <div class="q-context" style="font-size:1.05rem;line-height:1.9;text-align:left;padding:1rem 1.3rem">
-          Considere um átomo <strong style="color:var(--gold)">eletricamente neutro</strong>.<br>
-          Número de massa (A): <strong style="color:var(--gold)">9</strong><br>
-          Número de nêutrons (N): <strong style="color:#90a4ae">5</strong>
+          Consider an <strong style="color:var(--gold)">electrically neutral</strong> atom.<br>
+          Mass number (A): <strong style="color:var(--gold)">9</strong><br>
+          Number of neutrons (N): <strong style="color:#90a4ae">5</strong>
         </div>
-        <p class="q-text" style="margin-top:.6rem">Qual é o número de elétrons desse átomo?</p>
+        <p class="q-text" style="margin-top:.6rem">What is the number of electrons in this atom?</p>
         <div class="mass-input-row">
           <input class="mass-input" id="d-input" type="number" min="1" max="100" placeholder="?">
-          <button class="btn-check" onclick="verificarFinal()">Verificar</button>
+          <button class="btn-check" onclick="verificarFinal()">Check</button>
         </div>
         <div class="mass-fb" id="d-fb"></div>
       </div>
@@ -1004,50 +1004,50 @@ function verificarFinal() {
 
   if (val === 4) {
     fb.style.color = '#a5d6a7';
-    fb.textContent = '✓ Correto! Z = A − N = 9 − 5 = 4 prótons → 4 elétrons.';
+    fb.textContent = '✓ Correct! Z = A − N = 9 − 5 = 4 protons → 4 electrons.';
     ding();
     setTimeout(() =>
       fala(IMG.explicando,
-        'Perfeito! Primeiro encontramos os prótons: Z = A − N = 9 − 5 = 4. Como o átomo é neutro, o número de elétrons é igual ao de prótons: 4!',
+        'Perfect! First we find the protons: Z = A − N = 9 − 5 = 4. Since the atom is neutral, the number of electrons equals the number of protons: 4!',
         () => btnShow(vitoria)
       ), 500);
   } else {
     fb.style.color = '#ef9a9a';
-    fb.textContent = 'Dica: primeiro encontre os prótons (Z = A − N). Depois lembre que, em átomo neutro, elétrons = prótons.';
+    fb.textContent = 'Hint: first find the protons (Z = A − N). Then remember that, in a neutral atom, electrons = protons.';
   }
 }
 
 /* ═══════════════════════════════════════
-   VITÓRIA / CONCLUSÃO
+   VICTORY / CONCLUSION
    ═══════════════════════════════════════ */
 function vitoria() {
   fala(IMG.animada, '');
   fade(() => {
-    progress(7); // todos done
+    progress(7); // all done
 
-    type($text, 'Excelente! Agora você compreende a estrutura básica do átomo. Parabéns!',
-      () => btnShow(() => window.location.reload(), 'Retorne a fase'));
+    type($text, 'Excellent! Now you understand the basic structure of the atom. Congratulations!',
+      () => btnShow(() => window.location.reload(), 'Restart the Lesson'));
 
     $stage.innerHTML = `
       <div class="panel">
         <div class="conclusion-wrap">
-          <h2>Parabéns!</h2>
-          <p class="conclusion-sub">Você completou a aula sobre a estrutura do átomo com sucesso.</p>
+          <h2>Congratulations!</h2>
+          <p class="conclusion-sub">You have successfully completed the lesson on the structure of the atom.</p>
           <div class="summary-grid">
-            <div class="scard"><strong>Próton</strong>Carga +1. Fica no núcleo. Seu número define o elemento (Z).</div>
-            <div class="scard"><strong>Nêutron</strong>Sem carga. Fica no núcleo. Contribui para a massa (A).</div>
-            <div class="scard"><strong>Elétron</strong>Carga −1. Ocupa a eletrosfera ao redor do núcleo.</div>
-            <div class="scard"><strong>Número Atômico</strong>Z = número de prótons do átomo.</div>
-            <div class="scard"><strong>Número de Massa</strong>A = prótons + nêutrons (Z + N).</div>
+            <div class="scard"><strong>Proton</strong>Charge +1. Located in the nucleus. Its number defines the element (Z).</div>
+            <div class="scard"><strong>Neutron</strong>No charge. Located in the nucleus. Contributes to the mass (A).</div>
+            <div class="scard"><strong>Electron</strong>Charge −1. Occupies the electron cloud around the nucleus.</div>
+            <div class="scard"><strong>Atomic Number</strong>Z = number of protons in the atom.</div>
+            <div class="scard"><strong>Mass Number</strong>A = protons + neutrons (Z + N).</div>
           </div>
-          <button class="btn-reiniciar" onclick="window.location.reload()">Estudar Novamente</button>
+          <button class="btn-reiniciar" onclick="window.location.reload()">Study Again</button>
         </div>
       </div>`;
   });
 }
 
 /* ═══════════════════════════════════════
-   INICIALIZAÇÃO
+   INITIALIZATION
    ═══════════════════════════════════════ */
 window.addEventListener('load', () => {
   setTimeout(() => {

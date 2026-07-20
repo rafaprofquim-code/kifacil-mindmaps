@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex, nofollow">
-  <title>Funções Inorgânicas no Dia a Dia — Jogo Premium | KiFácil</title>
+  <title>Inorganic Functions in Everyday Life — Premium Game | KiFácil</title>
   <link rel="icon" type="image/png" href="/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -108,7 +108,7 @@
       min-height: 3.4em;
     }
 
-    /* PALCO DE ANIMAÇÃO */
+    /* ANIMATION STAGE */
     .imagem-wrapper {
       position: relative;
       display: flex;
@@ -152,7 +152,7 @@
     .link-aula:hover { background: rgba(30,16,8,0.92); transform: translateY(-1px); }
     .link-aula svg { width: 22px; height: 22px; }
 
-    /* Progresso */
+    /* Progress */
     .contador-central {
       position: absolute; top: 12px; left: 50%; transform: translateX(-50%);
       background: rgba(30,16,8,0.85); color: var(--dourado-claro);
@@ -161,7 +161,7 @@
       z-index: 5; white-space: nowrap;
     }
 
-    /* Cartão de pistas do composto */
+    /* Compound clue card */
     .cartao-produto {
       position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 3;
       background: var(--fundo-card); border: 1.5px solid var(--borda-forte); border-radius: 12px;
@@ -192,7 +192,7 @@
       max-width: 320px; margin: 10px auto 0;
     }
 
-    /* Classificação por categoria (desafio final) */
+    /* Classification by category (final challenge) */
     .jogo-associacao { position: absolute; inset: 0; display: flex; justify-content: center; align-items: center; gap: 30px; padding: 6%; flex-wrap: wrap; }
     .coluna-associacao { display: flex; flex-direction: column; gap: 8px; }
     .coluna-associacao-grade { display: grid; grid-template-columns: repeat(2, minmax(118px, 1fr)); gap: 8px; }
@@ -220,7 +220,7 @@
       to   { opacity: 1; transform: translate(-50%, 0); }
     }
 
-    /* PAINEL DE INTERAÇÃO */
+    /* INTERACTION PANEL */
     #painelInteracao { max-width: 900px; margin: 1.2rem auto 0; }
     .interacao-painel {
       background: var(--fundo-card); border: 1.5px solid var(--borda-forte); border-radius: 12px;
@@ -252,7 +252,7 @@
     .btn-continuar:disabled { opacity: 0.4; cursor: default; }
     .btn-continuar:disabled:hover { background: #1e1008; color: var(--dourado-claro); }
 
-    /* Botão continuar dentro do balão da professora */
+    /* Continue button inside the teacher's speech bubble */
     #continuarBalao { margin-top: 0.6rem; }
     #continuarBalao .btn-continuar { display: inline-block; margin: 0; }
 
@@ -276,7 +276,7 @@
     }
     .quadro-item .valor { font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-weight: 600; color: var(--texto); }
 
-    /* CONCLUSÃO */
+    /* CONCLUSION */
     .conclusao {
       display: none; margin-top: 2rem; background: var(--fundo-card);
       border: 1.5px solid var(--borda-forte); border-radius: 12px; padding: 2.4rem 2rem; text-align: center;
@@ -327,38 +327,38 @@
 </nav>
 
 <main>
-  <h1 class="titulo-jogo">Funções Inorgânicas no Dia a Dia</h1>
-  <p class="subtitulo">Reconheça ácidos, bases, sais e óxidos em situações do cotidiano.</p>
+  <h1 class="titulo-jogo">Inorganic Functions in Everyday Life</h1>
+  <p class="subtitulo">Recognize acids, bases, salts, and oxides in everyday situations.</p>
 
   <div class="narrador">
-    <img src="../imagens/rafa-sorrindo.jpg" alt="Professora Rafaela" />
+    <img src="../imagens/rafa-sorrindo.jpg" alt="Professor Rafaela" />
     <div style="flex: 1;">
-      <div class="narrador-nome">Professora Rafaela</div>
-      <div class="narrador-texto" id="narradorTexto">Vamos começar.</div>
+      <div class="narrador-nome">Professor Rafaela</div>
+      <div class="narrador-texto" id="narradorTexto">Let's get started.</div>
       <div id="continuarBalao"></div>
     </div>
   </div>
 
   <div class="imagem-wrapper" id="imagemWrapper">
-    <img src="../imagens/sala-funcoes-cotidiano.jpg" alt="Sala das funções do cotidiano" class="cena-fundo" />
+    <img src="../imagens/sala-funcoes-cotidiano.jpg" alt="Room of everyday functions" class="cena-fundo" />
     <div class="overlay-animacao" id="overlayAnimacao"></div>
-    <!-- COLOQUE O LINK AQUI -->
-    <a class="link-aula" href="#" target="_blank" rel="noopener" title="Assista à aula">
+    <!-- PUT THE LINK HERE -->
+    <a class="link-aula" href="#" target="_blank" rel="noopener" title="Watch the lesson">
       <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.6"/>
         <path d="M10 8.5L16 12L10 15.5V8.5Z" fill="currentColor"/>
       </svg>
-      <span>Assista à aula</span>
+      <span>Watch the lesson</span>
     </a>
   </div>
 
   <div id="painelInteracao"></div>
 
   <div class="conclusao" id="conclusao">
-    <div class="conclusao-titulo">Estudo concluído</div>
+    <div class="conclusao-titulo">Study complete</div>
     <div class="conclusao-placar" id="conclusaoPlacar"></div>
     <p class="conclusao-mensagem" id="conclusaoMensagem"></p>
-    <button class="btn-reiniciar" onclick="reiniciar()">Jogar novamente</button>
+    <button class="btn-reiniciar" onclick="reiniciar()">Play again</button>
   </div>
 </main>
 
@@ -366,80 +366,80 @@
 
 <script>
 /* ==========================================================
-   DADOS: EXEMPLOS DO COTIDIANO
+   DATA: EVERYDAY EXAMPLES
    ========================================================== */
 const EXEMPLOS = [
-  { emoji: '🧴', categoria: 'Ácido', nome: 'Ácido clorídrico', formula: 'HCl', pistas: [
-      'Está presente no suco gástrico, dentro do nosso estômago.',
-      'Também é muito utilizado na limpeza de pisos de pedra e superfícies com cal.',
-      'Em solução aquosa, libera íons H⁺.'
-    ], explicacao: 'Correto! Ele é um ácido porque, dissolvido em água, libera íons H⁺ — e sua fórmula começa com hidrogênio, como a maioria dos ácidos.' },
-  { emoji: '🧼', categoria: 'Base', nome: 'Hidróxido de sódio', formula: 'NaOH', pistas: [
-      'É muito utilizado na fabricação de sabões e produtos de limpeza.',
-      'É uma substância corrosiva, que exige cuidado ao manusear.',
-      'Apresenta o grupo OH⁻ em sua fórmula.'
-    ], explicacao: 'Correto! Conhecido como soda cáustica, é uma base porque apresenta o grupo hidroxila (OH⁻), que libera em água — típico das bases de Arrhenius.' },
-  { emoji: '🔋', categoria: 'Ácido', nome: 'Ácido sulfúrico', formula: 'H₂SO₄', pistas: [
-      'É essencial para o funcionamento das baterias de carro.',
-      'Também é muito usado no refino do petróleo e na indústria química.',
-      'Sua fórmula começa com hidrogênio, e ele libera H⁺ em água.'
-    ], explicacao: 'Correto! Um dos ácidos mais usados pela indústria. Como todo ácido, libera H⁺ ao ser dissolvido em água.' },
-  { emoji: '🧱', categoria: 'Base', nome: 'Hidróxido de cálcio', formula: 'Ca(OH)₂', pistas: [
-      'É usado no preparo de argamassa, na construção civil.',
-      'Também é usado para caiar (pintar de branco) paredes e troncos de árvores.',
-      'Apresenta o grupo OH⁻ ligado a um metal em sua fórmula.'
-    ], explicacao: 'Correto! Conhecido como cal hidratada. Mais uma vez, o grupo OH⁻ na fórmula denuncia uma base.' },
-  { emoji: '🧂', categoria: 'Sal', nome: 'Cloreto de sódio', formula: 'NaCl', pistas: [
-      'Está presente em quase todas as refeições que você faz.',
-      'Não tem cheiro, e é usado para conservar e temperar alimentos.',
-      'Não possui hidrogênio ionizável nem grupo OH⁻: é formado por um cátion e um ânion diferentes de H⁺ e OH⁻.'
-    ], explicacao: 'Correto! O sal de cozinha. É um sal porque não libera H⁺ nem OH⁻ em água — ele é formado pela união de um cátion (Na⁺) com um ânion (Cl⁻).' },
-  { emoji: '🏗️', categoria: 'Óxido', nome: 'Óxido de cálcio', formula: 'CaO', pistas: [
-      'É usado na fabricação de cimento e em obras de construção civil.',
-      'Também é usado para corrigir a acidez de solos agrícolas.',
-      'É formado por apenas dois elementos, sendo um deles o oxigênio — e não há hidrogênio na fórmula.'
-    ], explicacao: 'Correto! É um óxido: formado pela união do oxigênio com apenas mais um elemento, sem H⁺ nem OH⁻.' },
-  { emoji: '🍾', categoria: 'Sal', nome: 'Carbonato de sódio', formula: 'Na₂CO₃', pistas: [
-      'É essencial na fabricação de vidro.',
-      'Também está presente em produtos de limpeza e no tratamento de piscinas.',
-      'Não libera H⁺ nem OH⁻ em água: é formado por um cátion e um ânion diferentes desses.'
-    ], explicacao: 'Correto! Mesmo sendo menos familiar que o sal de cozinha, também é um sal: nenhum H⁺, nenhum OH⁻, apenas a união de um cátion (Na⁺) com um ânion (CO₃²⁻).' },
-  { emoji: '🥤', categoria: 'Óxido', nome: 'Dióxido de carbono', formula: 'CO₂', pistas: [
-      'Está presente em refrigerantes, águas gaseificadas e no gelo-seco.',
-      'É liberado quando respiramos e também na queima de combustíveis.',
-      'É formado por apenas dois elementos — carbono e oxigênio — sem hidrogênio ionizável nem grupo OH⁻.'
-    ], explicacao: 'Correto! Um óxido molecular: formado pela união do oxigênio com apenas mais um elemento, sem H⁺ nem OH⁻ em sua estrutura.' }
+  { emoji: '🧴', categoria: 'Acid', nome: 'Hydrochloric acid', formula: 'HCl', pistas: [
+      'It is present in gastric juice, inside our stomach.',
+      'It is also widely used to clean stone floors and lime-covered surfaces.',
+      'In aqueous solution, it releases H⁺ ions.'
+    ], explicacao: 'Correct! It is an acid because, dissolved in water, it releases H⁺ ions — and its formula starts with hydrogen, like most acids.' },
+  { emoji: '🧼', categoria: 'Base', nome: 'Sodium hydroxide', formula: 'NaOH', pistas: [
+      'It is widely used in the manufacture of soaps and cleaning products.',
+      'It is a corrosive substance that requires care when handling.',
+      'It has the OH⁻ group in its formula.'
+    ], explicacao: 'Correct! Known as caustic soda, it is a base because it has the hydroxyl group (OH⁻), which it releases in water — typical of Arrhenius bases.' },
+  { emoji: '🔋', categoria: 'Acid', nome: 'Sulfuric acid', formula: 'H₂SO₄', pistas: [
+      'It is essential for car batteries to work.',
+      'It is also widely used in oil refining and the chemical industry.',
+      'Its formula starts with hydrogen, and it releases H⁺ in water.'
+    ], explicacao: 'Correct! One of the acids most used by industry. Like every acid, it releases H⁺ when dissolved in water.' },
+  { emoji: '🧱', categoria: 'Base', nome: 'Calcium hydroxide', formula: 'Ca(OH)₂', pistas: [
+      'It is used to make mortar in construction.',
+      'It is also used for whitewashing (painting white) walls and tree trunks.',
+      'It has the OH⁻ group bonded to a metal in its formula.'
+    ], explicacao: 'Correct! Known as slaked lime. Once again, the OH⁻ group in the formula gives away a base.' },
+  { emoji: '🧂', categoria: 'Salt', nome: 'Sodium chloride', formula: 'NaCl', pistas: [
+      'It is present in almost every meal you eat.',
+      'It has no smell, and it is used to preserve and season food.',
+      'It has no ionizable hydrogen or OH⁻ group: it is made up of a cation and an anion other than H⁺ and OH⁻.'
+    ], explicacao: 'Correct! Table salt. It is a salt because it does not release H⁺ or OH⁻ in water — it is formed by the combination of a cation (Na⁺) with an anion (Cl⁻).' },
+  { emoji: '🏗️', categoria: 'Oxide', nome: 'Calcium oxide', formula: 'CaO', pistas: [
+      'It is used in cement manufacturing and in construction work.',
+      'It is also used to correct the acidity of agricultural soils.',
+      'It is made up of just two elements, one of them oxygen — and there is no hydrogen in the formula.'
+    ], explicacao: 'Correct! It is an oxide: formed by the combination of oxygen with just one other element, with no H⁺ or OH⁻.' },
+  { emoji: '🍾', categoria: 'Salt', nome: 'Sodium carbonate', formula: 'Na₂CO₃', pistas: [
+      'It is essential for glass manufacturing.',
+      'It is also found in cleaning products and pool treatment.',
+      'It does not release H⁺ or OH⁻ in water: it is made up of a cation and an anion other than those.'
+    ], explicacao: 'Correct! Even though it is less familiar than table salt, it is also a salt: no H⁺, no OH⁻, just the combination of a cation (Na⁺) with an anion (CO₃²⁻).' },
+  { emoji: '🥤', categoria: 'Oxide', nome: 'Carbon dioxide', formula: 'CO₂', pistas: [
+      'It is present in soft drinks, sparkling water, and dry ice.',
+      'It is released when we breathe and also when fuels are burned.',
+      'It is made up of just two elements — carbon and oxygen — with no ionizable hydrogen or OH⁻ group.'
+    ], explicacao: 'Correct! A molecular oxide: formed by the combination of oxygen with just one other element, with no H⁺ or OH⁻ in its structure.' }
 ];
-const CATEGORIAS = ['Ácido', 'Base', 'Sal', 'Óxido'];
+const CATEGORIAS = ['Acid', 'Base', 'Salt', 'Oxide'];
 const DESAFIO_FINAL = [
-  { rotulo: 'Suco gástrico do estômago', categoria: 'Ácido', nome: 'Ácido clorídrico', formula: 'HCl',
-    dica: 'Pense na fase dos Ácidos: essa substância libera H⁺ em água.',
-    explicacao: 'libera H⁺ em água, por isso é um ácido.' },
-  { rotulo: 'Baterias de carro', categoria: 'Ácido', nome: 'Ácido sulfúrico', formula: 'H₂SO₄',
-    dica: 'Sua fórmula começa com hidrogênio — sinal comum de ácido.',
-    explicacao: 'como todo ácido, libera H⁺ ao ser dissolvido em água.' },
-  { rotulo: 'Fabricação de sabões', categoria: 'Base', nome: 'Hidróxido de sódio', formula: 'NaOH',
-    dica: 'Observe se a fórmula tem o grupo OH⁻.',
-    explicacao: 'tem o grupo OH⁻ na fórmula, por isso é uma base.' },
-  { rotulo: 'Cal hidratada da construção', categoria: 'Base', nome: 'Hidróxido de cálcio', formula: 'Ca(OH)₂',
-    dica: 'O próprio nome "hidratada" já entrega o grupo OH⁻.',
-    explicacao: 'tem o grupo OH⁻ ligado a um metal, por isso é uma base.' },
-  { rotulo: 'O sal que usamos na comida', categoria: 'Sal', nome: 'Cloreto de sódio', formula: 'NaCl',
-    dica: 'Não tem H⁺ nem OH⁻: é formado por um cátion e um ânion.',
-    explicacao: 'não libera H⁺ nem OH⁻ — é formado por um cátion (Na⁺) e um ânion (Cl⁻), por isso é um sal.' },
-  { rotulo: 'Fabricação de vidro', categoria: 'Sal', nome: 'Carbonato de sódio', formula: 'Na₂CO₃',
-    dica: 'Assim como o sal de cozinha, não tem H⁺ nem OH⁻.',
-    explicacao: 'não libera H⁺ nem OH⁻ — é formado por um cátion (Na⁺) e um ânion (CO₃²⁻), por isso é um sal.' },
-  { rotulo: 'Correção da acidez do solo', categoria: 'Óxido', nome: 'Óxido de cálcio', formula: 'CaO',
-    dica: 'Formado por apenas dois elementos, um deles o oxigênio — sem hidrogênio.',
-    explicacao: 'é formado só por oxigênio e cálcio, sem H⁺ nem OH⁻, por isso é um óxido.' },
-  { rotulo: 'Gás dos refrigerantes', categoria: 'Óxido', nome: 'Dióxido de carbono', formula: 'CO₂',
-    dica: 'Formado só por carbono e oxigênio — sem hidrogênio.',
-    explicacao: 'é formado só por oxigênio e carbono, sem H⁺ nem OH⁻, por isso é um óxido.' }
+  { rotulo: 'Gastric juice in the stomach', categoria: 'Acid', nome: 'Hydrochloric acid', formula: 'HCl',
+    dica: 'Think back to the Acids stage: this substance releases H⁺ in water.',
+    explicacao: 'releases H⁺ in water, which is why it is an acid.' },
+  { rotulo: 'Car batteries', categoria: 'Acid', nome: 'Sulfuric acid', formula: 'H₂SO₄',
+    dica: 'Its formula starts with hydrogen — a common sign of an acid.',
+    explicacao: 'like every acid, it releases H⁺ when dissolved in water.' },
+  { rotulo: 'Soap manufacturing', categoria: 'Base', nome: 'Sodium hydroxide', formula: 'NaOH',
+    dica: 'Check whether the formula has the OH⁻ group.',
+    explicacao: 'has the OH⁻ group in its formula, which is why it is a base.' },
+  { rotulo: 'Slaked lime used in construction', categoria: 'Base', nome: 'Calcium hydroxide', formula: 'Ca(OH)₂',
+    dica: 'The name "slaked" itself gives away the OH⁻ group.',
+    explicacao: 'has the OH⁻ group bonded to a metal, which is why it is a base.' },
+  { rotulo: 'The salt we use in food', categoria: 'Salt', nome: 'Sodium chloride', formula: 'NaCl',
+    dica: 'It has no H⁺ or OH⁻: it is made up of a cation and an anion.',
+    explicacao: 'does not release H⁺ or OH⁻ — it is formed by a cation (Na⁺) and an anion (Cl⁻), which is why it is a salt.' },
+  { rotulo: 'Glass manufacturing', categoria: 'Salt', nome: 'Sodium carbonate', formula: 'Na₂CO₃',
+    dica: 'Just like table salt, it has no H⁺ or OH⁻.',
+    explicacao: 'does not release H⁺ or OH⁻ — it is formed by a cation (Na⁺) and an anion (CO₃²⁻), which is why it is a salt.' },
+  { rotulo: 'Correcting soil acidity', categoria: 'Oxide', nome: 'Calcium oxide', formula: 'CaO',
+    dica: 'Made up of just two elements, one of them oxygen — with no hydrogen.',
+    explicacao: 'is made up only of oxygen and calcium, with no H⁺ or OH⁻, which is why it is an oxide.' },
+  { rotulo: 'The gas in soft drinks', categoria: 'Oxide', nome: 'Carbon dioxide', formula: 'CO₂',
+    dica: 'Made up only of carbon and oxygen — with no hydrogen.',
+    explicacao: 'is made up only of oxygen and carbon, with no H⁺ or OH⁻, which is why it is an oxide.' }
 ];
 
 /* ==========================================================
-   REFERÊNCIAS DOM
+   DOM REFERENCES
    ========================================================== */
 const overlay = document.getElementById('overlayAnimacao');
 const painel  = document.getElementById('painelInteracao');
@@ -451,7 +451,7 @@ function tocarDing() { try { _ding.currentTime = 0; _ding.play().catch(function 
 
 function fala(texto) { document.getElementById('narradorTexto').textContent = texto; }
 
-const INCENTIVOS = ['Muito bem!', 'Isso mesmo!', 'Exato!', 'Mandou bem!', 'Ótimo raciocínio!', 'Excelente!'];
+const INCENTIVOS = ['Very good!', 'That\'s right!', 'Exactly!', 'Nice work!', 'Great reasoning!', 'Excellent!'];
 function incentivoAleatorio() { return INCENTIVOS[Math.floor(Math.random() * INCENTIVOS.length)]; }
 
 let timersAtivos = [];
@@ -461,14 +461,14 @@ function limparTimers() { timersAtivos.forEach(clearTimeout); timersAtivos = [];
 let acertos = 0;
 
 /* ==========================================================
-   HELPERS DE INTERAÇÃO
+   INTERACTION HELPERS
    ========================================================== */
 function botaoContinuar(delayMs) {
   delayMs = delayMs || 0;
   continuarBalao.innerHTML = '';
   const btn = document.createElement('button');
   btn.className = 'btn-continuar';
-  btn.textContent = 'Continuar →';
+  btn.textContent = 'Continue →';
   btn.disabled = delayMs > 0;
   continuarBalao.appendChild(btn);
   if (delayMs > 0) agendar(function () { btn.disabled = false; }, delayMs);
@@ -491,7 +491,7 @@ function perguntaComPistas(ex, listaPistasEl, cartaoEl, aoConcluir) {
   const wrap = document.createElement('div');
   wrap.className = 'interacao-painel';
   wrap.innerHTML =
-    '<div class="interacao-pergunta-texto">A qual função inorgânica esse composto pertence?</div>' +
+    '<div class="interacao-pergunta-texto">Which inorganic function does this compound belong to?</div>' +
     '<div class="opcoes-linha" id="opcoesLinha"></div>' +
     '<div class="modal-feedback" id="feedbackEscolha"></div>';
   painel.appendChild(wrap);
@@ -527,7 +527,7 @@ function perguntaComPistas(ex, listaPistasEl, cartaoEl, aoConcluir) {
           listaPistasEl.appendChild(li);
           pistasReveladas++;
           feedback.className = 'modal-feedback visivel';
-          feedback.innerHTML = '<span class="feedback-errado">Ainda não é isso. Observe mais essa pista.</span>';
+          feedback.innerHTML = '<span class="feedback-errado">Not quite. Take a look at this extra clue.</span>';
         } else {
           resolvido = true;
           Array.from(opcoesLinha.children).forEach(function (b) {
@@ -535,7 +535,7 @@ function perguntaComPistas(ex, listaPistasEl, cartaoEl, aoConcluir) {
             if (b.textContent === ex.categoria) b.classList.add('opcao-certa');
           });
           feedback.className = 'modal-feedback visivel';
-          feedback.innerHTML = '<span class="feedback-resposta">Resposta correta destacada.</span>';
+          feedback.innerHTML = '<span class="feedback-resposta">Correct answer highlighted.</span>';
           revelarSubstancia(ex, cartaoEl);
           aoConcluir();
         }
@@ -581,14 +581,14 @@ function criarClassificacaoPorCategoria(itens, categorias, mensagemErro, mensage
     el.addEventListener('click', function () {
       if (el.classList.contains('associado')) return;
       if (!categoriaAtiva) {
-        fala('Primeiro escolha uma categoria à esquerda.');
+        fala('First choose a category on the left.');
         return;
       }
       if (it.categoria === categoriaAtiva) {
         el.classList.add('associado');
         tocarDing();
         acertosLocais++;
-        fala(incentivoAleatorio() + ' Essa é ' + it.nome + ' (' + it.formula + ') — ' + it.explicacao);
+        fala(incentivoAleatorio() + ' That\'s ' + it.nome + ' (' + it.formula + ') — ' + it.explicacao);
         if (acertosLocais === itens.length) {
           agendar(function () { fala(mensagemSucesso); botaoContinuar(400); }, 1400);
         }
@@ -603,7 +603,7 @@ function criarClassificacaoPorCategoria(itens, categorias, mensagemErro, mensage
         } else {
           el.classList.add('associado');
           acertosLocais++;
-          fala('Essa é ' + it.nome + ' (' + it.formula + ') — ' + it.explicacao);
+          fala('That\'s ' + it.nome + ' (' + it.formula + ') — ' + it.explicacao);
           if (acertosLocais === itens.length) {
             agendar(function () { fala(mensagemSucesso); botaoContinuar(400); }, 300);
           }
@@ -614,28 +614,28 @@ function criarClassificacaoPorCategoria(itens, categorias, mensagemErro, mensage
 }
 
 /* ==========================================================
-   INTRODUÇÃO
+   INTRODUCTION
    ========================================================== */
 function passoIntro() {
-  fala('Você já conheceu os ácidos, as bases, os sais e os óxidos. Agora, em vez de decorar nomes, você vai investigar pistas do dia a dia e descobrir a função inorgânica de cada substância — como um verdadeiro químico.');
+  fala('You\'ve already learned about acids, bases, salts, and oxides. Now, instead of memorizing names, you\'ll investigate everyday clues and work out the inorganic function of each substance — like a real chemist.');
   const btn = document.createElement('button');
   btn.className = 'btn-continuar btn-iniciar-investigacao';
-  btn.textContent = 'INICIAR INVESTIGAÇÃO';
+  btn.textContent = 'START THE INVESTIGATION';
   overlay.appendChild(btn);
   btn.addEventListener('click', avancar);
 }
 
 /* ==========================================================
-   EXEMPLOS 1–8
+   EXAMPLES 1–8
    ========================================================== */
 function criarPassoExemplo(indice) {
   return function () {
     const ex = EXEMPLOS[indice];
-    fala('Exemplo ' + (indice + 1) + ' de ' + EXEMPLOS.length + '. Leia as pistas e descubra a função inorgânica — se errar, você ganha mais uma pista.');
+    fala('Example ' + (indice + 1) + ' of ' + EXEMPLOS.length + '. Read the clues and work out the inorganic function — if you get it wrong, you get one more clue.');
 
     const contador = document.createElement('div');
     contador.className = 'contador-central';
-    contador.textContent = 'Exemplo ' + (indice + 1) + ' de ' + EXEMPLOS.length + '   |   Acertos: ' + acertos;
+    contador.textContent = 'Example ' + (indice + 1) + ' of ' + EXEMPLOS.length + '   |   Correct: ' + acertos;
     overlay.appendChild(contador);
 
     const cartao = document.createElement('div');
@@ -653,35 +653,35 @@ function criarPassoExemplo(indice) {
 }
 
 /* ==========================================================
-   DESAFIO FINAL
+   FINAL CHALLENGE
    ========================================================== */
 function passoDesafioFinal() {
-  fala('Para fechar, aqui estão oito situações do dia a dia. Escolha a categoria e depois a situação que combina com ela — sem nomes, só características.');
-  criarClassificacaoPorCategoria(DESAFIO_FINAL, CATEGORIAS, 'Pense: essa substância libera H⁺? Tem grupo OH⁻? Ou nenhum dos dois?', 'Muito bem! Você reconheceu todas as substâncias pelas suas características, não pelos nomes.');
+  fala('To wrap up, here are eight everyday situations. Choose the category and then the situation that matches it — no names, just characteristics.');
+  criarClassificacaoPorCategoria(DESAFIO_FINAL, CATEGORIAS, 'Think: does this substance release H⁺? Does it have an OH⁻ group? Or neither?', 'Very good! You recognized every substance by its characteristics, not by its name.');
 }
 
 /* ==========================================================
    FINAL
    ========================================================== */
 function passoFinal() {
-  fala('Excelente! Reconhecer uma função inorgânica não é decorar nomes — é entender o comportamento da substância: se ela libera H⁺, se tem grupo OH⁻, ou se é formada apenas por um cátion e um ânion, ou por oxigênio e outro elemento.');
+  fala('Excellent! Recognizing an inorganic function isn\'t about memorizing names — it\'s about understanding the substance\'s behavior: whether it releases H⁺, whether it has an OH⁻ group, or whether it is made up of just a cation and an anion, or of oxygen and another element.');
   overlay.innerHTML =
     '<div class="quadro-resumo" style="position:absolute;inset:0;align-items:center;">' +
-    '<div class="quadro-item"><div class="rotulo">Ácidos</div><div class="valor">Ex.: HCl</div></div>' +
-    '<div class="quadro-item"><div class="rotulo">Bases</div><div class="valor">Ex.: NaOH</div></div>' +
-    '<div class="quadro-item"><div class="rotulo">Sais</div><div class="valor">Ex.: NaCl</div></div>' +
-    '<div class="quadro-item"><div class="rotulo">Óxidos</div><div class="valor">Ex.: CO₂</div></div>' +
+    '<div class="quadro-item"><div class="rotulo">Acids</div><div class="valor">E.g.: HCl</div></div>' +
+    '<div class="quadro-item"><div class="rotulo">Bases</div><div class="valor">E.g.: NaOH</div></div>' +
+    '<div class="quadro-item"><div class="rotulo">Salts</div><div class="valor">E.g.: NaCl</div></div>' +
+    '<div class="quadro-item"><div class="rotulo">Oxides</div><div class="valor">E.g.: CO₂</div></div>' +
     '</div>';
   painel.innerHTML = '';
   const conclusao = document.getElementById('conclusao');
-  document.getElementById('conclusaoPlacar').textContent = 'Acertos: ' + acertos + ' de ' + EXEMPLOS.length;
-  document.getElementById('conclusaoMensagem').textContent = 'Você reconheceu ácidos, bases, sais e óxidos presentes em produtos e situações do dia a dia.';
+  document.getElementById('conclusaoPlacar').textContent = 'Correct: ' + acertos + ' of ' + EXEMPLOS.length;
+  document.getElementById('conclusaoMensagem').textContent = 'You recognized acids, bases, salts, and oxides found in everyday products and situations.';
   conclusao.classList.add('visivel');
   conclusao.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 /* ==========================================================
-   MOTOR DA FASE
+   STAGE ENGINE
    ========================================================== */
 const PASSOS = [passoIntro]
   .concat(EXEMPLOS.map(function (_, i) { return criarPassoExemplo(i); }))

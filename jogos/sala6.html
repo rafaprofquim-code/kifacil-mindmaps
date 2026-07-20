@@ -417,17 +417,32 @@
     #teacher-bubble { width: auto; flex: 1; min-height: auto; border-radius: 8px; padding: .75rem; }
     #teacher-text { font-size: 16px; }
 
+    /* On mobile #scene-col becomes much taller than it is wide (the whole
+       interactive content column), so using the panoramic photo as a
+       background with "cover" cropped almost everything, leaving only the
+       hanging lamp visible. Instead, the photo runs full width at its real
+       proportional height (1672x941) at the top of the column — reserved
+       via padding-top — and the titanium card still overlaps and centers
+       on it (same behavior as desktop), just recalculated for the shorter
+       band that's left on mobile. */
     #scene-col {
       position: relative; width: 100%; height: auto; min-height: 70vh;
-      padding: 20px 16px;
+      padding: calc(56.28% + 16px) 16px 26px;
       display: flex; flex-direction: column; align-items: center;
+      background: #1a0f08 url('../imagens/fundo-distribuicao-eletronica.jpg') top center / 100% auto no-repeat;
     }
 
     #cartao-titanio-wrap {
-      position: relative; top: auto; left: auto; transform: none;
-      width: 160px; margin: 0 auto 16px;
+      top: 28.14vw; left: 50%;
+      transform: translate(-50%, -50%) scale(.4);
+      width: 160px;
     }
-    #cartao-titanio-wrap.fixo { width: 120px; }
+    #cartao-titanio-wrap.visivel { transform: translate(-50%, -50%) scale(1); }
+    #cartao-titanio-wrap.fixo {
+      top: 18px; left: 18px;
+      transform: translate(0, 0) scale(1);
+      width: 120px;
+    }
 
     #etapa1-painel {
       position: relative; top: auto; right: auto; transform: none;

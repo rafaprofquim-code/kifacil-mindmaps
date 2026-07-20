@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex, nofollow">
-  <title>Sais — Jogo Premium | KiFácil</title>
+  <title>Salts — Premium Game | KiFácil</title>
   <link rel="icon" type="image/png" href="/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -108,7 +108,7 @@
       min-height: 3.4em;
     }
 
-    /* PALCO DE ANIMAÇÃO */
+    /* ANIMATION STAGE */
     .imagem-wrapper {
       position: relative;
       display: flex;
@@ -151,7 +151,7 @@
 
     .frasco-rotulo { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 0.72rem; color: var(--texto-suave); margin-top: 2px; }
 
-    /* Cartão simples de fórmula/íon */
+    /* Simple formula/ion card */
     .cartao-formula-simples {
       background: var(--fundo-card); border: 1.5px solid var(--borda-forte); border-radius: 8px; padding: 0.5rem 1rem;
       font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 1.1rem; color: var(--texto);
@@ -165,7 +165,7 @@
       font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 0.9rem; color: var(--dourado-claro);
     }
 
-    /* Circuito / lâmpada */
+    /* Circuit / light bulb */
     .circuito-visual {
       position: absolute; left: 50%; top: 38%; transform: translate(-50%, -50%); text-align: center; z-index: 3;
       background: var(--fundo-card); border: 1.5px solid var(--borda-forte); border-radius: 12px; padding: 14px 20px;
@@ -173,7 +173,7 @@
     .ion-movendo { animation: moverIon 1.4s ease-in-out infinite alternate; }
     @keyframes moverIon { from { transform: translateX(-14px); } to { transform: translateX(14px); } }
 
-    /* Blocos de nomenclatura */
+    /* Nomenclature blocks */
     .montagem-nome { display: flex; gap: 6px; flex-wrap: wrap; min-height: 34px; margin-bottom: 0.6rem; }
     .bloco-montado {
       background: rgba(30,82,56,.12); border: 1.5px solid var(--verde-escuro); border-radius: 6px; padding: 0.3rem 0.6rem;
@@ -202,7 +202,7 @@
       to   { opacity: 1; transform: translate(-50%, 0); }
     }
 
-    /* PAINEL DE INTERAÇÃO */
+    /* INTERACTION PANEL */
     #painelInteracao { max-width: 900px; margin: 1.2rem auto 0; }
     .interacao-painel {
       background: var(--fundo-card); border: 1.5px solid var(--borda-forte); border-radius: 12px;
@@ -234,7 +234,7 @@
     .btn-continuar:disabled { opacity: 0.4; cursor: default; }
     .btn-continuar:disabled:hover { background: #1e1008; color: var(--dourado-claro); }
 
-    /* Botão continuar dentro do balão da professora */
+    /* Continue button inside the teacher's speech bubble */
     #continuarBalao { margin-top: 0.6rem; }
     #continuarBalao .btn-continuar { display: inline-block; margin: 0; }
 
@@ -257,7 +257,7 @@
     }
     .quadro-resumo-final .resumo-linha:last-child { border-bottom: none; }
 
-    /* CONCLUSÃO */
+    /* CONCLUSION */
     .conclusao {
       display: none; margin-top: 2rem; background: var(--fundo-card);
       border: 1.5px solid var(--borda-forte); border-radius: 12px; padding: 2.4rem 2rem; text-align: center;
@@ -306,38 +306,38 @@
 </nav>
 
 <main>
-  <h1 class="titulo-jogo">Sais</h1>
-  <p class="subtitulo">Descubra o que acontece quando um ácido encontra uma base — e de onde vêm os sais.</p>
+  <h1 class="titulo-jogo">Salts</h1>
+  <p class="subtitulo">Discover what happens when an acid meets a base — and where salts come from.</p>
 
   <div class="narrador">
-    <img src="../imagens/rafa-sorrindo.jpg" alt="Professora Rafaela" />
+    <img src="../imagens/rafa-sorrindo.jpg" alt="Professor Rafaela" />
     <div style="flex: 1;">
-      <div class="narrador-nome">Professora Rafaela</div>
-      <div class="narrador-texto" id="narradorTexto">Vamos começar.</div>
+      <div class="narrador-nome">Professor Rafaela</div>
+      <div class="narrador-texto" id="narradorTexto">Let's begin.</div>
       <div id="continuarBalao"></div>
     </div>
   </div>
 
   <div class="imagem-wrapper" id="imagemWrapper">
-    <img src="../imagens/sala-dos-sais.jpg" alt="Sala dos Sais" class="cena-fundo" />
+    <img src="../imagens/sala-dos-sais.jpg" alt="Salts Room" class="cena-fundo" />
     <div class="overlay-animacao" id="overlayAnimacao"></div>
-    <!-- COLOQUE O LINK AQUI -->
-    <a class="link-aula" href="https://www.youtube.com/watch?v=YyVu1cwK5oE" target="_blank" rel="noopener" title="Assista à aula">
+    <!-- PUT THE LINK HERE -->
+    <a class="link-aula" href="https://www.youtube.com/watch?v=YyVu1cwK5oE" target="_blank" rel="noopener" title="Watch the lesson">
       <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.6"/>
         <path d="M10 8.5L16 12L10 15.5V8.5Z" fill="currentColor"/>
       </svg>
-      <span>Assista à aula</span>
+      <span>Watch the lesson</span>
     </a>
   </div>
 
   <div id="painelInteracao"></div>
 
   <div class="conclusao" id="conclusao">
-    <div class="conclusao-titulo">Estudo concluído</div>
+    <div class="conclusao-titulo">Study Complete</div>
     <div class="conclusao-placar" id="conclusaoPlacar"></div>
     <p class="conclusao-mensagem" id="conclusaoMensagem"></p>
-    <button class="btn-reiniciar" onclick="reiniciar()">Jogar novamente</button>
+    <button class="btn-reiniciar" onclick="reiniciar()">Play Again</button>
   </div>
 </main>
 
@@ -345,7 +345,7 @@
 
 <script>
 /* ==========================================================
-   REFERÊNCIAS DOM
+   DOM REFERENCES
    ========================================================== */
 const overlay = document.getElementById('overlayAnimacao');
 const painel  = document.getElementById('painelInteracao');
@@ -366,17 +366,17 @@ function agendar(fn, ms) { const id = setTimeout(fn, ms); timersAtivos.push(id);
 function limparTimers() { timersAtivos.forEach(clearTimeout); timersAtivos = []; }
 
 /* ==========================================================
-   DADOS: NOMENCLATURA DOS SAIS
+   DATA: SALT NOMENCLATURE
    ========================================================== */
 const NOMENCLATURA_SAL = {
-  NaCl: ['CLOR', 'ETO', 'DE', 'SÓDIO'],
-  KNO3: ['NITR', 'ATO', 'DE', 'POTÁSSIO'],
-  CaSO4: ['SULF', 'ATO', 'DE', 'CÁLCIO']
+  NaCl: ['CHLOR', 'IDE', 'OF', 'SODIUM'],
+  KNO3: ['NITR', 'ATE', 'OF', 'POTASSIUM'],
+  CaSO4: ['SULF', 'ATE', 'OF', 'CALCIUM']
 };
 const FORMULAS_SAL = { NaCl: 'NaCl', KNO3: 'KNO₃', CaSO4: 'CaSO₄' };
 
 /* ==========================================================
-   COMPONENTE: CIRCUITO ELÉTRICO / LÂMPADA
+   COMPONENT: ELECTRIC CIRCUIT / LIGHT BULB
    ========================================================== */
 function criarCircuito(id) {
   const div = document.createElement('div');
@@ -395,7 +395,7 @@ function criarCircuito(id) {
     '<line x1="100" y1="30" x2="100" y2="26" stroke="#3d2e1a" stroke-width="2"/>' +
     '<g id="ions-' + id + '"></g>' +
     '</svg>' +
-    '<div class="frasco-rotulo" id="rotulo-' + id + '">Circuito de teste</div>';
+    '<div class="frasco-rotulo" id="rotulo-' + id + '">Test circuit</div>';
   return div;
 }
 function definirIntensidadeLampada(id, intensidade) {
@@ -422,14 +422,14 @@ function animarIonsCircuito(id) {
 }
 
 /* ==========================================================
-   HELPERS DE INTERAÇÃO
+   INTERACTION HELPERS
    ========================================================== */
 function botaoContinuar(delayMs) {
   delayMs = delayMs || 0;
   continuarBalao.innerHTML = '';
   const btn = document.createElement('button');
   btn.className = 'btn-continuar';
-  btn.textContent = 'Continuar →';
+  btn.textContent = 'Continue →';
   btn.disabled = delayMs > 0;
   continuarBalao.appendChild(btn);
   if (delayMs > 0) agendar(function () { btn.disabled = false; }, delayMs);
@@ -443,7 +443,7 @@ function botaoContinuarLocal(handler, delayMs) {
   continuarBalao.innerHTML = '';
   const btn = document.createElement('button');
   btn.className = 'btn-continuar';
-  btn.textContent = 'Continuar →';
+  btn.textContent = 'Continue →';
   btn.disabled = delayMs > 0;
   continuarBalao.appendChild(btn);
   if (delayMs > 0) agendar(function () { btn.disabled = false; }, delayMs);
@@ -478,7 +478,7 @@ function escolhaBotoes(opts) {
         Array.from(opcoesLinha.children).forEach(function (b) { b.disabled = true; });
         btn.classList.add('opcao-certa');
         feedback.className = 'modal-feedback visivel';
-        feedback.innerHTML = '<span class="feedback-certo">Correto!</span><p class="feedback-explicacao">' + opts.explicacao + '</p>';
+        feedback.innerHTML = '<span class="feedback-certo">Correct!</span><p class="feedback-explicacao">' + opts.explicacao + '</p>';
         opts.aoAcertar();
       } else {
         tentativas++;
@@ -493,7 +493,7 @@ function escolhaBotoes(opts) {
             if (opts.opcoes[i].correta) b.classList.add('opcao-certa');
           });
           feedback.className = 'modal-feedback visivel';
-          feedback.innerHTML = '<span class="feedback-resposta">Resposta correta destacada.</span><p class="feedback-explicacao">' + opts.explicacao + '</p>';
+          feedback.innerHTML = '<span class="feedback-resposta">Correct answer highlighted.</span><p class="feedback-explicacao">' + opts.explicacao + '</p>';
           opts.aoAcertar();
         }
       }
@@ -503,14 +503,14 @@ function escolhaBotoes(opts) {
 }
 
 /* ==========================================================
-   MONTAGEM DE NOME POR BLOCOS (clique/toque)
+   NAME ASSEMBLY BY BLOCKS (click/tap)
    ========================================================== */
 function montarNomeSal(chave, aoConcluir) {
   painel.innerHTML = '';
   const wrap = document.createElement('div');
   wrap.className = 'interacao-painel';
   wrap.innerHTML =
-    '<div class="interacao-pergunta-texto">Monte o nome do sal clicando nos blocos, na ordem correta.</div>' +
+    '<div class="interacao-pergunta-texto">Assemble the salt\'s name by clicking the blocks, in the correct order.</div>' +
     '<div class="montagem-nome" id="montagemNome"></div>' +
     '<div class="blocos-disponiveis" id="blocosDisponiveis"></div>' +
     '<div class="modal-feedback" id="fbNomenclatura"></div>';
@@ -541,7 +541,7 @@ function montarNomeSal(chave, aoConcluir) {
         progresso++;
         if (progresso === sequenciaCorreta.length) {
           fb.className = 'modal-feedback visivel';
-          fb.innerHTML = '<span class="feedback-certo">Correto!</span><p class="feedback-explicacao">' + FORMULAS_SAL[chave] + ' → ' + sequenciaCorreta.join(' ').toLowerCase() + '</p>';
+          fb.innerHTML = '<span class="feedback-certo">Correct!</span><p class="feedback-explicacao">' + FORMULAS_SAL[chave] + ' → ' + sequenciaCorreta.join(' ').toLowerCase() + '</p>';
           Array.from(blocosEl.children).forEach(function (b) { b.disabled = true; });
           aoConcluir();
         }
@@ -555,26 +555,26 @@ function montarNomeSal(chave, aoConcluir) {
 }
 
 /* ==========================================================
-   INTRODUÇÃO
+   INTRODUCTION
    ========================================================== */
 function passoIntro() {
-  fala('Já conhecemos os ácidos. Já conhecemos as bases. Hoje vamos descobrir o que acontece quando eles se encontram.');
+  fala('We already know acids. We already know bases. Today we\'re going to discover what happens when they meet.');
   painel.innerHTML = '';
   const wrap = document.createElement('div');
   wrap.className = 'interacao-painel';
   const btn = document.createElement('button');
   btn.className = 'btn-continuar';
-  btn.textContent = 'INICIAR INVESTIGAÇÃO';
+  btn.textContent = 'START INVESTIGATION';
   wrap.appendChild(btn);
   painel.appendChild(wrap);
   btn.addEventListener('click', avancar);
 }
 
 /* ==========================================================
-   ETAPA 1 — NEUTRALIZAÇÃO
+   STAGE 1 — NEUTRALIZATION
    ========================================================== */
 function passoNeutralizacao() {
-  fala('De um lado, uma solução de HCl. Do outro, uma solução de NaOH. O que acontecerá quando misturarmos as duas?');
+  fala('On one side, a solution of HCl. On the other, a solution of NaOH. What will happen when we mix the two?');
   const linha = document.createElement('div');
   linha.style.position = 'absolute'; linha.style.inset = '0';
   linha.style.display = 'flex'; linha.style.justifyContent = 'center'; linha.style.alignItems = 'center'; linha.style.gap = '24px';
@@ -588,7 +588,7 @@ function passoNeutralizacao() {
   wrap.className = 'interacao-painel';
   const btn = document.createElement('button');
   btn.className = 'btn-continuar';
-  btn.textContent = 'MISTURAR';
+  btn.textContent = 'MIX';
   wrap.appendChild(btn);
   painel.appendChild(wrap);
 
@@ -604,19 +604,19 @@ function passoNeutralizacao() {
     overlay.appendChild(resultado);
     const placa = document.createElement('div');
     placa.className = 'placa-dourada';
-    placa.textContent = 'HCl + NaOH → NaCl + H₂O (neutralização)';
+    placa.textContent = 'HCl + NaOH → NaCl + H₂O (neutralization)';
     overlay.appendChild(placa);
-    fala('O H₃O⁺ do ácido se une ao OH⁻ da base, formando água. Os íons restantes, Na⁺ e Cl⁻, formam o sal: NaCl.');
+    fala('The H₃O⁺ from the acid combines with the OH⁻ from the base, forming water. The remaining ions, Na⁺ and Cl⁻, form the salt: NaCl.');
     painel.innerHTML = '';
     botaoContinuar(600);
   });
 }
 
 /* ==========================================================
-   ETAPA 2 — IDENTIFICAR O SAL
+   STAGE 2 — IDENTIFY THE SALT
    ========================================================== */
 function passoIdentificarSal() {
-  fala('HNO₃ + KOH reagem. Água é formada. Qual composto é o sal?');
+  fala('HNO₃ + KOH react. Water is formed. Which compound is the salt?');
   const linha = document.createElement('div');
   linha.className = 'linha-cartas-simples';
   ['H₂O', 'KNO₃', 'HNO₃'].forEach(function (t) {
@@ -628,27 +628,27 @@ function passoIdentificarSal() {
   overlay.appendChild(linha);
 
   escolhaBotoes({
-    pergunta: 'Qual dessas fórmulas é o sal formado na reação?',
+    pergunta: 'Which of these formulas is the salt formed in the reaction?',
     opcoes: [
       { rotulo: 'H₂O', correta: false },
       { rotulo: 'KNO₃', correta: true },
       { rotulo: 'HNO₃', correta: false }
     ],
-    dica: 'O sal é formado pelos íons que sobraram: o do metal da base e o do ânion do ácido.',
-    explicacao: 'HNO₃ + KOH → KNO₃ + H₂O. O K⁺ (da base) e o NO₃⁻ (do ácido) formam o sal KNO₃.',
+    dica: 'The salt is formed by the leftover ions: the one from the metal in the base and the one from the anion in the acid.',
+    explicacao: 'HNO₃ + KOH → KNO₃ + H₂O. The K⁺ (from the base) and the NO₃⁻ (from the acid) form the salt KNO₃.',
     aoAcertar: function () { botaoContinuar(400); }
   });
 }
 
 /* ==========================================================
-   ETAPA 3 — DISSOCIAÇÃO E CONDUÇÃO
+   STAGE 3 — DISSOCIATION AND CONDUCTION
    ========================================================== */
 function passoDissociacaoSal() {
-  fala('Os sais também se dissociam em água. Vamos dissolver um cristal de NaCl.');
+  fala('Salts also dissociate in water. Let\'s dissolve a crystal of NaCl.');
   const cristal = document.createElement('div');
   cristal.className = 'cartao-formula-simples';
   cristal.style.position = 'absolute'; cristal.style.left = '50%'; cristal.style.top = '50%'; cristal.style.transform = 'translate(-50%,-50%)';
-  cristal.textContent = 'NaCl (sólido)';
+  cristal.textContent = 'NaCl (solid)';
   overlay.appendChild(cristal);
 
   painel.innerHTML = '';
@@ -656,7 +656,7 @@ function passoDissociacaoSal() {
   wrap.className = 'interacao-painel';
   const btn = document.createElement('button');
   btn.className = 'btn-continuar';
-  btn.textContent = 'ADICIONAR ÁGUA';
+  btn.textContent = 'ADD WATER';
   wrap.appendChild(btn);
   painel.appendChild(wrap);
 
@@ -672,40 +672,40 @@ function passoDissociacaoSal() {
       linha.appendChild(c);
     });
     overlay.appendChild(linha);
-    fala('NaCl → Na⁺ + Cl⁻. O sal se dissocia, liberando os íons na água.');
+    fala('NaCl → Na⁺ + Cl⁻. The salt dissociates, releasing the ions into the water.');
     painel.innerHTML = '';
     botaoContinuarLocal(passoConducaoSal, 600);
   });
 }
 function passoConducaoSal() {
-  fala('Agora vamos testar: o NaCl sólido conduz corrente elétrica?');
+  fala('Now let\'s test: does solid NaCl conduct electric current?');
   const circuito = criarCircuito('circ-sal');
   overlay.appendChild(circuito);
 
   painel.innerHTML = '';
   const wrap = document.createElement('div');
   wrap.className = 'interacao-painel';
-  wrap.innerHTML = '<div class="interacao-pergunta-texto">Teste o NaCl sólido.</div>';
+  wrap.innerHTML = '<div class="interacao-pergunta-texto">Test the solid NaCl.</div>';
   const btn = document.createElement('button');
   btn.className = 'btn-continuar';
-  btn.textContent = 'TESTAR SÓLIDO';
+  btn.textContent = 'TEST SOLID';
   wrap.appendChild(btn);
   painel.appendChild(wrap);
 
   btn.addEventListener('click', function () {
     btn.disabled = true;
     definirIntensidadeLampada('circ-sal', 0.1);
-    fala('A lâmpada não acende: no sólido, os íons ficam presos e não conseguem se mover.');
+    fala('The bulb doesn\'t light up: in the solid, the ions are locked in place and can\'t move.');
     botaoContinuarLocal(passoConducaoSalB, 700);
   });
 }
 function passoConducaoSalB() {
   const wrap = document.createElement('div');
   wrap.className = 'interacao-painel';
-  wrap.innerHTML = '<div class="interacao-pergunta-texto">Agora dissolva o NaCl em água.</div>';
+  wrap.innerHTML = '<div class="interacao-pergunta-texto">Now dissolve the NaCl in water.</div>';
   const btn = document.createElement('button');
   btn.className = 'btn-continuar';
-  btn.textContent = 'DISSOLVER EM ÁGUA';
+  btn.textContent = 'DISSOLVE IN WATER';
   wrap.appendChild(btn);
   painel.innerHTML = '';
   painel.appendChild(wrap);
@@ -715,29 +715,29 @@ function passoConducaoSalB() {
     animarIonsCircuito('circ-sal');
     definirIntensidadeLampada('circ-sal', 1);
     tocarBrilho();
-    fala('Agora a lâmpada acende! Fundido ou dissolvido, o sal libera íons livres para se mover — por isso conduz corrente elétrica.');
+    fala('Now the bulb lights up! Molten or dissolved, the salt releases ions that are free to move — that\'s why it conducts electric current.');
     painel.innerHTML = '';
     botaoContinuar(600);
   });
 }
 
 /* ==========================================================
-   ETAPA 4 — NOMENCLATURA
+   STAGE 4 — NOMENCLATURE
    ========================================================== */
 function passoNomenclatura() {
-  fala('O nome do sal vem do ácido que o originou: ídrico → eto, ico → ato, oso → ito. Monte o nome do NaCl (do ácido clorídrico).');
+  fala('The name of a salt comes from the acid it originated from: -hydric → -ide, -ic → -ate, -ous → -ite. Assemble the name of NaCl (from hydrochloric acid).');
   montarNomeSal('NaCl', function () {
     agendar(function () { botaoContinuarLocal(passoNomenclaturaKNO3, 400); }, 300);
   });
 }
 function passoNomenclaturaKNO3() {
-  fala('Agora o KNO₃, formado a partir do ácido nítrico.');
+  fala('Now KNO₃, formed from nitric acid.');
   montarNomeSal('KNO3', function () {
     agendar(function () { botaoContinuarLocal(passoNomenclaturaCaSO4, 400); }, 300);
   });
 }
 function passoNomenclaturaCaSO4() {
-  fala('Por último, o CaSO₄, formado a partir do ácido sulfúrico.');
+  fala('Finally, CaSO₄, formed from sulfuric acid.');
   montarNomeSal('CaSO4', function () {
     agendar(function () { botaoContinuar(400); }, 300);
   });
@@ -747,27 +747,27 @@ function passoNomenclaturaCaSO4() {
    FINAL
    ========================================================== */
 function passoFinal() {
-  fala('Excelente. Agora você entende de onde surgem os sais e como eles recebem seus nomes.');
+  fala('Excellent. Now you understand where salts come from and how they get their names.');
   function linha(txt) { return '<div class="resumo-linha">' + txt + '</div>'; }
   overlay.innerHTML =
     '<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:12px;">' +
     '<div class="quadro-resumo-final">' +
-    linha('Ácido + Base → Neutralização.') +
-    linha('O H₃O⁺ do ácido reage com o OH⁻ da base, formando água.') +
-    linha('Os íons restantes formam o sal.') +
-    linha('Sais se dissociam em água e conduzem eletricidade quando fundidos ou dissolvidos.') +
-    linha('O nome do sal deriva do nome do ácido correspondente.') +
+    linha('Acid + Base → Neutralization.') +
+    linha('The H₃O⁺ from the acid reacts with the OH⁻ from the base, forming water.') +
+    linha('The remaining ions form the salt.') +
+    linha('Salts dissociate in water and conduct electricity when molten or dissolved.') +
+    linha('The name of the salt is derived from the name of its corresponding acid.') +
     '</div></div>';
   painel.innerHTML = '';
   const conclusao = document.getElementById('conclusao');
-  document.getElementById('conclusaoPlacar').textContent = 'Fase concluída';
-  document.getElementById('conclusaoMensagem').textContent = 'Você descobriu como um ácido e uma base reagem formando sal e água, e como nomear os sais formados.';
+  document.getElementById('conclusaoPlacar').textContent = 'Stage Complete';
+  document.getElementById('conclusaoMensagem').textContent = 'You discovered how an acid and a base react to form salt and water, and how to name the salts formed.';
   conclusao.classList.add('visivel');
   conclusao.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 /* ==========================================================
-   MOTOR DA FASE
+   STAGE ENGINE
    ========================================================== */
 const PASSOS = [
   passoIntro, passoNeutralizacao, passoIdentificarSal, passoDissociacaoSal,

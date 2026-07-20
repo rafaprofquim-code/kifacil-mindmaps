@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex, nofollow">
-  <title>O Pavilhão dos Óxidos — Jogo Premium | KiFácil</title>
+  <title>The Pavilion of Oxides — Premium Game | KiFácil</title>
   <link rel="icon" type="image/png" href="/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -323,38 +323,38 @@
 </nav>
 
 <main>
-  <h1 class="titulo-jogo">O Pavilhão dos Óxidos</h1>
-  <p class="subtitulo">Investigue substâncias formadas por dois elementos, sendo um deles o oxigênio — antes de decorar qualquer regra.</p>
+  <h1 class="titulo-jogo">The Pavilion of Oxides</h1>
+  <p class="subtitulo">Investigate substances formed by two elements, one of them oxygen — before memorizing any rule.</p>
 
   <div class="narrador">
-    <img src="../imagens/rafa-sorrindo.jpg" alt="Professora Rafaela" />
+    <img src="../imagens/rafa-sorrindo.jpg" alt="Professor Rafaela" />
     <div style="flex: 1;">
-      <div class="narrador-nome">Professora Rafaela</div>
-      <div class="narrador-texto" id="narradorTexto">Vamos começar.</div>
+      <div class="narrador-nome">Professor Rafaela</div>
+      <div class="narrador-texto" id="narradorTexto">Let's begin.</div>
       <div id="continuarBalao"></div>
     </div>
   </div>
 
   <div class="imagem-wrapper" id="imagemWrapper">
-    <img src="../imagens/pavilhao-dos-oxidos.jpg" alt="Pavilhão dos Óxidos" class="cena-fundo" />
+    <img src="../imagens/pavilhao-dos-oxidos.jpg" alt="Pavilion of Oxides" class="cena-fundo" />
     <div class="overlay-animacao" id="overlayAnimacao"></div>
-    <!-- COLOQUE O LINK AQUI -->
-    <a class="link-aula" href="https://www.youtube.com/watch?v=C18isXTBUv0&t=1s" target="_blank" rel="noopener" title="Assista à aula">
+    <!-- PUT THE LINK HERE -->
+    <a class="link-aula" href="https://www.youtube.com/watch?v=C18isXTBUv0&t=1s" target="_blank" rel="noopener" title="Watch the lesson">
       <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.6"/>
         <path d="M10 8.5L16 12L10 15.5V8.5Z" fill="currentColor"/>
       </svg>
-      <span>Assista à aula</span>
+      <span>Watch the lesson</span>
     </a>
   </div>
 
   <div id="painelInteracao"></div>
 
   <div class="conclusao" id="conclusao">
-    <div class="conclusao-titulo">Estudo concluído</div>
+    <div class="conclusao-titulo">Study complete</div>
     <div class="conclusao-placar" id="conclusaoPlacar"></div>
     <p class="conclusao-mensagem" id="conclusaoMensagem"></p>
-    <button class="btn-reiniciar" onclick="reiniciar()">Jogar novamente</button>
+    <button class="btn-reiniciar" onclick="reiniciar()">Play again</button>
   </div>
 </main>
 
@@ -362,7 +362,7 @@
 
 <script>
 /* ==========================================================
-   REFERÊNCIAS DOM
+   DOM REFERENCES
    ========================================================== */
 const overlay = document.getElementById('overlayAnimacao');
 const painel  = document.getElementById('painelInteracao');
@@ -383,18 +383,18 @@ function agendar(fn, ms) { const id = setTimeout(fn, ms); timersAtivos.push(id);
 function limparTimers() { timersAtivos.forEach(clearTimeout); timersAtivos = []; }
 
 /* ==========================================================
-   DADOS: NOMENCLATURA DE ÓXIDOS
+   DATA: OXIDE NOMENCLATURE
    ========================================================== */
 const NOMENCLATURA_OXIDO = {
-  Na2O: ['ÓXIDO', 'DE', 'SÓDIO'],
-  Al2O3: ['ÓXIDO', 'DE', 'ALUMÍNIO'],
-  FeO: ['ÓXIDO', 'DE', 'FERRO', 'II'],
-  Fe2O3: ['ÓXIDO', 'DE', 'FERRO', 'III']
+  Na2O: ['SODIUM', 'OXIDE'],
+  Al2O3: ['ALUMINUM', 'OXIDE'],
+  FeO: ['IRON', '(II)', 'OXIDE'],
+  Fe2O3: ['IRON', '(III)', 'OXIDE']
 };
 const FORMULAS_OXIDO = { Na2O: 'Na₂O', Al2O3: 'Al₂O₃', FeO: 'FeO', Fe2O3: 'Fe₂O₃' };
 
 /* ==========================================================
-   COMPONENTE: CÂMARA DE REAÇÃO COM INDICADOR
+   COMPONENT: REACTION CHAMBER WITH INDICATOR
    ========================================================== */
 function criarCamaraReacao(id, formulaTexto) {
   const div = document.createElement('div');
@@ -403,7 +403,7 @@ function criarCamaraReacao(id, formulaTexto) {
   div.innerHTML =
     '<div class="camara-formula">' + formulaTexto + '</div>' +
     '<div class="indicador-cor" id="indicador-' + id + '"></div>' +
-    '<div class="camara-legenda" id="legenda-' + id + '">Fenolftaleína: incolor</div>';
+    '<div class="camara-legenda" id="legenda-' + id + '">Phenolphthalein: colorless</div>';
   return div;
 }
 function definirIndicador(id, tipo) {
@@ -411,19 +411,19 @@ function definirIndicador(id, tipo) {
   const leg = document.getElementById('legenda-' + id);
   if (!ind) return;
   ind.classList.remove('indicador-basico');
-  if (tipo === 'basico') { ind.classList.add('indicador-basico'); leg.textContent = 'Fenolftaleína: ficou rosa (meio básico)'; }
-  else if (tipo === 'acido') { leg.textContent = 'Fenolftaleína: permanece incolor (meio ácido)'; }
+  if (tipo === 'basico') { ind.classList.add('indicador-basico'); leg.textContent = 'Phenolphthalein: turned pink (basic medium)'; }
+  else if (tipo === 'acido') { leg.textContent = 'Phenolphthalein: stays colorless (acidic medium)'; }
 }
 
 /* ==========================================================
-   HELPERS DE INTERAÇÃO
+   INTERACTION HELPERS
    ========================================================== */
 function botaoContinuar(delayMs) {
   delayMs = delayMs || 0;
   continuarBalao.innerHTML = '';
   const btn = document.createElement('button');
   btn.className = 'btn-continuar';
-  btn.textContent = 'Continuar →';
+  btn.textContent = 'Continue →';
   btn.disabled = delayMs > 0;
   continuarBalao.appendChild(btn);
   if (delayMs > 0) agendar(function () { btn.disabled = false; }, delayMs);
@@ -437,7 +437,7 @@ function botaoContinuarLocal(handler, delayMs) {
   continuarBalao.innerHTML = '';
   const btn = document.createElement('button');
   btn.className = 'btn-continuar';
-  btn.textContent = 'Continuar →';
+  btn.textContent = 'Continue →';
   btn.disabled = delayMs > 0;
   continuarBalao.appendChild(btn);
   if (delayMs > 0) agendar(function () { btn.disabled = false; }, delayMs);
@@ -472,7 +472,7 @@ function escolhaBotoes(opts) {
         Array.from(opcoesLinha.children).forEach(function (b) { b.disabled = true; });
         btn.classList.add('opcao-certa');
         feedback.className = 'modal-feedback visivel';
-        feedback.innerHTML = '<span class="feedback-certo">Correto!</span><p class="feedback-explicacao">' + opts.explicacao + '</p>';
+        feedback.innerHTML = '<span class="feedback-certo">Correct!</span><p class="feedback-explicacao">' + opts.explicacao + '</p>';
         opts.aoAcertar();
       } else {
         tentativas++;
@@ -487,7 +487,7 @@ function escolhaBotoes(opts) {
             if (opts.opcoes[i].correta) b.classList.add('opcao-certa');
           });
           feedback.className = 'modal-feedback visivel';
-          feedback.innerHTML = '<span class="feedback-resposta">Resposta correta destacada.</span><p class="feedback-explicacao">' + opts.explicacao + '</p>';
+          feedback.innerHTML = '<span class="feedback-resposta">Correct answer highlighted.</span><p class="feedback-explicacao">' + opts.explicacao + '</p>';
           opts.aoAcertar();
         }
       }
@@ -497,7 +497,7 @@ function escolhaBotoes(opts) {
 }
 
 /* ==========================================================
-   CLASSIFICAÇÃO POR CATEGORIA
+   CLASSIFICATION BY CATEGORY
    ========================================================== */
 function criarClassificacaoPorCategoria(itens, categorias, mensagemErro, mensagemSucesso) {
   const container = document.createElement('div');
@@ -534,7 +534,7 @@ function criarClassificacaoPorCategoria(itens, categorias, mensagemErro, mensage
     el.addEventListener('click', function () {
       if (el.classList.contains('associado')) return;
       if (!categoriaAtiva) {
-        fala('Primeiro escolha uma categoria à esquerda.');
+        fala('First choose a category on the left.');
         return;
       }
       if (it.categoria === categoriaAtiva) {
@@ -554,14 +554,14 @@ function criarClassificacaoPorCategoria(itens, categorias, mensagemErro, mensage
 }
 
 /* ==========================================================
-   MONTAGEM DE NOME POR BLOCOS
+   BUILDING THE NAME FROM BLOCKS
    ========================================================== */
 function montarNomeOxido(chave, aoConcluir) {
   painel.innerHTML = '';
   const wrap = document.createElement('div');
   wrap.className = 'interacao-painel';
   wrap.innerHTML =
-    '<div class="interacao-pergunta-texto">Monte o nome clicando nos blocos, na ordem correta.</div>' +
+    '<div class="interacao-pergunta-texto">Build the name by clicking the blocks, in the correct order.</div>' +
     '<div class="formula-alvo">' + FORMULAS_OXIDO[chave] + '</div>' +
     '<div class="montagem-nome" id="montagemNome"></div>' +
     '<div class="blocos-disponiveis" id="blocosDisponiveis"></div>' +
@@ -593,7 +593,7 @@ function montarNomeOxido(chave, aoConcluir) {
         progresso++;
         if (progresso === sequenciaCorreta.length) {
           fb.className = 'modal-feedback visivel';
-          fb.innerHTML = '<span class="feedback-certo">Correto!</span><p class="feedback-explicacao">' + FORMULAS_OXIDO[chave] + ' → ' + sequenciaCorreta.join(' ').toLowerCase() + '</p>';
+          fb.innerHTML = '<span class="feedback-certo">Correct!</span><p class="feedback-explicacao">' + FORMULAS_OXIDO[chave] + ' → ' + sequenciaCorreta.join(' ').toLowerCase() + '</p>';
           Array.from(blocosEl.children).forEach(function (b) { b.disabled = true; });
           aoConcluir();
         }
@@ -607,77 +607,77 @@ function montarNomeOxido(chave, aoConcluir) {
 }
 
 /* ==========================================================
-   INTRODUÇÃO
+   INTRODUCTION
    ========================================================== */
 function passoIntro() {
-  fala('Hoje vamos investigar substâncias formadas por apenas dois elementos, sendo um deles o oxigênio. Mas será que todos os óxidos se comportam da mesma forma?');
+  fala('Today we\'re going to investigate substances formed by just two elements, one of them oxygen. But do all oxides behave the same way?');
   const btn = document.createElement('button');
   btn.className = 'btn-continuar btn-iniciar-investigacao';
-  btn.textContent = 'INICIAR INVESTIGAÇÃO';
+  btn.textContent = 'START THE INVESTIGATION';
   overlay.appendChild(btn);
   btn.addEventListener('click', avancar);
 }
 
 /* ==========================================================
-   ETAPA 1 — RECONHECENDO UM ÓXIDO
+   STAGE 1 — RECOGNIZING AN OXIDE
    ========================================================== */
 function passoReconhecer() {
-  fala('Associe cada fórmula à categoria certa: é um óxido, ou não é?');
+  fala('Match each formula to the right category: is it an oxide, or not?');
   criarClassificacaoPorCategoria([
-    { rotulo: 'Na₂O', categoria: 'É óxido' },
-    { rotulo: 'CO₂', categoria: 'É óxido' },
-    { rotulo: 'SO₃', categoria: 'É óxido' },
-    { rotulo: 'CaO', categoria: 'É óxido' },
-    { rotulo: 'NaCl', categoria: 'Não é óxido' },
-    { rotulo: 'H₂SO₄', categoria: 'Não é óxido' }
-  ], ['É óxido', 'Não é óxido'],
-  'Observe quantos elementos diferentes aparecem na fórmula, e se o oxigênio está presente.',
-  'Muito bem!');
+    { rotulo: 'Na₂O', categoria: 'Is an oxide' },
+    { rotulo: 'CO₂', categoria: 'Is an oxide' },
+    { rotulo: 'SO₃', categoria: 'Is an oxide' },
+    { rotulo: 'CaO', categoria: 'Is an oxide' },
+    { rotulo: 'NaCl', categoria: 'Not an oxide' },
+    { rotulo: 'H₂SO₄', categoria: 'Not an oxide' }
+  ], ['Is an oxide', 'Not an oxide'],
+  'Notice how many different elements appear in the formula, and whether oxygen is present.',
+  'Very good!');
 }
 function passoReconhecerPergunta() {
-  fala('O que Na₂O, CO₂, SO₃ e CaO têm em comum?');
+  fala('What do Na₂O, CO₂, SO₃ and CaO have in common?');
   escolhaBotoes({
-    pergunta: 'O que essas fórmulas têm em comum?',
+    pergunta: 'What do these formulas have in common?',
     opcoes: [
-      { rotulo: 'Possuem apenas dois elementos e um deles é o oxigênio', correta: true },
-      { rotulo: 'Possuem sempre hidrogênio', correta: false },
-      { rotulo: 'Possuem três elementos', correta: false }
+      { rotulo: 'They have only two elements and one of them is oxygen', correta: true },
+      { rotulo: 'They always have hydrogen', correta: false },
+      { rotulo: 'They have three elements', correta: false }
     ],
-    dica: 'Conte quantos elementos diferentes aparecem em cada fórmula.',
-    explicacao: 'Óxidos são compostos binários (dois elementos) nos quais o oxigênio está ligado a outro elemento. Essa é uma regra geral — existem compostos especiais do oxigênio que veremos mais adiante.',
+    dica: 'Count how many different elements appear in each formula.',
+    explicacao: 'Oxides are binary compounds (two elements) in which oxygen is bonded to another element. This is a general rule — there are special oxygen compounds we\'ll see further ahead.',
     aoAcertar: function () { botaoContinuar(400); }
   });
 }
 
 /* ==========================================================
-   ETAPA 2 — METAL OU AMETAL
+   STAGE 2 — METAL OR NONMETAL
    ========================================================== */
 function passoMetalOuAmetal() {
-  fala('Observe qual elemento está ligado ao oxigênio em cada óxido.');
+  fala('Notice which element is bonded to oxygen in each oxide.');
   criarClassificacaoPorCategoria([
-    { rotulo: 'Na₂O', categoria: 'Metal + Oxigênio' },
-    { rotulo: 'CaO', categoria: 'Metal + Oxigênio' },
-    { rotulo: 'CO₂', categoria: 'Ametal + Oxigênio' },
-    { rotulo: 'SO₃', categoria: 'Ametal + Oxigênio' }
-  ], ['Metal + Oxigênio', 'Ametal + Oxigênio'],
-  'Identifique se o elemento ligado ao oxigênio é metal ou ametal.',
-  'Essa divisão nos ajuda a prever o comportamento de muitos óxidos.');
+    { rotulo: 'Na₂O', categoria: 'Metal + Oxygen' },
+    { rotulo: 'CaO', categoria: 'Metal + Oxygen' },
+    { rotulo: 'CO₂', categoria: 'Nonmetal + Oxygen' },
+    { rotulo: 'SO₃', categoria: 'Nonmetal + Oxygen' }
+  ], ['Metal + Oxygen', 'Nonmetal + Oxygen'],
+  'Identify whether the element bonded to oxygen is a metal or a nonmetal.',
+  'This division helps us predict the behavior of many oxides.');
 }
 function passoRegraMetalAmetal() {
   const placa = document.createElement('div');
   placa.className = 'placa-dourada';
-  placa.textContent = 'Óxido de metal → tendência básica  |  Óxido de ametal → tendência ácida';
+  placa.textContent = 'Metal oxide → basic tendency  |  Nonmetal oxide → acidic tendency';
   overlay.appendChild(placa);
-  fala('Como tendência geral: óxido de metal costuma ter comportamento básico, e óxido de ametal costuma ter comportamento ácido. É uma tendência, não uma regra sem exceções.');
+  fala('As a general tendency: metal oxide usually behaves as a base, and nonmetal oxide usually behaves as an acid. It\'s a tendency, not a rule without exceptions.');
   painel.innerHTML = '';
   botaoContinuar(700);
 }
 
 /* ==========================================================
-   ETAPA 3 — ÓXIDO METÁLICO EM ÁGUA
+   STAGE 3 — METALLIC OXIDE IN WATER
    ========================================================== */
 function passoOxidoMetalicoAgua() {
-  fala('Vamos testar um óxido formado por metal: o CaO. Usaremos a fenolftaleína como indicador — ela fica rosa em meio básico, e permanece incolor em meio ácido ou neutro.');
+  fala('Let\'s test an oxide formed by a metal: CaO. We\'ll use phenolphthalein as an indicator — it turns pink in a basic medium, and stays colorless in an acidic or neutral medium.');
   const camara = criarCamaraReacao('cam-cao', 'CaO');
   overlay.appendChild(camara);
 
@@ -686,7 +686,7 @@ function passoOxidoMetalicoAgua() {
   wrap.className = 'interacao-painel';
   const btn = document.createElement('button');
   btn.className = 'btn-continuar';
-  btn.textContent = 'ADICIONAR ÁGUA';
+  btn.textContent = 'ADD WATER';
   wrap.appendChild(btn);
   painel.appendChild(wrap);
 
@@ -694,17 +694,17 @@ function passoOxidoMetalicoAgua() {
     btn.disabled = true;
     document.getElementById('cam-cao').querySelector('.camara-formula').textContent = 'CaO + H₂O → Ca(OH)₂';
     definirIndicador('cam-cao', 'basico');
-    fala('O CaO reagiu com a água formando Ca(OH)₂ — a fenolftaleína ficou rosa, indicando meio básico. Nesse exemplo, o óxido metálico reagiu com água formando uma base. (Nem todo óxido metálico reage facilmente com água.)');
+    fala('The CaO reacted with the water forming Ca(OH)₂ — the phenolphthalein turned pink, indicating a basic medium. In this example, the metallic oxide reacted with water forming a base. (Not every metallic oxide reacts easily with water.)');
     painel.innerHTML = '';
     botaoContinuar(700);
   });
 }
 
 /* ==========================================================
-   ETAPA 4 — ÓXIDO DE AMETAL EM ÁGUA
+   STAGE 4 — NONMETAL OXIDE IN WATER
    ========================================================== */
 function passoOxidoAmetalAgua() {
-  fala('Agora vamos testar um óxido formado por ametal: o SO₃.');
+  fala('Now let\'s test an oxide formed by a nonmetal: SO₃.');
   const camara = criarCamaraReacao('cam-so3', 'SO₃');
   overlay.appendChild(camara);
 
@@ -713,7 +713,7 @@ function passoOxidoAmetalAgua() {
   wrap.className = 'interacao-painel';
   const btn = document.createElement('button');
   btn.className = 'btn-continuar';
-  btn.textContent = 'ADICIONAR ÁGUA';
+  btn.textContent = 'ADD WATER';
   wrap.appendChild(btn);
   painel.appendChild(wrap);
 
@@ -721,116 +721,116 @@ function passoOxidoAmetalAgua() {
     btn.disabled = true;
     document.getElementById('cam-so3').querySelector('.camara-formula').textContent = 'SO₃ + H₂O → H₂SO₄';
     definirIndicador('cam-so3', 'acido');
-    fala('O SO₃ reagiu com a água formando H₂SO₄ — mas a fenolftaleína permanece incolor, porque esse indicador só muda de cor em meio básico; em meio ácido, como agora, ou neutro, ela continua transparente. O CO₂ também reage de forma parecida: CO₂ + H₂O ⇌ H₂CO₃. Muitos óxidos de ametais originam meios ácidos em água.');
+    fala('The SO₃ reacted with the water forming H₂SO₄ — but the phenolphthalein stays colorless, because this indicator only changes color in a basic medium; in an acidic medium, like now, or a neutral one, it remains clear. CO₂ reacts in a similar way too: CO₂ + H₂O ⇌ H₂CO₃. Many nonmetal oxides produce acidic media in water.');
     painel.innerHTML = '';
     botaoContinuar(700);
   });
 }
 
 /* ==========================================================
-   ETAPA 5 — REAÇÃO COM ÁCIDOS E BASES
+   STAGE 5 — REACTION WITH ACIDS AND BASES
    ========================================================== */
 function passoOxidoBasicoComAcido() {
-  fala('O CaO (óxido básico) reage com HCl. Quais são os produtos?');
+  fala('CaO (a basic oxide) reacts with HCl. What are the products?');
   escolhaBotoes({
     pergunta: 'CaO + 2HCl → ?',
     opcoes: [
       { rotulo: 'CaCl₂ + H₂O', correta: true },
-      { rotulo: 'CaCl₂ apenas', correta: false },
+      { rotulo: 'CaCl₂ only', correta: false },
       { rotulo: 'Ca(OH)₂ + Cl₂', correta: false }
     ],
-    dica: 'Um óxido básico reagindo com ácido forma sal e água, como uma neutralização.',
-    explicacao: 'CaO + 2HCl → CaCl₂ + H₂O. Um óxido básico pode reagir com um ácido, formando sal e água.',
+    dica: 'A basic oxide reacting with an acid forms salt and water, like a neutralization.',
+    explicacao: 'CaO + 2HCl → CaCl₂ + H₂O. A basic oxide can react with an acid, forming salt and water.',
     aoAcertar: function () { botaoContinuarLocal(passoOxidoAcidoComBase, 400); }
   });
 }
 function passoOxidoAcidoComBase() {
-  fala('Agora o SO₃ (óxido ácido) reage com NaOH. Quais são os produtos?');
+  fala('Now SO₃ (an acidic oxide) reacts with NaOH. What are the products?');
   escolhaBotoes({
     pergunta: 'SO₃ + 2NaOH → ?',
     opcoes: [
       { rotulo: 'Na₂SO₄ + H₂O', correta: true },
       { rotulo: 'Na₂SO₃ + H₂', correta: false },
-      { rotulo: 'NaOH + SO₃ (sem reação)', correta: false }
+      { rotulo: 'NaOH + SO₃ (no reaction)', correta: false }
     ],
-    dica: 'Um óxido ácido reagindo com base também forma sal e água.',
-    explicacao: 'SO₃ + 2NaOH → Na₂SO₄ + H₂O. Um óxido ácido pode reagir com uma base, formando sal e água.',
+    dica: 'An acidic oxide reacting with a base also forms salt and water.',
+    explicacao: 'SO₃ + 2NaOH → Na₂SO₄ + H₂O. An acidic oxide can react with a base, forming salt and water.',
     aoAcertar: function () { botaoContinuar(400); }
   });
 }
 
 /* ==========================================================
-   ETAPA 6 — CONSTRUINDO A FÓRMULA (NOX)
+   STAGE 6 — BUILDING THE FORMULA (OXIDATION NUMBER)
    ========================================================== */
 function passoFormulaNa() {
-  fala('O sódio tem NOX +1. O oxigênio tem NOX −2. Qual fórmula faz a soma das cargas ser zero?');
+  fala('Sodium has an oxidation number of +1. Oxygen has an oxidation number of −2. Which formula makes the sum of the charges equal zero?');
   escolhaBotoes({
-    pergunta: 'Na (+1) e O (−2): qual fórmula é eletricamente neutra?',
+    pergunta: 'Na (+1) and O (−2): which formula is electrically neutral?',
     opcoes: [
       { rotulo: 'NaO', correta: false },
       { rotulo: 'Na₂O', correta: true },
       { rotulo: 'NaO₂', correta: false }
     ],
-    dica: 'A soma das cargas precisa ser igual a zero.',
-    explicacao: 'Na₂O: 2 × (+1) + 1 × (−2) = 0. Por isso precisamos de 2 átomos de Na para cada átomo de O.',
+    dica: 'The sum of the charges needs to equal zero.',
+    explicacao: 'Na₂O: 2 × (+1) + 1 × (−2) = 0. That\'s why we need 2 atoms of Na for every atom of O.',
     aoAcertar: function () { botaoContinuarLocal(passoFormulaAl, 400); }
   });
 }
 function passoFormulaAl() {
-  fala('Agora o alumínio, com NOX +3.');
+  fala('Now aluminum, with an oxidation number of +3.');
   escolhaBotoes({
-    pergunta: 'Al (+3) e O (−2): qual fórmula é eletricamente neutra?',
+    pergunta: 'Al (+3) and O (−2): which formula is electrically neutral?',
     opcoes: [
       { rotulo: 'AlO', correta: false },
       { rotulo: 'Al₃O₂', correta: false },
       { rotulo: 'Al₂O₃', correta: true }
     ],
-    dica: 'Procure a combinação em que a soma das cargas dá exatamente zero.',
+    dica: 'Look for the combination where the sum of the charges is exactly zero.',
     explicacao: 'Al₂O₃: 2 × (+3) + 3 × (−2) = +6 − 6 = 0.',
     aoAcertar: function () { botaoContinuar(400); }
   });
 }
 
 /* ==========================================================
-   ETAPA 7 — NOMENCLATURA (UM NOX)
+   STAGE 7 — NOMENCLATURE (SINGLE OXIDATION NUMBER)
    ========================================================== */
 function passoNomenclaturaNa2O() {
-  fala('Quando o elemento forma apenas um óxido comum, o nome é "óxido de + nome do elemento". Monte o nome do Na₂O.');
+  fala('When an element forms only one common oxide, the name is "[element name] + oxide". Build the name for Na₂O.');
   montarNomeOxido('Na2O', function () {
     agendar(function () { botaoContinuarLocal(passoNomenclaturaAl2O3, 400); }, 300);
   });
 }
 function passoNomenclaturaAl2O3() {
-  fala('Agora monte o nome do Al₂O₃.');
+  fala('Now build the name for Al₂O₃.');
   montarNomeOxido('Al2O3', function () {
     agendar(function () { botaoContinuar(400); }, 300);
   });
 }
 
 /* ==========================================================
-   ETAPA 8 — ELEMENTO COM MAIS DE UM NOX (FERRO)
+   STAGE 8 — ELEMENT WITH MORE THAN ONE OXIDATION NUMBER (IRON)
    ========================================================== */
 function passoNomenclaturaFeO() {
-  fala('O ferro forma dois óxidos diferentes: no FeO, o ferro tem NOX +2; no Fe₂O₃, tem NOX +3. Usamos a nomenclatura de Stock: óxido de ferro + o NOX em algarismo romano. Monte o nome do FeO.');
+  fala('Iron forms two different oxides: in FeO, iron has an oxidation number of +2; in Fe₂O₃, it\'s +3. We use Stock nomenclature: the element name + the oxidation number in Roman numerals + "oxide". Build the name for FeO.');
   montarNomeOxido('FeO', function () {
     agendar(function () { botaoContinuarLocal(passoNomenclaturaFe2O3, 400); }, 300);
   });
 }
 function passoNomenclaturaFe2O3() {
-  fala('Agora monte o nome do Fe₂O₃.');
+  fala('Now build the name for Fe₂O₃.');
   montarNomeOxido('Fe2O3', function () {
     agendar(function () {
-      fala('FeO também pode ser chamado de óxido ferroso, e Fe₂O₃ de óxido férrico — nomes tradicionais alternativos. Mas "ferro II" e "ferro III" indicam o NOX de forma mais direta.');
+      fala('FeO can also be called ferrous oxide, and Fe₂O₃ ferric oxide — alternative traditional names. But "iron(II)" and "iron(III)" indicate the oxidation number more directly.');
       botaoContinuar(600);
     }, 300);
   });
 }
 
 /* ==========================================================
-   ETAPA 9 — ÓXIDOS DE AMETAIS (PREFIXOS)
+   STAGE 9 — NONMETAL OXIDES (PREFIXES)
    ========================================================== */
 function passoPrefixosAmetais() {
-  fala('SO₂ e SO₃ têm o mesmo enxofre, mas quantidades diferentes de oxigênio. Para diferenciá-los, usamos prefixos: di-, tri-.');
+  fala('SO₂ and SO₃ have the same sulfur, but different amounts of oxygen. To tell them apart, we use prefixes: di-, tri-.');
   const linha = document.createElement('div');
   linha.className = 'linha-cartas-simples';
   ['CO₂', 'SO₂', 'SO₃'].forEach(function (t) {
@@ -842,14 +842,14 @@ function passoPrefixosAmetais() {
   overlay.appendChild(linha);
 
   escolhaBotoes({
-    pergunta: 'Como se chama o SO₃, que tem três átomos de oxigênio?',
+    pergunta: 'What is SO₃ called, which has three oxygen atoms?',
     opcoes: [
-      { rotulo: 'Monóxido de enxofre', correta: false },
-      { rotulo: 'Dióxido de enxofre', correta: false },
-      { rotulo: 'Trióxido de enxofre', correta: true }
+      { rotulo: 'Sulfur monoxide', correta: false },
+      { rotulo: 'Sulfur dioxide', correta: false },
+      { rotulo: 'Sulfur trioxide', correta: true }
     ],
-    dica: 'Conte os átomos de oxigênio: mono- (1), di- (2), tri- (3).',
-    explicacao: 'CO₂ → dióxido de carbono. SO₂ → dióxido de enxofre. SO₃ → trióxido de enxofre (também chamado, tradicionalmente, de anidrido sulfúrico).',
+    dica: 'Count the oxygen atoms: mono- (1), di- (2), tri- (3).',
+    explicacao: 'CO₂ → carbon dioxide. SO₂ → sulfur dioxide. SO₃ → sulfur trioxide (also traditionally called sulfuric anhydride).',
     aoAcertar: function () { botaoContinuar(400); }
   });
 }
@@ -858,26 +858,26 @@ function passoPrefixosAmetais() {
    FINAL
    ========================================================== */
 function passoFinal() {
-  fala('Excelente. Agora você consegue reconhecer, formular, classificar e nomear diferentes óxidos.');
+  fala('Excellent. Now you can recognize, formulate, classify and name different oxides.');
   function linha(txt) { return '<div class="resumo-linha">' + txt + '</div>'; }
   overlay.innerHTML =
     '<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:12px;">' +
     '<div class="quadro-resumo-final">' +
-    linha('Óxidos são compostos binários com oxigênio.') +
-    linha('Metal + oxigênio tende a óxido básico; ametal + oxigênio tende a óxido ácido.') +
-    linha('A fórmula se forma quando a soma dos NOX é igual a zero.') +
-    linha('A nomenclatura usa "óxido de + elemento", NOX em romano, ou prefixos (di-, tri-).') +
+    linha('Oxides are binary compounds with oxygen.') +
+    linha('Metal + oxygen tends to form a basic oxide; nonmetal + oxygen tends to form an acidic oxide.') +
+    linha('The formula is built so that the sum of the oxidation numbers equals zero.') +
+    linha('The nomenclature uses "[element] + oxide", the oxidation number in Roman numerals, or prefixes (di-, tri-).') +
     '</div></div>';
   painel.innerHTML = '';
   const conclusao = document.getElementById('conclusao');
-  document.getElementById('conclusaoPlacar').textContent = 'Fase concluída';
-  document.getElementById('conclusaoMensagem').textContent = 'Você investigou os óxidos: o que os caracteriza, como reagem com água, ácidos e bases, como montar suas fórmulas pela neutralidade elétrica e como nomeá-los.';
+  document.getElementById('conclusaoPlacar').textContent = 'Stage complete';
+  document.getElementById('conclusaoMensagem').textContent = 'You investigated oxides: what characterizes them, how they react with water, acids and bases, how to build their formulas using electrical neutrality, and how to name them.';
   conclusao.classList.add('visivel');
   conclusao.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 /* ==========================================================
-   MOTOR DA FASE
+   STAGE ENGINE
    ========================================================== */
 const PASSOS = [
   passoIntro, passoReconhecer, passoReconhecerPergunta,

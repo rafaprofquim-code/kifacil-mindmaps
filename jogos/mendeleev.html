@@ -1,13 +1,13 @@
-﻿﻿
+
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" type="image/png" href="/favicon.png">
 <link rel="canonical" href="https://kifaciledu.com.br/jogos/jogos-escaperoom/torre-quimica/fases/gabinete-mendeleev.html">
-<title>Gabinete de Mendeleev — Cápsula do Tempo | KiFácil</title>
-<meta name="description" content="Viaje ao gabinete de Dmitri Mendeleev em 1869 e acompanhe a descoberta dos padrões da tabela periódica. Escape Room da Cápsula do Tempo — KiFácil.">
+<title>Mendeleev's Study — Time Capsule | KiFácil</title>
+<meta name="description" content="Travel to Dmitri Mendeleev's study in 1869 and follow the discovery of the periodic table's patterns. Time Capsule Escape Room — KiFácil.">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y1JGD5VVBD"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -209,83 +209,83 @@
 <body>
 
 <nav class="nav">
-  <a href="../../../torre-central/mapa-kifacil.html">Academia KiFácil</a>
+  <a href="../../../torre-central/mapa-kifacil.html">KiFácil Academy</a>
   <span class="nav-sep">›</span>
-  <a href="../../torre-ciencia.html">Torre de Ciências</a>
+  <a href="../../torre-ciencia.html">Science Tower</a>
   <span class="nav-sep">›</span>
-  Torre de Química · Fase 6 · Mendeleev
+  Chemistry Tower · Stage 6 · Mendeleev
 </nav>
 
 <header class="header">
   <div>
-    <div class="eyebrow">Escape Room · Cápsula do Tempo</div>
-    <h1 class="page-title">Gabinete de Mendeleev</h1>
+    <div class="eyebrow">Escape Room · Time Capsule</div>
+    <h1 class="page-title">Mendeleev's Study</h1>
   </div>
 </header>
 
 <div class="main" id="mainScreen">
   <div class="scene-wrap">
     <div class="scene-inner">
-      <img src="../imagens/mendeleev.jpg" alt="Gabinete de Dmitri Mendeleev em 1869" class="scene-img">
+      <img src="../imagens/mendeleev.jpg" alt="Dmitri Mendeleev's study in 1869" class="scene-img">
       <div class="hotspot active" id="hs-quadro" style="left:31%;top:5%;width:45%;height:67%;" onclick="abrirQuadro1()"></div>
       <div class="hotspot" id="hs-carta" style="left:55%;top:72%;width:24%;height:20%;" onclick="abrirAto3()"></div>
 
       <div class="quadro-overlay" id="quadroOverlay">
-        <button class="quadro-fechar" onclick="fecharQuadro()" aria-label="Fechar">✕ Fechar</button>
+        <button class="quadro-fechar" onclick="fecharQuadro()" aria-label="Close">✕ Close</button>
         <div class="quadro-instrucao" id="quadroInstrucao"></div>
         <div id="cartoesGrid"></div>
         <div class="quadro-feedback" id="quadroFeedback"></div>
-        <button class="btn-verificar" id="btnVerificar" onclick="verificarMassas()">Verificar massas</button>
+        <button class="btn-verificar" id="btnVerificar" onclick="verificarMassas()">Check masses</button>
       </div>
 
-      <!-- COLOQUE O LINK AQUI -->
-      <a class="link-aula" href="https://www.youtube.com/watch?v=8edFd1nDsko" target="_blank" rel="noopener" title="Assista à aula">
+      <!-- PUT THE LINK HERE -->
+      <a class="link-aula" href="https://www.youtube.com/watch?v=8edFd1nDsko" target="_blank" rel="noopener" title="Watch the lesson">
         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.6"/>
           <path d="M10 8.5L16 12L10 15.5V8.5Z" fill="currentColor"/>
         </svg>
-        <span>Assista à aula</span>
+        <span>Watch the lesson</span>
       </a>
     </div>
   </div>
 
   <div class="panels-row">
     <div class="narr-box">
-      <div class="narr-eyebrow">Cápsula do Tempo — 1869</div>
+      <div class="narr-eyebrow">Time Capsule — 1869</div>
       <div class="narr" id="narr">
-        Você chega ao gabinete de Mendeleev. Sobre a mesa há cartões com elementos e anotações de massa.<br><br>
-        <strong>Mendeleev:</strong> <em>"Não quero que você decore. Quero que investigue comigo. Clique no quadro para organizar os cartões que reuni."</em>
+        You arrive at Mendeleev's study. On the table are cards with elements and mass notes.<br><br>
+        <strong>Mendeleev:</strong> <em>"I don't want you to memorize. I want you to investigate with me. Click on the board to organize the cards I've gathered."</em>
       </div>
     </div>
 
     <div class="progresso-wrap">
-      <div class="progresso-title">Observações realizadas</div>
+      <div class="progresso-title">Observations made</div>
       <div class="ato-item" id="ai-1">
         <div class="ato-dot"></div>
-        <div><div class="ato-nome">Massas crescentes</div><span class="ato-tag">primeira pista</span></div>
+        <div><div class="ato-nome">Increasing masses</div><span class="ato-tag">first clue</span></div>
       </div>
       <div class="ato-item" id="ai-2">
         <div class="ato-dot"></div>
-        <div><div class="ato-nome">Colunas semelhantes</div><span class="ato-tag">propriedades se repetem</span></div>
+        <div><div class="ato-nome">Similar columns</div><span class="ato-tag">properties repeat</span></div>
       </div>
       <div class="ato-item" id="ai-3">
         <div class="ato-dot"></div>
-        <div><div class="ato-nome">Tabela moderna</div><span class="ato-tag">número atômico</span></div>
+        <div><div class="ato-nome">Modern table</div><span class="ato-tag">atomic number</span></div>
       </div>
     </div>
   </div>
 </div>
 
 <div class="win-screen" id="winScreen">
-  <div class="win-title">O padrão apareceu!</div>
-  <p class="win-sub">Você acompanhou o raciocínio de Mendeleev: primeiro as massas foram colocadas em ordem crescente; depois, as propriedades semelhantes revelaram colunas. Essa repetição organizada é a periodicidade. Hoje a tabela moderna é organizada pelo número atômico: para cada número, há um elemento correspondente — 1 hidrogênio, 2 hélio, 3 lítio e assim por diante.</p>
+  <div class="win-title">The pattern emerged!</div>
+  <p class="win-sub">You followed Mendeleev's reasoning: first the masses were arranged in increasing order; then, similar properties revealed columns. This organized repetition is periodicity. Today the modern table is organized by atomic number: for each number, there is a corresponding element — 1 hydrogen, 2 helium, 3 lithium, and so on.</p>
   <div class="win-badges">
-    <div class="badge"><div class="badge-icon">↔️</div><div class="badge-label">Períodos</div></div>
-    <div class="badge"><div class="badge-icon">↕️</div><div class="badge-label">Famílias</div></div>
-    <div class="badge"><div class="badge-icon">⚛️</div><div class="badge-label">Prótons</div></div>
+    <div class="badge"><div class="badge-icon">↔️</div><div class="badge-label">Periods</div></div>
+    <div class="badge"><div class="badge-icon">↕️</div><div class="badge-label">Families</div></div>
+    <div class="badge"><div class="badge-icon">⚛️</div><div class="badge-label">Protons</div></div>
   </div>
   <div class="win-btns">
-    <button class="btn-restart" onclick="resetGame()">Revisitar o gabinete</button>
+    <button class="btn-restart" onclick="resetGame()">Revisit the study</button>
   </div>
 </div>
 
@@ -299,12 +299,12 @@ document.getElementById('overlay').addEventListener('click', function(e) { if (e
 function tocarDing() { const a = new Audio('../sons/ding.mp3'); a.play().catch(() => {}); }
 
 const elementos = {
-  Li: { simb: 'Li', nome: 'Lítio', massa: 7, massaTxt: '7', grupo: 'A', props: 'metal; reage com água' },
-  Na: { simb: 'Na', nome: 'Sódio', massa: 23, massaTxt: '23', grupo: 'A', props: 'metal; reage com água' },
-  K:  { simb: 'K',  nome: 'Potássio', massa: 39, massaTxt: '39', grupo: 'A', props: 'metal; reage com água' },
-  F:  { simb: 'F',  nome: 'Flúor', massa: 19, massaTxt: '19', grupo: 'B', props: 'não metal; forma sais' },
-  Cl: { simb: 'Cl', nome: 'Cloro', massa: 35.5, massaTxt: '35,5', grupo: 'B', props: 'não metal; forma sais' },
-  Br: { simb: 'Br', nome: 'Bromo', massa: 80, massaTxt: '80', grupo: 'B', props: 'não metal; forma sais' }
+  Li: { simb: 'Li', nome: 'Lithium', massa: 7, massaTxt: '7', grupo: 'A', props: 'metal; reacts with water' },
+  Na: { simb: 'Na', nome: 'Sodium', massa: 23, massaTxt: '23', grupo: 'A', props: 'metal; reacts with water' },
+  K:  { simb: 'K',  nome: 'Potassium', massa: 39, massaTxt: '39', grupo: 'A', props: 'metal; reacts with water' },
+  F:  { simb: 'F',  nome: 'Fluorine', massa: 19, massaTxt: '19', grupo: 'B', props: 'nonmetal; forms salts' },
+  Cl: { simb: 'Cl', nome: 'Chlorine', massa: 35.5, massaTxt: '35.5', grupo: 'B', props: 'nonmetal; forms salts' },
+  Br: { simb: 'Br', nome: 'Bromine', massa: 80, massaTxt: '80', grupo: 'B', props: 'nonmetal; forms salts' }
 };
 
 const ordemCorretaMassas = ['Li', 'F', 'Na', 'Cl', 'K', 'Br'];
@@ -335,12 +335,12 @@ function cardHTML(simb, fixed = false, simples = false, emSlot = false) {
   const conteudo = simples
     ? `
       <div class="sym">${el.simb}</div>
-      <div class="mass">massa ${el.massaTxt}</div>
+      <div class="mass">mass ${el.massaTxt}</div>
     `
     : `
       <div class="sym">${el.simb}</div>
       <div class="name">${el.nome}</div>
-      <div class="mass">massa ${el.massaTxt}</div>
+      <div class="mass">mass ${el.massaTxt}</div>
       <div class="elem-prop-ato2">${el.props}</div>
     `;
   let attrs = '';
@@ -370,30 +370,31 @@ function abrirQuadro1() {
 
 function renderMassas() {
   document.getElementById('quadroInstrucao').innerHTML = `
-    <strong>Mendeleev:</strong> "Tenho cartões com símbolos e massas. Observe os números e tente encontrar uma sequência lógica."
+    <strong>Mendeleev:</strong> "I have cards with symbols and masses. Look at the numbers and try to find a logical sequence."
   `;
-  document.getElementById('btnVerificar').textContent = 'Verificar sequência';
+  document.getElementById('btnVerificar').textContent = 'Check sequence';
   document.getElementById('btnVerificar').disabled = false;
   document.getElementById('btnVerificar').setAttribute('onclick', 'verificarMassas()');
 
+  const ordinais = ['1st', '2nd', '3rd', '4th', '5th', '6th'];
   const slots = ['m1','m2','m3','m4','m5','m6'].map((id, i) => `
     <div class="drop-slot" data-slot="${id}" ondragover="allowDrop(event)" ondragleave="dragLeave(event)" ondrop="dropOnSlot(event, '${id}')" onclick="clickSlot('${id}')">
-      ${slotsMassas[id] ? cardHTML(slotsMassas[id], false, true, true) : `${i + 1}º lugar`}
+      ${slotsMassas[id] ? cardHTML(slotsMassas[id], false, true, true) : `${ordinais[i]} place`}
     </div>
   `).join('');
 
   document.getElementById('cartoesGrid').innerHTML = `
     <div class="game-area">
       <div class="board-box">
-        <div class="box-title">Linha de investigação</div>
-        <div class="hint-small">observe apenas símbolo e massa</div>
+        <div class="box-title">Investigation line</div>
+        <div class="hint-small">observe only symbol and mass</div>
         <div class="mass-row">${slots}</div>
       </div>
       <div class="bank-box">
-        <div class="box-title">Cartões fora da tabela</div>
-        <div class="hint-small">arraste ou toque no cartão e depois no espaço</div>
+        <div class="box-title">Cards outside the table</div>
+        <div class="hint-small">drag or tap the card, then tap the slot</div>
         <div class="cards-bank" id="bankCards">
-          ${bankMassas.length ? bankMassas.map(s => cardHTML(s, false, true)).join('') : '<div class="bank-empty">Todos os cartões foram usados.</div>'}
+          ${bankMassas.length ? bankMassas.map(s => cardHTML(s, false, true)).join('') : '<div class="bank-empty">All cards have been used.</div>'}
         </div>
       </div>
     </div>
@@ -405,24 +406,24 @@ function verificarMassas() {
   const fb = document.getElementById('quadroFeedback');
   const resposta = ['m1','m2','m3','m4','m5','m6'].map(id => slotsMassas[id]);
   if (resposta.some(v => !v)) {
-    fb.textContent = 'Ainda faltam cartões na linha.';
+    fb.textContent = 'There are still cards missing from the line.';
     fb.className = 'quadro-feedback err';
     return;
   }
   const ok = resposta.every((s, i) => s === ordemCorretaMassas[i]);
   if (!ok) {
-    fb.textContent = 'Quase! Compare os números dos cartões e procure uma sequência mais regular.';
+    fb.textContent = 'Almost! Compare the numbers on the cards and look for a more regular sequence.';
     fb.className = 'quadro-feedback err';
     marcarErrosMassas();
     return;
   }
-  fb.innerHTML = '<strong>Mendeleev:</strong> Excelente! Foi exatamente o que pensei: colocar os elementos em ordem crescente de massa. Mas havia algo ainda mais curioso...';
+  fb.innerHTML = '<strong>Mendeleev:</strong> Excellent! That is exactly what I thought: place the elements in increasing order of mass. But there was something even more curious...';
   fb.className = 'quadro-feedback ok';
   tocarDing();
   concluirProgresso(1);
   const btn = document.getElementById('btnVerificar');
   btn.disabled = false;
-  btn.textContent = 'Ir para a próxima pista';
+  btn.textContent = 'Go to the next clue';
   btn.setAttribute('onclick', 'abrirColunas()');
 }
 
@@ -447,26 +448,26 @@ function abrirColunas() {
 
 function renderColunas() {
   document.getElementById('quadroInstrucao').innerHTML = `
-    <strong>Mendeleev:</strong> "Mas eu acredito que podemos refinar a nossa organização. Alguns elementos se comportavam de maneira semelhante. Complete as <strong>colunas</strong> usando as propriedades."
+    <strong>Mendeleev:</strong> "But I believe we can refine our organization further. Some elements behaved in a similar way. Complete the <strong>columns</strong> using the properties."
   `;
-  document.getElementById('btnVerificar').textContent = 'Verificar colunas';
+  document.getElementById('btnVerificar').textContent = 'Check columns';
   document.getElementById('btnVerificar').disabled = false;
   document.getElementById('btnVerificar').setAttribute('onclick', 'verificarColunas()');
 
   const slot = (id, fixed = false) => `
     <div class="drop-slot ${fixed ? 'fixed' : ''}" data-slot="${id}" ${fixed ? '' : `ondragover="allowDrop(event)" ondragleave="dragLeave(event)" ondrop="dropOnSlot(event, '${id}')" onclick="clickSlot('${id}')"`}>
-      ${slotsColunas[id] ? cardHTML(slotsColunas[id], fixed, false, !fixed) : 'solte aqui'}
+      ${slotsColunas[id] ? cardHTML(slotsColunas[id], fixed, false, !fixed) : 'drop here'}
     </div>
   `;
 
   document.getElementById('cartoesGrid').innerHTML = `
     <div class="game-area">
       <div class="board-box">
-        <div class="box-title">Tabela em construção</div>
-        <div class="hint-small">os dois primeiros já estão fixos como pista</div>
+        <div class="box-title">Table under construction</div>
+        <div class="hint-small">the first two are already fixed as a clue</div>
         <div class="periodic-table-mini">
-          <div class="family-head">Coluna 1<br>reagem com água</div>
-          <div class="family-head">Coluna 2<br>formam sais</div>
+          <div class="family-head">Column 1<br>react with water</div>
+          <div class="family-head">Column 2<br>form salts</div>
           ${slot('a1', true)}
           ${slot('b1', true)}
           ${slot('a2')}
@@ -476,10 +477,10 @@ function renderColunas() {
         </div>
       </div>
       <div class="bank-box">
-        <div class="box-title">Cartões de Mendeleev</div>
-        <div class="hint-small">arraste para os espaços vazios</div>
+        <div class="box-title">Mendeleev's cards</div>
+        <div class="hint-small">drag to the empty slots</div>
         <div class="cards-bank" id="bankCards">
-          ${bankColunas.length ? bankColunas.map(s => cardHTML(s)).join('') : '<div class="bank-empty">Todos os cartões foram usados.</div>'}
+          ${bankColunas.length ? bankColunas.map(s => cardHTML(s)).join('') : '<div class="bank-empty">All cards have been used.</div>'}
         </div>
       </div>
     </div>
@@ -491,25 +492,25 @@ function verificarColunas() {
   const fb = document.getElementById('quadroFeedback');
   const ids = ['a2','b2','a3','b3'];
   if (ids.some(id => !slotsColunas[id])) {
-    fb.textContent = 'Ainda faltam cartões na tabela.';
+    fb.textContent = 'There are still cards missing from the table.';
     fb.className = 'quadro-feedback err';
     return;
   }
   const ok = Object.keys(gabaritoColunas).every(id => slotsColunas[id] === gabaritoColunas[id]);
   if (!ok) {
-    fb.textContent = 'Quase! As colunas estão certas, mas a ordem de cima para baixo importa: organize cada coluna pela massa atômica, do menor para o maior valor.';
+    fb.textContent = 'Almost! The columns are correct, but the top-to-bottom order matters: arrange each column by atomic mass, from the smallest to the largest value.';
     fb.className = 'quadro-feedback err';
     marcarErrosColunas();
     return;
   }
-  fb.textContent = 'Perfeito! As massas crescem nas linhas, e as propriedades semelhantes aparecem nas colunas.';
+  fb.textContent = 'Perfect! The masses increase along the rows, and similar properties appear in the columns.';
   fb.className = 'quadro-feedback ok';
   tocarDing();
   concluirProgresso(2);
 
   const btn = document.getElementById('btnVerificar');
   btn.disabled = false;
-  btn.textContent = 'Ler conclusão de Mendeleev';
+  btn.textContent = "Read Mendeleev's conclusion";
   btn.setAttribute('onclick', 'abrirAto1Pergunta()');
 }
 
@@ -613,20 +614,20 @@ function concluirProgresso(n) {
 
 function abrirAto1Pergunta() {
   document.getElementById('card').innerHTML = `
-    <button class="card-close" onclick="closeOverlay()" aria-label="Fechar">×</button>
-    <div class="card-eyebrow">Observações 1 e 2 — Periodicidade</div>
-    <div class="card-title">A massa cresce, e as propriedades se repetem</div>
-    <div class="card-fala"><strong>Mendeleev:</strong> "Excelente. Primeiro você organizou os elementos em ordem crescente de massa. Depois percebeu que certos comportamentos reapareciam nas colunas."</div>
+    <button class="card-close" onclick="closeOverlay()" aria-label="Close">×</button>
+    <div class="card-eyebrow">Observations 1 and 2 — Periodicity</div>
+    <div class="card-title">Mass increases, and properties repeat</div>
+    <div class="card-fala"><strong>Mendeleev:</strong> "Excellent. First you arranged the elements in increasing order of mass. Then you noticed that certain behaviors reappeared in the columns."</div>
     <div class="pergunta-box show" id="pergunta1">
-      <div class="pergunta-texto"><strong>Mendeleev:</strong> "O que esse padrão sugere sobre a organização dos elementos?"</div>
-      <textarea class="resposta-input" id="resp1" placeholder="Escreva sua observação..."></textarea>
-      <button class="btn-acao" onclick="responderAto1()">Mostrar a Mendeleev</button>
+      <div class="pergunta-texto"><strong>Mendeleev:</strong> "What does this pattern suggest about the organization of the elements?"</div>
+      <textarea class="resposta-input" id="resp1" placeholder="Write your observation..."></textarea>
+      <button class="btn-acao" onclick="responderAto1()">Show Mendeleev</button>
     </div>
     <div class="conclusao-box" id="conclusao1">
-      <div class="conclusao-eyebrow">Mendeleev responde</div>
-      <div class="conclusao-texto">"Exatamente! As <strong>linhas</strong> ajudavam a seguir a ordem crescente de massa, e as <strong>colunas</strong> reuniam elementos com propriedades semelhantes. Essa repetição é a <strong>periodicidade</strong>."</div>
+      <div class="conclusao-eyebrow">Mendeleev responds</div>
+      <div class="conclusao-texto">"Exactly! The <strong>rows</strong> helped follow the increasing order of mass, and the <strong>columns</strong> grouped elements with similar properties. This repetition is <strong>periodicity</strong>."</div>
     </div>
-    <button class="btn-continuar" id="btnContinuar1" onclick="concluirAto1()">Continuar →</button>`;
+    <button class="btn-continuar" id="btnContinuar1" onclick="concluirAto1()">Continue →</button>`;
   openOverlay();
 }
 function responderAto1() {
@@ -642,38 +643,38 @@ function concluirAto1() {
   document.getElementById('quadroOverlay').classList.remove('show');
   document.getElementById('hs-quadro').classList.add('done');
   document.getElementById('hs-carta').classList.add('active');
-  setNarr('<strong>Mendeleev:</strong> <em>"Você encontrou o padrão que eu procurava. Agora clique na carta sobre a mesa: ela mostra como a tabela é organizada hoje."</em>');
+  setNarr('<strong>Mendeleev:</strong> <em>"You found the pattern I was looking for. Now click on the letter on the table: it shows how the table is organized today."</em>');
 }
 
 function abrirAto3() {
   document.getElementById('card').innerHTML = `
-    <button class="card-close" onclick="closeOverlay()" aria-label="Fechar">×</button>
-    <div class="card-eyebrow">Observação 3 — A tabela de hoje</div>
-    <div class="card-title">Hoje a ordem vem do número atômico</div>
-    <div class="card-fala"><strong>Mendeleev:</strong> "Na minha época, a massa atômica foi a melhor pista. Mas a Cápsula do Tempo trouxe uma correção do futuro."</div>
+    <button class="card-close" onclick="closeOverlay()" aria-label="Close">×</button>
+    <div class="card-eyebrow">Observation 3 — Today's table</div>
+    <div class="card-title">Today the order comes from atomic number</div>
+    <div class="card-fala"><strong>Mendeleev:</strong> "In my time, atomic mass was the best clue. But the Time Capsule brought a correction from the future."</div>
     <div class="diagrama-wrap">
       <div class="card-fala" style="text-align:left;margin-bottom:0;">
-        <strong>Antes:</strong> Mendeleev observou massas atômicas e propriedades semelhantes.<br><br>
-        <strong>Hoje:</strong> a tabela periódica é organizada pelo <strong>número atômico</strong>, isto é, pela quantidade de <strong>prótons</strong> no núcleo.<br><br>
-        Para cada número, há um elemento correspondente: <strong>1 = hidrogênio</strong>, <strong>2 = hélio</strong>, <strong>3 = lítio</strong>... e assim por diante. <strong>Moseley</strong> percebeu um padrão entre o número de prótons e a periodicidade das propriedades.
+        <strong>Before:</strong> Mendeleev observed atomic masses and similar properties.<br><br>
+        <strong>Today:</strong> the periodic table is organized by <strong>atomic number</strong>, that is, by the number of <strong>protons</strong> in the nucleus.<br><br>
+        For each number, there is a corresponding element: <strong>1 = hydrogen</strong>, <strong>2 = helium</strong>, <strong>3 = lithium</strong>... and so on. <strong>Moseley</strong> noticed a pattern between the number of protons and the periodicity of properties.
       </div>
     </div>
-    <button class="btn-acao" id="btnAcao3" onclick="mostrarPergunta3()">Ler a anotação do futuro</button>
+    <button class="btn-acao" id="btnAcao3" onclick="mostrarPergunta3()">Read the note from the future</button>
     <div class="pergunta-box" id="pergunta3">
-      <div class="pergunta-texto"><strong>Mendeleev:</strong> "Se você fosse explicar para um colega pelo que a tabela é organizada hoje, o que diria?"</div>
-      <textarea class="resposta-input" id="resp3" placeholder="Exemplo: hoje a tabela segue o número atômico, que corresponde ao número de prótons..."></textarea>
-      <button class="btn-acao" onclick="responderAto3()">Mostrar a Mendeleev</button>
+      <div class="pergunta-texto"><strong>Mendeleev:</strong> "If you were to explain to a colleague what the table is organized by today, what would you say?"</div>
+      <textarea class="resposta-input" id="resp3" placeholder="Example: today the table follows the atomic number, which corresponds to the number of protons..."></textarea>
+      <button class="btn-acao" onclick="responderAto3()">Show Mendeleev</button>
     </div>
     <div class="conclusao-box" id="conclusao3">
-      <div class="conclusao-eyebrow">Mendeleev conclui</div>
-      <div class="conclusao-texto">"Exatamente. Eu encontrei o padrão observando massas e propriedades. Depois, Moseley mostrou que a ordem mais correta é o <strong>número atômico</strong>."</div>
+      <div class="conclusao-eyebrow">Mendeleev concludes</div>
+      <div class="conclusao-texto">"Exactly. I found the pattern by observing masses and properties. Later, Moseley showed that the more correct order is <strong>atomic number</strong>."</div>
     </div>
-    <button class="btn-continuar" id="btnContinuar3" onclick="concluirAto3()">Finalizar →</button>`;
+    <button class="btn-continuar" id="btnContinuar3" onclick="concluirAto3()">Finish →</button>`;
   openOverlay();
 }
 function mostrarPergunta3() {
   const btn = document.getElementById('btnAcao3');
-  btn.textContent = '✓ Anotação lida';
+  btn.textContent = '✓ Note read';
   btn.classList.add('feita');
   btn.disabled = true;
   document.getElementById('pergunta3').classList.add('show');
@@ -710,7 +711,7 @@ function resetGame() {
   document.getElementById('winScreen').classList.remove('show');
   document.getElementById('quadroFeedback').textContent = '';
   document.getElementById('quadroFeedback').className = 'quadro-feedback';
-  setNarr(`Você chega ao gabinete de Mendeleev. Sobre a mesa há cartões com elementos e anotações de massa.<br><br><strong>Mendeleev:</strong> <em>"Não quero que você decore. Quero que investigue comigo. Clique no quadro para organizar os cartões que reuni."</em>`);
+  setNarr(`You arrive at Mendeleev's study. On the table are cards with elements and mass notes.<br><br><strong>Mendeleev:</strong> <em>"I don't want you to memorize. I want you to investigate with me. Click on the board to organize the cards I've gathered."</em>`);
 }
 </script>
 
@@ -734,7 +735,7 @@ function resetGame() {
 
 </script>
 
-<div id="cookie-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#1a0f08;border-top:1px solid rgba(212,170,106,0.4);padding:1rem 2rem;z-index:9999;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;"><p style="margin:0;font-family:'Libre Baskerville',serif;font-size:0.82rem;color:#e8d4b0;line-height:1.5;">Este site utiliza cookies para melhorar sua experi&ecirc;ncia. Ao continuar navegando, voc&ecirc; concorda com nossa <a href="/politica-de-privacidade.html" style="color:#e8b84b;text-decoration:underline;text-underline-offset:2px;">Pol&iacute;tica de Privacidade</a>.</p><button onclick="document.getElementById('cookie-banner').style.display='none';localStorage.setItem('kifacil_cookies','1');" style="flex-shrink:0;background:#e8b84b;border:none;padding:0.55rem 1.5rem;font-family:'Libre Baskerville',serif;font-size:0.78rem;font-weight:700;color:#1a0f08;cursor:pointer;letter-spacing:0.04em;">Entendi</button></div>
+<div id="cookie-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#1a0f08;border-top:1px solid rgba(212,170,106,0.4);padding:1rem 2rem;z-index:9999;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;"><p style="margin:0;font-family:'Libre Baskerville',serif;font-size:0.82rem;color:#e8d4b0;line-height:1.5;">This site uses cookies to improve your experience. By continuing to browse, you agree to our <a href="/politica-de-privacidade.html" style="color:#e8b84b;text-decoration:underline;text-underline-offset:2px;">Privacy Policy</a>.</p><button onclick="document.getElementById('cookie-banner').style.display='none';localStorage.setItem('kifacil_cookies','1');" style="flex-shrink:0;background:#e8b84b;border:none;padding:0.55rem 1.5rem;font-family:'Libre Baskerville',serif;font-size:0.78rem;font-weight:700;color:#1a0f08;cursor:pointer;letter-spacing:0.04em;">Got it</button></div>
 <script>if(!localStorage.getItem('kifacil_cookies'))document.getElementById('cookie-banner').style.display='flex';</script>
 <script>
 (function () {
