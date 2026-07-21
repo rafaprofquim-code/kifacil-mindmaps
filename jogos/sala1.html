@@ -388,6 +388,60 @@
   }
   #slider-volume { width: 90px; accent-color: var(--gold); cursor: pointer; }
 
+  /* ── ENTRY GATE (audio unlock) ── */
+  #entry-gate {
+    position: fixed;
+    inset: 0;
+    z-index: 980;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background:
+      radial-gradient(120% 100% at 50% 25%, rgba(54,36,20,0.96), rgba(12,7,3,0.98) 70%),
+      repeating-linear-gradient(135deg, rgba(232,184,75,0.05) 0 2px, transparent 2px 18px);
+  }
+  #entry-gate.hidden { display: none; }
+  .entry-card {
+    width: min(560px, 100%);
+    background: rgba(18,10,5,0.94);
+    border: 1.5px solid rgba(212,170,106,0.45);
+    border-radius: 14px;
+    padding: clamp(1.5rem, 4vw, 2.2rem);
+    text-align: center;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.6);
+    backdrop-filter: blur(4px);
+  }
+  .entry-title {
+    font-family: 'Lora', serif;
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    color: var(--text);
+    margin-bottom: .55rem;
+    line-height: 1.1;
+  }
+  .entry-sub {
+    color: var(--text-soft);
+    font-size: .9rem;
+    letter-spacing: .04em;
+    margin-bottom: 1.4rem;
+  }
+  .entry-btn {
+    background: linear-gradient(135deg, #e8b84b, #b8891e);
+    color: #160600;
+    border: none;
+    border-radius: 8px;
+    padding: .75rem 1.8rem;
+    font-family: 'Libre Baskerville', serif;
+    font-size: .92rem;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: transform .2s ease, filter .2s ease;
+  }
+  .entry-btn:hover { filter: brightness(1.08); transform: translateY(-1px); }
+  .entry-btn:disabled { opacity: .75; cursor: default; transform: none; }
+
   @media (max-width: 768px) {
     html, body { overflow: auto; height: auto; }
     body { min-height: 100vh; }
@@ -480,6 +534,14 @@
 
 <!-- GAME AREA -->
 <div id="game-area">
+
+  <div id="entry-gate" role="dialog" aria-modal="true" aria-labelledby="entry-title" aria-describedby="entry-sub">
+    <div class="entry-card">
+      <h2 class="entry-title" id="entry-title">Enter the Deep Layers</h2>
+      <p class="entry-sub" id="entry-sub">Sound is part of this experience.</p>
+      <button class="entry-btn" id="btn-enter-experience" type="button">Enter</button>
+    </div>
+  </div>
 
   <!-- PROFESSOR RAFAELA — position:absolute on desktop / block above the scene on mobile -->
   <aside id="teacher-box">
@@ -694,11 +756,11 @@
   ];
   let introIdx = 0;
 
-  /* Background music + volume control (the preference is saved and applies
-     to every stage). Loops starting from the student's first click
-     (browsers block automatic audio without interaction); the volume
-     slider applies to both the music and the sound effects (click, ding,
-     door, etc.). */
+    /* Background music + volume control (the preference is saved and applies
+      to every stage). We try to start right on page load and keep a
+      user-interaction fallback for browsers that block autoplay with sound;
+      the volume slider applies to both music and sound effects (click, ding,
+      door, etc.). */
   let volumeSalvo = parseFloat(localStorage.getItem('kifacil_volume'));
   if (isNaN(volumeSalvo)) volumeSalvo = 0.35;
   let silenciado = localStorage.getItem('kifacil_silenciado') === '1';
@@ -715,18 +777,37 @@
      of restarting from zero — so the music feels continuous throughout
      the whole "Deep Layers Challenge". */
   function iniciarMusicaFundo() {
-    if (musicaFundo) return;
+    if (musicaFundo) return musicaFundo;
     try {
       musicaFundo = new Audio('../sons/camadas-profundas.mp3');
+      musicaFundo.preload = 'auto';
       musicaFundo.loop = true;
+      musicaFundo.muted = silenciado || volumeSalvo === 0;
       musicaFundo.volume = volumeEfetivo();
+
       const tempoSalvo = parseFloat(sessionStorage.getItem('kifacil_musica_tempo'));
-      if (!isNaN(tempoSalvo) && tempoSalvo > 0) musicaFundo.currentTime = tempoSalvo;
+      if (!isNaN(tempoSalvo) && tempoSalvo > 0) {
+        musicaFundo.addEventListener('loadedmetadata', function () {
+          try {
+            const limite = Math.max(0, (musicaFundo.duration || 0) - 0.25);
+            musicaFundo.currentTime = Math.min(tempoSalvo, limite);
+          } catch (e) {}
+        }, { once: true });
+      }
+
       musicaFundo.addEventListener('timeupdate', () => {
         sessionStorage.setItem('kifacil_musica_tempo', musicaFundo.currentTime);
       });
-      musicaFundo.play().catch(() => {});
     } catch (e) {}
+    return musicaFundo;
+  }
+
+  function tentarTocarMusica() {
+    if (!musicaFundo) iniciarMusicaFundo();
+    if (!musicaFundo) return;
+    musicaFundo.muted = silenciado || volumeSalvo === 0;
+    musicaFundo.volume = volumeEfetivo();
+    musicaFundo.play().catch(function () {});
   }
 
   function atualizarIconeMudo() {
@@ -740,7 +821,10 @@
   function alternarMudo() {
     silenciado = !silenciado;
     localStorage.setItem('kifacil_silenciado', silenciado ? '1' : '0');
-    if (musicaFundo) musicaFundo.volume = volumeEfetivo();
+    if (musicaFundo) {
+      musicaFundo.muted = silenciado || volumeSalvo === 0;
+      musicaFundo.volume = volumeEfetivo();
+    }
     atualizarIconeMudo();
   }
 
@@ -751,7 +835,10 @@
       silenciado = false;
       localStorage.setItem('kifacil_silenciado', '0');
     }
-    if (musicaFundo) musicaFundo.volume = volumeEfetivo();
+    if (musicaFundo) {
+      musicaFundo.muted = silenciado || volumeSalvo === 0;
+      musicaFundo.volume = volumeEfetivo();
+    }
     atualizarIconeMudo();
   }
 
@@ -759,17 +846,6 @@
     const slider = document.getElementById('slider-volume');
     if (slider) slider.value = Math.round(volumeSalvo * 100);
     atualizarIconeMudo();
-
-    iniciarMusicaFundo();
-    const ativarSom = function () {
-      if (!musicaFundo) iniciarMusicaFundo();
-      if (musicaFundo) {
-        musicaFundo.volume = volumeEfetivo();
-        musicaFundo.play().catch(function () {});
-      }
-    };
-    window.addEventListener('pointerdown', ativarSom, { once: true });
-    window.addEventListener('keydown', ativarSom, { once: true });
   })();
 
   function tocarClick() {
@@ -811,7 +887,48 @@
     fala(introPassos[0].img, introPassos[0].txt);
   }
 
-  setTimeout(iniciarIntro, 400);
+  async function entrarNaSala() {
+    const gate = document.getElementById('entry-gate');
+    const btnEnter = document.getElementById('btn-enter-experience');
+
+    if (btnEnter) {
+      btnEnter.disabled = true;
+      btnEnter.textContent = 'Entering...';
+    }
+
+    silenciado = false;
+    localStorage.setItem('kifacil_silenciado', '0');
+    if (volumeSalvo <= 0) {
+      volumeSalvo = 0.35;
+      localStorage.setItem('kifacil_volume', volumeSalvo);
+      const slider = document.getElementById('slider-volume');
+      if (slider) slider.value = Math.round(volumeSalvo * 100);
+    }
+
+    iniciarMusicaFundo();
+    if (musicaFundo) {
+      musicaFundo.loop = true;
+      musicaFundo.muted = false;
+      musicaFundo.volume = volumeEfetivo();
+      try { await musicaFundo.play(); } catch (e) {}
+    }
+
+    atualizarIconeMudo();
+    if (gate) gate.classList.add('hidden');
+    iniciarIntro();
+  }
+
+  const btnEnterExperience = document.getElementById('btn-enter-experience');
+  if (btnEnterExperience) {
+    btnEnterExperience.addEventListener('click', entrarNaSala);
+  }
+
+  const fallbackInteracao = function () {
+    if (!musicaFundo) return;
+    if (musicaFundo.paused) tentarTocarMusica();
+  };
+  window.addEventListener('pointerdown', fallbackInteracao, { passive: true });
+  window.addEventListener('click', fallbackInteracao, { passive: true });
 
   /* ── BENTINHO SCENE ── */
   function cenaBentinho(callback) {
