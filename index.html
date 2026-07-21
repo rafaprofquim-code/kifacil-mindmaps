@@ -627,7 +627,35 @@
   }
 
   .funding-card {
+    position: relative;
     padding: clamp(1.4rem, 2.6vw, 2.1rem);
+  }
+
+  .funding-intro-copy {
+    color: rgba(250,245,233,.82);
+    max-width: 66ch;
+    margin-top: 1rem;
+    line-height: 1.75;
+  }
+
+  .funding-context {
+    margin-top: 1.5rem;
+    border: 1px solid rgba(224,182,74,.22);
+    background: rgba(250,245,233,.05);
+    border-radius: 10px;
+    padding: 1.2rem 1.25rem;
+  }
+
+  .funding-context h3 {
+    color: var(--creme);
+    font-size: 1.35rem;
+    margin-bottom: .55rem;
+  }
+
+  .funding-context p {
+    color: rgba(250,245,233,.82);
+    font-size: .92rem;
+    line-height: 1.72;
   }
 
   .funding-badge {
@@ -642,6 +670,40 @@
     color: #25170a;
     background: linear-gradient(130deg, #f0ca73, #d8a22d);
     box-shadow: 0 0 0 2px rgba(31,20,10,.36);
+  }
+
+  .funding-corner-badge {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    border: 1px solid rgba(224,182,74,.65);
+    border-radius: 8px;
+    padding: .38rem .55rem;
+    text-align: right;
+    background: rgba(224,182,74,.12);
+  }
+
+  .funding-corner-badge strong {
+    display: block;
+    color: var(--dourado-pálido);
+    font-size: .64rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+  }
+
+  .funding-corner-badge span {
+    display: block;
+    color: rgba(250,245,233,.8);
+    font-size: .66rem;
+    line-height: 1.25;
+  }
+
+  .funding-availability {
+    font-size: .72rem;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--dourado-pálido);
+    margin-bottom: .45rem;
   }
 
   .funding-card h3 {
@@ -660,9 +722,7 @@
 
   .funding-starts {
     font-size: .86rem;
-    letter-spacing: .08em;
-    text-transform: uppercase;
-    color: rgba(250,245,233,.68);
+    color: rgba(250,245,233,.84);
     margin-bottom: 1.25rem;
   }
 
@@ -691,7 +751,48 @@
   .funding-apply-btn {
     width: 100%;
     justify-content: center;
-    margin-bottom: 1rem;
+    margin-bottom: .6rem;
+  }
+
+  .funding-counter {
+    margin: .35rem 0 .8rem;
+    border: 1px solid rgba(224,182,74,.32);
+    border-radius: 10px;
+    padding: .72rem .85rem;
+    background: rgba(250,245,233,.05);
+    text-align: center;
+  }
+
+  .funding-counter .label {
+    display: block;
+    color: rgba(250,245,233,.78);
+    font-size: .66rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+  }
+
+  .funding-counter .value {
+    display: block;
+    color: var(--creme);
+    font-family: var(--serif-display);
+    font-size: 1.02rem;
+    margin-top: .08rem;
+    margin-bottom: .22rem;
+  }
+
+  .funding-counter .sub {
+    display: block;
+    color: rgba(250,245,233,.74);
+    font-size: .68rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+  }
+
+  .funding-counter .progress {
+    display: block;
+    color: var(--dourado-pálido);
+    font-weight: 700;
+    margin-top: .22rem;
   }
 
   .funding-note {
@@ -701,6 +802,29 @@
     background: rgba(250,245,233,.04);
     font-size: .84rem;
     color: rgba(250,245,233,.83);
+  }
+
+  .funding-why {
+    margin: 1rem 0 1.2rem;
+    border: 1px solid rgba(224,182,74,.62);
+    border-radius: 10px;
+    background: rgba(224,182,74,.08);
+    padding: .95rem 1rem;
+  }
+
+  .funding-why h4 {
+    color: var(--dourado-pálido);
+    font-family: var(--serif-display);
+    font-size: 1.08rem;
+    margin-bottom: .45rem;
+  }
+
+  .funding-why ul {
+    margin: 0;
+    padding-left: 1rem;
+    color: rgba(250,245,233,.86);
+    font-size: .84rem;
+    line-height: 1.65;
   }
 
   .funding-form {
@@ -786,6 +910,27 @@
   }
   .funding-status.error { color: #ffd2c9; }
   .funding-status.success { color: #d8f3d2; }
+
+  .funding-form-success {
+    display: none;
+  }
+
+  .funding-form-success.active {
+    display: block;
+  }
+
+  .funding-form-success h3 {
+    color: var(--creme);
+    font-size: 1.9rem;
+    margin-bottom: .85rem;
+  }
+
+  .funding-form-success p {
+    color: rgba(250,245,233,.84);
+    font-size: .95rem;
+    line-height: 1.72;
+    margin-bottom: .7rem;
+  }
 
   .funding-success {
     display: none;
@@ -1280,26 +1425,80 @@
   <div class="envelope">
     <span class="rotulo">Limited pre-launch access</span>
     <h2 class="titulo-secao revela">Founding Class · September 2026</h2>
-    <p class="texto-corpo revela">Applications are now open for a single founding group of 50 students. This is not a checkout page. Admission is based on commitment, profile fit and readiness for a high-performance Chemistry journey.</p>
+    <div class="funding-intro-copy revela">
+      Applications are now open for the first class of KiFácil Academy.<br><br>
+      Our immersive digital campus officially opens in <strong>September 2026</strong>.<br><br>
+      Only <strong>50 Founding Students</strong> will be invited to join us before the public launch.<br><br>
+      As a Founding Student, you'll help shape the Academy from its very beginning while securing benefits that will never be offered again.
+    </div>
+
+    <div class="funding-context revela" style="transition-delay:.04s">
+      <h3>What is KiFácil Academy?</h3>
+      <p>KiFácil Academy is an immersive digital campus designed to make Chemistry unforgettable.<br><br>
+      Instead of simply watching lessons, you'll explore the Chemistry Tower, study with premium Mind Maps, solve Escape Rooms, play interactive games, watch guided lessons, complete challenges and unlock new areas as the Academy continues to grow.<br><br>
+      Every room teaches.<br>
+      Every challenge has a purpose.<br>
+      Every achievement moves you forward.</p>
+    </div>
+
+    <div class="funding-context revela" style="transition-delay:.08s">
+      <h3>Why only 50 students?</h3>
+      <p>The Academy is still being built.<br><br>
+      We intentionally decided to begin with only fifty students so we can work closely with every Founding Student during our first months.<br><br>
+      Your feedback will directly influence new rooms, new challenges and future expansions.<br><br>
+      Once the Academy officially launches, applications for the Founding Class will permanently close.</p>
+    </div>
 
     <div class="funding-wrap">
       <article class="funding-card funding-glass revela" style="transition-delay:.05s">
+        <div class="funding-corner-badge">
+          <strong>FOUNDER</strong>
+          <span>Never available again</span>
+        </div>
         <span class="funding-badge">Only 50 seats</span>
         <h3>Founding Student</h3>
-        <p class="funding-price">$47<span style="font-size:.42em;opacity:.85;"> / month</span></p>
-        <p class="funding-starts">Program starts in September 2026</p>
+        <p class="funding-availability">Only available before September 2026</p>
+        <p class="funding-price">US$29.99</p>
+        <p class="funding-starts">Founding price locked for life while your membership remains active.</p>
 
         <ul class="funding-benefits">
-          <li>Full access to every active floor and room of the Chemistry Tower</li>
-          <li>Mind Maps, interactive games, Deep Layers Tests and certificates</li>
-          <li>Priority support and direct feedback channel during the founding cycle</li>
-          <li>Founding badge on profile and priority access to future expansions</li>
+          <li>Permanent Founding Student Badge</li>
+          <li>Locked-in price of US$29.99/month</li>
+          <li>Early access before public launch</li>
+          <li>Full access to the Chemistry Tower</li>
+          <li>Premium Mind Maps</li>
+          <li>Interactive Games</li>
+          <li>Escape Rooms</li>
+          <li>Guided Video Lessons</li>
+          <li>Completion Certificates</li>
+          <li>Every future Chemistry expansion included</li>
+          <li>Exclusive Founder updates</li>
+          <li>Direct feedback channel with our team</li>
         </ul>
 
-        <button class="btn btn-dourado funding-apply-btn" id="openFoundingForm" type="button">Apply for the Founding Class</button>
+        <div class="funding-why">
+          <h4>Why join before launch?</h4>
+          <ul>
+            <li>Lowest price the Academy will ever offer.</li>
+            <li>Founder recognition that can never be earned again.</li>
+            <li>Help shape the Academy before thousands of students arrive.</li>
+            <li>Receive new features before everyone else.</li>
+            <li>Become part of KiFácil Academy history.</li>
+          </ul>
+        </div>
 
-        <div class="funding-note" id="foundingExplanation" hidden>
-          Your application takes around 2 minutes. After submitting, our team reviews your profile and sends a response to your email with the next steps for enrollment.
+        <div class="funding-counter" id="foundingCounter">
+          <span class="label">Founding Class</span>
+          <span class="value">50 Students</span>
+          <span class="sub">Applications received</span>
+          <span class="progress" id="foundingApplicationsCount">12 / 50</span>
+        </div>
+
+        <button class="btn btn-dourado funding-apply-btn" id="openFoundingForm" type="button">Apply to Become a Founding Student</button>
+
+        <div class="funding-note">
+          Submitting your application does not create any payment obligation.<br><br>
+          If you're selected as one of our first fifty Founding Students, we'll contact you by email before the Academy officially opens.
         </div>
       </article>
 
@@ -1350,6 +1549,13 @@
           <button class="btn btn-dourado funding-submit" id="foundingSubmitBtn" type="submit">Submit Application</button>
           <p class="funding-status" id="foundingStatus" aria-live="polite"></p>
         </form>
+
+        <div class="funding-form-success" id="foundingFormSuccess" role="status" aria-live="polite">
+          <h3>Application Received</h3>
+          <p>Professor Alceu has officially added your name to the list of Founding Student candidates.</p>
+          <p>If you're selected as one of the first fifty students, you'll receive your invitation by email before the Academy officially opens.</p>
+          <p>We look forward to welcoming you inside the Chemistry Tower.</p>
+        </div>
       </aside>
     </div>
 
@@ -1579,26 +1785,22 @@
 
   /* Founding Class application flow */
   var openFoundingFormBtn = document.getElementById('openFoundingForm');
-  var foundingExplanation = document.getElementById('foundingExplanation');
   var foundingFormPanel = document.getElementById('foundingFormPanel');
   var foundingForm = document.getElementById('foundingApplicationForm');
+  var foundingFormSuccess = document.getElementById('foundingFormSuccess');
   var foundingStatus = document.getElementById('foundingStatus');
-  var foundingSuccess = document.getElementById('foundingSuccess');
   var foundingSubmitBtn = document.getElementById('foundingSubmitBtn');
 
-  if (openFoundingFormBtn && foundingExplanation && foundingFormPanel && foundingForm) {
+  if (openFoundingFormBtn && foundingFormPanel && foundingForm) {
     openFoundingFormBtn.addEventListener('click', function () {
-      foundingExplanation.hidden = false;
       foundingFormPanel.hidden = false;
 
       if (!reduzMovimento) {
         window.requestAnimationFrame(function () {
           foundingFormPanel.classList.add('visivel');
-          foundingExplanation.classList.add('visivel');
         });
       } else {
         foundingFormPanel.classList.add('visivel');
-        foundingExplanation.classList.add('visivel');
       }
 
       openFoundingFormBtn.textContent = 'Application form opened';
@@ -1670,10 +1872,11 @@
         foundingForm.reset();
         foundingStatus.textContent = 'Application submitted successfully.';
         foundingStatus.className = 'funding-status success';
-        foundingFormPanel.hidden = true;
-        foundingExplanation.hidden = true;
-        foundingSuccess.classList.add('active');
-        foundingSuccess.scrollIntoView({ behavior: reduzMovimento ? 'auto' : 'smooth', block: 'start' });
+        foundingForm.hidden = true;
+        if (foundingFormSuccess) {
+          foundingFormSuccess.classList.add('active');
+        }
+        foundingFormPanel.scrollIntoView({ behavior: reduzMovimento ? 'auto' : 'smooth', block: 'start' });
       } catch (erroEnvio) {
         foundingStatus.textContent = 'We could not submit right now. Please try again in a few moments.';
         foundingStatus.className = 'funding-status error';
