@@ -1,10 +1,10 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex, nofollow">
-  <title>The Day of Matter � Premium Game | KiF�cil</title>
+  <title>The Day of Matter – Premium Game | KiFácil</title>
   <link rel="icon" type="image/png" href="/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -319,7 +319,7 @@
       pointer-events: none;
     }
 
-    /* CONCLUS�O */
+    /* CONCLUSÃO */
     .conclusao {
       display: none;
       margin-top: 3rem;
@@ -396,7 +396,7 @@
       .link-aula { top: 6px; right: 6px; padding: 0.3rem 0.5rem; font-size: 0.6rem; }
       .link-aula svg { width: 18px; height: 18px; }
     }
-  
+
     /* AUDIO CONTROL */
     #controle-volume {
       position: fixed;
@@ -435,7 +435,7 @@
 <body>
 
 <nav class="top-nav">
-  <div class="brand">KiF�cil</div>
+  <div class="brand">KiFácil</div>
 </nav>
 
 <main>
@@ -462,7 +462,7 @@
   </div>
 </main>
 
-<footer>� 2026 KiF�cil</footer>
+<footer>© 2026 KiFácil</footer>
 
 <!-- MODAL PERGUNTA -->
 <div class="overlay" id="overlayPergunta">
@@ -489,14 +489,14 @@ const ELEMENTOS = [
     pergunta: 'What is this vaporization process called?',
     resposta: 'boiling', letras: 7,
     dica: 'It happens throughout the whole mass of the liquid, with bubbles forming inside it.',
-    explicacao: 'Boiling is the vaporization that occurs throughout the whole mass of the liquid. It is an endothermic process � it absorbs energy from the environment.'
+    explicacao: 'Boiling is the vaporization that occurs throughout the whole mass of the liquid. It is an endothermic process — it absorbs energy from the environment.'
   },
   {
     id: 2, left: '31%', top: '62%',
     pergunta: 'What is the observed change of state called?',
     resposta: 'melting', letras: 7,
     dica: 'The solid is absorbing energy and changing into another state.',
-    explicacao: 'Melting is the change from the solid state to the liquid state. It is an endothermic process � the ice absorbs energy to melt.'
+    explicacao: 'Melting is the change from the solid state to the liquid state. It is an endothermic process — the ice absorbs energy to melt.'
   },
   {
     id: 3, left: '46%', top: '50%',
@@ -547,7 +547,7 @@ function getEstado(id) { return estado.find(e => e.id === id); }
 function normalizar(str) {
   return str.toLowerCase()
     .normalize('NFD')
-    .replace(/[`-?]/g, '')
+    .replace(/[\u0300-\u036f]/g, '')
     .trim();
 }
 
@@ -567,8 +567,8 @@ function renderHotspots() {
     if (el.mobileTop) btn.style.setProperty('--top-mobile', el.mobileTop);
     btn.setAttribute('aria-label', `Element ${el.id}`);
 
-    if (est.status === 'concluido')   btn.textContent = '?';
-    else if (est.status === 'revelado') btn.textContent = '?';
+    if (est.status === 'concluido')   btn.textContent = '✓';
+    else if (est.status === 'revelado') btn.textContent = '✗';
     else                               btn.textContent = el.id;
 
     btn.addEventListener('click', e => { e.stopPropagation(); abrirModal(el.id); });
@@ -747,9 +747,9 @@ function iniciarMusicaFundo() {
 function atualizarIconeMudo() {
   const botao = document.getElementById('btn-mute');
   if (!botao) return;
-  if (silenciado || volumeSalvo === 0) botao.textContent = '??';
-  else if (volumeSalvo < 0.5) botao.textContent = '??';
-  else botao.textContent = '??';
+  if (silenciado || volumeSalvo === 0) botao.textContent = '🔇';
+  else if (volumeSalvo < 0.5) botao.textContent = '🔉';
+  else botao.textContent = '🔊';
 }
 
 function alternarMudo() {
@@ -798,10 +798,8 @@ function ajustarVolume(valorSlider) {
 })();
 </script>
 <div id="controle-volume">
-  <button id="btn-mute" onclick="alternarMudo()" aria-label="Mute or unmute sound">??</button>
+  <button id="btn-mute" onclick="alternarMudo()" aria-label="Mute or unmute sound">🔊</button>
   <input type="range" id="slider-volume" min="0" max="100" value="35" oninput="ajustarVolume(this.value)" aria-label="Volume">
 </div>
 </body>
 </html>
-
-
