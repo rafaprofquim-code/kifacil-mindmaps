@@ -1,10 +1,10 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex, nofollow">
-  <title>The Pavilion of Oxides — Premium Game | KiFácil</title>
+  <title>The Pavilion of Oxides � Premium Game | KiF�cil</title>
   <link rel="icon" type="image/png" href="/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -108,7 +108,7 @@
       min-height: 3.4em;
     }
 
-    /* PALCO DE ANIMAÇÃO */
+    /* PALCO DE ANIMA��O */
     .imagem-wrapper {
       position: relative;
       display: flex;
@@ -152,14 +152,14 @@
     .link-aula:hover { background: rgba(30,16,8,0.92); transform: translateY(-1px); }
     .link-aula svg { width: 22px; height: 22px; }
 
-    /* Cartão simples de fórmula */
+    /* Cart�o simples de f�rmula */
     .cartao-formula-simples {
       background: var(--fundo-card); border: 1.5px solid var(--borda-forte); border-radius: 8px; padding: 0.5rem 1rem;
       font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 1.1rem; color: var(--texto);
     }
     .linha-cartas-simples { position: absolute; inset: 0; display: flex; justify-content: center; align-items: center; gap: 14px; flex-wrap: wrap; padding: 6%; }
 
-    /* Câmara de reação com indicador */
+    /* C�mara de rea��o com indicador */
     .camara-reacao {
       position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 3; text-align: center;
       background: var(--fundo-card); border: 1.5px solid var(--borda-forte); border-radius: 12px; padding: 16px 22px;
@@ -172,7 +172,7 @@
     .indicador-basico { background: #e0399b !important; border: 2px solid #e0399b !important; box-shadow: 0 0 10px rgba(224,57,155,.7); }
     .camara-legenda { font-family: 'Cormorant Garamond', serif; font-size: 0.8rem; color: var(--texto-suave); }
 
-    /* Classificação por categoria */
+    /* Classifica��o por categoria */
     .jogo-associacao { position: absolute; inset: 0; display: flex; justify-content: center; align-items: center; gap: 30px; padding: 6%; flex-wrap: wrap; }
     .coluna-associacao { display: flex; flex-direction: column; gap: 8px; }
     .item-associacao {
@@ -217,7 +217,7 @@
       to   { opacity: 1; transform: translate(-50%, 0); }
     }
 
-    /* PAINEL DE INTERAÇÃO */
+    /* PAINEL DE INTERA��O */
     #painelInteracao { max-width: 900px; margin: 1.2rem auto 0; }
     .interacao-painel {
       background: var(--fundo-card); border: 1.5px solid var(--borda-forte); border-radius: 12px;
@@ -249,7 +249,7 @@
     .btn-continuar:disabled { opacity: 0.4; cursor: default; }
     .btn-continuar:disabled:hover { background: #1e1008; color: var(--dourado-claro); }
 
-    /* Botão continuar dentro do balão da professora */
+    /* Bot�o continuar dentro do bal�o da professora */
     #continuarBalao { margin-top: 0.6rem; }
     #continuarBalao .btn-continuar { display: inline-block; margin: 0; }
 
@@ -273,7 +273,7 @@
     }
     .quadro-resumo-final .resumo-linha:last-child { border-bottom: none; }
 
-    /* CONCLUSÃO */
+    /* CONCLUS�O */
     .conclusao {
       display: none; margin-top: 2rem; background: var(--fundo-card);
       border: 1.5px solid var(--borda-forte); border-radius: 12px; padding: 2.4rem 2rem; text-align: center;
@@ -314,17 +314,51 @@
       .link-aula { top: 6px; right: 6px; padding: 0.3rem 0.5rem; font-size: 0.6rem; }
       .link-aula svg { width: 18px; height: 18px; }
     }
-  </style>
+  
+    /* AUDIO CONTROL */
+    #controle-volume {
+      position: fixed;
+      bottom: 16px;
+      right: 16px;
+      z-index: 300;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(14,6,0,0.85);
+      border: 1.5px solid var(--borda-forte);
+      border-radius: 24px;
+      padding: 8px 16px 8px 10px;
+    }
+    #btn-mute {
+      background: none;
+      border: none;
+      color: var(--dourado-claro);
+      font-size: 18px;
+      cursor: pointer;
+      padding: 0;
+      width: 22px;
+      height: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    #slider-volume {
+      width: 90px;
+      accent-color: var(--dourado-claro);
+      cursor: pointer;
+    }
+</style>
 </head>
 <body>
 
 <nav class="top-nav">
-  <div class="brand">KiFácil</div>
+  <div class="brand">KiF�cil</div>
 </nav>
 
 <main>
   <h1 class="titulo-jogo">The Pavilion of Oxides</h1>
-  <p class="subtitulo">Investigate substances formed by two elements, one of them oxygen — before memorizing any rule.</p>
+  <p class="subtitulo">Investigate substances formed by two elements, one of them oxygen � before memorizing any rule.</p>
 
   <div class="narrador">
     <img src="../imagens/rafa-sorrindo.jpg" alt="Professor Rafaela" />
@@ -350,7 +384,7 @@
   </div>
 </main>
 
-<footer>© 2026 KiFácil</footer>
+<footer>� 2026 KiF�cil</footer>
 
 <script>
 /* ==========================================================
@@ -383,7 +417,7 @@ const NOMENCLATURA_OXIDO = {
   FeO: ['IRON', '(II)', 'OXIDE'],
   Fe2O3: ['IRON', '(III)', 'OXIDE']
 };
-const FORMULAS_OXIDO = { Na2O: 'Na₂O', Al2O3: 'Al₂O₃', FeO: 'FeO', Fe2O3: 'Fe₂O₃' };
+const FORMULAS_OXIDO = { Na2O: 'Na2O', Al2O3: 'Al2O3', FeO: 'FeO', Fe2O3: 'Fe2O3' };
 
 /* ==========================================================
    COMPONENT: REACTION CHAMBER WITH INDICATOR
@@ -415,7 +449,7 @@ function botaoContinuar(delayMs) {
   continuarBalao.innerHTML = '';
   const btn = document.createElement('button');
   btn.className = 'btn-continuar';
-  btn.textContent = 'Continue →';
+  btn.textContent = 'Continue ?';
   btn.disabled = delayMs > 0;
   continuarBalao.appendChild(btn);
   if (delayMs > 0) agendar(function () { btn.disabled = false; }, delayMs);
@@ -429,7 +463,7 @@ function botaoContinuarLocal(handler, delayMs) {
   continuarBalao.innerHTML = '';
   const btn = document.createElement('button');
   btn.className = 'btn-continuar';
-  btn.textContent = 'Continue →';
+  btn.textContent = 'Continue ?';
   btn.disabled = delayMs > 0;
   continuarBalao.appendChild(btn);
   if (delayMs > 0) agendar(function () { btn.disabled = false; }, delayMs);
@@ -585,7 +619,7 @@ function montarNomeOxido(chave, aoConcluir) {
         progresso++;
         if (progresso === sequenciaCorreta.length) {
           fb.className = 'modal-feedback visivel';
-          fb.innerHTML = '<span class="feedback-certo">Correct!</span><p class="feedback-explicacao">' + FORMULAS_OXIDO[chave] + ' → ' + sequenciaCorreta.join(' ').toLowerCase() + '</p>';
+          fb.innerHTML = '<span class="feedback-certo">Correct!</span><p class="feedback-explicacao">' + FORMULAS_OXIDO[chave] + ' ? ' + sequenciaCorreta.join(' ').toLowerCase() + '</p>';
           Array.from(blocosEl.children).forEach(function (b) { b.disabled = true; });
           aoConcluir();
         }
@@ -611,23 +645,23 @@ function passoIntro() {
 }
 
 /* ==========================================================
-   STAGE 1 — RECOGNIZING AN OXIDE
+   STAGE 1 � RECOGNIZING AN OXIDE
    ========================================================== */
 function passoReconhecer() {
   fala('Match each formula to the right category: is it an oxide, or not?');
   criarClassificacaoPorCategoria([
-    { rotulo: 'Na₂O', categoria: 'Is an oxide' },
-    { rotulo: 'CO₂', categoria: 'Is an oxide' },
-    { rotulo: 'SO₃', categoria: 'Is an oxide' },
+    { rotulo: 'Na2O', categoria: 'Is an oxide' },
+    { rotulo: 'CO2', categoria: 'Is an oxide' },
+    { rotulo: 'SO3', categoria: 'Is an oxide' },
     { rotulo: 'CaO', categoria: 'Is an oxide' },
     { rotulo: 'NaCl', categoria: 'Not an oxide' },
-    { rotulo: 'H₂SO₄', categoria: 'Not an oxide' }
+    { rotulo: 'H2SO4', categoria: 'Not an oxide' }
   ], ['Is an oxide', 'Not an oxide'],
   'Notice how many different elements appear in the formula, and whether oxygen is present.',
   'Very good!');
 }
 function passoReconhecerPergunta() {
-  fala('What do Na₂O, CO₂, SO₃ and CaO have in common?');
+  fala('What do Na2O, CO2, SO3 and CaO have in common?');
   escolhaBotoes({
     pergunta: 'What do these formulas have in common?',
     opcoes: [
@@ -636,21 +670,21 @@ function passoReconhecerPergunta() {
       { rotulo: 'They have three elements', correta: false }
     ],
     dica: 'Count how many different elements appear in each formula.',
-    explicacao: 'Oxides are binary compounds (two elements) in which oxygen is bonded to another element. This is a general rule — there are special oxygen compounds we\'ll see further ahead.',
+    explicacao: 'Oxides are binary compounds (two elements) in which oxygen is bonded to another element. This is a general rule � there are special oxygen compounds we\'ll see further ahead.',
     aoAcertar: function () { botaoContinuar(400); }
   });
 }
 
 /* ==========================================================
-   STAGE 2 — METAL OR NONMETAL
+   STAGE 2 � METAL OR NONMETAL
    ========================================================== */
 function passoMetalOuAmetal() {
   fala('Notice which element is bonded to oxygen in each oxide.');
   criarClassificacaoPorCategoria([
-    { rotulo: 'Na₂O', categoria: 'Metal + Oxygen' },
+    { rotulo: 'Na2O', categoria: 'Metal + Oxygen' },
     { rotulo: 'CaO', categoria: 'Metal + Oxygen' },
-    { rotulo: 'CO₂', categoria: 'Nonmetal + Oxygen' },
-    { rotulo: 'SO₃', categoria: 'Nonmetal + Oxygen' }
+    { rotulo: 'CO2', categoria: 'Nonmetal + Oxygen' },
+    { rotulo: 'SO3', categoria: 'Nonmetal + Oxygen' }
   ], ['Metal + Oxygen', 'Nonmetal + Oxygen'],
   'Identify whether the element bonded to oxygen is a metal or a nonmetal.',
   'This division helps us predict the behavior of many oxides.');
@@ -658,7 +692,7 @@ function passoMetalOuAmetal() {
 function passoRegraMetalAmetal() {
   const placa = document.createElement('div');
   placa.className = 'placa-dourada';
-  placa.textContent = 'Metal oxide → basic tendency  |  Nonmetal oxide → acidic tendency';
+  placa.textContent = 'Metal oxide ? basic tendency  |  Nonmetal oxide ? acidic tendency';
   overlay.appendChild(placa);
   fala('As a general tendency: metal oxide usually behaves as a base, and nonmetal oxide usually behaves as an acid. It\'s a tendency, not a rule without exceptions.');
   painel.innerHTML = '';
@@ -666,10 +700,10 @@ function passoRegraMetalAmetal() {
 }
 
 /* ==========================================================
-   STAGE 3 — METALLIC OXIDE IN WATER
+   STAGE 3 � METALLIC OXIDE IN WATER
    ========================================================== */
 function passoOxidoMetalicoAgua() {
-  fala('Let\'s test an oxide formed by a metal: CaO. We\'ll use phenolphthalein as an indicator — it turns pink in a basic medium, and stays colorless in an acidic or neutral medium.');
+  fala('Let\'s test an oxide formed by a metal: CaO. We\'ll use phenolphthalein as an indicator � it turns pink in a basic medium, and stays colorless in an acidic or neutral medium.');
   const camara = criarCamaraReacao('cam-cao', 'CaO');
   overlay.appendChild(camara);
 
@@ -684,20 +718,20 @@ function passoOxidoMetalicoAgua() {
 
   btn.addEventListener('click', function () {
     btn.disabled = true;
-    document.getElementById('cam-cao').querySelector('.camara-formula').textContent = 'CaO + H₂O → Ca(OH)₂';
+    document.getElementById('cam-cao').querySelector('.camara-formula').textContent = 'CaO + H2O ? Ca(OH)2';
     definirIndicador('cam-cao', 'basico');
-    fala('The CaO reacted with the water forming Ca(OH)₂ — the phenolphthalein turned pink, indicating a basic medium. In this example, the metallic oxide reacted with water forming a base. (Not every metallic oxide reacts easily with water.)');
+    fala('The CaO reacted with the water forming Ca(OH)2 � the phenolphthalein turned pink, indicating a basic medium. In this example, the metallic oxide reacted with water forming a base. (Not every metallic oxide reacts easily with water.)');
     painel.innerHTML = '';
     botaoContinuar(700);
   });
 }
 
 /* ==========================================================
-   STAGE 4 — NONMETAL OXIDE IN WATER
+   STAGE 4 � NONMETAL OXIDE IN WATER
    ========================================================== */
 function passoOxidoAmetalAgua() {
-  fala('Now let\'s test an oxide formed by a nonmetal: SO₃.');
-  const camara = criarCamaraReacao('cam-so3', 'SO₃');
+  fala('Now let\'s test an oxide formed by a nonmetal: SO3.');
+  const camara = criarCamaraReacao('cam-so3', 'SO3');
   overlay.appendChild(camara);
 
   painel.innerHTML = '';
@@ -711,121 +745,121 @@ function passoOxidoAmetalAgua() {
 
   btn.addEventListener('click', function () {
     btn.disabled = true;
-    document.getElementById('cam-so3').querySelector('.camara-formula').textContent = 'SO₃ + H₂O → H₂SO₄';
+    document.getElementById('cam-so3').querySelector('.camara-formula').textContent = 'SO3 + H2O ? H2SO4';
     definirIndicador('cam-so3', 'acido');
-    fala('The SO₃ reacted with the water forming H₂SO₄ — but the phenolphthalein stays colorless, because this indicator only changes color in a basic medium; in an acidic medium, like now, or a neutral one, it remains clear. CO₂ reacts in a similar way too: CO₂ + H₂O ⇌ H₂CO₃. Many nonmetal oxides produce acidic media in water.');
+    fala('The SO3 reacted with the water forming H2SO4 � but the phenolphthalein stays colorless, because this indicator only changes color in a basic medium; in an acidic medium, like now, or a neutral one, it remains clear. CO2 reacts in a similar way too: CO2 + H2O ? H2CO3. Many nonmetal oxides produce acidic media in water.');
     painel.innerHTML = '';
     botaoContinuar(700);
   });
 }
 
 /* ==========================================================
-   STAGE 5 — REACTION WITH ACIDS AND BASES
+   STAGE 5 � REACTION WITH ACIDS AND BASES
    ========================================================== */
 function passoOxidoBasicoComAcido() {
   fala('CaO (a basic oxide) reacts with HCl. What are the products?');
   escolhaBotoes({
-    pergunta: 'CaO + 2HCl → ?',
+    pergunta: 'CaO + 2HCl ? ?',
     opcoes: [
-      { rotulo: 'CaCl₂ + H₂O', correta: true },
-      { rotulo: 'CaCl₂ only', correta: false },
-      { rotulo: 'Ca(OH)₂ + Cl₂', correta: false }
+      { rotulo: 'CaCl2 + H2O', correta: true },
+      { rotulo: 'CaCl2 only', correta: false },
+      { rotulo: 'Ca(OH)2 + Cl2', correta: false }
     ],
     dica: 'A basic oxide reacting with an acid forms salt and water, like a neutralization.',
-    explicacao: 'CaO + 2HCl → CaCl₂ + H₂O. A basic oxide can react with an acid, forming salt and water.',
+    explicacao: 'CaO + 2HCl ? CaCl2 + H2O. A basic oxide can react with an acid, forming salt and water.',
     aoAcertar: function () { botaoContinuarLocal(passoOxidoAcidoComBase, 400); }
   });
 }
 function passoOxidoAcidoComBase() {
-  fala('Now SO₃ (an acidic oxide) reacts with NaOH. What are the products?');
+  fala('Now SO3 (an acidic oxide) reacts with NaOH. What are the products?');
   escolhaBotoes({
-    pergunta: 'SO₃ + 2NaOH → ?',
+    pergunta: 'SO3 + 2NaOH ? ?',
     opcoes: [
-      { rotulo: 'Na₂SO₄ + H₂O', correta: true },
-      { rotulo: 'Na₂SO₃ + H₂', correta: false },
-      { rotulo: 'NaOH + SO₃ (no reaction)', correta: false }
+      { rotulo: 'Na2SO4 + H2O', correta: true },
+      { rotulo: 'Na2SO3 + H2', correta: false },
+      { rotulo: 'NaOH + SO3 (no reaction)', correta: false }
     ],
     dica: 'An acidic oxide reacting with a base also forms salt and water.',
-    explicacao: 'SO₃ + 2NaOH → Na₂SO₄ + H₂O. An acidic oxide can react with a base, forming salt and water.',
+    explicacao: 'SO3 + 2NaOH ? Na2SO4 + H2O. An acidic oxide can react with a base, forming salt and water.',
     aoAcertar: function () { botaoContinuar(400); }
   });
 }
 
 /* ==========================================================
-   STAGE 6 — BUILDING THE FORMULA (OXIDATION NUMBER)
+   STAGE 6 � BUILDING THE FORMULA (OXIDATION NUMBER)
    ========================================================== */
 function passoFormulaNa() {
-  fala('Sodium has an oxidation number of +1. Oxygen has an oxidation number of −2. Which formula makes the sum of the charges equal zero?');
+  fala('Sodium has an oxidation number of +1. Oxygen has an oxidation number of -2. Which formula makes the sum of the charges equal zero?');
   escolhaBotoes({
-    pergunta: 'Na (+1) and O (−2): which formula is electrically neutral?',
+    pergunta: 'Na (+1) and O (-2): which formula is electrically neutral?',
     opcoes: [
       { rotulo: 'NaO', correta: false },
-      { rotulo: 'Na₂O', correta: true },
-      { rotulo: 'NaO₂', correta: false }
+      { rotulo: 'Na2O', correta: true },
+      { rotulo: 'NaO2', correta: false }
     ],
     dica: 'The sum of the charges needs to equal zero.',
-    explicacao: 'Na₂O: 2 × (+1) + 1 × (−2) = 0. That\'s why we need 2 atoms of Na for every atom of O.',
+    explicacao: 'Na2O: 2 � (+1) + 1 � (-2) = 0. That\'s why we need 2 atoms of Na for every atom of O.',
     aoAcertar: function () { botaoContinuarLocal(passoFormulaAl, 400); }
   });
 }
 function passoFormulaAl() {
   fala('Now aluminum, with an oxidation number of +3.');
   escolhaBotoes({
-    pergunta: 'Al (+3) and O (−2): which formula is electrically neutral?',
+    pergunta: 'Al (+3) and O (-2): which formula is electrically neutral?',
     opcoes: [
       { rotulo: 'AlO', correta: false },
-      { rotulo: 'Al₃O₂', correta: false },
-      { rotulo: 'Al₂O₃', correta: true }
+      { rotulo: 'Al3O2', correta: false },
+      { rotulo: 'Al2O3', correta: true }
     ],
     dica: 'Look for the combination where the sum of the charges is exactly zero.',
-    explicacao: 'Al₂O₃: 2 × (+3) + 3 × (−2) = +6 − 6 = 0.',
+    explicacao: 'Al2O3: 2 � (+3) + 3 � (-2) = +6 - 6 = 0.',
     aoAcertar: function () { botaoContinuar(400); }
   });
 }
 
 /* ==========================================================
-   STAGE 7 — NOMENCLATURE (SINGLE OXIDATION NUMBER)
+   STAGE 7 � NOMENCLATURE (SINGLE OXIDATION NUMBER)
    ========================================================== */
 function passoNomenclaturaNa2O() {
-  fala('When an element forms only one common oxide, the name is "[element name] + oxide". Build the name for Na₂O.');
+  fala('When an element forms only one common oxide, the name is "[element name] + oxide". Build the name for Na2O.');
   montarNomeOxido('Na2O', function () {
     agendar(function () { botaoContinuarLocal(passoNomenclaturaAl2O3, 400); }, 300);
   });
 }
 function passoNomenclaturaAl2O3() {
-  fala('Now build the name for Al₂O₃.');
+  fala('Now build the name for Al2O3.');
   montarNomeOxido('Al2O3', function () {
     agendar(function () { botaoContinuar(400); }, 300);
   });
 }
 
 /* ==========================================================
-   STAGE 8 — ELEMENT WITH MORE THAN ONE OXIDATION NUMBER (IRON)
+   STAGE 8 � ELEMENT WITH MORE THAN ONE OXIDATION NUMBER (IRON)
    ========================================================== */
 function passoNomenclaturaFeO() {
-  fala('Iron forms two different oxides: in FeO, iron has an oxidation number of +2; in Fe₂O₃, it\'s +3. We use Stock nomenclature: the element name + the oxidation number in Roman numerals + "oxide". Build the name for FeO.');
+  fala('Iron forms two different oxides: in FeO, iron has an oxidation number of +2; in Fe2O3, it\'s +3. We use Stock nomenclature: the element name + the oxidation number in Roman numerals + "oxide". Build the name for FeO.');
   montarNomeOxido('FeO', function () {
     agendar(function () { botaoContinuarLocal(passoNomenclaturaFe2O3, 400); }, 300);
   });
 }
 function passoNomenclaturaFe2O3() {
-  fala('Now build the name for Fe₂O₃.');
+  fala('Now build the name for Fe2O3.');
   montarNomeOxido('Fe2O3', function () {
     agendar(function () {
-      fala('FeO can also be called ferrous oxide, and Fe₂O₃ ferric oxide — alternative traditional names. But "iron(II)" and "iron(III)" indicate the oxidation number more directly.');
+      fala('FeO can also be called ferrous oxide, and Fe2O3 ferric oxide � alternative traditional names. But "iron(II)" and "iron(III)" indicate the oxidation number more directly.');
       botaoContinuar(600);
     }, 300);
   });
 }
 
 /* ==========================================================
-   STAGE 9 — NONMETAL OXIDES (PREFIXES)
+   STAGE 9 � NONMETAL OXIDES (PREFIXES)
    ========================================================== */
 function passoPrefixosAmetais() {
-  fala('SO₂ and SO₃ have the same sulfur, but different amounts of oxygen. To tell them apart, we use prefixes: di-, tri-.');
+  fala('SO2 and SO3 have the same sulfur, but different amounts of oxygen. To tell them apart, we use prefixes: di-, tri-.');
   const linha = document.createElement('div');
   linha.className = 'linha-cartas-simples';
-  ['CO₂', 'SO₂', 'SO₃'].forEach(function (t) {
+  ['CO2', 'SO2', 'SO3'].forEach(function (t) {
     const c = document.createElement('div');
     c.className = 'cartao-formula-simples';
     c.textContent = t;
@@ -834,14 +868,14 @@ function passoPrefixosAmetais() {
   overlay.appendChild(linha);
 
   escolhaBotoes({
-    pergunta: 'What is SO₃ called, which has three oxygen atoms?',
+    pergunta: 'What is SO3 called, which has three oxygen atoms?',
     opcoes: [
       { rotulo: 'Sulfur monoxide', correta: false },
       { rotulo: 'Sulfur dioxide', correta: false },
       { rotulo: 'Sulfur trioxide', correta: true }
     ],
     dica: 'Count the oxygen atoms: mono- (1), di- (2), tri- (3).',
-    explicacao: 'CO₂ → carbon dioxide. SO₂ → sulfur dioxide. SO₃ → sulfur trioxide (also traditionally called sulfuric anhydride).',
+    explicacao: 'CO2 ? carbon dioxide. SO2 ? sulfur dioxide. SO3 ? sulfur trioxide (also traditionally called sulfuric anhydride).',
     aoAcertar: function () { botaoContinuar(400); }
   });
 }
@@ -898,19 +932,88 @@ function reiniciar() {
   irPara(0);
 }
 
-/* ── INIT ── */
+/* -- INIT -- */
 irPara(0);
 </script>
 
+<script>
+let volumeSalvo = parseFloat(localStorage.getItem('kifacil_volume'));
+if (isNaN(volumeSalvo)) volumeSalvo = 0.35;
+let silenciado = localStorage.getItem('kifacil_silenciado') === '1';
+let musicaFundo = null;
+
+function volumeEfetivo() {
+  return silenciado ? 0 : volumeSalvo;
+}
+
+function iniciarMusicaFundo() {
+  if (musicaFundo) return;
+  try {
+    musicaFundo = new Audio('../sons/natureza.mp3');
+    musicaFundo.loop = true;
+    musicaFundo.volume = volumeEfetivo();
+    musicaFundo.play().catch(function () {});
+  } catch (e) {}
+}
+
+function atualizarIconeMudo() {
+  const botao = document.getElementById('btn-mute');
+  if (!botao) return;
+  if (silenciado || volumeSalvo === 0) botao.textContent = '??';
+  else if (volumeSalvo < 0.5) botao.textContent = '??';
+  else botao.textContent = '??';
+}
+
+function alternarMudo() {
+  silenciado = !silenciado;
+  localStorage.setItem('kifacil_silenciado', silenciado ? '1' : '0');
+  if (musicaFundo) musicaFundo.volume = volumeEfetivo();
+  atualizarIconeMudo();
+}
+
+function ajustarVolume(valorSlider) {
+  volumeSalvo = Math.max(0, Math.min(1, valorSlider / 100));
+  localStorage.setItem('kifacil_volume', volumeSalvo);
+  if (volumeSalvo > 0 && silenciado) {
+    silenciado = false;
+    localStorage.setItem('kifacil_silenciado', '0');
+  }
+  if (musicaFundo) musicaFundo.volume = volumeEfetivo();
+  atualizarIconeMudo();
+}
+
+(function iniciarControleVolume() {
+  const slider = document.getElementById('slider-volume');
+  if (slider) slider.value = Math.round(volumeSalvo * 100);
+  atualizarIconeMudo();
+  iniciarMusicaFundo();
+
+  const ativarSom = function () {
+    if (!musicaFundo) iniciarMusicaFundo();
+    if (musicaFundo) {
+      musicaFundo.volume = volumeEfetivo();
+      musicaFundo.play().catch(function () {});
+    }
+  };
+  window.addEventListener('pointerdown', ativarSom, { once: true });
+  window.addEventListener('keydown', ativarSom, { once: true });
+})();
+</script>
 <script>
 (function () {
   var _clickSom = new Audio('../sons/click.mp3');
   _clickSom.preload = 'auto';
   document.addEventListener('click', function (e) {
     var alvo = e.target.closest('button');
-    if (alvo) { try { _clickSom.currentTime = 0; _clickSom.play().catch(function () {}); } catch (err) {} }
+    if (alvo) { try { _clickSom.currentTime = 0; _clickSom.volume = (typeof volumeEfetivo === 'function' ? volumeEfetivo() : 0.35); _clickSom.play().catch(function () {}); } catch (err) {} }
   }, true);
 })();
 </script>
+<div id="controle-volume">
+  <button id="btn-mute" onclick="alternarMudo()" aria-label="Mute or unmute sound">??</button>
+  <input type="range" id="slider-volume" min="0" max="100" value="35" oninput="ajustarVolume(this.value)" aria-label="Volume">
+</div>
 </body>
 </html>
+
+

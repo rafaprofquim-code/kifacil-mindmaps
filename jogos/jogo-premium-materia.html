@@ -1,10 +1,10 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex, nofollow">
-  <title>The Day of Matter — Premium Game | KiFácil</title>
+  <title>The Day of Matter � Premium Game | KiF�cil</title>
   <link rel="icon" type="image/png" href="/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -319,7 +319,7 @@
       pointer-events: none;
     }
 
-    /* CONCLUSÃO */
+    /* CONCLUS�O */
     .conclusao {
       display: none;
       margin-top: 3rem;
@@ -396,12 +396,46 @@
       .link-aula { top: 6px; right: 6px; padding: 0.3rem 0.5rem; font-size: 0.6rem; }
       .link-aula svg { width: 18px; height: 18px; }
     }
-  </style>
+  
+    /* AUDIO CONTROL */
+    #controle-volume {
+      position: fixed;
+      bottom: 16px;
+      right: 16px;
+      z-index: 300;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(14,6,0,0.85);
+      border: 1.5px solid var(--borda-forte);
+      border-radius: 24px;
+      padding: 8px 16px 8px 10px;
+    }
+    #btn-mute {
+      background: none;
+      border: none;
+      color: var(--dourado-claro);
+      font-size: 18px;
+      cursor: pointer;
+      padding: 0;
+      width: 22px;
+      height: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    #slider-volume {
+      width: 90px;
+      accent-color: var(--dourado-claro);
+      cursor: pointer;
+    }
+</style>
 </head>
 <body>
 
 <nav class="top-nav">
-  <div class="brand">KiFácil</div>
+  <div class="brand">KiF�cil</div>
 </nav>
 
 <main>
@@ -428,7 +462,7 @@
   </div>
 </main>
 
-<footer>© 2026 KiFácil</footer>
+<footer>� 2026 KiF�cil</footer>
 
 <!-- MODAL PERGUNTA -->
 <div class="overlay" id="overlayPergunta">
@@ -455,14 +489,14 @@ const ELEMENTOS = [
     pergunta: 'What is this vaporization process called?',
     resposta: 'boiling', letras: 7,
     dica: 'It happens throughout the whole mass of the liquid, with bubbles forming inside it.',
-    explicacao: 'Boiling is the vaporization that occurs throughout the whole mass of the liquid. It is an endothermic process — it absorbs energy from the environment.'
+    explicacao: 'Boiling is the vaporization that occurs throughout the whole mass of the liquid. It is an endothermic process � it absorbs energy from the environment.'
   },
   {
     id: 2, left: '31%', top: '62%',
     pergunta: 'What is the observed change of state called?',
     resposta: 'melting', letras: 7,
     dica: 'The solid is absorbing energy and changing into another state.',
-    explicacao: 'Melting is the change from the solid state to the liquid state. It is an endothermic process — the ice absorbs energy to melt.'
+    explicacao: 'Melting is the change from the solid state to the liquid state. It is an endothermic process � the ice absorbs energy to melt.'
   },
   {
     id: 3, left: '46%', top: '50%',
@@ -513,11 +547,11 @@ function getEstado(id) { return estado.find(e => e.id === id); }
 function normalizar(str) {
   return str.toLowerCase()
     .normalize('NFD')
-    .replace(/[̀-ͯ]/g, '')
+    .replace(/[`-?]/g, '')
     .trim();
 }
 
-/* ── HOTSPOTS ── */
+/* -- HOTSPOTS -- */
 function renderHotspots() {
   const wrapper = document.getElementById('imagemWrapper');
   wrapper.querySelectorAll('.hotspot').forEach(h => h.remove());
@@ -533,8 +567,8 @@ function renderHotspots() {
     if (el.mobileTop) btn.style.setProperty('--top-mobile', el.mobileTop);
     btn.setAttribute('aria-label', `Element ${el.id}`);
 
-    if (est.status === 'concluido')   btn.textContent = '✓';
-    else if (est.status === 'revelado') btn.textContent = '✕';
+    if (est.status === 'concluido')   btn.textContent = '?';
+    else if (est.status === 'revelado') btn.textContent = '?';
     else                               btn.textContent = el.id;
 
     btn.addEventListener('click', e => { e.stopPropagation(); abrirModal(el.id); });
@@ -542,7 +576,7 @@ function renderHotspots() {
   });
 }
 
-/* ── QUESTION MODAL ── */
+/* -- QUESTION MODAL -- */
 function abrirModal(id) {
   const el  = ELEMENTOS.find(e => e.id === id);
   const est = getEstado(id);
@@ -631,7 +665,7 @@ function confirmar() {
   }
 }
 
-/* ── CONCLUSION ── */
+/* -- CONCLUSION -- */
 function verificarConclusao() {
   if (!estado.every(e => e.status !== 'pendente')) return;
 
@@ -662,7 +696,7 @@ function reiniciar() {
   renderHotspots();
 }
 
-/* ── EVENTS ── */
+/* -- EVENTS -- */
 document.getElementById('btnFechar').addEventListener('click', fecharModal);
 document.getElementById('overlayPergunta').addEventListener('click', e => {
   if (e.target === e.currentTarget) fecharModal();
@@ -686,19 +720,88 @@ document.addEventListener('keydown', e => {
   if (e.key === 'Escape') { fecharModal(); modalZoom.classList.remove('ativo'); }
 });
 
-/* ── INIT ── */
+/* -- INIT -- */
 renderHotspots();
 </script>
 
+<script>
+let volumeSalvo = parseFloat(localStorage.getItem('kifacil_volume'));
+if (isNaN(volumeSalvo)) volumeSalvo = 0.35;
+let silenciado = localStorage.getItem('kifacil_silenciado') === '1';
+let musicaFundo = null;
+
+function volumeEfetivo() {
+  return silenciado ? 0 : volumeSalvo;
+}
+
+function iniciarMusicaFundo() {
+  if (musicaFundo) return;
+  try {
+    musicaFundo = new Audio('../sons/natureza.mp3');
+    musicaFundo.loop = true;
+    musicaFundo.volume = volumeEfetivo();
+    musicaFundo.play().catch(function () {});
+  } catch (e) {}
+}
+
+function atualizarIconeMudo() {
+  const botao = document.getElementById('btn-mute');
+  if (!botao) return;
+  if (silenciado || volumeSalvo === 0) botao.textContent = '??';
+  else if (volumeSalvo < 0.5) botao.textContent = '??';
+  else botao.textContent = '??';
+}
+
+function alternarMudo() {
+  silenciado = !silenciado;
+  localStorage.setItem('kifacil_silenciado', silenciado ? '1' : '0');
+  if (musicaFundo) musicaFundo.volume = volumeEfetivo();
+  atualizarIconeMudo();
+}
+
+function ajustarVolume(valorSlider) {
+  volumeSalvo = Math.max(0, Math.min(1, valorSlider / 100));
+  localStorage.setItem('kifacil_volume', volumeSalvo);
+  if (volumeSalvo > 0 && silenciado) {
+    silenciado = false;
+    localStorage.setItem('kifacil_silenciado', '0');
+  }
+  if (musicaFundo) musicaFundo.volume = volumeEfetivo();
+  atualizarIconeMudo();
+}
+
+(function iniciarControleVolume() {
+  const slider = document.getElementById('slider-volume');
+  if (slider) slider.value = Math.round(volumeSalvo * 100);
+  atualizarIconeMudo();
+  iniciarMusicaFundo();
+
+  const ativarSom = function () {
+    if (!musicaFundo) iniciarMusicaFundo();
+    if (musicaFundo) {
+      musicaFundo.volume = volumeEfetivo();
+      musicaFundo.play().catch(function () {});
+    }
+  };
+  window.addEventListener('pointerdown', ativarSom, { once: true });
+  window.addEventListener('keydown', ativarSom, { once: true });
+})();
+</script>
 <script>
 (function () {
   var _clickSom = new Audio('../sons/click.mp3');
   _clickSom.preload = 'auto';
   document.addEventListener('click', function (e) {
     var alvo = e.target.closest('button');
-    if (alvo) { try { _clickSom.currentTime = 0; _clickSom.play().catch(function () {}); } catch (err) {} }
+    if (alvo) { try { _clickSom.currentTime = 0; _clickSom.volume = (typeof volumeEfetivo === 'function' ? volumeEfetivo() : 0.35); _clickSom.play().catch(function () {}); } catch (err) {} }
   }, true);
 })();
 </script>
+<div id="controle-volume">
+  <button id="btn-mute" onclick="alternarMudo()" aria-label="Mute or unmute sound">??</button>
+  <input type="range" id="slider-volume" min="0" max="100" value="35" oninput="ajustarVolume(this.value)" aria-label="Volume">
+</div>
 </body>
 </html>
+
+

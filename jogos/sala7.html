@@ -372,7 +372,7 @@
       <div id="teacher-name">Professor Rafaela</div>
       <p id="teacher-text"></p>
       <button id="btn-avancar" onclick="proximoPasso()">Continue</button>
-      <a id="btn-concluir" href="torre-quimica-concluida.html">Finish</a>
+      <a id="btn-concluir" href="../index.html">Finish</a>
     </div>
   </aside>
 
@@ -507,6 +507,17 @@
     const slider = document.getElementById('slider-volume');
     if (slider) slider.value = Math.round(volumeSalvo * 100);
     atualizarIconeMudo();
+
+    iniciarMusicaFundo();
+    const ativarSom = function () {
+      if (!musicaFundo) iniciarMusicaFundo();
+      if (musicaFundo) {
+        musicaFundo.volume = volumeEfetivo();
+        musicaFundo.play().catch(function () {});
+      }
+    };
+    window.addEventListener('pointerdown', ativarSom, { once: true });
+    window.addEventListener('keydown', ativarSom, { once: true });
   })();
 
   function tocarClick() {

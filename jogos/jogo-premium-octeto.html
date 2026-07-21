@@ -1,10 +1,10 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex, nofollow">
-  <title>The Octet Rule — Premium Game | KiFácil</title>
+  <title>The Octet Rule � Premium Game | KiF�cil</title>
   <link rel="icon" type="image/png" href="/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -318,7 +318,7 @@
       pointer-events: none;
     }
 
-    /* CONCLUSÃO */
+    /* CONCLUS�O */
     .conclusao {
       display: none;
       margin-top: 3rem;
@@ -397,7 +397,7 @@
     }
 
     /* ==========================================================
-       STAGE-SPECIFIC MECHANICS — THE OCTET RULE
+       STAGE-SPECIFIC MECHANICS � THE OCTET RULE
        Nothing above this block was changed (nav, narrator,
        image-wrapper, conclusion, footer, modal-zoom remain
        identical to the template stage). Everything below this
@@ -440,7 +440,7 @@
       box-shadow: 0 0 26px 8px rgba(255,215,106,0.9), inset 0 0 0 1px rgba(255,250,230,0.8);
     }
     /* While waiting for the student's click, the column pulses
-       to invite interaction — it disappears as soon as they click. */
+       to invite interaction � it disappears as soon as they click. */
     .coluna-familia.clicavel {
       pointer-events: auto;
       cursor: pointer;
@@ -453,7 +453,7 @@
       to   { box-shadow: 0 0 40px 15px rgba(255,215,106,1), inset 0 0 0 1px rgba(255,250,230,0.95); }
     }
 
-    /* Electron count in the outermost shell — family 18 (investigation) */
+    /* Electron count in the outermost shell � family 18 (investigation) */
     .numero-eletrons {
       position: absolute;
       transform: translate(-50%, -50%);
@@ -471,7 +471,7 @@
     }
     .numero-eletrons.mostrar { opacity: 1; }
 
-    /* Floating symbol — animation leaving the table */
+    /* Floating symbol � animation leaving the table */
     .simbolo-flutuante {
       position: absolute;
       left: 50%; top: 38%;
@@ -545,7 +545,7 @@
     .escolha-btn:disabled { cursor: default; opacity: .5; }
     .cartao-mensagem { font-size: .76rem; color: var(--verde-escuro); font-weight: 700; min-height: 1.1em; }
 
-    /* Stage 5 — families table */
+    /* Stage 5 � families table */
     .tabela-familias {
       position: absolute; left: 50%; top: 50%;
       transform: translate(-50%, -50%);
@@ -586,12 +586,46 @@
       .tf-linha { grid-template-columns: 1fr 1.1fr 0.8fr; font-size: .74rem; }
       .tf-familia { font-size: .8rem; }
     }
-  </style>
+  
+    /* AUDIO CONTROL */
+    #controle-volume {
+      position: fixed;
+      bottom: 16px;
+      right: 16px;
+      z-index: 300;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(14,6,0,0.85);
+      border: 1.5px solid var(--borda-forte);
+      border-radius: 24px;
+      padding: 8px 16px 8px 10px;
+    }
+    #btn-mute {
+      background: none;
+      border: none;
+      color: var(--dourado-claro);
+      font-size: 18px;
+      cursor: pointer;
+      padding: 0;
+      width: 22px;
+      height: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    #slider-volume {
+      width: 90px;
+      accent-color: var(--dourado-claro);
+      cursor: pointer;
+    }
+</style>
 </head>
 <body>
 
 <nav class="top-nav">
-  <div class="brand">KiFácil</div>
+  <div class="brand">KiF�cil</div>
 </nav>
 
 <main>
@@ -637,7 +671,7 @@
   </div>
 </main>
 
-<footer>© 2026 KiFácil</footer>
+<footer>� 2026 KiF�cil</footer>
 
 <!-- MODAL ZOOM -->
 <div class="modal-zoom" id="modalZoom">
@@ -646,7 +680,7 @@
 
 <script>
 /* ==========================================================
-   DATA — ELEMENTS
+   DATA � ELEMENTS
    Central object: to add a new element to stage 4, just add
    an entry here and include the key in ORDEM_ETAPA4.
    ========================================================== */
@@ -664,21 +698,21 @@ const ORDEM_ETAPA4 = ['li', 'be', 'al', 'o', 'f'];
 /* Representative families (columns highlighted in stage 1) */
 const FAMILIAS_REPRESENTATIVAS = [1, 2, 13, 14, 15, 16, 17, 18];
 
-/* Stage 5 pattern — what the student needs to discover on their own */
+/* Stage 5 pattern � what the student needs to discover on their own */
 const FAMILIAS_OCTETO = {
   1:  { processo: 'Loses 1', nox: '+1' },
   2:  { processo: 'Loses 2', nox: '+2' },
   13: { processo: 'Loses 3', nox: '+3' },
-  15: { processo: 'Gains 3', nox: '−3' },
-  16: { processo: 'Gains 2', nox: '−2' },
-  17: { processo: 'Gains 1', nox: '−1' },
+  15: { processo: 'Gains 3', nox: '-3' },
+  16: { processo: 'Gains 2', nox: '-2' },
+  17: { processo: 'Gains 1', nox: '-1' },
   18: { processo: 'Stable', nox: '0' }
 };
 const ORDEM_FAMILIAS_TABELA = [1, 2, 13, 15, 16, 17, 18];
 const OPCOES_PROCESSO = ['Loses 1', 'Loses 2', 'Loses 3', 'Gains 1', 'Gains 2', 'Gains 3', 'Stable'];
-const OPCOES_NOX = ['+1', '+2', '+3', '−1', '−2', '−3', '0'];
+const OPCOES_NOX = ['+1', '+2', '+3', '-1', '-2', '-3', '0'];
 
-/* Socratic hints — never "wrong", always a question */
+/* Socratic hints � never "wrong", always a question */
 const DICAS_SOCRATICAS = [
   'Notice how many electrons are in the outermost shell.',
   'Would it be easier to gain many electrons or lose just a few?'
@@ -688,7 +722,7 @@ function dicaAleatoria() {
 }
 
 /* ==========================================================
-   PROFESSOR RAFAELA — same pattern used in the other stages
+   PROFESSOR RAFAELA � same pattern used in the other stages
    ========================================================== */
 const IMG_PROF = {
   sorrindo:   '../imagens/rafa-sorrindo.jpg',
@@ -716,7 +750,7 @@ $btnContinuar.addEventListener('click', () => {
 });
 
 // Socratic question: changes the teacher's expression/speech WITHOUT
-// requiring a click on "Continue" — the student keeps interacting
+// requiring a click on "Continue" � the student keeps interacting
 // with the card/table already on screen.
 function professoraPergunta(texto) {
   $prof.style.opacity = '0';
@@ -729,8 +763,8 @@ _ding.preload = 'auto';
 function tocarDing() { try { _ding.currentTime = 0; _ding.play().catch(() => {}); } catch (e) {} }
 
 /* ==========================================================
-   PERIODIC TABLE — family highlighting
-   Columns measured over tabela-periodica-vazia.png (1536×1024):
+   PERIODIC TABLE � family highlighting
+   Columns measured over tabela-periodica-vazia.png (1536�1024):
    column 1 starts at ~9.6% of the width, each column has a
    ~4.24% step and ~4% of its own width.
    ========================================================== */
@@ -785,7 +819,7 @@ function destacarFamiliaDourada(familia) {
 }
 
 // Reveals, period by period, how many electrons family 18 has in
-// its outermost shell — 2 for helium, 8 for the rest. Uses the same
+// its outermost shell � 2 for helium, 8 for the rest. Uses the same
 // vertical range (top/height) set for family 18 in
 // criarColunasTabela, so the numbers land on the correct column.
 function mostrarEletronsFamilia18() {
@@ -829,9 +863,9 @@ function animarSaidaDaTabela(simbolo, familia, aoTerminar) {
 }
 
 /* ==========================================================
-   VALENCE SHELL — electrons as icons (eletron.png)
+   VALENCE SHELL � electrons as icons (eletron.png)
    ========================================================== */
-function textoDistribuicao(dist) { return dist.join(' • '); }
+function textoDistribuicao(dist) { return dist.join(' � '); }
 
 function renderCamadaValencia(qtd) {
   const cont = document.getElementById('camadaValencia');
@@ -985,7 +1019,7 @@ function perguntarDirecaoQuantidade(elemento, aoAcertar) {
 }
 
 /* ==========================================================
-   STAGE 1 — the periodic table and the representative families
+   STAGE 1 � the periodic table and the representative families
    ========================================================== */
 function etapa1() {
   criarColunasTabela(); // rebuilds from scratch: guarantees no leftover click/listener from a previous playthrough
@@ -1003,7 +1037,7 @@ function etapa1() {
 }
 
 // Instead of a "Continue" button, the speech advances when the
-// student clicks the column 18 (already highlighted) — it pulses,
+// student clicks the column 18 (already highlighted) � it pulses,
 // inviting the student to click; clicking reveals the electrons
 // in the outermost shell.
 function habilitarCliqueFamilia18() {
@@ -1014,7 +1048,7 @@ function habilitarCliqueFamilia18() {
     el.classList.remove('clicavel');
     el.removeEventListener('click', aoClicar);
     mostrarEletronsFamilia18();
-    falar('animada', 'If we look closely, we\'ll see that they all have 8 electrons in their outermost shell — except for helium, which has 2.', () => {
+    falar('animada', 'If we look closely, we\'ll see that they all have 8 electrons in their outermost shell � except for helium, which has 2.', () => {
       setTimeout(etapaConceito, 900);
     });
   };
@@ -1022,7 +1056,7 @@ function habilitarCliqueFamilia18() {
 }
 
 /* ==========================================================
-   CONCEPTUAL STAGE — before naming any specific element, teaches
+   CONCEPTUAL STAGE � before naming any specific element, teaches
    the general reasoning with two generic atoms (no real symbol):
    the outermost shell can be completed either by gaining OR
    losing electrons.
@@ -1069,7 +1103,7 @@ function conceitoSituacaoPerder() {
 }
 
 /* ==========================================================
-   STAGE 2 — sodium: losing is easier than gaining
+   STAGE 2 � sodium: losing is easier than gaining
    ========================================================== */
 function etapa2() {
   falar('explicando', 'Observe sodium.', () => {
@@ -1085,7 +1119,7 @@ function etapa2() {
             () => {
               animarPerdeEletron(1, 0, () => {
                 renderCamadaValencia(8);
-                document.getElementById('cartaoInfo').innerHTML = 'Atomic number: 11<br>Distribution: 2 • 8';
+                document.getElementById('cartaoInfo').innerHTML = 'Atomic number: 11<br>Distribution: 2 � 8';
                 mostrarMensagemCartao('Now sodium has the same configuration as Neon.');
                 setTimeout(() => { esconderCartao(); setTimeout(etapa3, 600); }, 2000);
               });
@@ -1098,7 +1132,7 @@ function etapa2() {
 }
 
 /* ==========================================================
-   STAGE 3 — chlorine: gaining is easier than losing
+   STAGE 3 � chlorine: gaining is easier than losing
    ========================================================== */
 function etapa3() {
   falar('explicando', 'Now observe chlorine.', () => {
@@ -1112,7 +1146,7 @@ function etapa3() {
           ],
           () => {
             animarGanhaEletron(7, 8, () => {
-              document.getElementById('cartaoInfo').innerHTML = 'Atomic number: 17<br>Distribution: 2 • 8 • 8';
+              document.getElementById('cartaoInfo').innerHTML = 'Atomic number: 17<br>Distribution: 2 � 8 � 8';
               mostrarMensagemCartao('Chlorine has become stable.');
               setTimeout(() => { esconderCartao(); setTimeout(etapa4, 600); }, 2000);
             });
@@ -1124,7 +1158,7 @@ function etapa3() {
 }
 
 /* ==========================================================
-   STAGE 4 — several elements: lose or gain? how many?
+   STAGE 4 � several elements: lose or gain? how many?
    ========================================================== */
 function etapa4() {
   falar('explicando', 'Now let\'s look at other elements. You decide: does it lose or gain, and how many electrons?', () => {
@@ -1147,7 +1181,7 @@ function etapa4Elemento(idx) {
 }
 
 /* ==========================================================
-   STAGE 5 — summary table (Family / Process / Ox. #)
+   STAGE 5 � summary table (Family / Process / Ox. #)
    ========================================================== */
 function etapa5() {
   esconderTabela();
@@ -1165,11 +1199,11 @@ function montarTabelaFamilias() {
       <div class="tf-linha" data-familia="${f}">
         <span class="tf-familia">Family ${f}</span>
         <select class="tf-select" data-campo="processo">
-          <option value="">—</option>
+          <option value="">�</option>
           ${OPCOES_PROCESSO.map(p => `<option value="${p}">${p}</option>`).join('')}
         </select>
         <select class="tf-select" data-campo="nox">
-          <option value="">—</option>
+          <option value="">�</option>
           ${OPCOES_NOX.map(n => `<option value="${n}">${n}</option>`).join('')}
         </select>
       </div>
@@ -1255,7 +1289,7 @@ function iniciarIntro() {
   });
 }
 
-/* ── Zoom (clicking outside the interactive elements enlarges the scene) ── */
+/* -- Zoom (clicking outside the interactive elements enlarges the scene) -- */
 const imagemWrapper = document.getElementById('imagemWrapper');
 const modalZoom = document.getElementById('modalZoom');
 imagemWrapper.addEventListener('click', e => {
@@ -1267,20 +1301,89 @@ document.addEventListener('keydown', e => {
   if (e.key === 'Escape') modalZoom.classList.remove('ativo');
 });
 
-/* ── INIT ── */
+/* -- INIT -- */
 criarColunasTabela();
 iniciarIntro();
 </script>
 
+<script>
+let volumeSalvo = parseFloat(localStorage.getItem('kifacil_volume'));
+if (isNaN(volumeSalvo)) volumeSalvo = 0.35;
+let silenciado = localStorage.getItem('kifacil_silenciado') === '1';
+let musicaFundo = null;
+
+function volumeEfetivo() {
+  return silenciado ? 0 : volumeSalvo;
+}
+
+function iniciarMusicaFundo() {
+  if (musicaFundo) return;
+  try {
+    musicaFundo = new Audio('../sons/natureza.mp3');
+    musicaFundo.loop = true;
+    musicaFundo.volume = volumeEfetivo();
+    musicaFundo.play().catch(function () {});
+  } catch (e) {}
+}
+
+function atualizarIconeMudo() {
+  const botao = document.getElementById('btn-mute');
+  if (!botao) return;
+  if (silenciado || volumeSalvo === 0) botao.textContent = '??';
+  else if (volumeSalvo < 0.5) botao.textContent = '??';
+  else botao.textContent = '??';
+}
+
+function alternarMudo() {
+  silenciado = !silenciado;
+  localStorage.setItem('kifacil_silenciado', silenciado ? '1' : '0');
+  if (musicaFundo) musicaFundo.volume = volumeEfetivo();
+  atualizarIconeMudo();
+}
+
+function ajustarVolume(valorSlider) {
+  volumeSalvo = Math.max(0, Math.min(1, valorSlider / 100));
+  localStorage.setItem('kifacil_volume', volumeSalvo);
+  if (volumeSalvo > 0 && silenciado) {
+    silenciado = false;
+    localStorage.setItem('kifacil_silenciado', '0');
+  }
+  if (musicaFundo) musicaFundo.volume = volumeEfetivo();
+  atualizarIconeMudo();
+}
+
+(function iniciarControleVolume() {
+  const slider = document.getElementById('slider-volume');
+  if (slider) slider.value = Math.round(volumeSalvo * 100);
+  atualizarIconeMudo();
+  iniciarMusicaFundo();
+
+  const ativarSom = function () {
+    if (!musicaFundo) iniciarMusicaFundo();
+    if (musicaFundo) {
+      musicaFundo.volume = volumeEfetivo();
+      musicaFundo.play().catch(function () {});
+    }
+  };
+  window.addEventListener('pointerdown', ativarSom, { once: true });
+  window.addEventListener('keydown', ativarSom, { once: true });
+})();
+</script>
 <script>
 (function () {
   var _clickSom = new Audio('../sons/click.mp3');
   _clickSom.preload = 'auto';
   document.addEventListener('click', function (e) {
     var alvo = e.target.closest('button');
-    if (alvo) { try { _clickSom.currentTime = 0; _clickSom.play().catch(function () {}); } catch (err) {} }
+    if (alvo) { try { _clickSom.currentTime = 0; _clickSom.volume = (typeof volumeEfetivo === 'function' ? volumeEfetivo() : 0.35); _clickSom.play().catch(function () {}); } catch (err) {} }
   }, true);
 })();
 </script>
+<div id="controle-volume">
+  <button id="btn-mute" onclick="alternarMudo()" aria-label="Mute or unmute sound">??</button>
+  <input type="range" id="slider-volume" min="0" max="100" value="35" oninput="ajustarVolume(this.value)" aria-label="Volume">
+</div>
 </body>
 </html>
+
+

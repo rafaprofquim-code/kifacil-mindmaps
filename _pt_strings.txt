@@ -1,0 +1,425 @@
+﻿));
+    xAtual += 12;
+    config.produtos.forEach(function (chave, i) {
+      const z = criarZonaVazia(xAtual +
+);
+      }
+    }
+    renderizarLinhaEquacaoEmContainer(areaEquacao, reagentes, produtos, true, atualizar);
+    atualizar();
+  };
+}
+
+const passoH2Cl2 = criarPassoBalancear(
+);
+      const simboloMais = bEhMaisEletronegativo ? mol.b : mol.a;
+      // o aluno decide quando prosseguir — sem avanço automático,
+      // ele precisa de tempo para observar a seta e os elétrons.
+      falar(
+);
+      overlay.appendChild(el);
+      els.push(el);
+    });
+    if (config.reagentes.length === 2) {
+      overlay.appendChild(criarSinalMais(((posX[0] + posX[1]) / 2) +
+);
+    adicionarBancada();
+    const posX = [22, 50];
+    const els = [];
+    config.reagentes.forEach(function (chave, i) {
+      const left = (config.reagentes.length === 1 ? 36 : posX[i]) +
+);
+    professora(
+);
+  professora(`Muito bem! Você completou a fase de Íons. Acertou <strong>${acertos} de ${total}</strong> no desafio final.`,
+);
+  professora(temProximo
+    ? `Very good! This is the configuration of ${el.nome}. Let
+);
+
+/* ==========================================================
+   ETAPA 5 — ESTRATÉGIA MACHO (DICA)
+   ========================================================== */
+function passoEtapa5() {
+  fala(
+);
+}
+
+// ── PROBLEM 2 (telescope/spectroscope) ────────────────────────────────────────
+function clicarTelescópio() {
+  if (!estado.prob1 || estado.prob2) return;
+  document.getElementById(
+);
+}
+
+function renderizarContadores(container, reagentes, produtos, elementos) {
+  container.innerHTML =
+, avancar);
+  return btn;
+}
+
+/* ==========================================================
+   INTRODUÇÃO
+   ========================================================== */
+function passoIntro0() {
+  fala(
+, avancar);
+}
+
+/* ==========================================================
+   ETAPA 1 — DISSOCIAÇÃO
+   ========================================================== */
+function passoDissociacao() {
+  fala(
+, function () {
+    btn.disabled = true;
+    const cr = contarAtomos(reagentes), cp = contarAtomos(produtos);
+
+    const trN = document.createElement(
+, ligacaoDupla: true }
+];
+
+/* Diatômicas heteronucleares — etapa 2 (sempre polares) */
+const DIATOMICAS_POLARES = [
+  { formula:
+, svg);
+  return { dx: -(p2.x - s2.x), dy: s2.y - s1.y };
+}
+
+function desenharDiagonal(idx, grupos, svg) {
+  if (idx >= grupos.length) {
+    setTimeout(() => {
+      professora(
+; }
+
+/* ==========================================================
+   INTRODUÇÃO
+   ========================================================== */
+function iniciarIntro() {
+  falar(
+; }, 50);
+      });
+      if (config.produtos.length === 2) {
+        const mais = criarSinalMais(
+;
+      adicionarBancada();
+      const posXp = config.produtos.length === 1 ? [46] : [26, 66];
+      config.produtos.forEach(function (chave, i) {
+        const el = criarMolecula(
+;
+
+    if (esperado === 7) {
+      professora(
+;
+}
+
+// ══════════════════════════════════════════════════
+//  TÍTULO
+// ══════════════════════════════════════════════════
+function setTitulo(txt) {
+  const tituloJogo = document.getElementById(
+];
+
+/* ==========================================================
+   PROFESSORA RAFAELA
+   ========================================================== */
+const IMG_PROF = {
+  sorrindo:
+}
+];
+
+function etapa2(colIdx = 0) {
+  estado.etapa = 2;
+  const coluna = COLUNAS_ETAPA2[colIdx];
+
+  if (!coluna) {
+    professora(
++ Elétron
+>Add 2 elétrons</button>
+        <button class=
+>Agora você sabe por que o metano é tetraédrico, a amônia é piramidal e a água é angular — todas partem da mesma organização tetraédrica de nuvens eletrônicas.</p>
+    <button class=
+>Diferença de electronegativity</div>
+      <div class=
+>Este site utiliza cookies para melhorar sua experi&ecirc;ncia. Ao continuar navegando, voc&ecirc; concorda com nossa <a href=
+>Excelente. Agora você consegue visualizar por que algumas moléculas possuem polarity e outras não.</p>
+    <button class=
+>Fase concluída</div>
+    <div class=
+>Jogar novamente</button>
+  </div>
+</main>
+
+<footer>© 2026 KiFácil</footer>
+
+<!-- MODAL ZOOM -->
+<div class=
+>KiFácil Academy — Stage 4</div>
+      <div class=
+>Ligação polar</div>
+      <div class=
+>Ligações × pares isolados</div>
+      <div class=
+>Nuvens eletrônicas se repelem</div>
+      <div class=
+>O número de elétrons</button>
+    <div class=
+>O número de nêutrons</button>
+    <button class=
+>O número de prótons</button>
+    <button class=
+>Organização espacial de menor energia</div>
+      <div class=
+>Remove 2 elétrons</button>
+      </div>
+      <div class=
+>Remove 2 elétrons</button>
+      </div>
+    `);
+    return;
+  }
+
+  tocarDing();
+  renderCorpo(`
+    <div class=
+>Verificar posição</button>
+  </div>
+
+  <div class=
+>Você entendeu a origem da geometria molecular</div>
+    <div class=
+© 2026 KiFácil
+© 2026 KiFácil Academy
+1 próton a mais
+2 elétrons a mais
+Add 2 elétrons
+Add elétrons
+afastar-se ao máximo
+Agora aparece uma balança com os átomos dos reagentes e dos produtos.
+Agora é sua vez. Para cada gás, calcule o número de mols e o volume nas CNTP.
+Agora imagine que algumas dessas nuvens representam ligações e outras representam pares isolados.
+Agora observe esta reação completa e identifique cada parte.
+Agora vamos aprender os estados físicos usados nas equações.
+Agora vamos identificar as partes da equação.
+Agora você pode alterar apenas os coeficientes. Observe os contadores.
+Agora você sabe por que o metano é tetraédrico, a amônia é piramidal e a água é angular — todas partem da mesma organização tetraédrica de nuvens eletrônicas.
+Ainda não... ajuste e tente de novo
+amônia
+ÂNION
+ânion 3−
+Aqui estão duas substâncias: carbono e gás oxigênio.
+Associe cada base à sua solubilidade em água.
+átomo neutro
+Átomo Neutro
+atomo-clique-dica
+Balanceamento de Equações — Premium Game | KiFácil
+Balanceamento de Equações Químicas
+Balanceie esta equação observando os átomos.
+Bases ou Hidróxidos
+Bases ou Hidróxidos — Premium Game | KiFácil
+Bohr's Laboratory — Time Capsule | KiFácil
+btn-continuar
+btn-continuar btn-iniciar-investigacao
+btn-continuar show
+btn-continuar-lousa
+btn-iniciar-exp
+Building the Linus Pauling Diagram | KiFácil
+Campus of KiFácil Academy
+Carga = Prótons − Elétrons
+CÁTION
+cátion 2+
+Chamber of Atomic Records | KiFácil
+Chamber of Atomic Records at KiFácil Academy
+Chemical Bonds — Premium Game | KiFácil
+Chemistry Escape Room — Victorian Kitchen | KiFácil
+Classify the Substance — Game | KiFácil
+clicarTelescópio()
+Clique em: ' + alvos[indice].nome + '
+Clique para iniciar a reação.
+clique-${atomo.id}
+Coloque 1 mol de gás
+Continuar
+Continuar ?
+Continuar →
+Correto: elétrons.
+Courtyard at KiFácil Academy
+Courtyard of the three cats at KiFácil Academy
+Deep Layers · KiFácil
+Density Challenge — KiFácil
+Diferença de electronegativity
+dióxido de carbono
+Discover o que acontece quando uma base é dissolvida em água — antes de decorar qualquer definição.
+Discover por que cada molécula tem a forma que tem, observando como nuvens eletrônicas se organizam ao redor de um átomo central.
+Discover por que uma equação química precisa ser balanceada — nenhum átomo pode surgir ou desaparecer.
+Discover que uma reação química é apenas um rearranjo de átomos — e a equação química é só uma forma de representá-lo.
+Discover, observando experimentos, por que qualquer gás ocupa o mesmo volume nas CNTP quando possui um mol.
+Dormitory at KiFácil Academy
+Elétrons
+Elétrons:
+Elétrons: ${d.start}
+Energy Levels and Sublevels Laboratory · KiFácil
+Entrance Hall of the Deep Layers | KiFácil
+Entrance Hall of the Deep Layers at KiFácil Academy
+Equação montada corretamente!
+Escape Room · KiFácil Academy
+Escolha uma das opções abaixo.
+Essa não é a região certa. Tente novamente.
+Esse átomo possui 12 prótons e 12 elétrons. Precisamos transformá-lo em um <strong>cátion 2+</strong>. O que devemos fazer primeiro?
+Esse átomo possui 7 prótons e 7 elétrons. Transforme-o em um <strong>ânion 3−</strong>.<br>
+Esse átomo possui 9 prótons e 7 elétrons, vamos fazê-lo voltar ao <strong>estado neutro</strong>.<br>Adicione 2 elétrons.
+Este é um <strong>átomo neutro</strong>. Observe e clique em Próximo.
+Este site utiliza cookies para melhorar sua experi&ecirc;ncia. Ao continuar navegando, voc&ecirc; concorda com nossa
+Estudo concluído
+Every corner of KiFácil Academy was designed to feel like a real place — one you'll want to come back to.
+Excelente. Agora você consegue compreender o comportamento das bases em solução aquosa.
+Excelente. Agora você consegue visualizar por que algumas moléculas possuem polarity e outras não.
+Excelente. Agora você entende por que cada geometria molecular surge — tudo começa com nuvens eletrônicas se afastando ao máximo.
+Excelente. Agora você entende por que qualquer gás ocupa o mesmo volume nas CNTP.
+Excelente. Agora você entende que balancear não significa fazer contas. Significa garantir que os mesmos átomos existam antes e depois da reação.
+Excelente. Agora vou posicionar este pequeno cata-vento de metal � uma roda com l�minas leves � bem no caminho do feixe cat�dico, dentro do tubo. Ligue novamente a fonte.
+Existe diferença de electronegativity entre os átomos?
+Explore the isotope laboratory and discover isotopes, isotones and isobars. Time Capsule Escape Room — KiFácil.
+Façade of KiFácil Academy at dusk
+Fase concluída
+Fe (metal sólido)
+FÉRR
+Formação de Íons
+Formação do Ânion
+Formação do Cátion
+Ganha elétrons → Ânion → Carga negativa.
+Gás
+Geometria eletrônica: tetraédrica
+H₂O (líquido)
+Há diferença de electronegativity entre C e O, mas como o CO₂ é linear, os vetores se anulam. Portanto, o CO₂ é uma molécula nonpolar.
+Há diferença de electronegativity entre N e H, e como o NH₃ é piramidal, os vetores não se anulam. Portanto, o NH₃ é uma molécula polar.
+Há diferença de electronegativity entre O e H, e como a água é angular, os vetores não se anulam. Portanto, a água é uma molécula polar.
+Há uma pequena diferença de electronegativity entre C e H, mas a simetria tetraédrica do CH₄ anula os vetores. Portanto, o CH₄ é uma molécula nonpolar.
+hidrogênio
+HIDRÓXIDO
+hidróxido de + nome do elemento
+imagens/professora-mapa.png
+Inorganic Functions in Everyday Life — Premium Game | KiFácil
+Intermolecular Interactions — Premium Game | KiFácil
+íon
+Íons — Torre de Química | Academia KiFácil
+Isotope Laboratory — Time Capsule | KiFácil
+Jogar novamente
+John Dalton's Cabinet — KiFácil Game
+KiFácil
+KiFácil Academy
+KiFácil Academy — Stage 4
+KiFácil Academy — Welcome to the Chemistry Tower
+KiFácil Academy · Chemistry Tower
+KiFácil Academy at night, under the stars
+KiFácil Academy turns Chemistry study into an immersive journey — maps, games and challenges inside a Tower that only opens for those who persist.
+Knowledge map of KiFácil Academy
+Laboratório de íons
+Laboratório de reações químicas
+Laboratório Interativo
+Laboratory at KiFácil Academy
+Laboratory of Periodic Properties · KiFácil
+Lembre-se: hidróxidos de metais alcalinos e o hidróxido de amônio são muito solúveis; os de metais alcalinoterrosos são pouco solúveis; os demais são praticamente insolúveis.
+Library at KiFácil Academy
+Ligação polar
+Ligações × pares isolados
+Manômetro
+Mendeleev's Study — Time Capsule | KiFácil
+Molar Volume of Gases — Premium Game | KiFácil
+Molecular Geometry — Premium Game | KiFácil
+Muito bem! Agora clique em <strong>Continuar</strong> e remova dois elétrons da camada mais externa.
+Muito bem. A organização das nuvens continua tetraédrica. Mas observando apenas os átomos, enxergamos uma pirâmide.
+Muito bem. As quatro nuvens continuam organizadas em um tetraedro. Mas observando apenas os átomos, enxergamos outra forma.
+Muito solúvel
+N₂ + H₂ → NH₃. Será que essa reação está correta?
+Na última fase vimos que os ácidos produzem H₃O⁺. Agora vamos descobrir o comportamento das bases.
+NaCl dissolvido em água
+NaO
+nao
+Não
+Não é essa. Tente novamente.
+nitrogênio
+Nuvens eletrônicas se repelem
+O carbonato de cálcio se decompõe em óxido de cálcio e gás carbônico.
+O ferro reage com o oxigênio formando óxido de ferro (ferrugem).
+O número de elétrons
+O número de nêutrons
+O número de prótons
+o par eletrônico isolado
+O sódio transfere elétrons para o cloro, formando NaCl.
+O₂ (gás)
+Observatório molecular
+Observe a dissociação em cada recipiente.
+Observe a reação entre
+Organização espacial de menor energia
+Orientação tetraédrica
+Os átomos de hidrogênio e cloro se rearranjam formando HCl.
+os pares eletrônicos isolados
+oxigênio
+Oxigênio: clique em <strong>Add elétrons</strong>.
+Pátio dos Álcalis
+Perde elétrons → Cátion → Carga positiva.
+Perfeito! Você montou a equação C + O₂ → CO₂.
+Periodic Table at KiFácil Academy
+Polaridade das Moléculas
+Polaridade das Moléculas — Premium Game | KiFácil
+POTÁSSIO
+Pouco solúvel
+Praticamente insolúvel
+Pressão
+Preview of a KiFácil Academy Escape Room
+Preview of a KiFácil Academy Interactive Game
+Preview of a KiFácil Academy Mind Map
+Preview of KiFácil Academy updates
+Primeiro escolha uma categoria à esquerda.
+Professora Rafaela
+professora-mapa.png
+Prótons
+Prótons e nêutrons nunca mudam.
+Próximo →
+Próximo desafio →
+Qual é a carga elétrica desse átomo?
+Qual é o átomo mais eletronegativo?
+Quando um átomo vira <strong>íon</strong>, o que muda? <strong>Escolha uma das opções abaixo.</strong>
+que elétrons, a carga resultante é
+que prótons, a carga é
+Reações Químicas
+Reações Químicas — Premium Game | KiFácil
+Reagent Identification Laboratory | KiFácil
+Recomeçar
+Remove 2 elétrons
+Rutherford's Laboratory — Time Capsule | KiFácil
+Sala de balanceamento de equações
+Salts — Premium Game | KiFácil
+Será que gases diferentes ocupam volumes diferentes?
+Sob essas condições — chamadas de CNTP, Condições Normais de Temperatura e Pressão — todos os gases apresentam o mesmo volume quando possuem um mol.
+SÓDIO
+Sódio: clique no elétron da última camada para removê-lo.
+Stage 1 of the KiFácil Academy Mind Maps Escape Room. Discover the four hidden atomic models in the room and crack the cation lock to open the first door.
+Stage 3 of the KiFácil Academy Mind Maps Escape Room. Use isotone and isobar clues to discover the identity of each element and type the answers on the scrolls.
+Stage 4 of the chemistry escape room: Victorian kitchen. Solve the mixture-separation puzzle to escape. KiFácil Academy.
+Stage 5 of the KiFácil Academy Mind Maps Escape Room. Cross the Periodic Table following family and period clues until you find the right element.
+Stage 7 (Layer 1) of the KiFácil Academy Mind Maps Escape Room. The final stage of the Deep Layers Challenge: decipher the code that opens the Gate of Knowledge.
+Step into KiFácil Academy and experience the Chemistry Tower: mind maps, interactive games, video lessons and an Escape Room that transform the way you learn Chemistry.
+Study Room at KiFácil Academy
+Termômetro
+Teste a água pura.
+tetraédrica
+The Gallery of Acids — Premium Game | KiFácil
+The Gate of Knowledge | KiFácil
+The Measure of Three Cats | KiFácil
+The Periodic Table Crossing | KiFácil
+The Structure of the Atom — KiFácil
+The Titanium Card | KiFácil
+Today we will descobrir por que algumas moléculas possuem um lado mais negativo e outras não.
+Today we will descobrir por que algumas moléculas possuem um lado mais negativo e outras não. Você não vai decorar regras — vai enxergar a polarity acontecendo.
+Today we will entender por que as moléculas têm a forma que têm.
+Use a régua proporcional abaixo: arraste até encontrar a posição de 0,15 mol e veja o volume correspondente.
+Vamos começar.
+Vamos explorar os íons com calma.
+Vamos observar três bases diferentes se dissolvendo em água.
+Vamos testar se a água pura conduz corrente elétrica.
+Verificar posição
+VERIFICAR POSIÇÃO
+Você descobriu, observando os experimentos, que nas CNTP qualquer gás ocupa 22,4 litros por mol — independentemente da sua massa molar.
+Você entendeu a origem da geometria molecular
+Welcome to KiFácil Academy

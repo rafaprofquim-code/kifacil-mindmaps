@@ -373,7 +373,41 @@
       .item-associacao { font-size: 0.78rem; padding: 0.4rem 0.7rem; }
       .medidor-ionizacao { width: 92%; }
     }
-  </style>
+  
+    /* AUDIO CONTROL */
+    #controle-volume {
+      position: fixed;
+      bottom: 16px;
+      right: 16px;
+      z-index: 300;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(14,6,0,0.85);
+      border: 1.5px solid var(--borda-forte);
+      border-radius: 24px;
+      padding: 8px 16px 8px 10px;
+    }
+    #btn-mute {
+      background: none;
+      border: none;
+      color: var(--dourado-claro);
+      font-size: 18px;
+      cursor: pointer;
+      padding: 0;
+      width: 22px;
+      height: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    #slider-volume {
+      width: 90px;
+      accent-color: var(--dourado-claro);
+      cursor: pointer;
+    }
+</style>
 </head>
 <body>
 
@@ -383,7 +417,7 @@
 
 <main>
   <h1 class="titulo-jogo">The Gallery of Acids</h1>
-  <p class="subtitulo">Investigate what happens when an acid is placed in water — before memorizing any definition.</p>
+  <p class="subtitulo">Investigate what happens when an acid is dissolved in water before memorizing any definition.</p>
 
   <div class="narrador">
     <img src="../imagens/rafa-sorrindo.jpg" alt="Professor Rafaela" />
@@ -477,7 +511,7 @@ function criarCircuito(id) {
     '<line x1="100" y1="30" x2="100" y2="26" stroke="#3d2e1a" stroke-width="2"/>' +
     '<g id="ions-' + id + '"></g>' +
     '</svg>' +
-    '<div class="frasco-rotulo">Test circuit</div>';
+    '<div class="frasco-rotulo">Conductivity Tester</div>';
   return div;
 }
 function definirIntensidadeLampada(id, intensidade) {
@@ -753,24 +787,24 @@ function passoIntro() {
    STEP 2 — ELECTRICAL CONDUCTIVITY
    ========================================================== */
 function passoEtapa2() {
-  fala('Let\'s test whether pure water conducts electric current.');
+  fala('Let\'s use the conductivity tester to check whether pure water conducts electric current.');
   const circuito = criarCircuito('circ-e2');
   overlay.appendChild(circuito);
 
   painel.innerHTML = '';
   const wrap = document.createElement('div');
   wrap.className = 'interacao-painel';
-  wrap.innerHTML = '<div class="interacao-pergunta-texto">Test the pure water.</div>';
+  wrap.innerHTML = '<div class="interacao-pergunta-texto">Test pure water in the conductivity tester.</div>';
   const btnTestar = document.createElement('button');
   btnTestar.className = 'btn-continuar';
-  btnTestar.textContent = 'TEST';
+  btnTestar.textContent = 'RUN TEST';
   wrap.appendChild(btnTestar);
   painel.appendChild(wrap);
 
   btnTestar.addEventListener('click', function () {
     btnTestar.disabled = true;
     definirIntensidadeLampada('circ-e2', 0.1);
-    fala('The bulb barely lights up: pure water has very few ions.');
+    fala('The bulb barely lights: pure water contains very few ions.');
     botaoContinuarLocal(passoEtapa2b, 700);
   });
 }
@@ -778,7 +812,7 @@ function passoEtapa2() {
 function passoEtapa2b() {
   const wrap = document.createElement('div');
   wrap.className = 'interacao-painel';
-  wrap.innerHTML = '<div class="interacao-pergunta-texto">Now add the HCl solution.</div>';
+  wrap.innerHTML = '<div class="interacao-pergunta-texto">Now test HCl dissolved in water.</div>';
   const btnAdd = document.createElement('button');
   btnAdd.className = 'btn-continuar';
   btnAdd.textContent = 'Add HCl';
@@ -791,7 +825,7 @@ function passoEtapa2b() {
     animarIonsCircuito('circ-e2');
     definirIntensidadeLampada('circ-e2', 1);
     tocarBrilho();
-    fala('Look, the bulb lights up! What do you think the acid releases into the water that allows it to conduct electric current?');
+    fala('Now the bulb lights up. What does the acid release in water that allows the solution to conduct electric current?');
     botaoContinuarLocal(passoEtapa2c, 900);
   });
 }
@@ -801,7 +835,7 @@ function passoEtapa2c() {
   placa.className = 'placa-dourada';
   placa.textContent = 'H⁺ + H₂O → H₃O⁺';
   overlay.appendChild(placa);
-  fala('According to Arrhenius, every acid releases H⁺ (a proton) into water. But the proton doesn\'t stay free — it bonds with a water molecule, forming H₃O⁺.');
+  fala('According to Arrhenius, an acid ionizes in water and produces H⁺. In aqueous solution, H⁺ does not remain free. It immediately combines with a water molecule to form H₃O⁺ (the hydronium ion).');
   painel.innerHTML = '';
   botaoContinuarLocal(passoEtapa2d, 700);
 }
@@ -810,9 +844,9 @@ function passoEtapa2d() {
   overlay.querySelectorAll('.placa-dourada').forEach(function (p) { p.remove(); });
   const placa = document.createElement('div');
   placa.className = 'placa-dourada';
-  placa.textContent = 'HCl + H₂O → H₃O⁺ + Cl⁻ (ionization equation)';
+  placa.textContent = 'HCl + H₂O → H₃O⁺ + Cl⁻ (ionization in water)';
   overlay.appendChild(placa);
-  fala('This is the ionization equation for HCl: the H⁺ released combines with water to form H₃O⁺, while Cl⁻ remains free in solution. These are the ions that carry the electric current.');
+  fala('This is the ionization equation for HCl in water: the released H⁺ combines with H₂O to form H₃O⁺, while Cl⁻ remains in solution. These ions are what carry electric current.');
   painel.innerHTML = '';
   botaoContinuar(500);
 }
@@ -837,7 +871,7 @@ function passoIonizacao() {
     col.innerHTML =
       '<div class="recipiente-titulo">' + d.nome + '</div>' +
       '<div class="recipiente-particulas" id="part-' + d.id + '"></div>' +
-      '<div class="recipiente-contador" id="cont-' + d.id + '">Dissolved molecules: 20<br>Ionized molecules: 0</div>';
+      '<div class="recipiente-contador" id="cont-' + d.id + '">Molecules dissolved: 20<br>Molecules ionized: 0</div>';
     linha.appendChild(col);
     const partContainer = col.querySelector('#part-' + d.id);
     for (let i = 0; i < 20; i++) {
@@ -863,7 +897,7 @@ function passoIonizacao() {
       const partContainer = document.getElementById('part-' + d.id);
       const particulas = Array.from(partContainer.children).sort(function () { return Math.random() - 0.5; });
       for (let i = 0; i < d.ionizadas; i++) particulas[i].classList.add('particula-ionizada');
-      document.getElementById('cont-' + d.id).innerHTML = 'Dissolved molecules: 20<br>Ionized molecules: ' + d.ionizadas;
+      document.getElementById('cont-' + d.id).innerHTML = 'Molecules dissolved: 20<br>Molecules ionized: ' + d.ionizadas;
     });
     escolhaBotoes({
       pergunta: 'In which solution did the greatest ionization occur?',
@@ -873,7 +907,7 @@ function passoIonizacao() {
         { rotulo: 'Acid C', correta: true }
       ],
       dica: 'Count how many molecules actually ionized in each container.',
-      explicacao: 'Acid C had almost all of its molecules ionized — the highest degree of ionization (α = ionized molecules ÷ dissolved molecules). The higher the degree of ionization, the stronger the acid.',
+      explicacao: 'Acid C has the highest degree of ionization (α = ionized molecules ÷ dissolved molecules). Strong acids ionize almost completely in water, whereas weak acids ionize only partially.',
       aoAcertar: function () {
         agendar(function () {
           const medidor = criarMedidorIonizacao('med-ion');
@@ -883,7 +917,7 @@ function passoIonizacao() {
           painelCalculo.innerHTML = '<div class="linha-calculo">α = 18 ÷ 20</div><div class="linha-calculo linha-calculo-final">α = 90% — strong acid</div>';
           overlay.insertBefore(painelCalculo, linha);
           atualizarMedidorIonizacao('med-ion', 90);
-          fala('The higher the proportion of ionized molecules, the higher the degree of ionization. Since 90% is greater than 50%, Acid C is strong.');
+          fala('The greater the fraction of molecules that ionize, the greater the degree of ionization (α). Since 90% is above 50%, Acid C is classified as a strong acid.');
           botaoContinuar(500);
         }, 300);
       }
@@ -895,7 +929,7 @@ function passoIonizacao() {
    STEP 5 — VISUAL COMPARISON (rank by clicking)
    ========================================================== */
 function passoEtapa5() {
-  fala('Observe these three substances in solution. Click them in order from greatest to least ionization.');
+  fala('Observe these three acid solutions. Click them in order from greatest to least ionization.');
   const substancias = [
     { chave: 'HCl', ionizadas: 18 },
     { chave: 'HF', ionizadas: 6 },
@@ -941,7 +975,7 @@ function passoEtapa5() {
           const acertou = selecaoAtual.every(function (c, i) { return c === ordemCorreta[i]; });
           if (acertou) {
             tocarDing();
-            fala('The number of hydrogens in the formula alone doesn\'t determine the strength of the acid. Strength is related to the proportion that actually ionizes in water.');
+            fala('The number of hydrogens in the formula alone does not determine acid strength. Strength depends on the fraction that actually ionizes in water.');
             botaoContinuar(500);
           } else {
             fala('Compare the number of golden (ionized) particles in each container and try again.');
@@ -961,21 +995,21 @@ function passoEtapa5() {
    STEP 6 — HYDRACIDS
    ========================================================== */
 function passoHidracidos() {
-  fala('Now let\'s name the acids. These formulas have no oxygen: they are the HYDRACIDS, named HYDRO + anion root + -IC ACID. Match each formula to its name.');
+  fala('Now let\'s name acids. These formulas contain no oxygen: they are binary acids (hydracids), named hydro + anion root + ic acid. Match each formula to its name.');
 
   criarJogoDeAssociacao([
     { chave: 'HCl', nome: 'hydrochloric acid' },
     { chave: 'HBr', nome: 'hydrobromic acid' },
     { chave: 'HI', nome: 'hydroiodic acid' },
     { chave: 'HF', nome: 'hydrofluoric acid' }
-  ], 'Look at the anion\'s name and the suffix used in hydracids.', 'Well done! You named all the hydracids correctly.');
+  ], 'Check the anion root and the suffix used in binary acids (hydracids).', 'Well done! You named all the binary acids correctly.');
 }
 
 /* ==========================================================
    STEP 7 — OXYACIDS
    ========================================================== */
 function passoOxiacidos() {
-  fala('These acids contain oxygen: they are the OXYACIDS. Compare the pairs below — what differentiates each pair?');
+  fala('These acids contain oxygen: they are oxyacids (oxoacids). Compare the pairs below. What distinguishes each pair?');
   const linha = document.createElement('div');
   linha.className = 'linha-cartas-simples';
   ['HNO3', 'HNO2', 'H2SO4', 'H2SO3'].forEach(function (c) {
@@ -988,19 +1022,19 @@ function passoOxiacidos() {
 
   agendar(function () {
     escolhaBotoes({
-      pergunta: 'What differentiates each pair of oxyacids of the same element?',
+      pergunta: 'What distinguishes each pair of oxyacids with the same central element?',
       opcoes: [
         { rotulo: 'The amount of oxygen', correta: true },
         { rotulo: 'The amount of hydrogen', correta: false },
         { rotulo: 'The central element', correta: false }
       ],
       dica: 'Compare the two oxyacids of each element and count the oxygen atoms.',
-      explicacao: 'More oxygen → higher oxidation number → -IC ending (nitric, sulfuric). Less oxygen → lower oxidation number → -OUS ending (nitrous, sulfurous). This comparison only applies between oxyacids of the same central element.',
+      explicacao: 'More oxygen means a higher oxidation number and the -ic ending (nitric, sulfuric). Less oxygen means a lower oxidation number and the -ous ending (nitrous, sulfurous). This rule applies when comparing oxyacids with the same central element.',
       aoAcertar: function () {
         agendar(function () {
           const placa = document.createElement('div');
           placa.className = 'placa-dourada';
-          placa.textContent = 'Higher oxidation number → -IC   |   Lower oxidation number → -OUS';
+          placa.textContent = 'Higher oxidation number -> -ic   |   Lower oxidation number -> -ous';
           overlay.appendChild(placa);
           botaoContinuar(400);
         }, 300);
@@ -1014,7 +1048,7 @@ function passoOxiacidos() {
    ========================================================== */
 function criarPassoNomenclatura(chave) {
   return function () {
-    fala('Identify and name the acid: ' + FORMULAS[chave] + '.');
+    fala('Identify and name this acid: ' + FORMULAS[chave] + '.');
     const cartaoFormula = document.createElement('div');
     cartaoFormula.className = 'cartao-formula-grande';
     cartaoFormula.style.position = 'absolute';
@@ -1023,13 +1057,13 @@ function criarPassoNomenclatura(chave) {
     overlay.appendChild(cartaoFormula);
 
     escolhaBotoes({
-      pergunta: 'Is this acid a hydracid or an oxyacid?',
+      pergunta: 'Is this acid a binary acid (hydracid) or an oxyacid (oxoacid)?',
       opcoes: [
-        { rotulo: 'Hydracid', correta: TIPO_ACIDO[chave] === 'hidracido' },
-        { rotulo: 'Oxyacid', correta: TIPO_ACIDO[chave] === 'oxiacido' }
+        { rotulo: 'Binary acid (hydracid)', correta: TIPO_ACIDO[chave] === 'hidracido' },
+        { rotulo: 'Oxyacid (oxoacid)', correta: TIPO_ACIDO[chave] === 'oxiacido' }
       ],
       dica: 'Check whether the formula contains oxygen.',
-      explicacao: TIPO_ACIDO[chave] === 'hidracido' ? 'No oxygen: it is a hydracid.' : 'With oxygen: it is an oxyacid.',
+      explicacao: TIPO_ACIDO[chave] === 'hidracido' ? 'No oxygen is present, so it is a binary acid (hydracid).' : 'Oxygen is present, so it is an oxyacid (oxoacid).',
       aoAcertar: function () {
         agendar(function () {
           montarNomePorBlocos(chave, function () { agendar(function () { botaoContinuar(400); }, 300); });
@@ -1045,15 +1079,15 @@ const passosNomenclatura = NOMENCLATURA_ORDEM.map(function (c) { return criarPas
    CONCLUSION
    ========================================================== */
 function passoFinal() {
-  fala('Excellent. Now you can recognize an acid, interpret its ionization, and build its name.');
+  fala('Excellent work. You can now identify an acid, interpret its ionization, and apply acid nomenclature rules.');
   function linha(txt) { return '<div class="resumo-linha">' + txt + '</div>'; }
   overlay.innerHTML =
     '<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:12px;">' +
     '<div class="quadro-resumo-final">' +
-    linha('Acids in water form H₃O⁺.') +
-    linha('The ions produced conduct electric current.') +
-    linha('Different acids have different degrees of ionization (α).') +
-    linha('Hydracids and oxyacids follow their own naming rules.') +
+    linha('Acids ionize in water and form H₃O⁺.') +
+    linha('The ions produced allow the solution to conduct electric current.') +
+    linha('Each acid has its own degree of ionization (α).') +
+    linha('Binary acids (hydracids) and oxyacids follow specific naming rules.') +
     '</div></div>';
 
   painel.innerHTML = '';
@@ -1070,7 +1104,7 @@ function passoFinal() {
   btnConcluir.addEventListener('click', function () {
     const conclusao = document.getElementById('conclusao');
     document.getElementById('conclusaoPlacar').textContent = 'Stage completed';
-    document.getElementById('conclusaoMensagem').textContent = 'You investigated acids: how they form H₃O⁺ in water, how they conduct electric current, what degree of ionization is, and how to name hydracids and oxyacids.';
+    document.getElementById('conclusaoMensagem').textContent = 'You investigated acids: how they ionize in water to form H₃O⁺, how acidic solutions conduct electric current, what the degree of ionization (α) means, and how to name binary acids (hydracids) and oxyacids.';
     conclusao.classList.add('visivel');
     conclusao.scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
@@ -1106,14 +1140,82 @@ irPara(0);
 </script>
 
 <script>
+let volumeSalvo = parseFloat(localStorage.getItem('kifacil_volume'));
+if (isNaN(volumeSalvo)) volumeSalvo = 0.35;
+let silenciado = localStorage.getItem('kifacil_silenciado') === '1';
+let musicaFundo = null;
+
+function volumeEfetivo() {
+  return silenciado ? 0 : volumeSalvo;
+}
+
+function iniciarMusicaFundo() {
+  if (musicaFundo) return;
+  try {
+    musicaFundo = new Audio('../sons/natureza.mp3');
+    musicaFundo.loop = true;
+    musicaFundo.volume = volumeEfetivo();
+    musicaFundo.play().catch(function () {});
+  } catch (e) {}
+}
+
+function atualizarIconeMudo() {
+  const botao = document.getElementById('btn-mute');
+  if (!botao) return;
+  if (silenciado || volumeSalvo === 0) botao.textContent = '🔇';
+  else if (volumeSalvo < 0.5) botao.textContent = '🔉';
+  else botao.textContent = '🔊';
+}
+
+function alternarMudo() {
+  silenciado = !silenciado;
+  localStorage.setItem('kifacil_silenciado', silenciado ? '1' : '0');
+  if (musicaFundo) musicaFundo.volume = volumeEfetivo();
+  atualizarIconeMudo();
+}
+
+function ajustarVolume(valorSlider) {
+  volumeSalvo = Math.max(0, Math.min(1, valorSlider / 100));
+  localStorage.setItem('kifacil_volume', volumeSalvo);
+  if (volumeSalvo > 0 && silenciado) {
+    silenciado = false;
+    localStorage.setItem('kifacil_silenciado', '0');
+  }
+  if (musicaFundo) musicaFundo.volume = volumeEfetivo();
+  atualizarIconeMudo();
+}
+
+(function iniciarControleVolume() {
+  const slider = document.getElementById('slider-volume');
+  if (slider) slider.value = Math.round(volumeSalvo * 100);
+  atualizarIconeMudo();
+  iniciarMusicaFundo();
+
+  const ativarSom = function () {
+    if (!musicaFundo) iniciarMusicaFundo();
+    if (musicaFundo) {
+      musicaFundo.volume = volumeEfetivo();
+      musicaFundo.play().catch(function () {});
+    }
+  };
+  window.addEventListener('pointerdown', ativarSom, { once: true });
+  window.addEventListener('keydown', ativarSom, { once: true });
+})();
+</script>
+<script>
 (function () {
   var _clickSom = new Audio('../sons/click.mp3');
   _clickSom.preload = 'auto';
   document.addEventListener('click', function (e) {
     var alvo = e.target.closest('button');
-    if (alvo) { try { _clickSom.currentTime = 0; _clickSom.play().catch(function () {}); } catch (err) {} }
+    if (alvo) { try { _clickSom.currentTime = 0; _clickSom.volume = (typeof volumeEfetivo === 'function' ? volumeEfetivo() : 0.35); _clickSom.play().catch(function () {}); } catch (err) {} }
   }, true);
 })();
 </script>
+<div id="controle-volume">
+  <button id="btn-mute" onclick="alternarMudo()" aria-label="Mute or unmute sound">🔊</button>
+  <input type="range" id="slider-volume" min="0" max="100" value="35" oninput="ajustarVolume(this.value)" aria-label="Volume">
+</div>
 </body>
 </html>
+

@@ -583,6 +583,17 @@
     const slider = document.getElementById('slider-volume');
     if (slider) slider.value = Math.round(volumeSalvo * 100);
     atualizarIconeMudo();
+
+    iniciarMusicaFundo();
+    const ativarSom = function () {
+      if (!musicaFundo) iniciarMusicaFundo();
+      if (musicaFundo) {
+        musicaFundo.volume = volumeEfetivo();
+        musicaFundo.play().catch(function () {});
+      }
+    };
+    window.addEventListener('pointerdown', ativarSom, { once: true });
+    window.addEventListener('keydown', ativarSom, { once: true });
   })();
 
   function tocarClick() {

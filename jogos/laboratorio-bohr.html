@@ -204,6 +204,40 @@
     .link-aula { top: 6px; right: 6px; padding: 0.3rem 0.5rem; font-size: 0.6rem; }
     .link-aula svg { width: 18px; height: 18px; }
   }
+
+    /* AUDIO CONTROL */
+    #controle-volume {
+      position: fixed;
+      bottom: 16px;
+      right: 16px;
+      z-index: 300;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(14,6,0,0.85);
+      border: 1.5px solid var(--borda-forte);
+      border-radius: 24px;
+      padding: 8px 16px 8px 10px;
+    }
+    #btn-mute {
+      background: none;
+      border: none;
+      color: var(--dourado-claro);
+      font-size: 18px;
+      cursor: pointer;
+      padding: 0;
+      width: 22px;
+      height: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    #slider-volume {
+      width: 90px;
+      accent-color: var(--dourado-claro);
+      cursor: pointer;
+    }
 </style>
 </head>
 <body>
@@ -1266,6 +1300,10 @@ function svgSimulador(nivelBaixo, nivelAlto, tipo, cor) {
 }
 </script>
 
+<div id="controle-volume">
+  <button id="btn-mute" onclick="alternarMudo()" aria-label="Mute or unmute sound">🔊</button>
+  <input type="range" id="slider-volume" min="0" max="100" value="35" oninput="ajustarVolume(this.value)" aria-label="Volume">
+</div>
 <div id="cookie-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#1a0f08;border-top:1px solid rgba(212,170,106,0.4);padding:1rem 2rem;z-index:9999;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;"><p style="margin:0;font-family:'Libre Baskerville',serif;font-size:0.82rem;color:#e8d4b0;line-height:1.5;">This site uses cookies to improve your experience. By continuing to browse, you agree to our <a href="/politica-de-privacidade.html" style="color:#e8b84b;text-decoration:underline;text-underline-offset:2px;">Privacy Policy</a>.</p><button onclick="document.getElementById('cookie-banner').style.display='none';localStorage.setItem('kifacil_cookies','1');" style="flex-shrink:0;background:#e8b84b;border:none;padding:0.55rem 1.5rem;font-family:'Libre Baskerville',serif;font-size:0.78rem;font-weight:700;color:#1a0f08;cursor:pointer;letter-spacing:0.04em;">Got it</button></div>
 <script>if(!localStorage.getItem('kifacil_cookies'))document.getElementById('cookie-banner').style.display='flex';</script>
 <script type="module">
@@ -1288,14 +1326,78 @@ function svgSimulador(nivelBaixo, nivelAlto, tipo, cor) {
 
 </script>
 <script>
+let volumeSalvo = parseFloat(localStorage.getItem('kifacil_volume'));
+if (isNaN(volumeSalvo)) volumeSalvo = 0.35;
+let silenciado = localStorage.getItem('kifacil_silenciado') === '1';
+let musicaFundo = null;
+
+function volumeEfetivo() {
+  return silenciado ? 0 : volumeSalvo;
+}
+
+function iniciarMusicaFundo() {
+  if (musicaFundo) return;
+  try {
+    musicaFundo = new Audio('../sons/natureza.mp3');
+    musicaFundo.loop = true;
+    musicaFundo.volume = volumeEfetivo();
+    musicaFundo.play().catch(function () {});
+  } catch (e) {}
+}
+
+function atualizarIconeMudo() {
+  const botao = document.getElementById('btn-mute');
+  if (!botao) return;
+  if (silenciado || volumeSalvo === 0) botao.textContent = '🔇';
+  else if (volumeSalvo < 0.5) botao.textContent = '🔉';
+  else botao.textContent = '🔊';
+}
+
+function alternarMudo() {
+  silenciado = !silenciado;
+  localStorage.setItem('kifacil_silenciado', silenciado ? '1' : '0');
+  if (musicaFundo) musicaFundo.volume = volumeEfetivo();
+  atualizarIconeMudo();
+}
+
+function ajustarVolume(valorSlider) {
+  volumeSalvo = Math.max(0, Math.min(1, valorSlider / 100));
+  localStorage.setItem('kifacil_volume', volumeSalvo);
+  if (volumeSalvo > 0 && silenciado) {
+    silenciado = false;
+    localStorage.setItem('kifacil_silenciado', '0');
+  }
+  if (musicaFundo) musicaFundo.volume = volumeEfetivo();
+  atualizarIconeMudo();
+}
+
+(function iniciarControleVolume() {
+  const slider = document.getElementById('slider-volume');
+  if (slider) slider.value = Math.round(volumeSalvo * 100);
+  atualizarIconeMudo();
+  iniciarMusicaFundo();
+
+  const ativarSom = function () {
+    if (!musicaFundo) iniciarMusicaFundo();
+    if (musicaFundo) {
+      musicaFundo.volume = volumeEfetivo();
+      musicaFundo.play().catch(function () {});
+    }
+  };
+  window.addEventListener('pointerdown', ativarSom, { once: true });
+  window.addEventListener('keydown', ativarSom, { once: true });
+})();
+</script>
+<script>
 (function () {
   var _clickSom = new Audio('../sons/click.mp3');
   _clickSom.preload = 'auto';
   document.addEventListener('click', function (e) {
     var alvo = e.target.closest('button');
-    if (alvo) { try { _clickSom.currentTime = 0; _clickSom.play().catch(function () {}); } catch (err) {} }
+    if (alvo) { try { _clickSom.currentTime = 0; _clickSom.volume = (typeof volumeEfetivo === 'function' ? volumeEfetivo() : 0.35); _clickSom.play().catch(function () {}); } catch (err) {} }
   }, true);
 })();
 </script>
 </body>
 </html>
+

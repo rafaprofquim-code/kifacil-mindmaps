@@ -1,10 +1,10 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex, nofollow">
-  <title>Polaridade das Moléculas — Jogo Premium | KiFácil</title>
+  <title>Polaridade das Moléculas — Premium Game | KiFácil</title>
   <link rel="icon" type="image/png" href="/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -553,7 +553,41 @@
          para não ficar por cima dele. */
       .link-aula { top: 120px; }
     }
-  </style>
+  
+    /* AUDIO CONTROL */
+    #controle-volume {
+      position: fixed;
+      bottom: 16px;
+      right: 16px;
+      z-index: 300;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(14,6,0,0.85);
+      border: 1.5px solid var(--borda-forte);
+      border-radius: 24px;
+      padding: 8px 16px 8px 10px;
+    }
+    #btn-mute {
+      background: none;
+      border: none;
+      color: var(--dourado-claro);
+      font-size: 18px;
+      cursor: pointer;
+      padding: 0;
+      width: 22px;
+      height: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    #slider-volume {
+      width: 90px;
+      accent-color: var(--dourado-claro);
+      cursor: pointer;
+    }
+</style>
 </head>
 <body>
 
@@ -563,13 +597,13 @@
 
 <main>
   <h1 class="titulo-jogo">Polaridade das Moléculas</h1>
-  <p class="subtitulo">Observe os vetores de eletronegatividade e descubra sozinho quando eles se anulam e quando sobra um lado mais negativo.</p>
+  <p class="subtitulo">Observe os vetores de electronegativity e descubra sozinho quando eles se anulam e quando sobra um lado mais negativo.</p>
 
   <div class="narrador">
     <img src="../imagens/rafa-sorrindo.jpg" alt="Professora Rafaela" id="imgProfessora" />
     <div>
       <div class="narrador-nome">Professora Rafaela</div>
-      <div class="narrador-texto" id="narradorTexto">Hoje vamos descobrir por que algumas moléculas possuem um lado mais negativo e outras não.</div>
+      <div class="narrador-texto" id="narradorTexto">Today we will descobrir por que algumas moléculas possuem um lado mais negativo e outras não.</div>
       <button class="modal-btn-confirmar" id="btnContinuarFala">Continuar</button>
     </div>
   </div>
@@ -592,7 +626,7 @@
     <div class="resumo-cadeia">
       <div class="resumo-passo">Ligação polar</div>
       <div class="resumo-seta">↓</div>
-      <div class="resumo-passo">Diferença de eletronegatividade</div>
+      <div class="resumo-passo">Diferença de electronegativity</div>
       <div class="resumo-seta">↓</div>
       <div class="resumo-passo">Vetores</div>
       <div class="resumo-seta">↓</div>
@@ -602,7 +636,7 @@
       <div class="resumo-seta">↓</div>
       <div class="resumo-passo">Polar ou Apolar</div>
     </div>
-    <p class="conclusao-mensagem" id="conclusaoMensagem">Excelente. Agora você consegue visualizar por que algumas moléculas possuem polaridade e outras não.</p>
+    <p class="conclusao-mensagem" id="conclusaoMensagem">Excelente. Agora você consegue visualizar por que algumas moléculas possuem polarity e outras não.</p>
     <button class="btn-reiniciar" onclick="reiniciar()">Jogar novamente</button>
   </div>
 </main>
@@ -620,7 +654,7 @@
    ========================================================== */
 const ELETRONEGATIVIDADE = { H: 2.1, B: 2.0, C: 2.5, N: 3.0, O: 3.5, F: 4.0, Cl: 3.0, Br: 2.8, I: 2.5 };
 
-/* Diatômicas homonucleares — etapa 1 (sempre apolares) */
+/* Diatômicas homonucleares — etapa 1 (sempre nonpolares) */
 const DIATOMICAS_APOLARES = [
   { formula: 'H₂', simbolo: 'H' },
   { formula: 'Cl₂', simbolo: 'Cl' },
@@ -646,7 +680,7 @@ const MOLECULAS = {
 };
 
 const DICAS_SOCRATICAS = [
-  'Compare a eletronegatividade dos dois lados da ligação.',
+  'Compare a electronegativity dos dois lados da ligação.',
   'Observe para onde os vetores apontam — eles se equilibram?'
 ];
 function dicaAleatoria() { return DICAS_SOCRATICAS[Math.floor(Math.random() * DICAS_SOCRATICAS.length)]; }
@@ -734,7 +768,7 @@ function perguntarSimNao(pergunta, respostaSim, aoAcertar) {
   ]);
 }
 function perguntarDiferencaEletronegatividade(existeDiferenca, aoAcertar) {
-  perguntarSimNao('Existe diferença de eletronegatividade entre os átomos?', existeDiferenca, aoAcertar);
+  perguntarSimNao('Existe diferença de electronegativity entre os átomos?', existeDiferenca, aoAcertar);
 }
 function perguntarMaisEletronegativo(simboloA, simboloB, aoAcertar) {
   const aMaisEletronegativo = ELETRONEGATIVIDADE[simboloA] > ELETRONEGATIVIDADE[simboloB];
@@ -826,7 +860,7 @@ function moverParEletronico(g, pA, pB, frac) {
 }
 
 /* δ+ / δ− : cargas parciais exibidas em cima de cada átomo da
-   ligação, quando existe diferença de eletronegatividade (distinto
+   ligação, quando existe diferença de electronegativity (distinto
    de μ, usado para o momento dipolar resultante da molécula). */
 function mostrarDelta(ponto, sinal) {
   const t = criarSvgEl('text', { class: 'delta-label', x: ponto.x, y: ponto.y - 38 });
@@ -957,7 +991,7 @@ function mostrarMu(valor) {
 /* ==========================================================
    ETAPA 1 — diatômicas homonucleares (ν = 0)
    O par eletrônico da ligação nasce centralizado entre os átomos
-   e permanece ali: não há diferença de eletronegatividade.
+   e permanece ali: não há diferença de electronegativity.
    ========================================================== */
 function etapa1(idx) {
   if (idx >= DIATOMICAS_APOLARES.length) { etapa2(0); return; }
@@ -967,7 +1001,7 @@ function etapa1(idx) {
   desenharParEletronico(pA, pB, 0.5);
   falar('explicando', `Observe a molécula de ${mol.formula}.`, null);
   perguntarDiferencaEletronegatividade(false, () => {
-    falar('animada', `Não existe um lado mais negativo — os elétrons ficam igualmente distribuídos entre os dois átomos. Portanto, o ${mol.formula} é uma molécula apolar.`, () => {
+    falar('animada', `Não existe um lado mais negativo — os elétrons ficam igualmente distribuídos entre os dois átomos. Portanto, o ${mol.formula} é uma molécula nonpolar.`, () => {
       etapa1(idx + 1);
     });
   });
@@ -1026,20 +1060,20 @@ function criarSetaCurta(origem, anguloGraus) {
 
 /* ==========================================================
    ETAPA 3 — moléculas poliatômicas (CO2, H2O, NH3, CH4): mesmo
-   raciocínio da etapa 2 (existe diferença de eletronegatividade?),
+   raciocínio da etapa 2 (existe diferença de electronegativity?),
    agora somado à geometria da molécula para decidir se os vetores
    se anulam ou não. O aluno sempre controla quando prosseguir.
    ========================================================== */
 const ORDEM_ETAPA_GEOMETRIA = ['co2', 'h2o', 'nh3', 'ch4'];
 const EXPLICACAO_GEOMETRIA = {
   co2: { ehPolar: false, geometria: 'linear',
-    texto: 'Há diferença de eletronegatividade entre C e O, mas como o CO₂ é linear, os vetores se anulam. Portanto, o CO₂ é uma molécula apolar.' },
+    texto: 'Há diferença de electronegativity entre C e O, mas como o CO₂ é linear, os vetores se anulam. Portanto, o CO₂ é uma molécula nonpolar.' },
   h2o: { ehPolar: true, geometria: 'angular',
-    texto: 'Há diferença de eletronegatividade entre O e H, e como a água é angular, os vetores não se anulam. Portanto, a água é uma molécula polar.' },
+    texto: 'Há diferença de electronegativity entre O e H, e como a água é angular, os vetores não se anulam. Portanto, a água é uma molécula polar.' },
   nh3: { ehPolar: true, geometria: 'piramidal',
-    texto: 'Há diferença de eletronegatividade entre N e H, e como o NH₃ é piramidal, os vetores não se anulam. Portanto, o NH₃ é uma molécula polar.' },
+    texto: 'Há diferença de electronegativity entre N e H, e como o NH₃ é piramidal, os vetores não se anulam. Portanto, o NH₃ é uma molécula polar.' },
   ch4: { ehPolar: false, geometria: 'tetraédrica',
-    texto: 'Há uma pequena diferença de eletronegatividade entre C e H, mas a simetria tetraédrica do CH₄ anula os vetores. Portanto, o CH₄ é uma molécula apolar.' }
+    texto: 'Há uma pequena diferença de electronegativity entre C e H, mas a simetria tetraédrica do CH₄ anula os vetores. Portanto, o CH₄ é uma molécula nonpolar.' }
 };
 
 function etapaMolecula(idx) {
@@ -1104,7 +1138,7 @@ function etapaMolecula(idx) {
    ========================================================== */
 function finalizarJogo() {
   esconderPalco();
-  falar('animada', 'Excelente. Agora você consegue visualizar por que algumas moléculas possuem polaridade e outras não.', () => {
+  falar('animada', 'Excelente. Agora você consegue visualizar por que algumas moléculas possuem polarity e outras não.', () => {
     const conclusao = document.getElementById('conclusao');
     conclusao.classList.add('visivel');
     conclusao.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -1123,7 +1157,7 @@ function reiniciar() {
    INTRODUÇÃO / INÍCIO
    ========================================================== */
 function iniciarIntro() {
-  falar('sorrindo', 'Hoje vamos descobrir por que algumas moléculas possuem um lado mais negativo e outras não. Você não vai decorar regras — vai enxergar a polaridade acontecendo.', () => {
+  falar('sorrindo', 'Today we will descobrir por que algumas moléculas possuem um lado mais negativo e outras não. Você não vai decorar regras — vai enxergar a polarity acontecendo.', () => {
     etapa1(0);
   });
 }
@@ -1145,14 +1179,84 @@ iniciarIntro();
 </script>
 
 <script>
+let volumeSalvo = parseFloat(localStorage.getItem('kifacil_volume'));
+if (isNaN(volumeSalvo)) volumeSalvo = 0.35;
+let silenciado = localStorage.getItem('kifacil_silenciado') === '1';
+let musicaFundo = null;
+
+function volumeEfetivo() {
+  return silenciado ? 0 : volumeSalvo;
+}
+
+function iniciarMusicaFundo() {
+  if (musicaFundo) return;
+  try {
+    musicaFundo = new Audio('../sons/natureza.mp3');
+    musicaFundo.loop = true;
+    musicaFundo.volume = volumeEfetivo();
+    musicaFundo.play().catch(function () {});
+  } catch (e) {}
+}
+
+function atualizarIconeMudo() {
+  const botao = document.getElementById('btn-mute');
+  if (!botao) return;
+  if (silenciado || volumeSalvo === 0) botao.textContent = '🔇';
+  else if (volumeSalvo < 0.5) botao.textContent = '🔉';
+  else botao.textContent = '🔊';
+}
+
+function alternarMudo() {
+  silenciado = !silenciado;
+  localStorage.setItem('kifacil_silenciado', silenciado ? '1' : '0');
+  if (musicaFundo) musicaFundo.volume = volumeEfetivo();
+  atualizarIconeMudo();
+}
+
+function ajustarVolume(valorSlider) {
+  volumeSalvo = Math.max(0, Math.min(1, valorSlider / 100));
+  localStorage.setItem('kifacil_volume', volumeSalvo);
+  if (volumeSalvo > 0 && silenciado) {
+    silenciado = false;
+    localStorage.setItem('kifacil_silenciado', '0');
+  }
+  if (musicaFundo) musicaFundo.volume = volumeEfetivo();
+  atualizarIconeMudo();
+}
+
+(function iniciarControleVolume() {
+  const slider = document.getElementById('slider-volume');
+  if (slider) slider.value = Math.round(volumeSalvo * 100);
+  atualizarIconeMudo();
+  iniciarMusicaFundo();
+
+  const ativarSom = function () {
+    if (!musicaFundo) iniciarMusicaFundo();
+    if (musicaFundo) {
+      musicaFundo.volume = volumeEfetivo();
+      musicaFundo.play().catch(function () {});
+    }
+  };
+  window.addEventListener('pointerdown', ativarSom, { once: true });
+  window.addEventListener('keydown', ativarSom, { once: true });
+})();
+</script>
+<script>
 (function () {
   var _clickSom = new Audio('../sons/click.mp3');
   _clickSom.preload = 'auto';
   document.addEventListener('click', function (e) {
     var alvo = e.target.closest('button');
-    if (alvo) { try { _clickSom.currentTime = 0; _clickSom.play().catch(function () {}); } catch (err) {} }
+    if (alvo) { try { _clickSom.currentTime = 0; _clickSom.volume = (typeof volumeEfetivo === 'function' ? volumeEfetivo() : 0.35); _clickSom.play().catch(function () {}); } catch (err) {} }
   }, true);
 })();
 </script>
+<div id="controle-volume">
+  <button id="btn-mute" onclick="alternarMudo()" aria-label="Mute or unmute sound">🔊</button>
+  <input type="range" id="slider-volume" min="0" max="100" value="35" oninput="ajustarVolume(this.value)" aria-label="Volume">
+</div>
 </body>
 </html>
+
+
+
