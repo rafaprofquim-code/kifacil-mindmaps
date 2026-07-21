@@ -6,8 +6,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" type="image/png" href="/favicon.png">
 <link rel="canonical" href="https://kifaciledu.com.br/jogos/jogos-escaperoom/torre-quimica/fases/laboratorio-thomson.html">
-<title>Thomson's Laboratory — Time Capsule | KiFácil</title>
-<meta name="description" content="Travel to J.J. Thomson's laboratory in 1897 and relive the discovery of the electron. Time Capsule Escape Room — KiFácil.">
+<title>Laboratório de Thomson — Cápsula do Tempo | KiFácil</title>
+<meta name="description" content="Viaje ao laboratório de J.J. Thomson em 1897 e reviva a descoberta do elétron. Escape Room da Cápsula do Tempo — KiFácil.">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y1JGD5VVBD"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -30,6 +30,7 @@
   body { background: var(--bg); font-family: 'Libre Baskerville', serif; color: var(--text); min-height: 100vh; display: flex; flex-direction: column; }
 
   .nav { background: var(--bg-dark); padding: 12px 32px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid var(--border); font-size: 11px; color: var(--text-soft); letter-spacing: .04em; flex-shrink: 0; }
+  .nav-brand { color: var(--gold); font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
   .nav a { color: var(--gold); text-decoration: none; }
   .nav a:hover { text-decoration: underline; }
   .nav-sep { color: rgba(232,216,176,0.4); }
@@ -61,7 +62,7 @@
   .link-aula:hover { background: rgba(30,16,8,0.92); transform: translateY(-1px); }
   .link-aula svg { width: 22px; height: 22px; }
 
-  /* HOTSPOTS � �reas de clique invis�veis */
+  /* HOTSPOTS - áreas de clique invisíveis */
   .hotspot { position: absolute; cursor: pointer; display: none; }
   .hotspot.active { display: block; }
   .hotspot.done { display: none; }
@@ -118,7 +119,7 @@
   .diagrama-wrap { background: #fff8ee; border: 1px solid rgba(139,94,26,0.2); border-radius: 8px; padding: 18px; margin-bottom: 18px; text-align: center; }
   .diagrama-wrap svg { max-width: 100%; height: auto; }
 
-  /* BOT�O A��O */
+  /* BOTÃO AÇÃO */
   .btn-acao { display: block; width: 100%; background: var(--paper-text); border: none; border-radius: 6px; padding: 13px; font-family: 'Libre Baskerville', serif; font-size: 13px; font-weight: 700; color: var(--paper); cursor: pointer; letter-spacing: .04em; text-transform: uppercase; transition: background .15s; margin-bottom: 8px; }
   .btn-acao:hover:not(:disabled) { background: #4a2c10; }
   .btn-acao:disabled { opacity: 0.4; cursor: default; }
@@ -133,7 +134,7 @@
   .resposta-input:focus { border-color: var(--paper-gold); }
   .resposta-input::placeholder { color: rgba(46,26,8,0.3); }
 
-  /* CONCLUS�O */
+  /* CONCLUSÃO */
   .conclusao-box { display: none; background: rgba(80,200,120,0.08); border: 1px solid rgba(80,200,120,0.4); border-radius: 8px; padding: 16px 18px; margin-top: 14px; }
   .conclusao-box.show { display: block; animation: cardIn .3s ease; }
   .conclusao-eyebrow { font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: #2d5a2d; margin-bottom: 8px; }
@@ -159,7 +160,7 @@
   .btn-restart { background: none; border: 1px solid rgba(232,184,75,0.3); border-radius: 6px; padding: 10px 24px; font-family: 'Libre Baskerville', serif; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: rgba(232,184,75,0.6); cursor: pointer; transition: all .15s; }
   .btn-restart:hover { border-color: rgba(232,184,75,0.6); color: var(--gold); }
 
-  /* ANIMA��ES DO EXPERIMENTO */
+  /* ANIMAÇÕES DO EXPERIMENTO */
   .feixe { opacity: 0; transition: opacity .6s ease; }
   .feixe.on { opacity: 1; }
   .feixe-defletido { opacity: 0; transition: opacity .6s ease; }
@@ -222,17 +223,13 @@
 <body>
 
 <nav class="nav">
-  <a href="../../../torre-central/mapa-kifacil.html">Academia KiF�cil</a>
-  <span class="nav-sep">�</span>
-  <a href="../../torre-ciencia.html">Torre de Ci�ncias</a>
-  <span class="nav-sep">�</span>
-  Torre de Qu�mica � Fase 3 � Thomson
+  <span class="nav-brand">KiFácil</span>
 </nav>
 
 <header class="header">
   <div>
-    <div class="eyebrow">Escape Room � C�psula do Tempo</div>
-    <h1 class="page-title">Laborat�rio de Thomson</h1>
+    <div class="eyebrow">Escape Room • Cápsula do Tempo</div>
+    <h1 class="page-title">Laboratório de Thomson</h1>
   </div>
 </header>
 
@@ -240,10 +237,10 @@
 
   <div class="scene-wrap">
     <div class="scene-inner">
-      <img src="../imagens/sala-de-thomson.jpg" alt="Laborat�rio de J.J. Thomson no final do s�culo XIX" class="scene-img">
+      <img src="../imagens/sala-de-thomson.jpg" alt="Laboratório de J.J. Thomson no final do século XIX" class="scene-img">
       <div class="scene-overlay">
-        <div class="scene-overlay-title">Laborat�rio de J.J. Thomson</div>
-        <div class="scene-overlay-sub">1897 � C�psula do Tempo</div>
+        <div class="scene-overlay-title">Laboratório de J.J. Thomson</div>
+        <div class="scene-overlay-sub">1897 • Cápsula do Tempo</div>
       </div>
 
       <!-- HOTSPOT: TUBO DE CROOKES -->
@@ -263,9 +260,9 @@
   <div class="panels-row">
 
     <div class="narr-box">
-      <div class="narr-eyebrow">C�psula do Tempo � 1897</div>
+      <div class="narr-eyebrow">Cápsula do Tempo • 1897</div>
       <div class="narr" id="narr">
-        <strong>Thomson:</strong> <em>"Dalton acreditava que o �tomo era uma esfera indivis�vel. Eu n�o tenho tanta certeza. Vamos investigar essa hip�tese. Traga-me o tubo de vidro conhecido como Tubo de Crookes."</em>
+        <strong>Thomson:</strong> <em>"Dalton acreditava que o átomo era uma esfera indivisível. Eu não tenho tanta certeza. Vamos investigar essa hipótese. Traga-me o tubo de vidro conhecido como Tubo de Crookes."</em>
       </div>
     </div>
 
@@ -275,21 +272,21 @@
         <div class="ato-dot"></div>
         <div>
           <div class="ato-nome">O tubo de Crookes</div>
-          <span class="ato-tag">raios cat�dicos</span>
+          <span class="ato-tag">raios catódicos</span>
         </div>
       </div>
       <div class="ato-item" id="ai-2">
         <div class="ato-dot"></div>
         <div>
           <div class="ato-nome">O cata-vento</div>
-          <span class="ato-tag">os raios t�m massa</span>
+          <span class="ato-tag">os raios têm massa</span>
         </div>
       </div>
       <div class="ato-item" id="ai-3">
         <div class="ato-dot"></div>
         <div>
           <div class="ato-nome">As placas eletrodo</div>
-          <span class="ato-tag">os raios t�m carga negativa</span>
+          <span class="ato-tag">os raios têm carga negativa</span>
         </div>
       </div>
     </div>
@@ -299,12 +296,12 @@
 
 <!-- TELA FINAL -->
 <div class="win-screen" id="winScreen">
-  <div class="win-title">O el�tron foi descoberto!</div>
-  <p class="win-sub">Voc� ajudou Thomson a provar que o �tomo de Dalton estava incompleto. Existe uma part�cula menor, com massa e carga negativa, dentro de todo �tomo. Em 1897, isso muda tudo � o pr�ximo passo � imaginar como essa part�cula se organiza dentro do �tomo.</p>
+  <div class="win-title">O elétron foi descoberto!</div>
+  <p class="win-sub">Você ajudou Thomson a provar que o átomo de Dalton estava incompleto. Existe uma partícula menor, com massa e carga negativa, dentro de todo átomo. Em 1897, isso muda tudo — o próximo passo é imaginar como essa partícula se organiza dentro do átomo.</p>
   <div class="win-badges">
-    <div class="badge"><div class="badge-icon">??</div><div class="badge-label">Raios cat�dicos</div></div>
-    <div class="badge"><div class="badge-icon">??</div><div class="badge-label">T�m massa</div></div>
-    <div class="badge"><div class="badge-icon">?</div><div class="badge-label">Carga negativa</div></div>
+    <div class="badge"><div class="badge-icon">⚡</div><div class="badge-label">Raios catódicos</div></div>
+    <div class="badge"><div class="badge-icon">⚙</div><div class="badge-label">Têm massa</div></div>
+    <div class="badge"><div class="badge-icon">−</div><div class="badge-label">Carga negativa</div></div>
   </div>
   <div class="win-btns">
     <button class="btn-restart" onclick="resetGame()">Reviver o experimento</button>
@@ -334,11 +331,11 @@ function tocarDing() {
 // ==================== ATO 1: TUBO DE CROOKES ====================
 function buildAto1() {
   document.getElementById('card').innerHTML = `
-    <button class="card-close" onclick="closeOverlay()" aria-label="Fechar">�</button>
-    <div class="card-eyebrow">Experimento 1 � O Tubo de Crookes</div>
-    <div class="card-title">Raios cat�dicos</div>
+    <button class="card-close" onclick="closeOverlay()" aria-label="Fechar">×</button>
+    <div class="card-eyebrow">Experimento 1 • O Tubo de Crookes</div>
+    <div class="card-title">Raios catódicos</div>
     <div class="card-fala">
-      <strong>Thomson:</strong> "Aqui est� o tubo � um cilindro de vidro selado, com g�s sob baixa press�o e dois eletrodos: o c�todo, ligado ao polo negativo, e o �nodo, ligado ao polo positivo. Agora, ligue a fonte de alta tens�o."
+      <strong>Thomson:</strong> "Aqui está o tubo — um cilindro de vidro selado, com gás sob baixa pressão e dois eletrodos: o cátodo, ligado ao polo negativo, e o ânodo, ligado ao polo positivo. Agora, ligue a fonte de alta tensão."
     </div>
     <div class="diagrama-wrap">
       <svg viewBox="0 0 400 140" xmlns="http://www.w3.org/2000/svg">
@@ -358,10 +355,10 @@ function buildAto1() {
         <rect x="70" y="58" width="8" height="24" fill="#2e1a08"/>
         <rect x="330" y="58" width="8" height="24" fill="#2e1a08"/>
 
-        <!-- feixe invis�vel: raios cat�dicos n�o aparecem como linha colorida -->
+        <!-- feixe invisível: raios catódicos não aparecem como linha colorida -->
         <line id="feixe1" class="feixe" x1="78" y1="70" x2="330" y2="70" stroke="transparent" stroke-width="4"/>
 
-        <!-- incandesc�ncia no vidro: apenas dois risquinhos, n�o um feixe verde -->
+        <!-- incandescência no vidro: apenas dois risquinhos, não um feixe verde -->
         <path id="glowVidro1a" class="glow"
               d="M 341 48 Q 351 51 356 57"
               fill="none"
@@ -376,38 +373,38 @@ function buildAto1() {
               stroke-width="5"
               stroke-linecap="round"/>
 
-        <text x="38" y="42" font-family="Libre Baskerville, serif" font-size="12" fill="#8b5e1a">c�todo (-)</text>
-        <text x="318" y="42" font-family="Libre Baskerville, serif" font-size="12" fill="#8b5e1a">�nodo (+)</text>
-        <text x="150" y="120" font-family="Lora, serif" font-size="13" fill="#3d2010" font-style="italic">g�s sob baixa press�o</text>
+        <text x="38" y="42" font-family="Libre Baskerville, serif" font-size="12" fill="#8b5e1a">cátodo (-)</text>
+        <text x="318" y="42" font-family="Libre Baskerville, serif" font-size="12" fill="#8b5e1a">ânodo (+)</text>
+        <text x="150" y="120" font-family="Lora, serif" font-size="13" fill="#3d2010" font-style="italic">gás sob baixa pressão</text>
       </svg>
     </div>
-    <button class="btn-acao" id="btnAcao1" onclick="ligarAto1()">? Ligar a fonte de alta tens�o</button>
+    <button class="btn-acao" id="btnAcao1" onclick="ligarAto1()">Ligar a fonte de alta tensão</button>
 
     <div class="pergunta-box" id="pergunta1">
       <div class="pergunta-texto">
-        <strong>Thomson:</strong> "Observe a incandesc�ncia esverdeada perto do �nodo. N�o estamos vendo o feixe diretamente, mas apenas o efeito de sua colis�o com o vidro.
- Note tamb�m que esse fen�meno parece partir do c�todo, o eletrodo negativo, e seguir em dire��o ao �nodo.
+        <strong>Thomson:</strong> "Observe a incandescência esverdeada perto do ânodo. Não estamos vendo o feixe diretamente, mas apenas o efeito de sua colisão com o vidro.
+ Note também que esse fenômeno parece partir do cátodo, o eletrodo negativo, e seguir em direção ao ânodo.
 
-Por essa raz�o, muitos cientistas passaram a chamar esse feixe de raio cat�dico.
+Por essa razão, muitos cientistas passaram a chamar esse feixe de raio catódico.
 
-Mas o nome n�o resolve o mist�rio.
+Mas o nome não resolve o mistério.
 
-O que voc� acha que est� saindo do c�todo e atravessando o tubo?"
+O que você acha que está saindo do cátodo e atravessando o tubo?"
       </div>
-      <textarea class="resposta-input" id="resp1" placeholder="Escreva sua hip�tese..."></textarea>
+      <textarea class="resposta-input" id="resp1" placeholder="Escreva sua hipótese..."></textarea>
       <button class="btn-acao" onclick="responderAto1()">Responder a Thomson</button>
     </div>
 
     <div class="conclusao-box" id="conclusao1">
       <div class="conclusao-eyebrow">Thomson responde</div>
       <div class="conclusao-texto">
-       "Interessante... j� troquei v�rias vezes o g�s dentro deste tubo e o fen�meno continua praticamente o mesmo.
+       "Interessante... já troquei várias vezes o gás dentro deste tubo e o fenômeno continua praticamente o mesmo.
 
-Talvez esses raios n�o perten�am ao g�s. Talvez sejam algo presente em toda mat�ria.
+Talvez esses raios não pertençam ao gás. Talvez sejam algo presente em toda matéria.
 
 Se estiver correto, esse feixe deve possuir massa. Vamos investigar. Traga-me o cata-vento."
       </div>
-      <button class="btn-continuar" id="btnContinuar1" onclick="concluirAto(1)">Continuar ?</button>
+      <button class="btn-continuar" id="btnContinuar1" onclick="concluirAto(1)">Continuar</button>
     </div>
   `;
   openOverlay();
@@ -419,7 +416,7 @@ function ligarAto1() {
   document.getElementById('glowVidro1b').classList.add('on');
 
   const btn = document.getElementById('btnAcao1');
-  btn.textContent = '? Fonte ligada � observe o vidro';
+  btn.textContent = 'Fonte ligada - observe o vidro';
   btn.classList.add('feita');
   btn.disabled = true;
 
@@ -439,11 +436,11 @@ function responderAto1() {
 // ==================== ATO 2: CATA-VENTO ====================
 function buildAto2() {
   document.getElementById('card').innerHTML = `
-    <button class="card-close" onclick="closeOverlay()" aria-label="Fechar">�</button>
-    <div class="card-eyebrow">Experimento 2 � O Cata-vento</div>
-    <div class="card-title">Os raios t�m massa</div>
+    <button class="card-close" onclick="closeOverlay()" aria-label="Fechar">×</button>
+    <div class="card-eyebrow">Experimento 2 • O Cata-vento</div>
+    <div class="card-title">Os raios têm massa</div>
     <div class="card-fala">
-      <strong>Thomson:</strong> "Excelente. Agora vou posicionar este pequeno cata-vento de metal � uma roda com l�minas leves � bem no caminho do feixe cat�dico, dentro do tubo. Ligue novamente a fonte."
+      <strong>Thomson:</strong> "Excelente. Agora vou posicionar este pequeno cata-vento de metal — uma roda com lâminas leves — bem no caminho do feixe catódico, dentro do tubo. Ligue novamente a fonte."
     </div>
     <div class="diagrama-wrap">
       <svg viewBox="0 0 400 140" xmlns="http://www.w3.org/2000/svg">
@@ -463,7 +460,7 @@ function buildAto2() {
         <rect x="70" y="58" width="8" height="24" fill="#2e1a08"/>
         <rect x="330" y="58" width="8" height="24" fill="#2e1a08"/>
 
-        <!-- feixe invis�vel: nada verde atravessando o tubo -->
+        <!-- feixe invisível: nada verde atravessando o tubo -->
         <line id="feixe2" class="feixe" x1="78" y1="70" x2="200" y2="70" stroke="transparent" stroke-width="4"/>
 
         <g transform="translate(200,70)">
@@ -476,35 +473,35 @@ function buildAto2() {
           </g>
         </g>
 
-        <text x="38" y="42" font-family="Libre Baskerville, serif" font-size="12" fill="#8b5e1a">c�todo (-)</text>
-        <text x="318" y="42" font-family="Libre Baskerville, serif" font-size="12" fill="#8b5e1a">�nodo (+)</text>
-        <text x="130" y="120" font-family="Lora, serif" font-size="13" fill="#3d2010" font-style="italic">cata-vento met�lico no caminho do feixe</text>
+        <text x="38" y="42" font-family="Libre Baskerville, serif" font-size="12" fill="#8b5e1a">cátodo (-)</text>
+        <text x="318" y="42" font-family="Libre Baskerville, serif" font-size="12" fill="#8b5e1a">ânodo (+)</text>
+        <text x="130" y="120" font-family="Lora, serif" font-size="13" fill="#3d2010" font-style="italic">cata-vento metálico no caminho do feixe</text>
       </svg>
     </div>
-    <button class="btn-acao" id="btnAcao2" onclick="ligarAto2()">? Ligar a fonte de alta tens�o</button>
+    <button class="btn-acao" id="btnAcao2" onclick="ligarAto2()">Ligar a fonte de alta tensão</button>
 
     <div class="pergunta-box" id="pergunta2">
       <div class="pergunta-texto">
-        <strong>Thomson:</strong> "Veja! O cata-vento est� girando, impulsionado pelo feixe invis�vel. Um feixe de luz comum n�o conseguiria mover uma h�lice de metal. O que voc� acha que isso revela sobre a natureza dos raios cat�dicos?"
+        <strong>Thomson:</strong> "Veja! O cata-vento está girando, impulsionado pelo feixe invisível. Um feixe de luz comum não conseguiria mover uma hélice de metal. O que você acha que isso revela sobre a natureza dos raios catódicos?"
       </div>
-      <textarea class="resposta-input" id="resp2" placeholder="Escreva sua hip�tese..."></textarea>
+      <textarea class="resposta-input" id="resp2" placeholder="Escreva sua hipótese..."></textarea>
       <button class="btn-acao" onclick="responderAto2()">Responder a Thomson</button>
     </div>
 
     <div class="conclusao-box" id="conclusao2">
       <div class="conclusao-eyebrow">Thomson responde</div>
       <div class="conclusao-texto">
-        "Muito bem. Se o cata-vento girou, o feixe deve ser formado por part�culas materiais.
+        "Muito bem. Se o cata-vento girou, o feixe deve ser formado por partículas materiais.
 
-Mas de onde elas v�m? Troquei o g�s diversas vezes e o resultado permaneceu o mesmo. Talvez elas n�o perten�am ao g�s.
+Mas de onde elas vêm? Troquei o gás diversas vezes e o resultado permaneceu o mesmo. Talvez elas não pertençam ao gás.
 
-Come�o a suspeitar que sejam emitidas pelo pr�prio c�todo.
+Começo a suspeitar que sejam emitidas pelo próprio cátodo.
 
-Agora precisamos descobrir outra coisa: essas part�culas possuem carga el�trica?
+Agora precisamos descobrir outra coisa: essas partículas possuem carga elétrica?
 
-Traga-me as placas met�licas para o pr�ximo experimento."
+Traga-me as placas metálicas para o próximo experimento."
       </div>
-      <button class="btn-continuar" id="btnContinuar2" onclick="concluirAto(2)">Continuar ?</button>
+      <button class="btn-continuar" id="btnContinuar2" onclick="concluirAto(2)">Continuar</button>
     </div>
   `;
   openOverlay();
@@ -517,7 +514,7 @@ function ligarAto2() {
   somCatavento.play().catch(() => {});
 
   const btn = document.getElementById('btnAcao2');
-  btn.textContent = '? Fonte ligada � observe o cata-vento';
+  btn.textContent = 'Fonte ligada - observe o cata-vento';
   btn.classList.add('feita');
   btn.disabled = true;
 
@@ -537,11 +534,11 @@ function responderAto2() {
 // ==================== ATO 3: PLACAS ELETRODO ====================
 function buildAto3() {
   document.getElementById('card').innerHTML = `
-    <button class="card-close" onclick="closeOverlay()" aria-label="Fechar">�</button>
-    <div class="card-eyebrow">Experimento 3 � As Placas Eletrodo</div>
-    <div class="card-title">A carga dos raios cat�dicos</div>
+    <button class="card-close" onclick="closeOverlay()" aria-label="Fechar">×</button>
+    <div class="card-eyebrow">Experimento 3 • As Placas Eletrodo</div>
+    <div class="card-title">A carga dos raios catódicos</div>
     <div class="card-fala">
-      <strong>Thomson:</strong> "Perfeito. Vou posicionar estas duas placas met�licas, uma acima e outra abaixo do caminho do feixe � uma carregada positivamente, a outra negativamente. Se os raios tiverem carga, o campo el�trico entre as placas deve desvi�-los. Ligue a fonte."
+      <strong>Thomson:</strong> "Perfeito. Vou posicionar estas duas placas metálicas, uma acima e outra abaixo do caminho do feixe — uma carregada positivamente, a outra negativamente. Se os raios tiverem carga, o campo elétrico entre as placas deve desviá-los. Ligue a fonte."
     </div>
     <div class="diagrama-wrap">
       <svg viewBox="0 0 400 160" xmlns="http://www.w3.org/2000/svg">
@@ -573,10 +570,10 @@ function buildAto3() {
         <rect x="70" y="68" width="8" height="24" fill="#2e1a08"/>
         <rect x="330" y="68" width="8" height="24" fill="#2e1a08"/>
 
-        <text x="38" y="42" font-family="Libre Baskerville, serif" font-size="12" fill="#8b5e1a">c�todo (-)</text>
-        <text x="318" y="42" font-family="Libre Baskerville, serif" font-size="12" fill="#8b5e1a">�nodo (+)</text>
+        <text x="38" y="42" font-family="Libre Baskerville, serif" font-size="12" fill="#8b5e1a">cátodo (-)</text>
+        <text x="318" y="42" font-family="Libre Baskerville, serif" font-size="12" fill="#8b5e1a">ânodo (+)</text>
 
-        <!-- placas do campo el�trico -->
+        <!-- placas do campo elétrico -->
         <rect x="130" y="35" width="140" height="6" fill="#8b5e1a"/>
         <text x="275" y="40" font-family="Libre Baskerville, serif" font-size="13" fill="#8b5e1a">+</text>
         <rect x="130" y="119" width="140" height="6" fill="#3d2010"/>
@@ -592,25 +589,25 @@ function buildAto3() {
       stroke-linecap="round"
       marker-end="url(#arrowHead3)"/>
 
-        <text x="130" y="150" font-family="Lora, serif" font-size="13" fill="#3d2010" font-style="italic">campo el�trico entre as placas</text>
+        <text x="130" y="150" font-family="Lora, serif" font-size="13" fill="#3d2010" font-style="italic">campo elétrico entre as placas</text>
       </svg>
     </div>
-    <button class="btn-acao" id="btnAcao3" onclick="ligarAto3()">? Ligar a fonte de alta tens�o</button>
+    <button class="btn-acao" id="btnAcao3" onclick="ligarAto3()">Ligar a fonte de alta tensão</button>
 
     <div class="pergunta-box" id="pergunta3">
       <div class="pergunta-texto">
-        <strong>Thomson:</strong> "Observe � o feixe se curvou em dire��o � placa <strong>positiva</strong>, no topo. Pense: no modelo de Dalton, o �tomo era uma esfera neutra, sem carga el�trica. Se o que est� viajando nesse feixe se desvia por causa de cargas el�tricas... isso pode ser um �tomo inteiro, do jeito que Dalton imaginava? E pensando em cargas opostas se atraem e cargas iguais se repelem � o que isso revela sobre a carga dessas part�culas?"
+        <strong>Thomson:</strong> "Observe: o feixe se curvou em direção à placa <strong>positiva</strong>, no topo. Pense: no modelo de Dalton, o átomo era uma esfera neutra, sem carga elétrica. Se o que está viajando nesse feixe se desvia por causa de cargas elétricas... isso pode ser um átomo inteiro, do jeito que Dalton imaginava? E pensando em cargas opostas se atraem e cargas iguais se repelem, o que isso revela sobre a carga dessas partículas?"
       </div>
-      <textarea class="resposta-input" id="resp3" placeholder="Escreva sua hip�tese..."></textarea>
+      <textarea class="resposta-input" id="resp3" placeholder="Escreva sua hipótese..."></textarea>
       <button class="btn-acao" onclick="responderAto3()">Responder a Thomson</button>
     </div>
 
     <div class="conclusao-box" id="conclusao3">
       <div class="conclusao-eyebrow">Thomson responde</div>
       <div class="conclusao-texto">
-        "Voc� raciocinou exatamente como eu! Cargas opostas se atraem � se o caminho foi desviado em dire��o � placa <strong>positiva</strong>, as part�culas que o comp�em devem ter carga <strong>negativa</strong>. Acabamos de reunir tr�s descobertas: os raios cat�dicos s�o <strong>part�culas</strong> (n�o luz), elas t�m <strong>massa</strong> (giraram o cata-vento), e t�m <strong>carga negativa</strong> (foram atra�das pela placa positiva). Vou chamar essa part�cula de 'corp�sculo' � voc�s, no futuro, a chamam de <strong>el�tron</strong>. E isso muda tudo: a esfera maci�a e indivis�vel de Dalton... n�o est� completa. H� algo <em>dentro</em> do �tomo. Obrigado, caro estudante � voc� acabou de reviver a descoberta do el�tron."
+        "Você raciocinou exatamente como eu! Cargas opostas se atraem: se o caminho foi desviado em direção à placa <strong>positiva</strong>, as partículas que o compõem devem ter carga <strong>negativa</strong>. Acabamos de reunir três descobertas: os raios catódicos são <strong>partículas</strong> (não luz), elas têm <strong>massa</strong> (giraram o cata-vento), e têm <strong>carga negativa</strong> (foram atraídas pela placa positiva). Vou chamar essa partícula de 'corpúsculo' — vocês, no futuro, a chamam de <strong>elétron</strong>. E isso muda tudo: a esfera maciça e indivisível de Dalton... não está completa. Há algo <em>dentro</em> do átomo. Obrigado, caro estudante: você acabou de reviver a descoberta do elétron."
       </div>
-      <button class="btn-continuar" id="btnContinuar3" onclick="concluirAto(3)">Finalizar ?</button>
+      <button class="btn-continuar" id="btnContinuar3" onclick="concluirAto(3)">Finalizar</button>
     </div>
   `;
   openOverlay();
@@ -620,7 +617,7 @@ function ligarAto3() {
   document.getElementById('setaRaios3').classList.add('on');
 
   const btn = document.getElementById('btnAcao3');
-  btn.textContent = '? Fonte ligada � observe o desvio';
+  btn.textContent = 'Fonte ligada - observe o desvio';
   btn.classList.add('feita');
   btn.disabled = true;
 
@@ -654,10 +651,10 @@ function concluirAto(n) {
 
   if (n === 1) {
     document.getElementById('hs-catavento').classList.add('active');
-    setNarr('<strong>Thomson:</strong> <em>"Muito bem! O efeito no vidro mostra que algo viaja do c�todo ao �nodo, embora os raios cat�dicos n�o apare�am como luz colorida. Agora � v� at� a bancada e traga-me o cata-vento de metal que est� ali, ao lado do tubo."</em>');
+    setNarr('<strong>Thomson:</strong> <em>"Muito bem! O efeito no vidro mostra que algo viaja do cátodo ao ânodo, embora os raios catódicos não apareçam como luz colorida. Agora vá até a bancada e traga-me o cata-vento de metal que está ali, ao lado do tubo."</em>');
   } else if (n === 2) {
     document.getElementById('hs-placas').classList.add('active');
-    setNarr('<strong>Thomson:</strong> <em>"Os raios t�m massa � excelente descoberta! Agora a pergunta final: eles t�m carga? Traga-me aquelas duas placas eletrodo met�licas, sobre a bancada � direita."</em>');
+    setNarr('<strong>Thomson:</strong> <em>"Os raios têm massa, excelente descoberta! Agora a pergunta final: eles têm carga? Traga-me aquelas duas placas eletrodo metálicas, sobre a bancada à direita."</em>');
   } else if (n === 3) {
     localStorage.setItem('kifacil_thomson_ok', '1');
     setTimeout(() => {
@@ -677,7 +674,7 @@ function resetGame() {
   document.getElementById('hs-placas').classList.remove('active', 'done');
   document.getElementById('mainScreen').style.display = '';
   document.getElementById('winScreen').classList.remove('show');
-  setNarr(`<strong>Thomson:</strong> <em>"Ah, chegou bem a tempo! Caro estudante, dentro deste tubo de vidro h� um g�s sob baixa press�o. Vou ligar uma fonte de alta tens�o nos eletrodos e quero que observe comigo o que acontece � sem assumir nada de antem�o. Primeiro, traga-me aquele tubo de vidro contendo g�s sob baixa press�o � � conhecido como tubo de Crookes."</em>`);
+  setNarr(`<strong>Thomson:</strong> <em>"Ah, chegou bem a tempo! Caro estudante, dentro deste tubo de vidro há um gás sob baixa pressão. Vou ligar uma fonte de alta tensão nos eletrodos e quero que observe comigo o que acontece, sem assumir nada de antemão. Primeiro, traga-me aquele tubo de vidro contendo gás sob baixa pressão, conhecido como tubo de Crookes."</em>`);
 }
 </script>
 
