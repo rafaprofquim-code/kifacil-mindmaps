@@ -1,10 +1,10 @@
-﻿<!DOCTYPE html>
-<html lang="pt-BR">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex, nofollow">
-  <title>Balanceamento de Equações — Premium Game | KiFácil</title>
+  <title>Balancing Chemical Equations — Premium Game | KiFácil</title>
   <link rel="icon" type="image/png" href="/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -207,7 +207,7 @@
     .balanca-visual svg { transition: filter .3s; }
     .balanca-equilibrada svg { filter: drop-shadow(0 0 8px rgba(200,146,10,0.75)); }
 
-    /* Estratégia MACHO */
+    /* Estratégia de ordem de balanceamento */
     .lista-macho { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; z-index: 3; }
     .item-macho {
       background: var(--fundo-card); border: 1.5px solid var(--borda-forte); border-radius: 8px;
@@ -337,28 +337,28 @@
 </nav>
 
 <main>
-  <h1 class="titulo-jogo">Balanceamento de Equações Químicas</h1>
-  <p class="subtitulo">Discover por que uma equação química precisa ser balanceada — nenhum átomo pode surgir ou desaparecer.</p>
+  <h1 class="titulo-jogo">Balancing Chemical Equations</h1>
+  <p class="subtitulo">Discover why a chemical equation needs to be balanced — no atom can appear out of nowhere or disappear.</p>
 
   <div class="narrador">
-    <img src="../imagens/rafa-sorrindo.jpg" alt="Professora Rafaela" />
+    <img src="../imagens/rafa-sorrindo.jpg" alt="Teacher Rafaela" />
     <div style="flex: 1;">
-      <div class="narrador-nome">Professora Rafaela</div>
-      <div class="narrador-texto" id="narradorTexto">Vamos começar.</div>
+      <div class="narrador-nome">Teacher Rafaela</div>
+      <div class="narrador-texto" id="narradorTexto">Let's get started.</div>
       <div id="painelInteracao"></div>
     </div>
   </div>
 
   <div class="imagem-wrapper" id="imagemWrapper">
-    <img src="../imagens/sala-balanceamento.jpg" alt="Sala de balanceamento de equações" class="cena-fundo" />
+    <img src="../imagens/sala-balanceamento.jpg" alt="Equation balancing room" class="cena-fundo" />
     <div class="overlay-animacao" id="overlayAnimacao"></div>
 </div>
 
   <div class="conclusao" id="conclusao">
-    <div class="conclusao-titulo">Estudo concluído</div>
+    <div class="conclusao-titulo">Study Complete</div>
     <div class="conclusao-placar" id="conclusaoPlacar"></div>
     <p class="conclusao-mensagem" id="conclusaoMensagem"></p>
-    <button class="btn-reiniciar" onclick="reiniciar()">Jogar novamente</button>
+    <button class="btn-reiniciar" onclick="reiniciar()">Play Again</button>
   </div>
 </main>
 
@@ -366,7 +366,7 @@
 
 <script>
 /* ==========================================================
-   REFERÊNCIAS DOM
+   DOM REFERENCES
    ========================================================== */
 const overlay = document.getElementById('overlayAnimacao');
 const painel  = document.getElementById('painelInteracao');
@@ -382,7 +382,7 @@ function agendar(fn, ms) { const id = setTimeout(fn, ms); timersAtivos.push(id);
 function limparTimers() { timersAtivos.forEach(clearTimeout); timersAtivos = []; }
 
 /* ==========================================================
-   COMPONENTE: MOLÉCULA (SVG, nenhuma imagem de molécula usada)
+   COMPONENT: MOLECULE (SVG, no molecule images used)
    ========================================================== */
 const MOLECULAS_DEF = {
   N2:  { atomos: [{ simbolo: 'N', cor: 'var(--vermelho-escuro)', x: 26, y: 30, r: 15 }, { simbolo: 'N', cor: 'var(--vermelho-escuro)', x: 66, y: 30, r: 15 }], ligacoes: [[0, 1]], largura: 92, altura: 60 },
@@ -430,7 +430,7 @@ function construirSVGMolecula(chave) {
 }
 
 /* ==========================================================
-   CONTAGEM DE ÁTOMOS
+   ATOM COUNTING
    ========================================================== */
 function contarAtomos(especies) {
   const contagem = {};
@@ -460,7 +460,7 @@ function totalAtomos(contagem) {
 }
 
 /* ==========================================================
-   COMPONENTE: CARTÃO DE COEFICIENTE
+   COMPONENT: COEFFICIENT CARD
    ========================================================== */
 function criarCartaoEspecie(esp, comControles, aoMudar) {
   const div = document.createElement('div');
@@ -521,7 +521,7 @@ function renderizarLinhaEquacaoEmContainer(container, reagentes, produtos, comCo
 function criarContadoresWrap() {
   const tabela = document.createElement('table');
   tabela.className = 'tabela-contadores';
-  tabela.innerHTML = '<thead><tr><th></th><th>Reagente</th><th>Produto</th></tr></thead><tbody></tbody>';
+  tabela.innerHTML = '<thead><tr><th></th><th>Reactant</th><th>Product</th></tr></thead><tbody></tbody>';
   overlay.appendChild(tabela);
   return tabela.querySelector('tbody');
 }
@@ -541,7 +541,7 @@ function renderizarContadores(container, reagentes, produtos, elementos) {
 }
 
 /* ==========================================================
-   COMPONENTE: BALANÇA
+   COMPONENT: SCALE
    ========================================================== */
 function criarBalanca(id) {
   const div = document.createElement('div');
@@ -582,7 +582,7 @@ function atualizarBalanca(id, totalReag, totalProd) {
 }
 
 /* ==========================================================
-   ELEMENTOS DECORATIVOS
+   DECORATIVE ELEMENTS
    ========================================================== */
 function adicionarRetratoLavoisier(left, top) {
   const img = document.createElement('img');
@@ -595,7 +595,7 @@ function adicionarRetratoLavoisier(left, top) {
 }
 
 /* ==========================================================
-   HELPERS DE INTERAÇÃO
+   INTERACTION HELPERS
    ========================================================== */
 function botaoContinuar(delayMs) {
   delayMs = delayMs || 0;
@@ -604,7 +604,7 @@ function botaoContinuar(delayMs) {
   wrap.className = 'interacao-painel';
   const btn = document.createElement('button');
   btn.className = 'btn-continuar';
-  btn.textContent = 'Continuar →';
+  btn.textContent = 'Continue →';
   btn.disabled = delayMs > 0;
   wrap.appendChild(btn);
   painel.appendChild(wrap);
@@ -614,22 +614,22 @@ function botaoContinuar(delayMs) {
 }
 
 /* ==========================================================
-   INTRODUÇÃO
+   INTRODUCTION
    ========================================================== */
 function passoIntro0() {
-  fala('Today we will descobrir por que as equações químicas precisam ser balanceadas.');
+  fala('Today we will discover why chemical equations need to be balanced.');
   botaoContinuar(500);
 }
 function passoIntro1() {
-  fala('Nenhum átomo pode desaparecer, e nenhum átomo pode surgir do nada.');
+  fala('No atom can disappear, and no atom can appear out of nowhere.');
   botaoContinuar(500);
 }
 
 /* ==========================================================
-   ETAPA 1 — A REAÇÃO ESTÁ ERRADA?
+   STAGE 1 — IS THE REACTION WRONG?
    ========================================================== */
 function passoEtapa1() {
-  fala('N₂ + H₂ → NH₃. Será que essa reação está correta?');
+  fala('N₂ + H₂ → NH₃. Is this reaction correct?');
   const reagentes = [{ chave: 'N2', coef: 1 }, { chave: 'H2', coef: 1 }];
   const produtos = [{ chave: 'NH3', coef: 1 }];
 
@@ -645,7 +645,7 @@ function passoEtapa1() {
   wrap.className = 'interacao-painel';
   const btn = document.createElement('button');
   btn.className = 'btn-continuar';
-  btn.textContent = 'Verificar';
+  btn.textContent = 'Check';
   wrap.appendChild(btn);
   painel.appendChild(wrap);
 
@@ -660,16 +660,16 @@ function passoEtapa1() {
     trH.innerHTML = '<td class="celula-simbolo">H</td><td class="celula-erro">' + (cr.H || 0) + '</td><td class="celula-erro">' + (cp.H || 0) + '</td>';
     contadorContainer.appendChild(trH);
 
-    fala('Nitrogênio: ' + (cr.N || 0) + ' nos reagentes e ' + (cp.N || 0) + ' nos produtos. Hidrogênio: ' + (cr.H || 0) + ' nos reagentes e ' + (cp.H || 0) + ' nos produtos. A quantidade de átomos mudou — essa reação não está correta.');
+    fala('Nitrogen: ' + (cr.N || 0) + ' in the reactants and ' + (cp.N || 0) + ' in the products. Hydrogen: ' + (cr.H || 0) + ' in the reactants and ' + (cp.H || 0) + ' in the products. The number of atoms changed — this reaction is not correct.');
     botaoContinuar(600);
   });
 }
 
 /* ==========================================================
-   ETAPA 2 — AJUSTAR OS COEFICIENTES
+   STAGE 2 — ADJUST THE COEFFICIENTS
    ========================================================== */
 function passoEtapa2() {
-  fala('Agora você pode alterar apenas os coeficientes. Observe os contadores.');
+  fala('Now you can only change the coefficients. Watch the counters.');
   const reagentes = [{ chave: 'N2', coef: 1 }, { chave: 'H2', coef: 1 }];
   const produtos = [{ chave: 'NH3', coef: 1 }];
   const elementos = elementosEnvolvidos(reagentes, produtos);
@@ -686,7 +686,7 @@ function passoEtapa2() {
       if (!areaEquacao.dataset.concluido) {
         areaEquacao.dataset.concluido = '1';
         tocarDing();
-        fala('Agora os átomos foram conservados.');
+        fala('Now the atoms have been conserved.');
         agendar(function () { botaoContinuar(300); }, 500);
       }
     } else {
@@ -698,10 +698,10 @@ function passoEtapa2() {
 }
 
 /* ==========================================================
-   ETAPA 3 — A BALANÇA E A LEI DE LAVOISIER
+   STAGE 3 — THE SCALE AND LAVOISIER'S LAW
    ========================================================== */
 function passoEtapa3() {
-  fala('Agora aparece uma balança com os átomos dos reagentes e dos produtos.');
+  fala('Now a scale appears with the atoms of the reactants and products.');
   const reagentes = [{ chave: 'N2', coef: 1 }, { chave: 'H2', coef: 1 }];
   const produtos = [{ chave: 'NH3', coef: 1 }];
   const elementos = elementosEnvolvidos(reagentes, produtos);
@@ -722,7 +722,7 @@ function passoEtapa3() {
         areaEquacao.dataset.concluido = '1';
         tocarDing();
         adicionarRetratoLavoisier('4%', '8%');
-        fala('Essa é a ideia da Lei de Lavoisier.');
+        fala("This is the idea behind Lavoisier's Law.");
         agendar(function () { botaoContinuar(400); }, 600);
       }
     } else {
@@ -734,11 +734,11 @@ function passoEtapa3() {
 }
 
 /* ==========================================================
-   ETAPA 4 — MAIS REAÇÕES PARA BALANCEAR
+   STAGE 4 — MORE REACTIONS TO BALANCE
    ========================================================== */
 function criarPassoBalancear(id, reagentesChaves, produtosChaves, mensagemFinal) {
   return function () {
-    fala('Balanceie esta equação observando os átomos.');
+    fala('Balance this equation by watching the atoms.');
     const reagentes = reagentesChaves.map(function (r) { return { chave: r, coef: 1 }; });
     const produtos = produtosChaves.map(function (p) { return { chave: p, coef: 1 }; });
     const elementos = elementosEnvolvidos(reagentes, produtos);
@@ -770,19 +770,19 @@ function criarPassoBalancear(id, reagentesChaves, produtosChaves, mensagemFinal)
   };
 }
 
-const passoH2Cl2 = criarPassoBalancear('e4a', ['H2', 'Cl2'], ['HCl'], 'Muito bem! H₂ + Cl₂ → 2 HCl está balanceada.');
-const passoFeO2 = criarPassoBalancear('e4b', ['Fe', 'O2'], ['Fe2O3'], 'Muito bem! 4 Fe + 3 O₂ → 2 Fe₂O₃ está balanceada.');
-const passoNaCl2 = criarPassoBalancear('e4c', ['Na', 'Cl2'], ['NaCl'], 'Muito bem! 2 Na + Cl₂ → 2 NaCl está balanceada.');
+const passoH2Cl2 = criarPassoBalancear('e4a', ['H2', 'Cl2'], ['HCl'], 'Well done! H₂ + Cl₂ → 2 HCl is balanced.');
+const passoFeO2 = criarPassoBalancear('e4b', ['Fe', 'O2'], ['Fe2O3'], 'Well done! 4 Fe + 3 O₂ → 2 Fe₂O₃ is balanced.');
+const passoNaCl2 = criarPassoBalancear('e4c', ['Na', 'Cl2'], ['NaCl'], 'Well done! 2 Na + Cl₂ → 2 NaCl is balanced.');
 
 /* ==========================================================
-   ETAPA 5 — ESTRATÉGIA MACHO (DICA)
+   STAGE 5 — BALANCING ORDER STRATEGY (TIP)
    ========================================================== */
 function passoEtapa5() {
-  fala('Agora vou te contar uma estratégia que pode facilitar: a estratégia MACHO.');
+  fala("Now let me share a strategy that can help: a step-by-step balancing order.");
   const lista = document.createElement('div');
   lista.className = 'lista-macho';
   overlay.appendChild(lista);
-  const itens = ['M — Metais', 'A — Ametais', 'C — Carbono', 'H — Hidrogênio', 'O — Oxigênio'];
+  const itens = ['1. Metals', '2. Nonmetals', '3. Carbon', '4. Hydrogen', '5. Oxygen'];
   itens.forEach(function (txt, i) {
     agendar(function () {
       const li = document.createElement('div');
@@ -795,7 +795,7 @@ function passoEtapa5() {
     }, i * 550);
   });
   agendar(function () {
-    fala('Balanceie primeiro os metais, depois os ametais, o carbono, o hidrogênio e por último o oxigênio. É só uma dica, não uma regra obrigatória.');
+    fala("Balance the metals first, then the nonmetals, carbon, hydrogen, and finally oxygen. It's just a tip, not a strict rule.");
     botaoContinuar(400);
   }, itens.length * 550 + 500);
 }
@@ -804,23 +804,23 @@ function passoEtapa5() {
    FINAL
    ========================================================== */
 function passoFinal() {
-  fala('Excelente. Agora você entende que balancear não significa fazer contas. Significa garantir que os mesmos átomos existam antes e depois da reação.');
+  fala("Excellent. Now you understand that balancing doesn't mean doing arithmetic. It means making sure the same atoms exist before and after the reaction.");
   function linha(txt) { return '<div class="quadro-item"><div class="valor">' + txt + '</div></div>'; }
   function seta() { return '<div style="font-family:\'Cormorant Garamond\',serif;font-size:1.3rem;color:var(--dourado-claro);">↓</div>'; }
   overlay.innerHTML =
     '<div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:8px;">' +
-    linha('Lei de Lavoisier') + seta() + linha('Quantidade de átomos conservada') + seta() + linha('Coeficientes estequiométricos') + seta() + linha('Equação balanceada') +
+    linha("Lavoisier's Law") + seta() + linha('Number of atoms conserved') + seta() + linha('Stoichiometric coefficients') + seta() + linha('Balanced equation') +
     '</div>';
   painel.innerHTML = '';
   const conclusao = document.getElementById('conclusao');
-  document.getElementById('conclusaoPlacar').textContent = 'Fase concluída';
-  document.getElementById('conclusaoMensagem').textContent = 'Você descobriu que balancear uma equação é apenas garantir que os mesmos átomos existam antes e depois da reação — a Lei de Lavoisier.';
+  document.getElementById('conclusaoPlacar').textContent = 'Stage Complete';
+  document.getElementById('conclusaoMensagem').textContent = "You discovered that balancing an equation simply means making sure the same atoms exist before and after the reaction — Lavoisier's Law.";
   conclusao.classList.add('visivel');
   conclusao.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 /* ==========================================================
-   MOTOR DA FASE
+   STAGE ENGINE
    ========================================================== */
 const PASSOS = [
   passoIntro0, passoIntro1,
@@ -930,6 +930,3 @@ function ajustarVolume(valorSlider) {
 </div>
 </body>
 </html>
-
-
-
