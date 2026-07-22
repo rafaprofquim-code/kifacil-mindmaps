@@ -1,10 +1,10 @@
 ﻿
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Íons — Torre de Química | Academia KiFácil</title>
+<title>Ions — Chemistry Tower | KiFácil Academy</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
@@ -196,7 +196,7 @@
     color: var(--dourado);
   }
 
-  /* ÁTOMO */
+  /* ATOM */
   .atomo-wrap {
     position: absolute;
     left: 50%;
@@ -206,7 +206,7 @@
     height: 230px;
     z-index: 5;
 
-    /* ajuste fino do centro visual do átomo */
+    /* fine-tuning of the atom's visual center */
     --centro-x: 50.5%;
     --centro-y: 49.5%;
   }
@@ -342,7 +342,7 @@
     100% { opacity: 0; transform: translate(0,0) rotate(var(--rot)) scale(.95); }
   }
 
-  /* ÍON TAG */
+  /* ION TAG */
   .ion-tag {
     position: absolute;
     bottom: 14px;
@@ -394,7 +394,7 @@
     gap: 1rem;
   }
 
-  /* ELEMENTOS DE CONTEÚDO DA ATIVIDADE */
+  /* ACTIVITY CONTENT ELEMENTS */
   .questao-titulo {
     font-family: 'Cormorant Garamond', serif;
     font-size: 1.15rem;
@@ -571,25 +571,25 @@
 </nav>
 
 <main>
-  <h1 class="titulo-jogo" id="tituloJogo">Átomo Neutro</h1>
+  <h1 class="titulo-jogo" id="tituloJogo">Neutral Atom</h1>
 
   <div class="narrador" id="teacherBox">
-    <img src="../imagens/rafa-sorrindo.jpg" alt="Professora Rafaela" id="teacherImg">
+    <img src="../imagens/rafa-sorrindo.jpg" alt="Professor Rafaela" id="teacherImg">
     <div class="narrador-conteudo">
-      <div class="narrador-nome">Professora Rafaela</div>
-      <div class="narrador-texto" id="teacherText">Vamos explorar os íons com calma.</div>
+      <div class="narrador-nome">Professor Rafaela</div>
+      <div class="narrador-texto" id="teacherText">Let's explore ions calmly.</div>
       <div id="continuarBalao"></div>
     </div>
   </div>
 
   <div class="cena-atividade">
     <div class="imagem-wrapper" id="imagemWrapper">
-      <img src="../imagens/laboratorio-ions.jpg" alt="Laboratório de íons" class="imagem-cenario">
+      <img src="../imagens/laboratorio-ions.jpg" alt="Ion laboratory" class="imagem-cenario">
 
       <div class="hud" id="hud">
-        <div class="hud-item"><span class="hud-label">Prótons</span><span class="hud-valor" id="hudProtons">—</span></div>
-        <div class="hud-item"><span class="hud-label">Elétrons</span><span class="hud-valor" id="hudEletrons">—</span></div>
-        <div class="hud-item"><span class="hud-label">Carga</span><span class="hud-valor" id="hudCarga">—</span></div>
+        <div class="hud-item"><span class="hud-label">Protons</span><span class="hud-valor" id="hudProtons">—</span></div>
+        <div class="hud-item"><span class="hud-label">Electrons</span><span class="hud-valor" id="hudEletrons">—</span></div>
+        <div class="hud-item"><span class="hud-label">Charge</span><span class="hud-valor" id="hudCarga">—</span></div>
       </div>
 
       <div class="atomo-wrap" id="atomoWrap">
@@ -607,7 +607,7 @@
 
     <section class="atividade-card">
       <div class="atividade-corpo" id="painelCorpo">
-        <!-- conteúdo das etapas inserido pelo JavaScript -->
+        <!-- stage content inserted by JavaScript -->
       </div>
     </section>
   </div>
@@ -617,7 +617,7 @@
 
 <script>
 // ══════════════════════════════════════════════════
-//  ESTADO GLOBAL
+//  GLOBAL STATE
 // ══════════════════════════════════════════════════
 const estado = {
   protons: 11,
@@ -688,18 +688,18 @@ function atualizarIonTag() {
   tag.className = 'ion-tag';
   if (carga > 0) {
     tag.classList.add('cation');
-    tag.textContent = 'CÁTION';
+    tag.textContent = 'CATION';
   } else if (carga < 0) {
     tag.classList.add('anion');
-    tag.textContent = 'ÂNION';
+    tag.textContent = 'ANION';
   } else {
     tag.classList.add('neutro');
-    tag.textContent = 'NEUTRO';
+    tag.textContent = 'NEUTRAL';
   }
 }
 
 // ══════════════════════════════════════════════════
-//  ALEATORIEDADE DETERMINÍSTICA (mesma semente = mesma posição)
+//  DETERMINISTIC RANDOMNESS (same seed = same position)
 // ══════════════════════════════════════════════════
 function seededRandom(seed) {
   const x = Math.sin(seed) * 10000;
@@ -707,7 +707,7 @@ function seededRandom(seed) {
 }
 
 // ══════════════════════════════════════════════════
-//  NÚCLEO — montado com prótons e nêutrons reais
+//  NUCLEUS — assembled with real protons and neutrons
 // ══════════════════════════════════════════════════
 function limparNucleo() {
   const wrap = document.getElementById('nucleoWrap');
@@ -722,8 +722,8 @@ function renderizarNucleo(protons, neutrons) {
   const total = protons + neutrons;
   if (total <= 0) return;
 
-  // monta a lista de partículas e embaralha de forma determinística,
-  // assim prótons e nêutrons ficam misturados no aglomerado, não separados
+  // builds the particle list and shuffles it deterministically,
+  // so protons and neutrons are mixed in the cluster, not separated
   const particulas = [];
   for (let i = 0; i < protons; i++) particulas.push('proton');
   for (let i = 0; i < neutrons; i++) particulas.push('neutron');
@@ -732,7 +732,7 @@ function renderizarNucleo(protons, neutrons) {
     [particulas[i], particulas[j]] = [particulas[j], particulas[i]];
   }
 
-  // distribuição em espiral áurea compacta para manter o núcleo mais denso
+  // compact golden-spiral distribution to keep the nucleus denser
   const R = Math.min(40, 5 + total * 1.05);
   const anguloAureo = Math.PI * (3 - Math.sqrt(5));
   const tamanho = 14;
@@ -756,20 +756,20 @@ function renderizarNucleo(protons, neutrons) {
 }
 
 // ══════════════════════════════════════════════════
-//  ELÉTRONS — dispersos em nuvem eletrônica ao redor do núcleo
+//  ELECTRONS — spread out in an electron cloud around the nucleus
 // ══════════════════════════════════════════════════
 function criarEletron(idx, total, raioIgnorado, opcoes = {}) {
   const wrap = document.getElementById('atomoWrap');
 
   /*
-    Capacidade visual das camadas:
+    Visual capacity of the shells:
     K = 2
     L = 8
     M = 8
     N = 18
 
-    Cada elétron é localizado pela posição dele na sequência,
-    e não pelo número total de elétrons.
+    Each electron is placed by its position in the sequence,
+    not by the total number of electrons.
   */
   const capacidades = [2, 8, 8];
   const raios = [61, 79, 97];
@@ -787,7 +787,7 @@ function criarEletron(idx, total, raioIgnorado, opcoes = {}) {
 
   const posicaoNaCamada = idx - primeiroIndiceDaCamada;
 
-  // Quantos elétrons realmente existem nesta camada neste momento
+  // How many electrons actually exist in this shell right now
   const eletronsAntesDaCamada = primeiroIndiceDaCamada;
   const quantidadeNaCamada = Math.min(
     capacidades[camada],
@@ -795,8 +795,8 @@ function criarEletron(idx, total, raioIgnorado, opcoes = {}) {
   );
 
   /*
-    Rotação inicial diferente para cada camada.
-    Isso evita que todos os elétrons fiquem alinhados verticalmente.
+    Different starting rotation for each shell.
+    This keeps all the electrons from lining up vertically.
   */
   const rotacoesIniciais = [
     -Math.PI / 2,
@@ -809,15 +809,15 @@ function criarEletron(idx, total, raioIgnorado, opcoes = {}) {
     rotacoesIniciais[camada] +
     (2 * Math.PI * posicaoNaCamada) / quantidadeNaCamada;
 
-  // Variação muito pequena, apenas para não parecer mecanicamente perfeito
+  // Very small variation, just so it doesn't look mechanically perfect
   const variacaoAngular =
     (seededRandom(idx * 17.31 + total * 4.27) - 0.5) * 0.08;
 
   const angulo = anguloBase + variacaoAngular;
 
   /*
-    Todos os elétrons da mesma camada usam exatamente
-    a mesma distância em relação ao centro.
+    All electrons in the same shell use exactly
+    the same distance from the center.
   */
   const raioFinal = raios[camada];
 
@@ -842,8 +842,8 @@ function criarEletron(idx, total, raioIgnorado, opcoes = {}) {
   el.style.top = `${centroY + y - tamanho / 2}px`;
 
   /*
-    Flutuação tangencial.
-    Não altera a distância entre o elétron e o núcleo.
+    Tangential floating motion.
+    Does not change the distance between the electron and the nucleus.
   */
   const amplitudeFlutuacao = 1.5;
 
@@ -864,8 +864,8 @@ function criarEletron(idx, total, raioIgnorado, opcoes = {}) {
 
   if (opcoes.animar === 'entrar') {
     /*
-      O elétron começa fora do átomo, na mesma direção radial,
-      e termina exatamente na posição calculada.
+      The electron starts outside the atom, along the same radial direction,
+      and ends exactly at the calculated position.
     */
     const distanciaEntrada = 120;
     const sx = Math.cos(angulo) * distanciaEntrada;
@@ -907,11 +907,11 @@ function atualizarCamadasVisiveis(qtdEletrons) {
   if (!terceiraCamada) return;
 
   /*
-    Ate 10 eletrons:
-    distribuicao 2-8, portanto apenas duas camadas ocupadas.
+    Up to 10 electrons:
+    2-8 distribution, so only two shells are occupied.
 
-    Acima de 10 eletrons:
-    terceira camada ocupada.
+    Above 10 electrons:
+    third shell occupied.
   */
   if (qtdEletrons <= 10) {
     terceiraCamada.classList.add('oculta');
@@ -936,8 +936,8 @@ function habilitarRemocaoSomenteNaCamadaExterna(onClickFn) {
     .map(el => Number(el.dataset.shell))
     .filter(Number.isFinite);
 
-  // Fallback defensivo: se algum dataset vier inválido,
-  // mantém progresso liberando clique em todos os elétrons.
+  // Defensive fallback: if any dataset comes back invalid,
+  // keep progress moving by enabling clicks on all electrons.
   if (!camadasValidas.length) {
     eletrons.forEach(el => {
       el.classList.add('removivel', 'valencia-ativa');
@@ -996,7 +996,7 @@ function criarRastroEletron(x, y, opcoes = {}) {
 }
 
 // ══════════════════════════════════════════════════
-//  PROFESSORA — muda apenas imagem e texto
+//  TEACHER — only changes image and text
 // ══════════════════════════════════════════════════
 const professorImagens = {
   sorrindo: '../imagens/rafa-sorrindo.jpg',
@@ -1024,7 +1024,7 @@ function professora(texto, imagem = 'explicando') {
 }
 
 // ══════════════════════════════════════════════════
-//  TÍTULO
+//  TITLE
 // ══════════════════════════════════════════════════
 function setTitulo(txt) {
   const tituloJogo = document.getElementById('tituloJogo');
@@ -1034,7 +1034,7 @@ function setTitulo(txt) {
 }
 
 // ══════════════════════════════════════════════════
-//  ÁREA DE ATIVIDADE (abaixo da imagem)
+//  ACTIVITY AREA (below the image)
 // ══════════════════════════════════════════════════
 function renderCorpo(html) {
   const corpo = document.getElementById('painelCorpo');
@@ -1059,7 +1059,7 @@ function mostrarBotaoBalao(label, fn, id) {
 }
 
 // ══════════════════════════════════════════════════
-//  ETAPA 0 — Átomo Neutro
+//  STAGE 0 — Neutral Atom
 // ══════════════════════════════════════════════════
 function etapa0() {
   estado.etapa = 0;
@@ -1068,30 +1068,30 @@ function etapa0() {
   estado.eletrons = 11;
   estado.neutrons = 12;
   atualizarHUD();
-  setTitulo('Átomo Neutro');
+  setTitulo('Neutral Atom');
   renderizarNucleo(11, 12);
   renderizarEletrons(11, 88);
   document.getElementById('ionTag').style.display = 'none';
 
-  professora('Este é um <strong>átomo neutro</strong>. Observe e clique em Próximo.', 'sorrindo');
+  professora('This is a <strong>neutral atom</strong>. Take a look and click Next.', 'sorrindo');
 
   renderCorpo(``);
-  mostrarBotaoBalao('Próximo →', 'etapa1()');
+  mostrarBotaoBalao('Next →', 'etapa1()');
 }
 
 // ══════════════════════════════════════════════════
-//  ETAPA 1 — O que muda quando um íon é formado?
+//  STAGE 1 — What changes when an ion is formed?
 // ══════════════════════════════════════════════════
 function etapa1() {
   estado.etapa = 1;
   setHudModoFinal(false);
-  setTitulo('Formação de Íons');
-  professora('Quando um átomo vira <strong>íon</strong>, o que muda? <strong>Escolha uma das opções abaixo.</strong>', 'explicando');
+  setTitulo('Ion Formation');
+  professora('When an atom becomes an <strong>ion</strong>, what changes? <strong>Choose one of the options below.</strong>', 'explicando');
 
   renderCorpo(`
-    <button class="opcao-btn" id="op-protons"  onclick="responderEtapa1('protons')">O número de prótons</button>
-    <button class="opcao-btn" id="op-neutrons" onclick="responderEtapa1('neutrons')">O número de nêutrons</button>
-    <button class="opcao-btn" id="op-eletrons" onclick="responderEtapa1('eletrons')">O número de elétrons</button>
+    <button class="opcao-btn" id="op-protons"  onclick="responderEtapa1('protons')">The number of protons</button>
+    <button class="opcao-btn" id="op-neutrons" onclick="responderEtapa1('neutrons')">The number of neutrons</button>
+    <button class="opcao-btn" id="op-eletrons" onclick="responderEtapa1('eletrons')">The number of electrons</button>
     <div class="feedback-box" id="fb1"></div>
   `);
 }
@@ -1111,13 +1111,13 @@ function responderEtapa1(opcao) {
   if (opcao === 'eletrons') {
     tocarDing();
     fb.classList.add('ok');
-    fb.innerHTML = 'Correto: elétrons.';
+    fb.innerHTML = 'Correct: electrons.';
     setTimeout(() => {
-      mostrarBotaoBalao('Próximo →', 'etapa2()');
+      mostrarBotaoBalao('Next →', 'etapa2()');
     }, 500);
   } else {
     fb.classList.add('err');
-    fb.innerHTML = 'Não é essa. Tente novamente.';
+    fb.innerHTML = 'Not that one. Try again.';
     ['protons', 'neutrons', 'eletrons'].forEach(id => {
       const b = document.getElementById('op-' + id);
       b.disabled = false;
@@ -1128,7 +1128,7 @@ function responderEtapa1(opcao) {
 }
 
 // ══════════════════════════════════════════════════
-//  ETAPA 2 — Formação do Cátion
+//  STAGE 2 — Cation Formation
 // ══════════════════════════════════════════════════
 function etapa2() {
   estado.etapa = 2;
@@ -1137,12 +1137,12 @@ function etapa2() {
   estado.eletrons = 11;
   estado.neutrons = 12;
   atualizarHUD();
-  setTitulo('Formação do Cátion');
+  setTitulo('Cation Formation');
   renderizarNucleo(11, 12);
   renderizarEletrons(11, 88, false);
   document.getElementById('ionTag').style.display = 'none';
 
-  professora('Sódio: clique no elétron da última camada para removê-lo.', 'explicando');
+  professora('Sodium: click the electron in the outermost shell to remove it.', 'explicando');
 
   renderCorpo(`
     <div class="feedback-box" id="fb2"></div>
@@ -1181,18 +1181,18 @@ function removerEletronCation(el) {
     tocarDing();
     const fb = document.getElementById('fb2');
     fb.classList.add('visivel', 'ok');
-    fb.innerHTML = `O sódio perdeu 1 elétron. Agora tem 11 prótons e 10 elétrons.
-    Como há <strong>1 próton a mais</strong> que elétrons, a carga resultante é <strong>1+</strong>.
-    Esse tipo de íon com carga positiva chama-se <strong>CÁTION</strong>.`;
+    fb.innerHTML = `Sodium lost 1 electron. It now has 11 protons and 10 electrons.
+    Since there is <strong>1 more proton</strong> than electrons, the resulting charge is <strong>1+</strong>.
+    This type of positively charged ion is called a <strong>CATION</strong>.`;
 
     setTimeout(() => {
-      mostrarBotaoBalao('Próximo →', 'etapa3()');
+      mostrarBotaoBalao('Next →', 'etapa3()');
     }, 500);
   }, 750);
 }
 
 // ══════════════════════════════════════════════════
-//  ETAPA 3 — Formação do Ânion
+//  STAGE 3 — Anion Formation
 // ══════════════════════════════════════════════════
 function etapa3() {
   estado.etapa = 3;
@@ -1201,17 +1201,17 @@ function etapa3() {
   estado.eletrons = 8;
   estado.neutrons = 8;
   atualizarHUD();
-  setTitulo('Formação do Ânion');
+  setTitulo('Anion Formation');
   renderizarNucleo(8, 8);
   renderizarEletrons(8, 88, false);
   document.getElementById('ionTag').style.display = 'none';
 
-  professora('Oxigênio: clique em <strong>Add elétrons</strong>.', 'animada');
+  professora('Oxygen: click <strong>Add electrons</strong>.', 'animada');
 
   renderCorpo(`
     <div class="feedback-box" id="fb3"></div>
   `);
-  mostrarBotaoBalao('Add elétrons', 'iniciarAnimacaoAnion()', 'btnAnion');
+  mostrarBotaoBalao('Add electrons', 'iniciarAnimacaoAnion()', 'btnAnion');
 }
 
 function iniciarAnimacaoAnion() {
@@ -1228,11 +1228,11 @@ function iniciarAnimacaoAnion() {
       tocarDing();
       const fb = document.getElementById('fb3');
       fb.classList.add('visivel', 'ok');
-      fb.innerHTML = `O oxigênio ganhou 2 elétrons. Agora tem 8 prótons e 10 elétrons.
-      Como há <strong>2 elétrons a mais</strong> que prótons, a carga é <strong>2−</strong>.
-      Esse tipo de íon com carga negativa chama-se <strong>ÂNION</strong>.`;
+      fb.innerHTML = `Oxygen gained 2 electrons. It now has 8 protons and 10 electrons.
+      Since there are <strong>2 more electrons</strong> than protons, the charge is <strong>2−</strong>.
+      This type of negatively charged ion is called an <strong>ANION</strong>.`;
       setTimeout(() => {
-        mostrarBotaoBalao('Próximo →', 'etapa4()');
+        mostrarBotaoBalao('Next →', 'etapa4()');
       }, 500);
       return;
     }
@@ -1251,19 +1251,19 @@ function iniciarAnimacaoAnion() {
 }
 
 // ══════════════════════════════════════════════════
-//  ETAPA 4 — Laboratório Interativo
+//  STAGE 4 — Interactive Lab
 // ══════════════════════════════════════════════════
 const DESAFIOS_LAB = [
-  { texto: 'Esse átomo possui 12 prótons e 12 elétrons. Precisamos transformá-lo em um <strong>cátion 2+</strong>. O que devemos fazer primeiro?', protons: 12, neutrons: 12, start: 12, meta: 10, tipo: 'remover', qtd: 2 },
-  { texto: 'Esse átomo possui 7 prótons e 7 elétrons. Transforme-o em um <strong>ânion 3−</strong>.<br>', protons: 7,  neutrons: 7,  start: 7,  meta: 10, tipo: 'adicionar', qtd: 3 },
-  { texto: 'Esse átomo possui 9 prótons e 7 elétrons, vamos fazê-lo voltar ao <strong>estado neutro</strong>.<br>Adicione 2 elétrons.', protons: 9,  neutrons: 10, start: 7,  meta: 9,  tipo: 'adicionar', qtd: 2 },
+  { texto: 'This atom has 12 protons and 12 electrons. We need to turn it into a <strong>2+ cation</strong>. What should we do first?', protons: 12, neutrons: 12, start: 12, meta: 10, tipo: 'remover', qtd: 2 },
+  { texto: 'This atom has 7 protons and 7 electrons. Turn it into a <strong>3− anion</strong>.<br>', protons: 7,  neutrons: 7,  start: 7,  meta: 10, tipo: 'adicionar', qtd: 3 },
+  { texto: 'This atom has 9 protons and 7 electrons; let\'s bring it back to the <strong>neutral state</strong>.<br>Add 2 electrons.', protons: 9,  neutrons: 10, start: 7,  meta: 9,  tipo: 'adicionar', qtd: 2 },
 ];
 
 function etapa4() {
   estado.etapa = 4;
   setHudModoFinal(false);
   estado.laboratorio.desafioIdx = 0;
-  setTitulo('Laboratório Interativo');
+  setTitulo('Interactive Lab');
   carregarDesafioLab();
 }
 
@@ -1286,9 +1286,9 @@ function carregarDesafioLab() {
   if (idx === 0) {
     renderCorpo(`
       <div class="desafio-box">
-        <div class="desafio-titulo">Desafio ${idx + 1} de ${DESAFIOS_LAB.length}</div>
-        <button class="opcao-btn" onclick="responderEscolhaInicialLab('adicionar')">Add 2 elétrons</button>
-        <button class="opcao-btn" onclick="responderEscolhaInicialLab('remover')">Remove 2 elétrons</button>
+        <div class="desafio-titulo">Challenge ${idx + 1} of ${DESAFIOS_LAB.length}</div>
+        <button class="opcao-btn" onclick="responderEscolhaInicialLab('adicionar')">Add 2 electrons</button>
+        <button class="opcao-btn" onclick="responderEscolhaInicialLab('remover')">Remove 2 electrons</button>
       </div>
       <div class="feedback-box" id="fbLab"></div>
     `);
@@ -1297,13 +1297,13 @@ function carregarDesafioLab() {
 
   renderCorpo(`
     <div class="desafio-box">
-      <div class="desafio-titulo">Desafio ${idx + 1} de ${DESAFIOS_LAB.length}</div>
+      <div class="desafio-titulo">Challenge ${idx + 1} of ${DESAFIOS_LAB.length}</div>
       ${d.tipo === 'remover'
         ? ``
         : `
            <div class="eletron-controles">
-             <button class="btn-eletron" id="btnAdd" onclick="adicionarEletronLab()">+ Elétron</button>
-             <span style="font-size:12px;color:var(--texto-suave)" id="labStatus">Elétrons: ${d.start}</span>
+             <button class="btn-eletron" id="btnAdd" onclick="adicionarEletronLab()">+ Electron</button>
+             <span style="font-size:12px;color:var(--texto-suave)" id="labStatus">Electrons: ${d.start}</span>
            </div>`
       }
     </div>
@@ -1321,11 +1321,11 @@ function responderEscolhaInicialLab(acao) {
   if (acao === 'adicionar') {
     renderCorpo(`
       <div class="feedback-box visivel info" id="fbLab">
-        Ao adicionar elétrons, o átomo passa a ter mais elétrons do que prótons, adquirindo carga negativa. Como o objetivo é formar um cátion (2+), essa não é a ação correta.
+        Adding electrons gives the atom more electrons than protons, which makes it negatively charged. Since the goal is to form a cation (2+), that isn't the right action.
       </div>
       <div class="desafio-box">
-        <button class="opcao-btn" onclick="responderEscolhaInicialLab('adicionar')">Add 2 elétrons</button>
-        <button class="opcao-btn" onclick="responderEscolhaInicialLab('remover')">Remove 2 elétrons</button>
+        <button class="opcao-btn" onclick="responderEscolhaInicialLab('adicionar')">Add 2 electrons</button>
+        <button class="opcao-btn" onclick="responderEscolhaInicialLab('remover')">Remove 2 electrons</button>
       </div>
     `);
     return;
@@ -1334,12 +1334,12 @@ function responderEscolhaInicialLab(acao) {
   tocarDing();
   renderCorpo(`
     <div class="feedback-box visivel ok" id="fbLab">
-      Muito bem! Para formar um cátion precisamos diminuir a quantidade de elétrons. Agora clique em dois elétrons da camada mais externa para removê-los.
+      Well done! To form a cation we need to reduce the number of electrons. Now click two electrons in the outermost shell to remove them.
     </div>
   `);
-  mostrarBotaoBalao('Continuar →', 'iniciarRemocaoLabInicial()', 'btnInicioRemocaoLab');
+  mostrarBotaoBalao('Continue →', 'iniciarRemocaoLabInicial()', 'btnInicioRemocaoLab');
 
-  professora('Muito bem! Agora clique em <strong>Continuar</strong> e remova dois elétrons da camada mais externa.', 'explicando');
+  professora('Well done! Now click <strong>Continue</strong> and remove two electrons from the outermost shell.', 'explicando');
 }
 
 function iniciarRemocaoLabInicial() {
@@ -1397,7 +1397,7 @@ function adicionarEletronLab() {
   criarEletron(estado.eletrons - 1, estado.eletrons, 88, { animar: 'entrar' });
   atualizarHUD();
   atualizarIonTag();
-  document.getElementById('labStatus').textContent = 'Elétrons: ' + estado.eletrons;
+  document.getElementById('labStatus').textContent = 'Electrons: ' + estado.eletrons;
 
   if (estado.eletrons === d.meta) {
     document.getElementById('btnAdd').disabled = true;
@@ -1413,20 +1413,20 @@ function verificarDesafioLab() {
   const cargaTxt = carga === 0 ? '0' : `${Math.abs(carga)}${carga > 0 ? '+' : '−'}`;
   tocarDing();
   fb.classList.add('visivel', 'ok');
-  fb.innerHTML = `Correto! Prótons = ${estado.protons}, Elétrons = ${estado.eletrons}, Carga = ${cargaTxt}.`;
+  fb.innerHTML = `Correct! Protons = ${estado.protons}, Electrons = ${estado.eletrons}, Charge = ${cargaTxt}.`;
 
   setTimeout(() => {
     estado.laboratorio.desafioIdx++;
     if (estado.laboratorio.desafioIdx < DESAFIOS_LAB.length) {
-      mostrarBotaoBalao('Próximo desafio →', 'carregarDesafioLab()');
+      mostrarBotaoBalao('Next challenge →', 'carregarDesafioLab()');
     } else {
-      mostrarBotaoBalao('Próximo →', 'etapa5()');
+      mostrarBotaoBalao('Next →', 'etapa5()');
     }
   }, 600);
 }
 
 // ══════════════════════════════════════════════════
-//  ETAPA 5 — Desafio Final
+//  STAGE 5 — Final Challenge
 // ══════════════════════════════════════════════════
 const DESAFIOS_FINAIS = [
   { protons: 15, neutrons: 16, eletrons: 17, opcoes: ['3−', '2−', '2+', '3+'], certa: '2−' },
@@ -1439,7 +1439,7 @@ function etapa5() {
   setHudModoFinal(true);
   estado.desafioFinal.idx = 0;
   estado.desafioFinal.acertos = 0;
-  setTitulo('Desafio Final');
+  setTitulo('Final Challenge');
   carregarDesafioFinal();
 }
 
@@ -1456,7 +1456,7 @@ function carregarDesafioFinal() {
   renderizarEletrons(d.eletrons, 88, false);
   atualizarIonTag();
 
-  professora(`Observe o quadro na figura: Prótons = ${d.protons}, Elétrons = ${d.eletrons}. <strong>Escolha uma das opções abaixo.</strong>`, 'pensando');
+  professora(`Look at the panel in the figure: Protons = ${d.protons}, Electrons = ${d.eletrons}. <strong>Choose one of the options below.</strong>`, 'pensando');
 
   const ops = d.opcoes.map(op =>
     `<button class="resposta-opcao" onclick="responderFinal(this, '${op}', '${d.certa}')">${op}</button>`
@@ -1464,8 +1464,8 @@ function carregarDesafioFinal() {
 
   renderCorpo(`
     <div class="desafio-box">
-      <div class="desafio-titulo">Desafio ${idx + 1} de ${DESAFIOS_FINAIS.length}</div>
-      <div class="desafio-texto">Qual é a carga elétrica desse átomo?</div>
+      <div class="desafio-titulo">Challenge ${idx + 1} of ${DESAFIOS_FINAIS.length}</div>
+      <div class="desafio-texto">What is the electric charge of this atom?</div>
       ${ops}
     </div>
     <div class="feedback-box" id="fbFinal"></div>
@@ -1488,26 +1488,26 @@ function responderFinal(btn, opcao, certa) {
     tocarDing();
     estado.desafioFinal.acertos++;
     fb.classList.add('ok');
-    fb.innerHTML = `Correto! Carga = prótons (${estado.protons}) − elétrons (${estado.eletrons}) = ${certa}.`;
+    fb.innerHTML = `Correct! Charge = protons (${estado.protons}) − electrons (${estado.eletrons}) = ${certa}.`;
   } else {
     fb.classList.add('err');
     const diff = estado.protons - estado.eletrons;
     const diffTxt = diff === 0 ? '0' : `${Math.abs(diff)}${diff > 0 ? '+' : '−'}`;
-    fb.innerHTML = `A carga correta é <strong>${certa}</strong>. Lembre: carga = prótons − elétrons = ${estado.protons} − ${estado.eletrons} = ${diffTxt}.`;
+    fb.innerHTML = `The correct charge is <strong>${certa}</strong>. Remember: charge = protons − electrons = ${estado.protons} − ${estado.eletrons} = ${diffTxt}.`;
   }
 
   setTimeout(() => {
     estado.desafioFinal.idx++;
     if (estado.desafioFinal.idx < DESAFIOS_FINAIS.length) {
-      mostrarBotaoBalao('Próximo →', 'carregarDesafioFinal()');
+      mostrarBotaoBalao('Next →', 'carregarDesafioFinal()');
     } else {
-      mostrarBotaoBalao('Ver resumo →', 'mostrarFim()');
+      mostrarBotaoBalao('See summary →', 'mostrarFim()');
     }
   }, 700);
 }
 
 // ══════════════════════════════════════════════════
-//  TELA FINAL — Resumo
+//  FINAL SCREEN — Summary
 // ══════════════════════════════════════════════════
 function mostrarFim() {
   removerTodosEletrons();
@@ -1520,41 +1520,41 @@ function mostrarFim() {
   const acertos = estado.desafioFinal.acertos;
   const total   = DESAFIOS_FINAIS.length;
 
-  setTitulo('Resumo');
-  professora(`Muito bem! Você completou a fase de Íons. Acertou <strong>${acertos} de ${total}</strong> no desafio final.`, 'animada');
+  setTitulo('Summary');
+  professora(`Well done! You completed the Ions stage. You got <strong>${acertos} of ${total}</strong> right in the final challenge.`, 'animada');
 
   renderCorpo(`
     <div class="resumo-item">
       <div class="resumo-icone">+</div>
       <div class="resumo-texto">
-        <strong>Perde elétrons → Cátion → Carga positiva.</strong><br>
-        O átomo fica com mais prótons do que elétrons.
+        <strong>Loses electrons → Cation → Positive charge.</strong><br>
+        The atom ends up with more protons than electrons.
       </div>
     </div>
     <div class="resumo-item">
       <div class="resumo-icone">−</div>
       <div class="resumo-texto">
-        <strong>Ganha elétrons → Ânion → Carga negativa.</strong><br>
-        O átomo fica com mais elétrons do que prótons.
+        <strong>Gains electrons → Anion → Negative charge.</strong><br>
+        The atom ends up with more electrons than protons.
       </div>
     </div>
     <div class="resumo-item">
       <div class="resumo-icone">○</div>
       <div class="resumo-texto">
-        <strong>Prótons e nêutrons nunca mudam.</strong><br>
-        Somente elétrons são ganhos ou perdidos na formação de íons.
+        <strong>Protons and neutrons never change.</strong><br>
+        Only electrons are gained or lost when ions form.
       </div>
     </div>
 
     <div class="feedback-box visivel info" style="margin-top:4px">
-      Fórmula da carga: <strong>Carga = Prótons − Elétrons</strong>
+      Charge formula: <strong>Charge = Protons − Electrons</strong>
     </div>
   `);
-  mostrarBotaoBalao('Recomeçar', 'etapa0()', 'btnFim');
+  mostrarBotaoBalao('Restart', 'etapa0()', 'btnFim');
 
   try {
     if (window.salvarProgresso) salvarProgresso({ fase: 'ions', concluida: true });
-  } catch(e) { /* offline ou sem auth */ }
+  } catch(e) { /* offline or no auth */ }
 }
 
 // ══════════════════════════════════════════════════

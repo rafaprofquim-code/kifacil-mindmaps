@@ -1,10 +1,10 @@
 ﻿<!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex, nofollow">
-  <title>Polaridade das Moléculas — Premium Game | KiFácil</title>
+  <title>Molecular Polarity — Premium Game | KiFácil</title>
   <link rel="icon" type="image/png" href="/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -105,9 +105,9 @@
       font-size: .88rem;
       line-height: 1.55;
       color: var(--texto-suave);
-      /* altura mínima reservada para ~4 linhas: falas curtas e longas
-         não mudam a altura da caixa, então a imagem abaixo dela não
-         "pula" para cima e para baixo a cada troca de fala. */
+      /* minimum height reserved for ~4 lines: short and long lines
+         don't change the box height, so the image below it doesn't
+         "jump" up and down every time the line changes. */
       min-height: 6.2em;
     }
 
@@ -138,9 +138,9 @@
       user-select: none;
     }
 
-    /* top ajustado para não sobrepor o .painel-interacao, que ocupa
-       o canto superior direito do palco (right:1.5%; top:2%) quando
-       uma pergunta está sendo exibida. */
+    /* top adjusted so it doesn't overlap .painel-interacao, which sits
+       in the top-right corner of the stage (right:1.5%; top:2%) when
+       a question is being shown. */
     .link-aula {
       position: absolute; top: 175px; right: 10px; z-index: 10;
       display: flex; flex-direction: column; align-items: center; gap: 2px;
@@ -325,7 +325,7 @@
       pointer-events: none;
     }
 
-    /* CONCLUSÃO */
+    /* CONCLUSION */
     .conclusao {
       display: none;
       margin-top: 3rem;
@@ -391,7 +391,7 @@
       }
     }
 
-    /* RESPONSIVO */
+    /* RESPONSIVE */
     @media (max-width: 640px) {
       .top-nav { padding: 0 1.2rem; gap: 1.2rem; }
       main { padding: .8rem 1rem 1rem; }
@@ -404,16 +404,16 @@
     }
 
     /* ==========================================================
-       MECÂNICA ESPECÍFICA — POLARIDADE DAS MOLÉCULAS
-       Nada acima deste bloco foi alterado (nav, narrador,
-       imagem-wrapper, conclusão, footer, modal-zoom permanecem
-       idênticos à fase-modelo). Tudo daqui pra baixo é novo.
+       MECHANICS SPECIFIC TO THIS GAME — MOLECULAR POLARITY
+       Nothing above this block was changed (nav, narrator,
+       imagem-wrapper, conclusion, footer, modal-zoom stay
+       identical to the template stage). Everything below here is new.
        ========================================================== */
     .narrador img { transition: opacity .25s ease; }
-    /* visibility (não display) reserva sempre o espaço do botão —
-       assim a caixa da professora nunca muda de altura, e a imagem
-       abaixo dela não "pula" para cima e para baixo a cada troca
-       de fala. */
+    /* visibility (not display) always reserves the button's space —
+       so the teacher's box never changes height, and the image
+       below it doesn't "jump" up and down every time the
+       line changes. */
     #btnContinuarFala { margin-top: .9rem; visibility: hidden; }
 
     .palco-plataforma {
@@ -433,11 +433,11 @@
       aspect-ratio: 1 / 1;
       display: none;
     }
-    /* Guia de tetraedro — usado no NH3 e no CH4, para deixar claro que
-       são moléculas 3D (piramidal / tetraédrica), não planas. Fica
-       exatamente na mesma caixa do palco-svg-wrap (mesmo
-       left/top/width/transform), para que as coordenadas 0-400 do
-       SVG mapeiem 1:1 para dentro da imagem do tetraedro. */
+    /* Tetrahedron guide — used for NH3 and CH4, to make clear that
+       they are 3D molecules (pyramidal / tetrahedral), not flat. It sits
+       in exactly the same box as palco-svg-wrap (same
+       left/top/width/transform), so the SVG's 0-400 coordinates
+       map 1:1 onto the tetrahedron image. */
     .imagem-wrapper img.palco-tetraedro {
       position: absolute;
       left: 50%; top: 60%;
@@ -484,15 +484,15 @@
     }
     .mu-label.mostrar, .delta-label.mostrar { opacity: 1; }
 
-    /* Par eletrônico da ligação — duas bolinhas vermelhas empilhadas */
+    /* Bond electron pair — two small red dots stacked vertically */
     .par-eletronico circle {
       fill: #b5342a; stroke: #5a1712; stroke-width: 1;
       transition: cx .9s ease, cy .9s ease;
     }
 
-    /* Painel de interação — perguntas e escolhas, sobreposto ao lado
-       da cena (dentro do imagem-wrapper, nunca em fluxo abaixo dela,
-       para a página jamais precisar rolar). */
+    /* Interaction panel — questions and choices, overlaid beside
+       the scene (inside imagem-wrapper, never in flow below it,
+       so the page never needs to scroll). */
     .painel-interacao {
       display: none;
       position: absolute;
@@ -515,10 +515,10 @@
     }
     .interacao-botoes { display: flex; gap: .6rem; justify-content: center; flex-wrap: wrap; }
     .interacao-botoes .modal-btn-confirmar { padding: .7rem 1.6rem; font-size: 1.05rem; }
-    /* símbolos químicos (Cl, Br...) não podem virar maiúsculas */
+    /* chemical symbols (Cl, Br...) must not be uppercased */
     .btn-simbolo { text-transform: none; }
 
-    /* Resumo final (etapa de conclusão) */
+    /* Final summary (conclusion stage) */
     .resumo-cadeia {
       display: flex; flex-direction: column; align-items: center; gap: .5rem;
       margin: 1.4rem 0 1.8rem;
@@ -530,9 +530,9 @@
     .resumo-seta { color: var(--dourado-claro); font-size: 1.15rem; line-height: 1; }
 
     @media (max-width: 640px) {
-      /* no mobile o texto quebra em mais linhas (coluna mais
-         estreita); reserva mais espaço para as falas mais longas
-         não empurrarem a imagem para baixo. */
+      /* on mobile the text wraps to more lines (narrower
+         column); reserve more space so longer lines don't
+         push the image down. */
       .narrador-texto { min-height: 8.6em; }
       .palco-plataforma { width: 84%; top: 46%; }
       .palco-svg-wrap { width: 68%; top: 32%; }
@@ -548,9 +548,9 @@
       .interacao-texto { font-size: 1rem; margin-bottom: .7rem; }
       .interacao-botoes { gap: .5rem; }
       .interacao-botoes .modal-btn-confirmar { padding: .55rem 1.2rem; font-size: .92rem; }
-      /* no mobile o .painel-interacao vira uma barra central no topo
-         (left:50%; top:3%; width:94%) — o crachá precisa descer mais
-         para não ficar por cima dele. */
+      /* on mobile .painel-interacao becomes a centered bar at the top
+         (left:50%; top:3%; width:94%) — the badge needs to move down
+         further so it doesn't sit on top of it. */
       .link-aula { top: 120px; }
     }
   
@@ -596,20 +596,20 @@
 </nav>
 
 <main>
-  <h1 class="titulo-jogo">Polaridade das Moléculas</h1>
-  <p class="subtitulo">Observe os vetores de electronegativity e descubra sozinho quando eles se anulam e quando sobra um lado mais negativo.</p>
+  <h1 class="titulo-jogo">Molecular Polarity</h1>
+  <p class="subtitulo">Watch the electronegativity vectors and discover for yourself when they cancel out and when one side ends up more negative.</p>
 
   <div class="narrador">
-    <img src="../imagens/rafa-sorrindo.jpg" alt="Professora Rafaela" id="imgProfessora" />
+    <img src="../imagens/rafa-sorrindo.jpg" alt="Professor Rafaela" id="imgProfessora" />
     <div>
-      <div class="narrador-nome">Professora Rafaela</div>
-      <div class="narrador-texto" id="narradorTexto">Today we will descobrir por que algumas moléculas possuem um lado mais negativo e outras não.</div>
-      <button class="modal-btn-confirmar" id="btnContinuarFala">Continuar</button>
+      <div class="narrador-nome">Professor Rafaela</div>
+      <div class="narrador-texto" id="narradorTexto">Today we'll find out why some molecules have a more negative side and others don't.</div>
+      <button class="modal-btn-confirmar" id="btnContinuarFala">Continue</button>
     </div>
   </div>
 
   <div class="imagem-wrapper" id="imagemWrapper">
-    <img src="../imagens/observatorio-molecular.jpg" alt="Observatório molecular" id="imagemJogo" />
+    <img src="../imagens/observatorio-molecular.jpg" alt="Molecular observatory" id="imagemJogo" />
     <img src="../imagens/plataforma-molecula.png" alt="" class="palco-plataforma" id="palcoPlataforma" />
     <img src="../imagens/tetraedro-wireframe.png" alt="" class="palco-tetraedro" id="palcoTetraedro" />
     <div class="palco-svg-wrap" id="palcoWrap">
@@ -622,22 +622,22 @@
 </div>
 
   <div class="conclusao" id="conclusao">
-    <div class="conclusao-titulo">Fase concluída</div>
+    <div class="conclusao-titulo">Stage Complete</div>
     <div class="resumo-cadeia">
-      <div class="resumo-passo">Ligação polar</div>
+      <div class="resumo-passo">Polar bond</div>
       <div class="resumo-seta">↓</div>
-      <div class="resumo-passo">Diferença de electronegativity</div>
+      <div class="resumo-passo">Electronegativity difference</div>
       <div class="resumo-seta">↓</div>
-      <div class="resumo-passo">Vetores</div>
+      <div class="resumo-passo">Vectors</div>
       <div class="resumo-seta">↓</div>
-      <div class="resumo-passo">Geometria</div>
+      <div class="resumo-passo">Geometry</div>
       <div class="resumo-seta">↓</div>
-      <div class="resumo-passo">Momento dipolar resultante</div>
+      <div class="resumo-passo">Resulting dipole moment</div>
       <div class="resumo-seta">↓</div>
-      <div class="resumo-passo">Polar ou Apolar</div>
+      <div class="resumo-passo">Polar or Nonpolar</div>
     </div>
-    <p class="conclusao-mensagem" id="conclusaoMensagem">Excelente. Agora você consegue visualizar por que algumas moléculas possuem polarity e outras não.</p>
-    <button class="btn-reiniciar" onclick="reiniciar()">Jogar novamente</button>
+    <p class="conclusao-mensagem" id="conclusaoMensagem">Excellent. Now you can see for yourself why some molecules have polarity and others don't.</p>
+    <button class="btn-reiniciar" onclick="reiniciar()">Play again</button>
   </div>
 </main>
 
@@ -645,23 +645,23 @@
 
 <!-- MODAL ZOOM -->
 <div class="modal-zoom" id="modalZoom">
-  <img src="../imagens/observatorio-molecular.jpg" alt="Observatório ampliado" />
+  <img src="../imagens/observatorio-molecular.jpg" alt="Enlarged observatory" />
 </div>
 
 <script>
 /* ==========================================================
-   DADOS — ELETRONEGATIVIDADE (escala relativa, só a ordem importa)
+   DATA — ELECTRONEGATIVITY (relative scale, only the order matters)
    ========================================================== */
 const ELETRONEGATIVIDADE = { H: 2.1, B: 2.0, C: 2.5, N: 3.0, O: 3.5, F: 4.0, Cl: 3.0, Br: 2.8, I: 2.5 };
 
-/* Diatômicas homonucleares — etapa 1 (sempre nonpolares) */
+/* Homonuclear diatomics — stage 1 (always nonpolar) */
 const DIATOMICAS_APOLARES = [
   { formula: 'H₂', simbolo: 'H' },
   { formula: 'Cl₂', simbolo: 'Cl' },
   { formula: 'O₂', simbolo: 'O', ligacaoDupla: true }
 ];
 
-/* Diatômicas heteronucleares — etapa 2 (sempre polares) */
+/* Heteronuclear diatomics — stage 2 (always polar) */
 const DIATOMICAS_POLARES = [
   { formula: 'HCl', a: 'H', b: 'Cl' },
   { formula: 'HF', a: 'H', b: 'F' },
@@ -669,9 +669,9 @@ const DIATOMICAS_POLARES = [
   { formula: 'HI', a: 'H', b: 'I' }
 ];
 
-/* Moléculas poliatômicas — objeto central, reutilizado nas etapas 3, 4 e 5.
-   "angulos" são graus (convenção SVG: 0°=direita, 90°=baixo).
-   Para adicionar uma nova molécula, basta uma entrada aqui. */
+/* Polyatomic molecules — central object, reused in stages 3, 4 and 5.
+   "angulos" are degrees (SVG convention: 0°=right, 90°=down).
+   To add a new molecule, just add an entry here. */
 const MOLECULAS = {
   co2: { formula: 'CO₂', central: 'C', substituintes: ['O', 'O'], angulos: [0, 180], ligacaoDupla: true },
   h2o: { formula: 'H₂O', central: 'O', substituintes: ['H', 'H'], angulos: [250, 290] },
@@ -680,13 +680,13 @@ const MOLECULAS = {
 };
 
 const DICAS_SOCRATICAS = [
-  'Compare a electronegativity dos dois lados da ligação.',
-  'Observe para onde os vetores apontam — eles se equilibram?'
+  'Compare the electronegativity of the two sides of the bond.',
+  'Watch where the vectors point — do they balance out?'
 ];
 function dicaAleatoria() { return DICAS_SOCRATICAS[Math.floor(Math.random() * DICAS_SOCRATICAS.length)]; }
 
 /* ==========================================================
-   PROFESSORA RAFAELA — mesmo padrão das demais fases
+   TEACHER RAFAELA — same pattern as the other stages
    ========================================================== */
 const IMG_PROF = {
   sorrindo: '../imagens/rafa-sorrindo.jpg',
@@ -723,7 +723,7 @@ _ding.preload = 'auto';
 function tocarDing() { try { _ding.currentTime = 0; _ding.play().catch(() => {}); } catch (e) {} }
 
 /* ==========================================================
-   PAINEL DE INTERAÇÃO — perguntas e escolhas do aluno
+   INTERACTION PANEL — student questions and choices
    ========================================================== */
 function mostrarPainelInteracao(texto, botoes) {
   document.getElementById('interacaoTexto').textContent = texto;
@@ -732,9 +732,9 @@ function mostrarPainelInteracao(texto, botoes) {
   botoes.forEach(b => {
     const btn = document.createElement('button');
     btn.className = 'modal-btn-confirmar';
-    // símbolos químicos (Cl, Br...) não podem virar maiúsculas —
-    // o botão padrão é uppercase por CSS, então essa classe desliga
-    // a transformação quando o texto é um símbolo de elemento.
+    // chemical symbols (Cl, Br...) must not be uppercased —
+    // the default button is uppercase via CSS, so this class turns
+    // off the transform when the text is an element symbol.
     if (b.simbolo) btn.classList.add('btn-simbolo');
     btn.textContent = b.texto;
     btn.addEventListener('click', b.aoClicar);
@@ -763,31 +763,31 @@ function perguntarEscolha(pergunta, opcoes) {
 }
 function perguntarSimNao(pergunta, respostaSim, aoAcertar) {
   perguntarEscolha(pergunta, [
-    { texto: 'Sim', certa: respostaSim, aoAcertar },
-    { texto: 'Não', certa: !respostaSim, aoAcertar }
+    { texto: 'Yes', certa: respostaSim, aoAcertar },
+    { texto: 'No', certa: !respostaSim, aoAcertar }
   ]);
 }
 function perguntarDiferencaEletronegatividade(existeDiferenca, aoAcertar) {
-  perguntarSimNao('Existe diferença de electronegativity entre os átomos?', existeDiferenca, aoAcertar);
+  perguntarSimNao('Is there an electronegativity difference between the atoms?', existeDiferenca, aoAcertar);
 }
 function perguntarMaisEletronegativo(simboloA, simboloB, aoAcertar) {
   const aMaisEletronegativo = ELETRONEGATIVIDADE[simboloA] > ELETRONEGATIVIDADE[simboloB];
-  perguntarEscolha('Qual é o átomo mais eletronegativo?', [
+  perguntarEscolha('Which atom is more electronegative?', [
     { texto: simboloA, certa: aMaisEletronegativo, aoAcertar, simbolo: true },
     { texto: simboloB, certa: !aMaisEletronegativo, aoAcertar, simbolo: true }
   ]);
 }
 
 /* ==========================================================
-   PALCO — desenho de átomos, ligações e vetores (SVG)
+   STAGE — drawing atoms, bonds and vectors (SVG)
    ========================================================== */
 const NS = 'http://www.w3.org/2000/svg';
 const svg = document.getElementById('palcoSvg');
 const CX = 200, CY = 200;
 const RAIO_SUBSTITUINTE = 108;
 const RAIO_DIATOMICA = 62;
-/* Diatômicas ficam mais baixas no palco, sobre a parte clara da plataforma
-   (as moléculas poliatômicas continuam centradas em CY, inalteradas). */
+/* Diatomics sit lower on the stage, over the light part of the platform
+   (polyatomic molecules stay centered on CY, unchanged). */
 const CY_DIATOMICA = 250;
 
 function criarSvgEl(tag, attrs) {
@@ -827,7 +827,7 @@ function desenharFormula(texto, y = 44) {
   const t = criarSvgEl('text', { class: 'formula-molecula', x: CX, y });
   t.textContent = texto;
   svg.appendChild(t);
-  // quadro de fundo, para a fórmula ficar legível sobre qualquer parte da imagem
+  // background frame, so the formula stays legible over any part of the image
   const bbox = t.getBBox();
   const padX = 10, padY = 6;
   const fundo = criarSvgEl('rect', {
@@ -839,9 +839,9 @@ function desenharFormula(texto, y = 44) {
   svg.insertBefore(fundo, t);
 }
 
-/* Par eletrônico da ligação: duas bolinhas vermelhas empilhadas
-   verticalmente, na posição correspondente à fração "frac" do
-   caminho entre pA e pB (0.5 = centralizado). */
+/* Bond electron pair: two small red dots stacked
+   vertically, at the position corresponding to the fraction "frac" of
+   the path between pA and pB (0.5 = centered). */
 function desenharParEletronico(pA, pB, frac) {
   const x = pA.x + (pB.x - pA.x) * frac;
   const y = pA.y + (pB.y - pA.y) * frac;
@@ -859,9 +859,9 @@ function moverParEletronico(g, pA, pB, frac) {
   circles[1].setAttribute('cx', x); circles[1].setAttribute('cy', y + 6);
 }
 
-/* δ+ / δ− : cargas parciais exibidas em cima de cada átomo da
-   ligação, quando existe diferença de electronegativity (distinto
-   de μ, usado para o momento dipolar resultante da molécula). */
+/* δ+ / δ− : partial charges shown above each atom of the
+   bond, when there is an electronegativity difference (distinct
+   from μ, used for the molecule's resulting dipole moment). */
 function mostrarDelta(ponto, sinal) {
   const t = criarSvgEl('text', { class: 'delta-label', x: ponto.x, y: ponto.y - 38 });
   t.textContent = sinal === '+' ? 'δ+' : 'δ−';
@@ -884,8 +884,8 @@ function desenharLigacao(p1, p2) {
   svg.insertBefore(linha, svg.firstChild.nextSibling);
   return linha;
 }
-/* Ligação dupla: duas linhas paralelas, deslocadas perpendicularmente
-   ao eixo da ligação (ex.: O=C=O do CO2, O=O do O2). */
+/* Double bond: two parallel lines, offset perpendicular
+   to the bond axis (e.g.: O=C=O for CO2, O=O for O2). */
 function desenharLigacaoDupla(p1, p2) {
   const dx = p2.x - p1.x, dy = p2.y - p1.y;
   const comp = Math.hypot(dx, dy) || 1;
@@ -895,9 +895,9 @@ function desenharLigacaoDupla(p1, p2) {
   desenharLigacao({ x: p1.x - nx * offset, y: p1.y - ny * offset }, { x: p2.x - nx * offset, y: p2.y - ny * offset });
 }
 
-/* Diatômica: dois átomos lado a lado, ligados. Retorna os centros.
-   Fica mais para baixo no palco (CY_DIATOMICA) para sentar sobre a
-   parte clara da plataforma. */
+/* Diatomic: two atoms side by side, bonded. Returns the centers.
+   Sits lower on the stage (CY_DIATOMICA) to rest on the
+   light part of the platform. */
 function desenharDiatomica(simboloA, simboloB, formula, ligacaoDupla) {
   const pA = { x: CX - RAIO_DIATOMICA, y: CY_DIATOMICA };
   const pB = { x: CX + RAIO_DIATOMICA, y: CY_DIATOMICA };
@@ -908,7 +908,7 @@ function desenharDiatomica(simboloA, simboloB, formula, ligacaoDupla) {
   return { pA, pB };
 }
 
-/* Molécula com átomo central + substituintes nos ângulos definidos. */
+/* Molecule with a central atom + substituents at the defined angles. */
 function desenharMoleculaCentral(mol) {
   desenharFormula(mol.formula);
   const pontos = mol.angulos.map(ang => anguloParaXY(ang, RAIO_SUBSTITUINTE));
@@ -918,12 +918,12 @@ function desenharMoleculaCentral(mol) {
   return pontos;
 }
 
-/* Vértices do guia de tetraedro (tetraedro-wireframe.png), medidos
-   sobre a própria imagem e convertidos para o viewBox 0-400 (a
-   imagem ocupa exatamente a mesma caixa do palco-svg-wrap).
-   NH3 usa o ápice + 2 vértices da base (o 3º vértice da base vira
-   o par isolado, sem átomo). CH4 usa os 4 vértices, com o C no
-   centroide — os 4 H ficam nos 4 cantos do guia. */
+/* Tetrahedron guide vertices (tetraedro-wireframe.png), measured
+   on the image itself and converted to the 0-400 viewBox (the
+   image occupies exactly the same box as palco-svg-wrap).
+   NH3 uses the apex + 2 base vertices (the base's 3rd vertex becomes
+   the lone pair, with no atom). CH4 uses all 4 vertices, with C at the
+   centroid — the 4 H atoms sit at the guide's 4 corners. */
 const TETRAEDRO_VERTICES = {
   apice: { x: 198, y: 64 },
   baseEsq: { x: 60, y: 288 },
@@ -961,15 +961,15 @@ function desenharCH4() {
   return pontos;
 }
 
-/* Direção (em graus) que o vetor do dipolo daquela ligação deve apontar:
-   sempre do átomo menos eletronegativo para o mais eletronegativo. */
+/* Direction (in degrees) that the dipole vector of that bond should point:
+   always from the less electronegative atom to the more electronegative one. */
 function direcaoDipolo(elCentral, elSubstituinte, anguloSubstituinte) {
   const enCentral = ELETRONEGATIVIDADE[elCentral];
   const enSub = ELETRONEGATIVIDADE[elSubstituinte];
   return enSub > enCentral ? anguloSubstituinte : (anguloSubstituinte + 180) % 360;
 }
 
-/* Soma vetorial simples — usada para o vetor resultante. */
+/* Simple vector sum — used for the resultant vector. */
 function calcularResultante(vetores) {
   let sx = 0, sy = 0;
   vetores.forEach(v => {
@@ -989,9 +989,9 @@ function mostrarMu(valor) {
 }
 
 /* ==========================================================
-   ETAPA 1 — diatômicas homonucleares (ν = 0)
-   O par eletrônico da ligação nasce centralizado entre os átomos
-   e permanece ali: não há diferença de electronegativity.
+   STAGE 1 — homonuclear diatomics (ν = 0)
+   The bond's electron pair starts centered between the atoms
+   and stays there: there's no electronegativity difference.
    ========================================================== */
 function etapa1(idx) {
   if (idx >= DIATOMICAS_APOLARES.length) { etapa2(0); return; }
@@ -999,17 +999,17 @@ function etapa1(idx) {
   limparPalco(); mostrarPalco();
   const { pA, pB } = desenharDiatomica(mol.simbolo, mol.simbolo, mol.formula, mol.ligacaoDupla);
   desenharParEletronico(pA, pB, 0.5);
-  falar('explicando', `Observe a molécula de ${mol.formula}.`, null);
+  falar('explicando', `Take a look at the ${mol.formula} molecule.`, null);
   perguntarDiferencaEletronegatividade(false, () => {
-    falar('animada', `Não existe um lado mais negativo — os elétrons ficam igualmente distribuídos entre os dois átomos. Portanto, o ${mol.formula} é uma molécula nonpolar.`, () => {
+    falar('animada', `There's no more negative side — the electrons are equally distributed between the two atoms. So, ${mol.formula} is a nonpolar molecule.`, () => {
       etapa1(idx + 1);
     });
   });
 }
 
 /* ==========================================================
-   ETAPA 2 — diatômicas heteronucleares (o par eletrônico se
-   aproxima do átomo mais eletronegativo e nasce o vetor)
+   STAGE 2 — heteronuclear diatomics (the electron pair moves
+   closer to the more electronegative atom and the vector appears)
    ========================================================== */
 function etapa2(idx) {
   if (idx >= DIATOMICAS_POLARES.length) { etapaMolecula(0); return; }
@@ -1017,7 +1017,7 @@ function etapa2(idx) {
   limparPalco(); mostrarPalco();
   const { pA, pB } = desenharDiatomica(mol.a, mol.b, mol.formula);
   const par = desenharParEletronico(pA, pB, 0.5);
-  falar('explicando', `Observe a molécula de ${mol.formula}.`, null);
+  falar('explicando', `Take a look at the ${mol.formula} molecule.`, null);
   perguntarDiferencaEletronegatividade(true, () => {
     perguntarMaisEletronegativo(mol.a, mol.b, () => {
       const bEhMaisEletronegativo = ELETRONEGATIVIDADE[mol.b] > ELETRONEGATIVIDADE[mol.a];
@@ -1035,9 +1035,9 @@ function etapa2(idx) {
       mostrarDelta(maisEletronegativo, '-');
       mostrarDelta(menos, '+');
       const simboloMais = bEhMaisEletronegativo ? mol.b : mol.a;
-      // o aluno decide quando prosseguir — sem avanço automático,
-      // ele precisa de tempo para observar a seta e os elétrons.
-      falar('animada', `Os elétrons ficam mais próximos do ${simboloMais}, o átomo mais eletronegativo — nasce um momento dipolar. Portanto, o ${mol.formula} é uma molécula polar.`, () => {
+      // the student decides when to move on — no auto-advance,
+      // they need time to observe the arrow and the electrons.
+      falar('animada', `The electrons sit closer to ${simboloMais}, the more electronegative atom — a dipole moment appears. So, ${mol.formula} is a polar molecule.`, () => {
         etapa2(idx + 1);
       });
     });
@@ -1059,21 +1059,21 @@ function criarSetaCurta(origem, anguloGraus) {
 }
 
 /* ==========================================================
-   ETAPA 3 — moléculas poliatômicas (CO2, H2O, NH3, CH4): mesmo
-   raciocínio da etapa 2 (existe diferença de electronegativity?),
-   agora somado à geometria da molécula para decidir se os vetores
-   se anulam ou não. O aluno sempre controla quando prosseguir.
+   STAGE 3 — polyatomic molecules (CO2, H2O, NH3, CH4): same
+   reasoning as stage 2 (is there an electronegativity difference?),
+   now combined with the molecule's geometry to decide whether the
+   vectors cancel out or not. The student always controls when to move on.
    ========================================================== */
 const ORDEM_ETAPA_GEOMETRIA = ['co2', 'h2o', 'nh3', 'ch4'];
 const EXPLICACAO_GEOMETRIA = {
   co2: { ehPolar: false, geometria: 'linear',
-    texto: 'Há diferença de electronegativity entre C e O, mas como o CO₂ é linear, os vetores se anulam. Portanto, o CO₂ é uma molécula nonpolar.' },
-  h2o: { ehPolar: true, geometria: 'angular',
-    texto: 'Há diferença de electronegativity entre O e H, e como a água é angular, os vetores não se anulam. Portanto, a água é uma molécula polar.' },
-  nh3: { ehPolar: true, geometria: 'piramidal',
-    texto: 'Há diferença de electronegativity entre N e H, e como o NH₃ é piramidal, os vetores não se anulam. Portanto, o NH₃ é uma molécula polar.' },
-  ch4: { ehPolar: false, geometria: 'tetraédrica',
-    texto: 'Há uma pequena diferença de electronegativity entre C e H, mas a simetria tetraédrica do CH₄ anula os vetores. Portanto, o CH₄ é uma molécula nonpolar.' }
+    texto: 'There is an electronegativity difference between C and O, but since CO₂ is linear, the vectors cancel out. So, CO₂ is a nonpolar molecule.' },
+  h2o: { ehPolar: true, geometria: 'bent',
+    texto: 'There is an electronegativity difference between O and H, and since water is bent, the vectors don\'t cancel out. So, water is a polar molecule.' },
+  nh3: { ehPolar: true, geometria: 'pyramidal',
+    texto: 'There is an electronegativity difference between N and H, and since NH₃ is pyramidal, the vectors don\'t cancel out. So, NH₃ is a polar molecule.' },
+  ch4: { ehPolar: false, geometria: 'tetrahedral',
+    texto: 'There is a small electronegativity difference between C and H, but CH₄\'s tetrahedral symmetry cancels the vectors out. So, CH₄ is a nonpolar molecule.' }
 };
 
 function etapaMolecula(idx) {
@@ -1102,7 +1102,7 @@ function etapaMolecula(idx) {
     direcoes = mol.angulos.map((ang, i) => direcaoDipolo(mol.central, mol.substituintes[i], ang));
   }
 
-  falar('explicando', `Observe a molécula de ${mol.formula}.`, null);
+  falar('explicando', `Take a look at the ${mol.formula} molecule.`, null);
   perguntarDiferencaEletronegatividade(true, () => {
     pontos.forEach((p, i) => criarSetaCurta(p, direcoes[i]));
 
@@ -1125,8 +1125,8 @@ function etapaMolecula(idx) {
       mostrarMu(0);
     }
 
-    // o aluno decide quando prosseguir, com tempo para analisar
-    // os vetores antes de ir para a próxima molécula.
+    // the student decides when to move on, with time to analyze
+    // the vectors before going to the next molecule.
     falar('animada', info.texto, () => {
       etapaMolecula(idx + 1);
     });
@@ -1138,7 +1138,7 @@ function etapaMolecula(idx) {
    ========================================================== */
 function finalizarJogo() {
   esconderPalco();
-  falar('animada', 'Excelente. Agora você consegue visualizar por que algumas moléculas possuem polarity e outras não.', () => {
+  falar('animada', 'Excellent. Now you can see for yourself why some molecules have polarity and others don\'t.', () => {
     const conclusao = document.getElementById('conclusao');
     conclusao.classList.add('visivel');
     conclusao.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -1154,15 +1154,15 @@ function reiniciar() {
 }
 
 /* ==========================================================
-   INTRODUÇÃO / INÍCIO
+   INTRODUCTION / START
    ========================================================== */
 function iniciarIntro() {
-  falar('sorrindo', 'Today we will descobrir por que algumas moléculas possuem um lado mais negativo e outras não. Você não vai decorar regras — vai enxergar a polarity acontecendo.', () => {
+  falar('sorrindo', 'Today we\'ll find out why some molecules have a more negative side and others don\'t. You won\'t memorize rules — you\'ll see polarity happening.', () => {
     etapa1(0);
   });
 }
 
-/* ── Zoom (clique fora dos elementos interativos amplia a cena) ── */
+/* ── Zoom (clicking outside the interactive elements enlarges the scene) ── */
 const imagemWrapper = document.getElementById('imagemWrapper');
 const modalZoom = document.getElementById('modalZoom');
 imagemWrapper.addEventListener('click', e => {
