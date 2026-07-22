@@ -1,10 +1,10 @@
-﻿<!DOCTYPE html>
-<html lang="pt-BR">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex, nofollow">
-  <title>Reações Químicas — Premium Game | KiFácil</title>
+  <title>Chemical Reactions — Premium Game | KiFácil</title>
   <link rel="icon" type="image/png" href="/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -107,7 +107,7 @@
       color: var(--texto-suave);
     }
 
-    /* PALCO DE ANIMAÇÃO */
+    /* PALCO DE ANIMAÇÃO (agora só exibe, nada é arrastável) */
     .imagem-wrapper {
       position: relative;
       display: flex;
@@ -115,7 +115,7 @@
       align-items: center;
       width: min(100%, 900px);
       max-height: 70vh;
-      min-height: 460px;
+      min-height: 380px;
       margin: 0 auto;
       cursor: default;
       border: 1.5px solid var(--borda-forte);
@@ -154,13 +154,10 @@
     }
     .tubo-icone { position: absolute; width: 46px; z-index: 2; pointer-events: none; opacity: 0.9; }
 
-    /* Moléculas (SVG) */
-    .molecula-visual { position: absolute; z-index: 4; transform: translate(-50%, -50%); }
-    .molecula-visual svg { display: block; pointer-events: none; }
-    .peca-tray { cursor: grab; }
-    .peca-tray.arrastando { cursor: grabbing; }
+    /* Moléculas (SVG, apenas ilustrativas — sem interação) */
+    .molecula-visual { position: absolute; z-index: 4; transform: translate(-50%, -50%); pointer-events: none; }
+    .molecula-visual svg { display: block; }
     .destaque-dourado { filter: drop-shadow(0 0 8px rgba(200,146,10,0.9)); }
-    .erro-flash { outline: 3px solid var(--vermelho-escuro); border-radius: 8px; }
 
     .sinal-mais {
       position: absolute; font-family: 'Cormorant Garamond', serif; font-weight: 700;
@@ -168,19 +165,7 @@
       pointer-events: none;
     }
 
-    /* Zonas de equação */
-    .zona-equacao {
-      position: absolute; width: 100px; height: 76px;
-      border: 2px dashed var(--borda-forte); border-radius: 10px;
-      background: rgba(255,255,255,0.35); transform: translate(-50%, -50%); z-index: 2;
-    }
-    .zona-preenchida { border-style: solid; border-color: var(--dourado-claro); box-shadow: 0 0 8px rgba(200,146,10,0.5); }
-
-    /* Regiões clicáveis */
-    .regiao-clicavel { position: absolute; cursor: pointer; z-index: 3; border-radius: 8px; }
-    .regiao-clicavel:hover { background: rgba(200,146,10,0.1); }
-
-    /* Estados físicos */
+    /* Estados físicos — rótulos estáticos, sem drag */
     .exemplo-estado {
       display: flex; flex-direction: column; align-items: center; gap: 4px;
       background: var(--fundo-card); border: 1px solid var(--borda-forte); border-radius: 8px;
@@ -188,22 +173,17 @@
     }
     .exemplo-estado-nome { font-family: 'Libre Baskerville', serif; font-size: 0.66rem; color: var(--texto-suave); text-align: center; }
     .exemplo-estado-slot {
-      width: 44px; height: 30px; border: 2px dashed var(--borda-forte); border-radius: 6px;
+      width: 44px; height: 30px; border: 2px solid var(--borda-forte); border-radius: 6px;
       display: flex; align-items: center; justify-content: center;
       font-family: 'Cormorant Garamond', serif; font-weight: 700; color: var(--texto-suave);
     }
-    .exemplo-estado-slot.preenchido { border-style: solid; border-color: var(--dourado-claro); color: var(--dourado-claro); }
-    .pill-estado {
-      position: relative; background: #1e1008; color: var(--dourado-claro);
-      border: 1.5px solid var(--dourado-claro); border-radius: 14px; padding: 0.3rem 0.8rem;
-      font-family: 'Cormorant Garamond', serif; font-weight: 700; cursor: grab; z-index: 6;
-    }
+    .exemplo-estado-slot.preenchido { border-color: var(--dourado-claro); color: var(--dourado-claro); }
     .condicao-tag {
       position: absolute; transform: translate(-50%, -50%);
       background: linear-gradient(135deg, #fff3d6, #e9c877); color: #3d2600;
       font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 0.7rem;
       padding: 0.25rem 0.5rem; border-radius: 6px; border: 1px solid #a97c1f;
-      opacity: 0; animation: placaIn .4s ease forwards; z-index: 5;
+      opacity: 0; animation: placaIn .4s ease forwards; z-index: 5; pointer-events: none;
     }
 
     .placa-dourada {
@@ -220,16 +200,27 @@
       to   { opacity: 1; transform: translate(-50%, 0); }
     }
 
-    /* PAINEL DE INTERAÇÃO */
+    /* PAINEL DE INTERAÇÃO (perguntas de múltipla escolha) */
     #painelInteracao { max-width: 900px; margin: 1.2rem auto 0; }
     .interacao-painel {
       background: var(--fundo-card); border: 1.5px solid var(--borda-forte); border-radius: 12px;
       padding: 1.4rem 1.6rem 1.3rem;
     }
     .interacao-pergunta-texto {
-      font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 600;
+      font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 600;
       line-height: 1.35; margin-bottom: 1rem;
     }
+    .opcoes-linha { display: flex; gap: 0.7rem; flex-wrap: wrap; margin-bottom: 0.6rem; }
+    .btn-opcao {
+      background: var(--fundo); border: 1.5px solid var(--borda-forte); border-radius: 6px;
+      padding: 0.6rem 1.2rem; font-family: 'Libre Baskerville', serif; font-size: 0.95rem;
+      color: var(--texto); cursor: pointer; transition: border-color .2s, background .2s;
+    }
+    .btn-opcao:hover:not(:disabled) { border-color: var(--dourado-claro); }
+    .btn-opcao:disabled { cursor: default; opacity: 0.75; }
+    .opcao-certa { border-color: var(--verde-escuro) !important; background: rgba(30,82,56,0.12); }
+    .opcao-errada { border-color: var(--vermelho-escuro) !important; background: rgba(122,21,21,0.08); }
+
     .btn-continuar {
       background: #1e1008; color: var(--dourado-claro); border: 1.5px solid var(--dourado-claro);
       font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-weight: 600;
@@ -241,7 +232,6 @@
     .btn-continuar:disabled { opacity: 0.4; cursor: default; }
     .btn-continuar:disabled:hover { background: #1e1008; color: var(--dourado-claro); }
 
-    /* Botão continuar dentro do balão da professora */
     #continuarBalao { margin-top: 0.6rem; }
     #continuarBalao .btn-continuar { display: inline-block; margin: 0; }
 
@@ -252,6 +242,7 @@
     .modal-feedback.visivel { display: block; }
     .feedback-certo   { color: var(--verde-escuro); font-weight: 700; }
     .feedback-errado  { color: var(--vermelho-escuro); font-weight: 700; }
+    .feedback-resposta{ color: var(--verde-escuro); font-weight: 700; }
     .feedback-explicacao { color: var(--texto); margin-top: 0.5rem; }
 
     .quadro-item {
@@ -295,7 +286,6 @@
       main { padding: 2rem 1rem 4rem; }
       .interacao-painel { padding: 1.2rem 1rem; }
       .placa-dourada { font-size: 0.74rem; padding: 0.42rem 0.75rem; }
-      .zona-equacao { width: 70px; height: 56px; }
       .exemplo-estado { min-width: 78px; padding: 4px 6px; }
       .exemplo-estado-nome { font-size: 0.56rem; }
       .bancada-img { width: 90%; }
@@ -345,30 +335,30 @@
 </nav>
 
 <main>
-  <h1 class="titulo-jogo">Reações Químicas</h1>
-  <p class="subtitulo">Discover que uma reação química é apenas um rearranjo de átomos — e a equação química é só uma forma de representá-lo.</p>
+  <h1 class="titulo-jogo">Chemical Reactions</h1>
+  <p class="subtitulo">Discover that a chemical reaction is just a rearrangement of atoms — and the chemical equation is simply a way of representing it.</p>
 
   <div class="narrador">
-    <img src="../imagens/rafa-sorrindo.jpg" alt="Professora Rafaela" />
+    <img src="../imagens/rafa-sorrindo.jpg" alt="Teacher Rafaela" />
     <div style="flex: 1;">
-      <div class="narrador-nome">Professora Rafaela</div>
-      <div class="narrador-texto" id="narradorTexto">Vamos começar.</div>
+      <div class="narrador-nome">Teacher Rafaela</div>
+      <div class="narrador-texto" id="narradorTexto">Let's get started.</div>
       <div id="continuarBalao"></div>
     </div>
   </div>
 
   <div class="imagem-wrapper" id="imagemWrapper">
-    <img src="../imagens/laboratorio-reacoes.jpg" alt="Laboratório de reações químicas" class="cena-fundo" />
+    <img src="../imagens/laboratorio-reacoes.jpg" alt="Chemical reactions laboratory" class="cena-fundo" />
     <div class="overlay-animacao" id="overlayAnimacao"></div>
 </div>
 
   <div id="painelInteracao"></div>
 
   <div class="conclusao" id="conclusao">
-    <div class="conclusao-titulo">Estudo concluído</div>
+    <div class="conclusao-titulo">Study Complete</div>
     <div class="conclusao-placar" id="conclusaoPlacar"></div>
     <p class="conclusao-mensagem" id="conclusaoMensagem"></p>
-    <button class="btn-reiniciar" onclick="reiniciar()">Jogar novamente</button>
+    <button class="btn-reiniciar" onclick="reiniciar()">Play Again</button>
   </div>
 </main>
 
@@ -376,7 +366,7 @@
 
 <script>
 /* ==========================================================
-   REFERÊNCIAS DOM
+   DOM REFERENCES
    ========================================================== */
 const overlay = document.getElementById('overlayAnimacao');
 const painel  = document.getElementById('painelInteracao');
@@ -393,7 +383,7 @@ function agendar(fn, ms) { const id = setTimeout(fn, ms); timersAtivos.push(id);
 function limparTimers() { timersAtivos.forEach(clearTimeout); timersAtivos = []; }
 
 /* ==========================================================
-   COMPONENTE: MOLÉCULA (SVG, nenhuma imagem de molécula usada)
+   COMPONENT: MOLECULE (SVG, illustration only — no interaction)
    ========================================================== */
 const MOLECULAS_DEF = {
   C:   { atomos: [{ simbolo: 'C', cor: 'var(--escuro)', x: 30, y: 30, r: 18 }], ligacoes: [], largura: 60, altura: 60 },
@@ -452,7 +442,7 @@ function criarMolecula(idUnico, chave, left, top) {
 }
 
 /* ==========================================================
-   COMPONENTES: SETA, ZONA VAZIA, SINAL DE MAIS, REGIÃO CLICÁVEL
+   COMPONENTS: ARROW, PLUS SIGN, STATIC TAG
    ========================================================== */
 function criarSeta(left, top) {
   const div = document.createElement('div');
@@ -464,14 +454,6 @@ function criarSeta(left, top) {
     '<polygon points="66,4 80,12 66,20" fill="#c8920a"/></svg>';
   return div;
 }
-function criarZonaVazia(left, top, id) {
-  const z = document.createElement('div');
-  z.className = 'zona-equacao';
-  z.id = id;
-  z.style.left = left;
-  z.style.top = top;
-  return z;
-}
 function criarSinalMais(left, top) {
   const m = document.createElement('div');
   m.className = 'sinal-mais';
@@ -480,69 +462,24 @@ function criarSinalMais(left, top) {
   m.style.top = top;
   return m;
 }
-function criarRegiaoClicavel(left, top, largura, altura) {
-  const r = document.createElement('div');
-  r.className = 'regiao-clicavel';
-  r.style.left = left; r.style.top = top;
-  r.style.width = largura; r.style.height = altura;
-  return r;
-}
 function adicionarBancada() {
   const img = document.createElement('img');
   img.src = '../imagens/bancada-reacoes.png';
   img.className = 'bancada-img';
-  img.alt = 'Bancada de reação';
+  img.alt = 'Reaction bench';
   overlay.appendChild(img);
 }
 
 /* ==========================================================
-   ARRASTO LIVRE XY
-   ========================================================== */
-function tornarArrastavelXY(el, container, onSoltar) {
-  let arrastando = false, offsetX = 0, offsetY = 0;
-  el.style.touchAction = 'none';
-  el.addEventListener('pointerdown', function (e) {
-    arrastando = true;
-    el.setPointerCapture(e.pointerId);
-    el.classList.add('arrastando');
-    const r = container.getBoundingClientRect();
-    const elRect = el.getBoundingClientRect();
-    offsetX = e.clientX - elRect.left;
-    offsetY = e.clientY - elRect.top;
-    const left = elRect.left - r.left;
-    const top = elRect.top - r.top;
-    if (el.parentElement !== container) container.appendChild(el);
-    el.style.transform = 'none';
-    el.style.left = left + 'px';
-    el.style.top = top + 'px';
-  });
-  window.addEventListener('pointermove', function (e) {
-    if (!arrastando) return;
-    const r = container.getBoundingClientRect();
-    let x = e.clientX - r.left - offsetX;
-    let y = e.clientY - r.top - offsetY;
-    el.style.left = x + 'px';
-    el.style.top = y + 'px';
-  });
-  function soltar() {
-    if (!arrastando) return;
-    arrastando = false;
-    el.classList.remove('arrastando');
-    if (onSoltar) onSoltar();
-  }
-  window.addEventListener('pointerup', soltar);
-  window.addEventListener('pointercancel', soltar);
-}
-
-/* ==========================================================
-   HELPERS DE INTERAÇÃO
+   INTERACTION HELPERS
    ========================================================== */
 function botaoContinuar(delayMs) {
   delayMs = delayMs || 0;
+  painel.innerHTML = '';
   continuarBalao.innerHTML = '';
   const btn = document.createElement('button');
   btn.className = 'btn-continuar';
-  btn.textContent = 'Continuar →';
+  btn.textContent = 'Continue →';
   btn.disabled = delayMs > 0;
   continuarBalao.appendChild(btn);
   if (delayMs > 0) agendar(function () { btn.disabled = false; }, delayMs);
@@ -550,27 +487,80 @@ function botaoContinuar(delayMs) {
   return btn;
 }
 
+// Simple, reliable multiple-choice question — replaces all the
+// previous drag-and-drop mechanics.
+function escolhaBotoes(opts) {
+  painel.innerHTML = '';
+  const wrap = document.createElement('div');
+  wrap.className = 'interacao-painel';
+  wrap.innerHTML =
+    '<div class="interacao-pergunta-texto">' + opts.pergunta + '</div>' +
+    '<div class="opcoes-linha" id="opcoesLinha"></div>' +
+    '<div class="modal-feedback" id="feedbackEscolha"></div>';
+  painel.appendChild(wrap);
+
+  const opcoesLinha = wrap.querySelector('#opcoesLinha');
+  const feedback = wrap.querySelector('#feedbackEscolha');
+  let tentativas = 0;
+  let resolvido = false;
+
+  opts.opcoes.forEach(function (op) {
+    const btn = document.createElement('button');
+    btn.className = 'btn-opcao';
+    btn.textContent = op.rotulo;
+    btn.addEventListener('click', function () {
+      if (resolvido) return;
+      if (op.correta) {
+        resolvido = true;
+        tocarDing();
+        Array.from(opcoesLinha.children).forEach(function (b) { b.disabled = true; });
+        btn.classList.add('opcao-certa');
+        feedback.className = 'modal-feedback visivel';
+        feedback.innerHTML = '<span class="feedback-certo">Correct!</span><p class="feedback-explicacao">' + opts.explicacao + '</p>';
+        agendar(function () { botaoContinuar(400); }, 300);
+      } else {
+        tentativas++;
+        btn.classList.add('opcao-errada');
+        if (tentativas === 1 && opts.dica) {
+          feedback.className = 'modal-feedback visivel';
+          feedback.innerHTML = '<span class="feedback-errado">' + opts.dica + '</span>';
+        } else if (tentativas >= 2) {
+          resolvido = true;
+          Array.from(opcoesLinha.children).forEach(function (b, i) {
+            b.disabled = true;
+            if (opts.opcoes[i].correta) b.classList.add('opcao-certa');
+          });
+          feedback.className = 'modal-feedback visivel';
+          feedback.innerHTML = '<span class="feedback-resposta">The correct answer is highlighted.</span><p class="feedback-explicacao">' + opts.explicacao + '</p>';
+          agendar(function () { botaoContinuar(400); }, 300);
+        }
+      }
+    });
+    opcoesLinha.appendChild(btn);
+  });
+}
+
 /* ==========================================================
-   INTRODUÇÃO
+   INTRODUCTION
    ========================================================== */
 function passoIntro0() {
-  fala('Today we will descobrir o que realmente acontece durante uma reação química.');
+  fala('Today we will discover what really happens during a chemical reaction.');
   botaoContinuar(500);
 }
 function passoIntro1() {
-  fala('As substâncias desaparecem?');
+  fala('Do the substances disappear?');
   botaoContinuar(500);
 }
 function passoIntro2() {
-  fala('Ou apenas seus átomos mudam de posição?');
+  fala('Or do their atoms simply change position?');
   botaoContinuar(600);
 }
 
 /* ==========================================================
-   ETAPA 1 — PRIMEIRA REAÇÃO (C + O2 → CO2)
+   STAGE 1 — FIRST REACTION (C + O2 → CO2)
    ========================================================== */
 function passoEtapa1() {
-  fala('Aqui estão duas substâncias: carbono e gás oxigênio.');
+  fala('Here are two substances: carbon and oxygen gas.');
   adicionarBancada();
   const tubo = document.createElement('img');
   tubo.src = '../imagens/tubo-ensaio.png';
@@ -586,21 +576,21 @@ function passoEtapa1() {
   painel.innerHTML = '';
   const wrap = document.createElement('div');
   wrap.className = 'interacao-painel';
-  wrap.innerHTML = '<div class="interacao-pergunta-texto">Clique para iniciar a reação.</div>';
+  wrap.innerHTML = '<div class="interacao-pergunta-texto">Click to start the reaction.</div>';
   const btn = document.createElement('button');
   btn.className = 'btn-continuar';
-  btn.textContent = 'Iniciar reação';
+  btn.textContent = 'Start reaction';
   wrap.appendChild(btn);
   painel.appendChild(wrap);
 
   btn.addEventListener('click', function () {
     btn.disabled = true;
-    fala('As ligações desaparecem lentamente. Os átomos ficam livres.');
+    fala('The bonds slowly break apart. The atoms become free.');
     c.style.transition = 'opacity .8s'; o2.style.transition = 'opacity .8s'; mais.style.transition = 'opacity .8s';
     agendar(function () { c.style.opacity = '0'; o2.style.opacity = '0'; mais.style.opacity = '0'; }, 200);
     agendar(function () {
       c.remove(); o2.remove(); mais.remove();
-      fala('Agora eles se reorganizam...');
+      fala('Now they rearrange themselves...');
       const co2 = criarMolecula('e1-co2', 'CO2', '40%', '32%');
       co2.style.opacity = '0';
       co2.style.transition = 'opacity .8s';
@@ -608,224 +598,165 @@ function passoEtapa1() {
       agendar(function () { co2.style.opacity = '1'; }, 50);
     }, 1100);
     agendar(function () {
-      fala('Observe que nenhum átomo foi criado ou destruído. Apenas ocorreu um rearranjo.');
+      fala('Notice that no atom was created or destroyed. Only a rearrangement took place.');
       const placa = document.createElement('div');
       placa.className = 'placa-dourada';
-      placa.textContent = 'C + O₂ → CO₂ (rearranjo de átomos)';
+      placa.textContent = 'C + O₂ → CO₂ (atoms rearranged)';
       overlay.appendChild(placa);
-      botaoContinuar(400);
+      agendar(function () {
+        escolhaBotoes({
+          pergunta: 'What happened to the carbon and oxygen atoms during this reaction?',
+          opcoes: [
+            { rotulo: 'They were destroyed', correta: false },
+            { rotulo: 'They rearranged into a new substance', correta: true },
+            { rotulo: 'New atoms were created', correta: false }
+          ],
+          dica: 'Think about what you just watched happen on screen.',
+          explicacao: 'Exactly! No atom was created or destroyed — they simply rearranged into a new substance, CO₂. This is the Law of Conservation of Mass.'
+        });
+      }, 800);
     }, 2400);
   });
 }
 
 /* ==========================================================
-   ETAPA 2 — MONTAR A EQUAÇÃO (drag)
+   STAGE 2 — PARTS OF THE EQUATION (now simple questions)
    ========================================================== */
 function passoEtapa2() {
-  fala('Vamos representar o que acabou de acontecer.');
-  const zonaReag1 = criarZonaVazia('20%', '30%', 'zonaReag1');
-  const zonaReag2 = criarZonaVazia('44%', '30%', 'zonaReag2');
-  const zonaProd = criarZonaVazia('80%', '30%', 'zonaProd');
-  overlay.appendChild(zonaReag1); overlay.appendChild(zonaReag2); overlay.appendChild(zonaProd);
-  overlay.appendChild(criarSinalMais('32%', '34%'));
-  overlay.appendChild(criarSeta('62%', '32%'));
-
-  const tray = document.createElement('div');
-  tray.style.position = 'absolute'; tray.style.bottom = '4%'; tray.style.left = '4%'; tray.style.right = '4%';
-  tray.style.display = 'flex'; tray.style.gap = '14px'; tray.style.justifyContent = 'center'; tray.style.flexWrap = 'wrap';
-  overlay.appendChild(tray);
-
-  const pecas = [
-    { chave: 'C', zona: zonaReag1 },
-    { chave: 'O2', zona: zonaReag2 },
-    { chave: 'CO2', zona: zonaProd }
-  ].sort(function () { return Math.random() - 0.5; });
-
-  let corretos = 0;
-  pecas.forEach(function (p, idx) {
-    const peca = criarMolecula('e2-tray-' + idx, p.chave, '0', '0');
-    peca.classList.add('peca-tray');
-    peca.style.position = 'relative'; peca.style.left = '0'; peca.style.top = '0'; peca.style.transform = 'none';
-    tray.appendChild(peca);
-
-    tornarArrastavelXY(peca, overlay, function () {
-      const pr = peca.getBoundingClientRect();
-      const cx = pr.left + pr.width / 2, cy = pr.top + pr.height / 2;
-      const zr = p.zona.getBoundingClientRect();
-      const acertou = cx >= zr.left && cx <= zr.right && cy >= zr.top && cy <= zr.bottom;
-      if (acertou && !peca.classList.contains('classificada')) {
-        tocarDing();
-        peca.classList.add('classificada');
-        const rOverlay = overlay.getBoundingClientRect();
-        peca.style.left = ((zr.left - rOverlay.left) + zr.width / 2) + 'px';
-        peca.style.top = ((zr.top - rOverlay.top) + zr.height / 2) + 'px';
-        peca.style.transform = 'translate(-50%,-50%)';
-        p.zona.classList.add('zona-preenchida');
-        corretos++;
-        if (corretos === 3) {
-          agendar(function () {
-            fala('Perfeito! Você montou a equação C + O₂ → CO₂.');
-            botaoContinuar(400);
-          }, 300);
-        }
-      } else if (!acertou) {
-        peca.classList.add('erro-flash');
-        setTimeout(function () { peca.classList.remove('erro-flash'); }, 500);
-        tray.appendChild(peca);
-        peca.style.position = 'relative'; peca.style.left = '0'; peca.style.top = '0'; peca.style.transform = 'none';
-      }
-    });
-  });
-}
-
-/* ==========================================================
-   ETAPA 3 — IDENTIFICAR PARTES DA EQUAÇÃO
-   ========================================================== */
-function passoEtapa3() {
-  fala('Agora vamos identificar as partes da equação.');
-  const c = criarMolecula('e3-c', 'C', '18%', '32%');
-  const o2 = criarMolecula('e3-o2', 'O2', '38%', '32%');
+  fala("Let's label the parts of this equation.");
+  const c = criarMolecula('e2-c', 'C', '18%', '32%');
+  const o2 = criarMolecula('e2-o2', 'O2', '38%', '32%');
   const seta = criarSeta('58%', '34%');
-  const co2 = criarMolecula('e3-co2', 'CO2', '80%', '32%');
+  const co2 = criarMolecula('e2-co2', 'CO2', '80%', '32%');
   overlay.appendChild(c); overlay.appendChild(o2); overlay.appendChild(seta); overlay.appendChild(co2);
   overlay.appendChild(criarSinalMais('28%', '36%'));
 
-  const regReagentes = criarRegiaoClicavel('8%', '18%', '42%', '62%');
-  const regSeta = criarRegiaoClicavel('52%', '24%', '14%', '24%');
-  const regProdutos = criarRegiaoClicavel('68%', '18%', '26%', '62%');
-  overlay.appendChild(regReagentes); overlay.appendChild(regSeta); overlay.appendChild(regProdutos);
-
-  const alvos = [
-    { regiao: regReagentes, nome: 'os Reagentes', destaque: [c, o2] },
-    { regiao: regProdutos, nome: 'os Produtos', destaque: [co2] },
-    { regiao: regSeta, nome: 'a Seta (sentido da reação)', destaque: [seta] }
-  ];
-  let indice = 0;
-
-  function mostrarInstrucao() {
-    painel.innerHTML = '';
-    const wrap = document.createElement('div');
-    wrap.className = 'interacao-painel';
-    wrap.innerHTML = '<div class="interacao-pergunta-texto">Clique em: ' + alvos[indice].nome + '</div><div class="modal-feedback" id="fbEtapa3"></div>';
-    painel.appendChild(wrap);
-  }
-  mostrarInstrucao();
-
-  alvos.forEach(function (alvo, idx) {
-    alvo.regiao.addEventListener('click', function () {
-      if (idx === indice) {
-        tocarDing();
-        alvo.destaque.forEach(function (el) { el.classList.add('destaque-dourado'); });
-        indice++;
-        if (indice < alvos.length) {
-          mostrarInstrucao();
-        } else {
-          agendar(function () {
-            fala('Muito bem! Agora você sabe identificar reagentes, seta e produtos.');
-            botaoContinuar(400);
-          }, 300);
-        }
-      } else {
-        const fb = document.getElementById('fbEtapa3');
-        if (fb) { fb.className = 'modal-feedback visivel'; fb.innerHTML = '<span class="feedback-errado">Essa não é a região certa. Tente novamente.</span>'; }
-      }
-    });
+  escolhaBotoes({
+    pergunta: 'In the equation C + O₂ → CO₂, what do we call the substances on the left of the arrow (C and O₂)?',
+    opcoes: [
+      { rotulo: 'Reactants', correta: true },
+      { rotulo: 'Products', correta: false },
+      { rotulo: 'Catalysts', correta: false }
+    ],
+    dica: 'These are the substances you start with, before the reaction happens.',
+    explicacao: "Reactants are the starting substances of a reaction, always written on the left side of the equation."
+  });
+}
+function passoEtapa2b() {
+  escolhaBotoes({
+    pergunta: 'And what do we call the substance on the right of the arrow (CO₂)?',
+    opcoes: [
+      { rotulo: 'Products', correta: true },
+      { rotulo: 'Reactants', correta: false },
+      { rotulo: 'Catalysts', correta: false }
+    ],
+    dica: 'This is what forms as a result of the reaction.',
+    explicacao: 'Products are the substances formed by the reaction, always written on the right side of the equation.'
+  });
+}
+function passoEtapa2c() {
+  escolhaBotoes({
+    pergunta: 'What does the arrow (→) represent in a chemical equation?',
+    opcoes: [
+      { rotulo: 'The direction of the reaction', correta: true },
+      { rotulo: 'Addition, like a plus sign', correta: false },
+      { rotulo: 'Equality, like an equals sign', correta: false }
+    ],
+    dica: 'Think about which way the substances are turning into other substances.',
+    explicacao: 'The arrow shows the direction of the reaction: reactants (left) turn into products (right).'
   });
 }
 
 /* ==========================================================
-   ETAPA 4 — ESTADOS FÍSICOS E CONDIÇÕES DA REAÇÃO
+   STAGE 3 — PHYSICAL STATES AND REACTION CONDITIONS
    ========================================================== */
-function passoEtapa4() {
-  fala('Agora vamos aprender os estados físicos usados nas equações.');
+function passoEtapa3() {
+  fala("Now let's learn the physical state symbols used in equations.");
   const exemplos = [
-    { id: 'ex-s', label: 'Fe (metal sólido)', correto: '(s)' },
-    { id: 'ex-l', label: 'H₂O (líquido)', correto: '(l)' },
-    { id: 'ex-g', label: 'O₂ (gás)', correto: '(g)' },
-    { id: 'ex-aq', label: 'NaCl dissolvido em água', correto: '(aq)' }
+    { id: 'ex-s', label: 'Fe (solid metal)', simb: '(s)' },
+    { id: 'ex-l', label: 'H₂O (liquid)', simb: '(l)' },
+    { id: 'ex-g', label: 'O₂ (gas)', simb: '(g)' },
+    { id: 'ex-aq', label: 'NaCl dissolved in water', simb: '(aq)' }
   ];
   const zonasWrap = document.createElement('div');
-  zonasWrap.style.position = 'absolute'; zonasWrap.style.top = '6%'; zonasWrap.style.left = '4%'; zonasWrap.style.right = '4%';
+  zonasWrap.style.position = 'absolute'; zonasWrap.style.top = '10%'; zonasWrap.style.left = '4%'; zonasWrap.style.right = '4%';
   zonasWrap.style.display = 'flex'; zonasWrap.style.flexWrap = 'wrap'; zonasWrap.style.gap = '10px'; zonasWrap.style.justifyContent = 'center';
   overlay.appendChild(zonasWrap);
 
-  const zonas = {};
   exemplos.forEach(function (ex) {
     const col = document.createElement('div');
     col.className = 'exemplo-estado';
-    col.innerHTML = '<div class="exemplo-estado-nome">' + ex.label + '</div><div class="exemplo-estado-slot" id="slot-' + ex.id + '">?</div>';
+    col.innerHTML = '<div class="exemplo-estado-nome">' + ex.label + '</div><div class="exemplo-estado-slot">' + ex.simb + '</div>';
     zonasWrap.appendChild(col);
-    const slot = col.querySelector('#slot-' + ex.id);
-    slot.dataset.correto = ex.correto;
-    zonas[ex.id] = slot;
   });
 
-  const tray = document.createElement('div');
-  tray.style.position = 'absolute'; tray.style.bottom = '8%'; tray.style.left = '4%'; tray.style.right = '4%';
-  tray.style.display = 'flex'; tray.style.gap = '12px'; tray.style.justifyContent = 'center'; tray.style.flexWrap = 'wrap';
-  overlay.appendChild(tray);
-
-  const simbolos = ['(g)', '(l)', '(s)', '(aq)'].sort(function () { return Math.random() - 0.5; });
-  let corretos = 0;
-  simbolos.forEach(function (simb) {
-    const pill = document.createElement('div');
-    pill.className = 'pill-estado';
-    pill.textContent = simb;
-    tray.appendChild(pill);
-    tornarArrastavelXY(pill, overlay, function () {
-      const pr = pill.getBoundingClientRect();
-      const cx = pr.left + pr.width / 2, cy = pr.top + pr.height / 2;
-      let alvo = null;
-      Object.keys(zonas).forEach(function (k) {
-        const zr = zonas[k].getBoundingClientRect();
-        if (cx >= zr.left && cx <= zr.right && cy >= zr.top && cy <= zr.bottom) alvo = k;
-      });
-      if (alvo && zonas[alvo].dataset.correto === simb && !zonas[alvo].classList.contains('preenchido')) {
-        tocarDing();
-        zonas[alvo].textContent = simb;
-        zonas[alvo].classList.add('preenchido');
-        pill.remove();
-        corretos++;
-        if (corretos === 4) { agendar(mostrarCondicoes, 400); }
-      } else {
-        pill.classList.add('erro-flash');
-        setTimeout(function () { pill.classList.remove('erro-flash'); }, 500);
-        tray.appendChild(pill);
-        pill.style.position = 'relative'; pill.style.left = '0'; pill.style.top = '0';
-      }
-    });
+  escolhaBotoes({
+    pergunta: 'Which symbol represents a substance dissolved in water?',
+    opcoes: [
+      { rotulo: '(s) — solid', correta: false },
+      { rotulo: '(g) — gas', correta: false },
+      { rotulo: '(aq) — aqueous', correta: true }
+    ],
+    dica: 'Think about NaCl dissolved in water in the example above.',
+    explicacao: '"(aq)" stands for "aqueous" — a substance dissolved in water, like NaCl in the example.'
   });
-
-  function mostrarCondicoes() {
-    fala('Essas informações ficam acima da seta e representam condições da reação.');
-    overlay.appendChild(criarSeta('50%', '62%'));
-    ['Δ (aquecimento)', 'λ (luz)', 'Pt (catalisador)'].forEach(function (txt, i) {
-      agendar(function () {
-        const tag = document.createElement('div');
-        tag.className = 'condicao-tag';
-        tag.textContent = txt;
-        tag.style.left = (34 + i * 16) + '%';
-        tag.style.top = '48%';
-        overlay.appendChild(tag);
-      }, i * 500);
+}
+function passoEtapa3b() {
+  escolhaBotoes({
+    pergunta: 'Which symbol represents a gas?',
+    opcoes: [
+      { rotulo: '(l) — liquid', correta: false },
+      { rotulo: '(g) — gas', correta: true },
+      { rotulo: '(s) — solid', correta: false }
+    ],
+    dica: 'Think about O₂ in the example above.',
+    explicacao: '"(g)" stands for gas, like the O₂ shown in the example.'
+  });
+}
+function passoEtapa3c() {
+  fala('These labels appear right after each substance. Conditions, like heat or light, appear above the arrow instead.');
+  overlay.appendChild(criarSeta('50%', '55%'));
+  ['Δ (heat)', 'hv (light)', 'Pt (catalyst)'].forEach(function (txt, i) {
+    agendar(function () {
+      const tag = document.createElement('div');
+      tag.className = 'condicao-tag';
+      tag.textContent = txt;
+      tag.style.left = (34 + i * 16) + '%';
+      tag.style.top = '42%';
+      overlay.appendChild(tag);
+    }, i * 500);
+  });
+  agendar(function () {
+    escolhaBotoes({
+      pergunta: 'What does the Greek letter Δ above the arrow mean?',
+      opcoes: [
+        { rotulo: 'Heat is applied', correta: true },
+        { rotulo: 'Light is applied', correta: false },
+        { rotulo: 'A catalyst is used', correta: false }
+      ],
+      dica: 'This symbol is commonly used in physics and chemistry for one specific condition.',
+      explicacao: 'Δ (delta) above the arrow means the reaction requires heating to occur.'
     });
-    agendar(function () { botaoContinuar(300); }, 1900);
-  }
+  }, 1900);
 }
 
 /* ==========================================================
-   ETAPA 5 — VÁRIAS REAÇÕES: OBSERVAR + MONTAR
+   STAGE 4 — SEVERAL REACTIONS: WATCH + QUIZ
    ========================================================== */
 const REACOES = [
-  { id: 'r1', reagentes: ['H2', 'Cl2'], produtos: ['HCl'], nomeReagentes: 'H₂ e Cl₂', explicacao: 'Os átomos de hidrogênio e cloro se rearranjam formando HCl.', equacaoTexto: 'H₂ + Cl₂ → HCl' },
-  { id: 'r2', reagentes: ['Na', 'Cl2'], produtos: ['NaCl'], nomeReagentes: 'Na e Cl₂', explicacao: 'O sódio transfere elétrons para o cloro, formando NaCl.', equacaoTexto: 'Na + Cl₂ → NaCl' },
-  { id: 'r3', reagentes: ['CaCO3'], produtos: ['CaO', 'CO2'], nomeReagentes: 'CaCO₃', explicacao: 'O carbonato de cálcio se decompõe em óxido de cálcio e gás carbônico.', equacaoTexto: 'CaCO₃ → CaO + CO₂' },
-  { id: 'r4', reagentes: ['Fe', 'O2'], produtos: ['Fe2O3'], nomeReagentes: 'Fe e O₂', explicacao: 'O ferro reage com o oxigênio formando óxido de ferro (ferrugem).', equacaoTexto: 'Fe + O₂ → Fe₂O₃' }
+  { id: 'r1', reagentes: ['H2', 'Cl2'], produtos: ['HCl'], nomeReagentes: 'H₂ and Cl₂', explicacao: 'The hydrogen and chlorine atoms rearrange to form HCl.', equacaoTexto: 'H₂ + Cl₂ → HCl',
+    opcoes: [ { rotulo: 'H₂ + Cl₂ → HCl', correta: true }, { rotulo: 'H₂ + Cl₂ → H₂Cl', correta: false }, { rotulo: 'HCl → H₂ + Cl₂', correta: false } ] },
+  { id: 'r2', reagentes: ['Na', 'Cl2'], produtos: ['NaCl'], nomeReagentes: 'Na and Cl₂', explicacao: 'Sodium transfers electrons to chlorine, forming NaCl.', equacaoTexto: 'Na + Cl₂ → NaCl',
+    opcoes: [ { rotulo: 'Na + Cl₂ → NaCl', correta: true }, { rotulo: 'NaCl → Na + Cl₂', correta: false }, { rotulo: 'Na + Cl₂ → NaCl₂', correta: false } ] },
+  { id: 'r3', reagentes: ['CaCO3'], produtos: ['CaO', 'CO2'], nomeReagentes: 'CaCO₃', explicacao: 'Calcium carbonate breaks down into calcium oxide and carbon dioxide.', equacaoTexto: 'CaCO₃ → CaO + CO₂',
+    opcoes: [ { rotulo: 'CaCO₃ → CaO + CO₂', correta: true }, { rotulo: 'CaO + CO₂ → CaCO₃', correta: false }, { rotulo: 'CaCO₃ → Ca + O₃', correta: false } ] },
+  { id: 'r4', reagentes: ['Fe', 'O2'], produtos: ['Fe2O3'], nomeReagentes: 'Fe and O₂', explicacao: 'Iron reacts with oxygen to form iron oxide (rust).', equacaoTexto: 'Fe + O₂ → Fe₂O₃',
+    opcoes: [ { rotulo: 'Fe + O₂ → Fe₂O₃', correta: true }, { rotulo: 'Fe₂O₃ → Fe + O₂', correta: false }, { rotulo: 'Fe + O₂ → FeO₃', correta: false } ] }
 ];
 
 function criarPassoObservarReacao(config) {
   return function () {
-    fala('Observe a reação entre ' + config.nomeReagentes + '.');
+    fala('Watch the reaction between ' + config.nomeReagentes + '.');
     adicionarBancada();
     const posX = [22, 50];
     const els = [];
@@ -840,7 +771,7 @@ function criarPassoObservarReacao(config) {
     }
 
     agendar(function () {
-      fala('As ligações se rearranjam...');
+      fala('The bonds rearrange...');
       els.forEach(function (el) { el.style.transition = 'opacity .7s'; el.style.opacity = '0'; });
       overlay.querySelectorAll('.sinal-mais').forEach(function (m) { m.style.transition = 'opacity .7s'; m.style.opacity = '0'; });
     }, 900);
@@ -865,99 +796,31 @@ function criarPassoObservarReacao(config) {
 
     agendar(function () {
       fala(config.explicacao);
-      const placa = document.createElement('div');
-      placa.className = 'placa-dourada';
-      placa.textContent = config.equacaoTexto;
-      overlay.appendChild(placa);
-      botaoContinuar(400);
+      agendar(function () { botaoContinuar(400); }, 300);
     }, 2700);
   };
 }
 
-function criarPassoMontarEquacao(config) {
+function criarPassoQuizEquacao(config) {
   return function () {
-    fala('Agora monte a equação química correspondente.');
-    const zonas = [];
-    const totalReag = config.reagentes.length, totalProd = config.produtos.length;
-    let xAtual = 14;
-    const passoX = 60 / (totalReag + totalProd);
-
-    config.reagentes.forEach(function (chave, i) {
-      const z = criarZonaVazia(xAtual + '%', '30%', 'z-' + config.id + '-reag-' + i);
-      overlay.appendChild(z);
-      zonas.push({ zona: z, chave: chave, preenchida: false });
-      if (i < totalReag - 1) overlay.appendChild(criarSinalMais((xAtual + passoX / 2) + '%', '34%'));
-      xAtual += passoX;
-    });
-    xAtual += 8;
-    overlay.appendChild(criarSeta(xAtual + '%', '32%'));
-    xAtual += 12;
-    config.produtos.forEach(function (chave, i) {
-      const z = criarZonaVazia(xAtual + '%', '30%', 'z-' + config.id + '-prod-' + i);
-      overlay.appendChild(z);
-      zonas.push({ zona: z, chave: chave, preenchida: false });
-      if (i < totalProd - 1) overlay.appendChild(criarSinalMais((xAtual + passoX / 2) + '%', '34%'));
-      xAtual += passoX;
-    });
-
-    const tray = document.createElement('div');
-    tray.style.position = 'absolute'; tray.style.bottom = '4%'; tray.style.left = '4%'; tray.style.right = '4%';
-    tray.style.display = 'flex'; tray.style.gap = '12px'; tray.style.justifyContent = 'center'; tray.style.flexWrap = 'wrap';
-    overlay.appendChild(tray);
-
-    const todasChaves = config.reagentes.concat(config.produtos).slice().sort(function () { return Math.random() - 0.5; });
-    let corretos = 0;
-    todasChaves.forEach(function (chave, idx) {
-      const peca = criarMolecula('tray-' + config.id + '-' + idx, chave, '0', '0');
-      peca.classList.add('peca-tray');
-      peca.style.position = 'relative'; peca.style.left = '0'; peca.style.top = '0'; peca.style.transform = 'none';
-      tray.appendChild(peca);
-
-      tornarArrastavelXY(peca, overlay, function () {
-        const pr = peca.getBoundingClientRect();
-        const cx = pr.left + pr.width / 2, cy = pr.top + pr.height / 2;
-        let alvo = null;
-        zonas.forEach(function (zinfo) {
-          if (zinfo.preenchida) return;
-          const zr = zinfo.zona.getBoundingClientRect();
-          if (cx >= zr.left && cx <= zr.right && cy >= zr.top && cy <= zr.bottom) alvo = zinfo;
-        });
-        if (alvo && alvo.chave === chave) {
-          tocarDing();
-          alvo.preenchida = true;
-          const rOverlay = overlay.getBoundingClientRect();
-          const zr = alvo.zona.getBoundingClientRect();
-          peca.style.left = ((zr.left - rOverlay.left) + zr.width / 2) + 'px';
-          peca.style.top = ((zr.top - rOverlay.top) + zr.height / 2) + 'px';
-          peca.style.transform = 'translate(-50%,-50%)';
-          alvo.zona.classList.add('zona-preenchida');
-          corretos++;
-          if (corretos === zonas.length) {
-            agendar(function () {
-              fala('Equação montada corretamente!');
-              botaoContinuar(400);
-            }, 300);
-          }
-        } else {
-          peca.classList.add('erro-flash');
-          setTimeout(function () { peca.classList.remove('erro-flash'); }, 500);
-          tray.appendChild(peca);
-          peca.style.position = 'relative'; peca.style.left = '0'; peca.style.top = '0'; peca.style.transform = 'none';
-        }
-      });
+    escolhaBotoes({
+      pergunta: 'Which equation correctly represents the reaction you just watched?',
+      opcoes: config.opcoes,
+      dica: 'Look carefully at which substances were reactants and which were products.',
+      explicacao: config.equacaoTexto + ' — ' + config.explicacao
     });
   };
 }
 
 /* ==========================================================
-   ETAPA 6 — REAÇÃO COMPLETA: IDENTIFICAR TUDO
+   STAGE 5 — FULL REACTION REVIEW
    ========================================================== */
-function passoEtapa6() {
-  fala('Agora observe esta reação completa e identifique cada parte.');
-  const h2 = criarMolecula('e6-h2', 'H2', '12%', '34%');
-  const o2 = criarMolecula('e6-o2', 'O2', '32%', '34%');
+function passoEtapa5() {
+  fala('Now watch this complete reaction and identify each part.');
+  const h2 = criarMolecula('e5-h2', 'H2', '12%', '34%');
+  const o2 = criarMolecula('e5-o2', 'O2', '32%', '34%');
   const seta = criarSeta('50%', '36%');
-  const h2o = criarMolecula('e6-h2o', 'H2O', '76%', '34%');
+  const h2o = criarMolecula('e5-h2o', 'H2O', '76%', '34%');
   overlay.appendChild(h2); overlay.appendChild(o2); overlay.appendChild(seta); overlay.appendChild(h2o);
   overlay.appendChild(criarSinalMais('22%', '38%'));
 
@@ -970,55 +833,56 @@ function passoEtapa6() {
     overlay.appendChild(t);
     return t;
   }
-  const tagG1 = tagFixa('(g)', '18%', '18%');
-  const tagG2 = tagFixa('(g)', '38%', '18%');
-  const tagL = tagFixa('(l)', '82%', '18%');
-  const tagDelta = tagFixa('Δ', '50%', '16%');
+  tagFixa('(g)', '18%', '18%');
+  tagFixa('(g)', '38%', '18%');
+  tagFixa('(l)', '82%', '18%');
+  tagFixa('Δ', '50%', '16%');
 
-  const regReagentes = criarRegiaoClicavel('6%', '22%', '38%', '52%');
-  const regProdutos = criarRegiaoClicavel('64%', '22%', '28%', '52%');
-  const regSeta = criarRegiaoClicavel('46%', '28%', '10%', '28%');
-  const regEstados = criarRegiaoClicavel('14%', '10%', '76%', '10%');
-  const regCondicao = criarRegiaoClicavel('46%', '4%', '10%', '10%');
-  [regReagentes, regProdutos, regSeta, regEstados, regCondicao].forEach(function (r) { overlay.appendChild(r); });
-
-  const alvos = [
-    { regiao: regReagentes, nome: 'os Reagentes', destaque: [h2, o2] },
-    { regiao: regProdutos, nome: 'os Produtos', destaque: [h2o] },
-    { regiao: regSeta, nome: 'o Sentido da reação (seta)', destaque: [seta] },
-    { regiao: regEstados, nome: 'os Estados físicos', destaque: [tagG1, tagG2, tagL] },
-    { regiao: regCondicao, nome: 'a Condição da reação', destaque: [tagDelta] }
-  ];
-  let indice = 0;
-
-  function mostrarInstrucao() {
-    painel.innerHTML = '';
-    const wrap = document.createElement('div');
-    wrap.className = 'interacao-painel';
-    wrap.innerHTML = '<div class="interacao-pergunta-texto">Clique em: ' + alvos[indice].nome + '</div><div class="modal-feedback" id="fbEtapa6"></div>';
-    painel.appendChild(wrap);
-  }
-  mostrarInstrucao();
-
-  alvos.forEach(function (alvo, idx) {
-    alvo.regiao.addEventListener('click', function () {
-      if (idx === indice) {
-        tocarDing();
-        alvo.destaque.forEach(function (el) { el.classList.add('destaque-dourado'); });
-        indice++;
-        if (indice < alvos.length) {
-          mostrarInstrucao();
-        } else {
-          agendar(function () {
-            fala('Excelente! Você identificou todas as partes da equação.');
-            botaoContinuar(400);
-          }, 300);
-        }
-      } else {
-        const fb = document.getElementById('fbEtapa6');
-        if (fb) { fb.className = 'modal-feedback visivel'; fb.innerHTML = '<span class="feedback-errado">Essa não é a região certa. Tente novamente.</span>'; }
-      }
-    });
+  escolhaBotoes({
+    pergunta: 'In the equation 2H₂ (g) + O₂ (g) →(Δ) 2H₂O (l), what are called H₂ and O₂?',
+    opcoes: [
+      { rotulo: 'Reactants', correta: true },
+      { rotulo: 'Products', correta: false },
+      { rotulo: 'Conditions', correta: false }
+    ],
+    dica: 'They are the starting substances, on the left of the arrow.',
+    explicacao: 'H₂ and O₂ are the reactants — the substances present before the reaction happens.'
+  });
+}
+function passoEtapa5b() {
+  escolhaBotoes({
+    pergunta: 'What is H₂O called in this equation?',
+    opcoes: [
+      { rotulo: 'The product', correta: true },
+      { rotulo: 'A reactant', correta: false },
+      { rotulo: 'A catalyst', correta: false }
+    ],
+    dica: 'It is what forms after the reaction.',
+    explicacao: 'H₂O is the product — the substance formed as a result of the reaction.'
+  });
+}
+function passoEtapa5c() {
+  escolhaBotoes({
+    pergunta: 'What do the labels (g) and (l) tell us?',
+    opcoes: [
+      { rotulo: 'The physical states of the substances', correta: true },
+      { rotulo: 'The number of atoms', correta: false },
+      { rotulo: 'The temperature of the reaction', correta: false }
+    ],
+    dica: 'Think back to the earlier stage about (s), (l), (g), and (aq).',
+    explicacao: '(g) means gas and (l) means liquid — these labels show the physical state of each substance.'
+  });
+}
+function passoEtapa5d() {
+  escolhaBotoes({
+    pergunta: 'What does the Δ above the arrow tell us about this reaction?',
+    opcoes: [
+      { rotulo: 'It requires heat', correta: true },
+      { rotulo: 'It requires light', correta: false },
+      { rotulo: 'It happens instantly', correta: false }
+    ],
+    dica: 'This is the same symbol you learned earlier.',
+    explicacao: 'Δ above the arrow means the reaction needs to be heated in order to happen.'
   });
 }
 
@@ -1026,35 +890,34 @@ function passoEtapa6() {
    FINAL
    ========================================================== */
 function passoFinal() {
-  fala('Excelente. Agora você entende que uma equação química é apenas uma forma de representar o rearranjo dos átomos durante uma reação.');
+  fala('Excellent. Now you understand that a chemical equation is simply a way of representing the rearrangement of atoms during a reaction.');
   function linha(txt) { return '<div class="quadro-item"><div class="valor">' + txt + '</div></div>'; }
   function seta() { return '<div style="font-family:\'Cormorant Garamond\',serif;font-size:1.3rem;color:var(--dourado-claro);">↓</div>'; }
   overlay.innerHTML =
     '<div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:8px;">' +
-    linha('Reagentes') + seta() + linha('Reação') + seta() + linha('Rearranjo dos átomos') + seta() + linha('Produtos') + seta() + linha('Equação química') +
+    linha('Reactants') + seta() + linha('Reaction') + seta() + linha('Rearrangement of atoms') + seta() + linha('Products') + seta() + linha('Chemical equation') +
     '</div>';
   painel.innerHTML = '';
   const conclusao = document.getElementById('conclusao');
-  document.getElementById('conclusaoPlacar').textContent = 'Fase concluída';
-  document.getElementById('conclusaoMensagem').textContent = 'Você descobriu que uma reação química é um rearranjo de átomos, e a equação química é apenas a forma de representar esse rearranjo.';
+  document.getElementById('conclusaoPlacar').textContent = 'Stage Complete';
+  document.getElementById('conclusaoMensagem').textContent = 'You discovered that a chemical reaction is a rearrangement of atoms, and the chemical equation is simply the way we represent that rearrangement.';
   conclusao.classList.add('visivel');
   conclusao.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 /* ==========================================================
-   MOTOR DA FASE
+   STAGE ENGINE
    ========================================================== */
 const PASSOS = [
   passoIntro0, passoIntro1, passoIntro2,
   passoEtapa1,
-  passoEtapa2,
-  passoEtapa3,
-  passoEtapa4,
-  criarPassoObservarReacao(REACOES[0]), criarPassoMontarEquacao(REACOES[0]),
-  criarPassoObservarReacao(REACOES[1]), criarPassoMontarEquacao(REACOES[1]),
-  criarPassoObservarReacao(REACOES[2]), criarPassoMontarEquacao(REACOES[2]),
-  criarPassoObservarReacao(REACOES[3]), criarPassoMontarEquacao(REACOES[3]),
-  passoEtapa6,
+  passoEtapa2, passoEtapa2b, passoEtapa2c,
+  passoEtapa3, passoEtapa3b, passoEtapa3c,
+  criarPassoObservarReacao(REACOES[0]), criarPassoQuizEquacao(REACOES[0]),
+  criarPassoObservarReacao(REACOES[1]), criarPassoQuizEquacao(REACOES[1]),
+  criarPassoObservarReacao(REACOES[2]), criarPassoQuizEquacao(REACOES[2]),
+  criarPassoObservarReacao(REACOES[3]), criarPassoQuizEquacao(REACOES[3]),
+  passoEtapa5, passoEtapa5b, passoEtapa5c, passoEtapa5d,
   passoFinal
 ];
 
@@ -1157,6 +1020,3 @@ function ajustarVolume(valorSlider) {
 </div>
 </body>
 </html>
-
-
-
