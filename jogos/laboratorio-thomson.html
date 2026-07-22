@@ -6,8 +6,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" type="image/png" href="/favicon.png">
 <link rel="canonical" href="https://kifaciledu.com.br/jogos/jogos-escaperoom/torre-quimica/fases/laboratorio-thomson.html">
-<title>Laboratório de Thomson — Cápsula do Tempo | KiFácil</title>
-<meta name="description" content="Viaje ao laboratório de J.J. Thomson em 1897 e reviva a descoberta do elétron. Escape Room da Cápsula do Tempo — KiFácil.">
+<title>Thomson's Laboratory — Time Capsule | KiFácil</title>
+<meta name="description" content="Travel to J.J. Thomson's laboratory in 1897 and relive the discovery of the electron. Time Capsule Escape Room — KiFácil.">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y1JGD5VVBD"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -41,13 +41,10 @@
 
   .main { display: flex; flex: 1; align-items: flex-start; }
 
-  /* CENA */
+  /* SCENE */
   .scene-wrap { background: var(--bg-dark); padding: 28px; display: flex; justify-content: center; align-items: flex-start; flex: 0 0 56%; }
   .scene-inner { position: relative; width: 100%; max-width: 620px; user-select: none; }
   .scene-img { width: 100%; display: block; border-radius: 8px; border: 1px solid rgba(212,170,106,0.4); }
-  .scene-overlay { position: absolute; top: 0; left: 0; right: 0; background: linear-gradient(180deg, rgba(46,32,22,0.85) 0%, rgba(46,32,22,0) 100%); padding: 16px 20px 28px; border-radius: 8px 8px 0 0; pointer-events: none; }
-  .scene-overlay-title { font-family: 'Lora', serif; font-size: 20px; font-weight: 600; color: var(--text); margin-bottom: 2px; }
-  .scene-overlay-sub { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--gold); }
 
   .link-aula {
     position: absolute; top: 10px; right: 10px; z-index: 10;
@@ -62,14 +59,14 @@
   .link-aula:hover { background: rgba(30,16,8,0.92); transform: translateY(-1px); }
   .link-aula svg { width: 22px; height: 22px; }
 
-  /* HOTSPOTS - áreas de clique invisíveis */
+  /* HOTSPOTS - invisible clickable areas */
   .hotspot { position: absolute; cursor: pointer; display: none; }
   .hotspot.active { display: block; }
   .hotspot.done { display: none; }
   .hotspot .ring { display: none; }
   .hotspot .label { display: none; }
 
-  /* PAINEL DIREITO */
+  /* RIGHT PANEL */
   .panels-row { flex: 1; display: flex; flex-direction: column; gap: 18px; padding: 28px; border-left: 1px solid var(--border-faint); align-self: stretch; }
 
   .narr-box { background: var(--paper); border: 1px solid rgba(139,94,26,0.25); border-radius: 8px; padding: 20px 22px; }
@@ -115,17 +112,17 @@
   .card-fala { font-family: 'Lora', serif; font-size: 19px; line-height: 1.75; color: var(--paper-text); font-weight: 600; margin-bottom: 18px; }
   .card-fala strong { color: #6b3f0e; font-style: normal; }
 
-  /* DIAGRAMA SVG */
+  /* SVG DIAGRAM */
   .diagrama-wrap { background: #fff8ee; border: 1px solid rgba(139,94,26,0.2); border-radius: 8px; padding: 18px; margin-bottom: 18px; text-align: center; }
   .diagrama-wrap svg { max-width: 100%; height: auto; }
 
-  /* BOTÃO AÇÃO */
+  /* ACTION BUTTON */
   .btn-acao { display: block; width: 100%; background: var(--paper-text); border: none; border-radius: 6px; padding: 13px; font-family: 'Libre Baskerville', serif; font-size: 13px; font-weight: 700; color: var(--paper); cursor: pointer; letter-spacing: .04em; text-transform: uppercase; transition: background .15s; margin-bottom: 8px; }
   .btn-acao:hover:not(:disabled) { background: #4a2c10; }
   .btn-acao:disabled { opacity: 0.4; cursor: default; }
   .btn-acao.feita { background: rgba(80,200,120,0.15); color: #2d5a2d; border: 1px solid rgba(80,200,120,0.4); }
 
-  /* PERGUNTA / INPUT */
+  /* QUESTION / INPUT */
   .pergunta-box { display: none; }
   .pergunta-box.show { display: block; animation: cardIn .3s ease; }
   .pergunta-texto { font-family: 'Lora', serif; font-size: 19px; line-height: 1.7; color: var(--paper-text); font-weight: 600; margin-bottom: 14px; }
@@ -134,7 +131,7 @@
   .resposta-input:focus { border-color: var(--paper-gold); }
   .resposta-input::placeholder { color: rgba(46,26,8,0.3); }
 
-  /* CONCLUSÃO */
+  /* CONCLUSION */
   .conclusao-box { display: none; background: rgba(80,200,120,0.08); border: 1px solid rgba(80,200,120,0.4); border-radius: 8px; padding: 16px 18px; margin-top: 14px; }
   .conclusao-box.show { display: block; animation: cardIn .3s ease; }
   .conclusao-eyebrow { font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: #2d5a2d; margin-bottom: 8px; }
@@ -145,7 +142,7 @@
   .btn-continuar.show { display: block; }
   .btn-continuar:hover { background: #6b3f0e; }
 
-  /* TELA FINAL */
+  /* FINAL SCREEN */
   .win-screen { display: none; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 60px 32px; flex: 1; }
   .win-screen.show { display: flex; }
   .win-title { font-family: 'Lora', serif; font-size: 44px; font-weight: 600; color: var(--gold); margin-bottom: 12px; }
@@ -160,7 +157,7 @@
   .btn-restart { background: none; border: 1px solid rgba(232,184,75,0.3); border-radius: 6px; padding: 10px 24px; font-family: 'Libre Baskerville', serif; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: rgba(232,184,75,0.6); cursor: pointer; transition: all .15s; }
   .btn-restart:hover { border-color: rgba(232,184,75,0.6); color: var(--gold); }
 
-  /* ANIMAÇÕES DO EXPERIMENTO */
+  /* EXPERIMENT ANIMATIONS */
   .feixe { opacity: 0; transition: opacity .6s ease; }
   .feixe.on { opacity: 1; }
   .feixe-defletido { opacity: 0; transition: opacity .6s ease; }
@@ -228,8 +225,8 @@
 
 <header class="header">
   <div>
-    <div class="eyebrow">Escape Room • Cápsula do Tempo</div>
-    <h1 class="page-title">Laboratório de Thomson</h1>
+    <div class="eyebrow">Escape Room • Time Capsule</div>
+    <h1 class="page-title">Thomson's Laboratory</h1>
   </div>
 </header>
 
@@ -237,21 +234,17 @@
 
   <div class="scene-wrap">
     <div class="scene-inner">
-      <img src="../imagens/sala-de-thomson.jpg" alt="Laboratório de J.J. Thomson no final do século XIX" class="scene-img">
-      <div class="scene-overlay">
-        <div class="scene-overlay-title">Laboratório de J.J. Thomson</div>
-        <div class="scene-overlay-sub">1897 • Cápsula do Tempo</div>
-      </div>
+      <img src="../imagens/sala-de-thomson.jpg" alt="J.J. Thomson's laboratory in the late 19th century" class="scene-img">
 
-      <!-- HOTSPOT: TUBO DE CROOKES -->
+      <!-- HOTSPOT: CROOKES TUBE -->
       <div class="hotspot active" id="hs-tubo" style="left:6%;top:58%;width:40%;height:30%;"
            onclick="abrirAto(1)"></div>
 
-      <!-- HOTSPOT: CATA-VENTO -->
+      <!-- HOTSPOT: PINWHEEL -->
       <div class="hotspot" id="hs-catavento" style="left:42%;top:62%;width:18%;height:28%;"
            onclick="abrirAto(2)"></div>
 
-      <!-- HOTSPOT: PLACAS ELETRODO -->
+      <!-- HOTSPOT: ELECTRODE PLATES -->
       <div class="hotspot" id="hs-placas" style="left:60%;top:60%;width:30%;height:30%;"
            onclick="abrirAto(3)"></div>
 </div>
@@ -260,33 +253,33 @@
   <div class="panels-row">
 
     <div class="narr-box">
-      <div class="narr-eyebrow">Cápsula do Tempo • 1897</div>
+      <div class="narr-eyebrow">Time Capsule • 1897</div>
       <div class="narr" id="narr">
-        <strong>Thomson:</strong> <em>"Dalton acreditava que o átomo era uma esfera indivisível. Eu não tenho tanta certeza. Vamos investigar essa hipótese. Traga-me o tubo de vidro conhecido como Tubo de Crookes."</em>
+        <strong>Thomson:</strong> <em>"Dalton believed the atom was an indivisible sphere. I'm not so sure. Let's put that hypothesis to the test. Bring me the glass tube known as the Crookes tube."</em>
       </div>
     </div>
 
     <div class="progresso-wrap">
-      <div class="progresso-title">Experimentos realizados</div>
+      <div class="progresso-title">Experiments Completed</div>
       <div class="ato-item" id="ai-1">
         <div class="ato-dot"></div>
         <div>
-          <div class="ato-nome">O tubo de Crookes</div>
-          <span class="ato-tag">raios catódicos</span>
+          <div class="ato-nome">The Crookes tube</div>
+          <span class="ato-tag">cathode rays</span>
         </div>
       </div>
       <div class="ato-item" id="ai-2">
         <div class="ato-dot"></div>
         <div>
-          <div class="ato-nome">O cata-vento</div>
-          <span class="ato-tag">os raios têm massa</span>
+          <div class="ato-nome">The pinwheel</div>
+          <span class="ato-tag">the rays have mass</span>
         </div>
       </div>
       <div class="ato-item" id="ai-3">
         <div class="ato-dot"></div>
         <div>
-          <div class="ato-nome">As placas eletrodo</div>
-          <span class="ato-tag">os raios têm carga negativa</span>
+          <div class="ato-nome">The electrode plates</div>
+          <span class="ato-tag">the rays have negative charge</span>
         </div>
       </div>
     </div>
@@ -294,17 +287,17 @@
   </div>
 </div>
 
-<!-- TELA FINAL -->
+<!-- FINAL SCREEN -->
 <div class="win-screen" id="winScreen">
-  <div class="win-title">O elétron foi descoberto!</div>
-  <p class="win-sub">Você ajudou Thomson a provar que o átomo de Dalton estava incompleto. Existe uma partícula menor, com massa e carga negativa, dentro de todo átomo. Em 1897, isso muda tudo — o próximo passo é imaginar como essa partícula se organiza dentro do átomo.</p>
+  <div class="win-title">The electron has been discovered!</div>
+  <p class="win-sub">You helped Thomson prove that Dalton's atom wasn't the whole story. Inside every atom there's a smaller particle, with mass and a negative charge. In 1897, that changes everything — the next step is figuring out how this particle is arranged inside the atom.</p>
   <div class="win-badges">
-    <div class="badge"><div class="badge-icon">⚡</div><div class="badge-label">Raios catódicos</div></div>
-    <div class="badge"><div class="badge-icon">⚙</div><div class="badge-label">Têm massa</div></div>
-    <div class="badge"><div class="badge-icon">−</div><div class="badge-label">Carga negativa</div></div>
+    <div class="badge"><div class="badge-icon">⚡</div><div class="badge-label">Cathode rays</div></div>
+    <div class="badge"><div class="badge-icon">⚙</div><div class="badge-label">Have mass</div></div>
+    <div class="badge"><div class="badge-icon">−</div><div class="badge-label">Negative charge</div></div>
   </div>
   <div class="win-btns">
-    <button class="btn-restart" onclick="resetGame()">Reviver o experimento</button>
+    <button class="btn-restart" onclick="resetGame()">Replay the experiment</button>
   </div>
 </div>
 
@@ -328,18 +321,18 @@ function tocarDing() {
   a.play().catch(() => {});
 }
 
-// ==================== ATO 1: TUBO DE CROOKES ====================
+// ==================== ACT 1: CROOKES TUBE ====================
 function buildAto1() {
   document.getElementById('card').innerHTML = `
-    <button class="card-close" onclick="closeOverlay()" aria-label="Fechar">×</button>
-    <div class="card-eyebrow">Experimento 1 • O Tubo de Crookes</div>
-    <div class="card-title">Raios catódicos</div>
+    <button class="card-close" onclick="closeOverlay()" aria-label="Close">×</button>
+    <div class="card-eyebrow">Experiment 1 • The Crookes Tube</div>
+    <div class="card-title">Cathode Rays</div>
     <div class="card-fala">
-      <strong>Thomson:</strong> "Aqui está o tubo — um cilindro de vidro selado, com gás sob baixa pressão e dois eletrodos: o cátodo, ligado ao polo negativo, e o ânodo, ligado ao polo positivo. Agora, ligue a fonte de alta tensão."
+      <strong>Thomson:</strong> "Here's the tube — a sealed glass cylinder containing gas at low pressure, with two electrodes: the cathode, connected to the negative terminal, and the anode, connected to the positive terminal. Now, switch on the high-voltage source."
     </div>
     <div class="diagrama-wrap">
       <svg viewBox="0 0 400 140" xmlns="http://www.w3.org/2000/svg">
-        <!-- mesmo formato de tubo em todos os experimentos -->
+        <!-- same tube shape used in every experiment -->
         <path d="M 55 70
                  C 55 50, 78 45, 115 45
                  L 285 45
@@ -351,14 +344,14 @@ function buildAto1() {
               stroke="#2e1a08"
               stroke-width="2"/>
 
-        <!-- eletrodos do mesmo tamanho em todos os experimentos -->
+        <!-- electrodes are the same size in every experiment -->
         <rect x="70" y="58" width="8" height="24" fill="#2e1a08"/>
         <rect x="330" y="58" width="8" height="24" fill="#2e1a08"/>
 
-        <!-- feixe invisível: raios catódicos não aparecem como linha colorida -->
+        <!-- invisible beam: cathode rays don't appear as a colored line -->
         <line id="feixe1" class="feixe" x1="78" y1="70" x2="330" y2="70" stroke="transparent" stroke-width="4"/>
 
-        <!-- incandescência no vidro: apenas dois risquinhos, não um feixe verde -->
+        <!-- glow on the glass: just two small streaks, not a green beam -->
         <path id="glowVidro1a" class="glow"
               d="M 341 48 Q 351 51 356 57"
               fill="none"
@@ -373,38 +366,38 @@ function buildAto1() {
               stroke-width="5"
               stroke-linecap="round"/>
 
-        <text x="38" y="42" font-family="Libre Baskerville, serif" font-size="12" fill="#8b5e1a">cátodo (-)</text>
-        <text x="318" y="42" font-family="Libre Baskerville, serif" font-size="12" fill="#8b5e1a">ânodo (+)</text>
-        <text x="150" y="120" font-family="Lora, serif" font-size="13" fill="#3d2010" font-style="italic">gás sob baixa pressão</text>
+        <text x="38" y="42" font-family="Libre Baskerville, serif" font-size="12" fill="#8b5e1a">cathode (–)</text>
+        <text x="318" y="42" font-family="Libre Baskerville, serif" font-size="12" fill="#8b5e1a">anode (+)</text>
+        <text x="150" y="120" font-family="Lora, serif" font-size="13" fill="#3d2010" font-style="italic">gas at low pressure</text>
       </svg>
     </div>
-    <button class="btn-acao" id="btnAcao1" onclick="ligarAto1()">Ligar a fonte de alta tensão</button>
+    <button class="btn-acao" id="btnAcao1" onclick="ligarAto1()">Switch on the high-voltage source</button>
 
     <div class="pergunta-box" id="pergunta1">
       <div class="pergunta-texto">
-        <strong>Thomson:</strong> "Observe a incandescência esverdeada perto do ânodo. Não estamos vendo o feixe diretamente, mas apenas o efeito de sua colisão com o vidro.
- Note também que esse fenômeno parece partir do cátodo, o eletrodo negativo, e seguir em direção ao ânodo.
+        <strong>Thomson:</strong> "Observe the greenish glow near the anode. We aren't seeing the beam directly — only the effect of its collision with the glass.
+ Notice also that this phenomenon seems to start at the cathode, the negative electrode, and travel toward the anode.
 
-Por essa razão, muitos cientistas passaram a chamar esse feixe de raio catódico.
+For that reason, many scientists have started calling this beam a cathode ray.
 
-Mas o nome não resolve o mistério.
+But the name doesn't solve the mystery.
 
-O que você acha que está saindo do cátodo e atravessando o tubo?"
+What do you think is leaving the cathode and crossing the tube?"
       </div>
-      <textarea class="resposta-input" id="resp1" placeholder="Escreva sua hipótese..."></textarea>
-      <button class="btn-acao" onclick="responderAto1()">Responder a Thomson</button>
+      <textarea class="resposta-input" id="resp1" placeholder="Write your hypothesis..."></textarea>
+      <button class="btn-acao" onclick="responderAto1()">Answer Thomson</button>
     </div>
 
     <div class="conclusao-box" id="conclusao1">
-      <div class="conclusao-eyebrow">Thomson responde</div>
+      <div class="conclusao-eyebrow">Thomson responds</div>
       <div class="conclusao-texto">
-       "Interessante... já troquei várias vezes o gás dentro deste tubo e o fenômeno continua praticamente o mesmo.
+       "Interesting... I've swapped out the gas inside this tube several times, and the phenomenon stays practically the same.
 
-Talvez esses raios não pertençam ao gás. Talvez sejam algo presente em toda matéria.
+Maybe these rays don't belong to the gas. Maybe they're something present in all matter.
 
-Se estiver correto, esse feixe deve possuir massa. Vamos investigar. Traga-me o cata-vento."
+If that's correct, this beam should have mass. Let's find out. Bring me the pinwheel."
       </div>
-      <button class="btn-continuar" id="btnContinuar1" onclick="concluirAto(1)">Continuar</button>
+      <button class="btn-continuar" id="btnContinuar1" onclick="concluirAto(1)">Continue</button>
     </div>
   `;
   openOverlay();
@@ -416,7 +409,7 @@ function ligarAto1() {
   document.getElementById('glowVidro1b').classList.add('on');
 
   const btn = document.getElementById('btnAcao1');
-  btn.textContent = 'Fonte ligada - observe o vidro';
+  btn.textContent = 'Source on — watch the glass';
   btn.classList.add('feita');
   btn.disabled = true;
 
@@ -433,18 +426,18 @@ function responderAto1() {
   document.querySelector('#pergunta1 .btn-acao').disabled = true;
 }
 
-// ==================== ATO 2: CATA-VENTO ====================
+// ==================== ACT 2: PINWHEEL ====================
 function buildAto2() {
   document.getElementById('card').innerHTML = `
-    <button class="card-close" onclick="closeOverlay()" aria-label="Fechar">×</button>
-    <div class="card-eyebrow">Experimento 2 • O Cata-vento</div>
-    <div class="card-title">Os raios têm massa</div>
+    <button class="card-close" onclick="closeOverlay()" aria-label="Close">×</button>
+    <div class="card-eyebrow">Experiment 2 • The Pinwheel</div>
+    <div class="card-title">The Rays Have Mass</div>
     <div class="card-fala">
-      <strong>Thomson:</strong> "Excelente. Agora vou posicionar este pequeno cata-vento de metal — uma roda com lâminas leves — bem no caminho do feixe catódico, dentro do tubo. Ligue novamente a fonte."
+      <strong>Thomson:</strong> "Excellent. Now I'll place this small metal pinwheel — a wheel with light blades — right in the path of the cathode ray beam, inside the tube. Switch the source on again."
     </div>
     <div class="diagrama-wrap">
       <svg viewBox="0 0 400 140" xmlns="http://www.w3.org/2000/svg">
-        <!-- mesmo formato de tubo do Ato 1 -->
+        <!-- same tube shape as Act 1 -->
         <path d="M 55 70
                  C 55 50, 78 45, 115 45
                  L 285 45
@@ -456,11 +449,11 @@ function buildAto2() {
               stroke="#2e1a08"
               stroke-width="2"/>
 
-        <!-- mesmos eletrodos do Ato 1 -->
+        <!-- same electrodes as Act 1 -->
         <rect x="70" y="58" width="8" height="24" fill="#2e1a08"/>
         <rect x="330" y="58" width="8" height="24" fill="#2e1a08"/>
 
-        <!-- feixe invisível: nada verde atravessando o tubo -->
+        <!-- invisible beam: nothing green crossing the tube -->
         <line id="feixe2" class="feixe" x1="78" y1="70" x2="200" y2="70" stroke="transparent" stroke-width="4"/>
 
         <g transform="translate(200,70)">
@@ -473,35 +466,35 @@ function buildAto2() {
           </g>
         </g>
 
-        <text x="38" y="42" font-family="Libre Baskerville, serif" font-size="12" fill="#8b5e1a">cátodo (-)</text>
-        <text x="318" y="42" font-family="Libre Baskerville, serif" font-size="12" fill="#8b5e1a">ânodo (+)</text>
-        <text x="130" y="120" font-family="Lora, serif" font-size="13" fill="#3d2010" font-style="italic">cata-vento metálico no caminho do feixe</text>
+        <text x="38" y="42" font-family="Libre Baskerville, serif" font-size="12" fill="#8b5e1a">cathode (–)</text>
+        <text x="318" y="42" font-family="Libre Baskerville, serif" font-size="12" fill="#8b5e1a">anode (+)</text>
+        <text x="130" y="120" font-family="Lora, serif" font-size="13" fill="#3d2010" font-style="italic">metal pinwheel in the beam's path</text>
       </svg>
     </div>
-    <button class="btn-acao" id="btnAcao2" onclick="ligarAto2()">Ligar a fonte de alta tensão</button>
+    <button class="btn-acao" id="btnAcao2" onclick="ligarAto2()">Switch on the high-voltage source</button>
 
     <div class="pergunta-box" id="pergunta2">
       <div class="pergunta-texto">
-        <strong>Thomson:</strong> "Veja! O cata-vento está girando, impulsionado pelo feixe invisível. Um feixe de luz comum não conseguiria mover uma hélice de metal. O que você acha que isso revela sobre a natureza dos raios catódicos?"
+        <strong>Thomson:</strong> "Look! The pinwheel is spinning, driven by the invisible beam. An ordinary beam of light couldn't move a metal blade. What do you think this reveals about the nature of cathode rays?"
       </div>
-      <textarea class="resposta-input" id="resp2" placeholder="Escreva sua hipótese..."></textarea>
-      <button class="btn-acao" onclick="responderAto2()">Responder a Thomson</button>
+      <textarea class="resposta-input" id="resp2" placeholder="Write your hypothesis..."></textarea>
+      <button class="btn-acao" onclick="responderAto2()">Answer Thomson</button>
     </div>
 
     <div class="conclusao-box" id="conclusao2">
-      <div class="conclusao-eyebrow">Thomson responde</div>
+      <div class="conclusao-eyebrow">Thomson responds</div>
       <div class="conclusao-texto">
-        "Muito bem. Se o cata-vento girou, o feixe deve ser formado por partículas materiais.
+        "Very good. If the pinwheel turned, the beam must be made of material particles.
 
-Mas de onde elas vêm? Troquei o gás diversas vezes e o resultado permaneceu o mesmo. Talvez elas não pertençam ao gás.
+But where do they come from? I've swapped out the gas several times, and the result stayed the same. Maybe they don't belong to the gas.
 
-Começo a suspeitar que sejam emitidas pelo próprio cátodo.
+I'm starting to suspect they're emitted by the cathode itself.
 
-Agora precisamos descobrir outra coisa: essas partículas possuem carga elétrica?
+Now we need to find out one more thing: do these particles carry an electric charge?
 
-Traga-me as placas metálicas para o próximo experimento."
+Bring me the metal plates for the next experiment."
       </div>
-      <button class="btn-continuar" id="btnContinuar2" onclick="concluirAto(2)">Continuar</button>
+      <button class="btn-continuar" id="btnContinuar2" onclick="concluirAto(2)">Continue</button>
     </div>
   `;
   openOverlay();
@@ -514,7 +507,7 @@ function ligarAto2() {
   somCatavento.play().catch(() => {});
 
   const btn = document.getElementById('btnAcao2');
-  btn.textContent = 'Fonte ligada - observe o cata-vento';
+  btn.textContent = 'Source on — watch the pinwheel';
   btn.classList.add('feita');
   btn.disabled = true;
 
@@ -531,14 +524,14 @@ function responderAto2() {
   document.querySelector('#pergunta2 .btn-acao').disabled = true;
 }
 
-// ==================== ATO 3: PLACAS ELETRODO ====================
+// ==================== ACT 3: ELECTRODE PLATES ====================
 function buildAto3() {
   document.getElementById('card').innerHTML = `
-    <button class="card-close" onclick="closeOverlay()" aria-label="Fechar">×</button>
-    <div class="card-eyebrow">Experimento 3 • As Placas Eletrodo</div>
-    <div class="card-title">A carga dos raios catódicos</div>
+    <button class="card-close" onclick="closeOverlay()" aria-label="Close">×</button>
+    <div class="card-eyebrow">Experiment 3 • The Electrode Plates</div>
+    <div class="card-title">The Charge of Cathode Rays</div>
     <div class="card-fala">
-      <strong>Thomson:</strong> "Perfeito. Vou posicionar estas duas placas metálicas, uma acima e outra abaixo do caminho do feixe — uma carregada positivamente, a outra negativamente. Se os raios tiverem carga, o campo elétrico entre as placas deve desviá-los. Ligue a fonte."
+      <strong>Thomson:</strong> "Perfect. I'll place these two metal plates, one above and one below the beam's path — one charged positively, the other negatively. If the rays carry a charge, the electric field between the plates should deflect them. Switch on the source."
     </div>
     <div class="diagrama-wrap">
       <svg viewBox="0 0 400 160" xmlns="http://www.w3.org/2000/svg">
@@ -554,7 +547,7 @@ function buildAto3() {
 </marker>
         </defs>
 
-        <!-- mesmo formato de tubo dos Atos 1 e 2 -->
+        <!-- same tube shape as Acts 1 and 2 -->
         <path d="M 55 80
                  C 55 60, 78 55, 115 55
                  L 285 55
@@ -566,20 +559,20 @@ function buildAto3() {
               stroke="#2e1a08"
               stroke-width="2"/>
 
-        <!-- mesmos eletrodos, apenas deslocados para acompanhar o SVG de 160px de altura -->
+        <!-- same electrodes, just shifted to match the 160px-tall SVG -->
         <rect x="70" y="68" width="8" height="24" fill="#2e1a08"/>
         <rect x="330" y="68" width="8" height="24" fill="#2e1a08"/>
 
-        <text x="38" y="42" font-family="Libre Baskerville, serif" font-size="12" fill="#8b5e1a">cátodo (-)</text>
-        <text x="318" y="42" font-family="Libre Baskerville, serif" font-size="12" fill="#8b5e1a">ânodo (+)</text>
+        <text x="38" y="42" font-family="Libre Baskerville, serif" font-size="12" fill="#8b5e1a">cathode (–)</text>
+        <text x="318" y="42" font-family="Libre Baskerville, serif" font-size="12" fill="#8b5e1a">anode (+)</text>
 
-        <!-- placas do campo elétrico -->
+        <!-- electric field plates -->
         <rect x="130" y="35" width="140" height="6" fill="#8b5e1a"/>
         <text x="275" y="40" font-family="Libre Baskerville, serif" font-size="13" fill="#8b5e1a">+</text>
         <rect x="130" y="119" width="140" height="6" fill="#3d2010"/>
         <text x="275" y="128" font-family="Libre Baskerville, serif" font-size="13" fill="#3d2010">-</text>
 
-        <!-- seta preta: indica o caminho desviado dos raios, sem luz verde -->
+        <!-- black arrow: shows the deflected path of the rays, no green light -->
        <path id="setaRaios3"
       class="feixe-defletido"
       d="M 90 82 C 140 84, 180 78, 210 52"
@@ -589,25 +582,25 @@ function buildAto3() {
       stroke-linecap="round"
       marker-end="url(#arrowHead3)"/>
 
-        <text x="130" y="150" font-family="Lora, serif" font-size="13" fill="#3d2010" font-style="italic">campo elétrico entre as placas</text>
+        <text x="130" y="150" font-family="Lora, serif" font-size="13" fill="#3d2010" font-style="italic">electric field between the plates</text>
       </svg>
     </div>
-    <button class="btn-acao" id="btnAcao3" onclick="ligarAto3()">Ligar a fonte de alta tensão</button>
+    <button class="btn-acao" id="btnAcao3" onclick="ligarAto3()">Switch on the high-voltage source</button>
 
     <div class="pergunta-box" id="pergunta3">
       <div class="pergunta-texto">
-        <strong>Thomson:</strong> "Observe: o feixe se curvou em direção à placa <strong>positiva</strong>, no topo. Pense: no modelo de Dalton, o átomo era uma esfera neutra, sem carga elétrica. Se o que está viajando nesse feixe se desvia por causa de cargas elétricas... isso pode ser um átomo inteiro, do jeito que Dalton imaginava? E pensando em cargas opostas se atraem e cargas iguais se repelem, o que isso revela sobre a carga dessas partículas?"
+        <strong>Thomson:</strong> "Look: the beam curved toward the <strong>positive</strong> plate, at the top. Think about it: in Dalton's model, the atom was a neutral sphere, with no electric charge. If whatever is traveling in this beam is deflected because of electric charges... could this be a whole atom, the way Dalton imagined it? And keeping in mind that opposite charges attract and like charges repel, what does this reveal about the charge of these particles?"
       </div>
-      <textarea class="resposta-input" id="resp3" placeholder="Escreva sua hipótese..."></textarea>
-      <button class="btn-acao" onclick="responderAto3()">Responder a Thomson</button>
+      <textarea class="resposta-input" id="resp3" placeholder="Write your hypothesis..."></textarea>
+      <button class="btn-acao" onclick="responderAto3()">Answer Thomson</button>
     </div>
 
     <div class="conclusao-box" id="conclusao3">
-      <div class="conclusao-eyebrow">Thomson responde</div>
+      <div class="conclusao-eyebrow">Thomson responds</div>
       <div class="conclusao-texto">
-        "Você raciocinou exatamente como eu! Cargas opostas se atraem: se o caminho foi desviado em direção à placa <strong>positiva</strong>, as partículas que o compõem devem ter carga <strong>negativa</strong>. Acabamos de reunir três descobertas: os raios catódicos são <strong>partículas</strong> (não luz), elas têm <strong>massa</strong> (giraram o cata-vento), e têm <strong>carga negativa</strong> (foram atraídas pela placa positiva). Vou chamar essa partícula de 'corpúsculo' — vocês, no futuro, a chamam de <strong>elétron</strong>. E isso muda tudo: a esfera maciça e indivisível de Dalton... não está completa. Há algo <em>dentro</em> do átomo. Obrigado, caro estudante: você acabou de reviver a descoberta do elétron."
+        "You reasoned exactly the way I did! Opposite charges attract: if the path was deflected toward the <strong>positive</strong> plate, the particles making it up must carry a <strong>negative</strong> charge. We've just gathered three discoveries: cathode rays are <strong>particles</strong> (not light), they have <strong>mass</strong> (they spun the pinwheel), and they carry a <strong>negative charge</strong> (they were pulled toward the positive plate). I'll call this particle a 'corpuscle' — in your time, you call it the <strong>electron</strong>. And this changes everything: Dalton's solid, indivisible sphere... isn't the whole picture. There's something <em>inside</em> the atom. Thank you, dear student — you've just relived the discovery of the electron."
       </div>
-      <button class="btn-continuar" id="btnContinuar3" onclick="concluirAto(3)">Finalizar</button>
+      <button class="btn-continuar" id="btnContinuar3" onclick="concluirAto(3)">Finish</button>
     </div>
   `;
   openOverlay();
@@ -617,7 +610,7 @@ function ligarAto3() {
   document.getElementById('setaRaios3').classList.add('on');
 
   const btn = document.getElementById('btnAcao3');
-  btn.textContent = 'Fonte ligada - observe o desvio';
+  btn.textContent = 'Source on — watch the deflection';
   btn.classList.add('feita');
   btn.disabled = true;
 
@@ -634,7 +627,7 @@ function responderAto3() {
   document.querySelector('#pergunta3 .btn-acao').disabled = true;
 }
 
-// ==================== CONTROLE GERAL ====================
+// ==================== GENERAL CONTROL ====================
 function abrirAto(n) {
   if (n === 1) buildAto1();
   if (n === 2) buildAto2();
@@ -651,10 +644,10 @@ function concluirAto(n) {
 
   if (n === 1) {
     document.getElementById('hs-catavento').classList.add('active');
-    setNarr('<strong>Thomson:</strong> <em>"Muito bem! O efeito no vidro mostra que algo viaja do cátodo ao ânodo, embora os raios catódicos não apareçam como luz colorida. Agora vá até a bancada e traga-me o cata-vento de metal que está ali, ao lado do tubo."</em>');
+    setNarr('<strong>Thomson:</strong> <em>"Very good! The effect on the glass shows that something travels from the cathode to the anode, even though cathode rays don\'t appear as colored light. Now go to the workbench and bring me the metal pinwheel sitting there, next to the tube."</em>');
   } else if (n === 2) {
     document.getElementById('hs-placas').classList.add('active');
-    setNarr('<strong>Thomson:</strong> <em>"Os raios têm massa, excelente descoberta! Agora a pergunta final: eles têm carga? Traga-me aquelas duas placas eletrodo metálicas, sobre a bancada à direita."</em>');
+    setNarr('<strong>Thomson:</strong> <em>"The rays have mass — excellent discovery! Now for the final question: do they carry a charge? Bring me those two metal electrode plates, on the workbench to the right."</em>');
   } else if (n === 3) {
     localStorage.setItem('kifacil_thomson_ok', '1');
     setTimeout(() => {
@@ -674,7 +667,7 @@ function resetGame() {
   document.getElementById('hs-placas').classList.remove('active', 'done');
   document.getElementById('mainScreen').style.display = '';
   document.getElementById('winScreen').classList.remove('show');
-  setNarr(`<strong>Thomson:</strong> <em>"Ah, chegou bem a tempo! Caro estudante, dentro deste tubo de vidro há um gás sob baixa pressão. Vou ligar uma fonte de alta tensão nos eletrodos e quero que observe comigo o que acontece, sem assumir nada de antemão. Primeiro, traga-me aquele tubo de vidro contendo gás sob baixa pressão, conhecido como tubo de Crookes."</em>`);
+  setNarr(`<strong>Thomson:</strong> <em>"Ah, you've arrived just in time! Dear student, inside this glass tube there is a gas at low pressure. I'm going to switch on a high-voltage source across the electrodes, and I want you to observe with me what happens, without assuming anything beforehand. First, bring me that glass tube containing gas at low pressure, known as the Crookes tube."</em>`);
 }
 </script>
 
@@ -682,7 +675,7 @@ function resetGame() {
   <button id="btn-mute" onclick="alternarMudo()" aria-label="Mute or unmute sound">🔊</button>
   <input type="range" id="slider-volume" min="0" max="100" value="35" oninput="ajustarVolume(this.value)" aria-label="Volume">
 </div>
-<div id="cookie-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#1a0f08;border-top:1px solid rgba(212,170,106,0.4);padding:1rem 2rem;z-index:9999;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;"><p style="margin:0;font-family:'Libre Baskerville',serif;font-size:0.82rem;color:#e8d4b0;line-height:1.5;">Este site utiliza cookies para melhorar sua experi&ecirc;ncia. Ao continuar navegando, voc&ecirc; concorda com nossa <a href="/politica-de-privacidade.html" style="color:#e8b84b;text-decoration:underline;text-underline-offset:2px;">Pol&iacute;tica de Privacidade</a>.</p><button onclick="document.getElementById('cookie-banner').style.display='none';localStorage.setItem('kifacil_cookies','1');" style="flex-shrink:0;background:#e8b84b;border:none;padding:0.55rem 1.5rem;font-family:'Libre Baskerville',serif;font-size:0.78rem;font-weight:700;color:#1a0f08;cursor:pointer;letter-spacing:0.04em;">Entendi</button></div>
+<div id="cookie-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#1a0f08;border-top:1px solid rgba(212,170,106,0.4);padding:1rem 2rem;z-index:9999;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;"><p style="margin:0;font-family:'Libre Baskerville',serif;font-size:0.82rem;color:#e8d4b0;line-height:1.5;">This site uses cookies to improve your experience. By continuing to browse, you agree to our <a href="/politica-de-privacidade.html" style="color:#e8b84b;text-decoration:underline;text-underline-offset:2px;">Privacy Policy</a>.</p><button onclick="document.getElementById('cookie-banner').style.display='none';localStorage.setItem('kifacil_cookies','1');" style="flex-shrink:0;background:#e8b84b;border:none;padding:0.55rem 1.5rem;font-family:'Libre Baskerville',serif;font-size:0.78rem;font-weight:700;color:#1a0f08;cursor:pointer;letter-spacing:0.04em;">Got it</button></div>
 <script>if(!localStorage.getItem('kifacil_cookies'))document.getElementById('cookie-banner').style.display='flex';</script>
 
 <script>

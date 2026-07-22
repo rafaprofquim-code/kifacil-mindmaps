@@ -151,6 +151,7 @@
     .hotspot {
       position: absolute;
       top: var(--top-desktop);
+      left: var(--left-desktop);
       width: 36px;
       height: 36px;
       border-radius: 50%;
@@ -392,7 +393,7 @@
       .modal-pergunta { padding: 2rem 1.2rem 1.5rem; }
       .overlay { padding: 0.4rem; }
       .modal-input { font-size: 1rem; }
-      .hotspot { width: 22px; height: 22px; font-size: 0.65rem; border-width: 1.5px; top: var(--top-mobile, var(--top-desktop)); }
+      .hotspot { width: 22px; height: 22px; font-size: 0.65rem; border-width: 1.5px; top: var(--top-mobile, var(--top-desktop)); left: var(--left-mobile, var(--left-desktop)); }
       .link-aula { top: 6px; right: 6px; padding: 0.3rem 0.5rem; font-size: 0.6rem; }
       .link-aula svg { width: 18px; height: 18px; }
     }
@@ -499,14 +500,14 @@ const ELEMENTOS = [
     explicacao: 'Melting is the change from the solid state to the liquid state. It is an endothermic process — the ice absorbs energy to melt.'
   },
   {
-    id: 3, left: '46%', top: '50%',
+    id: 3, left: '46%', top: '58%',
     pergunta: 'What is the process that forms the droplets on the bottle called?',
     resposta: 'condensation', letras: 12,
     dica: 'Water vapor in the air meets a cold surface and changes state.',
     explicacao: 'Condensation is the change from the gaseous state to the liquid state. Water vapor in the air condenses when it touches the bottle\'s cold surface.'
   },
   {
-    id: 4, left: '58%', top: '19%',
+    id: 4, left: '58%', top: '29%',
     pergunta: 'What is the process that formed the ice crystals on the window called?',
     resposta: 'deposition', letras: 10,
     dica: 'The vapor changed directly into the solid state, without becoming liquid first.',
@@ -520,7 +521,7 @@ const ELEMENTOS = [
     explicacao: 'Evaporation is a slow vaporization that occurs only at the surface of the liquid. It is what makes clothes dry on the clothesline.'
   },
   {
-    id: 6, left: '63%', top: '53%',
+    id: 6, left: '55%', top: '53%', mobileLeft: '63%',
     pergunta: ' This is a:',
     resposta: 'chemical', letras: 8,
     dica: 'The iron reacted with oxygen in the air and formed a new substance.',
@@ -562,7 +563,8 @@ function renderHotspots() {
     btn.className = 'hotspot';
     if (est.status === 'concluido') btn.classList.add('concluido');
     if (est.status === 'revelado')  btn.classList.add('revelado');
-    btn.style.left = el.left;
+    btn.style.setProperty('--left-desktop', el.left);
+    if (el.mobileLeft) btn.style.setProperty('--left-mobile', el.mobileLeft);
     btn.style.setProperty('--top-desktop', el.top);
     if (el.mobileTop) btn.style.setProperty('--top-mobile', el.mobileTop);
     btn.setAttribute('aria-label', `Element ${el.id}`);
