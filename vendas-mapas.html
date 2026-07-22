@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="canonical" href="https://kifaciledu.com.br/vendas-mapas.html">
-<title>Chemistry Fundamentals Collection — 31 Mind Maps, 29 Games & Final Escape Room</title>
+<title>The Book of Chemistry Foundations — 31 Mind Maps, 29 Games & Final Escape Room</title>
 <meta name="description" content="Learn Chemistry through 31 visual Mind Maps, 29 interactive games, and a seven-stage final Escape Room. A digital collection designed to support the study of Chemistry fundamentals.">
 <link rel="icon" type="image/png" href="favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -472,6 +472,31 @@
     line-height: 1.7;
   }
 
+  /* ----------------------- OFERTA · LICENSE CARDS ----------------------- */
+  .secao-oferta { text-align: center; }
+  .grade-planos { margin-top: 3rem; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.6rem; align-items: stretch; }
+  .plano-card {
+    background: var(--creme); border: 1px solid var(--borda-forte); border-radius: 12px;
+    box-shadow: var(--sombra); padding: clamp(1.8rem, 3vw, 2.2rem) 1.8rem 2rem;
+    display: flex; flex-direction: column; text-align: left; position: relative;
+    transition: transform .4s var(--easing), box-shadow .4s var(--easing);
+  }
+  .plano-card:hover { transform: translateY(-6px); }
+  .plano-destaque { border: 1.5px solid var(--dourado-claro); box-shadow: 0 26px 60px rgba(46,32,22,.22); }
+  .plano-selo {
+    position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+    background: linear-gradient(155deg, var(--dourado-pálido), var(--dourado-claro));
+    color: #241708; font-size: .66rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+    padding: .35rem 1rem; border-radius: 20px; box-shadow: 0 6px 16px rgba(168,121,15,.35); white-space: nowrap;
+  }
+  .plano-titulo { font-size: 1.28rem; margin-bottom: .4rem; }
+  .plano-tagline { font-size: .88rem; color: var(--texto-suave); margin-bottom: 1.1rem; }
+  .plano-preco { font-family: var(--serif-display); font-weight: 700; font-size: clamp(1.4rem, 2.4vw, 1.9rem); color: var(--texto); line-height: 1.15; margin-bottom: 1.2rem; }
+  .plano-card .oferta-lista { flex: 1; }
+  .plano-card .btn { width: 100%; justify-content: center; margin-top: auto; }
+  .plano-nota { font-size: .8rem; color: var(--texto-fraco); line-height: 1.6; margin-top: .9rem; }
+  @media (max-width: 900px) { .grade-planos { grid-template-columns: 1fr; } }
+
   /* ----------------------- GARANTIA ----------------------- */
   .secao-garantia { padding: clamp(5rem, 10vw, 7rem) 0; text-align: center; background: var(--pedra); }
   .selo-garantia {
@@ -569,20 +594,20 @@
     <li><a href="#escape-room">Escape Room</a></li>
     <li><a href="#depoimentos">Testimonials</a></li>
     <li><a href="#faq">FAQ</a></li>
-    <li><a href="COLE AQUI O MEU LINK REAL DA HOTMART" class="nav-cta" target="_blank" rel="noopener noreferrer" data-checkout-cta data-cta-location="header">Get Instant Access</a></li>
+    <li><a href="https://pay.hotmart.com/K106836255X?off=7n8knzkf" class="nav-cta" target="_blank" rel="noopener noreferrer" data-checkout-cta data-cta-location="header">Get Instant Access</a></li>
   </ul>
 </header>
 
 <!-- ----------- HERO ----------- -->
 <section class="hero" id="topo">
   <div class="hero-bg-wrap">
-    <img class="bg-foto" src="imagens/torre-quimica.jpg" alt="Professor Rafaela presenting the Chemistry Fundamentals Collection">
+    <img class="bg-foto" src="imagens/torre-quimica.jpg" alt="Professor Rafaela presenting The Book of Chemistry Foundations">
   </div>
   <div class="hero-veu"></div>
   <div class="hero-conteudo">
-    <div class="hero-eyebrow">KiFácil Academy · Chemistry Fundamentals Collection</div>
+    <div class="hero-eyebrow">KiFácil Academy · The Book of Chemistry Foundations</div>
     <h1>Chemistry becomes easier when you can see it, explore it, and interact with it.</h1>
-    <p class="hero-sub">Build a strong Chemistry foundation with 31 visual Mind Maps, practice through 29 interactive games, and complete your journey inside a seven-stage final Escape Room.</p>
+    <p class="hero-sub">The Book of Chemistry Foundations gives you access to a complete learning experience: 31 visual Mind Maps, 29 interactive games, and a seven-stage final Escape Room — with future video lessons and practice exercises planned as free updates.</p>
     <div class="hero-stats">
       <div><div class="hero-stat-num">31</div><div class="hero-stat-label">Visual Mind Maps</div></div>
       <div><div class="hero-stat-num">29</div><div class="hero-stat-label">Interactive Games</div></div>
@@ -590,7 +615,7 @@
       <div><div class="hero-stat-num">∞</div><div class="hero-stat-label">Lifetime Access</div></div>
     </div>
     <div class="hero-botoes">
-      <a href="COLE AQUI O MEU LINK REAL DA HOTMART" class="btn btn-dourado" target="_blank" rel="noopener noreferrer" data-checkout-cta data-cta-location="hero">Get the Complete Collection</a>
+      <a href="https://pay.hotmart.com/K106836255X?off=7n8knzkf" class="btn btn-dourado" target="_blank" rel="noopener noreferrer" data-checkout-cta data-cta-location="hero">Get the Complete Collection</a>
     </div>
   </div>
   <a href="#metodologia" class="hero-scroll" aria-label="Scroll to the next section">
@@ -656,9 +681,9 @@
   <img class="bg-foto" src="imagens/torre-fechada.jpg" alt="Professor Alceu locking the gates of the Chemistry Tower">
   <div class="cena-veu"></div>
   <div class="cena-conteudo">
-    <span class="rotulo revela">The obstacle</span>
-    <h2 class="titulo-secao revela">The Tower is locked. Knowledge is the key.</h2>
-    <p class="texto-corpo revela">Professor Alceu guards the entrance. To move forward, you will need to explore the foundations of Chemistry through the maps, games, and challenges waiting inside the collection.</p>
+    <span class="rotulo revela">The guardian</span>
+    <h2 class="titulo-secao revela">The Tower stays closed. Knowledge is the key.</h2>
+    <p class="texto-corpo revela">Professor Alceu isn't here to stop you — he protects the Tower until a student is ready for it. His guidance is clear: before you can enter, you need to build a solid foundation in Chemistry.</p>
   </div>
 </section>
 
@@ -667,12 +692,12 @@
   <div class="envelope moldura-grade inverte">
     <div class="moldura-media revela revela-dir">
       <div class="moldura-card">
-        <img src="imagens/professora-mapa2.jpg" alt="Professor Rafaela handing over the Chemistry Fundamentals Collection">
+        <img src="imagens/professora-mapa2.jpg" alt="Professor Rafaela handing over The Book of Chemistry Foundations">
       </div>
     </div>
     <div class="revela revela-esq">
       <span class="rotulo">The turning point</span>
-      <h2 class="titulo-secao">Professor Rafaela places the Chemistry Fundamentals Collection in your hands</h2>
+      <h2 class="titulo-secao">Professor Rafaela places The Book of Chemistry Foundations in your hands</h2>
       <p class="texto-corpo">Inside, you will find 31 visual Mind Maps designed to organize the essential foundations of Chemistry, along with 29 interactive games that turn study into exploration.</p>
     </div>
   </div>
@@ -684,7 +709,7 @@
     <span class="rotulo revela">The material</span>
     <h2 class="titulo-secao revela">Thirty-one visual maps. Twenty-nine interactive games. One final journey.</h2>
     <div class="produto-livro revela">
-      <img src="imagens/livro-fundamentos2.png" alt="Cover of the Chemistry Fundamentals Collection">
+      <img src="imagens/livro-fundamentos2.png" alt="Cover of The Book of Chemistry Foundations">
     </div>
     <p class="texto-corpo revela">Each Mind Map helps you see the structure of a Chemistry topic more clearly. The games invite you to apply what you have studied, and the final Escape Room brings the experience together in seven immersive stages.</p>
   </div>
@@ -708,7 +733,7 @@
   <div class="cena-conteudo">
     <span class="rotulo revela">The beginning</span>
     <h2 class="titulo-secao revela">Your journey starts now</h2>
-    <p class="texto-corpo revela">This is no longer about cramming formulas the night before a test. It's about exploring, practicing, and building a stronger foundation, one floor of the Tower at a time.</p>
+    <p class="texto-corpo revela">This is no longer about cramming formulas the night before a test. It's about exploring, practicing, and building a solid foundation with the Book, one map and one game at a time — so that, one day, you're ready to walk through the Tower's gates.</p>
   </div>
 </section>
 
@@ -765,7 +790,7 @@
     <h2 class="titulo-secao revela">Why join now instead of waiting?</h2>
 
     <div class="antecipado-texto">
-      <p class="texto-corpo revela">The Chemistry Fundamentals Collection is only the beginning.</p>
+      <p class="texto-corpo revela">The Book of Chemistry Foundations is only the beginning.</p>
       <p class="texto-corpo revela">Our goal is to continue expanding this project with new learning resources over time.</p>
       <p class="texto-corpo revela">Future updates may include:</p>
       <ul class="oferta-lista revela">
@@ -815,7 +840,7 @@
 
     <div class="pagina-mapa revela">
       <div class="img-frame" style="aspect-ratio:4/3;">
-        <img src="imagens/mapa-preview.png" alt="Example of a mind map from the Chemistry Fundamentals collection">
+        <img src="imagens/mapa-preview.png" alt="Example of a mind map from The Book of Chemistry Foundations">
       </div>
     </div>
     <p class="mapa-legenda revela">Preview of one Mind Map from the collection.</p>
@@ -898,7 +923,7 @@
       </div>
       <div class="cartao-diferencial revela" style="transition-delay:.15s">
         <h3>Immersive Progression</h3>
-        <p>Move through a connected journey inside the Chemistry Tower.</p>
+        <p>Move through a connected journey inside the KiFácil Academy storyline.</p>
       </div>
     </div>
   </div>
@@ -908,9 +933,9 @@
 <section class="secao-depoimentos" id="depoimentos">
   <div class="envelope">
     <span class="rotulo">International Release</span>
-    <h2 class="titulo-secao revela">Be among the first students to enter the Chemistry Tower</h2>
+    <h2 class="titulo-secao revela">Be among the first students to open The Book of Chemistry Foundations</h2>
     <div class="bloco-primeiros-alunos revela">
-      <p class="texto-corpo" style="margin:0 auto;">The English edition of the Chemistry Fundamentals Collection is preparing for its first international students. Verified reviews will be added after learners begin completing the journey.</p>
+      <p class="texto-corpo" style="margin:0 auto;">The English edition of The Book of Chemistry Foundations is preparing for its first international students. Verified reviews will be added after learners begin completing the journey.</p>
     </div>
   </div>
 </section>
@@ -938,8 +963,8 @@
 
     <div class="lista-faq">
       <div class="item-faq revela">
-        <button class="pergunta-faq" aria-expanded="false">What is included in the Chemistry Fundamentals Collection?<span class="sinal"></span></button>
-        <div class="resposta-faq"><p>The collection currently includes 31 Chemistry Mind Maps, 29 interactive games, and a final Escape Room with seven stages.</p></div>
+        <button class="pergunta-faq" aria-expanded="false">What is included in The Book of Chemistry Foundations?<span class="sinal"></span></button>
+        <div class="resposta-faq"><p>The Book of Chemistry Foundations gives you access to 31 Chemistry Mind Maps, 29 interactive games, and a final Escape Room with seven stages.</p></div>
       </div>
       <div class="item-faq revela">
         <button class="pergunta-faq" aria-expanded="false">Are video lessons included?<span class="sinal"></span></button>
@@ -981,27 +1006,77 @@
   </div>
 </section>
 
-<!-- ----------- OFERTA ----------- -->
+<!-- ----------- OFERTA · LICENSES ----------- -->
 <section class="secao-oferta">
   <div class="envelope">
-    <div class="oferta-card revela">
-      <span class="rotulo">Complete Collection</span>
-      <h2 class="titulo-secao">Build a strong Chemistry foundation</h2>
-      <ul class="oferta-lista">
-        <li>31 Chemistry Mind Maps</li>
-        <li>29 Interactive Games</li>
-        <li>7-stage Final Escape Room</li>
-        <li>Lifetime Digital Access</li>
-        <li>Future Collection Updates</li>
-      </ul>
-      <p class="texto-corpo" style="margin:0 0 1.6rem;">Future additions may include video lessons, practice exercises, and new interactive resources.</p>
-      <div class="oferta-preco" id="ofertaPreco"></div>
-      <p class="oferta-preco-info">One-time payment</p>
-      <a href="COLE AQUI O MEU LINK REAL DA HOTMART" class="btn btn-dourado btn-grande" target="_blank" rel="noopener noreferrer" data-checkout-cta data-cta-location="offer">Get the Complete Collection</a>
-      <div class="oferta-notas">
-        <div>Secure checkout processed by Hotmart.</div>
-        <div>7-day refund period, subject to the checkout terms.</div>
+    <span class="rotulo">Choose your license</span>
+    <h2 class="titulo-secao revela">Choose the license that fits your needs</h2>
+    <p class="texto-corpo revela" style="margin-left:auto;margin-right:auto;">The content is the same in every edition. Choose the license according to how the collection will be used.</p>
+
+    <div class="grade-planos">
+
+      <!-- CARD 1: STUDENT LICENSE (highlighted / most popular) -->
+      <div class="plano-card plano-destaque revela" style="transition-delay:.03s">
+        <span class="plano-selo">Most Popular</span>
+        <h3 class="plano-titulo">Student License</h3>
+        <p class="plano-tagline">For one student using the collection for personal study.</p>
+        <div class="plano-preco">US$59.99</div>
+        <ul class="oferta-lista">
+          <li>Access for one individual student</li>
+          <li>Personal educational use</li>
+          <li>31 Chemistry Mind Maps</li>
+          <li>29 Interactive Games</li>
+          <li>7-stage Final Escape Room</li>
+          <li>Lifetime Digital Access</li>
+          <li>Future Collection Updates</li>
+        </ul>
+        <!-- Student License checkout -->
+        <a href="https://pay.hotmart.com/K106836255X?off=7n8knzkf" class="btn btn-dourado" target="_blank" rel="noopener noreferrer" data-pricing-cta data-cta-location="pricing-student">Get the Student License</a>
       </div>
+
+      <!-- CARD 2: EDUCATOR LICENSE -->
+      <div class="plano-card revela" style="transition-delay:.09s">
+        <h3 class="plano-titulo">Educator License</h3>
+        <p class="plano-tagline">For one teacher using the collection with their own classes.</p>
+        <div class="plano-preco">US$EDUCATOR_PRICE</div>
+        <ul class="oferta-lista">
+          <li>Access for one individual educator</li>
+          <li>Permission to present the Mind Maps during lessons</li>
+          <li>Permission to use the interactive games with the educator's own classes</li>
+          <li>Permission to use the Escape Room as a classroom activity</li>
+          <li>Lifetime Digital Access</li>
+          <li>Future Collection Updates</li>
+        </ul>
+        <!-- Educator License checkout -->
+        <a href="https://pay.hotmart.com/K106836255X?off=0yf9in4w" class="btn btn-dourado" target="_blank" rel="noopener noreferrer" data-pricing-cta data-cta-location="pricing-educator">Get the Educator License</a>
+        <p class="plano-nota">For use by one educator. This license may not be shared between multiple teachers or institutions.</p>
+      </div>
+
+      <!-- CARD 3: SCHOOL LICENSE -->
+      <div class="plano-card revela" style="transition-delay:.15s">
+        <h3 class="plano-titulo">School License</h3>
+        <p class="plano-tagline">For use by multiple educators within one school.</p>
+        <div class="plano-preco">US$SCHOOL_PRICE</div>
+        <ul class="oferta-lista">
+          <li>Institutional use within one school</li>
+          <li>Access for the school's authorized educators</li>
+          <li>Permission to present the Mind Maps in classes</li>
+          <li>Permission to use the games and Escape Room with students</li>
+          <li>Lifetime Digital Access</li>
+          <li>Future Collection Updates</li>
+        </ul>
+        <!-- School License checkout -->
+        <a href="https://pay.hotmart.com/K106836255X?off=0ifuevpn" class="btn btn-dourado" target="_blank" rel="noopener noreferrer" data-pricing-cta data-cta-location="pricing-school">Get the School License</a>
+        <p class="plano-nota">Valid for one school or educational institution. Redistribution, resale, and sharing outside the licensed institution are not permitted.</p>
+      </div>
+
+    </div>
+
+    <div class="oferta-notas">
+      <div>One-time payment.</div>
+      <div>Secure checkout processed by Hotmart.</div>
+      <div>7-day refund period, subject to the checkout terms.</div>
+      <div style="margin-top:.6rem;">Please choose the correct license before completing your purchase. Licenses are based on how the collection will be used, not on differences in content.</div>
     </div>
   </div>
 </section>
@@ -1015,7 +1090,7 @@
     <h2 class="titulo-secao revela">The Chemistry Tower is waiting.</h2>
     <p class="texto-corpo revela">Explore 31 visual Mind Maps, practice through 29 interactive games, and complete the final seven-stage Escape Room.</p>
     <div class="revela">
-      <a href="COLE AQUI O MEU LINK REAL DA HOTMART" class="btn btn-dourado btn-grande" style="margin-top:1.6rem;" target="_blank" rel="noopener noreferrer" data-checkout-cta data-cta-location="final">Get the Complete Collection</a>
+      <a href="https://pay.hotmart.com/K106836255X?off=7n8knzkf" class="btn btn-dourado btn-grande" style="margin-top:1.6rem;" target="_blank" rel="noopener noreferrer" data-checkout-cta data-cta-location="final">Get the Complete Collection</a>
     </div>
   </div>
 </section>
@@ -1026,7 +1101,7 @@
     <div class="rodape-grade">
       <div>
         <div class="rodape-marca">KiFácil</div>
-        <p>The Chemistry Fundamentals Collection turns studying into a visual, interactive journey, with Mind Maps, games, and a final Escape Room.</p>
+        <p>The Book of Chemistry Foundations turns studying into a visual, interactive journey, with Mind Maps, games, and a final Escape Room.</p>
       </div>
       <div>
         <h4>Explore</h4>
@@ -1041,7 +1116,7 @@
         <h4>Academy</h4>
         <ul>
           <li><a href="index.html">Back to KiFácil Academy</a></li>
-          <li><a href="COLE AQUI O MEU LINK REAL DA HOTMART" target="_blank" rel="noopener noreferrer" data-checkout-cta data-cta-location="footer">Get the Complete Collection</a></li>
+          <li><a href="https://pay.hotmart.com/K106836255X?off=7n8knzkf" target="_blank" rel="noopener noreferrer" data-checkout-cta data-cta-location="footer">Get the Complete Collection</a></li>
           <li><a href="/politica-de-privacidade.html">Privacy Policy</a></li>
         </ul>
       </div>
@@ -1057,8 +1132,11 @@
 <script>if(!localStorage.getItem('kifacil_cookies'))document.getElementById('cookie-banner').style.display='flex';</script>
 
 <script>
-const HOTMART_CHECKOUT_URL = "COLE AQUI O MEU LINK REAL DA HOTMART";
-const PRODUCT_PRICE = "US$59.99";
+// Default checkout link used by the generic "Get the Complete Collection"
+// buttons across the page (header, hero, final CTA, footer) — these always
+// point to the Student License. The three license cards in the pricing
+// section below have their own specific links and are not affected by this.
+const HOTMART_CHECKOUT_URL = "https://pay.hotmart.com/K106836255X?off=7n8knzkf";
 
 (function () {
   var reduzMovimento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -1071,10 +1149,14 @@ const PRODUCT_PRICE = "US$59.99";
     });
   });
 
-  var ofertaPreco = document.getElementById('ofertaPreco');
-  if (ofertaPreco) {
-    ofertaPreco.textContent = PRODUCT_PRICE;
-  }
+  // Pricing section license cards: hrefs are already set per-card in the HTML
+  // (Student / Educator / School), so we only attach click tracking here.
+  document.querySelectorAll('[data-pricing-cta]').forEach(function (cta) {
+    cta.addEventListener('click', function () {
+      var location = cta.getAttribute('data-cta-location') || 'unknown';
+      console.log('Hotmart CTA clicked:', location);
+    });
+  });
 
   /* Nav: fundo de vidro ao rolar */
   var nav = document.getElementById('nav');
