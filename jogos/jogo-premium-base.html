@@ -1,10 +1,10 @@
-﻿<!DOCTYPE html>
-<html lang="pt-BR">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex, nofollow">
-  <title>Bases ou Hidróxidos — Premium Game | KiFácil</title>
+  <title>Bases or Hydroxides — Premium Game | KiFácil</title>
   <link rel="icon" type="image/png" href="/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -402,30 +402,30 @@
 </nav>
 
 <main>
-  <h1 class="titulo-jogo">Bases ou Hidróxidos</h1>
-  <p class="subtitulo">Discover o que acontece quando uma base é dissolvida em água — antes de decorar qualquer definição.</p>
+  <h1 class="titulo-jogo">Bases or Hydroxides</h1>
+  <p class="subtitulo">Discover what happens when a base is dissolved in water — before memorizing any definition.</p>
 
   <div class="narrador">
-    <img src="../imagens/rafa-sorrindo.jpg" alt="Professora Rafaela" />
+    <img src="../imagens/rafa-sorrindo.jpg" alt="Teacher Rafaela" />
     <div style="flex: 1;">
-      <div class="narrador-nome">Professora Rafaela</div>
-      <div class="narrador-texto" id="narradorTexto">Vamos começar.</div>
+      <div class="narrador-nome">Teacher Rafaela</div>
+      <div class="narrador-texto" id="narradorTexto">Let's get started.</div>
       <div id="continuarBalao"></div>
     </div>
   </div>
 
   <div class="imagem-wrapper" id="imagemWrapper">
-    <img src="../imagens/patio-dos-alcalis.jpg" alt="Pátio dos Álcalis" class="cena-fundo" />
+    <img src="../imagens/patio-dos-alcalis.jpg" alt="Alkali Courtyard" class="cena-fundo" />
     <div class="overlay-animacao" id="overlayAnimacao"></div>
 </div>
 
   <div id="painelInteracao"></div>
 
   <div class="conclusao" id="conclusao">
-    <div class="conclusao-titulo">Estudo concluído</div>
+    <div class="conclusao-titulo">Study Complete</div>
     <div class="conclusao-placar" id="conclusaoPlacar"></div>
     <p class="conclusao-mensagem" id="conclusaoMensagem"></p>
-    <button class="btn-reiniciar" onclick="reiniciar()">Jogar novamente</button>
+    <button class="btn-reiniciar" onclick="reiniciar()">Play Again</button>
   </div>
 </main>
 
@@ -433,7 +433,7 @@
 
 <script>
 /* ==========================================================
-   REFERÊNCIAS DOM
+   DOM REFERENCES
    ========================================================== */
 const overlay = document.getElementById('overlayAnimacao');
 const painel  = document.getElementById('painelInteracao');
@@ -454,21 +454,21 @@ function agendar(fn, ms) { const id = setTimeout(fn, ms); timersAtivos.push(id);
 function limparTimers() { timersAtivos.forEach(clearTimeout); timersAtivos = []; }
 
 /* ==========================================================
-   DADOS: FÓRMULAS E NOMENCLATURA
+   DATA: FORMULAS AND NOMENCLATURE
    ========================================================== */
 const FORMULAS_BASE = {
   NaOH: 'NaOH', KOH: 'KOH', NH4OH: 'NH₄OH',
   'Fe(OH)3': 'Fe(OH)₃', 'Fe(OH)2': 'Fe(OH)₂'
 };
 const NOMENCLATURA_BASE = {
-  NaOH: ['HIDRÓXIDO', 'DE', 'SÓDIO'],
-  KOH: ['HIDRÓXIDO', 'DE', 'POTÁSSIO'],
-  'Fe(OH)3': ['HIDRÓXIDO', 'FÉRR', 'ICO'],
-  'Fe(OH)2': ['HIDRÓXIDO', 'FERR', 'OSO']
+  NaOH: ['SODIUM', 'HYDROXIDE'],
+  KOH: ['POTASSIUM', 'HYDROXIDE'],
+  'Fe(OH)3': ['FERR', 'IC', 'HYDROXIDE'],
+  'Fe(OH)2': ['FERR', 'OUS', 'HYDROXIDE']
 };
 
 /* ==========================================================
-   COMPONENTE: CIRCUITO ELÉTRICO / LÂMPADA
+   COMPONENT: ELECTRIC CIRCUIT / LIGHT BULB
    ========================================================== */
 function criarCircuito(id) {
   const div = document.createElement('div');
@@ -487,7 +487,7 @@ function criarCircuito(id) {
     '<line x1="100" y1="30" x2="100" y2="26" stroke="#3d2e1a" stroke-width="2"/>' +
     '<g id="ions-' + id + '"></g>' +
     '</svg>' +
-    '<div class="frasco-rotulo">Circuito de teste</div>';
+    '<div class="frasco-rotulo">Test circuit</div>';
   return div;
 }
 function definirIntensidadeLampada(id, intensidade) {
@@ -513,7 +513,7 @@ function animarIonsCircuito(id) {
 }
 
 /* ==========================================================
-   COMPONENTE: MEDIDOR DE GRAU DE DISSOCIAÇÃO
+   COMPONENT: DEGREE OF DISSOCIATION METER
    ========================================================== */
 function criarMedidorDissociacao(id) {
   const div = document.createElement('div');
@@ -526,7 +526,7 @@ function criarMedidorDissociacao(id) {
     '<div class="medidor-zona zona-forte" style="width:50%"></div>' +
     '<div class="medidor-marcador" id="marcador-' + id + '" style="left:0%"></div>' +
     '</div>' +
-    '<div class="medidor-legendas"><span>Fraca</span><span>Moderada</span><span>Forte</span></div>' +
+    '<div class="medidor-legendas"><span>Weak</span><span>Moderate</span><span>Strong</span></div>' +
     '<div class="medidor-classificacao" id="classificacao-' + id + '"></div>';
   return div;
 }
@@ -534,12 +534,12 @@ function atualizarMedidorDissociacao(id, pct) {
   const marcador = document.getElementById('marcador-' + id);
   const classif = document.getElementById('classificacao-' + id);
   if (marcador) marcador.style.left = Math.max(0, Math.min(100, pct)) + '%';
-  const texto = pct < 5 ? 'BASE FRACA' : (pct <= 50 ? 'BASE MODERADA' : 'BASE FORTE');
+  const texto = pct < 5 ? 'WEAK BASE' : (pct <= 50 ? 'MODERATE BASE' : 'STRONG BASE');
   if (classif) classif.textContent = texto + ' (α = ' + pct + '%)';
 }
 
 /* ==========================================================
-   HELPERS DE INTERAÇÃO
+   INTERACTION HELPERS
    ========================================================== */
 function botaoContinuar(delayMs) {
   delayMs = delayMs || 0;
@@ -547,7 +547,7 @@ function botaoContinuar(delayMs) {
   continuarBalao.innerHTML = '';
   const btn = document.createElement('button');
   btn.className = 'btn-continuar';
-  btn.textContent = 'Continuar →';
+  btn.textContent = 'Continue →';
   btn.disabled = delayMs > 0;
   continuarBalao.appendChild(btn);
   if (delayMs > 0) agendar(function () { btn.disabled = false; }, delayMs);
@@ -561,7 +561,7 @@ function botaoContinuarLocal(handler, delayMs) {
   continuarBalao.innerHTML = '';
   const btn = document.createElement('button');
   btn.className = 'btn-continuar';
-  btn.textContent = 'Continuar →';
+  btn.textContent = 'Continue →';
   btn.disabled = delayMs > 0;
   continuarBalao.appendChild(btn);
   if (delayMs > 0) agendar(function () { btn.disabled = false; }, delayMs);
@@ -596,7 +596,7 @@ function escolhaBotoes(opts) {
         Array.from(opcoesLinha.children).forEach(function (b) { b.disabled = true; });
         btn.classList.add('opcao-certa');
         feedback.className = 'modal-feedback visivel';
-        feedback.innerHTML = '<span class="feedback-certo">Correto!</span><p class="feedback-explicacao">' + opts.explicacao + '</p>';
+        feedback.innerHTML = '<span class="feedback-certo">Correct!</span><p class="feedback-explicacao">' + opts.explicacao + '</p>';
         opts.aoAcertar();
       } else {
         tentativas++;
@@ -611,7 +611,7 @@ function escolhaBotoes(opts) {
             if (opts.opcoes[i].correta) b.classList.add('opcao-certa');
           });
           feedback.className = 'modal-feedback visivel';
-          feedback.innerHTML = '<span class="feedback-resposta">Resposta correta destacada.</span><p class="feedback-explicacao">' + opts.explicacao + '</p>';
+          feedback.innerHTML = '<span class="feedback-resposta">The correct answer is highlighted.</span><p class="feedback-explicacao">' + opts.explicacao + '</p>';
           opts.aoAcertar();
         }
       }
@@ -621,7 +621,7 @@ function escolhaBotoes(opts) {
 }
 
 /* ==========================================================
-   CLASSIFICAÇÃO POR CATEGORIA (base → solubilidade)
+   CATEGORY CLASSIFICATION (base → solubility)
    ========================================================== */
 function criarClassificacaoPorCategoria(itens, categorias, mensagemErro, mensagemSucesso) {
   const container = document.createElement('div');
@@ -658,7 +658,7 @@ function criarClassificacaoPorCategoria(itens, categorias, mensagemErro, mensage
     el.addEventListener('click', function () {
       if (el.classList.contains('associado')) return;
       if (!categoriaAtiva) {
-        fala('Primeiro escolha uma categoria à esquerda.');
+        fala('First choose a category on the left.');
         return;
       }
       if (it.categoria === categoriaAtiva) {
@@ -678,14 +678,14 @@ function criarClassificacaoPorCategoria(itens, categorias, mensagemErro, mensage
 }
 
 /* ==========================================================
-   MONTAGEM DE NOME POR BLOCOS (clique/toque)
+   NAME BUILDING BY BLOCKS (click/tap)
    ========================================================== */
 function montarNomePorBlocosBase(chave, aoConcluir) {
   painel.innerHTML = '';
   const wrap = document.createElement('div');
   wrap.className = 'interacao-painel';
   wrap.innerHTML =
-    '<div class="interacao-pergunta-texto">Monte o nome clicando nos blocos, na ordem correta.</div>' +
+    '<div class="interacao-pergunta-texto">Build the name by clicking the blocks, in the correct order.</div>' +
     '<div class="formula-alvo">' + FORMULAS_BASE[chave] + '</div>' +
     '<div class="montagem-nome" id="montagemNome"></div>' +
     '<div class="blocos-disponiveis" id="blocosDisponiveis"></div>' +
@@ -717,7 +717,7 @@ function montarNomePorBlocosBase(chave, aoConcluir) {
         progresso++;
         if (progresso === sequenciaCorreta.length) {
           fb.className = 'modal-feedback visivel';
-          fb.innerHTML = '<span class="feedback-certo">Correto!</span><p class="feedback-explicacao">' + FORMULAS_BASE[chave] + ' → ' + sequenciaCorreta.join('').toLowerCase() + '</p>';
+          fb.innerHTML = '<span class="feedback-certo">Correct!</span><p class="feedback-explicacao">' + FORMULAS_BASE[chave] + ' → ' + sequenciaCorreta.join(' ').toLowerCase() + '</p>';
           Array.from(blocosEl.children).forEach(function (b) { b.disabled = true; });
           aoConcluir();
         }
@@ -725,7 +725,7 @@ function montarNomePorBlocosBase(chave, aoConcluir) {
         chip.classList.add('erro-flash');
         setTimeout(function () { chip.classList.remove('erro-flash'); }, 500);
         fb.className = 'modal-feedback visivel';
-        fb.innerHTML = '<span class="feedback-errado">Observe o elemento e o NOX indicado.</span>';
+        fb.innerHTML = '<span class="feedback-errado">Look at the element and the oxidation number shown.</span>';
       }
     });
     blocosEl.appendChild(chip);
@@ -733,30 +733,30 @@ function montarNomePorBlocosBase(chave, aoConcluir) {
 }
 
 /* ==========================================================
-   INTRODUÇÃO
+   INTRODUCTION
    ========================================================== */
 function passoIntro() {
-  fala('Na última fase vimos que os ácidos produzem H₃O⁺. Agora vamos descobrir o comportamento das bases.');
+  fala('In the last stage, we saw that acids produce H₃O⁺. Now let\'s discover how bases behave.');
   painel.innerHTML = '';
   const wrap = document.createElement('div');
   wrap.className = 'interacao-painel';
   const btn = document.createElement('button');
   btn.className = 'btn-continuar';
-  btn.textContent = 'INICIAR INVESTIGAÇÃO';
+  btn.textContent = 'START INVESTIGATION';
   wrap.appendChild(btn);
   painel.appendChild(wrap);
   btn.addEventListener('click', avancar);
 }
 
 /* ==========================================================
-   ETAPA 1 — DISSOCIAÇÃO
+   STAGE 1 — DISSOCIATION
    ========================================================== */
 function passoDissociacao() {
-  fala('Vamos dissolver hidróxido de sódio (NaOH) em água.');
+  fala('Let\'s dissolve sodium hydroxide (NaOH) in water.');
   const naoh = document.createElement('div');
   naoh.className = 'cartao-formula-simples';
   naoh.style.position = 'absolute'; naoh.style.left = '50%'; naoh.style.top = '50%'; naoh.style.transform = 'translate(-50%,-50%)';
-  naoh.textContent = 'NaOH (sólido)';
+  naoh.textContent = 'NaOH (solid)';
   overlay.appendChild(naoh);
 
   painel.innerHTML = '';
@@ -764,7 +764,7 @@ function passoDissociacao() {
   wrap.className = 'interacao-painel';
   const btn = document.createElement('button');
   btn.className = 'btn-continuar';
-  btn.textContent = 'DISSOLVER EM ÁGUA';
+  btn.textContent = 'DISSOLVE IN WATER';
   wrap.appendChild(btn);
   painel.appendChild(wrap);
 
@@ -782,43 +782,43 @@ function passoDissociacao() {
     overlay.appendChild(linha);
     const placa = document.createElement('div');
     placa.className = 'placa-dourada';
-    placa.textContent = 'NaOH → Na⁺ + OH⁻ (dissociação)';
+    placa.textContent = 'NaOH → Na⁺ + OH⁻ (dissociation)';
     overlay.appendChild(placa);
-    fala('As bases sofrem DISSOCIAÇÃO — os íons Na⁺ e OH⁻ já existiam prontos dentro do sólido, só foram separados pela água. Isso é diferente da ionização dos ácidos, em que os íons são formados na hora.');
+    fala('Bases undergo DISSOCIATION — the Na⁺ and OH⁻ ions already existed ready-made inside the solid; they were simply separated by the water. This is different from the ionization of acids, in which the ions are formed on the spot.');
     painel.innerHTML = '';
     botaoContinuar(600);
   });
 }
 
 /* ==========================================================
-   ETAPA 2 — CONDUÇÃO DE ELETRICIDADE
+   STAGE 2 — ELECTRICAL CONDUCTION
    ========================================================== */
 function passoConducao() {
-  fala('Vamos testar se a água pura conduz corrente elétrica.');
+  fala('Let\'s test whether pure water conducts electric current.');
   const circuito = criarCircuito('circ-base');
   overlay.appendChild(circuito);
 
   painel.innerHTML = '';
   const wrap = document.createElement('div');
   wrap.className = 'interacao-painel';
-  wrap.innerHTML = '<div class="interacao-pergunta-texto">Teste a água pura.</div>';
+  wrap.innerHTML = '<div class="interacao-pergunta-texto">Test the pure water.</div>';
   const btnTestar = document.createElement('button');
   btnTestar.className = 'btn-continuar';
-  btnTestar.textContent = 'TESTAR';
+  btnTestar.textContent = 'TEST';
   wrap.appendChild(btnTestar);
   painel.appendChild(wrap);
 
   btnTestar.addEventListener('click', function () {
     btnTestar.disabled = true;
     definirIntensidadeLampada('circ-base', 0.1);
-    fala('A lâmpada quase não acende: a água pura tem pouquíssimos íons.');
+    fala('The bulb barely lights up: pure water has very few ions.');
     botaoContinuarLocal(passoConducaoB, 700);
   });
 }
 function passoConducaoB() {
   const wrap = document.createElement('div');
   wrap.className = 'interacao-painel';
-  wrap.innerHTML = '<div class="interacao-pergunta-texto">Agora adicione o NaOH.</div>';
+  wrap.innerHTML = '<div class="interacao-pergunta-texto">Now add the NaOH.</div>';
   const btnAdd = document.createElement('button');
   btnAdd.className = 'btn-continuar';
   btnAdd.textContent = 'Add NaOH';
@@ -831,7 +831,7 @@ function passoConducaoB() {
     animarIonsCircuito('circ-base');
     definirIntensidadeLampada('circ-base', 1);
     tocarBrilho();
-    fala('Olha só a lâmpada acender! O NaOH libera Na⁺ e OH⁻ na água, e são esses íons que carregam a corrente elétrica.');
+    fala('Look at the bulb light up! NaOH releases Na⁺ and OH⁻ into the water, and it\'s these ions that carry the electric current.');
     const placa = document.createElement('div');
     placa.className = 'placa-dourada';
     placa.textContent = 'NaOH → Na⁺ + OH⁻';
@@ -842,10 +842,10 @@ function passoConducaoB() {
 }
 
 /* ==========================================================
-   ETAPA 3 — GRAU DE DISSOCIAÇÃO (α)
+   STAGE 3 — DEGREE OF DISSOCIATION (α)
    ========================================================== */
 function passoGrauDissociacao() {
-  fala('Vamos observar três bases diferentes se dissolvendo em água.');
+  fala('Let\'s observe three different bases dissolving in water.');
   const dados = [
     { id: 'A', nome: 'Base A', dissociadas: 3 },
     { id: 'B', nome: 'Base B', dissociadas: 10 },
@@ -861,7 +861,7 @@ function passoGrauDissociacao() {
     col.innerHTML =
       '<div class="recipiente-titulo">' + d.nome + '</div>' +
       '<div class="recipiente-particulas" id="part-' + d.id + '"></div>' +
-      '<div class="recipiente-contador" id="cont-' + d.id + '">Unidades dissolvidas: 20<br>Unidades dissociadas: 0</div>';
+      '<div class="recipiente-contador" id="cont-' + d.id + '">Units dissolved: 20<br>Units dissociated: 0</div>';
     linha.appendChild(col);
     const partContainer = col.querySelector('#part-' + d.id);
     for (let i = 0; i < 20; i++) {
@@ -874,10 +874,10 @@ function passoGrauDissociacao() {
   painel.innerHTML = '';
   const wrap = document.createElement('div');
   wrap.className = 'interacao-painel';
-  wrap.innerHTML = '<div class="interacao-pergunta-texto">Observe a dissociação em cada recipiente.</div>';
+  wrap.innerHTML = '<div class="interacao-pergunta-texto">Observe the dissociation in each container.</div>';
   const btn = document.createElement('button');
   btn.className = 'btn-continuar';
-  btn.textContent = 'OBSERVAR A DISSOCIAÇÃO';
+  btn.textContent = 'OBSERVE THE DISSOCIATION';
   wrap.appendChild(btn);
   painel.appendChild(wrap);
 
@@ -887,27 +887,27 @@ function passoGrauDissociacao() {
       const partContainer = document.getElementById('part-' + d.id);
       const particulas = Array.from(partContainer.children).sort(function () { return Math.random() - 0.5; });
       for (let i = 0; i < d.dissociadas; i++) particulas[i].classList.add('particula-ionizada');
-      document.getElementById('cont-' + d.id).innerHTML = 'Unidades dissolvidas: 20<br>Unidades dissociadas: ' + d.dissociadas;
+      document.getElementById('cont-' + d.id).innerHTML = 'Units dissolved: 20<br>Units dissociated: ' + d.dissociadas;
     });
     escolhaBotoes({
-      pergunta: 'Em qual solução ocorreu maior dissociação?',
+      pergunta: 'In which solution did the greatest dissociation occur?',
       opcoes: [
         { rotulo: 'Base A', correta: false },
         { rotulo: 'Base B', correta: false },
         { rotulo: 'Base C', correta: true }
       ],
-      dica: 'Conte quantas unidades realmente se dissociaram em cada recipiente.',
-      explicacao: 'A Base C teve quase todas as unidades dissociadas — maior grau de dissociação (α = unidades dissociadas ÷ unidades dissolvidas).',
+      dica: 'Count how many units actually dissociated in each container.',
+      explicacao: 'Base C had almost all of its units dissociated — the highest degree of dissociation (α = units dissociated ÷ units dissolved).',
       aoAcertar: function () {
         agendar(function () {
           const medidor = criarMedidorDissociacao('med-diss');
           overlay.appendChild(medidor);
           const painelCalculo = document.createElement('div');
           painelCalculo.className = 'painel-calculo';
-          painelCalculo.innerHTML = '<div class="linha-calculo">α = 18 ÷ 20</div><div class="linha-calculo linha-calculo-final">α = 90% — base forte</div>';
+          painelCalculo.innerHTML = '<div class="linha-calculo">α = 18 ÷ 20</div><div class="linha-calculo linha-calculo-final">α = 90% — strong base</div>';
           overlay.insertBefore(painelCalculo, linha);
           atualizarMedidorDissociacao('med-diss', 90);
-          fala('Quanto maior a proporção de unidades dissociadas, maior o grau de dissociação. Como 90% é maior que 50%, a Base C é forte. Nem toda base tem o mesmo grau de dissociação!');
+          fala('The higher the proportion of dissociated units, the higher the degree of dissociation. Since 90% is greater than 50%, Base C is strong. Not every base has the same degree of dissociation!');
           painel.innerHTML = '';
           botaoContinuar(600);
         }, 300);
@@ -917,27 +917,27 @@ function passoGrauDissociacao() {
 }
 
 /* ==========================================================
-   ETAPA 4 — SOLUBILIDADE
+   STAGE 4 — SOLUBILITY
    ========================================================== */
 function passoSolubilidade() {
-  fala('Associe cada base à sua solubilidade em água.');
+  fala('Match each base to its solubility in water.');
   criarClassificacaoPorCategoria([
-    { rotulo: 'NaOH', categoria: 'Muito solúvel' },
-    { rotulo: 'KOH', categoria: 'Muito solúvel' },
-    { rotulo: 'NH₄OH', categoria: 'Muito solúvel' },
-    { rotulo: 'Ca(OH)₂', categoria: 'Pouco solúvel' },
-    { rotulo: 'Fe(OH)₃', categoria: 'Praticamente insolúvel' },
-    { rotulo: 'Al(OH)₃', categoria: 'Praticamente insolúvel' }
-  ], ['Muito solúvel', 'Pouco solúvel', 'Praticamente insolúvel'],
-  'Lembre-se: hidróxidos de metais alcalinos e o hidróxido de amônio são muito solúveis; os de metais alcalinoterrosos são pouco solúveis; os demais são praticamente insolúveis.',
-  'Muito bem! Nem todas as bases apresentam a mesma solubilidade.');
+    { rotulo: 'NaOH', categoria: 'Highly soluble' },
+    { rotulo: 'KOH', categoria: 'Highly soluble' },
+    { rotulo: 'NH₄OH', categoria: 'Highly soluble' },
+    { rotulo: 'Ca(OH)₂', categoria: 'Slightly soluble' },
+    { rotulo: 'Fe(OH)₃', categoria: 'Practically insoluble' },
+    { rotulo: 'Al(OH)₃', categoria: 'Practically insoluble' }
+  ], ['Highly soluble', 'Slightly soluble', 'Practically insoluble'],
+  'Remember: hydroxides of alkali metals and ammonium hydroxide are highly soluble; those of alkaline earth metals are slightly soluble; the rest are practically insoluble.',
+  'Well done! Not all bases have the same solubility.');
 }
 
 /* ==========================================================
-   ETAPA 5 — NOMENCLATURA
+   STAGE 5 — NOMENCLATURE
    ========================================================== */
 function passoNomenclatura() {
-  fala('Agora vamos nomear as bases. Quando o elemento forma apenas uma base, o nome é "hidróxido de + nome do elemento".');
+  fala('Now let\'s name the bases. When the element forms only one base, the name is "[element] + hydroxide."');
   montarNomePorBlocosBase('NaOH', function () {
     agendar(function () { botaoContinuar(400); }, 300);
   });
@@ -948,13 +948,13 @@ function passoNomenclaturaKOH() {
   });
 }
 function passoNomenclaturaFerro() {
-  fala('O ferro forma duas bases diferentes. Quando isso acontece, usamos ÉRICO para o maior NOX e OSO para o menor. Monte o nome do Fe(OH)₃ primeiro.');
+  fala('Iron forms two different bases. When this happens, we use -IC for the higher oxidation state and -OUS for the lower one. Build the name of Fe(OH)₃ first.');
   montarNomePorBlocosBase('Fe(OH)3', function () {
     agendar(function () { botaoContinuarLocal(passoNomenclaturaFerroso, 400); }, 300);
   });
 }
 function passoNomenclaturaFerroso() {
-  fala('Agora monte o nome do Fe(OH)₂ — o ferro com NOX menor.');
+  fala('Now build the name of Fe(OH)₂ — iron with the lower oxidation state.');
   montarNomePorBlocosBase('Fe(OH)2', function () {
     agendar(function () { botaoContinuar(400); }, 300);
   });
@@ -964,27 +964,27 @@ function passoNomenclaturaFerroso() {
    FINAL
    ========================================================== */
 function passoFinal() {
-  fala('Excelente. Agora você consegue compreender o comportamento das bases em solução aquosa.');
+  fala('Excellent. Now you understand how bases behave in aqueous solution.');
   function linha(txt) { return '<div class="resumo-linha">' + txt + '</div>'; }
   overlay.innerHTML =
     '<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:12px;">' +
     '<div class="quadro-resumo-final">' +
-    linha('Bases em água sofrem dissociação, liberando OH⁻.') +
-    linha('Os íons produzidos conduzem corrente elétrica.') +
-    linha('Diferentes bases apresentam diferentes graus de dissociação (α).') +
-    linha('Bases têm solubilidades diferentes em água.') +
-    linha('Cada base segue regras próprias de nomenclatura.') +
+    linha('Bases dissociate in water, releasing OH⁻.') +
+    linha('The ions produced conduct electric current.') +
+    linha('Different bases have different degrees of dissociation (α).') +
+    linha('Bases have different solubilities in water.') +
+    linha('Each base follows its own nomenclature rules.') +
     '</div></div>';
   painel.innerHTML = '';
   const conclusao = document.getElementById('conclusao');
-  document.getElementById('conclusaoPlacar').textContent = 'Fase concluída';
-  document.getElementById('conclusaoMensagem').textContent = 'Você investigou as bases: como sofrem dissociação, como conduzem corrente elétrica, o que é grau de dissociação, solubilidade e como nomear hidróxidos.';
+  document.getElementById('conclusaoPlacar').textContent = 'Stage Complete';
+  document.getElementById('conclusaoMensagem').textContent = 'You investigated bases: how they dissociate, how they conduct electric current, what degree of dissociation is, solubility, and how to name hydroxides.';
   conclusao.classList.add('visivel');
   conclusao.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 /* ==========================================================
-   MOTOR DA FASE
+   STAGE ENGINE
    ========================================================== */
 const PASSOS = [
   passoIntro, passoDissociacao, passoConducao, passoGrauDissociacao, passoSolubilidade,
@@ -1090,6 +1090,3 @@ function ajustarVolume(valorSlider) {
 </div>
 </body>
 </html>
-
-
-
