@@ -626,7 +626,7 @@
 
   <div class="imagem-wrapper">
     <img src="../imagens/laboratorio-isotopos.jpg" alt="Isotope laboratory in the early twentieth century" id="imagemJogo">
-    <button class="btn-iniciar-exp" id="btnIniciar" onclick="abrirEtapa1()">⚗ Enter the laboratory</button>
+    <button class="btn-iniciar-exp" id="btnIniciar" onclick="entrarLaboratorio()">⚗ Enter the laboratory</button>
 </div>
 </main>
 
@@ -662,7 +662,16 @@ const IMG = {
 
 function setNarr(html) { document.getElementById('narr').innerHTML = html; }
 function openOverlay() { document.getElementById('overlay').classList.add('show'); }
-function closeOverlay() { document.getElementById('overlay').classList.remove('show'); }
+function closeOverlay() {
+  document.getElementById('overlay').classList.remove('show');
+  // Safety net: closing the modal early (× button or clicking the backdrop)
+  // must not strand the player — bring the entry button back if the lab
+  // isn't finished yet, so they can reopen right where they left off.
+  const btnIniciar = document.getElementById('btnIniciar');
+  if (btnIniciar && btnIniciar.classList.contains('oculto') && document.getElementById('mainScreen').style.display !== 'none') {
+    btnIniciar.classList.remove('oculto');
+  }
+}
 document.getElementById('overlay').addEventListener('click', function (e) { if (e.target === this) closeOverlay(); });
 
 function tocarDing() {
@@ -735,6 +744,19 @@ const ATOMOS_H = [
   { id: 'h3', nome: 'Hydrogen-3', protons: 1, neutrons: 2 }
 ];
 const revelado1 = { h1: false, h2: false, h3: false };
+
+let laboratorioAberto = false;
+function entrarLaboratorio() {
+  document.getElementById('btnIniciar').classList.add('oculto');
+  if (laboratorioAberto) {
+    // Already entered before — just reopen the modal instead of rebuilding
+    // stage 1, so the player's progress is preserved.
+    openOverlay();
+  } else {
+    laboratorioAberto = true;
+    abrirEtapa1();
+  }
+}
 
 function abrirEtapa1() {
   document.getElementById('btnIniciar').classList.add('oculto');
@@ -1217,6 +1239,7 @@ function fecharEtapaFinal() {
    RESET
    ============================================================ */
 function resetGame() {
+  laboratorioAberto = false;
   Object.keys(revelado1).forEach(k => revelado1[k] = false);
   Object.keys(revelado3).forEach(k => revelado3[k] = false);
   Object.keys(revelado4).forEach(k => revelado4[k] = false);
