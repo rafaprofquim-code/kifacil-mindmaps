@@ -1,5 +1,5 @@
-﻿<!DOCTYPE html>
-<html lang="pt-BR">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -147,7 +147,7 @@
     .link-aula:hover { background: rgba(30,16,8,0.92); transform: translateY(-1px); }
     .link-aula svg { width: 22px; height: 22px; }
 
-    /* HOTSPOTS (mantidos por identidade visual — não utilizados nesta mecânica) */
+    /* HOTSPOTS (kept for visual identity — not used in this mechanic) */
     .hotspot {
       position: absolute;
       width: 36px;
@@ -297,7 +297,7 @@
     .feedback-dica    { color: var(--texto-suave); }
     .feedback-explicacao { color: var(--texto); margin-top: 0.5rem; }
 
-    /* MODAL ZOOM (mantido por identidade visual — não utilizado nesta mecânica) */
+    /* MODAL ZOOM (kept for visual identity — not used in this mechanic) */
     .modal-zoom {
       display: none;
       position: fixed;
@@ -395,9 +395,9 @@
     }
 
     /* ==========================================================
-       MECÂNICA ESPECÍFICA — GEOMETRIA MOLECULAR (VSEPR)
-       Toda a ciência é desenhada em SVG; nada aqui altera o
-       "chame" visual acima (nav, narrador, imagem-wrapper, footer).
+       GAME-SPECIFIC MECHANICS — MOLECULAR GEOMETRY (VSEPR)
+       All the science is drawn in SVG; nothing here changes the
+       visual "shell" above (nav, narrator, image-wrapper, footer).
        ========================================================== */
     .narrador img { transition: opacity .25s ease; }
     #btnContinuarFala { margin-top: .9rem; display: none; }
@@ -454,7 +454,7 @@
       stroke: #ffd76a;
       filter: drop-shadow(0 0 10px rgba(255,215,106,.95));
     }
-    /* PAR ISOLADO — marcado pelo aluno como 2 pontinhos vermelhos */
+    /* LONE PAIR — marked by the student as 2 small red dots */
     .par-isolado-marcado {
       fill: rgba(200,40,40,0.12);
       stroke: #d64b4b;
@@ -494,7 +494,7 @@
     }
     #painelNomeGeo.mostrar { opacity: 1; }
 
-    /* FORMAS REVELADAS (linha/plano ao estabilizar 2 ou 3 nuvens) */
+    /* REVEALED SHAPES (line/plane once 2 or 3 clouds stabilize) */
     .forma-final {
       stroke: var(--dourado-claro);
       stroke-width: 2.5;
@@ -510,7 +510,7 @@
       stroke-width: 1.5;
     }
 
-    /* TETRAEDRO (4 nuvens — profundidade obrigatória) */
+    /* TETRAHEDRON (4 clouds — depth is required) */
     .aresta-tetraedro {
       stroke: var(--dourado-claro);
       stroke-width: 1.5;
@@ -520,7 +520,7 @@
       pointer-events: none;
     }
 
-    /* ALVO DE ENCAIXE — marca cada vértice livre do tetraedro-guia */
+    /* SNAP TARGET — marks each free vertex of the guide tetrahedron */
     .alvo-vertice {
       fill: none;
       stroke: rgba(232,184,75,0.6);
@@ -586,9 +586,9 @@
     }
     .resumo-seta { color: var(--dourado-claro); font-size: 1.2rem; line-height: 1; }
 
-    /* MODELO MOLECULAR SÓLIDO — "bola-e-vareta" clássico, ao lado
-       da cena, com ligações sólidas (em vez das nuvens/arestas
-       tracejadas), reforçando a geometria final já revelada. */
+    /* SOLID MOLECULAR MODEL — classic "ball-and-stick" style, beside
+       the scene, with solid bonds (instead of the dashed clouds/edges),
+       reinforcing the geometry already revealed. */
     .modelo-molecular {
       position: absolute;
       right: 3%; top: 50%;
@@ -684,19 +684,19 @@
 
 <main>
   <h1 class="titulo-jogo">Molecular Geometry</h1>
-  <p class="subtitulo">Discover por que cada molécula tem a forma que tem, observando como nuvens eletrônicas se organizam ao redor de um átomo central.</p>
+  <p class="subtitulo">Discover why each molecule has the shape it has, by observing how electron clouds arrange themselves around a central atom.</p>
 
   <div class="narrador">
-    <img src="../imagens/rafa-sorrindo.jpg" alt="Professora Rafaela" id="imgProfessora" />
+    <img src="../imagens/rafa-sorrindo.jpg" alt="Teacher Rafaela" id="imgProfessora" />
     <div>
-      <div class="narrador-nome">Professora Rafaela</div>
-      <div class="narrador-texto" id="narradorTexto">Today we will entender por que as moléculas têm a forma que têm.</div>
-      <button class="modal-btn-confirmar" id="btnContinuarFala">Continuar</button>
+      <div class="narrador-nome">Teacher Rafaela</div>
+      <div class="narrador-texto" id="narradorTexto">Today we will understand why molecules have the shapes they have.</div>
+      <button class="modal-btn-confirmar" id="btnContinuarFala">Continue</button>
     </div>
   </div>
 
   <div class="imagem-wrapper" id="imagemWrapper">
-    <img src="../imagens/sala-geometria-molecular.jpg" alt="Sala de geometria molecular" id="imagemJogo" />
+    <img src="../imagens/sala-geometria-molecular.jpg" alt="Molecular geometry room" id="imagemJogo" />
     <img src="../imagens/plataforma-vsepr.png" alt="" class="palco-plataforma" id="palcoPlataforma" />
     <div class="palco-svg-wrap" id="palcoWrap">
       <svg id="palcoSvg" viewBox="0 0 400 400"></svg>
@@ -709,24 +709,24 @@
 </div>
 
   <div style="text-align:center; margin-top:1.2rem;">
-    <button class="btn-reiniciar" id="btnVerificarPosicao" style="display:none;">Verificar posição</button>
+    <button class="btn-reiniciar" id="btnVerificarPosicao" style="display:none;">Check position</button>
   </div>
 
   <div class="grade-revisao" id="gradeRevisao"></div>
 
   <div class="conclusao" id="conclusao">
-    <div class="conclusao-titulo">Você entendeu a origem da geometria molecular</div>
+    <div class="conclusao-titulo">You understood where molecular geometry comes from</div>
     <div class="resumo-cadeia">
-      <div class="resumo-passo">Nuvens eletrônicas se repelem</div>
+      <div class="resumo-passo">Electron clouds repel each other</div>
       <div class="resumo-seta">↓</div>
-      <div class="resumo-passo">Organização espacial de menor energia</div>
+      <div class="resumo-passo">Lowest-energy spatial arrangement</div>
       <div class="resumo-seta">↓</div>
-      <div class="resumo-passo">Ligações × pares isolados</div>
+      <div class="resumo-passo">Bonds × lone pairs</div>
       <div class="resumo-seta">↓</div>
-      <div class="resumo-passo">Geometria molecular</div>
+      <div class="resumo-passo">Molecular geometry</div>
     </div>
-    <p class="conclusao-mensagem">Agora você sabe por que o metano é tetraédrico, a amônia é piramidal e a água é angular — todas partem da mesma organização tetraédrica de nuvens eletrônicas.</p>
-    <button class="btn-reiniciar" onclick="reiniciar()">Jogar novamente</button>
+    <p class="conclusao-mensagem">Now you know why methane is tetrahedral, ammonia is pyramidal, and water is bent — they all start from the same tetrahedral arrangement of electron clouds.</p>
+    <button class="btn-reiniciar" onclick="reiniciar()">Play Again</button>
   </div>
 </main>
 
@@ -734,17 +734,17 @@
 
 <script>
 /* ==========================================================
-   DADOS DAS MOLÉCULAS (introduzidas só depois do tetraedro)
+   MOLECULE DATA (introduced only after the tetrahedron)
    ========================================================== */
 const ELEMENTOS_TETRA = {
-  ch4: { formula: 'CH₄', nome: 'metano', central: 'C', ligantes: ['H','H','H','H'], isolados: 0, geometriaMolecular: 'tetraédrica' },
-  nh3: { formula: 'NH₃', nome: 'amônia', central: 'N', ligantes: ['H','H','H'],     isolados: 1, geometriaMolecular: 'piramidal' },
-  h2o: { formula: 'H₂O', nome: 'água',   central: 'O', ligantes: ['H','H'],         isolados: 2, geometriaMolecular: 'angular' }
+  ch4: { formula: 'CH₄', nome: 'methane', central: 'C', ligantes: ['H','H','H','H'], isolados: 0, geometriaMolecular: 'tetrahedral' },
+  nh3: { formula: 'NH₃', nome: 'ammonia', central: 'N', ligantes: ['H','H','H'],     isolados: 1, geometriaMolecular: 'pyramidal' },
+  h2o: { formula: 'H₂O', nome: 'water',   central: 'O', ligantes: ['H','H'],         isolados: 2, geometriaMolecular: 'bent' }
 };
 const ORDEM_MOLECULAS = ['ch4', 'nh3', 'h2o'];
 
 /* ==========================================================
-   PROFESSORA RAFAELA
+   TEACHER RAFAELA
    ========================================================== */
 const IMG_PROF = {
   sorrindo:   '../imagens/rafa-sorrindo.jpg',
@@ -776,9 +776,9 @@ _ding.preload = 'auto';
 function tocarDing() { try { _ding.currentTime = 0; _ding.play().catch(() => {}); } catch (e) {} }
 
 /* ==========================================================
-   MOTOR DE REPULSÃO DE PARES ELETRÔNICOS (reutilizável)
-   — cada par é um ponto sobre um círculo, com força de repulsão
-     angular mútua; a única regra é "afastar-se ao máximo".
+   ELECTRON PAIR REPULSION ENGINE (reusable)
+   — each pair is a point on a circle, with mutual angular
+     repulsion force; the only rule is "move as far apart as possible."
    ========================================================== */
 const NS = 'http://www.w3.org/2000/svg';
 const svg = document.getElementById('palcoSvg');
@@ -829,14 +829,14 @@ function desenharAtomoCentral(simbolo) {
   svg.appendChild(g);
 }
 
-// As nuvens só se movem quando o aluno arrasta — nada de física
-// automática resolvendo sozinha. O travamento (e a revelação do
-// ângulo) só acontece quando ele solta numa posição estável.
+// The clouds only move when the student drags them — no automatic
+// physics solving it by itself. Locking (and revealing the angle)
+// only happens when the student releases at a stable position.
 function iniciarPares(n, callbackEstabilizar) {
   onEstabilizar = callbackEstabilizar;
   const anguloBase = Math.random() * 360;
   for (let i = 0; i < n; i++) {
-    // começa deliberadamente amontoado — está longe de resolvido
+    // starts deliberately clumped together — far from solved
     const angulo = anguloBase + (Math.random() - 0.5) * 20;
     const eixo = criarSvgEl('line', { class: 'eixo-par', x1: CX, y1: CY, x2: CX, y2: CY });
     const circ = criarSvgEl('circle', { class: 'par-eletronico', r: RAIO_PONTO, cx: CX, cy: CY });
@@ -860,14 +860,15 @@ function atualizarPosicoesPares() {
   });
 }
 
-// Enquanto o aluno arrasta uma nuvem, as demais (não travadas, não
-// sendo arrastadas) se afastam um pouco dela — dá a sensação de
-// repulsão sem resolver a posição sozinho. A força é proporcional
-// ao quanto a nuvem arrastada REALMENTE moveu neste evento (não um
-// valor fixo por evento), senão um arraste lento e cuidadoso (com
-// muitos eventos pequenos) empurraria as outras bem mais do que um
-// arraste rápido cobrindo a mesma distância — o que fazia as nuvens
-// já posicionadas saírem do lugar sem o aluno perceber.
+// While the student drags one cloud, the others (not locked, not
+// being dragged) drift away from it a little — giving the feeling
+// of repulsion without solving the position on its own. The force
+// is proportional to how much the dragged cloud ACTUALLY moved in
+// this event (not a fixed value per event), otherwise a slow,
+// careful drag (with many small events) would push the others much
+// more than a fast drag covering the same distance — which made
+// already-positioned clouds drift out of place without the student
+// noticing.
 function empurrarOutrasNuvens(parArrastado, deltaMovimento) {
   const intensidade = Math.min(Math.abs(deltaMovimento), 20) / 20;
   if (intensidade <= 0) return;
@@ -882,9 +883,9 @@ function empurrarOutrasNuvens(parArrastado, deltaMovimento) {
   });
 }
 
-// Margem de erro generosa (±12°): posicionar à mão nunca é exato,
-// e o aluno não deve ser barrado por um arranjo que já está certo
-// na prática só porque faltaram 2-3° para o valor perfeito.
+// Generous margin of error (±12°): positioning by hand is never
+// exact, and the student shouldn't be blocked by an arrangement
+// that's practically correct just because it's 2-3° off from perfect.
 function verificarEstabilidade() {
   const n = pares.length;
   if (n < 2) return true;
@@ -946,16 +947,16 @@ function ligarDragPar(par) {
 }
 
 /* ==========================================================
-   BOTÃO "VERIFICAR POSIÇÃO" — o aluno posiciona as nuvens e só
-   confirma quando clica; com margem de erro, e a resposta certa
-   corrige qualquer erro angular residual ao travar.
+   "CHECK POSITION" BUTTON — the student positions the clouds
+   and only confirms when clicking; with a margin of error, and
+   the correct answer fixes any residual angular error on lock.
    ========================================================== */
 const $btnVerificar = document.getElementById('btnVerificarPosicao');
 
 function mostrarBotaoVerificar(aoClicar) {
   $btnVerificar.style.display = 'inline-block';
   $btnVerificar.disabled = false;
-  $btnVerificar.textContent = 'Verificar posição';
+  $btnVerificar.textContent = 'Check position';
   $btnVerificar.onclick = aoClicar;
 }
 function esconderBotaoVerificar() {
@@ -968,13 +969,13 @@ function verificarPosicaoAtual() {
     esconderBotaoVerificar();
     travarPares();
   } else {
-    $btnVerificar.textContent = 'Ainda não... ajuste e tente de novo';
-    setTimeout(() => { $btnVerificar.textContent = 'Verificar posição'; }, 1500);
+    $btnVerificar.textContent = 'Not quite... adjust and try again';
+    setTimeout(() => { $btnVerificar.textContent = 'Check position'; }, 1500);
   }
 }
 
 /* ==========================================================
-   PAINEL FLUTUANTE (ângulo → nome da geometria, nesta ordem)
+   FLOATING PANEL (angle → geometry name, in this order)
    ========================================================== */
 function mostrarPainel(texto) {
   const p = document.getElementById('painelFlutuante');
@@ -995,8 +996,8 @@ function esconderPainel() {
 }
 
 /* ==========================================================
-   REVELAÇÃO DA FORMA PLANA (2 e 3 nuvens)
-   — linha dourada para 180°, plano translúcido para 120°.
+   REVEALING THE FLAT SHAPE (2 and 3 clouds)
+   — golden line for 180°, translucent plane for 120°.
    ========================================================== */
 function revelarFormaFinal(n) {
   return new Promise(resolve => {
@@ -1019,8 +1020,8 @@ function revelarFormaFinal(n) {
 }
 
 /* ==========================================================
-   TETRAEDRO 3D (4 nuvens — a profundidade é obrigatória)
-   Projeção simples: tilt fixo em X + giro contínuo em Y.
+   3D TETRAHEDRON (4 clouds — depth is required)
+   Simple projection: fixed tilt on X + continuous spin on Y.
    ========================================================== */
 let tetraPares = [];
 let tetraArestas = [];
@@ -1034,7 +1035,7 @@ const TETRA_VERTICES = [
 ].map(v => { const m = Math.sqrt(3); return { x: v.x / m, y: v.y / m, z: v.z / m }; });
 const ARESTAS_TETRA = [[0,1],[0,2],[0,3],[1,2],[1,3],[2,3]];
 const RAIO_TETRA = 112;
-const FI_TETRA = 0.5; // tilt fixo em X, para sugerir profundidade
+const FI_TETRA = 0.5; // fixed tilt on X, to suggest depth
 
 function projetar3D(v, theta) {
   const y1 = v.y * Math.cos(FI_TETRA) - v.z * Math.sin(FI_TETRA);
@@ -1115,9 +1116,10 @@ function pararRotacaoTetra() {
 }
 
 /* ==========================================================
-   MODELO MOLECULAR SÓLIDO ("bola-e-vareta") — painel ao lado,
-   com ligações sólidas e átomos opacos, reforçando a geometria
-   final já revelada (reaproveita a mesma projeção 3D do tetraedro).
+   SOLID MOLECULAR MODEL ("ball-and-stick") — side panel, with
+   solid bonds and opaque atoms, reinforcing the geometry that
+   was already revealed (reuses the same 3D projection as the
+   tetrahedron).
    ========================================================== */
 const CX_MODELO = 100, CY_MODELO = 100, RAIO_MODELO = 62;
 let modeloTheta = 0.6;
@@ -1174,9 +1176,9 @@ function esconderModeloSolido() {
   modeloVetores = [];
 }
 
-// Usa as mesmas direções tetraédricas do palco principal — só os N
-// primeiros vértices (N = nº de ligantes), o que já dá a forma certa:
-// 4 = tetraédrica, 3 = piramidal, 2 = angular.
+// Uses the same tetrahedral directions as the main stage — just
+// the first N vertices (N = number of bonded atoms), which already
+// gives the right shape: 4 = tetrahedral, 3 = pyramidal, 2 = bent.
 function mostrarModeloSolido(mol) {
   esconderModeloSolido();
   document.getElementById('modeloTitulo').textContent =
@@ -1213,9 +1215,9 @@ function mostrarModeloSolido(mol) {
   modeloFrame = requestAnimationFrame(cicloModelo);
 }
 
-// Constrói o tetraedro de arame dourado, com entrada suave (fade-in).
-// girarImediatamente=false mantém um ângulo fixo, útil enquanto o
-// aluno ainda vai clicar nos vértices (alvo parado facilita o clique).
+// Builds the golden wireframe tetrahedron, with a smooth fade-in.
+// girarImediatamente=false keeps a fixed angle, useful while the
+// student is still clicking vertices (a still target is easier to click).
 function construirTetraedro(aoCompletar, girarImediatamente = true) {
   tetraPares = [];
   tetraArestas = [];
@@ -1253,22 +1255,22 @@ function construirTetraedro(aoCompletar, girarImediatamente = true) {
 }
 
 /* ==========================================================
-   ENCAIXE NO TETRAEDRO (4 nuvens) — mecânica simples: o tetraedro
-   correto já aparece desenhado, com um "alvo" marcado em cada
-   vértice. O aluno só arrasta cada nuvem até encaixar num alvo
-   livre; ao soltar perto o bastante, ela gruda lá. Quando os 4
-   alvos estiverem ocupados, a etapa termina sozinha.
+   SNAPPING ONTO THE TETRAHEDRON (4 clouds) — simple mechanic: the
+   correct tetrahedron is already drawn, with a "target" marked at
+   each vertex. The student just drags each cloud until it snaps
+   into a free target; once all 4 targets are filled, the stage
+   ends on its own.
    ========================================================== */
 let alvosTetraedro = [];
 let nuvensEncaixe = [];
 let grupoEncaixe = null;
-const RAIO_ENCAIXE = 34; // distância (em px do svg) para "grudar" no alvo
+const RAIO_ENCAIXE = 34; // distance (in svg px) to "snap" onto the target
 
 function construirEncaixeTetraedro() {
   grupoEncaixe = criarSvgEl('g', { class: 'grupo-tetraedro' });
   svg.appendChild(grupoEncaixe);
 
-  // o tetraedro-guia fica parado (sem girar) enquanto o aluno encaixa
+  // the guide tetrahedron stays still (not spinning) while the student snaps clouds into place
   const telas = TETRA_VERTICES.map(v => pontoTelaTetra(projetar3D(v, tetraTheta)));
 
   ARESTAS_TETRA.forEach(([a, b]) => {
@@ -1286,7 +1288,7 @@ function construirEncaixeTetraedro() {
     grupoEncaixe.appendChild(alvo.marcador);
   });
 
-  // as 4 nuvens começam juntas perto do átomo, longe dos alvos
+  // the 4 clouds start bunched together near the atom, far from the targets
   nuvensEncaixe = [];
   const anguloBase = Math.random() * 360;
   for (let i = 0; i < 4; i++) {
@@ -1364,17 +1366,17 @@ function limparEncaixeTetraedro() {
 function concluirEncaixeTetraedro() {
   limparEncaixeTetraedro();
   construirTetraedro(() => {
-    mostrarPainel('≈ 109,5°');
-    revelarNomeGeometria('Orientação tetraédrica', () => {
+    mostrarPainel('≈ 109.5°');
+    revelarNomeGeometria('Tetrahedral arrangement', () => {
       setTimeout(iniciarAplicacaoMoleculas, 1200);
     });
   }, true);
 }
 
 /* ==========================================================
-   POSICIONAMENTO NOS VÉRTICES DO TETRAEDRO — o aluno marca
-   quais nuvens são ligações (átomo) e quais são pares isolados
-   (2 pontinhos vermelhos, representando os 2 elétrons do par).
+   PLACING AT THE TETRAHEDRON VERTICES — the student marks which
+   clouds are bonds and which are lone pairs (2 small red dots,
+   representing the pair's 2 electrons).
    ========================================================== */
 function marcarParIsolado(par) {
   par.circ.classList.remove('par-eletronico');
@@ -1443,7 +1445,7 @@ function revelarSomenteAtomosTetra() {
 }
 
 /* ==========================================================
-   ETAPAS 1-3 — ABSTRATO: só nuvens, sem nomear moléculas
+   STAGES 1-3 — ABSTRACT: clouds only, no molecules named yet
    ========================================================== */
 function etapaNuvens2() {
   limparPalco(); esconderPainel();
@@ -1454,8 +1456,8 @@ function etapaNuvens2() {
     esconderBotaoVerificar();
     revelarFormaFinal(2).then(() => {
       mostrarPainel('180°');
-      falar('animada', 'Para duas nuvens, a maior distância possível ocorre quando elas ficam em lados opostos.', () => {
-        revelarNomeGeometria('Geometria linear', () => {
+      falar('animada', 'For two clouds, the greatest possible distance happens when they sit on opposite sides.', () => {
+        revelarNomeGeometria('Linear geometry', () => {
           setTimeout(etapaNuvens3, 900);
         });
       });
@@ -1467,13 +1469,13 @@ function etapaNuvens2() {
 function etapaNuvens3() {
   limparPalco(); esconderPainel();
   desenharAtomoCentral('');
-  falar('pensando', 'Agora surgem três nuvens. Tente posicioná-las.', () => {
+  falar('pensando', 'Now three clouds appear. Try positioning them.', () => {
     iniciarPares(3, () => {
       esconderBotaoVerificar();
       revelarFormaFinal(3).then(() => {
         mostrarPainel('120°');
-        falar('animada', 'Agora não é mais possível manter a maior distância usando apenas uma reta. As três nuvens passam a ocupar um mesmo plano.', () => {
-          revelarNomeGeometria('Trigonal plana', () => {
+        falar('animada', "Now it's no longer possible to keep the greatest distance using just a straight line. The three clouds now occupy the same plane.", () => {
+          revelarNomeGeometria('Trigonal planar', () => {
             setTimeout(etapaNuvens4, 900);
           });
         });
@@ -1483,31 +1485,32 @@ function etapaNuvens3() {
   });
 }
 
-// A etapa de 4 nuvens não tenta mais resolver no plano: isso é
-// impossível de fazer parecer "certo", já que a resposta real exige
-// profundidade. O tetraedro correto já aparece desenhado, com um
-// alvo marcado em cada vértice — o aluno só arrasta cada nuvem até
-// encaixar; a etapa termina sozinha quando os 4 alvos são ocupados.
+// The 4-cloud stage no longer tries to work in a flat plane: that's
+// impossible to make look "right", since the real answer requires
+// depth. The correct tetrahedron is already drawn, with a target
+// marked at each vertex — the student just drags each cloud until
+// it snaps into place; the stage ends on its own once all 4 targets
+// are filled.
 function etapaNuvens4() {
   limparPalco(); esconderPainel();
   desenharAtomoCentral('');
-  falar('pensando', 'Agora surgem quatro nuvens. Por mais que você tente, não dá para deixá-las igualmente afastadas usando só um plano — elas precisam sair do plano.', () => {
+  falar('pensando', "Now four clouds appear. No matter how hard you try, you can't keep them equally spaced using just a flat plane — they need to move out of the plane.", () => {
     document.getElementById('palcoPlataforma').style.display = 'block';
     document.getElementById('palcoWrap').style.display = 'block';
     construirEncaixeTetraedro();
-    falar('explicando', 'Este é o tetraedro. Arraste cada nuvem até encaixar em um dos quatro vértices marcados.', null);
+    falar('explicando', 'This is the tetrahedron. Drag each cloud until it snaps into one of the four marked vertices.', null);
   });
 }
 
 /* ==========================================================
-   SOMENTE AGORA: APLICAÇÃO EM MOLÉCULAS REAIS
-   O mesmo tetraedro é reaproveitado; o que muda é quais
-   vértices são átomos e quais são pares isolados.
+   ONLY NOW: APPLICATION TO REAL MOLECULES
+   The same tetrahedron is reused; what changes is which
+   vertices are atoms and which are lone pairs.
    ========================================================== */
 function iniciarAplicacaoMoleculas() {
   esconderPainel();
   esconderBotaoVerificar();
-  falar('sorrindo', 'Agora imagine que algumas dessas nuvens representam ligações e outras representam pares isolados.', () => {
+  falar('sorrindo', 'Now imagine that some of these clouds represent bonds and others represent lone pairs.', () => {
     rodarMolecula(ORDEM_MOLECULAS[0]);
   });
 }
@@ -1516,16 +1519,16 @@ function rodarMolecula(chave) {
   const mol = ELEMENTOS_TETRA[chave];
   esconderPainel();
   esconderModeloSolido();
-  falar('explicando', `Vamos analisar a molécula de ${mol.nome} (${mol.formula}).`, () => {
+  falar('explicando', `Let's analyze the ${mol.nome} molecule (${mol.formula}).`, () => {
     limparPalco();
     document.getElementById('palcoPlataforma').style.display = 'block';
     document.getElementById('palcoWrap').style.display = 'block';
     desenharAtomoCentral(mol.central);
 
     construirTetraedro(() => {
-      const instrucaoAtomos = `Clique em ${mol.ligantes.length} ${mol.ligantes.length === 1 ? 'nuvem' : 'nuvens'} para encaixar ${mol.ligantes.join(', ')}`;
+      const instrucaoAtomos = `Click on ${mol.ligantes.length} ${mol.ligantes.length === 1 ? 'cloud' : 'clouds'} to place ${mol.ligantes.join(', ')}`;
       const instrucaoIsolados = mol.isolados > 0
-        ? `, e ${mol.isolados === 1 ? 'na nuvem restante, marque' : 'nas nuvens restantes, marque'} ${mol.isolados === 1 ? 'o par eletrônico isolado' : 'os pares eletrônicos isolados'} (2 pontinhos vermelhos).`
+        ? `, and ${mol.isolados === 1 ? 'on the remaining cloud, mark' : 'on the remaining clouds, mark'} ${mol.isolados === 1 ? 'the lone electron pair' : 'the lone electron pairs'} (2 small red dots).`
         : '.';
       falar('explicando', instrucaoAtomos + instrucaoIsolados, null);
       iniciarPosicionamentoTetra(mol, () => {
@@ -1537,8 +1540,8 @@ function rodarMolecula(chave) {
           seguir();
         } else {
           falar('pensando', mol.isolados === 1
-            ? 'Muito bem. A organização das nuvens continua tetraédrica. Mas observando apenas os átomos, enxergamos uma pirâmide.'
-            : 'Muito bem. As quatro nuvens continuam organizadas em um tetraedro. Mas observando apenas os átomos, enxergamos outra forma.', () => {
+            ? 'Well done. The arrangement of the clouds is still tetrahedral. But looking only at the atoms, we see a pyramid.'
+            : 'Well done. The four clouds are still arranged in a tetrahedron. But looking only at the atoms, we see a different shape.', () => {
             revelarSomenteAtomosTetra();
             setTimeout(seguir, 700);
           });
@@ -1549,10 +1552,10 @@ function rodarMolecula(chave) {
 }
 
 function finalizarMolecula(mol, chave) {
-  mostrarPainel('Geometria eletrônica: tetraédrica');
-  falar('animada', `A forma real da molécula é: geometria molecular ${mol.geometriaMolecular}.`, () => {
+  mostrarPainel('Electron geometry: tetrahedral');
+  falar('animada', `The actual shape of the molecule is: ${mol.geometriaMolecular} molecular geometry.`, () => {
     mostrarModeloSolido(mol);
-    revelarNomeGeometria('Geometria molecular: ' + mol.geometriaMolecular, () => {
+    revelarNomeGeometria('Molecular geometry: ' + mol.geometriaMolecular, () => {
       const idx = ORDEM_MOLECULAS.indexOf(chave);
       if (idx < ORDEM_MOLECULAS.length - 1) {
         setTimeout(() => rodarMolecula(ORDEM_MOLECULAS[idx + 1]), 1200);
@@ -1564,11 +1567,11 @@ function finalizarMolecula(mol, chave) {
 }
 
 /* ==========================================================
-   QUADRO-RESUMO FINAL
+   FINAL SUMMARY PANEL
    ========================================================== */
 function finalizarJogo() {
   esconderPainel();
-  falar('animada', 'Excelente. Agora você entende por que cada geometria molecular surge — tudo começa com nuvens eletrônicas se afastando ao máximo.', null);
+  falar('animada', 'Excellent. Now you understand why each molecular geometry arises — it all starts with electron clouds spreading as far apart as possible.', null);
   const conclusao = document.getElementById('conclusao');
   conclusao.classList.add('visivel');
   conclusao.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -1587,23 +1590,23 @@ function reiniciar() {
 }
 
 /* ==========================================================
-   INTRODUÇÃO / INÍCIO
-   Nada de moléculas ainda — só átomo central e nuvens.
+   INTRODUCTION / START
+   No molecules yet — just the central atom and clouds.
    ========================================================== */
 function iniciarIntro() {
   falar(
     'sorrindo',
-    `Today we will entender por que as moléculas têm a forma que têm.
-Imagine que existem algumas nuvens eletrônicas ligadas a um átomo central.`,
+    `Today we will understand why molecules have the shapes they have.
+Imagine there are some electron clouds attached to a central atom.`,
     () => {
       falar(
         'explicando',
-        `Essas nuvens se repelem entre si.`,
+        `These clouds repel each other.`,
         () => {
           falar(
             'pensando',
-            `Como podemos colocá-las o mais afastadas possível no espaço?
-Você vai descobrir sozinho.`,
+            `How can we place them as far apart as possible in space?
+You'll figure it out on your own.`,
             () => {
               etapaNuvens2();
             }
@@ -1696,6 +1699,3 @@ function ajustarVolume(valorSlider) {
 </div>
 </body>
 </html>
-
-
-
