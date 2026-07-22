@@ -1,5 +1,5 @@
-﻿<!DOCTYPE html>
-<html lang="pt-BR">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -261,10 +261,10 @@
     }
 
     /* ==========================================================
-       MECÂNICA ESPECÍFICA — VOLUME MOLAR DOS GASES
-       Todo o palco interativo fica em fluxo normal ABAIXO da
-       imagem (nunca sobreposto/clipado pelo imagem-wrapper), para
-       nunca ficar cortado nem tampar a caixa de diálogo no mobile.
+       GAME-SPECIFIC MECHANICS — MOLAR VOLUME OF GASES
+       The entire interactive stage stays in normal flow BELOW the
+       image (never overlapping/clipped by the image wrapper), so
+       it never gets cut off or covers the dialogue box on mobile.
        ========================================================== */
     .palco-jogo {
       width: min(100%, 900px);
@@ -339,7 +339,7 @@
     /* Botão central de ação do palco */
     .palco-acoes { text-align: center; margin: 1.1rem 0 .3rem; }
 
-    /* Indicadores CNTP — sobre o topo da imagem */
+    /* Indicadores STP — sobre o topo da imagem */
     .overlay-indicadores {
       position: absolute;
       left: 50%; top: 5%; transform: translateX(-50%); z-index: 4;
@@ -585,19 +585,19 @@
 
 <main>
   <h1 class="titulo-jogo">Molar Volume of Gases</h1>
-  <p class="subtitulo">Discover, observando experimentos, por que qualquer gás ocupa o mesmo volume nas CNTP quando possui um mol.</p>
+  <p class="subtitulo">Discover, by observing experiments, why any gas occupies the same volume at STP when it contains one mole.</p>
 
   <div class="narrador">
-    <img src="../imagens/rafa-sorrindo.jpg" alt="Professora Rafaela" id="imgProfessora" />
+    <img src="../imagens/rafa-sorrindo.jpg" alt="Teacher Rafaela" id="imgProfessora" />
     <div>
-      <div class="narrador-nome">Professora Rafaela</div>
-      <div class="narrador-texto" id="narradorTexto">Será que gases diferentes ocupam volumes diferentes?</div>
-      <button class="modal-btn-confirmar" id="btnContinuarFala">Continuar</button>
+      <div class="narrador-nome">Teacher Rafaela</div>
+      <div class="narrador-texto" id="narradorTexto">Do different gases occupy different volumes?</div>
+      <button class="modal-btn-confirmar" id="btnContinuarFala">Continue</button>
     </div>
   </div>
 
   <div class="imagem-wrapper" id="imagemWrapper">
-    <img src="../imagens/sala-volume-gases.jpg" alt="Sala de experimentos com gases" id="imagemJogo" />
+    <img src="../imagens/sala-volume-gases.jpg" alt="Gas experiment room" id="imagemJogo" />
     <div class="overlay-indicadores" id="overlayIndicadores"></div>
     <div class="overlay-recipientes" id="overlayRecipientes"></div>
     <div class="overlay-painel" id="overlayPainel"></div>
@@ -606,10 +606,10 @@
   <div class="palco-jogo" id="palcoJogo"></div>
 
   <div class="conclusao" id="conclusao">
-    <div class="conclusao-titulo">Fase concluída</div>
+    <div class="conclusao-titulo">Stage Complete</div>
     <div class="conclusao-placar" id="conclusaoPlacar"></div>
     <p class="conclusao-mensagem" id="conclusaoMensagem"></p>
-    <button class="btn-reiniciar" onclick="reiniciar()">Jogar novamente</button>
+    <button class="btn-reiniciar" onclick="reiniciar()">Play Again</button>
   </div>
 </main>
 
@@ -617,25 +617,25 @@
 
 <!-- MODAL ZOOM -->
 <div class="modal-zoom" id="modalZoom">
-  <img src="../imagens/sala-volume-gases.jpg" alt="Sala ampliada" />
+  <img src="../imagens/sala-volume-gases.jpg" alt="Enlarged room" />
 </div>
 
 <script>
 /* ==========================================================
-   DADOS
+   DATA
    ========================================================== */
-const V_MOLAR = 22.4; // litros por mol nas CNTP
+const V_MOLAR = 22.4; // liters per mole at STP
 
 const GASES = {
-  h2:  { formula: 'H₂',  nome: 'hidrogênio',         massaMolar: 2,  cor: '#8ecbe6' },
-  o2:  { formula: 'O₂',  nome: 'oxigênio',            massaMolar: 32, cor: '#e3ac54' },
-  co2: { formula: 'CO₂', nome: 'dióxido de carbono',  massaMolar: 44, cor: '#cf9550' },
-  n2:  { formula: 'N₂',  nome: 'nitrogênio',          massaMolar: 28, cor: '#84b6dc' },
-  ch4: { formula: 'CH₄', nome: 'metano',              massaMolar: 16, cor: '#93d18d' },
-  nh3: { formula: 'NH₃', nome: 'amônia',              massaMolar: 17, cor: '#cf9adf' }
+  h2:  { formula: 'H₂',  nome: 'hydrogen',        massaMolar: 2,  cor: '#8ecbe6' },
+  o2:  { formula: 'O₂',  nome: 'oxygen',           massaMolar: 32, cor: '#e3ac54' },
+  co2: { formula: 'CO₂', nome: 'carbon dioxide',   massaMolar: 44, cor: '#cf9550' },
+  n2:  { formula: 'N₂',  nome: 'nitrogen',         massaMolar: 28, cor: '#84b6dc' },
+  ch4: { formula: 'CH₄', nome: 'methane',          massaMolar: 16, cor: '#93d18d' },
+  nh3: { formula: 'NH₃', nome: 'ammonia',          massaMolar: 17, cor: '#cf9adf' }
 };
 
-/* Desafios da etapa 5: massa dada (g) -> mol e volume (L) esperados */
+/* Challenges for stage 5: given mass (g) -> expected moles and volume (L) */
 const DESAFIOS_ETAPA5 = [
   { gas: 'o2',  massa: 16 },
   { gas: 'n2',  massa: 56 },
@@ -645,7 +645,7 @@ const DESAFIOS_ETAPA5 = [
 ];
 
 /* ==========================================================
-   PROFESSORA — diálogo
+   TEACHER — dialogue
    ========================================================== */
 const $prof = document.getElementById('imgProfessora');
 const $fala = document.getElementById('narradorTexto');
@@ -683,12 +683,11 @@ _ding.preload = 'auto';
 function tocarDing() { try { _ding.currentTime = 0; _ding.play().catch(() => {}); } catch (e) {} }
 
 /* ==========================================================
-   FORMATAÇÃO NUMÉRICA (padrão brasileiro)
+   NUMBER FORMATTING (American standard — decimal point)
    ========================================================== */
 function fmt(numero, casas) {
   const n = Number(numero.toFixed(casas == null ? 2 : casas));
-  let s = n.toString().replace('.', ',');
-  return s;
+  return n.toString();
 }
 function paraNumero(str) {
   if (typeof str !== 'string') return NaN;
@@ -699,7 +698,7 @@ function aproxIgual(a, b, tolerancia) {
 }
 
 /* ==========================================================
-   COMPONENTE: RECIPIENTE GRADUADO (desenhado em SVG)
+   COMPONENT: GRADUATED CONTAINER (drawn in SVG)
    ========================================================== */
 function criarRecipiente(id, formula, corGas) {
   const div = document.createElement('div');
@@ -761,7 +760,7 @@ function atualizarParticulas(id, frac) {
 }
 
 /* ==========================================================
-   PALCO — área de fluxo normal abaixo da imagem
+   STAGE — normal-flow area below the image
    ========================================================== */
 const $palco = document.getElementById('palcoJogo');
 const $overlayRecipientes = document.getElementById('overlayRecipientes');
@@ -770,18 +769,18 @@ const $overlayPainel = document.getElementById('overlayPainel');
 function limparPalco() { $palco.innerHTML = ''; $overlayRecipientes.innerHTML = ''; $overlayIndicadores.innerHTML = ''; $overlayPainel.innerHTML = ''; }
 
 /* ==========================================================
-   INTRODUÇÃO
+   INTRODUCTION
    ========================================================== */
 function iniciarIntro() {
-  falar('sorrindo', 'Será que gases diferentes ocupam volumes diferentes?', () => {
-    falar('pensando', 'Vamos descobrir.', () => {
+  falar('sorrindo', 'Do different gases occupy different volumes?', () => {
+    falar('pensando', "Let's find out.", () => {
       etapa1();
     });
   });
 }
 
 /* ==========================================================
-   ETAPA 1 — três recipientes, 1 mol cada, mesmo volume final
+   STAGE 1 — three containers, 1 mole each, same final volume
    ========================================================== */
 function etapa1() {
   limparPalco();
@@ -795,7 +794,7 @@ function etapa1() {
   });
   const acoes = document.createElement('div');
   acoes.className = 'palco-acoes';
-  acoes.innerHTML = '<button class="modal-btn-confirmar" id="btnEncher">Coloque 1 mol de gás</button>';
+  acoes.innerHTML = '<button class="modal-btn-confirmar" id="btnEncher">Add 1 mole of gas</button>';
   $overlayRecipientes.appendChild(linha);
   $palco.appendChild(acoes);
 
@@ -804,14 +803,14 @@ function etapa1() {
     definirNivelRecipiente(id, 0, V_MOLAR);
   });
 
-  falar('explicando', 'Aqui estão três recipientes transparentes. Aperte "Coloque 1 mol de gás" para colocar um mol de hidrogênio, oxigênio e dióxido de carbono em cada um e observar.', null);
+  falar('explicando', 'Here are three transparent containers. Press "Add 1 mole of gas" to place one mole of hydrogen, oxygen, and carbon dioxide in each one and observe.', null);
 
   document.getElementById('btnEncher').addEventListener('click', () => {
     document.getElementById('btnEncher').disabled = true;
     tocarDing();
     ['h2', 'o2', 'co2'].forEach(id => definirNivelRecipiente(id, V_MOLAR, V_MOLAR));
     setTimeout(() => {
-      falar('animada', 'Observe: os três chegaram exatamente à mesma altura — 22,4 litros. O que você percebeu?', () => {
+      falar('animada', 'Notice: all three reached exactly the same height — 22.4 liters. What did you notice?', () => {
         etapa2();
       });
     }, 1300);
@@ -819,33 +818,33 @@ function etapa1() {
 }
 
 /* ==========================================================
-   ETAPA 2 — condições CNTP
+   STAGE 2 — STP conditions
    ========================================================== */
 function etapa2() {
   const indicadores = document.createElement('div');
   indicadores.className = 'indicadores-cntp';
   indicadores.innerHTML = `
     <div class="indicador">
-      <img src="../imagens/termometro-cntp.png" alt="Termômetro" />
+      <img src="../imagens/termometro-cntp.png" alt="Thermometer" />
       <div class="indicador-valor">0°C</div>
-      <div class="indicador-label">Temperatura</div>
+      <div class="indicador-label">Temperature</div>
     </div>
     <div class="indicador">
-      <img src="../imagens/manometro-cntp.png" alt="Manômetro" />
+      <img src="../imagens/manometro-cntp.png" alt="Pressure gauge" />
       <div class="indicador-valor">1 atm</div>
-      <div class="indicador-label">Pressão</div>
+      <div class="indicador-label">Pressure</div>
     </div>
   `;
   $overlayIndicadores.appendChild(indicadores);
 
-  falar('explicando', 'Sob essas condições — chamadas de CNTP, Condições Normais de Temperatura e Pressão — todos os gases apresentam o mesmo volume quando possuem um mol.', () => {
+  falar('explicando', 'Under these conditions — called STP, Standard Temperature and Pressure — all gases have the same volume when they contain one mole.', () => {
     document.querySelectorAll('#linhaEtapa1 .recipiente').forEach(r => r.classList.add('brilho'));
     setTimeout(etapa3, 700);
   });
 }
 
 /* ==========================================================
-   ETAPA 3 — slider de mols: o volume é proporcional
+   STAGE 3 — mole slider: volume is proportional
    ========================================================== */
 function etapa3() {
   limparPalco();
@@ -858,11 +857,11 @@ function etapa3() {
   const bloco = document.createElement('div');
   bloco.className = 'slider-bloco';
   bloco.innerHTML = `
-    <div class="slider-leitura" id="leituraMol">1 mol → 22,4 L</div>
+    <div class="slider-leitura" id="leituraMol">1 mol → 22.4 L</div>
     <div class="mol-opcoes" id="molOpcoes">
-      <button class="btn-mol" data-mol="0.5" type="button">0,5 mol</button>
+      <button class="btn-mol" data-mol="0.5" type="button">0.5 mol</button>
       <button class="btn-mol selecionado" data-mol="1" type="button">1 mol</button>
-      <button class="btn-mol" data-mol="1.5" type="button">1,5 mol</button>
+      <button class="btn-mol" data-mol="1.5" type="button">1.5 mol</button>
       <button class="btn-mol" data-mol="2" type="button">2 mol</button>
     </div>
   `;
@@ -885,19 +884,19 @@ function etapa3() {
     });
   });
 
-  falar('explicando', 'Agora escolha diferentes quantidades de mols e observe o que acontece com o nível do gás.', () => {
-    falar('animada', 'Perceba que o volume é proporcional ao número de mols: dobrando os mols, dobra o volume.', () => {
+  falar('explicando', 'Now choose different amounts of moles and observe what happens to the gas level.', () => {
+    falar('animada', 'Notice that volume is proportional to the number of moles: doubling the moles doubles the volume.', () => {
       etapa4();
     });
   });
 }
 
 /* ==========================================================
-   ETAPA 4 — problema guiado: CO2, 6,6 g
+   STAGE 4 — guided problem: CO2, 6.6 g
    ========================================================== */
 function etapa4() {
   limparPalco();
-  falar('explicando', 'Agora um problema: temos 6,6 gramas de CO₂. Primeiro, vamos descobrir quantos mols existem nessa massa.', () => {
+  falar('explicando', "Now a problem: we have 6.6 grams of CO₂. First, let's figure out how many moles are in this mass.", () => {
     montarPainelCalculo();
   });
 }
@@ -906,7 +905,7 @@ function montarPainelCalculo() {
   const painel = document.createElement('div');
   painel.className = 'painel-dados';
   painel.innerHTML = `
-    <div class="painel-titulo">CO₂ — 6,6 g</div>
+    <div class="painel-titulo">CO₂ — 6.6 g</div>
     <div id="passosCalculo"></div>
   `;
   $overlayPainel.appendChild(painel);
@@ -914,7 +913,7 @@ function montarPainelCalculo() {
 
   const passos = [
     '<span class="passo-destaque">44 g</span><span class="passo-seta">↓</span><span>1 mol</span>',
-    '<span class="passo-destaque">6,6 g</span><span class="passo-seta">↓</span><span class="passo-destaque">0,15 mol</span>'
+    '<span class="passo-destaque">6.6 g</span><span class="passo-seta">↓</span><span class="passo-destaque">0.15 mol</span>'
   ];
   let i = 0;
   function proximoPasso() {
@@ -938,18 +937,18 @@ function montarRegua() {
   painel.className = 'painel-dados';
   painel.id = 'painelRegua';
   painel.innerHTML = `
-    <div class="painel-titulo">0,15 mol → Volume?</div>
+    <div class="painel-titulo">0.15 mol → Volume?</div>
     <div class="slider-bloco" style="margin-top:0;">
       <div class="slider-leitura" id="leituraRegua">0 mol → 0 L</div>
       <input type="range" id="reguaProporcional" min="0" max="1" step="0.01" value="0" />
-      <div class="slider-marcas"><span>0 mol</span><span>0,5 mol</span><span>1 mol</span></div>
+      <div class="slider-marcas"><span>0 mol</span><span>0.5 mol</span><span>1 mol</span></div>
     </div>
-    <div class="palco-acoes"><button class="modal-btn-confirmar" id="btnConfirmarRegua">Confirmar</button></div>
+    <div class="palco-acoes"><button class="modal-btn-confirmar" id="btnConfirmarRegua">Confirm</button></div>
     <div class="td-feedback" id="feedbackRegua"></div>
   `;
   $overlayPainel.appendChild(painel);
 
-  falar('explicando', 'Use a régua proporcional abaixo: arraste até encontrar a posição de 0,15 mol e veja o volume correspondente.', null);
+  falar('explicando', 'Use the proportional ruler below: drag until you find the position for 0.15 mol and see the corresponding volume.', null);
 
   const slider = document.getElementById('reguaProporcional');
   const leitura = document.getElementById('leituraRegua');
@@ -967,29 +966,29 @@ function montarRegua() {
       slider.disabled = true;
       document.getElementById('btnConfirmarRegua').disabled = true;
       feedback.style.color = '#8fd18a';
-      feedback.textContent = 'Exatamente: 0,15 mol → 3,36 L.';
+      feedback.textContent = 'Exactly: 0.15 mol → 3.36 L.';
       const passo = document.createElement('div');
       passo.className = 'passo-calculo';
-      passo.innerHTML = '<span class="passo-destaque">0,15 mol</span><span class="passo-seta">↓</span><span class="passo-destaque">3,36 L</span>';
+      passo.innerHTML = '<span class="passo-destaque">0.15 mol</span><span class="passo-seta">↓</span><span class="passo-destaque">3.36 L</span>';
       document.getElementById('painelRegua').insertBefore(passo, document.getElementById('painelRegua').querySelector('.palco-acoes'));
       requestAnimationFrame(() => passo.classList.add('visivel'));
       setTimeout(() => {
-        falar('animada', 'Muito bem! Bastou multiplicar 0,15 mol por 22,4 litros para chegar a 3,36 litros.', () => {
+        falar('animada', 'Well done! All it took was multiplying 0.15 mol by 22.4 liters to get 3.36 liters.', () => {
           etapa5();
         });
       }, 1400);
     } else {
-      professoraPergunta('Tente novamente: 1 mol equivale a 22,4 litros — encontre a fração correspondente a 0,15 mol.');
+      professoraPergunta('Try again: 1 mole equals 22.4 liters — find the fraction that corresponds to 0.15 mol.');
     }
   });
 }
 
 /* ==========================================================
-   ETAPA 5 — vários desafios: mol e volume de cada gás
+   STAGE 5 — several challenges: moles and volume of each gas
    ========================================================== */
 function etapa5() {
   limparPalco();
-  falar('explicando', 'Agora é sua vez. Para cada gás, calcule o número de mols e o volume nas CNTP.', () => {
+  falar('explicando', "Now it's your turn. For each gas, calculate the number of moles and the volume at STP.", () => {
     montarTabelaDesafios();
   });
 }
@@ -999,9 +998,9 @@ function montarTabelaDesafios() {
   painel.className = 'painel-dados';
   painel.style.maxWidth = '560px';
   painel.innerHTML = `
-    <div class="painel-titulo">Desafios — CNTP</div>
+    <div class="painel-titulo">Challenges — STP</div>
     <div class="tabela-desafios" id="tabelaDesafios">
-      <div class="td-linha cabecalho"><span>Gás</span><span>Mol</span><span>Volume (L)</span></div>
+      <div class="td-linha cabecalho"><span>Gas</span><span>Moles</span><span>Volume (L)</span></div>
       ${DESAFIOS_ETAPA5.map(d => {
         const g = GASES[d.gas];
         return `
@@ -1013,7 +1012,7 @@ function montarTabelaDesafios() {
       }).join('')}
     </div>
     <div class="td-feedback" id="feedbackDesafios"></div>
-    <div class="td-botoes"><button class="modal-btn-confirmar" id="btnVerificarDesafios">Verificar</button></div>
+    <div class="td-botoes"><button class="modal-btn-confirmar" id="btnVerificarDesafios">Check</button></div>
   `;
   $overlayPainel.appendChild(painel);
 
@@ -1042,14 +1041,14 @@ function verificarDesafios() {
   if (tudoCerto) {
     tocarDing();
     feedback.style.color = '#8fd18a';
-    feedback.textContent = 'Todos os cálculos corretos!';
+    feedback.textContent = 'All calculations correct!';
     document.getElementById('btnVerificarDesafios').disabled = true;
     document.querySelectorAll('#tabelaDesafios .td-input').forEach(i => i.disabled = true);
     setTimeout(finalizarJogo, 1300);
   } else {
     feedback.style.color = '#f5ead0';
-    feedback.textContent = 'Alguns valores ainda não conferem. Lembre-se: mol = massa ÷ massa molar; volume = mol × 22,4 L.';
-    professoraPergunta('Revise os campos destacados em vermelho: mol = massa ÷ massa molar, e volume = mol × 22,4 L.');
+    feedback.textContent = "Some values don't match yet. Remember: moles = mass ÷ molar mass; volume = moles × 22.4 L.";
+    professoraPergunta('Review the fields highlighted in red: moles = mass ÷ molar mass, and volume = moles × 22.4 L.');
   }
 }
 
@@ -1061,23 +1060,23 @@ function finalizarJogo() {
   const painel = document.createElement('div');
   painel.className = 'painel-dados';
   painel.innerHTML = `
-    <div class="painel-titulo">CNTP</div>
+    <div class="painel-titulo">STP</div>
     <div class="resumo-fluxo">
       <div class="resumo-item">0°C</div>
       <div class="resumo-seta">↓</div>
       <div class="resumo-item">1 atm</div>
       <div class="resumo-seta">↓</div>
-      <div class="resumo-item">1 mol</div>
+      <div class="resumo-item">1 mole</div>
       <div class="resumo-seta">↓</div>
-      <div class="resumo-item">22,4 litros</div>
+      <div class="resumo-item">22.4 liters</div>
     </div>
   `;
   $overlayPainel.appendChild(painel);
 
-  falar('animada', 'Excelente. Agora você entende por que qualquer gás ocupa o mesmo volume nas CNTP.', () => {
-    document.getElementById('conclusaoPlacar').textContent = 'O volume molar dos gases, compreendido';
+  falar('animada', 'Excellent. Now you understand why any gas occupies the same volume at STP.', () => {
+    document.getElementById('conclusaoPlacar').textContent = 'The molar volume of gases, understood';
     document.getElementById('conclusaoMensagem').textContent =
-      'Você descobriu, observando os experimentos, que nas CNTP qualquer gás ocupa 22,4 litros por mol — independentemente da sua massa molar.';
+      'You discovered, by observing the experiments, that at STP any gas occupies 22.4 liters per mole — regardless of its molar mass.';
     const conclusao = document.getElementById('conclusao');
     conclusao.classList.add('visivel');
     conclusao.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -1091,7 +1090,7 @@ function reiniciar() {
 }
 
 /* ==========================================================
-   ZOOM DA IMAGEM PRINCIPAL
+   MAIN IMAGE ZOOM
    ========================================================== */
 const imagemWrapper = document.getElementById('imagemWrapper');
 const modalZoom = document.getElementById('modalZoom');
@@ -1189,6 +1188,3 @@ function ajustarVolume(valorSlider) {
 </div>
 </body>
 </html>
-
-
-
