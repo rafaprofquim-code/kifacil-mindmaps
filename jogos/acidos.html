@@ -417,7 +417,7 @@
 
 <main>
   <h1 class="titulo-jogo">The Gallery of Acids</h1>
-  <p class="subtitulo">Investigate what happens when an acid is dissolved in water before memorizing any definition.</p>
+  <p class="subtitulo">Investigate what happens when an acid dissolves in water before learning the formal definition.</p>
 
   <div class="narrador">
     <img src="../imagens/rafa-sorrindo.jpg" alt="Professor Rafaela" />
@@ -775,7 +775,7 @@ function montarNomePorBlocos(chave, aoConcluir) {
    INTRODUCTION
    ========================================================== */
 function passoIntro() {
-  fala('Today we are going to investigate acids — we will learn what they are and how to name them.');
+  fala('Today we\'ll investigate acids, discover what they are, and learn how to name them.');
   const btn = document.createElement('button');
   btn.className = 'btn-continuar btn-iniciar-investigacao';
   btn.textContent = 'START INVESTIGATION';
@@ -835,7 +835,7 @@ function passoEtapa2c() {
   placa.className = 'placa-dourada';
   placa.textContent = 'H⁺ + H₂O → H₃O⁺';
   overlay.appendChild(placa);
-  fala('According to Arrhenius, an acid ionizes in water and produces H⁺. In aqueous solution, H⁺ does not remain free. It immediately combines with a water molecule to form H₃O⁺ (the hydronium ion).');
+  fala('According to the Arrhenius definition, an acid ionizes in water to produce H⁺ ions. In aqueous solution, H⁺ does not remain free. It immediately combines with a water molecule to form H₃O⁺ (the hydronium ion).');
   painel.innerHTML = '';
   botaoContinuarLocal(passoEtapa2d, 700);
 }
@@ -884,7 +884,7 @@ function passoIonizacao() {
   painel.innerHTML = '';
   const wrap = document.createElement('div');
   wrap.className = 'interacao-painel';
-  wrap.innerHTML = '<div class="interacao-pergunta-texto">Observe the ionization in each container.</div>';
+  wrap.innerHTML = '<div class="interacao-pergunta-texto">Observe the degree of ionization in each solution.</div>';
   const btn = document.createElement('button');
   btn.className = 'btn-continuar';
   btn.textContent = 'OBSERVE THE IONIZATION';
@@ -995,7 +995,7 @@ function passoEtapa5() {
    STEP 6 — HYDRACIDS
    ========================================================== */
 function passoHidracidos() {
-  fala('Now let\'s name acids. These formulas contain no oxygen: they are binary acids (hydracids), named hydro + anion root + ic acid. Match each formula to its name.');
+  fala('Now let\'s name acids. These formulas contain no oxygen. They are called binary acids and are named using hydro + the anion root + ic acid. Match each formula to its name.');
 
   criarJogoDeAssociacao([
     { chave: 'HCl', nome: 'hydrochloric acid' },
@@ -1009,7 +1009,7 @@ function passoHidracidos() {
    STEP 7 — OXYACIDS
    ========================================================== */
 function passoOxiacidos() {
-  fala('These acids contain oxygen: they are oxyacids (oxoacids). Compare the pairs below. What distinguishes each pair?');
+  fala('These acids contain oxygen. They are called oxyacids. Compare the pairs below. What distinguishes each pair?');
   const linha = document.createElement('div');
   linha.className = 'linha-cartas-simples';
   ['HNO3', 'HNO2', 'H2SO4', 'H2SO3'].forEach(function (c) {
@@ -1057,7 +1057,7 @@ function criarPassoNomenclatura(chave) {
     overlay.appendChild(cartaoFormula);
 
     escolhaBotoes({
-      pergunta: 'Is this acid a binary acid (hydracid) or an oxyacid (oxoacid)?',
+      pergunta: 'Is this a binary acid or an oxyacid?',
       opcoes: [
         { rotulo: 'Binary acid (hydracid)', correta: TIPO_ACIDO[chave] === 'hidracido' },
         { rotulo: 'Oxyacid (oxoacid)', correta: TIPO_ACIDO[chave] === 'oxiacido' }
@@ -1087,7 +1087,7 @@ function passoFinal() {
     linha('Acids ionize in water and form H₃O⁺.') +
     linha('The ions produced allow the solution to conduct electric current.') +
     linha('Each acid has its own degree of ionization (α).') +
-    linha('Binary acids (hydracids) and oxyacids follow specific naming rules.') +
+    linha('Binary acids and oxyacids follow specific naming rules.') +
     '</div></div>';
 
   painel.innerHTML = '';

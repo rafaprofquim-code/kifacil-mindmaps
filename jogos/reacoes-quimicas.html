@@ -115,7 +115,7 @@
       align-items: center;
       width: min(100%, 900px);
       max-height: 70vh;
-      min-height: 380px;
+      min-height: 460px;
       margin: 0 auto;
       cursor: default;
       border: 1.5px solid var(--borda-forte);
@@ -133,7 +133,33 @@
       user-select: none;
       pointer-events: none;
     }
-    .overlay-animacao { position: absolute; inset: 0; }
+    /* Darkens/blurs the photo backdrop so the (now much larger)
+       molecules and equations stay the clear visual focus. */
+    .cena-escurecida {
+      position: absolute;
+      inset: 0;
+      background: rgba(10,6,0,.46);
+      backdrop-filter: blur(2px);
+      -webkit-backdrop-filter: blur(2px);
+      z-index: 0;
+      pointer-events: none;
+    }
+    /* Parchment-colored card behind the reaction/equation, so dark
+       atoms (like carbon) stay visible against the darkened photo. */
+    .pergaminho-fundo {
+      position: absolute;
+      left: 50%; top: 50%;
+      transform: translate(-50%, -50%);
+      width: 88%; max-width: 780px;
+      height: 62%; max-height: 320px;
+      background: linear-gradient(155deg, #f3e9cc, #e6d7ad);
+      border: 1.5px solid rgba(139,94,26,.4);
+      border-radius: 18px;
+      box-shadow: 0 12px 32px rgba(0,0,0,.35), inset 0 0 50px rgba(139,94,26,.1);
+      z-index: 0;
+      pointer-events: none;
+    }
+    .overlay-animacao { position: absolute; inset: 0; z-index: 1; }
 
     .link-aula {
       position: absolute; top: 10px; right: 10px; z-index: 10;
@@ -148,10 +174,6 @@
     .link-aula:hover { background: rgba(30,16,8,0.92); transform: translateY(-1px); }
     .link-aula svg { width: 22px; height: 22px; }
 
-    .bancada-img {
-      position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
-      width: 70%; max-width: 480px; z-index: 1; pointer-events: none; opacity: 0.9;
-    }
     .tubo-icone { position: absolute; width: 46px; z-index: 2; pointer-events: none; opacity: 0.9; }
 
     /* Moléculas (SVG, apenas ilustrativas — sem interação) */
@@ -159,31 +181,42 @@
     .molecula-visual svg { display: block; }
     .destaque-dourado { filter: drop-shadow(0 0 8px rgba(200,146,10,0.9)); }
 
+    /* Pulses a molecule right before its bonds break, as a visual cue */
+    .molecula-quebrando { animation: pulsoQuebra .5s ease 2; }
+    @keyframes pulsoQuebra { 0%, 100% { opacity: 1; } 50% { opacity: .35; } }
+
     .sinal-mais {
       position: absolute; font-family: 'Cormorant Garamond', serif; font-weight: 700;
-      font-size: 1.7rem; color: var(--texto-suave); transform: translate(-50%, -50%); z-index: 3;
-      pointer-events: none;
+      font-size: 2.1rem; color: #fff8ee; transform: translate(-50%, -50%); z-index: 3;
+      pointer-events: none; text-shadow: 0 2px 6px rgba(0,0,0,.5);
     }
 
-    /* Estados físicos — rótulos estáticos, sem drag */
-    .exemplo-estado {
-      display: flex; flex-direction: column; align-items: center; gap: 4px;
-      background: var(--fundo-card); border: 1px solid var(--borda-forte); border-radius: 8px;
-      padding: 6px 8px; min-width: 100px;
+    /* ---------------------------------------------------------
+       PERSISTENT EQUATION DISPLAY (flexbox)
+       Used whenever a full equation must stay on screen across
+       several related questions (parts of the equation, physical
+       states, full review). Groups can be dimmed/highlighted with
+       .dim / .foco without ever being removed from the DOM.
+       --------------------------------------------------------- */
+    .equacao-wrap { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; z-index: 2; padding: 1rem; }
+    .equacao-flex { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 1rem; width: 100%; }
+    .eq-grupo { display: flex; align-items: center; gap: 0.7rem; transition: opacity .5s ease, filter .5s ease; }
+    .eq-grupo.dim { opacity: .25; filter: grayscale(.65); }
+    .eq-grupo.foco { filter: drop-shadow(0 0 16px rgba(200,146,10,.85)); }
+    .eq-mais { font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 2.2rem; color: #fff8ee; text-shadow: 0 2px 6px rgba(0,0,0,.5); }
+    .eq-molecula-bloco { display: flex; flex-direction: column; align-items: center; gap: .4rem; }
+    .eq-molecula svg { display: block; }
+    .eq-estado-label {
+      font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 1.05rem;
+      color: #fff8ee; background: rgba(30,16,8,.7); padding: 2px 10px; border-radius: 6px;
+      border: 1px solid rgba(200,146,10,.4);
     }
-    .exemplo-estado-nome { font-family: 'Libre Baskerville', serif; font-size: 0.66rem; color: var(--texto-suave); text-align: center; }
-    .exemplo-estado-slot {
-      width: 44px; height: 30px; border: 2px solid var(--borda-forte); border-radius: 6px;
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'Cormorant Garamond', serif; font-weight: 700; color: var(--texto-suave);
-    }
-    .exemplo-estado-slot.preenchido { border-color: var(--dourado-claro); color: var(--dourado-claro); }
-    .condicao-tag {
-      position: absolute; transform: translate(-50%, -50%);
-      background: linear-gradient(135deg, #fff3d6, #e9c877); color: #3d2600;
-      font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 0.7rem;
-      padding: 0.25rem 0.5rem; border-radius: 6px; border: 1px solid #a97c1f;
-      opacity: 0; animation: placaIn .4s ease forwards; z-index: 5; pointer-events: none;
+    .eq-seta-wrap { position: relative; }
+    .eq-condicao {
+      position: absolute; top: -1.9rem; left: 50%; transform: translateX(-50%);
+      font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 0.9rem;
+      color: #3d2600; background: linear-gradient(135deg, #fff3d6, #e9c877);
+      padding: 3px 10px; border-radius: 6px; border: 1px solid #a97c1f; white-space: nowrap;
     }
 
     .placa-dourada {
@@ -286,13 +319,16 @@
       main { padding: 2rem 1rem 4rem; }
       .interacao-painel { padding: 1.2rem 1rem; }
       .placa-dourada { font-size: 0.74rem; padding: 0.42rem 0.75rem; }
-      .exemplo-estado { min-width: 78px; padding: 4px 6px; }
-      .exemplo-estado-nome { font-size: 0.56rem; }
-      .bancada-img { width: 90%; }
       .link-aula { top: 6px; right: 6px; padding: 0.3rem 0.5rem; font-size: 0.6rem; }
       .link-aula svg { width: 18px; height: 18px; }
+      /* Molecules are drawn ~2.3x larger for legibility; scale them
+         back down on narrow screens so equations still fit. */
+      .molecula-visual { transform: translate(-50%, -50%) scale(.62); }
+      .eq-molecula-bloco svg { transform: scale(.72); }
+      .eq-estado-label { font-size: 0.86rem; }
+      .equacao-flex { gap: .5rem; }
     }
-  
+
     /* AUDIO CONTROL */
     #controle-volume {
       position: fixed;
@@ -349,6 +385,8 @@
 
   <div class="imagem-wrapper" id="imagemWrapper">
     <img src="../imagens/laboratorio-reacoes.jpg" alt="Chemical reactions laboratory" class="cena-fundo" />
+    <div class="cena-escurecida"></div>
+    <div class="pergaminho-fundo"></div>
     <div class="overlay-animacao" id="overlayAnimacao"></div>
 </div>
 
@@ -384,11 +422,17 @@ function limparTimers() { timersAtivos.forEach(clearTimeout); timersAtivos = [];
 
 /* ==========================================================
    COMPONENT: MOLECULE (SVG, illustration only — no interaction)
+   Bond entries are [atomIndexA, atomIndexB, order] — order 2 draws
+   a correct Lewis-style double bond (two parallel lines); order is
+   1 by default. Coordinates below are the "design" scale; the real
+   on-screen size is ESCALA times larger (see defEscalada).
    ========================================================== */
+const ESCALA = 2.3;
+
 const MOLECULAS_DEF = {
   C:   { atomos: [{ simbolo: 'C', cor: 'var(--escuro)', x: 30, y: 30, r: 18 }], ligacoes: [], largura: 60, altura: 60 },
-  O2:  { atomos: [{ simbolo: 'O', cor: 'var(--vermelho-escuro)', x: 26, y: 32, r: 15 }, { simbolo: 'O', cor: 'var(--vermelho-escuro)', x: 68, y: 32, r: 15 }], ligacoes: [[0, 1]], largura: 94, altura: 64 },
-  CO2: { atomos: [{ simbolo: 'O', cor: 'var(--vermelho-escuro)', x: 18, y: 32, r: 14 }, { simbolo: 'C', cor: 'var(--escuro)', x: 56, y: 32, r: 16 }, { simbolo: 'O', cor: 'var(--vermelho-escuro)', x: 94, y: 32, r: 14 }], ligacoes: [[0, 1], [1, 2]], largura: 112, altura: 64 },
+  O2:  { atomos: [{ simbolo: 'O', cor: 'var(--vermelho-escuro)', x: 26, y: 32, r: 15 }, { simbolo: 'O', cor: 'var(--vermelho-escuro)', x: 68, y: 32, r: 15 }], ligacoes: [[0, 1, 2]], largura: 94, altura: 64 },
+  CO2: { atomos: [{ simbolo: 'O', cor: 'var(--vermelho-escuro)', x: 18, y: 32, r: 14 }, { simbolo: 'C', cor: 'var(--escuro)', x: 56, y: 32, r: 16 }, { simbolo: 'O', cor: 'var(--vermelho-escuro)', x: 94, y: 32, r: 14 }], ligacoes: [[0, 1, 2], [1, 2, 2]], largura: 112, altura: 64 },
   H2:  { atomos: [{ simbolo: 'H', cor: 'var(--dourado-claro)', x: 24, y: 28, r: 12 }, { simbolo: 'H', cor: 'var(--dourado-claro)', x: 60, y: 28, r: 12 }], ligacoes: [[0, 1]], largura: 84, altura: 56 },
   Cl2: { atomos: [{ simbolo: 'Cl', cor: 'var(--vermelho-escuro)', x: 28, y: 30, r: 16 }, { simbolo: 'Cl', cor: 'var(--vermelho-escuro)', x: 72, y: 30, r: 16 }], ligacoes: [[0, 1]], largura: 100, altura: 60 },
   HCl: { atomos: [{ simbolo: 'H', cor: 'var(--dourado-claro)', x: 22, y: 28, r: 11 }, { simbolo: 'Cl', cor: 'var(--vermelho-escuro)', x: 60, y: 28, r: 15 }], ligacoes: [[0, 1]], largura: 84, altura: 56 },
@@ -419,25 +463,84 @@ const MOLECULAS_DEF = {
   H2O: { atomos: [{ simbolo: 'O', cor: 'var(--vermelho-escuro)', x: 46, y: 20, r: 14 }, { simbolo: 'H', cor: 'var(--dourado-claro)', x: 20, y: 46, r: 10 }, { simbolo: 'H', cor: 'var(--dourado-claro)', x: 72, y: 46, r: 10 }], ligacoes: [[0, 1], [0, 2]], largura: 92, altura: 64 }
 };
 
-function criarMolecula(idUnico, chave, left, top) {
-  const def = MOLECULAS_DEF[chave];
+const _defCache = {};
+function defEscalada(chave) {
+  if (_defCache[chave]) return _defCache[chave];
+  const original = MOLECULAS_DEF[chave];
+  const escalado = {
+    largura: original.largura * ESCALA,
+    altura: original.altura * ESCALA,
+    ligacoes: original.ligacoes,
+    atomos: original.atomos.map(function (a) {
+      return { simbolo: a.simbolo, cor: a.cor, x: a.x * ESCALA, y: a.y * ESCALA, r: a.r * ESCALA };
+    })
+  };
+  _defCache[chave] = escalado;
+  return escalado;
+}
+
+function construirSvgMolecula(chave) {
+  const def = defEscalada(chave);
   let svg = '<svg viewBox="0 0 ' + def.largura + ' ' + def.altura + '" width="' + def.largura + '" height="' + def.altura + '">';
   def.ligacoes.forEach(function (par) {
     const a = def.atomos[par[0]], b = def.atomos[par[1]];
-    svg += '<line x1="' + a.x + '" y1="' + a.y + '" x2="' + b.x + '" y2="' + b.y + '" stroke="#3d2e1a" stroke-width="2.5"/>';
+    const ordem = par[2] || 1;
+    if (ordem === 2) {
+      const dx = b.x - a.x, dy = b.y - a.y;
+      const len = Math.hypot(dx, dy) || 1;
+      const nx = -dy / len, ny = dx / len;
+      const off = 7;
+      svg += '<line x1="' + (a.x + nx * off) + '" y1="' + (a.y + ny * off) + '" x2="' + (b.x + nx * off) + '" y2="' + (b.y + ny * off) + '" stroke="#3d2e1a" stroke-width="3.5"/>';
+      svg += '<line x1="' + (a.x - nx * off) + '" y1="' + (a.y - ny * off) + '" x2="' + (b.x - nx * off) + '" y2="' + (b.y - ny * off) + '" stroke="#3d2e1a" stroke-width="3.5"/>';
+    } else {
+      svg += '<line x1="' + a.x + '" y1="' + a.y + '" x2="' + b.x + '" y2="' + b.y + '" stroke="#3d2e1a" stroke-width="4"/>';
+    }
   });
   def.atomos.forEach(function (a) {
     svg += '<circle cx="' + a.x + '" cy="' + a.y + '" r="' + a.r + '" fill="' + a.cor + '"/>';
     svg += '<text x="' + a.x + '" y="' + (a.y + a.r * 0.34) + '" font-size="' + (a.r * 0.68) + '" text-anchor="middle" fill="#fff8ee" font-family="Cormorant Garamond, serif" font-weight="700">' + a.simbolo + '</text>';
   });
   svg += '</svg>';
+  return svg;
+}
+
+// Absolutely-positioned molecule — left/top are the CENTER of the
+// molecule (the CSS transform: translate(-50%,-50%) does the rest).
+// Used during reaction animations.
+function criarMolecula(idUnico, chave, left, top) {
   const div = document.createElement('div');
   div.className = 'molecula-visual';
   div.id = 'mol-' + idUnico;
   div.style.left = left;
   div.style.top = top;
   div.dataset.chave = chave;
-  div.innerHTML = svg;
+  div.innerHTML = construirSvgMolecula(chave);
+  return div;
+}
+
+// A single free-floating atom, positioned the same way as
+// criarMolecula. Used to show atoms detaching from a molecule and
+// flying to their new position in a reaction.
+function criarAtomoPx(idUnico, simbolo, cor, raio, centerX, centerY) {
+  const tam = raio * 2;
+  const div = document.createElement('div');
+  div.className = 'molecula-visual';
+  div.id = 'atomo-' + idUnico;
+  div.style.left = centerX + 'px';
+  div.style.top = centerY + 'px';
+  div.innerHTML = '<svg viewBox="0 0 ' + tam + ' ' + tam + '" width="' + tam + '" height="' + tam + '">' +
+    '<circle cx="' + raio + '" cy="' + raio + '" r="' + raio + '" fill="' + cor + '"/>' +
+    '<text x="' + raio + '" y="' + (raio + raio * 0.34) + '" font-size="' + (raio * 0.68) + '" text-anchor="middle" fill="#fff8ee" font-family="Cormorant Garamond, serif" font-weight="700">' + simbolo + '</text>' +
+  '</svg>';
+  return div;
+}
+
+// Flexbox-friendly molecule (no absolute positioning) — used inside
+// the persistent equation display, where layout is handled by CSS.
+function criarMoleculaFlex(chave) {
+  const div = document.createElement('div');
+  div.className = 'eq-molecula';
+  div.innerHTML = construirSvgMolecula(chave);
   return div;
 }
 
@@ -462,18 +565,90 @@ function criarSinalMais(left, top) {
   m.style.top = top;
   return m;
 }
-function adicionarBancada() {
-  const img = document.createElement('img');
-  img.src = '../imagens/bancada-reacoes.png';
-  img.className = 'bancada-img';
-  img.alt = 'Reaction bench';
-  overlay.appendChild(img);
+/* ==========================================================
+   PERSISTENT EQUATION DISPLAY
+   Builds a reactants → products row (with optional physical-state
+   labels and a reaction condition above the arrow) that stays on
+   screen for as long as the current scene needs it. Individual
+   parts (reactants / arrow / products) can be highlighted with
+   focarGrupos() without ever clearing the stage.
+   ========================================================== */
+function blocoMolecula(item) {
+  const bloco = document.createElement('div');
+  bloco.className = 'eq-molecula-bloco';
+  bloco.appendChild(criarMoleculaFlex(item.chave));
+  if (item.estado) {
+    const lbl = document.createElement('div');
+    lbl.className = 'eq-estado-label';
+    lbl.textContent = item.estado;
+    bloco.appendChild(lbl);
+  }
+  return bloco;
+}
+
+function criarGrupo(itens) {
+  const grupo = document.createElement('div');
+  grupo.className = 'eq-grupo';
+  itens.forEach(function (item, i) {
+    if (i > 0) {
+      const mais = document.createElement('div');
+      mais.className = 'eq-mais';
+      mais.textContent = '+';
+      grupo.appendChild(mais);
+    }
+    grupo.appendChild(blocoMolecula(item));
+  });
+  return grupo;
+}
+
+function renderEquacao(reagentes, produtos, opts) {
+  opts = opts || {};
+  const wrap = document.createElement('div');
+  wrap.className = 'equacao-wrap';
+  const linha = document.createElement('div');
+  linha.className = 'equacao-flex';
+
+  const grupoReagentes = criarGrupo(reagentes);
+  const setaWrap = document.createElement('div');
+  setaWrap.className = 'eq-grupo eq-seta-wrap';
+  setaWrap.innerHTML = '<svg class="eq-seta-svg" viewBox="0 0 80 24" width="80" height="24"><line x1="4" y1="12" x2="66" y2="12" stroke="#c8920a" stroke-width="3"/><polygon points="66,4 80,12 66,20" fill="#c8920a"/></svg>';
+  if (opts.condicao) {
+    const cond = document.createElement('div');
+    cond.className = 'eq-condicao';
+    cond.textContent = opts.condicao;
+    setaWrap.appendChild(cond);
+  }
+  const grupoProdutos = criarGrupo(produtos);
+
+  linha.appendChild(grupoReagentes);
+  linha.appendChild(setaWrap);
+  linha.appendChild(grupoProdutos);
+  wrap.appendChild(linha);
+  overlay.appendChild(wrap);
+
+  return { reagentesEl: grupoReagentes, produtosEl: grupoProdutos, setaEl: setaWrap };
+}
+
+function focarGrupos() {
+  const manter = Array.prototype.slice.call(arguments);
+  document.querySelectorAll('.eq-grupo').forEach(function (g) {
+    if (manter.indexOf(g) !== -1) {
+      g.classList.remove('dim');
+      g.classList.add('foco');
+    } else {
+      g.classList.add('dim');
+      g.classList.remove('foco');
+    }
+  });
+}
+function limparFoco() {
+  document.querySelectorAll('.eq-grupo').forEach(function (g) { g.classList.remove('dim', 'foco'); });
 }
 
 /* ==========================================================
    INTERACTION HELPERS
    ========================================================== */
-function botaoContinuar(delayMs) {
+function botaoContinuar(delayMs, aoContinuar) {
   delayMs = delayMs || 0;
   painel.innerHTML = '';
   continuarBalao.innerHTML = '';
@@ -483,12 +658,15 @@ function botaoContinuar(delayMs) {
   btn.disabled = delayMs > 0;
   continuarBalao.appendChild(btn);
   if (delayMs > 0) agendar(function () { btn.disabled = false; }, delayMs);
-  btn.addEventListener('click', avancar);
+  btn.addEventListener('click', aoContinuar || avancar);
   return btn;
 }
 
-// Simple, reliable multiple-choice question — replaces all the
-// previous drag-and-drop mechanics.
+// Simple, reliable multiple-choice question. Accepts an optional
+// aoContinuar callback so a scene can chain several questions in a
+// row (highlighting a different part of the same equation each
+// time) without the global engine clearing the stage in between —
+// only the last question of a scene should fall through to avancar().
 function escolhaBotoes(opts) {
   painel.innerHTML = '';
   const wrap = document.createElement('div');
@@ -517,7 +695,7 @@ function escolhaBotoes(opts) {
         btn.classList.add('opcao-certa');
         feedback.className = 'modal-feedback visivel';
         feedback.innerHTML = '<span class="feedback-certo">Correct!</span><p class="feedback-explicacao">' + opts.explicacao + '</p>';
-        agendar(function () { botaoContinuar(400); }, 300);
+        agendar(function () { botaoContinuar(400, opts.aoContinuar); }, 300);
       } else {
         tentativas++;
         btn.classList.add('opcao-errada');
@@ -532,7 +710,7 @@ function escolhaBotoes(opts) {
           });
           feedback.className = 'modal-feedback visivel';
           feedback.innerHTML = '<span class="feedback-resposta">The correct answer is highlighted.</span><p class="feedback-explicacao">' + opts.explicacao + '</p>';
-          agendar(function () { botaoContinuar(400); }, 300);
+          agendar(function () { botaoContinuar(400, opts.aoContinuar); }, 300);
         }
       }
     });
@@ -558,25 +736,34 @@ function passoIntro2() {
 
 /* ==========================================================
    STAGE 1 — FIRST REACTION (C + O2 → CO2)
+   A slow, explicit atom-by-atom animation: the O2 bond visibly
+   breaks, the three atoms drift apart, then travel to their new
+   positions and form the correct double bonds of CO2 (O=C=O).
    ========================================================== */
 function passoEtapa1() {
   fala('Here are two substances: carbon and oxygen gas.');
-  adicionarBancada();
   const tubo = document.createElement('img');
   tubo.src = '../imagens/tubo-ensaio.png';
   tubo.className = 'tubo-icone';
   tubo.style.left = '4%'; tubo.style.top = '8%';
   overlay.appendChild(tubo);
 
-  const c = criarMolecula('e1-c', 'C', '24%', '32%');
-  const o2 = criarMolecula('e1-o2', 'O2', '54%', '32%');
-  const mais = criarSinalMais('40%', '34%');
+  const larguraPalco = overlay.clientWidth;
+  const alturaPalco = overlay.clientHeight;
+
+  const centroC  = { x: larguraPalco * 0.22, y: alturaPalco * 0.42 };
+  const centroO2 = { x: larguraPalco * 0.66, y: alturaPalco * 0.42 };
+  const centroMais = { x: larguraPalco * 0.44, y: alturaPalco * 0.44 };
+
+  const c  = criarMolecula('e1-c', 'C', centroC.x + 'px', centroC.y + 'px');
+  const o2 = criarMolecula('e1-o2', 'O2', centroO2.x + 'px', centroO2.y + 'px');
+  const mais = criarSinalMais(centroMais.x + 'px', centroMais.y + 'px');
   overlay.appendChild(c); overlay.appendChild(o2); overlay.appendChild(mais);
 
   painel.innerHTML = '';
   const wrap = document.createElement('div');
   wrap.className = 'interacao-painel';
-  wrap.innerHTML = '<div class="interacao-pergunta-texto">Click to start the reaction.</div>';
+  wrap.innerHTML = '<div class="interacao-pergunta-texto">Click to start the reaction and watch closely.</div>';
   const btn = document.createElement('button');
   btn.className = 'btn-continuar';
   btn.textContent = 'Start reaction';
@@ -585,24 +772,63 @@ function passoEtapa1() {
 
   btn.addEventListener('click', function () {
     btn.disabled = true;
-    fala('The bonds slowly break apart. The atoms become free.');
-    c.style.transition = 'opacity .8s'; o2.style.transition = 'opacity .8s'; mais.style.transition = 'opacity .8s';
-    agendar(function () { c.style.opacity = '0'; o2.style.opacity = '0'; mais.style.opacity = '0'; }, 200);
+    fala('Watch the double bond inside O₂ — it is about to break.');
+    o2.classList.add('molecula-quebrando');
+    mais.style.transition = 'opacity .6s';
+    agendar(function () { mais.style.opacity = '0'; }, 700);
+
     agendar(function () {
-      c.remove(); o2.remove(); mais.remove();
-      fala('Now they rearrange themselves...');
-      const co2 = criarMolecula('e1-co2', 'CO2', '40%', '32%');
-      co2.style.opacity = '0';
-      co2.style.transition = 'opacity .8s';
-      overlay.appendChild(co2);
-      agendar(function () { co2.style.opacity = '1'; }, 50);
-    }, 1100);
-    agendar(function () {
-      fala('Notice that no atom was created or destroyed. Only a rearrangement took place.');
-      const placa = document.createElement('div');
-      placa.className = 'placa-dourada';
-      placa.textContent = 'C + O₂ → CO₂ (atoms rearranged)';
-      overlay.appendChild(placa);
+      fala('The bond breaks. Now three separate atoms are free: one carbon and two oxygen.');
+      mais.remove();
+
+      const defC  = defEscalada('C');
+      const defO2 = defEscalada('O2');
+      const raioC = defC.atomos[0].r;
+      const raioO = defO2.atomos[0].r;
+
+      // Each oxygen atom's real center, derived from the O2 layout.
+      const o1Start = { x: centroO2.x + (defO2.atomos[0].x - defO2.largura / 2), y: centroO2.y + (defO2.atomos[0].y - defO2.altura / 2) };
+      const o2Start = { x: centroO2.x + (defO2.atomos[1].x - defO2.largura / 2), y: centroO2.y + (defO2.atomos[1].y - defO2.altura / 2) };
+
+      c.remove(); o2.remove();
+
+      const atomC  = criarAtomoPx('flying-c', 'C', 'var(--escuro)', raioC, centroC.x, centroC.y);
+      const atomOa = criarAtomoPx('flying-o1', 'O', 'var(--vermelho-escuro)', raioO, o1Start.x, o1Start.y);
+      const atomOb = criarAtomoPx('flying-o2', 'O', 'var(--vermelho-escuro)', raioO, o2Start.x, o2Start.y);
+      overlay.appendChild(atomC); overlay.appendChild(atomOa); overlay.appendChild(atomOb);
+
+      // Target: the correct CO2 layout, centered on the stage.
+      const defCO2 = defEscalada('CO2');
+      const centroPalco = { x: larguraPalco / 2, y: alturaPalco * 0.42 };
+      const alvoO1 = { x: centroPalco.x + (defCO2.atomos[0].x - defCO2.largura / 2), y: centroPalco.y + (defCO2.atomos[0].y - defCO2.altura / 2) };
+      const alvoC  = { x: centroPalco.x + (defCO2.atomos[1].x - defCO2.largura / 2), y: centroPalco.y + (defCO2.atomos[1].y - defCO2.altura / 2) };
+      const alvoO2 = { x: centroPalco.x + (defCO2.atomos[2].x - defCO2.largura / 2), y: centroPalco.y + (defCO2.atomos[2].y - defCO2.altura / 2) };
+
+      agendar(function () {
+        fala('Now the atoms move slowly toward each other to form new bonds.');
+        [atomOa, atomC, atomOb].forEach(function (a) { a.style.transition = 'left 1.7s ease, top 1.7s ease'; });
+        atomOa.style.left = alvoO1.x + 'px'; atomOa.style.top = alvoO1.y + 'px';
+        atomC.style.left  = alvoC.x  + 'px'; atomC.style.top  = alvoC.y  + 'px';
+        atomOb.style.left = alvoO2.x + 'px'; atomOb.style.top = alvoO2.y + 'px';
+      }, 250);
+
+      agendar(function () {
+        fala('New double bonds form, creating carbon dioxide: O=C=O.');
+        atomOa.remove(); atomC.remove(); atomOb.remove();
+        const co2 = criarMolecula('e1-co2', 'CO2', centroPalco.x + 'px', centroPalco.y + 'px');
+        co2.style.opacity = '0'; co2.style.transition = 'opacity .5s';
+        overlay.appendChild(co2);
+        agendar(function () { co2.style.opacity = '1'; }, 30);
+      }, 2100);
+
+      agendar(function () {
+        fala('Notice that no atom was created or destroyed. Only a rearrangement took place.');
+        const placa = document.createElement('div');
+        placa.className = 'placa-dourada';
+        placa.textContent = 'C + O₂ → CO₂ (atoms rearranged)';
+        overlay.appendChild(placa);
+      }, 2700);
+
       agendar(function () {
         escolhaBotoes({
           pergunta: 'What happened to the carbon and oxygen atoms during this reaction?',
@@ -614,134 +840,170 @@ function passoEtapa1() {
           dica: 'Think about what you just watched happen on screen.',
           explicacao: 'Exactly! No atom was created or destroyed — they simply rearranged into a new substance, CO₂. This is the Law of Conservation of Mass.'
         });
-      }, 800);
-    }, 2400);
+      }, 3600);
+    }, 900);
   });
 }
 
 /* ==========================================================
-   STAGE 2 — PARTS OF THE EQUATION (now simple questions)
+   STAGE 2 — PARTS OF THE EQUATION
+   The full C + O2 → CO2 equation is drawn once and stays visible
+   for all three questions below; only the highlighted group
+   changes (reactants → products → arrow).
    ========================================================== */
 function passoEtapa2() {
-  fala("Let's label the parts of this equation.");
-  const c = criarMolecula('e2-c', 'C', '18%', '32%');
-  const o2 = criarMolecula('e2-o2', 'O2', '38%', '32%');
-  const seta = criarSeta('58%', '34%');
-  const co2 = criarMolecula('e2-co2', 'CO2', '80%', '32%');
-  overlay.appendChild(c); overlay.appendChild(o2); overlay.appendChild(seta); overlay.appendChild(co2);
-  overlay.appendChild(criarSinalMais('28%', '36%'));
+  fala("Let's label the parts of this equation you just discovered.");
+  const eq = renderEquacao(
+    [{ chave: 'C' }, { chave: 'O2' }],
+    [{ chave: 'CO2' }]
+  );
 
-  escolhaBotoes({
-    pergunta: 'In the equation C + O₂ → CO₂, what do we call the substances on the left of the arrow (C and O₂)?',
-    opcoes: [
-      { rotulo: 'Reactants', correta: true },
-      { rotulo: 'Products', correta: false },
-      { rotulo: 'Catalysts', correta: false }
-    ],
-    dica: 'These are the substances you start with, before the reaction happens.',
-    explicacao: "Reactants are the starting substances of a reaction, always written on the left side of the equation."
-  });
-}
-function passoEtapa2b() {
-  escolhaBotoes({
-    pergunta: 'And what do we call the substance on the right of the arrow (CO₂)?',
-    opcoes: [
-      { rotulo: 'Products', correta: true },
-      { rotulo: 'Reactants', correta: false },
-      { rotulo: 'Catalysts', correta: false }
-    ],
-    dica: 'This is what forms as a result of the reaction.',
-    explicacao: 'Products are the substances formed by the reaction, always written on the right side of the equation.'
-  });
-}
-function passoEtapa2c() {
-  escolhaBotoes({
-    pergunta: 'What does the arrow (→) represent in a chemical equation?',
-    opcoes: [
-      { rotulo: 'The direction of the reaction', correta: true },
-      { rotulo: 'Addition, like a plus sign', correta: false },
-      { rotulo: 'Equality, like an equals sign', correta: false }
-    ],
-    dica: 'Think about which way the substances are turning into other substances.',
-    explicacao: 'The arrow shows the direction of the reaction: reactants (left) turn into products (right).'
-  });
+  function perguntaReagentes() {
+    focarGrupos(eq.reagentesEl);
+    escolhaBotoes({
+      pergunta: 'In this equation, what do we call the substances on the left of the arrow (C and O₂)?',
+      opcoes: [
+        { rotulo: 'Reactants', correta: true },
+        { rotulo: 'Products', correta: false },
+        { rotulo: 'Catalysts', correta: false }
+      ],
+      dica: 'These are the substances you start with, before the reaction happens.',
+      explicacao: 'Reactants are the starting substances of a reaction, always written on the left side of the equation.',
+      aoContinuar: perguntaProdutos
+    });
+  }
+  function perguntaProdutos() {
+    focarGrupos(eq.produtosEl);
+    escolhaBotoes({
+      pergunta: 'And what do we call the substance on the right of the arrow (CO₂)?',
+      opcoes: [
+        { rotulo: 'Products', correta: true },
+        { rotulo: 'Reactants', correta: false },
+        { rotulo: 'Catalysts', correta: false }
+      ],
+      dica: 'This is what forms as a result of the reaction.',
+      explicacao: 'Products are the substances formed by the reaction, always written on the right side of the equation.',
+      aoContinuar: perguntaSeta
+    });
+  }
+  function perguntaSeta() {
+    focarGrupos(eq.setaEl);
+    escolhaBotoes({
+      pergunta: 'What does the arrow (→) represent in a chemical equation?',
+      opcoes: [
+        { rotulo: 'The direction of the reaction', correta: true },
+        { rotulo: 'Addition, like a plus sign', correta: false },
+        { rotulo: 'Equality, like an equals sign', correta: false }
+      ],
+      dica: 'Think about which way the substances are turning into other substances.',
+      explicacao: 'The arrow shows the direction of the reaction: reactants (left) turn into products (right).',
+      aoContinuar: function () { limparFoco(); avancar(); }
+    });
+  }
+
+  agendar(perguntaReagentes, 500);
 }
 
 /* ==========================================================
    STAGE 3 — PHYSICAL STATES AND REACTION CONDITIONS
+   All four examples stay visible together as formula + state
+   symbol only (no explanatory text that would give the answer
+   away), then reaction conditions are introduced right after,
+   all inside the same persistent scene.
    ========================================================== */
 function passoEtapa3() {
-  fala("Now let's learn the physical state symbols used in equations.");
+  fala("Now let's learn the physical state symbols used in chemical equations.");
   const exemplos = [
-    { id: 'ex-s', label: 'Fe (solid metal)', simb: '(s)' },
-    { id: 'ex-l', label: 'H₂O (liquid)', simb: '(l)' },
-    { id: 'ex-g', label: 'O₂ (gas)', simb: '(g)' },
-    { id: 'ex-aq', label: 'NaCl dissolved in water', simb: '(aq)' }
+    { chave: 'Fe', estado: '(s)' },
+    { chave: 'H2O', estado: '(l)' },
+    { chave: 'O2', estado: '(g)' },
+    { chave: 'NaCl', estado: '(aq)' }
   ];
-  const zonasWrap = document.createElement('div');
-  zonasWrap.style.position = 'absolute'; zonasWrap.style.top = '10%'; zonasWrap.style.left = '4%'; zonasWrap.style.right = '4%';
-  zonasWrap.style.display = 'flex'; zonasWrap.style.flexWrap = 'wrap'; zonasWrap.style.gap = '10px'; zonasWrap.style.justifyContent = 'center';
-  overlay.appendChild(zonasWrap);
 
-  exemplos.forEach(function (ex) {
-    const col = document.createElement('div');
-    col.className = 'exemplo-estado';
-    col.innerHTML = '<div class="exemplo-estado-nome">' + ex.label + '</div><div class="exemplo-estado-slot">' + ex.simb + '</div>';
-    zonasWrap.appendChild(col);
+  const wrap = document.createElement('div');
+  wrap.className = 'equacao-wrap';
+  const linha = document.createElement('div');
+  linha.className = 'equacao-flex';
+  const grupos = exemplos.map(function (ex) {
+    const g = document.createElement('div');
+    g.className = 'eq-grupo';
+    g.appendChild(blocoMolecula(ex));
+    linha.appendChild(g);
+    return g;
   });
+  wrap.appendChild(linha);
+  overlay.appendChild(wrap);
 
-  escolhaBotoes({
-    pergunta: 'Which symbol represents a substance dissolved in water?',
-    opcoes: [
-      { rotulo: '(s) — solid', correta: false },
-      { rotulo: '(g) — gas', correta: false },
-      { rotulo: '(aq) — aqueous', correta: true }
-    ],
-    dica: 'Think about NaCl dissolved in water in the example above.',
-    explicacao: '"(aq)" stands for "aqueous" — a substance dissolved in water, like NaCl in the example.'
-  });
-}
-function passoEtapa3b() {
-  escolhaBotoes({
-    pergunta: 'Which symbol represents a gas?',
-    opcoes: [
-      { rotulo: '(l) — liquid', correta: false },
-      { rotulo: '(g) — gas', correta: true },
-      { rotulo: '(s) — solid', correta: false }
-    ],
-    dica: 'Think about O₂ in the example above.',
-    explicacao: '"(g)" stands for gas, like the O₂ shown in the example.'
-  });
-}
-function passoEtapa3c() {
-  fala('These labels appear right after each substance. Conditions, like heat or light, appear above the arrow instead.');
-  overlay.appendChild(criarSeta('50%', '55%'));
-  ['Δ (heat)', 'hv (light)', 'Pt (catalyst)'].forEach(function (txt, i) {
-    agendar(function () {
-      const tag = document.createElement('div');
-      tag.className = 'condicao-tag';
-      tag.textContent = txt;
-      tag.style.left = (34 + i * 16) + '%';
-      tag.style.top = '42%';
-      overlay.appendChild(tag);
-    }, i * 500);
-  });
-  agendar(function () {
+  function perguntaAq() {
+    focarGrupos(grupos[3]);
     escolhaBotoes({
-      pergunta: 'What does the Greek letter Δ above the arrow mean?',
+      pergunta: 'Look at NaCl(aq). What does the symbol (aq) mean?',
       opcoes: [
-        { rotulo: 'Heat is applied', correta: true },
-        { rotulo: 'Light is applied', correta: false },
-        { rotulo: 'A catalyst is used', correta: false }
+        { rotulo: '(aq) — dissolved in water', correta: true },
+        { rotulo: '(aq) — a gas', correta: false },
+        { rotulo: '(aq) — a solid crystal', correta: false }
       ],
-      dica: 'This symbol is commonly used in physics and chemistry for one specific condition.',
-      explicacao: 'Δ (delta) above the arrow means the reaction requires heating to occur.'
+      dica: 'Think about the substances you dissolve in a glass of water.',
+      explicacao: '"(aq)" stands for "aqueous" — a substance dissolved in water.',
+      aoContinuar: perguntaGas
     });
-  }, 1900);
+  }
+  function perguntaGas() {
+    focarGrupos(grupos[2]);
+    escolhaBotoes({
+      pergunta: 'Now look at O₂(g). What does the symbol (g) mean?',
+      opcoes: [
+        { rotulo: '(g) — a gas', correta: true },
+        { rotulo: '(g) — a liquid', correta: false },
+        { rotulo: '(g) — a solid', correta: false }
+      ],
+      dica: 'Oxygen that we breathe is in this physical state.',
+      explicacao: '"(g)" stands for gas.',
+      aoContinuar: perguntaCondicoes
+    });
+  }
+  function perguntaCondicoes() {
+    limparFoco();
+    fala('These labels appear right after each substance. Reaction conditions, like heat or light, appear above the arrow instead.');
+    const setaWrap = document.createElement('div');
+    setaWrap.className = 'eq-grupo eq-seta-wrap';
+    setaWrap.style.marginLeft = '.6rem';
+    setaWrap.innerHTML = '<svg class="eq-seta-svg" viewBox="0 0 80 24" width="80" height="24"><line x1="4" y1="12" x2="66" y2="12" stroke="#c8920a" stroke-width="3"/><polygon points="66,4 80,12 66,20" fill="#c8920a"/></svg>';
+    linha.appendChild(setaWrap);
+    ['Δ', 'hv', 'Pt'].forEach(function (txt, i) {
+      agendar(function () {
+        const cond = document.createElement('div');
+        cond.className = 'eq-condicao';
+        cond.style.position = 'static';
+        cond.style.transform = 'none';
+        cond.style.marginLeft = i === 0 ? '0' : '.5rem';
+        cond.textContent = txt;
+        setaWrap.appendChild(cond);
+      }, i * 450);
+    });
+    agendar(function () {
+      escolhaBotoes({
+        pergunta: 'What does the Greek letter Δ above an arrow mean?',
+        opcoes: [
+          { rotulo: 'Heat is applied', correta: true },
+          { rotulo: 'Light is applied', correta: false },
+          { rotulo: 'A catalyst is used', correta: false }
+        ],
+        dica: 'This symbol is commonly used in physics and chemistry for one specific condition.',
+        explicacao: 'Δ (delta) above the arrow means the reaction requires heating to occur.',
+        aoContinuar: function () { limparFoco(); avancar(); }
+      });
+    }, 1600);
+  }
+
+  agendar(perguntaAq, 700);
 }
 
 /* ==========================================================
    STAGE 4 — SEVERAL REACTIONS: WATCH + QUIZ
+   Each reaction is one continuous scene: the animation plays,
+   and the resulting molecules stay on screen while the quiz
+   question about that same reaction is answered.
    ========================================================== */
 const REACOES = [
   { id: 'r1', reagentes: ['H2', 'Cl2'], produtos: ['HCl'], nomeReagentes: 'H₂ and Cl₂', explicacao: 'The hydrogen and chlorine atoms rearrange to form HCl.', equacaoTexto: 'H₂ + Cl₂ → HCl',
@@ -754,136 +1016,144 @@ const REACOES = [
     opcoes: [ { rotulo: 'Fe + O₂ → Fe₂O₃', correta: true }, { rotulo: 'Fe₂O₃ → Fe + O₂', correta: false }, { rotulo: 'Fe + O₂ → FeO₃', correta: false } ] }
 ];
 
-function criarPassoObservarReacao(config) {
-  return function () {
-    fala('Watch the reaction between ' + config.nomeReagentes + '.');
-    adicionarBancada();
-    const posX = [22, 50];
-    const els = [];
-    config.reagentes.forEach(function (chave, i) {
-      const left = (config.reagentes.length === 1 ? 36 : posX[i]) + '%';
-      const el = criarMolecula('obs-' + config.id + '-reag' + i, chave, left, '32%');
+function tocarAnimacaoSimples(reagentesChaves, produtosChaves, callback) {
+  const posXReag = reagentesChaves.length === 1 ? [50] : [16, 66];
+  const elsReag = [];
+  reagentesChaves.forEach(function (chave, i) {
+    const el = criarMolecula('anim-reag' + i, chave, posXReag[i] + '%', '42%');
+    overlay.appendChild(el);
+    elsReag.push(el);
+  });
+  let maisReag = null;
+  if (reagentesChaves.length === 2) {
+    maisReag = criarSinalMais(((posXReag[0] + posXReag[1]) / 2) + '%', '46%');
+    overlay.appendChild(maisReag);
+  }
+
+  agendar(function () {
+    elsReag.forEach(function (el) { el.classList.add('molecula-quebrando'); });
+  }, 700);
+
+  agendar(function () {
+    elsReag.forEach(function (el) { el.style.transition = 'opacity .8s'; el.style.opacity = '0'; });
+    if (maisReag) { maisReag.style.transition = 'opacity .8s'; maisReag.style.opacity = '0'; }
+  }, 1500);
+
+  agendar(function () {
+    elsReag.forEach(function (el) { el.remove(); });
+    if (maisReag) maisReag.remove();
+    const posXProd = produtosChaves.length === 1 ? [50] : [24, 68];
+    produtosChaves.forEach(function (chave, i) {
+      const el = criarMolecula('anim-prod' + i, chave, posXProd[i] + '%', '42%');
+      el.style.opacity = '0'; el.style.transition = 'opacity 1s';
       overlay.appendChild(el);
-      els.push(el);
+      agendar(function () { el.style.opacity = '1'; }, 60);
     });
-    if (config.reagentes.length === 2) {
-      overlay.appendChild(criarSinalMais(((posX[0] + posX[1]) / 2) + '%', '36%'));
+    if (produtosChaves.length === 2) {
+      const maisProd = criarSinalMais('46%', '46%');
+      maisProd.style.opacity = '0'; maisProd.style.transition = 'opacity 1s';
+      overlay.appendChild(maisProd);
+      agendar(function () { maisProd.style.opacity = '1'; }, 60);
     }
+  }, 2300);
 
-    agendar(function () {
-      fala('The bonds rearrange...');
-      els.forEach(function (el) { el.style.transition = 'opacity .7s'; el.style.opacity = '0'; });
-      overlay.querySelectorAll('.sinal-mais').forEach(function (m) { m.style.transition = 'opacity .7s'; m.style.opacity = '0'; });
-    }, 900);
-
-    agendar(function () {
-      overlay.innerHTML = '';
-      adicionarBancada();
-      const posXp = config.produtos.length === 1 ? [46] : [26, 66];
-      config.produtos.forEach(function (chave, i) {
-        const el = criarMolecula('obs-' + config.id + '-prod' + i, chave, posXp[i] + '%', '32%');
-        el.style.opacity = '0'; el.style.transition = 'opacity .7s';
-        overlay.appendChild(el);
-        agendar(function () { el.style.opacity = '1'; }, 50);
-      });
-      if (config.produtos.length === 2) {
-        const mais = criarSinalMais('46%', '36%');
-        mais.style.opacity = '0'; mais.style.transition = 'opacity .7s';
-        overlay.appendChild(mais);
-        agendar(function () { mais.style.opacity = '1'; }, 50);
-      }
-    }, 1700);
-
-    agendar(function () {
-      fala(config.explicacao);
-      agendar(function () { botaoContinuar(400); }, 300);
-    }, 2700);
-  };
+  agendar(function () {
+    if (callback) callback();
+  }, 3600);
 }
 
-function criarPassoQuizEquacao(config) {
+function criarPassoReacaoCompleta(config) {
   return function () {
-    escolhaBotoes({
-      pergunta: 'Which equation correctly represents the reaction you just watched?',
-      opcoes: config.opcoes,
-      dica: 'Look carefully at which substances were reactants and which were products.',
-      explicacao: config.equacaoTexto + ' — ' + config.explicacao
+    fala('Watch the reaction between ' + config.nomeReagentes + '.');
+    tocarAnimacaoSimples(config.reagentes, config.produtos, function () {
+      fala(config.explicacao);
+      const placa = document.createElement('div');
+      placa.className = 'placa-dourada';
+      placa.textContent = config.equacaoTexto;
+      overlay.appendChild(placa);
+      agendar(function () {
+        escolhaBotoes({
+          pergunta: 'Which equation correctly represents the reaction you just watched?',
+          opcoes: config.opcoes,
+          dica: 'Look carefully at which substances were reactants and which were products.',
+          explicacao: config.equacaoTexto + ' — ' + config.explicacao
+        });
+      }, 600);
     });
   };
 }
 
 /* ==========================================================
    STAGE 5 — FULL REACTION REVIEW
+   Same idea as Stage 2: the complete labeled equation is drawn
+   once and stays visible through all four follow-up questions.
    ========================================================== */
 function passoEtapa5() {
   fala('Now watch this complete reaction and identify each part.');
-  const h2 = criarMolecula('e5-h2', 'H2', '12%', '34%');
-  const o2 = criarMolecula('e5-o2', 'O2', '32%', '34%');
-  const seta = criarSeta('50%', '36%');
-  const h2o = criarMolecula('e5-h2o', 'H2O', '76%', '34%');
-  overlay.appendChild(h2); overlay.appendChild(o2); overlay.appendChild(seta); overlay.appendChild(h2o);
-  overlay.appendChild(criarSinalMais('22%', '38%'));
+  const eq = renderEquacao(
+    [{ chave: 'H2', estado: '(g)' }, { chave: 'O2', estado: '(g)' }],
+    [{ chave: 'H2O', estado: '(l)' }],
+    { condicao: 'Δ' }
+  );
 
-  function tagFixa(txt, left, top) {
-    const t = document.createElement('div');
-    t.className = 'condicao-tag';
-    t.textContent = txt;
-    t.style.left = left; t.style.top = top;
-    t.style.opacity = '1'; t.style.animation = 'none';
-    overlay.appendChild(t);
-    return t;
+  function perguntaReagentes() {
+    focarGrupos(eq.reagentesEl);
+    escolhaBotoes({
+      pergunta: 'In the equation 2H₂(g) + O₂(g) →(Δ) 2H₂O(l), what are H₂ and O₂ called?',
+      opcoes: [
+        { rotulo: 'Reactants', correta: true },
+        { rotulo: 'Products', correta: false },
+        { rotulo: 'Conditions', correta: false }
+      ],
+      dica: 'They are the starting substances, on the left of the arrow.',
+      explicacao: 'H₂ and O₂ are the reactants — the substances present before the reaction happens.',
+      aoContinuar: perguntaProduto
+    });
   }
-  tagFixa('(g)', '18%', '18%');
-  tagFixa('(g)', '38%', '18%');
-  tagFixa('(l)', '82%', '18%');
-  tagFixa('Δ', '50%', '16%');
+  function perguntaProduto() {
+    focarGrupos(eq.produtosEl);
+    escolhaBotoes({
+      pergunta: 'What is H₂O called in this equation?',
+      opcoes: [
+        { rotulo: 'The product', correta: true },
+        { rotulo: 'A reactant', correta: false },
+        { rotulo: 'A catalyst', correta: false }
+      ],
+      dica: 'It is what forms after the reaction.',
+      explicacao: 'H₂O is the product — the substance formed as a result of the reaction.',
+      aoContinuar: perguntaEstados
+    });
+  }
+  function perguntaEstados() {
+    focarGrupos(eq.reagentesEl, eq.produtosEl);
+    escolhaBotoes({
+      pergunta: 'What do the labels (g) and (l) tell us?',
+      opcoes: [
+        { rotulo: 'The physical states of the substances', correta: true },
+        { rotulo: 'The number of atoms', correta: false },
+        { rotulo: 'The temperature of the reaction', correta: false }
+      ],
+      dica: 'Think back to the earlier stage about (s), (l), (g), and (aq).',
+      explicacao: '(g) means gas and (l) means liquid — these labels show the physical state of each substance.',
+      aoContinuar: perguntaCondicao
+    });
+  }
+  function perguntaCondicao() {
+    focarGrupos(eq.setaEl);
+    escolhaBotoes({
+      pergunta: 'What does the Δ above the arrow tell us about this reaction?',
+      opcoes: [
+        { rotulo: 'It requires heat', correta: true },
+        { rotulo: 'It requires light', correta: false },
+        { rotulo: 'It happens instantly', correta: false }
+      ],
+      dica: 'This is the same symbol you learned earlier.',
+      explicacao: 'Δ above the arrow means the reaction needs to be heated in order to happen.',
+      aoContinuar: function () { limparFoco(); avancar(); }
+    });
+  }
 
-  escolhaBotoes({
-    pergunta: 'In the equation 2H₂ (g) + O₂ (g) →(Δ) 2H₂O (l), what are called H₂ and O₂?',
-    opcoes: [
-      { rotulo: 'Reactants', correta: true },
-      { rotulo: 'Products', correta: false },
-      { rotulo: 'Conditions', correta: false }
-    ],
-    dica: 'They are the starting substances, on the left of the arrow.',
-    explicacao: 'H₂ and O₂ are the reactants — the substances present before the reaction happens.'
-  });
-}
-function passoEtapa5b() {
-  escolhaBotoes({
-    pergunta: 'What is H₂O called in this equation?',
-    opcoes: [
-      { rotulo: 'The product', correta: true },
-      { rotulo: 'A reactant', correta: false },
-      { rotulo: 'A catalyst', correta: false }
-    ],
-    dica: 'It is what forms after the reaction.',
-    explicacao: 'H₂O is the product — the substance formed as a result of the reaction.'
-  });
-}
-function passoEtapa5c() {
-  escolhaBotoes({
-    pergunta: 'What do the labels (g) and (l) tell us?',
-    opcoes: [
-      { rotulo: 'The physical states of the substances', correta: true },
-      { rotulo: 'The number of atoms', correta: false },
-      { rotulo: 'The temperature of the reaction', correta: false }
-    ],
-    dica: 'Think back to the earlier stage about (s), (l), (g), and (aq).',
-    explicacao: '(g) means gas and (l) means liquid — these labels show the physical state of each substance.'
-  });
-}
-function passoEtapa5d() {
-  escolhaBotoes({
-    pergunta: 'What does the Δ above the arrow tell us about this reaction?',
-    opcoes: [
-      { rotulo: 'It requires heat', correta: true },
-      { rotulo: 'It requires light', correta: false },
-      { rotulo: 'It happens instantly', correta: false }
-    ],
-    dica: 'This is the same symbol you learned earlier.',
-    explicacao: 'Δ above the arrow means the reaction needs to be heated in order to happen.'
-  });
+  agendar(perguntaReagentes, 500);
 }
 
 /* ==========================================================
@@ -907,17 +1177,21 @@ function passoFinal() {
 
 /* ==========================================================
    STAGE ENGINE
+   Each entry below is one continuous scene. Overlay content is
+   only cleared when moving between these scenes — never in the
+   middle of a scene's own follow-up questions (see aoContinuar
+   chaining in escolhaBotoes / botaoContinuar above).
    ========================================================== */
 const PASSOS = [
   passoIntro0, passoIntro1, passoIntro2,
   passoEtapa1,
-  passoEtapa2, passoEtapa2b, passoEtapa2c,
-  passoEtapa3, passoEtapa3b, passoEtapa3c,
-  criarPassoObservarReacao(REACOES[0]), criarPassoQuizEquacao(REACOES[0]),
-  criarPassoObservarReacao(REACOES[1]), criarPassoQuizEquacao(REACOES[1]),
-  criarPassoObservarReacao(REACOES[2]), criarPassoQuizEquacao(REACOES[2]),
-  criarPassoObservarReacao(REACOES[3]), criarPassoQuizEquacao(REACOES[3]),
-  passoEtapa5, passoEtapa5b, passoEtapa5c, passoEtapa5d,
+  passoEtapa2,
+  passoEtapa3,
+  criarPassoReacaoCompleta(REACOES[0]),
+  criarPassoReacaoCompleta(REACOES[1]),
+  criarPassoReacaoCompleta(REACOES[2]),
+  criarPassoReacaoCompleta(REACOES[3]),
+  passoEtapa5,
   passoFinal
 ];
 
