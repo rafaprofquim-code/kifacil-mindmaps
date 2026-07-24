@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex, nofollow">
-  <title>Inorganic Functions in Everyday Life — Premium Game | KiFácil</title>
+  <title>Acids, Bases, Salts, and Oxides in Everyday Life — Premium Game | KiFácil</title>
   <link rel="icon" type="image/png" href="/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -361,7 +361,7 @@
 </nav>
 
 <main>
-  <h1 class="titulo-jogo">Inorganic Functions in Everyday Life</h1>
+  <h1 class="titulo-jogo">Acids, Bases, Salts, and Oxides in Everyday Life</h1>
   <p class="subtitulo">Recognize acids, bases, salts, and oxides in everyday situations.</p>
 
   <div class="narrador">
@@ -396,45 +396,45 @@
    ========================================================== */
 const EXEMPLOS = [
   { emoji: '🧴', categoria: 'Acid', nome: 'Hydrochloric acid', formula: 'HCl', pistas: [
-      'It is present in gastric juice, inside our stomach.',
-      'It is also widely used to clean stone floors and lime-covered surfaces.',
-      'In aqueous solution, it releases H⁺ ions.'
-    ], explicacao: 'Correct! It is an acid because, dissolved in water, it releases H⁺ ions — and its formula starts with hydrogen, like most acids.' },
+      'It is found in the gastric juice in the stomach.',
+      'Dilute hydrochloric acid is used in some masonry and mineral-cleaning products.',
+      'In water, it ionizes and forms H₃O⁺ ions.'
+    ], explicacao: 'Correct! It is an acid because it ionizes in water and increases the concentration of H₃O⁺ ions. Its formula begins with hydrogen, which is a common feature of many acids.' },
   { emoji: '🧼', categoria: 'Base', nome: 'Sodium hydroxide', formula: 'NaOH', pistas: [
       'It is widely used in the manufacture of soaps and cleaning products.',
       'It is a corrosive substance that requires care when handling.',
-      'It has the OH⁻ group in its formula.'
-    ], explicacao: 'Correct! Known as caustic soda, it is a base because it has the hydroxyl group (OH⁻), which it releases in water — typical of Arrhenius bases.' },
+      'Its formula contains hydroxide ions (OH⁻).'
+    ], explicacao: 'Correct! Known as caustic soda, sodium hydroxide is an Arrhenius base because it dissociates in water to produce hydroxide ions (OH⁻).' },
   { emoji: '🔋', categoria: 'Acid', nome: 'Sulfuric acid', formula: 'H₂SO₄', pistas: [
-      'It is essential for car batteries to work.',
+      'It is used as the electrolyte in lead-acid car batteries.',
       'It is also widely used in oil refining and the chemical industry.',
-      'Its formula starts with hydrogen, and it releases H⁺ in water.'
-    ], explicacao: 'Correct! One of the acids most used by industry. Like every acid, it releases H⁺ when dissolved in water.' },
+      'It ionizes in water and forms H₃O⁺ ions.'
+    ], explicacao: 'Correct! Sulfuric acid is widely used in industry. Like other Arrhenius acids, it increases the concentration of H₃O⁺ ions in water.' },
   { emoji: '🧱', categoria: 'Base', nome: 'Calcium hydroxide', formula: 'Ca(OH)₂', pistas: [
       'It is used to make mortar in construction.',
-      'It is also used for whitewashing (painting white) walls and tree trunks.',
-      'It has the OH⁻ group bonded to a metal in its formula.'
-    ], explicacao: 'Correct! Known as slaked lime. Once again, the OH⁻ group in the formula gives away a base.' },
+      'It is also used to whitewash walls and tree trunks.',
+      'It is an ionic compound made of Ca²⁺ ions and OH⁻ ions.'
+    ], explicacao: 'Correct! Known as slaked lime, calcium hydroxide contains hydroxide ions (OH⁻), which is characteristic of an Arrhenius base.' },
   { emoji: '🧂', categoria: 'Salt', nome: 'Sodium chloride', formula: 'NaCl', pistas: [
       'It is present in almost every meal you eat.',
       'It has no smell, and it is used to preserve and season food.',
-      'It has no ionizable hydrogen or OH⁻ group: it is made up of a cation and an anion other than H⁺ and OH⁻.'
-    ], explicacao: 'Correct! Table salt. It is a salt because it does not release H⁺ or OH⁻ in water — it is formed by the combination of a cation (Na⁺) with an anion (Cl⁻).' },
+      'It is an ionic compound made of Na⁺ cations and Cl⁻ anions.'
+    ], explicacao: 'Correct! Sodium chloride is table salt. It is classified as a salt because it is an ionic compound composed of Na⁺ cations and Cl⁻ anions.' },
   { emoji: '🏗️', categoria: 'Oxide', nome: 'Calcium oxide', formula: 'CaO', pistas: [
       'It is used in cement manufacturing and in construction work.',
       'It is also used to correct the acidity of agricultural soils.',
-      'It is made up of just two elements, one of them oxygen — and there is no hydrogen in the formula.'
-    ], explicacao: 'Correct! It is an oxide: formed by the combination of oxygen with just one other element, with no H⁺ or OH⁻.' },
+      'It is a binary compound made of calcium and oxygen.'
+    ], explicacao: 'Correct! It is an oxide because it is a binary compound composed of oxygen and one other element.' },
   { emoji: '🍾', categoria: 'Salt', nome: 'Sodium carbonate', formula: 'Na₂CO₃', pistas: [
       'It is essential for glass manufacturing.',
       'It is also found in cleaning products and pool treatment.',
-      'It does not release H⁺ or OH⁻ in water: it is made up of a cation and an anion other than those.'
-    ], explicacao: 'Correct! Even though it is less familiar than table salt, it is also a salt: no H⁺, no OH⁻, just the combination of a cation (Na⁺) with an anion (CO₃²⁻).' },
+      'It is an ionic compound made of Na⁺ cations and CO₃²⁻ anions.'
+    ], explicacao: 'Correct! Although it is less familiar than table salt, sodium carbonate is also a salt because it is composed of Na⁺ cations and CO₃²⁻ anions.' },
   { emoji: '🥤', categoria: 'Oxide', nome: 'Carbon dioxide', formula: 'CO₂', pistas: [
-      'It is present in soft drinks, sparkling water, and dry ice.',
-      'It is released when we breathe and also when fuels are burned.',
+      'It is dissolved in soft drinks and sparkling water, and solid CO₂ is known as dry ice.',
+      'It is released when we exhale and when fuels burn.',
       'It is made up of just two elements — carbon and oxygen — with no ionizable hydrogen or OH⁻ group.'
-    ], explicacao: 'Correct! A molecular oxide: formed by the combination of oxygen with just one other element, with no H⁺ or OH⁻ in its structure.' }
+    ], explicacao: 'Correct! It is a molecular oxide because it is a binary compound composed of carbon and oxygen.' }
 ];
 const CATEGORIAS = ['Acid', 'Base', 'Salt', 'Oxide'];
 const DESAFIO_FINAL = [
@@ -442,26 +442,26 @@ const DESAFIO_FINAL = [
     dica: 'Think back to the Acids stage: this substance releases H⁺ in water.',
     explicacao: 'releases H⁺ in water, which is why it is an acid.' },
   { rotulo: 'Car batteries', categoria: 'Acid', nome: 'Sulfuric acid', formula: 'H₂SO₄',
-    dica: 'Its formula starts with hydrogen — a common sign of an acid.',
+    dica: 'Its formula begins with hydrogen, which is a common feature of many acids.',
     explicacao: 'like every acid, it releases H⁺ when dissolved in water.' },
   { rotulo: 'Soap manufacturing', categoria: 'Base', nome: 'Sodium hydroxide', formula: 'NaOH',
-    dica: 'Check whether the formula has the OH⁻ group.',
-    explicacao: 'has the OH⁻ group in its formula, which is why it is a base.' },
+    dica: 'Check whether the formula contains hydroxide ions (OH⁻).',
+    explicacao: 'contains hydroxide ions (OH⁻), which is why it is a base.' },
   { rotulo: 'Slaked lime used in construction', categoria: 'Base', nome: 'Calcium hydroxide', formula: 'Ca(OH)₂',
-    dica: 'The name "slaked" itself gives away the OH⁻ group.',
-    explicacao: 'has the OH⁻ group bonded to a metal, which is why it is a base.' },
+    dica: 'Look at the formula: it contains hydroxide ions (OH⁻).',
+    explicacao: 'contains hydroxide ions (OH⁻) bonded to a metal, which is why it is a base.' },
   { rotulo: 'The salt we use in food', categoria: 'Salt', nome: 'Sodium chloride', formula: 'NaCl',
     dica: 'It has no H⁺ or OH⁻: it is made up of a cation and an anion.',
-    explicacao: 'does not release H⁺ or OH⁻ — it is formed by a cation (Na⁺) and an anion (Cl⁻), which is why it is a salt.' },
+    explicacao: 'is an ionic compound composed of Na⁺ cations and Cl⁻ anions, which is why it is classified as a salt.' },
   { rotulo: 'Glass manufacturing', categoria: 'Salt', nome: 'Sodium carbonate', formula: 'Na₂CO₃',
     dica: 'Just like table salt, it has no H⁺ or OH⁻.',
-    explicacao: 'does not release H⁺ or OH⁻ — it is formed by a cation (Na⁺) and an anion (CO₃²⁻), which is why it is a salt.' },
+    explicacao: 'is an ionic compound composed of Na⁺ cations and CO₃²⁻ anions, which is why it is classified as a salt.' },
   { rotulo: 'Correcting soil acidity', categoria: 'Oxide', nome: 'Calcium oxide', formula: 'CaO',
     dica: 'Made up of just two elements, one of them oxygen — with no hydrogen.',
-    explicacao: 'is made up only of oxygen and calcium, with no H⁺ or OH⁻, which is why it is an oxide.' },
+    explicacao: 'is a binary compound composed of calcium and oxygen, which is why it is classified as an oxide.' },
   { rotulo: 'The gas in soft drinks', categoria: 'Oxide', nome: 'Carbon dioxide', formula: 'CO₂',
     dica: 'Made up only of carbon and oxygen — with no hydrogen.',
-    explicacao: 'is made up only of oxygen and carbon, with no H⁺ or OH⁻, which is why it is an oxide.' }
+    explicacao: 'is a binary compound composed of carbon and oxygen, which is why it is classified as an oxide.' }
 ];
 
 /* ==========================================================
@@ -517,7 +517,7 @@ function perguntaComPistas(ex, listaPistasEl, cartaoEl, aoConcluir) {
   const wrap = document.createElement('div');
   wrap.className = 'interacao-painel';
   wrap.innerHTML =
-    '<div class="interacao-pergunta-texto">Which inorganic function does this compound belong to?</div>' +
+    '<div class="interacao-pergunta-texto">Is this compound an acid, a base, a salt, or an oxide?</div>' +
     '<div class="opcoes-linha" id="opcoesLinha"></div>' +
     '<div class="modal-feedback" id="feedbackEscolha"></div>';
   painel.appendChild(wrap);
@@ -643,7 +643,7 @@ function criarClassificacaoPorCategoria(itens, categorias, mensagemErro, mensage
    INTRODUCTION
    ========================================================== */
 function passoIntro() {
-  fala('You\'ve already learned about acids, bases, salts, and oxides. Now, instead of memorizing names, you\'ll investigate everyday clues and work out the inorganic function of each substance — like a real chemist.');
+  fala('You\'ve already learned about acids, bases, salts, and oxides. Now, instead of memorizing names, you\'ll use everyday clues to classify each substance—just like a chemist.');
   const btn = document.createElement('button');
   btn.className = 'btn-continuar btn-iniciar-investigacao';
   btn.textContent = 'START THE INVESTIGATION';
@@ -657,7 +657,7 @@ function passoIntro() {
 function criarPassoExemplo(indice) {
   return function () {
     const ex = EXEMPLOS[indice];
-    fala('Example ' + (indice + 1) + ' of ' + EXEMPLOS.length + '. Read the clues and work out the inorganic function — if you get it wrong, you get one more clue.');
+    fala('Example ' + (indice + 1) + ' of ' + EXEMPLOS.length + '. Read the clues and identify the compound category. If your first answer is incorrect, you\'ll receive another clue.');
 
     const contador = document.createElement('div');
     contador.className = 'contador-central';
@@ -690,7 +690,7 @@ function passoDesafioFinal() {
    FINAL
    ========================================================== */
 function passoFinal() {
-  fala('Excellent! Recognizing an inorganic function isn\'t about memorizing names — it\'s about understanding the substance\'s behavior: whether it releases H⁺, whether it has an OH⁻ group, or whether it is made up of just a cation and an anion, or of oxygen and another element.');
+  fala('Excellent! Classifying a compound is not just about memorizing its name. It means recognizing its composition and its behavior in water: acids increase the concentration of H₃O⁺, Arrhenius bases produce OH⁻, salts are ionic compounds made of cations and anions, and oxides are binary compounds containing oxygen.');
   overlay.innerHTML =
     '<div class="quadro-resumo" style="position:absolute;inset:0;align-items:center;">' +
     '<div class="quadro-item"><div class="rotulo">Acids</div><div class="valor">E.g.: HCl</div></div>' +

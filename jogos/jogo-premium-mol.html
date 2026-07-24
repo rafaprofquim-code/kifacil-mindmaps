@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex, nofollow">
-  <title>The Mole and Molar Mass � Premium Game | KiF�cil</title>
+  <title>The Mole and Molar Mass — Premium Game | KiFácil</title>
   <link rel="icon" type="image/png" href="/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -108,7 +108,7 @@
       min-height: 3.4em;
     }
 
-    /* IMAGEM / PALCO DE ANIMA��O */
+    /* IMAGEM / PALCO DE ANIMAÇÃO */
     .imagem-wrapper {
       position: relative;
       display: flex;
@@ -153,7 +153,7 @@
     .link-aula:hover { background: rgba(30,16,8,0.92); transform: translateY(-1px); }
     .link-aula svg { width: 22px; height: 22px; }
 
-    /* Componentes de anima��o */
+    /* Componentes de animação */
     .mol-fade { opacity: 0; animation: molFadeIn .45s ease forwards; }
     @keyframes molFadeIn { to { opacity: 1; } }
 
@@ -298,7 +298,7 @@
       color: var(--texto);
     }
 
-    /* PAINEL DE INTERA��O (dentro da caixa da professora) */
+    /* PAINEL DE INTERAÇÃO (dentro da caixa da professora) */
     #painelInteracao { margin-top: 0.7rem; }
     .interacao-pergunta-texto {
       font-family: 'Cormorant Garamond', serif;
@@ -362,7 +362,7 @@
     .feedback-dica    { color: var(--texto-suave); }
     .feedback-explicacao { color: var(--texto); margin-top: 0.5rem; }
 
-    /* CONCLUS�O */
+    /* CONCLUSÃO */
     .conclusao {
       display: none;
       margin-top: 3rem;
@@ -481,7 +481,7 @@
 <body>
 
 <nav class="top-nav">
-  <div class="brand">KiF�cil</div>
+  <div class="brand">KiFácil</div>
 </nav>
 
 <main>
@@ -510,7 +510,7 @@
   </div>
 </main>
 
-<footer>� 2026 KiF�cil</footer>
+<footer>© 2026 KiFácil</footer>
 
 <script>
 /* ==========================================================
@@ -610,7 +610,7 @@ function criarCartaoElemento(simbolo, massa, left, top) {
 }
 
 function parseNumeroCientifico(input) {
-  let s = input.toLowerCase().replace(/\s+/g, '').replace(/�/g, 'x').replace(/\*/g, 'x');
+  let s = input.toLowerCase().replace(/\s+/g, '').replace(/×/g, 'x').replace(/\*/g, 'x');
   let m = s.match(/^([\d.,]+)x10\^?(-?\d+)$/);
   if (m) {
     const mant = parseFloat(m[1].replace(',', '.'));
@@ -707,14 +707,14 @@ function passoContarBolinhas(qtd, intro) {
       validar: function (v) { return parseInt(v.replace(/\D/g, ''), 10) === qtd; },
       dica: 'Count them one by one, calmly.',
       respostaExibicao: String(qtd),
-      explicacao: 'That\'s right � there are ' + qtd + '.',
+      explicacao: 'That\'s right—there are ' + qtd + '.',
       aoAcertar: function () { botaoContinuar(300); }
     });
   };
 }
 const passoContar2 = passoContarBolinhas(2, 'I\'m going to place some balls in this room. Count how many there are and type the number.');
 const passoContar5 = passoContarBolinhas(5, 'Now I\'m going to add more balls. Count again.');
-const passoContar10 = passoContarBolinhas(10, 'One more time � how many balls are there now?');
+const passoContar10 = passoContarBolinhas(10, 'One more time—how many balls are there now?');
 
 function passoMilBolinhas() {
   fala('Now I\'m going to place a thousand balls in this room...');
@@ -723,13 +723,13 @@ function passoMilBolinhas() {
   svgWrap.innerHTML = bolinhasSVG(1000);
   overlay.appendChild(svgWrap);
   agendar(function () {
-    fala('It got hard to count, didn\'t it? Counting one by one stops working once the quantity gets too large.');
+    fala('It\'s hard to count now, isn\'t it? Counting one by one stops working once the quantity gets too large.');
     botaoContinuar(600);
   }, 900);
 }
 
 function passoAgruparCaixas() {
-  fala('I\'m going to group all these balls into little boxes, each box will hold the same number of balls as the others. This little box is a new unit I\'ve just created � I\'ll call it a "kif�cil".');
+  fala('I\'m going to group all these balls into little boxes, each box will hold the same number of balls as the others. This little box is a new unit I\'ve just created—I\'ll call this new unit a "KiFácil."');
   const svgWrap = document.createElement('div');
   svgWrap.style.position = 'absolute'; svgWrap.style.inset = '0';
   svgWrap.innerHTML = caixinhasSVG(10);
@@ -738,18 +738,18 @@ function passoAgruparCaixas() {
 }
 
 function passoContarCaixas() {
-  fala('How many kif�cils do you see here?');
+  fala('How many KiFácil units do you see here?');
   const svgWrap = document.createElement('div');
   svgWrap.style.position = 'absolute'; svgWrap.style.inset = '0';
   svgWrap.innerHTML = caixinhasSVG(10);
   overlay.appendChild(svgWrap);
 
   perguntaInterativa({
-    pergunta: 'How many kif�cils are there in this room?',
+    pergunta: 'How many KiFácil units are there in this room?',
     validar: function (v) { return parseInt(v.replace(/\D/g, ''), 10) === 10; },
     dica: 'Count the little boxes.',
-    respostaExibicao: '10 kif�cils',
-    explicacao: 'That\'s right � there are 10 kif�cils.',
+    respostaExibicao: '10 KiFácil units',
+    explicacao: 'That\'s right—there are 10 KiFácil units.',
     aoAcertar: function () { botaoContinuar(300); }
   });
 }
@@ -761,11 +761,11 @@ function passoRevelarTotal() {
   overlay.appendChild(svgWrap);
 
   perguntaInterativa({
-    pergunta: 'And what if I told you that each kif�cil has 100 balls inside � how many balls were there in total in this room?',
+    pergunta: 'And what if I told you that each KiFácil unit has 100 balls inside—how many balls were there in total in this room?',
     validar: function (v) { return parseInt(v.replace(/\D/g, ''), 10) === 1000; },
-    dica: '10 kif�cils � 100 balls in each one.',
+    dica: '10 KiFácil units × 100 balls in each one.',
     respostaExibicao: '1,000 balls',
-    explicacao: '10 � 100 = 1,000 balls. The "kif�cil" was just a unit we created to make it easier to count a very large quantity.',
+    explicacao: '10 × 100 = 1,000 balls. The KiFácil unit was simply a counting unit that made large quantities easier to handle.',
     aoAcertar: function () { botaoContinuar(500); }
   });
 }
@@ -776,7 +776,7 @@ function passoTransicaoMol() {
 }
 
 function passoAreia() {
-  fala('There are more water molecules in a teaspoon than grains of sand on every beach on planet Earth.');
+  fala('There are more water molecules in a teaspoon than grains of sand on all the beaches on Earth.');
   const img = document.createElement('img');
   img.src = '../imagens/areia.png';
   img.alt = 'Grains of sand';
@@ -793,7 +793,7 @@ function passoAvogadro() {
   contador.textContent = '1';
   overlay.appendChild(contador);
 
-  const seq = ['10', '1,000', '1,000,000', '6.02 � 10��'];
+  const seq = ['10', '1,000', '1,000,000', '6.022 × 10²³'];
   let i = 0;
   function passoContador() {
     contador.textContent = seq[i];
@@ -802,10 +802,10 @@ function passoAvogadro() {
       agendar(passoContador, 550);
     } else {
       agendar(function () {
-        fala('1 mole equals 6.02 � 10�� particles � Avogadro\'s number. It\'s an absurdly large number: counting one atom per second, it would take you far longer than the age of the universe to finish.');
+        fala('One mole contains 6.022 × 10²³ representative particles—Avogadro\'s number. It\'s an absurdly large number: counting one atom per second, it would take you far longer than the age of the universe to finish.');
         const placa = document.createElement('div');
         placa.className = 'placa-dourada';
-        placa.textContent = '1 mole = 6.02 � 10�� particles';
+        placa.textContent = '1 mole = 6.022 × 10²³ particles';
         overlay.appendChild(placa);
         botaoContinuar(600);
       }, 500);
@@ -824,9 +824,9 @@ function passoCalcular2Mols() {
       const alvo = 2 * AVOGADRO;
       return Math.abs(num - alvo) / alvo < 0.06;
     },
-    dica: 'Multiply 2 by Avogadro\'s number: 2 � 6.02�10��.',
-    respostaExibicao: '1.204 � 10�4 atoms',
-    explicacao: '2 � 6.02�10�� = 1.204�10�4 atoms.',
+    dica: 'Multiply 2 by Avogadro\'s number: 2 × 6.022 × 10²³.',
+    respostaExibicao: '1.204 × 10²⁴ atoms',
+    explicacao: '2 × 6.022 × 10²³ = 1.204 × 10²⁴ atoms.',
     aoAcertar: function () { botaoContinuar(400); }
   });
 }
@@ -841,9 +841,9 @@ function passoCalcular3Mols() {
       const alvo = 3 * AVOGADRO;
       return Math.abs(num - alvo) / alvo < 0.06;
     },
-    dica: 'Multiply 3 by Avogadro\'s number: 3 � 6.02�10��.',
-    respostaExibicao: '1.806 � 10�4 atoms',
-    explicacao: '3 � 6.02�10�� = 1.806�10�4 atoms.',
+    dica: 'Multiply 3 by Avogadro\'s number: 3 × 6.022 × 10²³.',
+    respostaExibicao: '1.806 × 10²⁴ atoms',
+    explicacao: '3 × 6.022 × 10²³ = 1.806 × 10²⁴ atoms.',
     aoAcertar: function () { botaoContinuar(400); }
   });
 }
@@ -920,7 +920,7 @@ function criarPassoSubstancia(sub) {
 function passoFinal() {
   fala('Excellent. Now you understand why we use the mole and how to calculate the molar mass of any substance.');
   overlay.innerHTML = '<div class="quadro-resumo" style="position:absolute;inset:0;align-items:center;">' +
-    '<div class="quadro-item"><div class="rotulo">Mole</div><div class="valor">6.02 � 10�� particles</div></div>' +
+    '<div class="quadro-item"><div class="rotulo">Mole</div><div class="valor">6.022 × 10²³ particles</div></div>' +
     '<div class="quadro-item"><div class="rotulo">Molar mass</div><div class="valor">Mass of 1 mole (g/mol)</div></div>' +
     '</div>';
   painel.innerHTML = '';
@@ -992,9 +992,9 @@ function iniciarMusicaFundo() {
 function atualizarIconeMudo() {
   const botao = document.getElementById('btn-mute');
   if (!botao) return;
-  if (silenciado || volumeSalvo === 0) botao.textContent = '??';
-  else if (volumeSalvo < 0.5) botao.textContent = '??';
-  else botao.textContent = '??';
+  if (silenciado || volumeSalvo === 0) botao.textContent = '🔇';
+  else if (volumeSalvo < 0.5) botao.textContent = '🔉';
+  else botao.textContent = '🔊';
 }
 
 function alternarMudo() {
