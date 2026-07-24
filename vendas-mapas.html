@@ -492,6 +492,7 @@
   .plano-titulo { font-size: 1.28rem; margin-bottom: .4rem; }
   .plano-tagline { font-size: .88rem; color: var(--texto-suave); margin-bottom: 1.1rem; }
   .plano-preco { font-family: var(--serif-display); font-weight: 700; font-size: clamp(1.4rem, 2.4vw, 1.9rem); color: var(--texto); line-height: 1.15; margin-bottom: 1.2rem; }
+  .plano-preco-antigo { font-size: .55em; font-weight: 400; color: var(--texto-fraco); text-decoration: line-through; margin-right: .5em; }
   .plano-card .oferta-lista { flex: 1; }
   .plano-card .btn { width: 100%; justify-content: center; margin-top: auto; }
   .plano-nota { font-size: .8rem; color: var(--texto-fraco); line-height: 1.6; margin-top: .9rem; }
@@ -1025,7 +1026,7 @@
         <span class="plano-selo">Most Popular</span>
         <h3 class="plano-titulo">Student License</h3>
         <p class="plano-tagline">For one student using the collection for personal study.</p>
-        <div class="plano-preco">US$59.99</div>
+        <div class="plano-preco"><span class="plano-preco-antigo">US$59.99</span>US$19.99</div>
         <ul class="oferta-lista">
           <li>Access for one individual student</li>
           <li>Personal educational use</li>
@@ -1043,7 +1044,7 @@
       <div class="plano-card revela" style="transition-delay:.09s">
         <h3 class="plano-titulo">Educator License</h3>
         <p class="plano-tagline">For one teacher using the collection with their own classes.</p>
-        <div class="plano-preco">US$EDUCATOR_PRICE</div>
+        <div class="plano-preco"><span class="plano-preco-antigo">US$149.99</span>US$49.99</div>
         <ul class="oferta-lista">
           <li>Access for one individual educator</li>
           <li>Permission to present the Mind Maps during lessons</li>
@@ -1061,7 +1062,7 @@
       <div class="plano-card revela" style="transition-delay:.15s">
         <h3 class="plano-titulo">School License</h3>
         <p class="plano-tagline">For use by multiple educators within one school.</p>
-        <div class="plano-preco">US$SCHOOL_PRICE</div>
+        <div class="plano-preco"><span class="plano-preco-antigo">US$399.99</span>US$99.99</div>
         <ul class="oferta-lista">
           <li>Institutional use within one school</li>
           <li>Access for the school's authorized educators</li>
