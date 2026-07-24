@@ -579,6 +579,14 @@
   }
   @media (min-width: 761px) { .nav-toggle { display: none; } }
 </style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-18346423809"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){ dataLayer.push(arguments); }
+  gtag('js', new Date());
+  gtag('config', 'AW-18346423809');
+</script>
 </head>
 <body>
 
@@ -1144,14 +1152,37 @@
 // section below have their own specific links and are not affected by this.
 const HOTMART_CHECKOUT_URL = "https://pay.hotmart.com/K106836255X?off=7n8knzkf";
 
+// ==========================================================
+// GOOGLE ADS CONVERSION TRACKING
+// The Conversion Action has not been created in Google Ads yet,
+// so there is no Conversion ID/label to send. This function is the
+// single reusable hook every purchase button calls before redirecting
+// to Hotmart; it is a safe no-op until the TODO below is filled in.
+// ==========================================================
+function trackPurchaseConversion() {
+  // TODO
+  // Insert Google Ads Conversion ID here after creating the Conversion Action.
+  /*
+    gtag('event', 'conversion', {
+      'send_to': 'AW-18346423809/XXXXXXXXXXX'
+    });
+  */
+}
+
 (function () {
   var reduzMovimento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  // Every element with [data-checkout-cta] or [data-pricing-cta] is a
+  // purchase button that redirects to Hotmart checkout (Student/Educator/
+  // School license cards, the final CTA, and the footer CTA). Any future
+  // purchase button only needs one of these attributes to be covered here
+  // automatically — no extra wiring required.
   document.querySelectorAll('[data-checkout-cta]').forEach(function (cta) {
     cta.setAttribute('href', HOTMART_CHECKOUT_URL);
     cta.addEventListener('click', function () {
       var location = cta.getAttribute('data-cta-location') || 'unknown';
       console.log('Hotmart CTA clicked:', location);
+      trackPurchaseConversion();
     });
   });
 
@@ -1161,6 +1192,7 @@ const HOTMART_CHECKOUT_URL = "https://pay.hotmart.com/K106836255X?off=7n8knzkf";
     cta.addEventListener('click', function () {
       var location = cta.getAttribute('data-cta-location') || 'unknown';
       console.log('Hotmart CTA clicked:', location);
+      trackPurchaseConversion();
     });
   });
 
